@@ -55,15 +55,43 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
 
-   
+        var svg = new Walkway('#triangle');
+
+        svg.draw(function() {
+          console.dir('Finished triangle!');
+        });
+
         var svg2 = new Walkway({
-            selector: '#triangle',
+          selector: '#diamond',
           duration: 2500,
           easing: 'linear'
         }).draw(function() {
-            console.dir('Finished triangle!');
+          console.dir('Finished diamond!');
         });
- 
+
+        var svg3 = new Walkway({
+          selector: '#tester',
+          duration: 5000,
+          easing: 'linear'
+        });
+
+        svg3.draw(function() {
+          console.log('Finished test shape!');
+        });
+
+        var svg4 = new Walkway({
+          selector: '#ps4',
+          duration: 3500
+        }).draw();
+
+        var svg5 = new Walkway({
+          selector: '#polyline',
+          duration: 3000
+        });
+
+        svg5.draw(function() {
+          console.log('Finished polyline!');
+        });
       });
     </script>
   </body>
