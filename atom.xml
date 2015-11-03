@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[yosita]]></title>
+  <subtitle><![CDATA[ѧ��]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2015-09-30T07:42:55.567Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name><![CDATA[terry]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/09/30/xbox/"/>
+    <id>http://yoursite.com/2015/09/30/xbox/</id>
+    <published>2015-09-30T07:42:55.567Z</published>
+    <updated>2015-09-30T07:42:55.567Z</updated>
+    <content type="html"><![CDATA[<!--
+title: terry
+date: 2015-09-30
+categories: xbox-one
+tags: [xbox-one]
+--> 
+<p><a href="http://yangwei.info/archives/xbox.html" target="_blank" rel="external">1.XBox-one</a><br><a href="http://yangwei.info/archives/heptagram.html" target="_blank" rel="external">2.heptagram</a><br><img src="/archives/heptagram.jpg" alt=""><br>The Acute Heptagram of Impact – Seth Godin<br>How come Seth Godin is so full of simple but clever and practical ideas?</p>
+<p>Here’s another .. The Heptagram of Impact</p>
+<p>“Not as catchy a title as Maslow’s Hierarchy of Needs, but I hope you’ll walk through this with me:</p>
+<p>I can outline a strategy for you, but if you don’t have the tactics in place or you’re not skilled enough to execute, it won’t matter if the strategy is a good one.</p>
+<p>Your project’s success is going to be influenced in large measure by the reputation of the people who join in and the organization that brings it forward. That’s nothing you can completely change in a day, but it’s something that will change (like it or not) every day.</p>
+<p>None of this matters if you and your team don’t persist, and your persistence will largely be driven by the desire you have to succeed, which of course is relentlessly undermined by the fear we all wrestle with every day.</p>
+<p>These seven elements: Strategy, Tactics, Execution, Reputation, Persistence, Desire and Fear, make up the seven points of the acute heptagram of impact. If your project isn’t working, it’s almost certainly because one or more of these elements aren’t right. And in my experience, it’s all of them. We generally pick the easiest and safest one to work on (probably tactics) without taking a deep breath and understanding where the real problem is.</p>
+<p>Feel free to share the AHI, but please don’t have it tattooed on your hip or anything.”</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<!--
+title: terry
+date: 2015-09-30
+categories: xbox-one
+tags: [xbox-one]
+--> 
+<p><a href="http://yangwei.info/archives/xbox.html" target="_b]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/09/18/stack/"/>
+    <id>http://yoursite.com/2015/09/18/stack/</id>
+    <published>2015-09-18T02:55:28.449Z</published>
+    <updated>2015-09-18T02:55:28.449Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
+<p><a href="http://yangwei.info/test/WebFrontEndStack-master/ux/WebFrontEndStack.htm" target="_blank" rel="external">2.WebFrontEndStack</a></p>
+<p><a href="http://yangwei.info/test/DatabaseStack-master/ux/DatabaseStack.htm" target="_blank" rel="external">3.DatabaseStack</a></p>
+<p><a href="http://coodict.github.io/javascript-in-one-pic/" target="_blank" rel="external">4.javascript-in-one-pic</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
+<p><a href=]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/09/18/dabai/"/>
+    <id>http://yoursite.com/2015/09/18/dabai/</id>
+    <published>2015-09-18T02:53:42.665Z</published>
+    <updated>2015-09-18T02:53:42.665Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://yangwei.info/test/dabai.jpg" alt="dabai" title="dabai"><br><img src="http://github.global.ssl.fastly.net/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Mark" title="GitHub Mark"><br><a href="http://yangwei8888.github.io/test/dabai.html" target="_blank" rel="external">1.css3 大白</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://yangwei.info/test/dabai.jpg" alt="dabai" title="dabai"><br><img src="http://github.global.ssl.fastly.net/images/modules/]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/09/17/helloworld/"/>
+    <id>http://yoursite.com/2015/09/17/helloworld/</id>
+    <published>2015-09-17T03:19:00.877Z</published>
+    <updated>2015-09-17T03:14:46.991Z</updated>
+    <content type="html"><![CDATA[<p>你好！GitBlog</p>
+<p><a href="http://segmentfault.com/a/1190000002620961" target="_blank" rel="external">1.在ubuntu上部署Kubernetes管理docker集群示例</a></p>
+<p><a href="http://blog.csdn.net/thomas0yang/article/details/8562910/" target="_blank" rel="external">7.Hadoop mapreduce原理学习</a></p>
+<p><a href="https://leancloud.cn/docs/leanengine_guide-node.html#" target="_blank" rel="external">26.LeanEngine 指南</a></p>
+<p><a href="http://dockone.io/article/489" target="_blank" rel="external">28.回顾容器标准之争：Docker赢了，而CoreOS未必就输了</a></p>
+<p><a href="http://www.infoq.com/cn/news/2015/04/google-borg/" target="_blank" rel="external">29.Google发布论文 披露大规模集群管理工具Borg的细节</a></p>
+<p><a href="https://registry.hub.docker.com/u/urlgrey/dynamic-redis/" target="_blank" rel="external">31.dynamic-redis</a></p>
+<p><a href="http://blog.csdn.net/codemosi/article/details/44015179" target="_blank" rel="external">38.mdrill安装（1）</a></p>
+<p><a href="http://www.open-open.com/lib/view/open1410954520648.html" target="_blank" rel="external">40.Solr与HBase架构设计</a></p>
+<p><a href="http://www.suchso.com/productdesign/bootstrap-small-manage-system-template-ace.html" target="_blank" rel="external">42.Bootstrap 轻量级后台管理系统模板–ACE使用介绍</a></p>
+<p><a href="https://github.com/makuk66/docker-solr" target="_blank" rel="external">43.makuk66/docker-solr</a></p>
+<p><a href="http://wenku.it168.com/d_000053840.shtml" target="_blank" rel="external">44.The GraphDB Landscape and sones</a></p>
+<p><a href="http://blog.liuts.com/post/242/" target="_blank" rel="external">45.构建一个高可用及自动发现的Docker基础架构-HECD[原创]  不指定</a></p>
+<p><a href="http://yaxin-cn.github.io/Docker/how-to-delete-a-docker-image.html" target="_blank" rel="external">46.docker中如何删除image（镜像）</a></p>
+<p><a href="http://dockone.io/article/180" target="_blank" rel="external">47.用Docker构建分布式Redis集群</a></p>
+<p><a href="http://blog.csdn.net/xautlx/article/details/45481477" target="_blank" rel="external">49.基于Nutch&amp;Solr定向采集解析和索引搜索的整合技术指南文档</a></p>
+<p><a href="http://www.21ops.com/linux/13512.html" target="_blank" rel="external">50.15 分钟掌握 15 个 Docker 小窍门</a></p>
+<p><a href="http://www.blogjava.net/yongboy/archive/2013/12/12/407498.html" target="_blank" rel="external">52.Docker学习笔记之一，搭建一个JAVA Tomcat运行环境</a></p>
+<p><a href="http://blog.csdn.net/cjsafty/article/details/8653021" target="_blank" rel="external">53.moinmoin-wiki</a></p>
+<p><a href="http://golangtc.com/download" target="_blank" rel="external">54.Golang下载</a></p>
+<p><a href="http://dockerpool.com/static/books/docker_practice/fig/wordpress.html" target="_blank" rel="external">55.使用 Wordpress 入门 Fig</a></p>
+<p><a href="http://segmentfault.com/a/1190000002464365" target="_blank" rel="external">56.Docker集中化web界面管理平台shipyard</a></p>
+<p><a href="http://www.zhihu.com/question/24378012" target="_blank" rel="external">57.nodejs与go语言比较如何，它们的发展前景怎样，网站后台开发，选择nodejs好还是go好？</a></p>
+<p><a href="http://www.ryanday.net/2012/10/01/installing-go-and-gopath/" target="_blank" rel="external">58.微软开源 rDSN 分布式系统开发框架</a></p>
+<p><a href="http://www.csdn.net/article/2015-06-09/2824906" target="_blank" rel="external">59.基于Mesos和Docker的分布式计算平台</a></p>
+<p><a href="http://www.cnblogs.com/yexiaochai/p/3759959.html" target="_blank" rel="external">60.【webapp的优化整理】要做移动前端优化的朋友进来看看吧</a></p>
+<p><a href="http://blog.csdn.net/wind19/article/details/8600083" target="_blank" rel="external">61.系统吞吐量、TPS（QPS）、用户并发量、性能测试概念和公式</a></p>
+<p><a href="http://blog.codingnow.com/2011/11/dev_note_2.html" target="_blank" rel="external">62.开发笔记 (2) ：redis 数据库结构设计</a></p>
+<p><a href="http://blog.csdn.net/lincyang/article/details/43850867" target="_blank" rel="external">63.Docker实践4：搭建wordpress</a></p>
+<p><a href="http://www.ryanday.net/2012/10/01/installing-go-and-gopath/" target="_blank" rel="external">64.Installing Go and $GOPATH</a></p>
+<p><a href="http://www.tuicool.com/articles/YniIfu" target="_blank" rel="external">65.使用 Etcd 和 Haproxy 做 Docker 服务发现</a></p>
+<p><a href="http://my.oschina.net/u/1396253/blog/178125" target="_blank" rel="external">66.Docker的WEB管理界面shipyard</a></p>
+<p><a href="http://www.jdon.com/artichect/managing-docker-clusters-using-mesos-and-marathon.html" target="_blank" rel="external">67.使用Mesos和Marathon管理Docker集群</a></p>
+<p><a href="http://www.blogjava.net/yongboy/archive/2013/12/31/408297.html" target="_blank" rel="external">68.Docker学习笔记之四，构建一个Redis as a Service(RAAS)</a></p>
+<p><a href="http://dockone.io/article/180" target="_blank" rel="external">69.用Docker构建分布式Redis集群</a></p>
+<p><a href="http://blog.csdn.net/shimiso/article/details/21830313" target="_blank" rel="external">70.同源策略和跨域访问</a></p>
+<p><a href="http://blog.csdn.net/baron_blogs/article/details/39996989" target="_blank" rel="external">71.对微信、陌陌等进行了分析（IM）</a></p>
+<p><a href="http://www.tuicool.com/articles/2QrAVr" target="_blank" rel="external">72.Creating a REST API using Go (GoLang) and JAS (JSON API Server)</a></p>
+<p><a href="http://blog.csdn.net/zdw12242/article/details/8687644" target="_blank" rel="external">73.利用python、Gephi绘制人人的社交网络图</a></p>
+<p><a href="http://www.ryanday.net/2012/10/01/installing-go-and-gopath/" target="_blank" rel="external">74.Installing Go and $GOPATH</a></p>
+<p><a href="http://zhidao.baidu.com/link?url=F59LrJlWPGBawvcCFtx4L0g3P7D4c9LfvhUR58bmSs4qTv7x40H4FuK9oxzOlWBhplLKXnrBt6eoRYnA4T5getKXKnMwwLtpRMVTegWclFq" target="_blank" rel="external">75.Apache的Mesos和Google的Kubernetes 有什么不同</a></p>
+<p><a href="http://keylines.com/network-visualization/visualizing-titan-the-scalable-graph-database" target="_blank" rel="external">76.Visualizing Titan – the scalable graph database</a></p>
+<p><a href="http://www.kankanews.com/ICkengine/archives/145210.shtml" target="_blank" rel="external">77.图形数据库和NOSQL</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzA5OTAyNzQ2OA==&amp;mid=207127336&amp;idx=1&amp;sn=ee19657852acf7683b2db8fcf55e6e61&amp;scene=5#rd" target="_blank" rel="external">78.SAMI：来自三星的基于Docker和Mesos的容器解决方案</a></p>
+<p><a href="http://blog.csdn.net/malefactor/article/details/39347187" target="_blank" rel="external">79.大数据图数据库之TAO数据库</a></p>
+<p><a href="http://www.cnblogs.com/xia520pi/p/3615554.html" target="_blank" rel="external">80.Nutch搜索引擎（第1期）_ Nutch简介及安装</a></p>
+<p><a href="http://blog.fens.me/nosql-neo4j-intro/" target="_blank" rel="external">81.Neo4j集群安装实践</a></p>
+<p><a href="http://blog.csdn.net/wangloveall/article/details/21407531" target="_blank" rel="external">82.Hadoop之MapReduce</a></p>
+<p><a href="http://blog.sciencenet.cn/blog-496649-838067.html" target="_blank" rel="external">83.citespace</a></p>
+<p><a href="http://www.yiibai.com/sqlite/sqlite_select_query.html" target="_blank" rel="external">84.SQLite</a></p>
+<p><a href="http://limu.iteye.com/blog/765173" target="_blank" rel="external">85.Facebook让网站速度提升一倍的BigPipe技术分析</a></p>
+<p><a href="http://sofar.blog.51cto.com/353572/1369266/" target="_blank" rel="external">86.采用RedisLive监控Redis服务</a></p>
+<p><a href="http://www.cnblogs.com/sharpxiajun/p/3531665.html" target="_blank" rel="external">87.系统架构：Web应用架构的新趋势—前端和后端分离的一点想法</a></p>
+<p><a href="http://www.cnblogs.com/mcgrady/archive/2015/08/12/4725038.html" target="_blank" rel="external">88..NET开发知识体系</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>你好！GitBlog</p>
+<p><a href="http://segmentfault.com/a/1190000002620961" target="_blank" rel="external">1.在ubuntu上部署Kubernetes管理docker集群示例<]]>
+    </summary>
+    
+  </entry>
+  
+</feed>
