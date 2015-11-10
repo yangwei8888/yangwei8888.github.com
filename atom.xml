@@ -4,7 +4,7 @@
   <subtitle><![CDATA[ѧ��]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-09-30T07:42:55.567Z</updated>
+  <updated>2015-11-10T02:22:15.426Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,16 +16,30 @@
   
   <entry>
     <title></title>
-    <link href="http://yoursite.com/2015/09/30/xbox/"/>
-    <id>http://yoursite.com/2015/09/30/xbox/</id>
-    <published>2015-09-30T07:42:55.567Z</published>
-    <updated>2015-09-30T07:42:55.567Z</updated>
-    <content type="html"><![CDATA[<!--
-title: terry
-date: 2015-09-30
-categories: xbox-one
-tags: [xbox-one]
---> 
+    <link href="http://yoursite.com/2015/11/10/stack/"/>
+    <id>http://yoursite.com/2015/11/10/stack/</id>
+    <published>2015-11-10T02:22:15.426Z</published>
+    <updated>2015-11-10T02:22:15.426Z</updated>
+    <content type="html"><![CDATA[<p>title: 技术栈<br>date: 2015-09-29 07:56:29<br>categories: blog<br>tags: [前端，技术，数据库，javascript]  </p>
+<p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
+<p><a href="http://yangwei.info/test/WebFrontEndStack-master/ux/WebFrontEndStack.htm" target="_blank" rel="external">2.WebFrontEndStack</a></p>
+<p><a href="http://yangwei.info/test/DatabaseStack-master/ux/DatabaseStack.htm" target="_blank" rel="external">3.DatabaseStack</a></p>
+<p><a href="http://coodict.github.io/javascript-in-one-pic/" target="_blank" rel="external">4.javascript-in-one-pic</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>title: 技术栈<br>date: 2015-09-29 07:56:29<br>categories: blog<br>tags: [前端，技术，数据库，javascript]  </p>
+<p><a href="http://yangwei.info/test/Do]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/11/10/xbox/"/>
+    <id>http://yoursite.com/2015/11/10/xbox/</id>
+    <published>2015-11-10T02:21:24.912Z</published>
+    <updated>2015-11-10T02:21:24.912Z</updated>
+    <content type="html"><![CDATA[<p>title: js绘图<br>date: 2015-09-29 07:56:29<br>categories: blog<br>tags: [SVG，技术] </p>
 <p><a href="http://yangwei.info/archives/xbox.html" target="_blank" rel="external">1.XBox-one</a><br><a href="http://yangwei.info/archives/heptagram.html" target="_blank" rel="external">2.heptagram</a><br><img src="/archives/heptagram.jpg" alt=""><br>The Acute Heptagram of Impact – Seth Godin<br>How come Seth Godin is so full of simple but clever and practical ideas?</p>
 <p>Here’s another .. The Heptagram of Impact</p>
 <p>“Not as catchy a title as Maslow’s Hierarchy of Needs, but I hope you’ll walk through this with me:</p>
@@ -36,31 +50,8 @@ tags: [xbox-one]
 <p>Feel free to share the AHI, but please don’t have it tattooed on your hip or anything.”</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<!--
-title: terry
-date: 2015-09-30
-categories: xbox-one
-tags: [xbox-one]
---> 
-<p><a href="http://yangwei.info/archives/xbox.html" target="_b]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/09/18/stack/"/>
-    <id>http://yoursite.com/2015/09/18/stack/</id>
-    <published>2015-09-18T02:55:28.449Z</published>
-    <updated>2015-09-18T02:55:28.449Z</updated>
-    <content type="html"><![CDATA[<p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
-<p><a href="http://yangwei.info/test/WebFrontEndStack-master/ux/WebFrontEndStack.htm" target="_blank" rel="external">2.WebFrontEndStack</a></p>
-<p><a href="http://yangwei.info/test/DatabaseStack-master/ux/DatabaseStack.htm" target="_blank" rel="external">3.DatabaseStack</a></p>
-<p><a href="http://coodict.github.io/javascript-in-one-pic/" target="_blank" rel="external">4.javascript-in-one-pic</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
-<p><a href=]]>
+    <![CDATA[<p>title: js绘图<br>date: 2015-09-29 07:56:29<br>categories: blog<br>tags: [SVG，技术] </p>
+<p><a href="http://yangwei.info/archives/xbox.html" t]]>
     </summary>
     
   </entry>
