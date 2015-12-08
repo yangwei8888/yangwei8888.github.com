@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/10/18/bilibili/2831578/</loc>
+    <lastmod>2015-12-08T08:39:55.493Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/12/08/docker/machine/install-machine/</loc>
     <lastmod>2015-12-08T07:16:23.723Z</lastmod>
   </url>
@@ -174,51 +179,6 @@
   <url>
     <loc>http://yoursite.com/2015/09/29/xbox/</loc>
     <lastmod>2015-12-08T06:49:36.138Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/frugalware/</loc>
-    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/amazon/</loc>
-    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/rackspace/</loc>
-    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/joyent/</loc>
-    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/binaries/</loc>
-    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/centos/</loc>
-    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/crux/</loc>
-    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/fedora/</loc>
-    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/gentoo/</loc>
-    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
   </url>
   
 </urlset>

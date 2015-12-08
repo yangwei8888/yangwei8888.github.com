@@ -101,520 +101,28 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/rackspace/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/rackspace/</id>
-    <published>2015-12-08T07:05:15.474Z</published>
-    <updated>2015-09-30T15:27:59.000Z</updated>
-    <content type="html"><![CDATA[<p>#Rackspace Cloud</p>
-<p>由 Rackspace 提供的 Ubuntu 安装 Docker 是非常简单的，你可以大多按照<a href="../installation/ubuntu.md" title="Ubuntu">Ubuntu</a>的安装指南。</p>
-<p><strong>不过请注意：</strong></p>
-<p>如果你使用的 Linux 发行版没有运行 3.8 内核，你就必须升级内核，这个在 Rackspace 上是有些困难的。</p>
-<p>Rackspace 使用 grub 的 <code>menu.lst</code> 启动服务，虽然它们运行正常，但是并不像非虚拟软件包（如xen兼容）内核那样。所以你必须手动设置内核。</p>
-<p>不要在上线部署的机器上尝试这样做：</p>
-<pre><code><span class="preprocessor"># 更新apt</span>
-$ apt-<span class="keyword">get</span> update
-
-<span class="preprocessor"># 安装新内核</span>
-$ apt-<span class="keyword">get</span> install linux-generic-lts-raring
-</code></pre><p>非常好，现在你已经将内核安装到 <code>/boot/</code> 下，下一步你需要让它在重新启动后生效。</p>
-<pre><code><span class="comment"># find the exact names</span>
-$ find <span class="regexp">/boot/</span> -name <span class="string">'*3.8*'</span>
-
-<span class="comment"># this should return some results</span>
-</code></pre><p>现在你需要手动编译 <code>/boot/grub/menu.list</code> ,在底部有相关选项。复制和替换成新内核，确保新内核在最上边，仔细检查内核和 initrd 指向的文件是否正确。</p>
-<p>要特别注意检查内核和 initrd 条目。</p>
-<pre><code># 现在编辑 /boot/grub/<span class="keyword">menu</span>.lst
- <span class="keyword">vi</span> /boot/grub/<span class="keyword">menu</span>.lst
-</code></pre><p>这是配置好的样子：</p>
-<pre><code>## ## End <span class="keyword">Default</span> <span class="keyword">Options</span> ##
-
-title              Ubuntu <span class="number">12.04</span>.<span class="number">2</span> LTS, kernel <span class="number">3.8</span>.x generic
-root               (hd0)
-kernel             <span class="regexp">/boot/</span>vmlinuz-<span class="number">3.8</span>.<span class="number">0</span>-<span class="number">19</span>-generic root=<span class="regexp">/dev/</span>xvda1 ro quiet splash console=hvc0
-initrd             <span class="regexp">/boot/i</span>nitrd.img-<span class="number">3.8</span>.<span class="number">0</span>-<span class="number">19</span>-generic
-
-title              Ubuntu <span class="number">12.04</span>.<span class="number">2</span> LTS, kernel <span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual
-root               (hd0)
-kernel             <span class="regexp">/boot/</span>vmlinuz-<span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual root=<span class="regexp">/dev/</span>xvda1 ro quiet splash console=hvc0
-initrd             <span class="regexp">/boot/i</span>nitrd.img-<span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual
-
-title              Ubuntu <span class="number">12.04</span>.<span class="number">2</span> LTS, kernel <span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual (recovery mode)
-root               (hd0)
-kernel             <span class="regexp">/boot/</span>vmlinuz-<span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual root=<span class="regexp">/dev/</span>xvda1 ro quiet splash  single
-initrd             <span class="regexp">/boot/i</span>nitrd.img-<span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual
-</code></pre><p>重启你的服务器（通过命令行或者控制台）：</p>
-<pre><code>reboot
-</code></pre><p>验证你的内核是否升级成功</p>
-<pre><code>$ uname -a
-<span class="preprocessor"># Linux docker-<span class="number">12</span>-<span class="number">04</span> <span class="number">3.8</span><span class="number">.0</span>-<span class="number">19</span>-generic #<span class="number">30</span>~precise1-Ubuntu SMP Wed May <span class="number">1</span> <span class="number">22</span>:<span class="number">26</span>:<span class="number">36</span> UTC <span class="number">2013</span> x86_64 x86_64 x86_64 GNU/Linux</span>
-
-<span class="preprocessor"># nice! <span class="number">3.8</span>.</span>
-</code></pre><p>现在升级内核完成，更多信息查看<a href="../installation/ubuntu.md">ubuntu文档安装</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>#Rackspace Cloud</p>
-<p>由 Rackspace 提供的 Ubuntu 安装 Docker 是非常简单的，你可以大多按照<a href="../installation/ubuntu.md" title="Ubuntu">Ubuntu</a>的安装指南]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/joyent/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/joyent/</id>
-    <published>2015-12-08T07:05:15.471Z</published>
-    <updated>2015-09-30T15:27:59.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="Joyent_公有云安装_Docker">Joyent 公有云安装 Docker</h2><ol>
-<li><p>登录 Joyent <a href="https://my.joyent.com/" target="_blank" rel="external">用户中心</a></p>
-</li>
-<li><p><a href="https://docs.joyent.com/jpc/managing-docker-containers/creating-a-docker-host" target="_blank" rel="external">创建一个 Docker 主机</a>.</p>
-</li>
-</ol>
-<h2 id="启动和管理容器">启动和管理容器</h2><ol>
-<li><p><a href="https://docs.joyent.com/jpc/managing-docker-containers/starting-a-container" target="_blank" rel="external">在 WEB 界面中启动容器</a></p>
-</li>
-<li><p><a href="https://docs.joyent.com/jpc/managing-docker-containers/access-your-jpc-docker-hosts-from-the-docker-cli" target="_blank" rel="external">在你的电脑上配置 Docker </a> 连接远程主机来开启和管理容器。</p>
-</li>
-<li><p>在 Docker 主机中添加 SSH.</p>
-</li>
-<li><p>使用 Docker 命令行来启动容器.</p>
-</li>
-</ol>
-<p>##下一步</p>
-<p>查看 <a href="../userguide/">用户指南</a>, 或阅读 Joyent’s <a href="https://www.joyent.com/blog/first-steps-with-joyents-container-service" target="_blank" rel="external"> 博客中的开始教程 </a>和 <a href="https://docs.joyent.com/jpc/managing-docker-containers" target="_blank" rel="external">管理容器文档</a>.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="Joyent_公有云安装_Docker">Joyent 公有云安装 Docker</h2><ol>
-<li><p>登录 Joyent <a href="https://my.joyent.com/" target="_blank" rel="external">用]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/gentoo/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/gentoo/</id>
-    <published>2015-12-08T07:05:15.469Z</published>
-    <updated>2015-09-30T15:27:59.000Z</updated>
-    <content type="html"><![CDATA[<p>#Gentoo</p>
-<p>在 Gentoo Linux 上安装 Docker 可以通过以下两种方式的任一种实现：官方安装方法和 <code>docker-overlay</code> 方法。</p>
-<p>官方 <a href="https://wiki.gentoo.org/wiki/Project:Docker" target="_blank" rel="external"> Gentoo Docker </a> 团队页面。</p>
-<h2 id="官方方式">官方方式</h2><p>如果你正在寻找一种稳定的方案，最好的办法就是直接在 portage tree 上安装官方的 app-emulation/docker 包。</p>
-<p>如果 ebuild 时出现任何问题，包括缺少内核配置标识或依赖，请到 Gentoo 的 <a href="https://bugs.gentoo.org/" target="_blank" rel="external"> Bugzilla </a> 网站上指定的 <code>docker AT gentoo DOT org</code> 提交问题，或者加入 Freenode 的 Gentoo 官方 <a href="http://webchat.freenode.net?channels=%23gentoo-containers&amp;uio=d4" target="_blank" rel="external">IRC</a> 频道来提问。</p>
-<h2 id="docker-overlay_方法">docker-overlay 方法</h2><p>如果你正在寻找一个 <code>-bin</code> ebuild, live ebuild, 或者 bleeding edge ebuild，可以使用 overlay  提供的<a href="https://github.com/tianon/docker-overlay" target="_blank" rel="external">docker-overlay</a>。使用 app-portage/layman 来添加第三方的 portage。查看最新的安装和使用 overlay 的文档请，请点击 <a href="https://github.com/tianon/docker-overlay/blob/master/README.md#using-this-overlay" target="_blank" rel="external">the overlay README</a>。</p>
-<p>如果 ebuild 或者生成的二进制文件时出现任何问题，包括特别是缺少内核配置标识或依赖关系，请 <a href="https://github.com/tianon/docker-overlay/issues" target="_blank" rel="external">在 docker-overlay 仓库提交一个 issue</a> 或者直接在 freenode 网络的 #docker IRC 频道上联系 tianon。</p>
-<h2 id="安装">安装</h2><h3 id="Available_USE_flags">Available USE flags</h3><table><br><thead><br><tr><br><th>USE Flag</th><br><th align="center">Default</th><br><th align="left">Description</th><br></tr><br></thead><br><tbody><br><tr><br><td>aufs</td><br><td align="center"></td><br><td align="left">Enables dependencies for the “aufs” graph driver, including necessary kernel flags.</td><br></tr><br><tr><br><td>btrfs</td><br><td align="center"></td><br><td align="left">Enables dependencies for the “btrfs” graph driver, including necessary kernel flags.</td><br></tr><br><tr><br><td>contrib</td><br><td align="center">Yes</td><br><td align="left">Install additional contributed scripts and components.</td><br></tr><br><tr><br><td>device-mapper</td><br><td align="center">Yes</td><br><td align="left">Enables dependencies for the “devicemapper” graph driver, including necessary kernel flags.</td><br></tr><br><tr><br><td>doc</td><br><td align="center"></td><br><td align="left">Add extra documentation (API, Javadoc, etc). It is recommended to enable per package instead of globally.</td><br></tr><br><tr><br><td>lxc</td><br><td align="center"></td><br><td align="left">Enables dependencies for the “lxc” execution driver.</td><br></tr><br><tr><br><td>vim-syntax</td><br><td align="center"></td><br><td align="left">Pulls in related vim syntax scripts.</td><br></tr><br><tr><br><td>zsh-completion</td><br><td align="center"></td><br><td align="left">Enable zsh completion support.</td><br></tr><br></tbody><br></table>
-
-
-<p>这个包会适当的获取必要的依赖和提示的内核选项。</p>
-<p><a href="https://tianon.github.io/post/2014/05/17/docker-on-gentoo.html" target="_blank" rel="external"> tianon’s </a> 的博客中有详细的使用标识的介绍。</p>
-<pre><code><span class="variable">$ </span>sudo emerge -av app-emulation/docker
-</code></pre><blockquote>
-<p>注：有时候官方的 <strong>Gentoo tree</strong> 和 <strong>docker-overlay</strong> 的最新版本还是有差距的，请耐心等待，最新版本会很快更新。</p>
-</blockquote>
-<p>##启动 Docker</p>
-<p>请确保您运行的内核包含了所有必要的模块和配置（可选的 device-mapper 和 AUFS 或 Btrfs ，这主要取决于你要使用的存储驱动程序）。</p>
-<p>使用 Docker，docker 进程必须以 <strong>root</strong> 用户运行。</p>
-<p>用 <strong>非root</strong> 用户使用 Docker，可以使用下边的命令，将你自己的用户添加到 <strong>docker</strong> 用户组 。</p>
-<pre><code>$ sudo usermod -<span class="tag">a</span> -G docker user
-</code></pre><p>###OpenRC</p>
-<p>启动 <code>docker</code> 进程：</p>
-<pre><code><span class="variable">$ </span>sudo /etc/init.d/docker start
-</code></pre><p>开机启动：</p>
-<pre><code>$ sudo rc-<span class="operator"><span class="keyword">update</span> <span class="keyword">add</span> docker <span class="keyword">default</span></span>
-</code></pre><p>###systemd</p>
-<p>启动 <code>docker</code> 进程：</p>
-<pre><code><span class="variable">$ </span>sudo systemctl start docker.service
-</code></pre><p>开机启动：</p>
-<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker.service
-</code></pre><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="../articles/systemd.md">如何定制 Docker 进程</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>#Gentoo</p>
-<p>在 Gentoo Linux 上安装 Docker 可以通过以下两种方式的任一种实现：官方安装方法和 <code>docker-overlay</code> 方法。</p>
-<p>官方 <a href="https://wiki.gentoo.]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/frugalware/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/frugalware/</id>
-    <published>2015-12-08T07:05:15.468Z</published>
-    <updated>2015-09-30T15:27:59.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="FrugalWare">FrugalWare</h1><p>在FrugalWare上使用官方包来安装:</p>
-<ul>
-<li><a href="http://www.frugalware.org/packages/200141" target="_blank" rel="external">lxc-docker i686</a></li>
-<li><a href="http://www.frugalware.org/packages/200130" target="_blank" rel="external">lxc-docker x86_64</a></li>
-</ul>
-<p><code>lxc-docker</code> 包将会安装最新版本的 Docker。</p>
-<p>###依赖关系</p>
-<p>Docker 有几个依赖包需要安装，核心依赖包如下：</p>
-<ul>
-<li>systemd</li>
-<li>lvm2</li>
-<li>sqlite3</li>
-<li>libguestfs</li>
-<li>lxc</li>
-<li>iproute2</li>
-<li>bridge-utils</li>
-</ul>
-<p>###安装</p>
-<p>只需一步就可以完整安装：</p>
-<pre><code><span class="title">pacman</span> -S lxc-docker
-</code></pre><p>###开始用docker</p>
-<p>Docker 会创建一个系统服务，使用下面的命令启动该服务：</p>
-<pre><code><span class="variable">$ </span>sudo systemctl start lxc-docker
-</code></pre><p>设置开机启动：</p>
-<pre><code>$ sudo systemctl <span class="built_in">enable</span> lxc-docker
-</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="FrugalWare">FrugalWare</h1><p>在FrugalWare上使用官方包来安装:</p>
-<ul>
-<li><a href="http://www.frugalware.org/packages/200141" target="_blank"]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/fedora/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/fedora/</id>
-    <published>2015-12-08T07:05:15.468Z</published>
-    <updated>2015-09-30T15:27:59.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="Fedora">Fedora</h1><p>Docker 已经支持以下版本的 Fedora :</p>
-<ul>
-<li><a href="#fedora-20-installation"><em>Fedora 20 (64-bit)</em></a></li>
-<li><a href="#fedora-21-and-later-installation"><em>Fedora 21 and later (64-bit)</em></a></li>
-</ul>
-<p>目前的 Fedora 项目，仅发行版本中的内核支持 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错。</p>
-<h2 id="Fedora_21_或更高版本安装_Docker">Fedora 21 或更高版本安装 Docker</h2><p>在你的主机上安装 <code>docker</code> 包来安装 Docker 。</p>
-<pre><code>$ sudo yum -y <span class="keyword">install</span> docker
-</code></pre><p>更新 <code>docker</code> :</p>
-<pre><code><span class="variable">$ </span>sudo yum -y update docker
-</code></pre><p>请继续阅读启动 Docker 进程 <a href="#starting-the-docker-daemon">Starting the Docker daemon</a>。</p>
-<h2 id="Fedora_20_安装_Docker">Fedora 20 安装 Docker</h2><p>在 <code>Fedora 20</code> 中，一个系统自带的可执行的应用程序与 docker 包名字发生冲突，所以我们给 docker 的RPM包重命名为 docker-io 。</p>
-<p><code>Fedora 20</code> 中 安装 <code>docker-io</code> 之前需要先卸载 <code>docker</code> 包。</p>
-<pre><code>$ sudo yum -y <span class="keyword">remove</span> docker
-$ sudo yum -y <span class="keyword">install</span> docker-io
-</code></pre><p>更新 <code>docker</code></p>
-<pre><code><span class="variable">$ </span>sudo yum -y update docker-io
-</code></pre><p>请继续阅读启动 Docker 进程 <a href="#starting-the-docker-daemon">Starting the Docker daemon</a>。</p>
-<h2 id="Starting_the_Docker_daemon">Starting the Docker daemon</h2><p>当 Docker 安装完成之后，你需要启动 docker 进程。</p>
-<pre><code><span class="variable">$ </span>sudo systemctl start docker
-</code></pre><p>如果我们希望开机时自动启动 Docker ，如下操作：</p>
-<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker
-</code></pre><p>现在，我们来验证 Docker 是否正常工作。</p>
-<pre><code>$ sudo docker run -<span class="tag">i</span> -t fedora /bin/bash
-</code></pre><blockquote>
-<p>注意 ： 如果你使用的时候提示了 <code>Cannot start container</code> 错误，错误中提到了 SELINUX 或者权限不足，你需要更新 SELinux 策略，你可以使用 <code>sudo yum upgrade selinux-policy</code> 来改变 SELinux策略并重启。</p>
-</blockquote>
-<h2 id="为使用_Docker_用户授权">为使用 Docker 用户授权</h2><p><code>docker</code> 命令行工具通过 socket 文件 <code>/var/run/docker.sock</code> 和 <code>docker</code> 守护进程进行通信的。而这个 socket 文件的用户权限是 <code>root:root</code>。 虽然<br><a href="https://lists.projectatomic.io/projectatomic-archives/atomic-devel/2015-January/msg00034.html" target="_blank" rel="external">推荐</a><br>使用 <code>sudo</code> 命令来使用 docker 命令，但是如果你不想使用 <code>sudo</code>, 系统管理员可以创建一个 <code>docker</code> 用户组，并将 <code>/var/run/docker.sock</code> 赋予 docker 用户组权限，然后给 docker 用户组添加用户即可。</p>
-<pre><code>$ sudo groupadd docker
-$ sudo chown root:docker /var/run/docker<span class="class">.sock</span>
-$ sudo usermod -<span class="tag">a</span> -G docker <span class="variable">$USERNAME</span>
-</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
-<h2 id="下一步">下一步</h2><p>阅读 <a href="../userguide/">用户指南</a>.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="Fedora">Fedora</h1><p>Docker 已经支持以下版本的 Fedora :</p>
-<ul>
-<li><a href="#fedora-20-installation"><em>Fedora 20 (64-bit)</em></a></li>
-]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/crux/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/crux/</id>
-    <published>2015-12-08T07:05:15.466Z</published>
-    <updated>2015-09-30T15:27:59.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="CRUX_Linux">CRUX Linux</h1><p>在CRUX Linux可以通过由 <a href="http://prologic.shortcircuit.net.au/" target="_blank" rel="external">James Mills</a> 提供的 ports，或者官方的 <a href="http://crux.nu/portdb/?a=repo&amp;q=contrib" target="_blank" rel="external">contrib</a> ports.</p>
-<ul>
-<li>docker</li>
-</ul>
-<p><code>docker</code> port 将构建安装最新版本的 Docker。</p>
-<p>###安装</p>
-<p>如果你的版本允许，更新你的 ports 目录树并且安装docker(用root用户)：</p>
-<pre><code><span class="preprocessor"># prt-get depinst docker</span>
-</code></pre><p>如果你想节省你的编译时间，你可以安装<code>docker-bin</code></p>
-<p>###内核要求</p>
-<p>如果使 CRUX + Docker 主机正常工作，你必须确保你的内核安装必要的模块来保证 Docker 进程的正常运行。</p>
-<p>请阅读<code>README</code>：</p>
-<pre><code>$ prt-<span class="keyword">get</span> readme docker
-</code></pre><p><code>docker</code> ports 安装由 Docker 发行版提供的 contrib/check-config.sh 脚本，以供检查你的内核配置是否适合安装 Docker 主机。</p>
-<p>运行下面的命令来检查你的内核：</p>
-<pre><code>$ <span class="regexp">/usr/</span>share<span class="regexp">/docker/</span>check-config.sh
-</code></pre><p>###启动docker</p>
-<p>我们提供一个 rc 脚本来创建 Docker.请使用下列命令来启动 Docker 服务(root用户):</p>
-<pre><code><span class="preprocessor"># /etc/rc.d/docker start</span>
-</code></pre><p>设置开机启动</p>
-<ul>
-<li>编辑 <code>/etc/rc.conf</code></li>
-<li>将 <code>docker</code> 放到 <code>SERVICES=(...)</code> 数组 <code>net</code> 之后.</li>
-</ul>
-<p>###镜像</p>
-<p>“官方库”中提供了由 <a href="http://prologic.shortcircuit.net.au/" target="_blank" rel="external">James Mills</a> 制作的 CRUX 镜像。你可以使用 <code>pull</code> 命令来使用这个镜像，当然你也可以在 <code>Dockerfile(s)</code> 中的 <code>FROM</code> 部分来设置使用。</p>
-<pre><code><span class="variable">$ </span>docker pull crux
-<span class="variable">$ </span>docker run -i -t crux
-</code></pre><p>在 Docker Hub 中也有其他用户贡献的  <a href="https://registry.hub.docker.com/repos/crux/" target="_blank" rel="external">CRUX 基础镜像</a> 。</p>
-<p>###Issues</p>
-<p>如果你有一些问题，请在 <a href="http://crux.nu/bugs/" target="_blank" rel="external">CRUX Bug Tracker</a> 提交。</p>
-<p>###支持</p>
-<p>寻求更多技术支持，请查看 <a href="http://crux.nu/Main/MailingLists" target="_blank" rel="external">CRUX 邮件列表</a> 或加入在 <a href="http://freenode.net/" target="_blank" rel="external">FreeNode</a> 网络上的 <a href="http://crux.nu/Main/IrcChannels" target="_blank" rel="external">IRC Channels</a>.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="CRUX_Linux">CRUX Linux</h1><p>在CRUX Linux可以通过由 <a href="http://prologic.shortcircuit.net.au/" target="_blank" rel="external">James M]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/centos/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/centos/</id>
-    <published>2015-12-08T07:05:15.465Z</published>
-    <updated>2015-09-30T15:27:59.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="CentOS">CentOS</h1><p>以下版本的CentOS 支持 Docker ：</p>
-<ul>
-<li><a href="#installing-docker-centos-7"><em>CentOS 7 (64-bit)</em></a></li>
-<li><a href="#installing-docker-centos-6.5"><em>CentOS 6.5 (64-bit)</em></a> or later</li>
-</ul>
-<p>该指南可能会适用于其它的  EL6/EL7 的 Linux 发行版，譬如 Scientific Linux 。但是我们没有做过任何测试。</p>
-<p>请注意，由于 Docker 的局限性，Docker 只能运行在64位的系统中。</p>
-<h2 id="内核支持">内核支持</h2><p>目前的 CentOS 项目，仅发行版本中的内核支持 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错。</p>
-<p>Docker 运行在 <a href="www.centos.org">CentOS-6.5</a> 或更高的版本的 CentOS 上，需要内核版本是 2.6.32-431 或者更高版本 ，因为这是允许它运行的指定内核补丁版本。</p>
-<p>##安装 - CentOS-7</p>
-<p>Docker 软件包已经包含在默认的 CentOS-Extras 软件源里，安装命令如下：</p>
-<pre><code>$ sudo yum <span class="keyword">install</span> docker
-</code></pre><p>开始运行 <a href="#starting-the-docker-daemon">Docker daemon</a>。</p>
-<h3 id="FirewallD">FirewallD</h3><p>CentOS-7 中介绍了 firewalld，firewall的底层是使用iptables进行数据过滤，建立在iptables之上，这可能会与 Docker 产生冲突。</p>
-<p>当 <code>firewalld</code> 启动或者重启的时候，将会从 iptables 中移除 <code>DOCKER</code> 的规则，从而影响了 Docker 的正常工作。</p>
-<p>当你使用的是 Systemd 的时候， <code>firewalld</code> 会在 Docker 之前启动，但是如果你在 Docker 启动之后再启动 或者重启 <code>firewalld</code> ，你就需要重启 Docker 进程了。</p>
-<h2 id="安装_Docker_-_CentOS-6-5">安装 Docker - CentOS-6.5</h2><p>在 CentOS-6.5 中，Docker 包含在 <a href="https://fedoraproject.org/wiki/EPEL" target="_blank" rel="external">Extra Packages<br>for Enterprise Linux (EPEL)</a> 提供的镜像源中，该组织致力于为 RHEL 发行版创建和维护更多可用的软件包。</p>
-<p>首先，你需要安装 EPEL 镜像源，请查看 <a href="https://fedoraproject.org/wiki/EPEL#How_can_I_use_these_extra_packages.3F" target="_blank" rel="external">EPEL installation instructions</a>.</p>
-<p>在 CentOS-6 中，一个系统自带的可执行的应用程序与 docker 包名字发生冲突，所以我们重新命名 docker 的RPM包名字为 <code>docker-io</code> 。</p>
-<p>CentOS-6 中 安装 <code>docker-io</code> 之前需要先卸载 <code>docker</code> 包。</p>
-<pre><code>$ sudo yum -y <span class="keyword">remove</span> docker
-</code></pre><p>下一步，安装 <code>docker-io</code> 包来为我们的主机安装 Docker。</p>
-<pre><code>$ sudo yum <span class="keyword">install</span> docker-io
-</code></pre><p>开始运行 <a href="#starting-the-docker-daemon">Docker daemon</a>。</p>
-<h2 id="手动安装最新版本的_Docker">手动安装最新版本的 Docker</h2><p>当你使用推荐方法来安装 Docker 的时候，上述的 Docker 包可能不是最新发行版本。 如果你想安装最新版本，<a href="./binaries.md">你可以直接安装二进制包</a></p>
-<p>当你使用二进制安装时，你可能想将 Docker 集成到 Systemd 的系统服务中。为了实现至一点，你需要从github中下载 <a href="https://github.com/docker/docker/tree/master/contrib/init/systemd" target="_blank" rel="external">service and socket</a>两个文件，然后安装到 <code>/etc/systemd/system</code> 中。</p>
-<p>Please continue with the <a href="#starting-the-docker-daemon">Starting the Docker daemon</a>.</p>
-<h2 id="Starting_the_Docker_daemon">Starting the Docker daemon</h2><p>当 Docker 安装完成之后，你需要启动 docker 进程。</p>
-<pre><code><span class="variable">$ </span>sudo service docker start
-</code></pre><p>如果我们希望 Docker 默认开机启动，如下操作：</p>
-<pre><code>$ sudo chkconfig docker <span class="function_start"><span class="keyword">on</span></span>
-</code></pre><p>现在，我们来验证 Docker 是否正常工作。第一步，我们需要下载最新的 <code>centos</code> 镜像。</p>
-<pre><code><span class="variable">$ </span>sudo docker pull centos
-</code></pre><p>下一步，我们运行下边的命令来查看镜像，确认镜像是否存在：</p>
-<pre><code><span class="variable">$ </span>sudo docker images centos
-</code></pre><p>这将会输出如下的信息：</p>
-<pre><code>$ sudo docker images centos
-REPOSITORY      TAG             IMAGE ID          CREATED             VIRTUAL SIZE
-centos          latest          <span class="number">0</span>b443ba03958      <span class="number">2</span> hours ago         <span class="number">297.6</span> MB
-</code></pre><p>运行简单的脚本来测试镜像：</p>
-<pre><code>$ sudo docker run -<span class="tag">i</span> -t centos /bin/bash
-</code></pre><p>如果正常运行，你将会获得一个简单的 bash 提示，输入 <code>exit</code> 来退出。</p>
-<h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
-<h2 id="Dockerfiles">Dockerfiles</h2><p>CentOS 项目为开发者提供了大量的的示例镜像，作为开发模板或者学习 Docker 的实例。你可以在这里找到这些示例：</p>
-<p><a href="https://github.com/CentOS/CentOS-Dockerfiles" target="_blank" rel="external">https://github.com/CentOS/CentOS-Dockerfiles</a></p>
-<p>好！现在你可以去查看<a href="../userguide/README.md">用户指南</a>，或者创建你自己的镜像了。</p>
-<p>##发现问题？</p>
-<p>如果有关于在 CentOS 上的 Docker 问题，请直接在这里提交：<a href="http://bugs.centos.org/" target="_blank" rel="external">CentOS Bug Tracker</a>.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="CentOS">CentOS</h1><p>以下版本的CentOS 支持 Docker ：</p>
-<ul>
-<li><a href="#installing-docker-centos-7"><em>CentOS 7 (64-bit)</em></a></li>]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/binaries/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/binaries/</id>
-    <published>2015-12-08T07:05:15.464Z</published>
-    <updated>2015-09-30T15:27:59.000Z</updated>
-    <content type="html"><![CDATA[<p>#Binaries</p>
-<p>本安装说明是提供给那些想在多种环境中安装 Docker 的 hacker 们的。</p>
-<p>在进行安装之前，请检查你的 Linux 发行版本是否有打包好的 Docker 安装包。我们已经发布了许多发行版包，这样会节省您很多时间。</p>
-<p>##检查运行时的依赖关系</p>
-<p>如果想要 Docker 正常运行，需要安装以下软件:</p>
-<ul>
-<li>iptables version 1.4 or later</li>
-<li>Git version 1.7 or later</li>
-<li>procps (or similar provider of a “ps” executable)</li>
-<li>XZ Utils 4.9 or later</li>
-<li>a <a href="https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount" target="_blank" rel="external">properly mounted</a> cgroupfs hierarchy (having a single, all-encompassing “cgroup” mount point <a href="https://github.com/docker/docker/issues/3485" target="_blank" rel="external">is not sufficien</a>)</li>
-</ul>
-<p>##检查内核的依赖关系</p>
-<p>Docker 进程模式需要特定的内核环境支持。详情请检查您的<a href="../SUMMARY.md">发行版</a>。</p>
-<p>Docker 对 Linux 内核版本的最低要求是3.10，如果内核版本低于 3.10 会缺少一些运行 Docker 容器的功能。这些比较旧的内核，在一定条件下会导致数据丢失和频繁恐慌错误。</p>
-<p>推荐使用版本号为（3.x.y）的 3.10 Linux 内核版本（或者新的维护版本），保持跟上内核的次要版本更新来确保内核的BUG已经被修复。</p>
-<blockquote>
-<p>警告：安装自定义内核时，Linux 版本发行商可能不支持内核软件包。请务必在安装自定义内核之前，先咨询供应商是否支持 Docker。</p>
-<p>警告：一些发行版本上还不能够安装新版本的内核，因为这些发行版本提供的包太老或者与新内核不兼容。</p>
-</blockquote>
-<p>值得注意的是 Docker 可以以客户端模式存在，它几乎可以运行在任何的Linux内核（甚至 OS X 上）。</p>
-<p>##Enable AppArmor and SELinux when possible</p>
-<p>如果你的 Linux 发行版上支持 AppArmor 或者 Selinux 请启用。这有助于提高安全性并阻止某些漏洞。关与如何启动设置推荐的安全机制，在发行版提供的文档上提供了详细的步骤。</p>
-<p>某些 Linux 发行版上默认情况下是启用 AppArmor 或者 Selinux，但是它们的内核不符合安装 Docker 的最低要求（3.10或更高版本）。为了让系统能够启动 Docker 和 运行容器，需要更新内核到3.10或者更高版本。AppArmor/SELinux 用户空间(user space) 工具提供的系统与内核版本的不兼容性可能会阻止 Docker 的运行，容器的启动或者造成容器的意外退出。</p>
-<blockquote>
-<p>警告：如果机器上启用了安全机制，它就不应该被禁用来使 Docker 和 容器运行。这样会使系统失去发行版供应商的支持，并可能打破严格的监管环境和安全策略。</p>
-</blockquote>
-<p>##获取Docker二进制文件</p>
-<p>你可以下载最新版本或者特定版本的二进制版本。下载完二进制文件之后，你必须要给文件可执行权限来运行。</p>
-<p>在 Linux 或 OS X 上指定文件的执行权限：</p>
-<pre><code><span class="variable">$ </span>chmod +x docker
-</code></pre><p>从 Github 上获取稳定的发行版本号列表，请查看 <code>docker/docker</code> <a href="https://github.com/docker/docker/releases" target="_blank" rel="external">发布页面</a></p>
-<blockquote>
-<p>注意</p>
-<p>1) 你可以通过在 URL 中分别附加 MD5 和 SHA256 哈希值来获得二进制包。</p>
-<p>2) 你可以通过 URL 中附加 .tgz 地址来获得压缩的二进制包。</p>
-</blockquote>
-<p>###获取 Linux 二进制包</p>
-<p>通过下边的链接来下载最新版本的 Linux 二进制包：</p>
-<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/i386/docker-latest
-
-http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/x86_64/docker-latest
-</code></pre><p>使用下边的链接模式来下载指定版本的 Linux 二进制包：</p>
-<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/i386/docker-&lt;<span class="keyword">version</span>&gt;
-
-http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/x86_64/docker-&lt;<span class="keyword">version</span>&gt;
-</code></pre><p>举例：</p>
-<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/i386/docker-<span class="number">1.6</span>.<span class="number">0</span>
-
-http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/x86_64/docker-<span class="number">1.6</span>.<span class="number">0</span>
-</code></pre><h3 id="获取_Mac_OS_X_二进制包">获取 Mac OS X 二进制包</h3><p>Mac OS X 的二进制文件仅仅是一个客户端。你不可以使用它来启动 docker 进程。通过下边的链接来下载最新的 Mac OS X 版本：</p>
-<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/i386/docker-latest
-
-http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/x86_64/docker-latest
-</code></pre><p>通过下边的 URL 模式来下载指定的 Mac OS X 版本：</p>
-<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/i386/docker-&lt;<span class="keyword">version</span>&gt;
-
-http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/x86_64/docker-&lt;<span class="keyword">version</span>&gt;
-</code></pre><p>举例：</p>
-<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/i386/docker-<span class="number">1.6</span>.<span class="number">0</span>
-
-http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/x86_64/docker-<span class="number">1.6</span>.<span class="number">0</span>
-</code></pre><h3 id="获取_Windows_的二进制包">获取 Windows 的二进制包</h3><p>从 1.60 版本开始，你可以只下载 Windows 客户端的二进制包。此外，二进制包仅是一个客户端，你不能用它来启动 docker 进程。通过下边的链接来下载最新的 Windows 版本：</p>
-<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/i386/docker-latest.<span class="keyword">exe</span>
-
-http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/x86_64/docker-latest.<span class="keyword">exe</span>
-</code></pre><p>通过下边的 URL 模式来下载指定的 Windows 版本：</p>
-<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/i386/docker-&lt;<span class="keyword">version</span>&gt;.<span class="keyword">exe</span>
-
-http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/x86_64/docker-&lt;<span class="keyword">version</span>&gt;.<span class="keyword">exe</span>
-</code></pre><p>举例：</p>
-<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/i386/docker-<span class="number">1.6</span>.<span class="number">0</span>.<span class="keyword">exe</span>
-
-http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/x86_64/docker-<span class="number">1.6</span>.<span class="number">0</span>.<span class="keyword">exe</span>
-</code></pre><h2 id="运行Docker进程">运行Docker进程</h2><pre><code># <span class="operator"><span class="keyword">start</span> the docker <span class="keyword">in</span> daemon <span class="keyword">mode</span> <span class="keyword">from</span> the <span class="keyword">directory</span> you unpacked
-$ sudo ./docker -<span class="keyword">d</span> &amp;</span>
-</code></pre><p>##非root用户运行</p>
-<p><code>docker</code> 进程一般来说默认用 <code>root</code> 用户运行， docker 进程绑定 unix socket 来代替 TCP 端口。默认情况下由用户 <code>root</code> 来管理 unix socket ,但是你也可以使用 <code>sudo</code> 来使用。</p>
-<p>如果你（你安装的 Docker）创建一个叫 <code>docker</code> 的 unix 群组，并且在群组中添加用户，当进程启动的时候，Docker 群组将有 <code>docker</code> 进程 unix socket 的读/写使用权。docker 进程必须使用root用户运行，但是当使用 Docker 群组的一个用户来运行 Docker 客户端的时候，你不需要在命令前添加 <code>sudo</code> 。</p>
-<blockquote>
-<p>警告：Docker 用户组（或者用<code>-G</code>指定的用户组）和 root 等效，</p>
-</blockquote>
-<p>###更新</p>
-<p>升级你手动安装的 Docker ,需要先关闭你的 docker 进程：</p>
-<pre><code><span class="variable">$ </span>killall docker
-</code></pre><p>然后按照常规的步骤安装。</p>
-<p>###运行你的第一个Docker容器</p>
-<pre><code># <span class="operator"><span class="keyword">check</span> your docker <span class="keyword">version</span>
-$ sudo ./docker <span class="keyword">version</span>
-
-# run a <span class="keyword">container</span> <span class="keyword">and</span> <span class="keyword">open</span> an interactive shell <span class="keyword">in</span> the <span class="keyword">container</span>
-$ sudo ./docker run -<span class="keyword">i</span> -<span class="keyword">t</span> Ubuntu /<span class="keyword">bin</span>/bash</span>
-</code></pre><p>继续阅读<a href="../userguide/README.md">用户指南</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>#Binaries</p>
-<p>本安装说明是提供给那些想在多种环境中安装 Docker 的 hacker 们的。</p>
-<p>在进行安装之前，请检查你的 Linux 发行版本是否有打包好的 Docker 安装包。我们已经发布了许多发行版包，这样会节省您很多时间。</p>]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/amazon/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/amazon/</id>
-    <published>2015-12-08T07:05:15.461Z</published>
-    <updated>2015-09-30T15:27:59.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="Amazon_EC2">Amazon EC2</h1><p>这里有几种方法可以在 AWS EC2 上安装 Docker。你可以使用 Amazon Linux ， 它的软件源中已经包含了 Docker 包，或者你也可以选择其它支持 Docker 的 Linux 镜像 ，例如：<a href="#standard-ubuntu-installation"><em>标准的 Ubuntu 安装</em></a>。</p>
-<p>当然，首先你要创建一个AWS帐号。</p>
-<h2 id="Amazon_QuickStart_with_Amazon_Linux_AMI_2014-09-1">Amazon QuickStart with Amazon Linux AMI 2014.09.1</h2><ol>
-<li><p><strong>选择一个镜像：</strong></p>
-<ul>
-<li><p>在你的 AWS 控制台选择 <a href="https://console.aws.amazon.com/ec2/v2/home?#LaunchInstanceWizard:" title="Create Instance Wizard" target="_blank" rel="external">Create Instance Wizard</a> 菜单。</p>
-</li>
-<li><p>在 Quick Start 按钮中，选择 Amazon 提供的Amazon Linux 2014.09.1  机器镜像(AMI)</p>
-</li>
-<li><p>作为测试，你可以使用默认的(可能免费) <code>t2.micro</code> 实例，（更多价格，<a href="http://aws.amazon.com/ec2/pricing/" target="_blank" rel="external">请查看这里</a>）。</p>
-</li>
-<li><p>单击右下角的 <code>Next: Configure Instance Details</code> 按钮 。</p>
-</li>
-</ul>
-</li>
-<li><p>在几个标准的选项（这里一般默认选择就可以）之后，你的 Amazon Linux 实例可能就运行了。</p>
-</li>
-<li><p>使用 SSH 登录你的实例中 (instance) 来安装 Docker：</p>
-<pre><code>`ssh -i &lt;path <span class="keyword">to</span> your <span class="keyword">private</span> <span class="keyword">key</span>&gt; ec2-user@&lt;your <span class="keyword">public</span> IP address&gt;`
-</code></pre></li>
-<li><p>当你连接到你的实例 （instance）之后，输入 ：</p>
-<pre><code>`sudo yum <span class="operator"><span class="keyword">install</span> -y docker ;</span> sudo service docker <span class="operator"><span class="keyword">start</span><span class="string">`</span></span>
-</code></pre><p> 来安装和启动 Docker 。</p>
-</li>
-</ol>
-<p><strong>如果这是你第一个 AWS 实例，您可能需要配置您的安全组规则来允许 ssh 连接</strong>。默认情况下，新实例(instance) 所有流入端口都会被 AWS 安全组过滤掉。所以当你尝试连接的时候，会出现超时。</p>
-<p>在安装完成 Docker 之后，当你准备试用它的时候，你可以查看<a href="../userguide/README.md">用户指南</a></p>
-<p>###标准Ubuntu安装</p>
-<p>如果你想手动配置安装，请在 EC2 主机上根据 <a href="ubuntu.md">Ubuntu</a> 文档安装 Docker。只要按照步骤1快速选择一个镜像（或者使用你自己现有的），并跳过用户数据的步骤。然后继续按照 <a href="ubuntu.md">Ubuntu</a> 说明进行操作。</p>
-<p>继续查看<a href="../userguide/README.md">用户指南</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="Amazon_EC2">Amazon EC2</h1><p>这里有几种方法可以在 AWS EC2 上安装 Docker。你可以使用 Amazon Linux ， 它的软件源中已经包含了 Docker 包，或者你也可以选择其它支持 Docker 的 Linux 镜像]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Google Cloud Platform版本的]]></title>
-    <link href="http://yoursite.com/2015/12/08/docker/installation/google/"/>
-    <id>http://yoursite.com/2015/12/08/docker/installation/google/</id>
+    <title><![CDATA[Microsoft Azure]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/azure/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/azure/</id>
     <published>2015-12-07T23:56:29.000Z</published>
-    <updated>2015-12-08T07:10:42.799Z</updated>
-    <content type="html"><![CDATA[<h1 id="Google_Cloud_Platform">Google Cloud Platform</h1><p>###Google Compute Enginer 镜像快速入门</p>
-<p>1.去谷歌云控制台，创建一个新的云计算项目，启用云引擎</p>
-<p>2.使用如下的命令来下载谷歌云 SDK 并配置您的项目：</p>
-<pre><code>$ curl https://sdk.cloud.google.com | bash
-$ gcloud auth login
-$ gcloud config <span class="operator"><span class="keyword">set</span> <span class="keyword">project</span> &lt;google-cloud-<span class="keyword">project</span>-<span class="keyword">id</span>&gt;</span>
-</code></pre><p>3.启动一个新实例，使用最新的 Container-optimized 镜像:(选择一个接近你所需实例大小的分区)</p>
-<pre><code>$ gcloud compute instances create docker-playground \
--<span class="ruby">-image <span class="symbol">https:</span>/<span class="regexp">/www.googleapis.com/compute</span><span class="regexp">/v1/projects</span><span class="regexp">/google-containers/global</span><span class="regexp">/images/container</span>-vm-v20140522 \
-</span>-<span class="ruby">-zone us-central1-a \
-</span>-<span class="ruby">-machine-type f1-micro</span>
-</code></pre><p>4.用ssh来连接这个实例：</p>
-<pre><code>$ gcloud compute ssh <span class="comment">--zone us-central1-a docker-playground</span>
-docker-playground:~$ sudo docker <span class="command">run</span> hello-world
-</code></pre><p>当 Docker 输出 hello word 消息的时候，说明你的 Docker 工作正常。</p>
-<p>更多，请阅读 <a href="https://developers.google.com/compute/docs/containers" target="_blank" rel="external"> google 云平台部署容器 </a></p>
+    <updated>2015-12-08T07:08:59.714Z</updated>
+    <content type="html"><![CDATA[<p>#Microsoft Azure</p>
+<p>##在 Azure 上创建 Docker 主机。</p>
+<p>请仔细阅读由 <a href="http://azure.microsoft.com/" target="_blank" rel="external">Microsoft Azure</a> 网站上提供的详细教程，教程中包含了使用不同方法在 Azure 上创建 Docker 虚拟主机。</p>
+<ul>
+<li><a href="http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-vm-extension/" target="_blank" rel="external"> Azure 的 Docker 虚拟主机组件 </a><ul>
+<li><a href="http://azure.microsoft.com/documentation/articles/virtual-machines-docker-with-xplat-cli/" target="_blank" rel="external"> 如何使用 Azure 提供的跨平台接口使用 Docker 虚拟机组件 </a></li>
+<li><a href="http://azure.microsoft.com/documentation/articles/virtual-machines-docker-with-portal/" target="_blank" rel="external"> 如何在 Azure 用户中心使用 Docker 虚拟机组件 </a> </li>
+</ul>
+</li>
+<li><a href="http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-machine/" target="_blank" rel="external"> 在 Azure 上使用 Docker 虚拟机 </a></li>
+</ul>
+<h2 id="下一步?">下一步?</h2><p>阅读 <a href="../userguide/">用户指南</a>.</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="Google_Cloud_Platform">Google Cloud Platform</h1><p>###Google Compute Enginer 镜像快速入门</p>
-<p>1.去谷歌云控制台，创建一个新的云计算项目，启用云引擎</p>
-<p>2.使用如]]>
+    <![CDATA[<p>#Microsoft Azure</p>
+<p>##在 Azure 上创建 Docker 主机。</p>
+<p>请仔细阅读由 <a href="http://azure.microsoft.com/" target="_blank" rel="external">Micro]]>
     </summary>
     
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
@@ -624,111 +132,137 @@ docker-playground:~$ sudo docker <span class="command">run</span> hello-world
   </entry>
   
   <entry>
-    <title><![CDATA[Docker Hub上的自动化构建]]></title>
-    <link href="http://yoursite.com/2015/12/08/docker/docker-hub/builds/"/>
-    <id>http://yoursite.com/2015/12/08/docker/docker-hub/builds/</id>
+    <title><![CDATA[使用docker第一步]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/basics/"/>
+    <id>http://yoursite.com/2015/12/08/docker/basics/</id>
     <published>2015-12-07T23:56:29.000Z</published>
-    <updated>2015-12-08T07:06:56.849Z</updated>
-    <content type="html"><![CDATA[<h1 id="Docker_Hub上的自动化构建">Docker Hub上的自动化构建</h1><p>##关于自动化构建</p>
-<p>自动化构建是一个特殊的功能，它允许您在 Docker Hub 上使用构建集群，根据指定的 <code>Dockerfile</code> 或者 GitHub 、 BitBucket 仓库（或环境）来自动创建镜像。该系统将从仓库复制一份，并根据以仓库为环境的 <code>Dockerfile</code> 的描述构建镜像。由此产生的镜像将被上传到注册表，并且自动生成标记。</p>
-<p>自动化构建有许多优势：</p>
+    <updated>2015-12-08T06:57:10.985Z</updated>
+    <content type="html"><![CDATA[<h1 id="使用docker第一步">使用docker第一步</h1><p>###检查你的Docker是否安装</p>
+<p>本指南假设你已经完成了Docker的安装工作。检查你安装的Docker,运行以下命令：</p>
+<pre><code><span class="comment"># Check that you have a working install</span>
+<span class="variable">$ </span>docker info
+</code></pre><p>如果你得到 <code>docker: command not found</code>，你可能没有完整的安装上Docker。</p>
+<p>如果你得到 <code>/var/lib/docker/repositories: permission denied</code> ，那你可能没有权限访问你主机上的Docker。</p>
+<p>为获得访问Docker权限可以直接在命令前加<code>sudo</code>，或者采取以下步骤授予权限：：</p>
+<pre><code><span class="comment"># 如果还没有docker group就添加一个：</span>
+<span class="variable">$ </span>sudo groupadd docker
+<span class="comment"># 将用户加入该group内。然后退出并重新登录即可生效。</span>
+<span class="variable">$ </span>sudo gpasswd -a <span class="variable">${</span><span class="constant">USER</span>} docker
+<span class="comment"># 重启docker</span>
+<span class="variable">$ </span>sudo service docker restart
+</code></pre><p>请参考<a href="../install/">安装指南</a>安装。</p>
+<p>###下载预构建镜像</p>
+<pre><code><span class="comment"># Download an ubuntu image</span>
+<span class="variable">$ </span>sudo docker pull ubuntu
+</code></pre><p>这将从Docker Hub中查找到 <code>Ubuntu</code> 镜像，并且从Docker Hub中下载镜像到本地缓存中。</p>
+<blockquote>
+<p>提示：当镜像下载成功之后，你将会看到镜像的短id一个12字符的hash, <code>539c0211cd76: Download complete</code>，这些短的镜像IDS是完整ID的前12个字符。你可以使用 <code>docker inspect</code>和 <code>docker images --no-trunc=true</code>来查看完整ID。</p>
+</blockquote>
+<p>如果你使用OS X，你可以使用 <code>sudo</code>。</p>
+<p>###运行交互shell</p>
+<pre><code><span class="comment"># 在ubuntu镜像中使用运行交互shell,</span>
+<span class="comment"># 分配一个控制台,分配输入输出流</span>
+<span class="comment"># To detach the tty without exiting the shell,</span>
+<span class="comment"># use the escape sequence Ctrl-p + Ctrl-q</span>
+<span class="comment"># <span class="doctag">note:</span> This will continue to exist in a stopped state once exited (see "docker ps -a")</span>
+$ sudo docker <span class="command">run</span> -i -t ubuntu /bin/bash
+</code></pre><p>###绑定Docker到另外的主机/端口或者Unix socket</p>
+<blockquote>
+<p>提示：修改默认的 docker 进程绑定到一个tcp端口或者 Unix docker群组，这将会增加你的安全风险，允许非 root 用户获得 root 访问的主机权限。请确保你的 <code>docker</code> 权限。如果你绑定一个 <code>TCP</code> 端口任何人可以通过这个端口来访问你的 <code>Docker</code>,所以它不应该放在一个开放的网络中。</p>
+</blockquote>
+<p>使用 <code>-H</code> 标记可以使 <code>Docker</code> 来监听指定的IP和端口。默认情况下，它将监听 <code>unix:///var/run/docker.sock</code>只允许本地root用户连接。你可以将它设置为 <code>0.0.0.0:2375</code>或者指定的主机IP来给所有人访问权限。但是这不推荐，因为这样普通用户获得主机上运行进程的root权限。</p>
+<p>同样，Docker 客户端可以使用 <code>-H</code> 来连接指定的主机端口。</p>
+<p><code>-H</code> 使用以下格式来分配主机和端口</p>
+<pre><code>tcp://[<span class="link_label">host</span>][<span class="link_reference">:port</span>]<span class="code">` or `</span>unix://path
+</code></pre><p>举例：</p>
 <ul>
-<li>你的自动化构建项目一定是准确按照预期构建的</li>
-<li>在 Docker Hub 注册表上，任何拥有你仓库访问权限的用户都乐意浏览 <code>Dockerfile</code></li>
-<li>自动化构建保证了你的仓库总是最新的</li>
+<li>tcp://host:2375 -&gt; TCP connection on host:2375</li>
+<li>unix://path/to/socket -&gt; Unix socket located at path/to/socket</li>
 </ul>
-<p>自动化构建支持 <a href="http://GitHub.com/" target="_blank" rel="external">GitHub</a> 和 <a href="https://bitbucket.org/" target="_blank" rel="external">BitBucket</a> 的私有和公有的仓库。</p>
-<p>要使用自动化构建，你必须拥有经过验证有效的 Docker Hub 账户和 GitHub/Bitbucket 账户。</p>
-<p>##设置GitHub自动化构建</p>
-<p>首先，你需要将 GitHub 账户链接到你的 <a href="https://hub.docker.com/" target="_blank" rel="external">Docker Hub</a> 账户，以允许注册表查看你的仓库。</p>
-<blockquote>
-<p>注：目前我们需要有读写权限以建立 Docker Hub 和 GitHub 的挂钩服务，这是GitHub管理权限的方式，我们别无选择。抱歉！我们将保护您的账户及隐私，确保不会被他人非法获取。</p>
-</blockquote>
-<p>开始构建！登录到你的 Docker Hub 账户，点击屏幕右上方的 “+ Add Repository” 按钮，选择<a href="https://registry.hub.docker.com/builds/add/" target="_blank" rel="external">自动化构建</a>。</p>
-<p>选择<a href="https://registry.hub.docker.com/associate/GitHub/" target="_blank" rel="external">GitHub服务</a></p>
-<p>然后按照说明授权和连接你的 GitHub 账户到 Docker Hub。连接成功后，你就可以选择用来自动化构建的仓库了。</p>
-<p>###创建一个自动化构建项目</p>
-<p>你可以用你的 <code>Dockerfile</code> 从你的公共或者私有仓库<a href="https://registry.hub.docker.com/builds/GitHub/select/" target="_blank" rel="external">创建一个自动化构建项目</a>。</p>
-<p>###GitHub子模块</p>
-<p>如果你的 GitHub 仓库包含了私有子模块的连接，你需要在 Docker Hub 上添加部署秘钥。</p>
-<p>部署秘钥位于自动化构建主页的 “Build Details” 菜单。访问设置 GitHub 仓库的页面，选择 “Deploy keys” 来添加秘钥。</p>
-<table class="table table-bordered"><br>  <thead><br>    <tr><br>      <th>Step</th><br>      <th>Screenshot</th><br>      <th>Description</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <td>1.</td><br>      <td><img style="max-width:100%;" src="../images/github_submodule_deploy_key.png"></td><br>      <td>你的自动化构建部署秘钥位于 “Build Details” 菜单的 “Deploy keys” 下。</td><br>    </tr><br>    <tr><br>      <td>2.</td><br>      <td><img style="max-width:100%;" src="../images/github_submodule_deploy_key_2.png"></td><br>      <td>在你的 GitHub 子模块仓库设置页，添加部署秘钥。</td><br>    </tr><br>  </tbody><br></table>
+<p><code>-H</code>，当输入为空的时候，将默认为相同的原始值，即没有<code>-H</code>输入。<br><code>-H</code>也接受短形式的TCP绑定。</p>
+<pre><code>host[<span class="symbol">:port</span>]` <span class="keyword">or</span> `<span class="symbol">:port</span>
+</code></pre><p>进程模式运行Docker</p>
+<pre><code>$ sudo &lt;path to&gt;/docker -H <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">5555</span> -d &amp;
+</code></pre><p>下载<code>Ubuntu</code>镜像：</p>
+<pre><code>sudo docker -H :<span class="number">5555</span> pull ubuntu
+</code></pre><p>你可以使用多个<code>-H</code>标记，例如，你想要同时监听TCP和Unix socket。</p>
+<pre><code><span class="comment"># 进程模式下运行docker</span>
+<span class="variable">$ </span>sudo &lt;path to&gt;<span class="regexp">/docker -H tcp:/</span><span class="regexp">/127.0.0.1:2375 -H unix:/</span><span class="regexp">//var</span><span class="regexp">/run/docker</span>.sock -d &amp;
+<span class="comment"># 使用默认的unix socker来下载ubuntu镜像</span>
+<span class="variable">$ </span>sudo docker pull ubuntu
+<span class="comment"># 或者使用TCP端口</span>
+<span class="variable">$ </span>sudo docker -<span class="constant">H</span> <span class="symbol">tcp:</span>/<span class="regexp">/127.0.0.1:2375 pull ubuntu</span>
+</code></pre><p>####开始一个长时间运行的工作进程</p>
+<pre><code><span class="comment"># 开始一个非常有用的长时间运行的进程</span>
+<span class="variable">$ </span><span class="constant">JOB=</span><span class="variable">$(</span>sudo docker run -d ubuntu /bin/sh -c <span class="string">"while true; do echo Hello world; sleep 1; done"</span>)
 
-<p>###GitHub组织</p>
-<p>一旦你的组织成员身份设置为公开，对应的 GitHub 组织状态便会被公开在你的 GitHub 上。为了验证，你可以查看 GitHub 上你的组织的成员选项卡。</p>
-<p>###GitHub服务挂钩</p>
-<p>按照以下步骤配置自动化构建的 GitHub 服务挂钩:</p>
-<table class="table table-bordered"><br>  <thead><br>    <tr><br>      <th>Step</th><br>      <th>Screenshot</th><br>      <th>Description</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <td>1.</td><br>      <td><img src="../images/GitHub_settings.png"></td><br>      <td>登录到 GitHub.com，并转到您的仓库页面，点击右侧页面“Settings”。<br>    执行该操作要求你有该仓库的管理员权限。</td><br>    </tr><br>    <tr><br>      <td>2.</td><br>      <td><img style="max-width:100%;" src="../images/github_service_hooks.png" alt="Webhooks & Services"></td><br>      <td>点击页面左侧的“Webhooks &amp; Services”。</td></tr><br>      <tr><td>3.</td><br>      <td><img style="max-width:100%;" src="../images/github_docker_service_hook.png" alt="Find the service labeled Docker"></td><td>找到 “Docker” 并点击它.</td></tr><br>      <tr><td>4.</td><td><img style="max-width:100%;" src="../images/github_service_hook_docker_activate.png" alt="Activate Service Hooks"></td><br>      <td>确认 “Active” 被选中，然后点击 “Update service” 按钮以保存您的更改。</td><br>    </tr><br>  </tbody><br></table>
+<span class="comment"># 到目前为止收集的输出工作</span>
+<span class="variable">$ </span>sudo docker logs <span class="variable">$JOB</span>
 
-<p>##设置BitBucket自动化构建</p>
-<p>为了设置自动化构建，你需要先把 BitBucket 连接到你的 Docker Hub 账户，以允许其访问你的仓库。</p>
-<p>登录到你的 Docker Hub 账户，点击屏幕右上方的 “+ Add Repository” 按钮，选择<a href="https://registry.hub.docker.com/builds/add/" target="_blank" rel="external">自动化构建</a>。</p>
-<p>选择的 <a href="https://registry.hub.docker.com/associate/bitbucket/" target="_blank" rel="external">Bitbucket 服务</a>。 </p>
-<p>然后按照说明授权和连接你的 Bitbucket 账户到 Docker Hub。连接成功后，你就可以选择用来自动化构建的仓库了。</p>
-<p>###创建自动化构建项目</p>
-<p>你可以用你的 <code>Dockerfile</code> 从你的公共或者私有仓库<a href="https://registry.hub.docker.com/builds/bitbucket/select/" target="_blank" rel="external">创建一个自动化构建项目</a>。</p>
-<p>###Bitbucket服务挂钩</p>
-<p>当你成功连接账户以后，一个 <code>POST</code> 挂钩将会自动被添加到你的仓库。请按照以下步骤确认或者更改你的挂钩设置：</p>
-<table class="table table-bordered"><br>  <thead><br>    <tr><br>      <th>Step</th><br>      <th>Screenshot</th><br>      <th>Description</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <td>1.</td><br>      <td><img src="../images/bitbucket_hook_menu.png" alt="Settings" width="180"></td><br>      <td>登录到 Bitbucket.org 进入仓库页面。点击左侧导航下的 “Settings”。执行该操作要求你有该仓库的管理员权限。</td><br>    </tr><br>    <tr><br>      <td>2.</td><br>      <td><img src="../images/bitbucket_hook_menu_2.png" alt="Hooks" width="180"></td><br>      <td>点击左侧 “Settings” 下的 “Hooks”。</td></tr><br>    <tr><br>      <td>3.</td><br>      <td><img style="max-width:100%;" src="../images/bitbucket_hook_post.png" alt="Docker Post Hook"></td><td>现在你应该能看到关联了该仓库的挂钩列表，包括一个指向 registry.hub.docker.com/hooks/bitbucket 的 <code>POST</code> 挂钩。</td><br>    </tr><br>  </tbody><br></table>
+<span class="comment"># 关闭这项进程</span>
+<span class="variable">$ </span>sudo docker kill <span class="variable">$JOB</span>
+</code></pre><p>####列出容器</p>
+<pre><code><span class="variable">$ </span>sudo docker ps <span class="comment"># Lists only running containers</span>
+<span class="variable">$ </span>sudo docker ps -a <span class="comment"># Lists all containers</span>
+<span class="variable">$ </span>sudo docker ps -l <span class="comment"># List the last running container</span>
+</code></pre><p>####控制容器</p>
+<pre><code><span class="comment"># 开始一个新的容器</span>
+<span class="variable">$ </span><span class="constant">JOB=</span><span class="variable">$(</span>sudo docker run -d ubuntu /bin/sh -c <span class="string">"while true; do echo Hello world; sleep 1; done"</span>)
 
-<p>##Dockerfile和自动化构建</p>
-<p>在构建过程中，我们将复制 <code>Dockerfile</code> 的内容。我们也将添加它到 Docker Hub 上，使得 Docker 社区（公共仓库）或者得到许可的团队成员可以访问仓库页面。</p>
-<p>##README.md</p>
-<p>如果你的仓库有一个 <code>README.md</code> 文件，我们将使用它作为仓库的描述。构建过程中会寻找 <code>Dockerfile</code> 同一目录下的 <code>README.md</code>。</p>
-<blockquote>
-<p>警告：如果你需要在创建之后修改描述，它会在下一次自动化构建完成之后生效。</p>
-</blockquote>
-<p>###建立触发器</p>
-<p>如果你需要 GitHub 或者 BitBucket 以外的方式来触发自动化构建，你可以创建一个构建触发器。当你打开构建触发器，它会提供给你一个 url 来发送 POST 请求。这将触发自动化构建过程，类似于 GitHub webhook。</p>
-<p>建立触发器可在自动化构建项目的 Settings 菜单中设置。</p>
-<blockquote>
-<p>注：你在五分钟内只能触发一个构建，如果你已经进行一个构建，或你最近提交了构建请求，这些请求将被忽略。你可以在设置页面来找到最后10条触发日志来验证是否一切正常工作。</p>
-</blockquote>
-<p>###Webhooks</p>
-<p>也可以使用 Webhooks 来自动化构建，Webhooks 会在仓库推送成功后被调用。</p>
-<p>此webhook调用将生成一个 HTTP POST，JSON样例如下：</p>
-<pre><code>{
-   "<span class="attribute">push_data</span>":<span class="value">{
-      "<span class="attribute">pushed_at</span>":<span class="value"><span class="number">1385141110</span></span>,
-      "<span class="attribute">images</span>":<span class="value">[
-         <span class="string">"imagehash1"</span>,
-         <span class="string">"imagehash2"</span>,
-         <span class="string">"imagehash3"</span>
-      ]</span>,
-      "<span class="attribute">pusher</span>":<span class="value"><span class="string">"username"</span>
-   </span>}</span>,
-   "<span class="attribute">repository</span>":<span class="value">{
-      "<span class="attribute">status</span>":<span class="value"><span class="string">"Active"</span></span>,
-      "<span class="attribute">description</span>":<span class="value"><span class="string">"my docker repo that does cool things"</span></span>,
-      "<span class="attribute">is_automated</span>":<span class="value"><span class="literal">false</span></span>,
-      "<span class="attribute">full_description</span>":<span class="value"><span class="string">"This is my full description"</span></span>,
-      "<span class="attribute">repo_url</span>":<span class="value"><span class="string">"https://registry.hub.docker.com/u/username/reponame/"</span></span>,
-      "<span class="attribute">owner</span>":<span class="value"><span class="string">"username"</span></span>,
-      "<span class="attribute">is_official</span>":<span class="value"><span class="literal">false</span></span>,
-      "<span class="attribute">is_private</span>":<span class="value"><span class="literal">false</span></span>,
-      "<span class="attribute">name</span>":<span class="value"><span class="string">"reponame"</span></span>,
-      "<span class="attribute">namespace</span>":<span class="value"><span class="string">"username"</span></span>,
-      "<span class="attribute">star_count</span>":<span class="value"><span class="number">1</span></span>,
-      "<span class="attribute">comment_count</span>":<span class="value"><span class="number">1</span></span>,
-      "<span class="attribute">date_created</span>":<span class="value"><span class="number">1370174400</span></span>,
-      "<span class="attribute">dockerfile</span>":<span class="value"><span class="string">"my full dockerfile is listed here"</span></span>,
-      "<span class="attribute">repo_name</span>":<span class="value"><span class="string">"username/reponame"</span>
-   </span>}
-</span>}
-</code></pre><p>Webhooks 可在自动化构建项目的 Settings 菜单中设置。</p>
-<blockquote>
-<p>注意：如果你想测试你的 webhook，我们建议使用像 <a href="http://requestb.in/" target="_blank" rel="external">requestb.in</a> 的工具。 </p>
-</blockquote>
-<p>###仓库链接</p>
-<p>仓库链接是一种建立自动化项目与项目之间关联的方式。如果一个项目得到更新，连接系统还会触发另一个项目的更新构建。这使得你可以轻松地让所有关联项目保持更新同步。</p>
-<p>要添加链接的话，访问你想要添加链接的项目的仓库设置页面，在设置菜单下地右侧点击 “Repository Links”。然后输入你想要与之链接的仓库名称。</p>
-<blockquote>
-<p>警告：您可以添加多个仓库的链接，但要小心。自动化构建之间的双向关系会造成一个永不停止的构建循环。</p>
-</blockquote>
-]]></content>
+<span class="comment"># 停止容器</span>
+<span class="variable">$ </span>docker stop <span class="variable">$JOB</span>
+
+<span class="comment"># 开始容器</span>
+<span class="variable">$ </span>docker start <span class="variable">$JOB</span>
+
+<span class="comment"># 重启容器</span>
+<span class="variable">$ </span>docker restart <span class="variable">$JOB</span>
+
+<span class="comment"># 杀死一个工作</span>
+<span class="variable">$ </span>docker kill <span class="variable">$JOB</span>
+
+<span class="comment"># 删除一个容器</span>
+<span class="variable">$ </span>docker stop <span class="variable">$JOB</span> <span class="comment"># Container must be stopped to remove it</span>
+<span class="variable">$ </span>docker rm <span class="variable">$JOB</span>
+</code></pre><p>####绑定服务到TCP端口</p>
+<pre><code><span class="comment">#让容器绑定4444端口，并通知netcat监听它。</span>
+<span class="variable">$ </span><span class="constant">JOB=</span><span class="variable">$(</span>sudo docker run -d -p <span class="number">4444</span> <span class="symbol">ubuntu:</span><span class="number">12.10</span> /bin/nc -l <span class="number">4444</span>)
+
+<span class="comment"># 查看容器转发的公共端口</span>
+<span class="variable">$ </span><span class="constant">PORT=</span><span class="variable">$(</span>sudo docker port <span class="variable">$JOB</span> <span class="number">4444</span> | awk -<span class="constant">F:</span> <span class="string">'{ print $2 }'</span>)
+
+<span class="comment"># 连接这个公共端口</span>
+<span class="variable">$ </span>echo hello world | nc <span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span> <span class="variable">$PORT</span>
+
+<span class="comment"># 确认网络连接工作</span>
+<span class="variable">$ </span>echo <span class="string">"Daemon received: $(sudo docker logs $JOB)"</span>
+</code></pre><p>####提交（存储）一个容器的状态</p>
+<p>保存你镜像容器的状态，这也就可以重复利用。</p>
+<p>当你提交你的容器，仅仅是镜像和容器之间的不同，从创建到容器的当前状态来存储（作为差异）。你可以使用 <code>docker images</code>来查看已有镜像。</p>
+<pre><code><span class="comment"># 使用新的名称来提交你的镜像</span>
+<span class="variable">$ </span>sudo docker commit &lt;container_id&gt; &lt;some_name&gt;
+
+<span class="comment"># 列出你的容器</span>
+<span class="variable">$ </span>sudo docker images
+</code></pre><p>你现在有一个镜像的状态，你可以创建新的实例。</p>
+<p>####删除Docker镜像</p>
+<p>首先要保证有权限对Docker镜像或者容器进行操作，具体做法参见进入前文安装部分。</p>
+<pre><code><span class="comment"># 停止所有容器</span>
+<span class="variable">$ </span>docker stop <span class="variable">$(</span>docker ps -a -q)
+
+<span class="comment"># 删除指定镜像</span>
+<span class="variable">$ </span>docker rmi <span class="variable">$image</span>
+
+<span class="comment"># 删除无标示镜像，即id为&lt;None&gt;的镜像</span>
+<span class="variable">$ </span>docker rmi <span class="variable">$(</span>docker images | grep <span class="string">"^&lt;none&gt;"</span> | awk <span class="string">"{print $3}"</span>)
+
+<span class="comment"># 删除所有镜像</span>
+<span class="variable">$ </span>docker rmi <span class="variable">$(</span>docker images -q)
+</code></pre>]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="Docker_Hub上的自动化构建">Docker Hub上的自动化构建</h1><p>##关于自动化构建</p>
-<p>自动化构建是一个特殊的功能，它允许您在 Docker Hub 上使用构建集群，根据指定的 <code>Dockerfile</code> 或者]]>
+    <![CDATA[<h1 id="使用docker第一步">使用docker第一步</h1><p>###检查你的Docker是否安装</p>
+<p>本指南假设你已经完成了Docker的安装工作。检查你安装的Docker,运行以下命令：</p>
+<pre><code><span class="com]]>
     </summary>
     
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
@@ -738,23 +272,122 @@ docker-playground:~$ sudo docker <span class="command">run</span> hello-world
   </entry>
   
   <entry>
-    <title><![CDATA[Docker Hub]]></title>
-    <link href="http://yoursite.com/2015/12/08/docker/docker-hub/docker-hub/"/>
-    <id>http://yoursite.com/2015/12/08/docker/docker-hub/docker-hub/</id>
+    <title><![CDATA[网络配置]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/networking/"/>
+    <id>http://yoursite.com/2015/12/08/docker/networking/</id>
     <published>2015-12-07T23:56:29.000Z</published>
-    <updated>2015-12-08T07:07:05.780Z</updated>
-    <content type="html"><![CDATA[<h1 id="Docker_Hub">Docker Hub</h1><p>先来看看 Docker Hub 的界面：</p>
-<h1 id=""><img src="../images/hub.png" alt=""></h1><p>在这个章节，我们来学习 Docker Hub 的相关话题：</p>
-<p><a href="accounts.md">账户</a></p>
-<p>学习如何创建一个Docker Hub账户来管理你的组织和机构。</p>
-<p><a href="repos.md">仓库</a></p>
-<p>了解如何分享你 Docker Hub 上的 Docker 镜像，以及如何存储和管理你的私人镜像。</p>
-<p><a href="builds.md">自动构建</a></p>
-<p>学习如何自动化构建、部署和管理</p>
+    <updated>2015-12-08T06:57:37.703Z</updated>
+    <content type="html"><![CDATA[<h1 id="网络配置">网络配置</h1><p>###TL;DR(原文的这些个符号，几个意思？)</p>
+<p> <code>Dockers</code>启动后，会在宿主机上创建名为<code>docker0</code>的虚拟网卡，并给<code>docker0</code>随机分配一个宿主机没有使用，且满足RFC 1918定义的私有网络地址和子网段。举例来说，在我做这个步骤时，Docker分配的子网段是<code>172.17.42.1/16</code>，（最后那个16是掩码，表示该子网段可以会为宿主机和容器提供65534个地址）。容器的MAC地址根据IP地址生成，可以避免产生ARP冲突，它的范围从 02:42:ac:11:00:00 开始到 02:42:ac:11:ff:ff结束。</p>
+<blockquote>
+<p>注：本文档讨论的是 <code>docker</code> 的网络高级配置选项，初级用户无需阅读。如果想了解<code>docker</code>网络或容器间的连接方式，请查看<a href="../userguide/dockerlinks">docker用户指南</a></p>
+</blockquote>
+<p>当然， <code>docker0</code> 除了是虚拟网卡，还是负责其附属网卡间数据转发的虚拟网桥。<code>docker</code>每新建一个容器，就会同时创建了两个相对应的网卡接口，它们就像一条管道的两端：数据从一端进入（发送），从另一端出来（接受）。这两个网卡，一个被分配给新建的容器做<code>eth0</code>网卡，另一个被分配给宿主机，并取个类似于<code>vethAQI2QT</code>的唯一名称。就这样，通过绑定每个<code>veth*</code>网卡到<code>docker0</code>网桥，<code>Docker</code>在宿主机和各docker容器间搭建起了一个虚拟子网。</p>
+<p>接下来，我们详细阐述如何使用<code>docker</code>参数或Linux网络命令来进一步修改、完善、或者完全替代<code>docker</code>的默认网络配置。</p>
+<p>###参数快速指南</p>
+<p>首先，来浏览<code>docker</code>的网络相关的命令行选项列表，下面的章节对一一进行介绍：</p>
+<p>第一部分：只能在<code>docker</code>服务启动时使用使用的网络命令行选项，一旦运行，不能改变。</p>
+<ul>
+<li><code>-b BRIDGE</code> or <code>--bridge=BRIDGE</code> — 请查看<a href="#bridge-building">搭建私人网桥</a>小节</li>
+<li><code>--bip=CIDR</code> — 请查看<a href="#docker0">定制 docker0</a>小节</li>
+<li><code>-H SOCKET...</code> 或 <code>--host=SOCKET...</code>  —这个参数听起来像是在说容器网络，但实际上是在干另一件事：用来向<code>Docker</code>服务传递类似”运行容器”和“停止容器”的命令。</li>
+<li><code>--icc=true|false</code> — 请查看<a href="#between-containers">容器间通信</a>小节小节</li>
+<li><code>--ip=IP_ADDRESS</code> — 请查看<a href="#binding-port">绑定容器端口</a>小节</li>
+<li><code>--ipv6=true|false</code> — 请查看<a href="#ipv6">IPV6</a>小节</li>
+<li><code>--ip-forward=true|false</code> — 请查看<a href="#the-world">容器与外部通讯</a>小节</li>
+<li><code>--iptables=true|false</code> — 请查看<a href="#between-containers">容器间通信</a>小节</li>
+<li><code>--mtu=BYTES</code> — 请查看<a href="#docker0">定制 docker0</a>小节</li>
+</ul>
+<p>第二部分：下面两个参数，可以在启动时或者当 <code>docker run</code> 运行调用。如果启动时进行了设置，就会作为<code>docker run</code>运行时的初始默认值。</p>
+<ul>
+<li><code>--dns=IP_ADDRESS...</code>  — 请查看<a href="#dns">配置 DNS</a>小节</li>
+<li><code>--dns-search=DOMAIN...</code>  — 请查看<a href="#dns">配置 DNS</a>小节</li>
+</ul>
+<p>第三部分：只能在<code>docker run</code>运行时调用的参数，特别用来定制容器的特性：</p>
+<ul>
+<li><code>-h HOSTNAME</code> or <code>--hostname=HOSTNAME</code>  — 请查看<a href="#dns">配置 DNS</a>小节和<a href="#containers-networking">如何设置容器的网络</a>小节</li>
+<li><code>--link=CONTAINER_NAME:ALIAS</code>  — 请查看<a href="#dns">配置 DNS</a>小节和<a href="#between-containers">容器间通信</a>小节</li>
+<li><code>--net=bridge|none|container:NAME_or_ID|host</code>  — 请查看<a href="#containers-networking">如何设置容器的网络</a>小节</li>
+<li><code>--mac-address=MACADDRESS...</code>  — 请查看<a href="#containers-networking">如何设置容器的网络</a>小节</li>
+<li><code>-p SPEC</code> or <code>--publish=SPEC</code>  — 请查看<a href="#binding-port">绑定容器端口</a>小节</li>
+<li><code>-P</code> or <code>--publish-all=true|false</code>  — 请查看<a href="#binding-port">绑定容器端口</a>小节</li>
+</ul>
+<p>接下来，我们从浅到深的讲解上述题目。</p>
+<p>###配置DNS</p>
+<p>docker如何给每个容器提供独立的主机名和DNS配置呢？当然不是直接把主机名写到镜像里。docker巧妙的利用可刷新的虚拟文件覆盖了容器<code>/etc</code>目录下的三个关键文件。可以在容器内运行<code>mount</code>命令进行查看：</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="Docker_Hub">Docker Hub</h1><p>先来看看 Docker Hub 的界面：</p>
-<h1 id=""><img src="../images/hub.png" alt=""></h1><p>在这个章节，我们来学习 Docker Hub ]]>
+    <![CDATA[<h1 id="网络配置">网络配置</h1><p>###TL;DR(原文的这些个符号，几个意思？)</p>
+<p> <code>Dockers</code>启动后，会在宿主机上创建名为<code>docker0</code>的虚拟网卡，并给<code>docker0</code]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[使用 HTTPS 保护 Docker Socket 进程]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/https/"/>
+    <id>http://yoursite.com/2015/12/08/docker/https/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T06:57:26.060Z</updated>
+    <content type="html"><![CDATA[<h1 id="使用_HTTPS_保护_Docker_Socket_进程">使用 HTTPS 保护 Docker Socket 进程</h1><p>默认情况下，Docker 使用的是无网络环境的 Unix Socket。它可以使用 HTTP Socket 进行通信。</p>
+<p>如果你需要 Docker 使用安全的方式来进行网络通信，你可以使用 <code>tlsverify</code> 标识来启用 TLS，并使用 <code>tlscacert</code> 标识来指定 CA 证书。</p>
+<blockquote>
+<p>警告：使用 TLS 和管理 CA 证书是一个高级话题。在投入生成环境使用之前，你需要自行熟悉了解 OpenSSL，X509 和 TLS 。</p>
+<p>警告：这些 TLS 指令只能生成在 Linux 上工作的证书，Mac OSX 附带的 OpenSSL 版本与 Docker 所需要使用的证书不兼容。</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="使用_HTTPS_保护_Docker_Socket_进程">使用 HTTPS 保护 Docker Socket 进程</h1><p>默认情况下，Docker 使用的是无网络环境的 Unix Socket。它可以使用 HTTP Socket 进行通信。</p>
+<p]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[baseimages]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/baseimages/"/>
+    <id>http://yoursite.com/2015/12/08/docker/baseimages/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T06:57:00.631Z</updated>
+    <content type="html"><![CDATA[<h1 id="创建一个基本镜像">创建一个基本镜像</h1><p>==================</p>
+<p>你想创建你自己的<a href="../terms/image.md">基础镜像</a>？很好！</p>
+<p>具体的过程会严重依赖于你想打包的Linux发行版。我们有下面一些例子供你参考。<br>同时，我们鼓励你通过提交推送请求来贡献你的新镜像。</p>
+<h3 id="使用_tar_来创建一个完整的镜像">使用 tar 来创建一个完整的镜像</h3><p>通常，你要先运行一个可工作的发行版的机器，来打包一个基础镜像。虽然有一些<br>工具不是必需的，比如 Debian 的 Deboostrap，但是你还是可以用它来生成 Ubuntu<br>镜像。</p>
+<p>下面的例子尽可能简单地创建一个 Ubuntu 基础镜像：</p>
+<pre><code>$ sudo debootstrap raring raring &gt; /dev/null
+$ sudo tar -C raring -c . | sudo docker <span class="keyword">import</span> - raring
+a29c15f1bf7a
+$ sudo docker run raring cat /etc/lsb-release
+<span class="constant">DISTRIB_ID</span>=Ubuntu
+<span class="constant">DISTRIB_RELEASE</span>=<span class="number">13.04</span>
+<span class="constant">DISTRIB_CODENAME</span>=raring
+<span class="constant">DISTRIB_DESCRIPTION</span>=<span class="string">"Ubuntu 13.04"</span>
+</code></pre><p>在 Docker 的 GitHub 上，有更多的创建基础镜像的脚本示例：</p>
+<ul>
+<li><a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-busybox.sh" target="_blank" rel="external">BusyBox</a></li>
+<li>CentOS / Scientific Linux CERN (SLC) <a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-rinse.sh" target="_blank" rel="external">on Debian/Ubuntu</a> or on <a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-yum.sh" target="_blank" rel="external">CentOS/RHEL/SLC/etc</a>.</li>
+<li><a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-debootstrap.sh" target="_blank" rel="external">Debian / Ubuntu</a></li>
+</ul>
+<h3 id="使用_scratch_创建简单的基础镜像">使用 scratch 创建简单的基础镜像</h3><p>在 Docker 的注册中，有一个使用空的 tar 文件创建的特殊的版本库，叫 scratch ：</p>
+<pre><code>$ tar cv --files-<span class="keyword">from</span> <span class="regexp">/dev/</span><span class="keyword">null</span> | docker <span class="keyword">import</span> - scratch
+</code></pre><p>你可以用 <strong><em> docker pull </em></strong> 把它拉取下来。然后你就可以基于它来做新的最小<br>的容器了：</p>
+<pre><code><span class="built_in">FROM</span> scratch
+<span class="built_in">COPY</span> <span class="bash"><span class="literal">true</span>-asm /<span class="literal">true</span>
+</span><span class="built_in">CMD</span> <span class="bash">[<span class="string">"/true"</span>]</span>
+</code></pre><p>上面的 Dockerfile 来自外部的一个最小镜像：<a href="https://github.com/tianon/dockerfiles/tree/master/true" target="_blank" rel="external">tianon/true</a>。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="创建一个基本镜像">创建一个基本镜像</h1><p>==================</p>
+<p>你想创建你自己的<a href="../terms/image.md">基础镜像</a>？很好！</p>
+<p>具体的过程会严重依赖于你想打包的Linux发行版]]>
     </summary>
     
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
@@ -1168,93 +801,6 @@ can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
   </entry>
   
   <entry>
-    <title><![CDATA[Docker Hub上的仓库和镜像]]></title>
-    <link href="http://yoursite.com/2015/12/08/docker/docker-hub/repos/"/>
-    <id>http://yoursite.com/2015/12/08/docker/docker-hub/repos/</id>
-    <published>2015-12-07T23:56:29.000Z</published>
-    <updated>2015-12-08T07:07:14.644Z</updated>
-    <content type="html"><![CDATA[<h1 id="Docker_Hub上的仓库和镜像">Docker Hub上的仓库和镜像</h1><p><img src="../images/repos.png" alt="仓库镜像"></p>
-<p>##搜索仓库和镜像</p>
-<p>你可以使用 Docker 来搜索所有公开可用的仓库和镜像。</p>
-<pre><code><span class="variable">$ </span>docker search ubuntu
-</code></pre><p>这将通过 Docker 提供的关键字匹配来显示您可用的仓库列表。</p>
-<p>私有仓库将不会显示到仓库搜索结果上。你可以通过 Docker Hub 的简况页面来查看仓库的状态。</p>
-<p>##仓库</p>
-<p>你的 Docker Hub 仓库有许多特性。</p>
-<p>###stars</p>
-<p>你的仓库可以用星被标记，你也可以用星标记别的仓库。Stars 也是显示你喜欢这个仓库的一种方法，也是一种简单的方法来标记你喜欢的仓库。</p>
-<p>###评论</p>
-<p>你可以与其他 Docker 社区的成员和维护者留下评论。如果你发现有不当的评论，你可以标记他们以供审核。</p>
-<p>###合作者及其作用</p>
-<p>指定的合作者可以通过你提供的权限访问你的私人仓库。一旦指定，他们可以 <code>push</code> 和 <code>pull</code> 你的仓库。但他们将不会被允许执行任何管理任务，如从删除仓库或者改变其状态。</p>
-<blockquote>
-<p>注：一个合作者不能添加其他合作者。只有仓库的所有者才有管理权限。</p>
-</blockquote>
-<p>你也可以与在 Docker Hub 上的组织和团队进行协作，更多信息。</p>
-<p>##官方仓库</p>
-<p>Docker Hub 包含了许多<a href="http://registry.hub.docker.com/official" target="_blank" rel="external">官方仓库</a>。这些都是 Docker 供应商和 Docker 贡献者提供的认证库，他们包含了来自供应商，如 Oracle 和 Red Hat的镜像,您可以使用它们来构建应用程序和服务。</p>
-<p>如果使用官方库，供应商会对镜像进行持续维护、升级和优化，从而为项目提供强大的驱动力。</p>
-<blockquote>
-<p>注：如果你的组织、产品或者团队想要给官方资源库做贡献。可以再<a href="https://github.com/docker/stackbrew" target="_blank" rel="external">这里</a>查看更多信息。</p>
-</blockquote>
-<p>##私有Docker仓库</p>
-<p>私人仓库用来存储你的私有镜像，前提是你需要一个 Docker 账户，或者你已经属于 Docker Hub 上的某个组织或群组。</p>
-<p>要使用 Docker Hub 私有仓库，首先在<a href="https://registry.hub.docker.com/account/repositories/add/" target="_blank" rel="external">这里</a>进行添加。你的 Docker Hub 账户会免费获得一个私人仓库。如果你需要更多的账户，你需要升级你的 <a href="https://registry.hub.docker.com/plans/" target="_blank" rel="external">Docker Hub 计划</a>。</p>
-<p>私有仓库建立好后，你可以使用 Docker 来 <code>push</code> 和 <code>pull</code> 你的镜像。</p>
-<blockquote>
-<p>注：你需要先登录并获得权限来访问你的私人仓库。</p>
-</blockquote>
-<p>私有仓库和公共仓库基本相同，但是以公共身份是无法浏览或者搜索到私有仓库及其内容的，他们也不会以同样的方式被缓存。</p>
-<p>在设置页面你可以指定哪些人有权限访问（如合作者），在这里你可以切换仓库状态（公共到私有，或者反过来）。你需要有一个可用的私有仓库，并开启相关设置才能做这样的转换。如果你无法进行相关操作，请升级你的 <a href="https://registry.hub.docker.com/plans/" target="_blank" rel="external">Docker Hub 计划</a>。</p>
-<p>##Webhooks</p>
-<p>您可以在仓库设置页面来配置你的 webhooks。只有成功 <code>push</code> 以后，<code>webhook</code> 才会生效。webhooks 会调用 HTTP POST 请求一个json，类似如下所示的例子：</p>
-<blockquote>
-<p>你可以使用 http 工具进行测试，例如 <a href="http://requestb.in/" target="_blank" rel="external">requestb.in.</a></p>
-</blockquote>
-<p>webhook json例子:</p>
-<pre><code>{
-   "<span class="attribute">push_data</span>":<span class="value">{
-      "<span class="attribute">pushed_at</span>":<span class="value"><span class="number">1385141110</span></span>,
-      "<span class="attribute">images</span>":<span class="value">[
-         <span class="string">"imagehash1"</span>,
-         <span class="string">"imagehash2"</span>,
-         <span class="string">"imagehash3"</span>
-      ]</span>,
-      "<span class="attribute">pusher</span>":<span class="value"><span class="string">"username"</span>
-   </span>}</span>,
-   "<span class="attribute">repository</span>":<span class="value">{
-      "<span class="attribute">status</span>":<span class="value"><span class="string">"Active"</span></span>,
-      "<span class="attribute">description</span>":<span class="value"><span class="string">"my docker repo that does cool things"</span></span>,
-      "<span class="attribute">is_automated</span>":<span class="value"><span class="literal">false</span></span>,
-      "<span class="attribute">full_description</span>":<span class="value"><span class="string">"This is my full description"</span></span>,
-      "<span class="attribute">repo_url</span>":<span class="value"><span class="string">"https://registry.hub.docker.com/u/username/reponame/"</span></span>,
-      "<span class="attribute">owner</span>":<span class="value"><span class="string">"username"</span></span>,
-      "<span class="attribute">is_official</span>":<span class="value"><span class="literal">false</span></span>,
-      "<span class="attribute">is_private</span>":<span class="value"><span class="literal">false</span></span>,
-      "<span class="attribute">name</span>":<span class="value"><span class="string">"reponame"</span></span>,
-      "<span class="attribute">namespace</span>":<span class="value"><span class="string">"username"</span></span>,
-      "<span class="attribute">star_count</span>":<span class="value"><span class="number">1</span></span>,
-      "<span class="attribute">comment_count</span>":<span class="value"><span class="number">1</span></span>,
-      "<span class="attribute">date_created</span>":<span class="value"><span class="number">1370174400</span></span>,
-      "<span class="attribute">dockerfile</span>":<span class="value"><span class="string">"my full dockerfile is listed here"</span></span>,
-      "<span class="attribute">repo_name</span>":<span class="value"><span class="string">"username/reponame"</span>
-   </span>}
-</span>}
-</code></pre><p>Webhooks 允许你将你镜像和仓库的更新信息通知指定用户、服务以及其他应用程序。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="Docker_Hub上的仓库和镜像">Docker Hub上的仓库和镜像</h1><p><img src="../images/repos.png" alt="仓库镜像"></p>
-<p>##搜索仓库和镜像</p>
-<p>你可以使用 Docker 来搜索所有公开可]]>
-    </summary>
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[openSUSE 安装 Docker]]></title>
     <link href="http://yoursite.com/2015/12/08/docker/installation/opensuse/"/>
     <id>http://yoursite.com/2015/12/08/docker/installation/opensuse/</id>
@@ -1293,6 +839,700 @@ can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
     <summary type="html">
     <![CDATA[<h1 id="openSUSE">openSUSE</h1><p>Docker 支持 openSUSE 12.3 或更高版本。由于 Docker 的限制，Docker 只能运行在64位的主机上。</p>
 <p>Docker 不被包含在 openSUSE 12.3 和 openS]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Mac OS X 安装 Docker]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/mac/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/mac/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:11:01.294Z</updated>
+    <content type="html"><![CDATA[<h1 id="Mac_OS_X_安装_Docker">Mac OS X 安装 Docker</h1><blockquote>
+<p>注意：<br>该 Docker 版本为了支持 Docker 机,于是不再支持 Boot2Docker 命令行。使用 Docker Toolbox 和其它 Docker 工具来安装 Docker 机。</p>
+</blockquote>
+<p>您可以利用 Docker Toolbox 来安装 Docker。Docker Toolbox 提供了以下工具：</p>
+<ul>
+<li>用于运行 docker-machine 二进制文件的 <code>Docker Machine</code></li>
+<li>用于运行 docker 二进行文件的 <code>Docker Engine</code></li>
+<li>用于运行 docker-compose 二进行文件的 <code>Docker Compose (Mac 特有)</code></li>
+<li>Kitematic，Docker 的图形用户界面</li>
+<li>用于 Docker 命令行环且预先配置好的 shell</li>
+<li>Oracle VM VirtualBox</li>
+</ul>
+<p>由于 Docker 的后台程序使用了 Linux 特有的内核特性，所以您不能直接在 OS X 上运行 Docker。相反，您必须使用 <code>docker-machine</code> 来创建并附加一台虚拟机（VM）。该虚拟机需要安装 Linux 操作系统以便在您 Mac 机上运行 Docker。</p>
+<p>####前提条件</p>
+<p>您 Mac 机的 OS X 版本必须大于等于 10.8 “Snow Leopard” 才可以安装 Docker Toolbox。</p>
+<p>###在安装之前先来了解一些关键概念</p>
+<p>当我们在一台 Linux 主机上安装完 Docker 之后，我们的机器中就包含了本地主机和 Docker 主机。如果从网络层来划分，本地主机就代表你的电脑，而 Docker 主机就是运行 container 的那台机器。</p>
+<p>在 Linux 机器上的一种典型安装 Docker 方法：Docker 客户端，Docker 后台程序和 container 会直接运行在您的机器上。这就意味着您可以使用标准的本地主机寻址（例如 <code>localhost:8000</code> 或者 <code>0.0.0.0:8376</code>）来为 Docker container 分配一个地址。</p>
+<p><img src="../images/linux_docker_host.svg" alt="linux_docker_host"></p>
+<p>在 OS X 上安装的 Docker ，其 Docker 后台程序是运行在一个名为 <code>default</code> 的 Linux 虚拟机上的。<code>default</code> 是 Linux 上的一个轻量级的虚拟机，是专门用于在 Mac OS X 机器上运行 Docker 的。</p>
+<p><img src="../images/mac_docker_host.svg" alt="mac_docker_host"></p>
+<p>在 OS X 中，Docker 主机地址就是 Linux 虚拟机的地址。当你使用 <code>docker-machine</code> 启动虚拟机的时候，该虚拟机会自动获取到 IP 地址。当您开启一个 container 的时候，container 上的端口会映射到虚拟机的端口上。本页面上的实践操作会一一印证上述内容。</p>
+<p>###安装</p>
+<p>如果您有一个正在运行着的 VirtualBox，那么请您在运行安装器（Docker Toolbox）之前务必关闭它。</p>
+<ol>
+<li><p>进入 <a href="https://www.docker.com/toolbox" target="_blank" rel="external">Docker Toolbox</a> 页面。</p>
+</li>
+<li><p>点击 Docker Toolbox 下载链接，进行下载。</p>
+</li>
+<li><p>双击安装包或者通过右击并在快捷菜单中选择“打开”的方式安装 Docker Toolbox。</p>
+<p>此时会弹出“Install Docker Toolbox”（安装 Docker 工具箱）窗口。</p>
+<p><img src="../images/mac-welcome-page.png" alt="mac-welcome-page"></p>
+</li>
+<li><p>点击“继续”（Continue），安装 toolbox。</p>
+<p>此时，toolbox 会展现给你一些选项，供您自定义标准安装。</p>
+<p><img src="../images/mac-page-two.png" alt="mac-page-two"></p>
+<p>默认情况下，标准的 Docker Toolbox 安装是这样的：</p>
+<ul>
+<li>向 <code>/usr/local/bin</code> 目录中添加 Docker 工具的二进制文件。</li>
+<li>修改权限使得这些二进制文件可供任何用户使用。</li>
+<li>更新现有的 VirtualBox 安装。</li>
+</ul>
+<p><br><br>通过点击“自定义”或“更改安装目录”修改这些默认安装值。</p>
+</li>
+<li><p>点击“安装”，执行标准安装。</p>
+<p>系统提示您输入密码。</p>
+<p><img src="../images/mac-password-prompt.png" alt="mac-password-prompt"></p>
+</li>
+<li><p>输入密码，继续安装</p>
+<p>安装完成后，Docker Toolbox 会为您提供一些信息，通过这些信息您可以完成一些常见的任务。 </p>
+</li>
+<li><p>点击“关闭”，离开当前窗口。</p>
+</li>
+</ol>
+<p>##运行 Docker Container</p>
+<p>想要运行一个 Docker 容器，你需要做如下内容：</p>
+<ul>
+<li>创建一个新的（或开启一台已存在的）Docker 虚拟机</li>
+<li>从您当前的环境切换到新的虚拟机的环境中</li>
+<li>利用 <code>docker</code> 客户端创建，加载并管理 container</li>
+</ul>
+<p>一旦您创建了一台虚拟机，您就可以随时使用它。如同任意一台 VirtualBox 虚拟机，在每次使用它的时候都会保存其配置。</p>
+<p>这里提供两种使用 Docker Toolbox 的方法：使用 Docker 的快速入门终端或使用您的 shell 环境。</p>
+<p>###使用 Docker 的快速入门终端</p>
+<ol>
+<li>打开“应用程序”文件夹或“启动面板”。</li>
+<li><p>找到 Docker 快速入门终端并双击启动它。</p>
+<p>该应用程序：</p>
+<ul>
+<li>开启一个终端窗口</li>
+<li>如果还没有虚拟机的化，请创建一台名叫 <code>default</code> 的虚拟机；如果已经存在这样一台虚拟机，请你开启它。</li>
+<li>将当前终端环境切换到虚拟机环境中。</li>
+</ul>
+<p>一旦启动完成，Docker 快速入门终端会是如下状态：</p>
+<p><img src="../images/mac-success.png" alt="mac-success"><br>现在，您可以运行 <code>docker</code> 命令了。</p>
+</li>
+<li><p>通过运行 <code>hello-world</code> container 来核实您的安装是否成功。</p>
+</li>
+</ol>
+   <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ docker run hello-world</span><br><span class="line">Unable <span class="built_in">to</span> find image <span class="string">'hello-world:latest'</span> locally</span><br><span class="line"><span class="number">511136</span>ea3c5a: Pull complete</span><br><span class="line"><span class="number">31</span>cbccb51277: Pull complete</span><br><span class="line">e45a5af57b00: Pull complete</span><br><span class="line">hello-world:latest: The image you are pulling has been verified.</span><br><span class="line">Important: image verification is <span class="operator">a</span> tech preview feature <span class="operator">and</span> should <span class="operator">not</span> be</span><br><span class="line">relied <span class="command"><span class="keyword">on</span> <span class="title">to</span> <span class="title">provide</span> <span class="title">security</span>.</span></span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</span><br><span class="line">Hello <span class="built_in">from</span> Docker.</span><br><span class="line">This message shows that your installation appears <span class="built_in">to</span> be working correctly.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">To generate this message, Docker took <span class="operator">the</span> following steps:</span><br><span class="line"><span class="number">1.</span> The Docker client contacted <span class="operator">the</span> Docker daemon.</span><br><span class="line"><span class="number">2.</span> The Docker daemon pulled <span class="operator">the</span> <span class="string">"hello-world"</span> image <span class="built_in">from</span> <span class="operator">the</span> Docker Hub.</span><br><span class="line">   (Assuming <span class="keyword">it</span> was <span class="operator">not</span> already locally available.)</span><br><span class="line"><span class="number">3.</span> The Docker daemon created <span class="operator">a</span> <span class="built_in">new</span> container <span class="built_in">from</span> that image which runs <span class="operator">the</span></span><br><span class="line">   executable that produces <span class="operator">the</span> output you are currently reading.</span><br><span class="line"><span class="number">4.</span> The Docker daemon streamed that output <span class="built_in">to</span> <span class="operator">the</span> Docker client, which sent <span class="keyword">it</span></span><br><span class="line">   <span class="built_in">to</span> your terminal.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">To <span class="keyword">try</span> something more ambitious, you can run <span class="operator">an</span> Ubuntu container <span class="operator">with</span>:</span><br><span class="line">$ docker run -<span class="keyword">it</span> ubuntu bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">For more examples <span class="operator">and</span> ideas, visit:</span><br><span class="line"><span class="keyword">http</span>://docs.docker.com/userguide/</span><br></pre></td></tr></table></figure>
+<p>一个可以和 Docker 工具进行交互的另一种典型方法就是：从您的 shell 命令行入手。</p>
+<p>###使用shell 命令行<br>该部分假设您正在运行一个 Bash shell。您运行的可能是不同的 shell，例如 C shell，但是不用担心，命令都是一样的。</p>
+<ol>
+<li><p>创建一个新的 Docker 虚拟机。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   $ docker-machine <span class="operator"><span class="keyword">create</span> <span class="comment">--driver virtualbox default      </span></span><br><span class="line"></span><br><span class="line">   Creating VirtualBox VM...</span><br><span class="line">   Creating SSH <span class="keyword">key</span>...</span><br><span class="line">   <span class="keyword">Starting</span> VirtualBox VM...</span><br><span class="line">   <span class="keyword">Starting</span> VM...</span><br><span class="line">   <span class="keyword">To</span> see how <span class="keyword">to</span> <span class="keyword">connect</span> Docker <span class="keyword">to</span> this machine, run: docker-machine env <span class="keyword">default</span></span><br><span class="line">   <span class="string">``</span><span class="string">` </span><br><span class="line">  </span><br><span class="line">   这就在 VirtualBox 中创建了一台新的 `</span><span class="keyword">default</span><span class="string">` 虚拟机。</span><br><span class="line">   </span><br><span class="line">   该命令还会在 `</span>~/.docker/machine/machines/<span class="keyword">default</span><span class="string">` 目录下生成一个 docker machine 的配置文件。您只需执行一次 `</span><span class="keyword">create</span><span class="string">` 命令。然后，您可以使用 `</span>docker-machine<span class="string">` 命令来开启，停止，查询并管理虚拟机。</span><br><span class="line"></span><br><span class="line">2. 列出所有可用的 docker machine。</span></span></span><br></pre></td></tr></table></figure>
+<p>$ docker-machine ls<br>NAME                ACTIVE   DRIVER       STATE     URL                         SWARM<br>default             *        virtualbox   Running   tcp://192.168.99.101:2376  </p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   如果您之前安装了现在已经舍弃了的 Boot2Docker 这个应用程序的话或者您运行了 Docker 快速入门终端，在列表中还会有一个 <span class="escape">`d</span>ev<span class="escape">` </span>虚拟机。当   您创建 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的时候，<span class="escape">`d</span>ocker-machine<span class="escape">` </span>命令给出了一些指导，以便您您连接虚拟机。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 获取 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的环境变量</span><br></pre></td></tr></table></figure>
+<p>$ docker-machine env default<br>export DOCKER_TLS_VERIFY=”1”<br>export DOCKER_HOST=”tcp://192.168.99.101:2376”<br>export DOCKER_CERT_PATH=”/Users/mary/.docker/machine/machines/default”<br>export DOCKER_MACHINE_NAME=”default”</p>
+<h1 id="Run_this_command_to_configure_your_shell:">Run this command to configure your shell:</h1><h1 id="eval_“$(docker-machine_env_default)”">eval “$(docker-machine env default)”</h1><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">4</span>. 连接到 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机</span><br></pre></td></tr></table></figure>
+<p>$ eval “$(docker-machine env default)”</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">5</span>. 运行 <span class="escape">`h</span>ello-world<span class="escape">` </span>container 来验证您的安装是否已经成功。</span><br></pre></td></tr></table></figure>
+<p>docker run hello-world</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">##学习 Toolbox 安装</span></span><br><span class="line"></span><br><span class="line">Toolbox 将 Docker Engine 的可执行文件和 Docker 的可执行文件下载到您的系统中。当您使用 Docker 快速入门终端或手动创建一个 `<span class="javascript"><span class="keyword">default</span></span>` 虚拟机的时候，Docker Machine 会更新 `<span class="javascript">~<span class="regexp">/.docker/m</span>achine/machines/<span class="keyword">default</span></span>` 文件。该文件夹中包含了虚拟机的配置文件。</span><br><span class="line"></span><br><span class="line">您可以利用 Docker Machine 在系统中创建多个虚拟机，那么也就会有多个虚拟机的配置文件。如果您想要删除某台虚拟机，请您使用 `<span class="javascript">docker-machine rm &lt;machine-name&gt;</span>` 命令。</span><br><span class="line"></span><br><span class="line"><span class="comment">##从 Boot2Docker 迁移</span></span><br><span class="line">如果您现在用的还是 Boot2Docker 的话，在您的本地系统中还会有一个 `<span class="javascript">boot2docker-vm</span>` 虚拟机。为了允许 Docker Machine 管理该台虚拟机，你可以对它进行迁移。</span><br><span class="line"><span class="number">1.</span> 打开一个终端或 Docker 的命令行界面。</span><br><span class="line"><span class="number">2.</span> 输入以下命令。</span><br></pre></td></tr></table></figure>
+<p>docker-machine create -d virtualbox –virtualbox-import-boot2docker-vm boot2docker-vm docker-vm<br>```</p>
+</li>
+<li>使用 <code>docker-machine</code> 命令与该台要被迁移的虚拟机进行交互。<br><code>docker-machine</code> 的子命令和 <code>boot2docker</code> 的子命令比起来还是有一些不同之处的。下面这个表列出了对比了二者的不同并介绍其功能。   </li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong><code>boot2docker</code></strong></th>
+<th><strong><code>docker-machine</code></strong></th>
+<th><strong><code>docker-machine</code></strong> description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>init</td>
+<td>create</td>
+<td>Creates a new docker host.</td>
+</tr>
+<tr>
+<td>up</td>
+<td>start</td>
+<td>Starts a stopped machine.</td>
+</tr>
+<tr>
+<td>ssh</td>
+<td>ssh</td>
+<td>Runs a command or interactive ssh session on the machine.</td>
+</tr>
+<tr>
+<td>save</td>
+<td>-</td>
+<td>Not applicable.</td>
+</tr>
+<tr>
+<td>down</td>
+<td>stop</td>
+<td>Stops a running machine.</td>
+</tr>
+<tr>
+<td>poweroff</td>
+<td>stop</td>
+<td>Stops a running machine.</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>restart</td>
+<td>Restarts a running machine.</td>
+</tr>
+<tr>
+<td>config</td>
+<td>inspect</td>
+<td>Prints machine configuration details.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>ls</td>
+<td>Lists all machines and their status.</td>
+</tr>
+<tr>
+<td>info</td>
+<td>inspect</td>
+<td>Displays a machine’s details.</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>ip</td>
+<td>Displays the machine’s ip address.</td>
+</tr>
+<tr>
+<td>shellinit</td>
+<td>env</td>
+<td>Displays shell commands needed to configure your shell to interact with a machine.</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>rm</td>
+<td>Removes a machine.</td>
+</tr>
+<tr>
+<td>download</td>
+<td>-</td>
+<td>Not applicable.</td>
+</tr>
+<tr>
+<td>upgrade</td>
+<td>upgrade</td>
+<td>Upgrades a machine’s Docker client to the latest stable release.</td>
+</tr>
+</tbody>
+</table>
+<p>##Mac OS X 上 Docker 的实例<br>通过了解本小节，您可以尝试在虚拟机上进行一些可行的 container 任务。现在，您应该有一台运行着的虚拟机，且通过 shell 脚本可以连接到该虚拟机。为了验证上面所说的，可以执行如下命令来验证:</p>
+<pre><code>$ docker-machine ls
+NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
+<span class="keyword">default</span>             *        virtualbox   Running   <span class="string">tcp:</span><span class="comment">//192.168.99.100:2376   </span>
+</code></pre><p>该台处于 <code>ACTIVE</code> 状态的虚拟机，即本例中的 default 虚拟机，就是您的环境所指向的虚拟机。</p>
+<p>###访问 container 的端口</p>
+<ol>
+<li><p>在 DOCKER_HOST 上开启一个NGINX container。</p>
+<pre><code>$ docker <span class="command">run</span> -d -P <span class="comment">--name web nginx</span>
+</code></pre><p>一般来说，<code>docker run</code> 命令会开启一个 container，并运行它，最后关闭它。加上 <code>-d</code> 这个参数，container 就可以在您执行了 <code>docker run</code> 这条命令后继续在后台运行了。加上 <code>-P</code> 这个参数就可以将 container 监听的那个端口告知给 Docker Host；这样您就可以在您的 Mac 机上访问 container 了。</p>
+</li>
+<li><p>执行 <code>docker ps</code> 命令，查看运行着的 container</p>
+<pre><code>CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
+<span class="number">5f</span>b65ff765e9        nginx:latest  
+</code></pre><p>此时，您会发现 <code>nginx</code> 依然在后台运行。</p>
+</li>
+<li><p>查看 container 的端口</p>
+<pre><code>$ docker port web
+<span class="number">443</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49156</span>
+<span class="number">80</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49157</span>
+</code></pre><p>该命令显示出的内容会告诉你 <code>web</code> container 的 <code>80</code> 端口已经映射到了 Docker Host 上的 <code>49157</code> 端口上。</p>
+</li>
+<li><p>在您的浏览器中输入地址 <code>http://localhost:49157</code>（localhost 就是 0.0.0.0）。</p>
+<p> <img src="../images/bad_host1.png" alt="bad_host1"><br>并没有生效，其原因就是 <code>DOCKER_HOST</code> 的地址并不是你本地的机器的地址（0.0.0.0），而是您的 Docker 虚拟机的地址。</p>
+</li>
+<li><p>获取 Docker 虚拟机（即 <code>default</code>）的地址。</p>
+<pre><code>$ docker-machine ip <span class="keyword">default</span>
+<span class="number">192.168</span><span class="number">.59</span><span class="number">.103</span>
+</code></pre></li>
+<li><p>在您的浏览器中输入地址 <code>http://192.168.59.103:49157</code></p>
+<p> <img src="../images/good_host1.png" alt="good_host1"><br>成功了！</p>
+</li>
+<li><p>如果您想停止并删除正在运行的 <code>nginx</code> container 的话，请执行如下操作：</p>
+<pre><code><span class="variable">$ </span>docker stop web
+<span class="variable">$ </span>docker rm web
+</code></pre></li>
+</ol>
+<p>###为容器挂载一个卷</p>
+<p>当您开启一个 container 的时候，系统会自动将您本机中的 <code>/Users/username</code> 目录共享给 Docker 虚拟机。通过本次共享，您可以将该目录挂载到您的 container 上。下面的内容将会介绍如何做到这些。</p>
+<ol>
+<li><p>跳转到您的用户 <code>$HOME</code> 目录下。</p>
+<pre><code>$ cd <span class="variable">$HOME</span>
+</code></pre></li>
+<li><p>创建一个新的 <code>site</code> 目录。</p>
+<pre><code><span class="variable">$ </span>mkdir site
+</code></pre></li>
+<li><p>跳转到 <code>site</code> 目录中。</p>
+<pre><code>$ <span class="built_in">cd</span> site
+</code></pre></li>
+<li><p>创建一个新的 <code>index.html</code> 文件。</p>
+<pre><code>$ <span class="keyword">echo</span> <span class="string">"my new site"</span> &gt; <span class="built_in">index</span>.html
+</code></pre></li>
+<li><p>开启一个新 <code>nginx</code> container 并将 <code>html</code> 目录替换为 <code>site</code> 目录。</p>
+<pre><code>$ docker run -d -P -v <span class="variable">$HOME</span>/site:/usr/share/nginx/html --name mysite nginx
+</code></pre></li>
+<li><p>获取到 <code>mysite</code> 这个 container 的端口。</p>
+<pre><code>$ docker port mysite
+<span class="number">80</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49166</span>
+<span class="number">443</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49165</span>
+</code></pre></li>
+<li><p>在浏览器中输入地址：</p>
+<p> <img src="../images/newsite_view1.png" alt="newsite_view1"></p>
+</li>
+<li><p>立即添加一个文件到 <code>$HOME/siet</code> 目录下。</p>
+<pre><code>$ <span class="built_in">echo</span> <span class="string">"This is cool"</span> &gt; cool.html
+</code></pre></li>
+<li><p>在浏览器中输入地址：</p>
+<p> <img src="../images/cool_view1.png" alt="cool_view1"></p>
+</li>
+<li><p>停止然后删除正在运行的 <code>mysite</code> container。</p>
+<pre><code><span class="variable">$ </span>docker stop mysite
+<span class="variable">$ </span>docker rm mysite
+</code></pre></li>
+</ol>
+<p>##更新 Docker Toolbox</p>
+<p>为更新Docker Toolbox, 需要下载并重新运行<a href="https://docker.com/toolbox/" target="_blank" rel="external">Docker Toolbox安装器</a>.</p>
+<p>##卸载 Docker Toolbox</p>
+<p>按照以下步骤卸载Toolbox：</p>
+<ol>
+<li><p>列出所有的虚拟机</p>
+<pre><code>$ docker-machine ls
+NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
+dev                 *        virtualbox   Running   <span class="string">tcp:</span><span class="comment">//192.168.99.100:2376   </span>
+my-docker-machine            virtualbox   Stopped                               
+<span class="keyword">default</span>                      virtualbox   Stopped  
+</code></pre></li>
+<li><p>删除（列出的）每一台虚拟机.</p>
+<pre><code>$ docker-machine rm <span class="built_in">dev</span>
+Successfully removed <span class="built_in">dev</span>
+</code></pre><p>删除一台虚拟机，意味着从<code>VirtualBox</code>和<code>~/.docker/machine/machines</code>目录中同时删除虚拟机文件。 </p>
+</li>
+<li><p>从“应用程序“文件夹中删除Docker快捷终端（Quickstart Terminal）和Kitematic.</p>
+</li>
+<li><p>从/usr/local/bin文件夹中删除docker, docker-compose和 docker-machine命令文件.</p>
+<pre><code>$ rm <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>docker
+</code></pre></li>
+<li><p>从系统中删除 <code>~/.docker</code> 文件夹.</p>
+</li>
+</ol>
+<p>##学习更多</p>
+<p>使用”docker-machine help”命令可以列出关于Docker Machine的全部命令行参考信息.参照<a href="https://docs.docker.com/machine/" target="_blank" rel="external">Docker Machine文档</a>来获得关于如何使用 SSH 或者 SCP 访问虚拟机的信息。<br>接下来，可以继续了解<a href="https://docs.docker.com/userguide" target="_blank" rel="external">Docker用户手册</a> . 如果对使用Kitematic图形界面工具感兴趣，可以参考阅读 <a href="https://docs.docker.com/kitematic/userguide/" target="_blank" rel="external">Kitermatic用户手册</a>.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Mac_OS_X_安装_Docker">Mac OS X 安装 Docker</h1><blockquote>
+<p>注意：<br>该 Docker 版本为了支持 Docker 机,于是不再支持 Boot2Docker 命令行。使用 Docker Toolbox ]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Google Cloud Platform版本的]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/google/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/google/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:10:42.799Z</updated>
+    <content type="html"><![CDATA[<h1 id="Google_Cloud_Platform">Google Cloud Platform</h1><p>###Google Compute Enginer 镜像快速入门</p>
+<p>1.去谷歌云控制台，创建一个新的云计算项目，启用云引擎</p>
+<p>2.使用如下的命令来下载谷歌云 SDK 并配置您的项目：</p>
+<pre><code>$ curl https://sdk.cloud.google.com | bash
+$ gcloud auth login
+$ gcloud config <span class="operator"><span class="keyword">set</span> <span class="keyword">project</span> &lt;google-cloud-<span class="keyword">project</span>-<span class="keyword">id</span>&gt;</span>
+</code></pre><p>3.启动一个新实例，使用最新的 Container-optimized 镜像:(选择一个接近你所需实例大小的分区)</p>
+<pre><code>$ gcloud compute instances create docker-playground \
+-<span class="ruby">-image <span class="symbol">https:</span>/<span class="regexp">/www.googleapis.com/compute</span><span class="regexp">/v1/projects</span><span class="regexp">/google-containers/global</span><span class="regexp">/images/container</span>-vm-v20140522 \
+</span>-<span class="ruby">-zone us-central1-a \
+</span>-<span class="ruby">-machine-type f1-micro</span>
+</code></pre><p>4.用ssh来连接这个实例：</p>
+<pre><code>$ gcloud compute ssh <span class="comment">--zone us-central1-a docker-playground</span>
+docker-playground:~$ sudo docker <span class="command">run</span> hello-world
+</code></pre><p>当 Docker 输出 hello word 消息的时候，说明你的 Docker 工作正常。</p>
+<p>更多，请阅读 <a href="https://developers.google.com/compute/docs/containers" target="_blank" rel="external"> google 云平台部署容器 </a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Google_Cloud_Platform">Google Cloud Platform</h1><p>###Google Compute Enginer 镜像快速入门</p>
+<p>1.去谷歌云控制台，创建一个新的云计算项目，启用云引擎</p>
+<p>2.使用如]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Debian支持 Docker]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/debian/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/debian/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:09:45.088Z</updated>
+    <content type="html"><![CDATA[<h1 id="Debian">Debian</h1><p>以下版本的 Debian 支持 Docker：</p>
+<ul>
+<li><a href="#debian-jessie-80-64-bit">Debian 8.0 Jessie (64-bit)</a></li>
+<li><a href="#debian-wheezystable-7x-64-bit">Debian 7.7 Wheezy (64-bit)</a></li>
+</ul>
+<p>##Debian Jessie 8.0 (64-bit)Debian</p>
+<p>Debian 8 使用的是 3.14.0 的内核版本，可以从 Debian 的镜像源来安装 <code>docker.io</code> 包。</p>
+<blockquote>
+<p>提示：Debian 包含一个特别老的KDE3/GNOME2包叫 <code>docker</code> ,所以我们把这个包叫<code>docker.io</code>。</p>
+</blockquote>
+<p>###安装</p>
+<p>安装最新版的 Debian 软件包（可能不是最新版本 Docker ）</p>
+<pre><code>$ sudo apt-<span class="built_in">get</span> <span class="keyword">update</span>
+$ sudo apt-<span class="built_in">get</span> install docker.io
+</code></pre><p>验证 Docker 是否正常工作 ：</p>
+<pre><code>$ sudo docker run -<span class="tag">i</span> -t  Ubuntu  /bin/bash
+</code></pre><p>该命令将下载 <code>Ubuntu</code> 镜像，并且在容器内运行 <code>bash</code>.</p>
+<blockquote>
+<p>注意：如果你打算启用内存和交换空间设置，请查看<a href="./ubuntu.md">这里</a></p>
+</blockquote>
+<p>##Debian Wheezy/Stable 7.x (64-bit)</p>
+<p>安装 Docker 需要内核在3.8版本以上，但是 Wheezy 的内核版本是 3.2（<a href="https://github.com/docker/docker/issues/407%20kernel%20versions" target="_blank" rel="external">bug #407</a>对 Docker 需要3.8版本内核进行了讨论。）</p>
+<p>幸运的是，官方提供了 <code>wheezy-backports</code> ，它内核版本是3.16，可以支持 Docker。</p>
+<p>###安装</p>
+<ol>
+<li><p>从 wheezy-backports 镜像源来安装内核</p>
+<p> 在 <code>/etc/apt/sources.list</code> 文件下添加如下内容：</p>
+<pre><code>deb <span class="string">http:</span><span class="comment">//http.debian.net/debian wheezy-backports main</span>
+</code></pre><p> 安装 <code>linux-image-amd64</code> 包  (注意使用 <code>-t wheezy-backports</code>)</p>
+<pre><code>$ sudo apt-get <span class="operator"><span class="keyword">update</span>
+$ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> -<span class="keyword">t</span> wheezy-backports linux-image-amd64</span>
+</code></pre></li>
+<li><p>从 get.docker.com 获取安装脚本并安装：</p>
+<pre><code>curl -sSL http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/ | <span class="keyword">sh</span>
+</code></pre></li>
+</ol>
+<p>###使用非root</p>
+<p>docker 进程通过监听一个 Unix Socket 来替代 TCP 端口。在默认情况下，docker 的 Unix Socket属于<code>root</code>用户，当然其他用户可以使用<code>sudo</code>方式来访问。因为这个原因， docker 进程就一直是<code>root</code>用户运行的。</p>
+<p>如果你（或者说你安装Docker的时候）创建一个叫 <code>docker</code> 的用户组，并为用户组添加用户。这时候，当 Docker 进程启动的时候，<code>docker</code> 用户组对 Unix Socket 有了读/写权限。 你必须使用root用户来运行 docker 进程，但你可以用 <code>docker</code> 群组用户来使用 docker 客户端，你再使用 docker 命令的时候前边就不需要加 <code>sudo</code> 了。从Docker 0.9版本开始，你可以使用<code>-G</code>来指定用户组。</p>
+<blockquote>
+<p>警告：Docker 用户组（或者用 <code>-G</code> 指定的用户组）有等同于root用户的权限，有关系统安全影响的细节，请查看 <a href="">Docker 进程表面攻击细节</a></p>
+</blockquote>
+<p>操作演示：</p>
+<pre><code><span class="comment"># Add the docker group if it doesn't already exist.</span>
+<span class="variable">$ </span>sudo groupadd docker
+
+<span class="comment"># Add the connected user "${USER}" to the docker group.</span>
+<span class="comment"># Change the user name to match your preferred user.</span>
+<span class="comment"># You may have to logout and log back in again for</span>
+<span class="comment"># this to take effect.</span>
+<span class="variable">$ </span>sudo gpasswd -a <span class="variable">${</span><span class="constant">USER</span>} docker
+
+<span class="comment"># Restart the Docker daemon.</span>
+<span class="variable">$ </span>sudo service docker restart
+<span class="comment">##下一步</span>
+</code></pre><p>继续阅读<a href="../userguide/README.md">用户指南</a>。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Debian">Debian</h1><p>以下版本的 Debian 支持 Docker：</p>
+<ul>
+<li><a href="#debian-jessie-80-64-bit">Debian 8.0 Jessie (64-bit)</a></li>
+<l]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Using Supervior with Docker]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/SupervisorwithDocker/"/>
+    <id>http://yoursite.com/2015/12/08/docker/SupervisorwithDocker/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T06:57:46.932Z</updated>
+    <content type="html"><![CDATA[<h1 id="Using_Supervior_with_Docker">Using Supervior with Docker</h1><p>注意：如果你不喜欢使用sudo，那么你可以看看<a href="http://docs.docker.com/installation/binaries/#dockergroup" target="_blank" rel="external">Giving non-root access</a></p>
+<p>传统上的docker容器中一次只能运行一个进程，例如一次只运行一个Apache守护进程或SSH服务器守护进程一个进程。你经常遇到需要<br>在一个容器中运行多个进程的情形。有许多方法可以实现这一点，从使用简单的bash脚本来运行的<code>CMD</code>指令到安装进程管理工具。 </p>
+<p>在这个例子中，我们将要利用进程管理工具，<a href="http://supervisord.org/" target="_blank" rel="external"><code>Supervior</code></a>，来管理我们容器中的多个进程。使用Supervior使我们能够更好地控制，管理，<br>和重新启动我们想要运行的进程。为了证明这一点，我们接下来要安装并管理的SSH服务进程和一个Apache守护进程。 </p>
+<h2 id="创建Dockerfile">创建Dockerfile</h2><p>让我们先创建一个基本的<code>Dockerfile</code>来创建我们的新镜像。 </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:<span class="number">13.04</span></span><br><span class="line">MAINTAINER examples@docker.com</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">"deb http://archive.ubuntu.com/ubuntu precise main universe"</span> &gt; /etc/apt/sources.list</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get upgrade -y</span><br></pre></td></tr></table></figure>
+<h2 id="安装Supervisor">安装Supervisor</h2><p>现在，我们可以安装我们的SSH和Apache，以及Supervisor在我们的容器中。 </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get install -y openssh-server apache2 supervisor</span><br><span class="line">RUN mkdir -p /var/run/sshd</span><br><span class="line">RUN mkdir -p /var/<span class="built_in">log</span>/supervisor</span><br></pre></td></tr></table></figure>
+<p>这里我们组装了一个包含Openssh-server，Apache2和supervisor（它提供了超级守护进程）的封装包。我们也创建了用来运行<br>我们SSH和Supervisor的两个新目录</p>
+<h2 id="添加Supervisor的配置文件">添加Supervisor的配置文件 </h2><p>现在，让我们为Supervisor添加一个配置文件。默认的文件名为<code>supervisord.conf</code>，位于<code>/etc/supervisor/conf.d/</code>。 </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf</span><br></pre></td></tr></table></figure>
+<p>让我们来看看supervisord.conf文件。 </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[supervisord]</span><br><span class="line">nodaemon=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[program:sshd]</span><br><span class="line"><span class="built_in">command</span>=/usr/sbin/sshd -D</span><br><span class="line"></span><br><span class="line">[program:apache2]</span><br><span class="line"><span class="built_in">command</span>=/bin/bash -c <span class="string">"source /etc/apache2/envvars &amp;&amp; exec /usr/sbin/apache2 -DFOREGROUND"</span></span><br></pre></td></tr></table></figure>
+<p>该<code>supervisord.conf</code>配置文件包含了配置Supervisor的指令和Supervisor用来管理进程的指令。第一部分<code>[supervisord]</code>为Supervisor本身的配置。<br>我们使用一个<code>nodaemon</code>指令，来告诉Supervisor以交互方式而非以后台进程方式运行。 </p>
+<p>接下来的两个部分用来管理我们要控制的服务。每个部分控制一个单独的进程。该部分包含一个<code>command</code>指令，指定用什么命令来启动每个过程。 （<em>译者注：要运行什么指令按照相同格式添加即可</em>）</p>
+<h2 id="开放端口以及运行Supervisor">开放端口以及运行Supervisor </h2><p>现在，让我们开放一些需要口，并指定当容器启动时要运行的CMD指令来结束<code>Dockerfile</code>文件。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EXPOSE <span class="number">22</span> <span class="number">80</span></span><br><span class="line">CMD [<span class="string">"/usr/bin/supervisord"</span>]</span><br></pre></td></tr></table></figure>
+<p>在这里，当我们的容器启动时，会自动开放了容器的22和80端口，同时运行<code>/usr/bin/supervisord</code>命令。</p>
+<h2 id="创建我们自己的镜像">创建我们自己的镜像</h2><p>现在，我们可以创建我们的新镜像。 </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker build -t &lt;yourname&gt;/supervisord .</span><br></pre></td></tr></table></figure>
+<h2 id="启动我们的Supervisor容器">启动我们的Supervisor容器</h2><p>一旦我们创建了一个镜像，我们就可以从它启动一个容器。 </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -p <span class="number">22</span> -p <span class="number">80</span> -t -i &lt;yourname&gt;/supervisord</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> CRIT Supervisor running as root (no user <span class="keyword">in</span> config file)</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> WARN Included extra file <span class="string">"/etc/supervisor/conf.d/supervisord.conf"</span> during parsing</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">342</span> INFO supervisord started with pid <span class="number">1</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">346</span> INFO spawned: <span class="string">'sshd'</span> with pid <span class="number">6</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">349</span> INFO spawned: <span class="string">'apache2'</span> with pid <span class="number">7</span></span><br><span class="line">. . .</span><br></pre></td></tr></table></figure>
+<p>我们已经使用<code>docker run</code>命令以交互方式启动一个新的容器。该容器已运行Supervisor，并启动了SSH和Apache后台进程。<br>我们已经指定了<code>-p</code>参数开放了端口22和80。通过这种方式我们可以确认我们开放的端口，并且通过这些端口连接到SSH和Apache后台进程。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Using_Supervior_with_Docker">Using Supervior with Docker</h1><p>注意：如果你不喜欢使用sudo，那么你可以看看<a href="http://docs.docker.com/installation/]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Arch Linux]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/archlinux/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/archlinux/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:08:48.043Z</updated>
+    <content type="html"><![CDATA[<h1 id="Arch_Linux">Arch Linux</h1><p>你可以使用 Arch Linux 社区发布的 Docker 软件包进行安装：</p>
+<ul>
+<li><a href="https://www.archLinux.org/packages/community/x86_64/docker/" target="_blank" rel="external">docker</a></li>
+</ul>
+<p>或者使用 AUR 包</p>
+<ul>
+<li><a href="https://aur.archLinux.org/packages/docker-git/" target="_blank" rel="external">docker-git</a></li>
+</ul>
+<p><code>docker</code> 软件包将会安装最新版本的 Docker。<code>docker-git</code> 则是由当前master分支构建的包。</p>
+<p>###依赖关系</p>
+<p>Docker 依赖于几个指定的安装包，核心的几个依赖包为：</p>
+<ul>
+<li>bridge-utils</li>
+<li>device-mapper</li>
+<li>iproute2</li>
+<li>lxc</li>
+<li>sqlite</li>
+</ul>
+<p>###安装</p>
+<p>一般包的简单安装：</p>
+<pre><code><span class="title">pacman</span> -S docker
+</code></pre><p>这就安装了你所需要的一切。</p>
+<p>对于AUR包的执行：</p>
+<pre><code><span class="title">yaourt</span> -S docker-git
+</code></pre><p>这里假设你已经安装好了 yaourt.如果你之前没有安装构建过这个包，请参考 <a href="https://wiki.archLinux.org/index.php/Arch_User_Repository#Installing_packages" target="_blank" rel="external">Arch User Repository</a> .</p>
+<p>###开启Docker</p>
+<p>Docker 会创建一个系统服务，用下面命令来启动 Docker：</p>
+<pre><code><span class="variable">$ </span>sudo systemctl start docker
+</code></pre><p>设置开机启动：</p>
+<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker
+</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Arch_Linux">Arch Linux</h1><p>你可以使用 Arch Linux 社区发布的 Docker 软件包进行安装：</p>
+<ul>
+<li><a href="https://www.archLinux.org/packages/commun]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[安装 Compose]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/compose/install/"/>
+    <id>http://yoursite.com/2015/12/08/docker/compose/install/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:06:31.992Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装_Compose">安装 Compose</h1><p>在安装 Compose之前，你需要先安装好 Docker 。然后你需要使用 <code>curl</code> 指令来安装 Compose</p>
+<p>###安装 Docker</p>
+<p>首先，你需要安装大于或者等于1.6版本的 Docker 。</p>
+<ul>
+<li><a href="../installation/mac.md">MAC OSX 安装指南</a></li>
+<li><a href="../installation/ubuntu.md">Ubuntu  安装指南</a></li>
+<li><a href="../installation/">其它系统安装指南</a></li>
+</ul>
+<p>###安装 Compose</p>
+<p>运行下边的命令来安装 Compose：</p>
+<pre><code>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/compose/releases</span><span class="regexp">/download/</span><span class="number">1.3</span>.<span class="number">1</span>/docker-compose-<span class="string">`uname -s`</span>-<span class="string">`uname -m`</span> &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>-compose
+chmod +x /usr/local/bin/docker-compose
+</code></pre><blockquote>
+<p>注意：如果你在安装的时候出现了  “Permission denied” 的错误信息，这说明你的 <code>/usr/local/bin</code> 目录是不可写的，你需要使用超级用户来安装。运行 <code>sudo -i</code> , 然后运行上边的两个命令，然后 <code>exit</code> 退出。</p>
+</blockquote>
+<p>可选，你也可以在 shell 中使用命令行安装。</p>
+<p>Compose 适用于 OS X 和 64位的Linux 。 如果你使用其他平台，你可以安装一个 Compose 的 Python 包来完成安装。</p>
+<pre><code>$ sudo pip <span class="keyword">install</span> -U docker-compose
+</code></pre><p>到这里安装就结束了；Compose已经安装完成。你可以使用 <code>docker-compose --version</code> 来进行测试 。</p>
+<p>###升级</p>
+<p>如果你使用的是 Compose 1.2或者早期版本，当你升级完成后，你需要删除或者迁移你现有的容器。这是因为，1.3版本， Composer 使用 Docker 标签来对容器进行检测，所以它们需要重新创建索引标记。</p>
+<p>如果 Composer 检测到创建的容器没有标签，它将拒绝运行，这样你就不会有两组容器。如果你想要保留已经存在的容器（举例：这里有容器的数据卷上保留这非常重要的数据），你可以使用下边的命令来迁移：</p>
+<pre><code>docker-compose migrate-<span class="keyword">to</span>-labels
+</code></pre><p>或者，如果这些容器是不必要的，你可以删除它们 - Composer 会重新创建一个新的。</p>
+<pre><code>docker rm <span class="operator">-f</span> myapp_web_1 myapp_db_1 ...
+</code></pre><p>###Compose 文档</p>
+<ul>
+<li><a href="../compose/">用户指南</a></li>
+<li><a href="../compose/cli.md">使用命令行</a></li>
+<li><a href="../compose/yml.md">Yaml 文件使用</a></li>
+<li><a href="../compose/env.md">Compose 环境变量</a></li>
+<li><a href="../compose/completion.md">命令行安装Compose</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装_Compose">安装 Compose</h1><p>在安装 Compose之前，你需要先安装好 Docker 。然后你需要使用 <code>curl</code> 指令来安装 Compose</p>
+<p>###安装 Docker</p>
+<p>首先，你需]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[在Docker中运行SSH进程服务]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/examples/running_ssh_service/"/>
+    <id>http://yoursite.com/2015/12/08/docker/examples/running_ssh_service/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:08:23.991Z</updated>
+    <content type="html"><![CDATA[<h1 id="在Docker中运行SSH进程服务">在Docker中运行SSH进程服务</h1><p>以下是用<code>Dockerfile</code>设置sshd服务容器，您可以使用连接并检查其他容器的卷,或者可以快速访问测试容器。</p>
+<pre><code><span class="comment"># sshd</span>
+<span class="comment">#</span>
+<span class="comment"># VERSION               0.0.1</span>
+
+<span class="built_in">FROM</span>     ubuntu:<span class="number">12.04</span>
+<span class="built_in">MAINTAINER</span> Thatcher R. Peskens <span class="string">"thatcher@dotcloud.com"</span>
+
+<span class="comment"># make sure the package repository is up to date</span>
+<span class="built_in">RUN</span> <span class="bash">apt-get update
+</span>
+<span class="built_in">RUN</span> <span class="bash">apt-get install -y openssh-server
+</span><span class="built_in">RUN</span> <span class="bash">mkdir /var/run/sshd
+</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">'root:screencast'</span> |chpasswd
+</span>
+<span class="built_in">EXPOSE</span> <span class="number">22</span>
+CMD    [<span class="string">"/usr/sbin/sshd"</span>, <span class="string">"-D"</span>]
+</code></pre><p>使用如下命令构建镜像：</p>
+<pre><code>$ sudo docker build <span class="comment">--rm -t eg_sshd .</span>
+</code></pre><p>然后运行它，你可以使用<code>docker port</code>来找出容器端口22映射到主机的端口</p>
+<pre><code>$ sudo docker run -d -P --name test_sshd eg_sshd
+$ sudo docker port test_sshd <span class="number">22</span>
+<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49154</span>
+</code></pre><p>现在你可以使用ssh登陆Docker进程的主机IP地址，端口是49154(IP地址可以使用ifconfig获取)：</p>
+<pre><code>$ ssh root@<span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span> -p <span class="number">49154</span>
+<span class="preprocessor"># The password is ``screencast``.</span>
+$$
+</code></pre><p>最后，清理停止的容器，并且删除容器，然后删除镜像。</p>
+<pre><code><span class="variable">$ </span>sudo docker stop test_sshd
+<span class="variable">$ </span>sudo docker rm test_sshd
+<span class="variable">$ </span>sudo docker rmi eg_sshd
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="在Docker中运行SSH进程服务">在Docker中运行SSH进程服务</h1><p>以下是用<code>Dockerfile</code>设置sshd服务容器，您可以使用连接并检查其他容器的卷,或者可以快速访问测试容器。</p>
+<pre><code><spa]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[在Docker中使用Riak服务]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/examples/running_riak_service/"/>
+    <id>http://yoursite.com/2015/12/08/docker/examples/running_riak_service/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:08:16.014Z</updated>
+    <content type="html"><![CDATA[<h1 id="在Docker中使用Riak服务">在Docker中使用Riak服务</h1><p>这个例子的目的是向您展示如何构建一个预装Riak的docker镜象。</p>
+<p>###创建Dockerfile</p>
+<p>创建一个空文件<code>Dockerfile</code></p>
+<pre><code><span class="variable">$ </span>touch <span class="constant">Dockerfile</span>
+</code></pre><p>接下来，定义你想要来建立你镜像的父镜像。我们将使用Ubuntu（tag：最新版），从Docker Hub中下载：</p>
+<pre><code><span class="comment"># Riak</span>
+<span class="comment">#</span>
+<span class="comment"># VERSION       0.1.0</span>
+
+<span class="comment"># Use the Ubuntu base image provided by dotCloud</span>
+<span class="built_in">FROM</span> ubuntu:latest
+<span class="built_in">MAINTAINER</span> Hector Castro hector@basho.com
+</code></pre><p>接下来,我们更新APT缓存和应用更新:</p>
+<pre><code><span class="comment"># Update the APT cache</span>
+<span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/main$/main universe/'</span> /etc/apt/sources.list
+</span><span class="built_in">RUN</span> <span class="bash">apt-get update
+</span><span class="built_in">RUN</span> <span class="bash">apt-get upgrade -y</span>
+</code></pre><p>之后，我们安装和设置一些依赖关系：</p>
+<ul>
+<li><code>CURL</code>来下载 Basho’s APT存储库秘钥。</li>
+<li><code>lsb-release</code>帮助我们查看Ubuntu版本。</li>
+<li><code>openssh-server</code>允许我们登陆远程容器，加入Riak节点组成一个集群。</li>
+<li><p><code>supervisor</code>用于管理<code>OpenSSH</code>和<code>Riak</code>进程。</p>
+<h1 id="Install_and_setup_project_dependencies">Install and setup project dependencies</h1><p>  RUN apt-get install -y curl lsb-release supervisor openssh-server</p>
+<p>  RUN mkdir -p /var/run/sshd<br>  RUN mkdir -p /var/log/supervisor</p>
+<p>  RUN locale-gen en_US en_US.UTF-8</p>
+<p>  ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf</p>
+<p>  RUN echo ‘root:basho’ | chpasswd</p>
+</li>
+</ul>
+<p>下一步，添加 Basho’s APT仓库：</p>
+<pre><code><span class="built_in">RUN</span> <span class="bash">curl <span class="operator">-s</span> http://apt.basho.com/gpg/basho.apt.key | apt-key add --
+</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"deb http://apt.basho.com <span class="variable">$(lsb_release -cs)</span> main"</span> &gt; /etc/apt/sources.list.d/basho.list
+</span><span class="built_in">RUN</span> <span class="bash">apt-get update</span>
+</code></pre><p>之后，我们安装Riak和改变一些默认值：</p>
+<pre><code><span class="comment"># Install Riak and prepare it to run</span>
+<span class="built_in">RUN</span> <span class="bash">apt-get install -y riak
+</span><span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/127.0.0.1/0.0.0.0/'</span> /etc/riak/app.config
+</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"ulimit -n 4096"</span> &gt;&gt; /etc/default/riak</span>
+</code></pre><p>接下来，我们为缺少的<code>initctl</code>来添加一个软连接：</p>
+<pre><code><span class="comment"># Hack for initctl</span>
+<span class="comment"># See: https://github.com/dotcloud/docker/issues/1024</span>
+<span class="built_in">RUN</span> <span class="bash">dpkg-divert --local --rename --add /sbin/initctl
+</span><span class="built_in">RUN</span> <span class="bash">ln <span class="operator">-s</span> /bin/<span class="literal">true</span> /sbin/initctl</span>
+</code></pre><p>然后我们开发Riak协议缓冲区、HTTP接口以及SSH：</p>
+<pre><code><span class="preprocessor"># Expose Riak Protocol Buffers and HTTP interfaces, along with SSH</span>
+EXPOSE <span class="number">8087</span> <span class="number">8098</span> <span class="number">22</span>
+</code></pre><p>最后，运行<code>supervisord</code>这里Riak和OpenSSH将启动：</p>
+<pre><code><span class="built_in">CMD</span> <span class="bash">[<span class="string">"/usr/bin/supervisord"</span>]</span>
+</code></pre><p>###创建一个supervisord配置文件</p>
+<p>创建一个supervisord.conf空文件，并且保证和Dockerfile是平级目录：</p>
+<pre><code><span class="tag">touch</span> <span class="tag">supervisord</span><span class="class">.conf</span>
+</code></pre><p>填充下面定义的程序:</p>
+<pre><code>[supervisord]
+nodaemon=true
+
+[<span class="keyword">program</span>:sshd]
+command=/usr/sbin/sshd -<span class="literal">D</span>
+stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+autorestart=true
+
+[<span class="keyword">program</span>:riak]
+command=bash -c <span class="string">". /etc/default/riak &amp;&amp; /usr/sbin/riak console"</span>
+pidfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/riak/riak.pid
+stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+</code></pre><p>###构建Riak的Docker镜像</p>
+<p>现在你应该能够构建一个Riak的docker镜像:</p>
+<pre><code>$ docker <span class="keyword">build </span>-t <span class="string">"&lt;yourname&gt;/riak"</span> .
+</code></pre><p>###下一步</p>
+<p>Riak是分布式数据库。很多生产部署包括至少5个节点。查看docker-riak<a href="https://github.com/hectcastro/docker-riak" target="_blank" rel="external">https://github.com/hectcastro/docker-riak</a>项目细节来使用Docker和Pipework部署Riak集群。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="在Docker中使用Riak服务">在Docker中使用Riak服务</h1><p>这个例子的目的是向您展示如何构建一个预装Riak的docker镜象。</p>
+<p>###创建Dockerfile</p>
+<p>创建一个空文件<code>Dockerfile</]]>
     </summary>
     
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
