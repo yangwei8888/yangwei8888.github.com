@@ -1,0 +1,764 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="docker," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="Docker 中运行 MongoDB###描述
+在这个例子里，我们会学到如何构建一个预装 MongoDB 的镜像。我们还将会看到如何推送镜像到 Docker Hub 并分享给其他人。
+使用 Docker 容器来部署 MongoDB 实例将会给你带来许多好处，例如：
+
+易于维护、高可配置的 MongoDB 实例
+准备好运行和毫秒级内开始工作
+基于全球访问的共享镜像
+
+
+注意: 如果你不喜欢sudo,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 中运行 MongoDB">
+<meta property="og:url" content="http://yoursite.com/2015/12/08/docker/examples/mongodb/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="Docker 中运行 MongoDB###描述
+在这个例子里，我们会学到如何构建一个预装 MongoDB 的镜像。我们还将会看到如何推送镜像到 Docker Hub 并分享给其他人。
+使用 Docker 容器来部署 MongoDB 实例将会给你带来许多好处，例如：
+
+易于维护、高可配置的 MongoDB 实例
+准备好运行和毫秒级内开始工作
+基于全球访问的共享镜像
+
+
+注意: 如果你不喜欢sudo,">
+<meta property="og:updated_time" content="2015-12-08T07:07:41.457Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker 中运行 MongoDB">
+<meta name="twitter:description" content="Docker 中运行 MongoDB###描述
+在这个例子里，我们会学到如何构建一个预装 MongoDB 的镜像。我们还将会看到如何推送镜像到 Docker Hub 并分享给其他人。
+使用 Docker 容器来部署 MongoDB 实例将会给你带来许多好处，例如：
+
+易于维护、高可配置的 MongoDB 实例
+准备好运行和毫秒级内开始工作
+基于全球访问的共享镜像
+
+
+注意: 如果你不喜欢sudo,">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> Docker 中运行 MongoDB | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Docker 中运行 MongoDB
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/docker/" itemprop="url" rel="index">
+                  <span itemprop="name">docker</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/08/docker/examples/mongodb/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/mongodb/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="Docker_中运行_MongoDB">Docker 中运行 MongoDB</h1><p>###描述</p>
+<p>在这个例子里，我们会学到如何构建一个预装 <code>MongoDB</code> 的镜像。我们还将会看到如何推送镜像到 Docker Hub 并分享给其他人。</p>
+<p>使用 Docker 容器来部署 <a href="https://www.mongodb.org/" target="_blank" rel="external">MongoDB</a> 实例将会给你带来许多好处，例如：</p>
+<ul>
+<li>易于维护、高可配置的 MongoDB 实例</li>
+<li>准备好运行和毫秒级内开始工作</li>
+<li>基于全球访问的共享镜像</li>
+</ul>
+<blockquote>
+<p>注意: 如果你不喜欢sudo,可以查看<a href="installation/binaries.md">非 root 用户使用</a></p>
+</blockquote>
+<p>###为 MongoDB 创建一个 Dockerfile</p>
+<p>让我们创建一个 <code>Dockerfile</code> 并构建：</p>
+<pre><code><span class="variable">$ </span>nano <span class="constant">Dockerfile</span>
+</code></pre><p>虽然这部分是可选的，但是在 <code>Dockerfile</code> 开头处添加注释，可以更好的去解释其目的：</p>
+<pre><code><span class="preprocessor"># Dockerizing MongoDB: Dockerfile for building MongoDB images</span>
+<span class="preprocessor"># Based on ubuntu:latest, installs MongoDB following the instructions from:</span>
+<span class="preprocessor"># http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/</span>
+</code></pre><blockquote>
+<p>小贴士：<code>Dockerfile</code>文件是灵活的。然而，他们遵循一定的格式。第一项定义的是镜像的名称，这里是 Dockerized MongoDB 应用的父镜像。</p>
+</blockquote>
+<p>我们将使用 Docker Hub 中最新版本的 Ubuntu 镜像来构建。</p>
+<pre><code><span class="comment"># Format: FROM    repository[:version]</span>
+<span class="built_in">FROM</span>       ubuntu:latest
+</code></pre><p>继续，我们将在 <code>Dockerfile</code> 中指定 <code>MAINTAINER</code></p>
+<pre><code><span class="comment"># Format: MAINTAINER Name &lt;email<span class="doctag">@addr</span>.ess&gt;</span>
+<span class="constant">MAINTAINER</span> <span class="constant">M</span>.<span class="constant">Y</span>. <span class="constant">Name</span> &lt;myname<span class="variable">@addr</span>.ess&gt;
+</code></pre><blockquote>
+<p>注：尽管 Ubuntu 系统已经有 MongoDB 包，但是它们可能过时，因此，在这个例子中，我们将使用 MongoDB 的官方包。</p>
+</blockquote>
+<p>我们将开始导入 MongoDB 公共 GPG 秘钥。我们还将创建一个 MongoDB 库包管理器</p>
+<pre><code><span class="comment"># Installation:</span>
+<span class="comment"># Import MongoDB public GPG key AND create a MongoDB list file</span>
+<span class="built_in">RUN</span> <span class="bash">apt-key adv --keyserver hkp://keyserver.ubuntu.com:<span class="number">80</span> --recv <span class="number">7</span>F0CEB10
+</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'</span> | tee /etc/apt/sources.list.d/<span class="number">10</span>gen.list</span>
+</code></pre><p>这个初步的准备后，我们将更新我们的包并且安装 MongoDB 。</p>
+<pre><code># <span class="operator"><span class="keyword">Update</span> apt-<span class="keyword">get</span> sources <span class="keyword">AND</span> <span class="keyword">install</span> MongoDB
+RUN apt-<span class="keyword">get</span> <span class="keyword">update</span>
+RUN apt-<span class="keyword">get</span> <span class="keyword">install</span> -y -q mongodb-org</span>
+</code></pre><blockquote>
+<p>小贴士: 您可以通过使用所需的软件包版本列表来指定 MongoDB的特定版本,例如:</p>
+</blockquote>
+<pre><code>RUN apt-get install -y -q mongodb-org=<span class="number">2.6</span><span class="number">.1</span> mongodb-org-server=<span class="number">2.6</span><span class="number">.1</span> mongodb-org-shell=<span class="number">2.6</span><span class="number">.1</span> mongodb-org-mongos=<span class="number">2.6</span><span class="number">.1</span> mongodb-org-tools=<span class="number">2.6</span><span class="number">.1</span>
+</code></pre><p>MongoDB 需要数据目录，让我们在最后一步中执行</p>
+<pre><code># <span class="operator"><span class="keyword">Create</span> the MongoDB <span class="keyword">data</span> <span class="keyword">directory</span>
+RUN mkdir -<span class="keyword">p</span> /<span class="keyword">data</span>/db</span>
+</code></pre><p>最后我们设置 <code>ENTRYPOINT</code> 指令来告诉 Docker 如何在我们的 MongoDB 镜像容器内运行 <code>mongod</code> 。并且我们将使用 <code>EXPOSE</code> 命令来指定端口：</p>
+<pre><code><span class="comment"># Expose port 27017 from the container to the host</span>
+<span class="built_in">EXPOSE</span> <span class="number">27017</span>
+
+<span class="comment"># Set usr/bin/mongod as the dockerized entry-point application</span>
+<span class="built_in">ENTRYPOINT</span> <span class="bash">usr/bin/mongod</span>
+</code></pre><p>现在保存我们的文件并且构建我们的镜像。</p>
+<blockquote>
+<p>注：完整版的 <code>Dockerfile</code> 可以在这里<a href="Dockerfile">下载</a></p>
+</blockquote>
+<p>###构建 MongoDB 的 Docker 镜像</p>
+<p>我们可以使用我们的 <code>Dockerfile</code> 来构建我们的 MongoD B镜像。除非实验，使用 <code>docker build</code> 的 <code>--tag</code> 参数来给 docker 镜像指定标签始终是一个很好的做法。</p>
+<pre><code><span class="preprocessor"># Format: sudo docker build --tag/-t <span class="title">&lt;user-name&gt;</span>/<span class="title">&lt;repository&gt;</span> .</span>
+<span class="preprocessor"># Example:</span>
+$ sudo docker build --tag my/repo .
+</code></pre><p>当我们发出这个命令时，Docker 将会通过 <code>Dockerfile</code> 来构建镜像。最终镜像将被标记成 <code>my/repo</code> 。</p>
+<p>###推送 MongoDB 镜像到 Docker Hub</p>
+<p><code>docker push</code> 命令将会把镜像推送到 Docker Hub 上，你可以在 Docker Hub 上托管和分享推送的镜像。为此，你需要先登录：</p>
+<pre><code><span class="comment"># Log-in</span>
+$ sudo docker login
+Username:
+..
+
+<span class="comment"># Push the image</span>
+<span class="comment"># Format: sudo docker push &lt;user-name&gt;/&lt;repository&gt;</span>
+$ sudo docker push <span class="keyword">my</span>/repo
+The push refers <span class="keyword">to</span> a repository [<span class="keyword">my</span>/repo] (len: <span class="number">1</span>)
+Sending image <span class="type">list</span>
+Pushing repository <span class="keyword">my</span>/repo (<span class="number">1</span> tags)
+..
+</code></pre><p>###使用 MongoDB 的镜像</p>
+<p>使用我们创建的MongoDB镜像，我们可以运行一个或多个的 MongoDB 守护进程。</p>
+<pre><code><span class="preprocessor"># Basic way</span>
+<span class="preprocessor"># Usage: sudo docker run --name <span class="title">&lt;name for container&gt;</span> -d <span class="title">&lt;user-name&gt;</span>/<span class="title">&lt;repository&gt;</span></span>
+$ sudo docker run --name mongo_instance_001 -d my/repo
+
+<span class="preprocessor"># Dockerized MongoDB, lean and mean!</span>
+<span class="preprocessor"># Usage: sudo docker run --name <span class="title">&lt;name for container&gt;</span> -d <span class="title">&lt;user-name&gt;</span>/<span class="title">&lt;repository&gt;</span> --noprealloc --smallfiles</span>
+$ sudo docker run --name mongo_instance_001 -d my/repo --noprealloc --smallfiles
+
+<span class="preprocessor"># Checking out the logs of a MongoDB container</span>
+<span class="preprocessor"># Usage: sudo docker logs <span class="title">&lt;name for container&gt;</span></span>
+$ sudo docker logs mongo_instance_001
+
+<span class="preprocessor"># Playing with MongoDB</span>
+<span class="preprocessor"># Usage: mongo --port <span class="title">&lt;port you get from `docker ps`&gt;</span> </span>
+$ mongo --port <span class="number">12345</span>
+</code></pre></span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag">#docker</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/08/docker/examples/nodejs_web_app/" rel="prev">Docker中运行Node.js web应用</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/08/free-programming-books-zh/" rel="next">BOOK目录</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker_中运行_MongoDB"><span class="nav-number">1.</span> <span class="nav-text">Docker 中运行 MongoDB</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/08/docker/examples/mongodb/';
+      var disqus_title = 'Docker 中运行 MongoDB';
+      var disqus_url = 'http://yoursite.com/2015/12/08/docker/examples/mongodb/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

@@ -2,28 +2,223 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2015/11/26/free-programming-books-zh/</loc>
-    <lastmod>2015-11-24T17:42:43.000Z</lastmod>
+    <loc>http://yoursite.com/2015/12/08/docker/machine/install-machine/</loc>
+    <lastmod>2015-12-08T07:16:23.723Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/11/10/stack/</loc>
-    <lastmod>2015-11-10T02:22:15.426Z</lastmod>
+    <loc>http://yoursite.com/2015/12/08/docker/kitematic/README/</loc>
+    <lastmod>2015-12-08T07:16:13.453Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/11/10/xbox/</loc>
-    <lastmod>2015-11-10T02:21:24.912Z</lastmod>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/softlayer/</loc>
+    <lastmod>2015-12-08T07:15:53.416Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/09/18/dabai/</loc>
-    <lastmod>2015-09-18T02:53:42.665Z</lastmod>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/ubuntu/</loc>
+    <lastmod>2015-12-08T07:15:45.274Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/09/17/helloworld/</loc>
-    <lastmod>2015-09-17T03:14:46.991Z</lastmod>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/windows/</loc>
+    <lastmod>2015-12-08T07:15:37.642Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/redhat/</loc>
+    <lastmod>2015-12-08T07:11:43.079Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/opensuse/</loc>
+    <lastmod>2015-12-08T07:11:11.407Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/mac/</loc>
+    <lastmod>2015-12-08T07:11:01.294Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/google/</loc>
+    <lastmod>2015-12-08T07:10:42.799Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/debian/</loc>
+    <lastmod>2015-12-08T07:09:45.088Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/azure/</loc>
+    <lastmod>2015-12-08T07:08:59.714Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/archlinux/</loc>
+    <lastmod>2015-12-08T07:08:48.043Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/examples/running_ssh_service/</loc>
+    <lastmod>2015-12-08T07:08:23.991Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/examples/running_riak_service/</loc>
+    <lastmod>2015-12-08T07:08:16.014Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/examples/running_redis_service/</loc>
+    <lastmod>2015-12-08T07:08:08.056Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/examples/postgresql_service/</loc>
+    <lastmod>2015-12-08T07:07:58.975Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/examples/nodejs_web_app/</loc>
+    <lastmod>2015-12-08T07:07:51.209Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/examples/mongodb/</loc>
+    <lastmod>2015-12-08T07:07:41.457Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/examples/couchdb_data_volumes/</loc>
+    <lastmod>2015-12-08T07:07:33.529Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/examples/apt-cacher-ng/</loc>
+    <lastmod>2015-12-08T07:07:25.118Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/repos/</loc>
+    <lastmod>2015-12-08T07:07:14.644Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/docker-hub/</loc>
+    <lastmod>2015-12-08T07:07:05.780Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/builds/</loc>
+    <lastmod>2015-12-08T07:06:56.849Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/accounts/</loc>
+    <lastmod>2015-12-08T07:06:43.111Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/compose/install/</loc>
+    <lastmod>2015-12-08T07:06:31.992Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/10/08/free-programming-books-zh/</loc>
+    <lastmod>2015-12-08T06:59:18.891Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/10/08/helloworld/</loc>
+    <lastmod>2015-12-08T06:59:02.425Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/SupervisorwithDocker/</loc>
+    <lastmod>2015-12-08T06:57:46.932Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/networking/</loc>
+    <lastmod>2015-12-08T06:57:37.703Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/https/</loc>
+    <lastmod>2015-12-08T06:57:26.060Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/basics/</loc>
+    <lastmod>2015-12-08T06:57:10.985Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/baseimages/</loc>
+    <lastmod>2015-12-08T06:57:00.631Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/09/29/dabai/</loc>
+    <lastmod>2015-12-08T06:55:17.038Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/09/29/stack/</loc>
+    <lastmod>2015-12-08T06:51:38.661Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/09/29/xbox/</loc>
+    <lastmod>2015-12-08T06:49:36.138Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/frugalware/</loc>
+    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/amazon/</loc>
+    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/rackspace/</loc>
+    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/joyent/</loc>
+    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/binaries/</loc>
+    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/centos/</loc>
+    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/crux/</loc>
+    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/fedora/</loc>
+    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/08/docker/installation/gentoo/</loc>
+    <lastmod>2015-09-30T15:27:59.000Z</lastmod>
   </url>
   
 </urlset>

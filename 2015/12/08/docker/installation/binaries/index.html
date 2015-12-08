@@ -1,0 +1,737 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="#Binaries
+本安装说明是提供给那些想在多种环境中安装 Docker 的 hacker 们的。
+在进行安装之前，请检查你的 Linux 发行版本是否有打包好的 Docker 安装包。我们已经发布了许多发行版包，这样会节省您很多时间。
+##检查运行时的依赖关系
+如果想要 Docker 正常运行，需要安装以下软件:
+
+iptables version 1.4 or later
+Git versi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yosita">
+<meta property="og:url" content="http://yoursite.com/2015/12/08/docker/installation/binaries/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="#Binaries
+本安装说明是提供给那些想在多种环境中安装 Docker 的 hacker 们的。
+在进行安装之前，请检查你的 Linux 发行版本是否有打包好的 Docker 安装包。我们已经发布了许多发行版包，这样会节省您很多时间。
+##检查运行时的依赖关系
+如果想要 Docker 正常运行，需要安装以下软件:
+
+iptables version 1.4 or later
+Git versi">
+<meta property="og:updated_time" content="2015-09-30T15:27:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="yosita">
+<meta name="twitter:description" content="#Binaries
+本安装说明是提供给那些想在多种环境中安装 Docker 的 hacker 们的。
+在进行安装之前，请检查你的 Linux 发行版本是否有打包好的 Docker 安装包。我们已经发布了许多发行版包，这样会节省您很多时间。
+##检查运行时的依赖关系
+如果想要 Docker 正常运行，需要安装以下软件:
+
+iptables version 1.4 or later
+Git versi">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title>  | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-12-08T15:05:15+08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/08/docker/installation/binaries/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/binaries/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>#Binaries</p>
+<p>本安装说明是提供给那些想在多种环境中安装 Docker 的 hacker 们的。</p>
+<p>在进行安装之前，请检查你的 Linux 发行版本是否有打包好的 Docker 安装包。我们已经发布了许多发行版包，这样会节省您很多时间。</p>
+<p>##检查运行时的依赖关系</p>
+<p>如果想要 Docker 正常运行，需要安装以下软件:</p>
+<ul>
+<li>iptables version 1.4 or later</li>
+<li>Git version 1.7 or later</li>
+<li>procps (or similar provider of a “ps” executable)</li>
+<li>XZ Utils 4.9 or later</li>
+<li>a <a href="https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount" target="_blank" rel="external">properly mounted</a> cgroupfs hierarchy (having a single, all-encompassing “cgroup” mount point <a href="https://github.com/docker/docker/issues/3485" target="_blank" rel="external">is not sufficien</a>)</li>
+</ul>
+<p>##检查内核的依赖关系</p>
+<p>Docker 进程模式需要特定的内核环境支持。详情请检查您的<a href="../SUMMARY.md">发行版</a>。</p>
+<p>Docker 对 Linux 内核版本的最低要求是3.10，如果内核版本低于 3.10 会缺少一些运行 Docker 容器的功能。这些比较旧的内核，在一定条件下会导致数据丢失和频繁恐慌错误。</p>
+<p>推荐使用版本号为（3.x.y）的 3.10 Linux 内核版本（或者新的维护版本），保持跟上内核的次要版本更新来确保内核的BUG已经被修复。</p>
+<blockquote>
+<p>警告：安装自定义内核时，Linux 版本发行商可能不支持内核软件包。请务必在安装自定义内核之前，先咨询供应商是否支持 Docker。</p>
+<p>警告：一些发行版本上还不能够安装新版本的内核，因为这些发行版本提供的包太老或者与新内核不兼容。</p>
+</blockquote>
+<p>值得注意的是 Docker 可以以客户端模式存在，它几乎可以运行在任何的Linux内核（甚至 OS X 上）。</p>
+<p>##Enable AppArmor and SELinux when possible</p>
+<p>如果你的 Linux 发行版上支持 AppArmor 或者 Selinux 请启用。这有助于提高安全性并阻止某些漏洞。关与如何启动设置推荐的安全机制，在发行版提供的文档上提供了详细的步骤。</p>
+<p>某些 Linux 发行版上默认情况下是启用 AppArmor 或者 Selinux，但是它们的内核不符合安装 Docker 的最低要求（3.10或更高版本）。为了让系统能够启动 Docker 和 运行容器，需要更新内核到3.10或者更高版本。AppArmor/SELinux 用户空间(user space) 工具提供的系统与内核版本的不兼容性可能会阻止 Docker 的运行，容器的启动或者造成容器的意外退出。</p>
+<blockquote>
+<p>警告：如果机器上启用了安全机制，它就不应该被禁用来使 Docker 和 容器运行。这样会使系统失去发行版供应商的支持，并可能打破严格的监管环境和安全策略。</p>
+</blockquote>
+<p>##获取Docker二进制文件</p>
+<p>你可以下载最新版本或者特定版本的二进制版本。下载完二进制文件之后，你必须要给文件可执行权限来运行。</p>
+<p>在 Linux 或 OS X 上指定文件的执行权限：</p>
+<pre><code><span class="variable">$ </span>chmod +x docker
+</code></pre><p>从 Github 上获取稳定的发行版本号列表，请查看 <code>docker/docker</code> <a href="https://github.com/docker/docker/releases" target="_blank" rel="external">发布页面</a></p>
+<blockquote>
+<p>注意</p>
+<p>1) 你可以通过在 URL 中分别附加 MD5 和 SHA256 哈希值来获得二进制包。</p>
+<p>2) 你可以通过 URL 中附加 .tgz 地址来获得压缩的二进制包。</p>
+</blockquote>
+<p>###获取 Linux 二进制包</p>
+<p>通过下边的链接来下载最新版本的 Linux 二进制包：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/i386/docker-latest
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/x86_64/docker-latest
+</code></pre><p>使用下边的链接模式来下载指定版本的 Linux 二进制包：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/i386/docker-&lt;<span class="keyword">version</span>&gt;
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/x86_64/docker-&lt;<span class="keyword">version</span>&gt;
+</code></pre><p>举例：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/i386/docker-<span class="number">1.6</span>.<span class="number">0</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/x86_64/docker-<span class="number">1.6</span>.<span class="number">0</span>
+</code></pre><h3 id="获取_Mac_OS_X_二进制包">获取 Mac OS X 二进制包</h3><p>Mac OS X 的二进制文件仅仅是一个客户端。你不可以使用它来启动 docker 进程。通过下边的链接来下载最新的 Mac OS X 版本：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/i386/docker-latest
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/x86_64/docker-latest
+</code></pre><p>通过下边的 URL 模式来下载指定的 Mac OS X 版本：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/i386/docker-&lt;<span class="keyword">version</span>&gt;
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/x86_64/docker-&lt;<span class="keyword">version</span>&gt;
+</code></pre><p>举例：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/i386/docker-<span class="number">1.6</span>.<span class="number">0</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/x86_64/docker-<span class="number">1.6</span>.<span class="number">0</span>
+</code></pre><h3 id="获取_Windows_的二进制包">获取 Windows 的二进制包</h3><p>从 1.60 版本开始，你可以只下载 Windows 客户端的二进制包。此外，二进制包仅是一个客户端，你不能用它来启动 docker 进程。通过下边的链接来下载最新的 Windows 版本：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/i386/docker-latest.<span class="keyword">exe</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/x86_64/docker-latest.<span class="keyword">exe</span>
+</code></pre><p>通过下边的 URL 模式来下载指定的 Windows 版本：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/i386/docker-&lt;<span class="keyword">version</span>&gt;.<span class="keyword">exe</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/x86_64/docker-&lt;<span class="keyword">version</span>&gt;.<span class="keyword">exe</span>
+</code></pre><p>举例：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/i386/docker-<span class="number">1.6</span>.<span class="number">0</span>.<span class="keyword">exe</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/x86_64/docker-<span class="number">1.6</span>.<span class="number">0</span>.<span class="keyword">exe</span>
+</code></pre><h2 id="运行Docker进程">运行Docker进程</h2><pre><code># <span class="operator"><span class="keyword">start</span> the docker <span class="keyword">in</span> daemon <span class="keyword">mode</span> <span class="keyword">from</span> the <span class="keyword">directory</span> you unpacked
+$ sudo ./docker -<span class="keyword">d</span> &amp;</span>
+</code></pre><p>##非root用户运行</p>
+<p><code>docker</code> 进程一般来说默认用 <code>root</code> 用户运行， docker 进程绑定 unix socket 来代替 TCP 端口。默认情况下由用户 <code>root</code> 来管理 unix socket ,但是你也可以使用 <code>sudo</code> 来使用。</p>
+<p>如果你（你安装的 Docker）创建一个叫 <code>docker</code> 的 unix 群组，并且在群组中添加用户，当进程启动的时候，Docker 群组将有 <code>docker</code> 进程 unix socket 的读/写使用权。docker 进程必须使用root用户运行，但是当使用 Docker 群组的一个用户来运行 Docker 客户端的时候，你不需要在命令前添加 <code>sudo</code> 。</p>
+<blockquote>
+<p>警告：Docker 用户组（或者用<code>-G</code>指定的用户组）和 root 等效，</p>
+</blockquote>
+<p>###更新</p>
+<p>升级你手动安装的 Docker ,需要先关闭你的 docker 进程：</p>
+<pre><code><span class="variable">$ </span>killall docker
+</code></pre><p>然后按照常规的步骤安装。</p>
+<p>###运行你的第一个Docker容器</p>
+<pre><code># <span class="operator"><span class="keyword">check</span> your docker <span class="keyword">version</span>
+$ sudo ./docker <span class="keyword">version</span>
+
+# run a <span class="keyword">container</span> <span class="keyword">and</span> <span class="keyword">open</span> an interactive shell <span class="keyword">in</span> the <span class="keyword">container</span>
+$ sudo ./docker run -<span class="keyword">i</span> -<span class="keyword">t</span> Ubuntu /<span class="keyword">bin</span>/bash</span>
+</code></pre><p>继续阅读<a href="../userguide/README.md">用户指南</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/08/docker/installation/centos/" rel="prev"></a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/08/docker/installation/amazon/" rel="next"></a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取_Mac_OS_X_二进制包"><span class="nav-number">1.</span> <span class="nav-text">获取 Mac OS X 二进制包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取_Windows_的二进制包"><span class="nav-number">2.</span> <span class="nav-text">获取 Windows 的二进制包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行Docker进程"><span class="nav-number"></span> <span class="nav-text">运行Docker进程</span></a></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/08/docker/installation/binaries/';
+      var disqus_title = '';
+      var disqus_url = 'http://yoursite.com/2015/12/08/docker/installation/binaries/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

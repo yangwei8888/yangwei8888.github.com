@@ -4,7 +4,7 @@
   <subtitle><![CDATA[ѧ��]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-11-24T17:42:43.000Z</updated>
+  <updated>2015-12-08T07:16:23.723Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,700 +15,1289 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2015/11/26/free-programming-books-zh/"/>
-    <id>http://yoursite.com/2015/11/26/free-programming-books-zh/</id>
-    <published>2015-11-26T07:20:34.656Z</published>
-    <updated>2015-11-24T17:42:43.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="目录">目录</h2><ul>
-<li><a href="#语言无关">语言无关</a><ul>
-<li><a href="#在线教育">在线教育</a></li>
-<li><a href="#软件开发方法">软件开发方法</a></li>
-<li><a href="#操作系统">操作系统</a></li>
-<li><a href="#版本控制">版本控制</a></li>
-<li><a href="#数据库">数据库</a></li>
-<li><a href="#正则表达式">正则表达式</a></li>
-<li><a href="#智能系统">智能系统</a></li>
-<li><a href="#分布式系统">分布式系统</a></li>
-<li><a href="#编译原理">编译原理</a></li>
-<li><a href="#函数式概念">函数式概念</a></li>
-<li><a href="#计算机图形学">计算机图形学</a></li>
-<li><a href="#web服务器">WEB服务器</a></li>
-<li><a href="#编辑器">编辑器</a></li>
-<li><a href="#nosql">NoSQL</a></li>
-<li><a href="#postgresql">PostgreSQL</a></li>
-<li><a href="#mysql">MySQL</a></li>
-<li><a href="#管理和监控">管理和监控</a></li>
-<li><a href="#项目相关">项目相关</a></li>
-<li><a href="#设计模式">设计模式</a></li>
-<li><a href="#web">Web</a></li>
-<li><a href="#大数据">大数据</a></li>
-<li><a href="#编程艺术">编程艺术</a></li>
-<li><a href="#其它">其它</a></li>
-</ul>
-</li>
-<li><a href="#语言相关">语言相关</a><ul>
-<li><a href="#android">Android</a></li>
-<li><a href="#awk">AWK</a></li>
-<li><a href="#cc">C/C++</a></li>
-<li><a href="#coffeescript">CoffeeScript</a></li>
-<li><a href="#dart">Dart</a></li>
-<li><a href="#elasticsearch">Elasticsearch</a></li>
-<li><a href="#erlang">Erlang</a></li>
-<li><a href="#fortran">Fortran</a></li>
-<li><a href="#golang">Golang</a></li>
-<li><a href="#haskell">Haskell</a></li>
-<li><a href="#html--css">HTML / CSS</a></li>
-<li><a href="#http">HTTP</a></li>
-<li><a href="#ios">iOS</a></li>
-<li><a href="#java">Java</a></li>
-<li><a href="#javascript">JavaScript</a></li>
-<li><a href="#latex">LaTeX</a></li>
-<li><a href="#lisp">LISP</a></li>
-<li><a href="#lua">Lua</a></li>
-<li><a href="#markdown">Markdown</a></li>
-<li><a href="#nodejs">Node.js</a></li>
-<li><a href="#perl">Perl</a></li>
-<li><a href="#php">PHP</a></li>
-<li><a href="#python">Python</a></li>
-<li><a href="#r">R</a></li>
-<li><a href="#restructuredtext">reStructuredText</a></li>
-<li><a href="#ruby">Ruby</a></li>
-<li><a href="#scala">Scala</a></li>
-<li><a href="#scheme">Scheme</a></li>
-<li><a href="#shell">Shell</a></li>
-<li><a href="#swift">Swift</a></li>
-<li><a href="#vim">Vim</a></li>
-<li><a href="#visual-prolog">Visual Prolog</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="语言无关">语言无关</h2><h3 id="在线教育">在线教育</h3><ul>
-<li><a href="https://www.codeschool.com" target="_blank" rel="external">CodeSchool</a></li>
-<li><a href="http://www.codecademy.com/?locale_code=zh" target="_blank" rel="external">Codecademy</a></li>
-<li><a href="https://www.coursera.org/courses?orderby=upcoming&amp;lngs=zh" target="_blank" rel="external">Coursera</a></li>
-<li><a href="http://learnxinyminutes.com" target="_blank" rel="external">Learn X in Y minutes</a> (数十种语言快速入门教程)</li>
-<li><a href="https://www.shiyanlou.com" target="_blank" rel="external">shiyanlou</a></li>
-<li><a href="http://teamtreehouse.com" target="_blank" rel="external">TeamTreeHouse</a></li>
-<li><a href="https://www.udacity.com" target="_blank" rel="external">Udacity</a></li>
-<li><a href="https://www.xuetangx.com" target="_blank" rel="external">xuetangX</a></li>
-<li><a href="http://www.imooc.com/course/list" target="_blank" rel="external">慕课网</a> (丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源)</li>
-<li><a href="http://www.jikexueyuan.com" target="_blank" rel="external">极客学院</a></li>
-<li><a href="http://edu.51cto.com" target="_blank" rel="external">51CTO学院</a></li>
-<li><a href="http://www.jisuanke.com" target="_blank" rel="external">计蒜客</a></li>
-</ul>
-<h3 id="软件开发方法">软件开发方法</h3><ul>
-<li><a href="https://github.com/justinyhuang/Functional-Programming-For-The-Rest-of-Us-Cn" target="_blank" rel="external">傻瓜函数编程</a> (《Functional Programming For The Rest of Us》中文版)</li>
-<li><a href="http://www.infoq.com/cn/minibooks/scrum-xp-from-the-trenches" target="_blank" rel="external">硝烟中的 Scrum 和 XP</a></li>
-</ul>
-<h3 id="操作系统">操作系统</h3><ul>
-<li><a href="http://man.chinaunix.net/linux/debian/reference/reference.zh-cn.html" target="_blank" rel="external">Debian 参考手册 </a></li>
-<li><a href="http://wiki.ubuntu.org.cn/UbuntuManual" target="_blank" rel="external">Ubuntu 参考手册 </a></li>
-<li><a href="http://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/" target="_blank" rel="external">FreeBSD 使用手册</a></li>
-<li><a href="http://happypeter.github.io/LGCB/book/" target="_blank" rel="external">Linux Guide for Complete Beginners</a></li>
-<li><a href="http://cb.vu/unixtoolbox_zh_CN.xhtml" target="_blank" rel="external">UNIX TOOLBOX</a></li>
-<li><a href="http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php" target="_blank" rel="external">鸟哥的 Linux 私房菜 基础学习篇</a></li>
-<li><a href="http://vbird.dic.ksu.edu.tw/linux_server/" target="_blank" rel="external">鸟哥的 Linux 私房菜 服务器架设篇</a></li>
-<li><a href="http://i.linuxtoy.org/docs/guide/index.html" target="_blank" rel="external">开源世界旅行手册</a></li>
-<li><a href="http://sourceforge.net/apps/trac/elpi/wiki/ALP" target="_blank" rel="external">Linux 系统高级编程</a></li>
-<li><a href="http://billie66.github.io/TLCL/index.html" target="_blank" rel="external">The Linux Command Line</a> (中英文版)</li>
-<li><a href="http://oss.org.cn/kernel-book/ldd3/index.html" target="_blank" rel="external">Linux 设备驱动</a> (第三版)</li>
-<li><a href="http://www.kerneltravel.net/kernel-book/%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81.html" target="_blank" rel="external">深入分析Linux内核源码</a></li>
-<li><a href="http://works.jinbuguo.com/lfs/lfs62/index.html" target="_blank" rel="external">Linux 构建指南</a></li>
-<li><a href="https://github.com/me115/linuxtools_rst" target="_blank" rel="external">Linux工具快速教程</a></li>
-<li><a href="http://tinylab.gitbooks.io/linux-doc" target="_blank" rel="external">Linux Documentation (中文版)</a></li>
-<li><a href="http://tinylab.gitbooks.io/elinux" target="_blank" rel="external">嵌入式 Linux 知识库 (eLinux.org 中文版)</a></li>
-<li><a href="https://github.com/tobegit3hub/understand_linux_process" target="_blank" rel="external">理解Linux进程</a></li>
-<li><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/" target="_blank" rel="external">Operating Systems: Three Easy Pieces</a></li>
-<li><a href="https://www.gitbook.com/book/objectkuan/ucore-docs/details" target="_blank" rel="external">uCore Lab: Operating System Course in Tsinghua University</a></li>
-<li><a href="https://github.com/widuu/chinese_docker" target="_blank" rel="external">Docker中文指南</a></li>
-<li><a href="https://github.com/yeasy/docker_practice" target="_blank" rel="external">Docker —— 从入门到实践</a></li>
-<li><a href="http://yuedu.baidu.com/ebook/d817967416fc700abb68fca1" target="_blank" rel="external">Docker入门实战</a></li>
-<li><a href="http://freeradius.akagi201.org" target="_blank" rel="external">FreeRADIUS新手入门</a></li>
-<li><a href="http://aaaaaashu.gitbooks.io/mac-dev-setup/content/" target="_blank" rel="external">Mac 开发配置手册</a></li>
-<li><a href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md" target="_blank" rel="external">命令行的艺术</a></li>
-</ul>
-<h3 id="版本控制">版本控制</h3><ul>
-<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">Git - 简易指南</a></li>
-<li><a href="http://gitbook.liuhui998.com" target="_blank" rel="external">Git Community Book 中文版</a></li>
-<li><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/" target="_blank" rel="external">Git magic</a></li>
-<li><a href="http://gitref.justjavac.com" target="_blank" rel="external">Git 参考手册</a></li>
-<li><a href="https://github.com/gotgit/gotgithub" target="_blank" rel="external">Got GitHub</a></li>
-<li><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="external">Pro Git</a></li>
-<li><a href="https://www.gitbook.com/book/0532/progit/details" target="_blank" rel="external">Pro Git 中文版</a> (整理在gitbook上)</li>
-<li><a href="http://pcottle.github.io/learnGitBranching/" target="_blank" rel="external">学习 Git 分支</a> (点击右下角按钮可切换至简体及正体中文)</li>
-<li><a href="http://igit.linuxtoy.org/index.html" target="_blank" rel="external">沉浸式学 Git</a></li>
-<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">Git教程</a> （本文由 <a href="http://weibo.com/liaoxuefeng" target="_blank" rel="external">@廖雪峰</a> 创作，如果觉得本教程对您有帮助，可以去 <a href="https://itunes.apple.com/cn/app/git-jiao-cheng/id876420437" target="_blank" rel="external">iTunes</a> 购买）</li>
-<li><a href="http://backlogtool.com/git-guide/cn/" target="_blank" rel="external">猴子都能懂的GIT入门</a></li>
-<li><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/" target="_blank" rel="external">Git Magic</a></li>
-<li><a href="http://www.worldhello.net/gotgithub/index.html" target="_blank" rel="external">GotGitHub</a></li>
-<li><a href="http://mercurial.selenic.com/wiki/ChineseTutorial" target="_blank" rel="external">Mercurial 使用教程</a></li>
-<li><a href="http://bucunzai.net/hginit/" target="_blank" rel="external">HgInit (中文版)</a></li>
-<li><a href="https://github.com/flyhigher139/Git-Cheat-Sheet" target="_blank" rel="external">Git-Cheat-Sheet</a> （感谢 @flyhigher139 翻译了中文版）</li>
-<li><a href="http://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/index.html" target="_blank" rel="external">GitHub秘籍</a></li>
-<li><a href="https://github.com/waylau/github-help" target="_blank" rel="external">Github帮助文档</a></li>
-<li><a href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html" target="_blank" rel="external">git-flow 备忘清单</a></li>
-<li><a href="http://svnbook.red-bean.com/nightly/zh/index.html" target="_blank" rel="external">svn 手册</a></li>
-</ul>
-<h3 id="数据库">数据库</h3><ul>
-<li><a href="http://www.redisbook.com" target="_blank" rel="external">Redis 设计与实现</a></li>
-<li><a href="https://github.com/justinyhuang/the-little-mongodb-book-cn" target="_blank" rel="external">The Little MongoDB Book 中文版</a></li>
-</ul>
-<h3 id="正则表达式">正则表达式</h3><ul>
-<li><a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="external">正则表达式30分钟入门教程</a></li>
-</ul>
-<h3 id="智能系统">智能系统</h3><ul>
-<li><a href="https://github.com/gmszone/designiot" target="_blank" rel="external">一步步搭建物联网系统</a></li>
-</ul>
-<h3 id="分布式系统">分布式系统</h3><ul>
-<li><a href="http://dcaoyuan.github.io/papers/pdfs/Scalability.pdf" target="_blank" rel="external">走向分布式</a> (PDF)</li>
-</ul>
-<h3 id="编译原理">编译原理</h3><ul>
-<li><a href="https://github.com/DeathKing/Learning-SICP" target="_blank" rel="external">《计算机程序的结构和解释》公开课 翻译项目</a></li>
-</ul>
-<h3 id="函数式概念">函数式概念</h3><ul>
-<li><a href="https://github.com/justinyhuang/Functional-Programming-For-The-Rest-of-Us-Cn" target="_blank" rel="external">傻瓜函数编程</a></li>
-</ul>
-<h3 id="计算机图形学">计算机图形学</h3><ul>
-<li><a href="https://github.com/zilongshanren/opengl-tutorials" target="_blank" rel="external">OpenGL 教程</a></li>
-</ul>
-<h3 id="WEB服务器">WEB服务器</h3><ul>
-<li><a href="http://tengine.taobao.org/book/index.html" target="_blank" rel="external">Nginx开发从入门到精通</a> (淘宝团队出品)</li>
-<li><a href="http://www.ttlsa.com/nginx/nginx-stu-pdf/" target="_blank" rel="external">Nginx教程从入门到精通</a> (PDF版本，运维生存时间出品)</li>
-<li><a href="http://works.jinbuguo.com/apache/menu22/index.html" target="_blank" rel="external">Apache 中文手册</a></li>
-</ul>
-<h3 id="编辑器">编辑器</h3><ul>
-<li><a href="http://exvim.github.io/docs-zh/intro/" target="_blank" rel="external">exvim–vim 改良成IDE项目</a></li>
-<li><a href="http://learnvimscriptthehardway.onefloweroneworld.com" target="_blank" rel="external">笨方法学Vimscript 中译本</a></li>
-<li><a href="https://github.com/vimcn/vimcdoc" target="_blank" rel="external">Vim中文文档</a></li>
-<li><a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需即所获：像 IDE 一样使用 vim</a></li>
-<li><a href="https://github.com/aqua7regia/tmux-Productive-Mouse-Free-Development_zh" target="_blank" rel="external">tmux:高效的全键盘开发工具</a></li>
-</ul>
-<h3 id="NoSQL">NoSQL</h3><ul>
-<li><a href="http://www.yankay.com/wp-content/NoSql_Database_Note.html" target="_blank" rel="external">NoSQL数据库笔谈</a> (<a href="http://yankaycom-wordpress.stor.sinaapp.com/uploads/2012/12/NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%B0%88v2.pdf" target="_blank" rel="external">PDF</a>)</li>
-<li><a href="http://redisbook.com" target="_blank" rel="external">Redis 设计与实现</a></li>
-<li><a href="http://www.redisdoc.com" target="_blank" rel="external">Redis 命令参考</a></li>
-<li><a href="https://github.com/huangz1990/redis-3.0-annotated" target="_blank" rel="external">带有详细注释的 Redis 3.0 代码</a></li>
-<li><a href="https://github.com/huangz1990/annotated_redis_source" target="_blank" rel="external">带有详细注释的 Redis 2.6 代码</a></li>
-<li><a href="https://github.com/justinyhuang/the-little-mongodb-book-cn/blob/master/mongodb.md" target="_blank" rel="external">The Little MongoDB Book</a></li>
-<li><a href="https://github.com/JasonLai256/the-little-redis-book/blob/master/cn/redis.md" target="_blank" rel="external">The Little Redis Book</a></li>
-<li><a href="http://docs.neo4j.org.cn" target="_blank" rel="external">Neo4j 简体中文手册 v1.8</a></li>
-<li><a href="http://neo4j.tw" target="_blank" rel="external">Neo4j .rb 中文資源</a></li>
-<li><a href="http://disquebook.com" target="_blank" rel="external">Disque 使用教程</a></li>
-</ul>
-<h3 id="PostgreSQL">PostgreSQL</h3><ul>
-<li><a href="http://works.jinbuguo.com/postgresql/menu823/index.html" target="_blank" rel="external">PostgreSQL 8.2.3 中文文档</a></li>
-<li><a href="http://www.postgres.cn/docs/9.3/index.html" target="_blank" rel="external">PostgreSQL 9.3.1 中文文档</a></li>
-</ul>
-<h3 id="MySQL">MySQL</h3><ul>
-<li><a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="external">MySQL索引背后的数据结构及算法原理</a></li>
-<li><a href="http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html" target="_blank" rel="external">21分钟MySQL入门教程</a></li>
-</ul>
-<h3 id="管理和监控">管理和监控</h3><ul>
-<li><a href="http://kibana.logstash.es" target="_blank" rel="external">ELKstack 中文指南</a></li>
-<li><a href="http://udn.yyuap.com/doc/mastering-elasticsearch/" target="_blank" rel="external">Mastering Elasticsearch(中文版)</a></li>
-<li><a href="https://www.gitbook.com/book/fuxiaopang/learnelasticsearch/details" target="_blank" rel="external">ElasticSearch 权威指南</a></li>
-<li><a href="http://es.xiaoleilu.com" target="_blank" rel="external">Elasticsearch 权威指南（中文版）</a></li>
-<li><a href="https://github.com/chenryn/logstash-best-practice-cn" target="_blank" rel="external">Logstash 最佳实践</a></li>
-<li><a href="http://bbs.konotes.org/workdoc/puppet-27/" target="_blank" rel="external">Puppet 2.7 Cookbook 中文版</a></li>
-</ul>
-<h3 id="项目相关">项目相关</h3><ul>
-<li><a href="http://article.yeeyan.org/view/2251/94882" target="_blank" rel="external">持续集成（第二版）</a> (译言网)</li>
-<li><a href="http://www.ibm.com/developerworks/cn/java/j-ap/" target="_blank" rel="external">让开发自动化系列专栏</a></li>
-<li><a href="http://www.ibm.com/developerworks/cn/java/j-cq/" target="_blank" rel="external">追求代码质量</a></li>
-<li><a href="https://github.com/fool2fish/selenium-doc" target="_blank" rel="external">selenium 中文文档</a></li>
-<li><a href="http://local.joelonsoftware.com/wiki/Chinese_(Simplified" target="_blank" rel="external">Joel谈软件</a>)</li>
-<li><a href="http://local.joelonsoftware.com/wiki/%E9%A6%96%E9%A0%81" target="_blank" rel="external">約耳談軟體(Joel on Software)</a></li>
-<li><a href="https://github.com/waylau/Gradle-2-User-Guide" target="_blank" rel="external">Gradle 2 用户指南</a></li>
-<li><a href="http://yuedu.baidu.com/ebook/f23af265998fcc22bcd10da2" target="_blank" rel="external">Gradle 中文使用文档</a></li>
-<li><a href="https://github.com/ecomfe/spec" target="_blank" rel="external">编码规范</a></li>
-<li><a href="http://www.ituring.com.cn/book/1143" target="_blank" rel="external">开源软件架构</a></li>
-<li><a href="http://docs.huihoo.com/gnu/linux/gmake.html" target="_blank" rel="external">GNU make 指南</a></li>
-</ul>
-<h3 id="设计模式">设计模式</h3><ul>
-<li><a href="https://github.com/me115/design_patterns" target="_blank" rel="external">图说设计模式</a></li>
-<li><a href="http://blog.csdn.net/lovelion/article/details/17517213" target="_blank" rel="external">史上最全设计模式导学目录</a></li>
-</ul>
-<h3 id="Web">Web</h3><ul>
-<li><a href="http://www.20thingsilearned.com/zh-CN/home" target="_blank" rel="external">关于浏览器和网络的 20 项须知</a></li>
-<li><a href="http://jinlong.github.io/2013/08/29/devtoolsecrets/" target="_blank" rel="external">浏览器开发工具的秘密</a></li>
-<li><a href="https://github.com/CN-Chrome-DevTools/CN-Chrome-DevTools" target="_blank" rel="external">Chrome 开发者工具中文手册</a></li>
-<li><a href="http://open.chrome.360.cn/extension_dev/overview.html" target="_blank" rel="external">Chrome扩展开发文档</a></li>
-<li><a href="http://www.gruntjs.net" target="_blank" rel="external">Grunt中文文档</a></li>
-<li><a href="http://www.gulpjs.com.cn/docs/" target="_blank" rel="external">gulp中文文档</a></li>
-<li><a href="https://github.com/nimojs/gulp-book" target="_blank" rel="external">Gulp 入门指南</a></li>
-<li><a href="http://yeomanjs.org" target="_blank" rel="external">Yeoman中文文档</a></li>
-<li><a href="https://github.com/AlloyTeam/Mars" target="_blank" rel="external">移动Web前端知识库</a></li>
-<li><a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="external">正则表达式30分钟入门教程</a></li>
-<li><a href="https://github.com/fouber/blog/issues/2" target="_blank" rel="external">前端开发体系建设日记</a></li>
-<li><a href="https://github.com/hoosin/mobile-web-favorites" target="_blank" rel="external">移动前端开发收藏夹</a></li>
-<li><a href="https://github.com/darcyliu/google-styleguide/blob/master/JSONStyleGuide.md" target="_blank" rel="external">JSON风格指南</a></li>
-<li><a href="https://github.com/bolasblack/http-api-guide" target="_blank" rel="external">HTTP 接口设计指北</a></li>
-<li><a href="https://github.com/hacke2/hacke2.github.io/issues/1" target="_blank" rel="external">前端资源分享（一）</a></li>
-<li><a href="https://github.com/hacke2/hacke2.github.io/issues/3" target="_blank" rel="external">前端资源分享（二）</a></li>
-<li><a href="http://coderlmn.github.io/code-standards/" target="_blank" rel="external">前端代码规范 及 最佳实践</a></li>
-<li><a href="http://man.lupaworld.com/content/network/wireshark/index.html" target="_blank" rel="external">Wireshark用户手册</a></li>
-<li><a href="https://community.emc.com/thread/194901" target="_blank" rel="external">一站式学习Wireshark</a></li>
-<li><a href="http://happypeter.github.io/tealeaf-http/" target="_blank" rel="external">HTTP 下午茶</a></li>
-<li><a href="http://yuedu.baidu.com/ebook/478d1a62376baf1ffc4fad99?pn=1" target="_blank" rel="external">HTTP/2.0 中文翻译</a></li>
-<li><a href="https://www.gitbook.com/book/ye11ow/http2-explained/details" target="_blank" rel="external">http2讲解</a></li>
-<li><a href="https://www.gitbook.com/book/juntao/3-web-designs-in-3-weeks/details" target="_blank" rel="external">3 Web Designs in 3 Weeks</a></li>
-</ul>
-<h3 id="大数据">大数据</h3><ul>
-<li><a href="https://github.com/Flowerowl/Big-Data-Resources" target="_blank" rel="external">大数据/数据挖掘/推荐系统/机器学习相关资源</a></li>
-<li><a href="https://github.com/jizhang/guidetodatamining" target="_blank" rel="external">面向程序员的数据挖掘指南</a></li>
-<li><a href="https://code.csdn.net/CODE_Translation/spark_matei_phd" target="_blank" rel="external">大型集群上的快速和通用数据处理架构</a></li>
-<li><a href="https://github.com/linyiqun/DataMiningAlgorithm" target="_blank" rel="external">数据挖掘中经典的算法实现和详细的注释</a></li>
-<li><a href="https://aiyanbo.gitbooks.io/spark-programming-guide-zh-cn/content/" target="_blank" rel="external">Spark 编程指南简体中文版</a></li>
-</ul>
-<h3 id="编程艺术">编程艺术</h3><ul>
-<li><a href="http://huyuefeng.me/intro-to-prog/" target="_blank" rel="external">编程入门指南</a></li>
-<li><a href="https://github.com/julycoding/The-Art-Of-Programming-by-July" target="_blank" rel="external">程序员编程艺术</a></li>
-<li><a href="http://www.oschina.net/translate/what-every-programmer-should-know-about-memory-part1?print" target="_blank" rel="external">每个程序员都应该了解的内存知识(译)</a>【第一部分】</li>
-<li><a href="http://read.douban.com/ebook/4972883/" target="_blank" rel="external">取悦的工序：如何理解游戏</a> (豆瓣阅读，免费书籍)</li>
-<li><a href="http://xiaobeicn.gitbooks.io/programming-skills-summary/" target="_blank" rel="external">编程技巧总汇</a></li>
-</ul>
-<h3 id="其它">其它</h3><ul>
-<li><a href="http://softwaredownload.gitbooks.io/openwrt-fanqiang/" target="_blank" rel="external">OpenWrt智能、自动、透明翻墙路由器教程</a></li>
-<li><a href="https://community.emc.com/docs/DOC-16067" target="_blank" rel="external">SAN 管理入门系列</a></li>
-<li><a href="http://sketchcn.com/sketch-chinese-user-manual.html#introduce" target="_blank" rel="external">Sketch 中文手册</a></li>
-<li><a href="http://ifeve.com/perfbook/" target="_blank" rel="external">深入理解并行编程</a></li>
-</ul>
-<h2 id="语言相关">语言相关</h2><h3 id="Android">Android</h3><ul>
-<li><a href="http://www.apkbus.com/design/index.html" target="_blank" rel="external">Android Design(中文版)</a></li>
-<li>Google Material Design 正體中文版 (<a href="http://wcc723.gitbooks.io/google_design_translate/content/style-icons.html" target="_blank" rel="external">译本一</a> <a href="https://github.com/1sters/material_design_zh" target="_blank" rel="external">译本二</a>)</li>
-<li><a href="http://wiki.jikexueyuan.com/project/material-design/" target="_blank" rel="external">Material Design 中文版</a></li>
-<li><a href="http://hukai.me/android-training-course-in-chinese/index.html" target="_blank" rel="external">Google Android官方培训课程中文版</a></li>
-<li><a href="http://stormzhang.github.io/android/2014/07/07/learn-android-from-rookie/" target="_blank" rel="external">Android学习之路</a></li>
-<li><a href="https://github.com/bboyfeiyu/android-tech-frontier" target="_blank" rel="external">Android开发技术前线(android-tech-frontier)</a></li>
-<li><a href="https://github.com/FX-Max/Point-of-Android" target="_blank" rel="external">Point-of-Android</a> Android 一些重要知识点解析整理</li>
-<li><a href="http://leanote.com/blog/post/561658f938f41126b2000298?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">Android6.0新特性详解</a></li>
-</ul>
-<h3 id="AWK">AWK</h3><ul>
-<li><a href="https://github.com/wuzhouhui/awk" target="_blank" rel="external">awk程序设计语言</a></li>
-<li><a href="http://awk.readthedocs.org/en/latest/index.html" target="_blank" rel="external">awk中文指南</a></li>
-</ul>
-<h3 id="C">C</h3><ul>
-<li><a href="http://c-faq-chn.sourceforge.net/ccfaq/ccfaq.html" target="_blank" rel="external">C 语言常见问题集</a></li>
-<li><a href="http://doc.lellansin.com" target="_blank" rel="external">C/C++ 学习教程</a></li>
-<li><a href="https://github.com/limingth/NCCL" target="_blank" rel="external">新概念 C 语言教程</a></li>
-<li><a href="http://docs.linuxtone.org/ebooks/C&amp;CPP/c/" target="_blank" rel="external">Linux C 编程一站式学习</a></li>
-</ul>
-<h3 id="C++">C++</h3><ul>
-<li><a href="https://github.com/wuye9036/CppTemplateTutorial" target="_blank" rel="external">C++ Template 进阶指南</a></li>
-<li><a href="http://www.prglab.com/cms/" target="_blank" rel="external">C++ 基础教程</a></li>
-<li><a href="https://github.com/forhappy/A-Detailed-Cplusplus-Concurrency-Tutorial" target="_blank" rel="external">C++ 并发编程指南</a></li>
-<li><a href="http://www.ituring.com.cn/book/1203" target="_blank" rel="external">像计算机科学家一样思考（C++版)</a> (《How To Think Like a Computer Scientist: C++ Version》中文版)</li>
-<li><a href="http://tinylab.gitbooks.io/cbook" target="_blank" rel="external">C 语言编程透视</a></li>
-<li><a href="https://github.com/leeyiw/cgdb-manual-in-chinese" target="_blank" rel="external">CGDB中文手册</a></li>
-<li><a href="https://github.com/hellogcc/100-gdb-tips/blob/master/src/index.md" target="_blank" rel="external">100个gdb小技巧</a></li>
-<li><a href="https://github.com/hellogcc/100-gcc-tips/blob/master/src/index.md" target="_blank" rel="external">100个gcc小技巧</a></li>
-<li><a href="https://github.com/anjuke/zguide-cn" target="_blank" rel="external">ZMQ 指南</a></li>
-<li><a href="http://scc.qibebt.cas.cn/docs/linux/base/%B8%FA%CE%D2%D2%BB%C6%F0%D0%B4Makefile-%B3%C2%F0%A9.pdf" target="_blank" rel="external">跟我一起写Makefile(PDF)</a> (PDF)</li>
-<li><a href="http://docs.huihoo.com/gnu/linux/gmake.html" target="_blank" rel="external">GNU make 指南</a></li>
-<li><a href="http://zh-google-styleguide.readthedocs.org/en/latest/google-cpp-styleguide/contents/" target="_blank" rel="external">Google C++ 风格指南</a></li>
-<li><a href="https://github.com/andycai/cprimer" target="_blank" rel="external">C/C++ Primer</a> (by @andycai)</li>
-<li><a href="http://www.nowamagic.net/librarys/books/contents/c" target="_blank" rel="external">简单易懂的C魔法</a></li>
-<li><a href="http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf" target="_blank" rel="external">Cmake 实践</a> (PDF版)</li>
-<li><a href="http://www.sunistudio.com/cppfaq/" target="_blank" rel="external">C++ FAQ LITE(中文版)</a></li>
-<li><a href="https://github.com/Mooophy/Cpp-Primer" target="_blank" rel="external">C++ Primer 5th Answers</a></li>
-<li><a href="http://chenxiaowei.gitbooks.io/cpp_concurrency_in_action/" target="_blank" rel="external">C++ 并发编程(基于C++11)</a></li>
-<li><a href="http://www.kuqin.com/qtdocument/tutorial.html" target="_blank" rel="external">QT 教程</a></li>
-</ul>
-<h3 id="CoffeeScript">CoffeeScript</h3><ul>
-<li><a href="http://coffee-script.org" target="_blank" rel="external">CoffeeScript 中文</a></li>
-<li><a href="https://github.com/elrrrrrrr/coffeescript-style-guide/blob/master/README-ZH.md" target="_blank" rel="external">CoffeeScript 编程风格指南</a></li>
-</ul>
-<h3 id="Dart">Dart</h3><ul>
-<li><a href="http://dart.lidian.info/wiki/Language_Tour" target="_blank" rel="external">Dart 语言导览</a></li>
-</ul>
-<h3 id="Elasticsearch">Elasticsearch</h3><ul>
-<li><a href="https://github.com/looly/elasticsearch-definitive-guide-cn" target="_blank" rel="external">Elasticsearch 权威指南</a> （《Elasticsearch the definitive guide》中文版）</li>
-<li><a href="http://kibana.logstash.es" target="_blank" rel="external">ELKstack 中文指南</a></li>
-<li><a href="http://udn.yyuap.com/doc/mastering-elasticsearch/" target="_blank" rel="external">Mastering Elasticsearch(中文版)</a></li>
-</ul>
-<h3 id="Erlang">Erlang</h3><ul>
-<li><a href="https://github.com/liancheng/cpie-cn" target="_blank" rel="external">Erlang 并发编程</a> (《Concurrent Programming in Erlang (Part I)》中文版)</li>
-</ul>
-<h3 id="Fortran">Fortran</h3><ul>
-<li><a href="http://micro.ustc.edu.cn/Fortran/ZJDing/" target="_blank" rel="external">Fortran77和90/95编程入门</a></li>
-</ul>
-<h3 id="Golang">Golang</h3><ul>
-<li><a href="https://github.com/astaxie/build-web-application-with-golang" target="_blank" rel="external">Go Web 编程</a></li>
-<li><a href="https://github.com/Unknwon/the-way-to-go_ZH_CN" target="_blank" rel="external">Go 入门指南</a> (《The Way to Go》中文版)</li>
-<li><a href="http://go-tour-zh.appsp0t.com" target="_blank" rel="external">Go 指南</a> (《A Tour of Go》中文版)</li>
-<li><a href="https://github.com/Unknwon/go-fundamental-programming" target="_blank" rel="external">Go 编程基础</a></li>
-<li><a href="http://mikespook.com/learning-go/" target="_blank" rel="external">学习Go语言</a></li>
-<li><a href="https://github.com/astaxie/Go-in-Action" target="_blank" rel="external">Go实战开发</a> (当我收录此项目时，作者已经写完第三章，如果读完前面章节觉得有帮助，可以给作者<a href="https://me.alipay.com/astaxie" target="_blank" rel="external">捐赠</a>，以鼓励作者的继续创作)</li>
-<li><a href="https://github.com/astaxie/NPWG_zh" target="_blank" rel="external">Network programming with Go 中文翻译版本</a></li>
-<li><a href="http://www.hellogcc.org/effective_go.html" target="_blank" rel="external">Effective Go</a></li>
-<li><a href="https://github.com/polaris1119/The-Golang-Standard-Library-by-Example" target="_blank" rel="external">Go 语言标准库</a></li>
-<li><a href="http://gorevel.cn/docs/manual/index.html" target="_blank" rel="external">Revel 框架手册</a></li>
-<li><a href="http://blog.csdn.net/dc_726/article/details/46565241" target="_blank" rel="external">Java程序员的Golang入门指南</a></li>
-<li><a href="https://github.com/hyper-carrot/go_command_tutorial" target="_blank" rel="external">Go命令教程</a></li>
-<li><a href="https://github.com/achun/Go-Blog-In-Action" target="_blank" rel="external">Go语言博客实践</a></li>
-<li><a href="https://github.com/golang-china/golangdoc.translations" target="_blank" rel="external">Go 官方文档翻译</a></li>
-</ul>
-<h3 id="Groovy">Groovy</h3><ul>
-<li><a href="http://www.ibm.com/developerworks/cn/java/j-pg/" target="_blank" rel="external">实战 Groovy 系列</a></li>
-</ul>
-<h3 id="Haskell">Haskell</h3><ul>
-<li><a href="http://learnyouahaskell-zh-tw.csie.org" target="_blank" rel="external">Haskell 趣学指南</a></li>
-<li><a href="http://rwh.readthedocs.org/en/latest/" target="_blank" rel="external">Real World Haskell 中文版</a></li>
-</ul>
-<h3 id="HTML_/_CSS">HTML / CSS</h3><ul>
-<li><a href="http://zh.learnlayout.com" target="_blank" rel="external">学习CSS布局</a></li>
-<li><a href="https://github.com/chadluo/CSS-Guidelines/blob/master/README.md" target="_blank" rel="external">通用 CSS 笔记、建议与指导</a></li>
-<li><a href="http://css.doyoe.com" target="_blank" rel="external">CSS参考手册</a></li>
-<li><a href="https://github.com/waylau/css3-tutorial" target="_blank" rel="external">CSS3 Tutorial 《CSS3 教程》</a></li>
-<li><a href="http://yanxyz.github.io/emmet-docs/" target="_blank" rel="external">Emmet 文档</a></li>
-<li><a href="http://alloyteam.github.io/CodeGuide/" target="_blank" rel="external">前端代码规范</a> (腾讯 AlloyTeam 团队)</li>
-<li><a href="http://codeguide.bootcss.com" target="_blank" rel="external">HTML和CSS编码规范</a></li>
-<li><a href="http://www.w3school.com.cn/html5/" target="_blank" rel="external">HTML5 教程</a></li>
-<li><a href="http://sass-guidelin.es/zh/" target="_blank" rel="external">Sass Guidelines 中文</a></li>
-</ul>
-<h3 id="HTTP">HTTP</h3><ul>
-<li><a href="http://happypeter.github.io/tealeaf-http" target="_blank" rel="external">HTTP 下午茶</a></li>
-</ul>
-<h3 id="iOS">iOS</h3><ul>
-<li><a href="https://github.com/qinjx/30min_guides/blob/master/ios.md" target="_blank" rel="external">iOS开发60分钟入门</a></li>
-<li><a href="http://isux.tencent.com/ios-human-interface-guidelines-ui-design-basics-ios7.html" target="_blank" rel="external">iOS7人机界面指南</a></li>
-<li><a href="http://zh-google-styleguide.readthedocs.org/en/latest/google-objc-styleguide/" target="_blank" rel="external">Google Objective-C Style Guide 中文版</a></li>
-<li><a href="http://wileam.com/iphone-6-screen-cn/" target="_blank" rel="external">iPhone 6 屏幕揭秘</a></li>
-<li><a href="http://nilsun.github.io/apple-watch/" target="_blank" rel="external">Apple Watch开发初探</a></li>
-<li><a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOSCh/index.html" target="_blank" rel="external">马上着手开发 iOS 应用程序</a></li>
-<li><a href="https://github.com/jkyin/Subtitle" target="_blank" rel="external">网易斯坦福大学公开课：iOS 7应用开发字幕文件</a></li>
-</ul>
-<h3 id="Java">Java</h3><ul>
-<li><a href="https://github.com/waylau/apache-shiro-1.2.x-reference" target="_blank" rel="external">Apache Shiro 用户指南</a></li>
-<li><a href="https://github.com/waylau/Jersey-2.x-User-Guide" target="_blank" rel="external">Jersey 2.x 用户指南</a></li>
-<li><a href="https://github.com/waylau/spring-framework-4-reference" target="_blank" rel="external">Spring Framework 4.x参考文档</a></li>
-<li><a href="https://github.com/qibaoguang/Spring-Boot-Reference-Guide" target="_blank" rel="external">Spring Boot参考指南</a> (翻译中)</li>
-<li><a href="http://mybatis.github.io/mybatis-3/zh/index.html" target="_blank" rel="external">MyBatis中文文档</a></li>
-<li><a href="https://github.com/waylau/RestDemo" target="_blank" rel="external">用jersey构建REST服务</a></li>
-<li><a href="https://github.com/waylau/activiti-5.x-user-guide" target="_blank" rel="external">Activiti 5.x 用户指南</a></li>
-<li><a href="http://www.hawstein.com/posts/google-java-style.html" target="_blank" rel="external">Google Java编程风格指南</a></li>
-<li><a href="https://github.com/waylau/netty-4-user-guide" target="_blank" rel="external">Netty 4.x 用户指南</a></li>
-<li><a href="https://github.com/waylau/essential-netty-in-action" target="_blank" rel="external">Netty 实战(精髓)</a></li>
-<li><a href="https://github.com/waylau/rest-in-action" target="_blank" rel="external">REST 实战</a></li>
-<li><a href="https://github.com/waylau/java-code-conventions" target="_blank" rel="external">Java 编码规范</a></li>
-<li><a href="https://github.com/waylau/apache-mina-2.x-user-guide" target="_blank" rel="external">Apache MINA 2 用户指南</a></li>
-<li><a href="https://github.com/waylau/h2-database-doc" target="_blank" rel="external">H2 Database 教程</a></li>
-<li><a href="https://github.com/waylau/servlet-3.1-specification" target="_blank" rel="external">Java Servlet 3.1 规范</a></li>
-<li><a href="https://github.com/waylau/jsse-reference-guide" target="_blank" rel="external">JSSE 参考指南</a></li>
-</ul>
-<h3 id="Javascript">Javascript</h3><ul>
-<li><a href="http://typeof.net/s/jsmech/" target="_blank" rel="external">Javascript 原理</a></li>
-<li><a href="http://bq69.com/blog/articles/script/868/google-javascript-style-guide.html" target="_blank" rel="external">Google JavaScript 代码风格指南</a></li>
-<li><a href="https://github.com/darcyliu/google-styleguide/blob/master/JSONStyleGuide.md" target="_blank" rel="external">Google JSON 风格指南</a></li>
-<li><a href="https://github.com/adamlu/javascript-style-guide" target="_blank" rel="external">Airbnb JavaScript 规范</a></li>
-<li><a href="http://javascript.ruanyifeng.com" target="_blank" rel="external">JavaScript 标准参考教程（alpha）</a></li>
-<li><a href="http://pij.robinqu.me" target="_blank" rel="external">Javascript编程指南</a> (<a href="https://github.com/RobinQu/Programing-In-Javascript" target="_blank" rel="external">源码</a>)</li>
-<li><a href="https://github.com/justjavac/12-javascript-quirks" target="_blank" rel="external">javascript 的 12 个怪癖</a></li>
-<li><a href="http://bonsaiden.github.io/JavaScript-Garden/zh/" target="_blank" rel="external">JavaScript 秘密花园</a></li>
-<li><a href="http://icodeit.org/jsccp/" target="_blank" rel="external">JavaScript核心概念及实践</a> (PDF) (此书已由人民邮电出版社出版发行，但作者依然免费提供PDF版本，希望开发者们去购买，支持作者)</li>
-<li><a href="https://github.com/jayli/javascript-patterns" target="_blank" rel="external">《JavaScript 模式》</a> “JavaScript patterns”中译本</li>
-<li><a href="http://justjavac.com/named-function-expressions-demystified.html" target="_blank" rel="external">命名函数表达式探秘</a>  (注:原文由<a href="http://www.cn-cuckoo.com" target="_blank" rel="external">为之漫笔</a>翻译，原始地址无法打开，所以此处地址为我博客上的备份)</li>
-<li><a href="http://www.oschina.net/translate/learning-javascript-design-patterns" target="_blank" rel="external">学用 JavaScript 设计模式</a> (开源中国)</li>
-<li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html" target="_blank" rel="external">深入理解JavaScript系列</a></li>
-<li><a href="http://es6.ruanyifeng.com" target="_blank" rel="external">ECMAScript 6 入门</a> (作者：阮一峰)</li>
-<li><a href="http://liubin.github.io/promises-book/" target="_blank" rel="external">JavaScript Promise迷你书</a></li>
-<li><a href="https://github.com/getify/You-Dont-Know-JS" target="_blank" rel="external">You-Dont-Know-JS</a> (深入JavaScript语言核心机制的系列图书)</li>
-<li>jQuery<ul>
-<li><a href="http://www.nowamagic.net/librarys/books/contents/jquery" target="_blank" rel="external">简单易懂的JQuery魔法</a></li>
-<li><a href="http://i5ting.github.io/How-to-write-jQuery-plugin/build/jquery.plugin.html" target="_blank" rel="external">How to write jQuery plugin</a></li>
-</ul>
-</li>
-<li>Node.js<ul>
-<li><a href="http://www.nodebeginner.org/index-zh-cn.html" target="_blank" rel="external">Node入门</a></li>
-<li><a href="http://nqdeng.github.io/7-days-nodejs/" target="_blank" rel="external">七天学会NodeJS</a></li>
-<li><a href="https://github.com/nodejs-tw/nodejs-wiki-book" target="_blank" rel="external">Nodejs Wiki Book</a> (繁体中文)</li>
-<li><a href="http://expressjs.jser.us" target="_blank" rel="external">express.js 中文文档</a></li>
-<li><a href="https://github.com/turingou/koa-guide" target="_blank" rel="external">koa 中文文档</a></li>
-<li><a href="https://github.com/nswbmw/N-blog" target="_blank" rel="external">使用 Express + MongoDB 搭建多人博客</a></li>
-<li><a href="http://javascript.ruanyifeng.com/nodejs/express.html" target="_blank" rel="external">Express框架</a></li>
-<li><a href="https://github.com/alsotang/node-lessons" target="_blank" rel="external">Node.js 包教不包会</a></li>
-<li><a href="https://www.npmjs.org/package/learnyounode-zh-cn" target="_blank" rel="external">Learn You The Node.js For Much Win! (中文版)</a></li>
-<li><a href="http://i5ting.github.io/node-debug-tutorial/" target="_blank" rel="external">Node debug 三法三例</a></li>
-<li><a href="https://www.gitbook.com/book/0532/nodejs/details" target="_blank" rel="external">nodejs中文文档</a></li>
-</ul>
-</li>
-<li>underscore.js<ul>
-<li><a href="http://learningcn.com/underscore/" target="_blank" rel="external">Underscore.js中文文档</a></li>
-</ul>
-</li>
-<li>backbone.js<ul>
-<li><a href="http://www.css88.com/doc/backbone/" target="_blank" rel="external">backbone.js中文文档</a></li>
-<li><a href="http://www.the5fire.com/backbone-js-tutorials-pdf-download.html" target="_blank" rel="external">backbone.js入门教程</a> (PDF)</li>
-<li><a href="https://github.com/the5fire/backbonejs-learning-note" target="_blank" rel="external">Backbone.js入门教程第二版</a></li>
-<li><a href="http://feliving.github.io/developing-backbone-applications" target="_blank" rel="external">Developing Backbone.js Applications(中文版)</a></li>
-</ul>
-</li>
-<li>AngularJS<ul>
-<li><a href="https://github.com/mgechev/angularjs-style-guide/blob/master/README-zh-cn.md" target="_blank" rel="external">AngularJS最佳实践和风格指南</a></li>
-<li><a href="https://github.com/peiransun/angularjs-cn" target="_blank" rel="external">AngularJS中译本</a></li>
-<li><a href="https://github.com/zensh/AngularjsTutorial_cn" target="_blank" rel="external">AngularJS入门教程</a></li>
-<li><a href="https://github.com/xufei/Make-Your-Own-AngularJS/blob/master/01.md" target="_blank" rel="external">构建自己的AngularJS</a></li>
-<li><a href="http://www.waylau.com/build-angularjs-app-with-yeoman-in-windows/" target="_blank" rel="external">在Windows环境下用Yeoman构建AngularJS项目</a></li>
-</ul>
-</li>
-<li>Zepto.js<ul>
-<li><a href="http://mweb.baidu.com/zeptoapi/" target="_blank" rel="external">Zepto.js 中文文档</a></li>
-</ul>
-</li>
-<li>React.js<ul>
-<li><a href="http://reactjs.cn" target="_blank" rel="external">React.js 中文文档</a></li>
-<li><a href="https://github.com/fakefish/react-webpack-cookbook" target="_blank" rel="external">React webpack-cookbook</a></li>
-<li><a href="http://fraserxu.me/intro-to-react/" target="_blank" rel="external">React 入门教程</a></li>
-<li><a href="http://wiki.jikexueyuan.com/project/react-native/" target="_blank" rel="external">React Native 中文文档(含最新Android内容)</a></li>
-</ul>
-</li>
-<li>impress.js<ul>
-<li><a href="https://github.com/kokdemo/impress.js-tutorial-in-Chinese" target="_blank" rel="external">impress.js的中文教程</a></li>
-</ul>
-</li>
-<li>CoffeeScript<ul>
-<li><a href="https://github.com/geekplux/coffeescript-style-guide" target="_blank" rel="external">CoffeeScript 编码风格指南</a></li>
-</ul>
-</li>
-<li>ExtJS<ul>
-<li><a href="http://extjs-doc-cn.github.io/ext4api/" target="_blank" rel="external">Ext4.1.0 中文文档</a></li>
-</ul>
-</li>
-<li>Meteor<ul>
-<li><a href="http://zh.discovermeteor.com" target="_blank" rel="external">Discover Meteor</a></li>
-</ul>
-</li>
-<li>D3.js<ul>
-<li><a href="https://github.com/mbostock/d3/wiki/API--%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C" target="_blank" rel="external">官方API文档</a></li>
-<li><a href="http://www.pkuwwt.tk/d3-tutorial-cn/about.html" target="_blank" rel="external">pkuwwt的D3教程</a></li>
-<li><a href="http://blog.csdn.net/zhang__tianxu/article/category/1623437" target="_blank" rel="external">张天旭的D3教程</a></li>
-<li><a href="http://www.cnblogs.com/winleisure/tag/D3.js/" target="_blank" rel="external">楚狂人的D3教程</a></li>
-<li><a href="http://www.ourd3js.com/wordpress/?cat=2" target="_blank" rel="external">D3.js 入门系列</a> (还有进阶、高级等系列)</li>
-</ul>
-</li>
-<li><a href="http://www.ituring.com.cn/minibook/950" target="_blank" rel="external">Chrome扩展及应用开发</a></li>
-</ul>
-<h3 id="LaTeX">LaTeX</h3><ul>
-<li><a href="http://www.dralpha.com/zh/tech/tech.htm" target="_blank" rel="external">LaTeX 笔记</a></li>
-<li><a href="http://ctan.org/pkg/lshort-zh-cn" target="_blank" rel="external">一份不太简短的 LaTeX2ε 介绍</a></li>
-<li><a href="http://web.math.isu.edu.tw/yeh/HowTo/HowToTex/latex123.pdf" target="_blank" rel="external">大家來學 LaTeX</a> (PDF)</li>
-</ul>
-<h3 id="LISP">LISP</h3><ul>
-<li><a href="http://acl.readthedocs.org/en/latest/" target="_blank" rel="external">ANSI Common Lisp 中文翻译版</a></li>
-<li><a href="http://www.ituring.com.cn/minibook/862" target="_blank" rel="external">Common Lisp 高级编程技术</a> (《On Lisp》中文版)</li>
-</ul>
-<h3 id="Lua">Lua</h3><ul>
-<li><a href="http://www.w3cschool.cc/manual/lua53doc/contents.html" target="_blank" rel="external">Lua 5.3 参考手册</a></li>
-</ul>
-<h3 id="Markdown">Markdown</h3><ul>
-<li><a href="http://wowubuntu.com/markdown/basic.html" target="_blank" rel="external">Markdown 快速入门</a></li>
-<li><a href="http://jianshu.io/p/7bd23251da0a" target="_blank" rel="external">Markdown 简明教程</a></li>
-<li><a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">Markdown 语法说明</a></li>
-<li><a href="http://jianshu.io/p/q81RER" target="_blank" rel="external">献给写作者的 Markdown 新手指南</a></li>
-</ul>
-<h3 id="Node-js">Node.js</h3><ul>
-<li><a href="http://www.nodebeginner.org/index-zh-cn.html" target="_blank" rel="external">Node 入门</a></li>
-<li><a href="https://www.gitbook.com/book/0532/nodejs/details" target="_blank" rel="external">The NodeJS 中文文档</a>（社区翻译）</li>
-<li><a href="http://nqdeng.github.io/7-days-nodejs/" target="_blank" rel="external">七天学会NodeJS</a> 阿里出品，很好的入门资料</li>
-</ul>
-<h3 id="Perl">Perl</h3><ul>
-<li><a href="https://github.com/fayland/chinese-perl-book" target="_blank" rel="external">Master Perl Today</a></li>
-<li><a href="http://www.cbi.pku.edu.cn/chinese/documents/perl/index.htm" target="_blank" rel="external">Perl 5 教程</a></li>
-<li><a href="http://www.yiibai.com/perl" target="_blank" rel="external">Perl 教程</a></li>
-<li><a href="https://github.com/horus/modern_perl_book" target="_blank" rel="external">《Modern Perl》中文版</a></li>
-</ul>
-<h3 id="PHP">PHP</h3><ul>
-<li><a href="http://www.php-internals.com/book/" target="_blank" rel="external">深入理解 PHP 内核</a></li>
-<li><a href="http://php.net/manual/zh/" target="_blank" rel="external">PHP5中文手册</a></li>
-<li><a href="http://www.walu.cc/phpbook/preface.md" target="_blank" rel="external">PHP扩展开发及内核应用</a></li>
-<li><a href="http://wusuopu.gitbooks.io/symfony2_tutorial/content" target="_blank" rel="external">Symfony2 实例教程</a></li>
-<li><a href="http://wulijun.github.io/php-the-right-way/" target="_blank" rel="external">PHP 之道</a></li>
-</ul>
-<h3 id="Python">Python</h3><ul>
-<li><a href="http://djangobook.py3k.cn/2.0/" target="_blank" rel="external">Django book 2.0</a></li>
-<li><a href="http://docspy3zh.readthedocs.org/en/latest/" target="_blank" rel="external">Python 3 文档(简体中文) 3.2.2 documentation</a></li>
-<li><a href="http://www.pythondoc.com" target="_blank" rel="external">Python 中文学习大本营</a></li>
-<li><a href="http://woodpecker.org.cn/diveintopython/" target="_blank" rel="external">深入 Python</a></li>
-<li><a href="http://woodpecker.org.cn/diveintopython3/" target="_blank" rel="external">深入 Python 3</a></li>
-<li><a href="http://sebug.net/paper/books/LearnPythonTheHardWay/" target="_blank" rel="external">笨办法学 Python</a></li>
-<li><a href="http://woodpecker.org.cn/abyteofpython_cn/chinese/" target="_blank" rel="external">简明 Python 教程</a> (《A Byte of Python》中文版)</li>
-</ul>
-<h3 id="R">R</h3><ul>
-<li><a href="http://cran.r-project.org/doc/contrib/Ding-R-intro_cn.pdf" target="_blank" rel="external">R 导论</a> (《An Introduction to R》中文版) (PDF)</li>
-<li><a href="http://cran.r-project.org/doc/contrib/Liu-FAQ.pdf" target="_blank" rel="external">153分钟学会 R</a> (PDF)</li>
-<li><a href="http://www.biosino.org/R/R-doc/files/R4beg_cn_2.0.pdf" target="_blank" rel="external">《R for beginners》中文版</a> (PDF)</li>
-<li><a href="http://yanping.me/shiny-tutorial/" target="_blank" rel="external">用 R 构建 Shiny 应用程序</a> (《Building ‘Shiny’ Applications with R》中文版)</li>
-<li><a href="http://cran.r-project.org/doc/contrib/Xu-Statistics_and_R.pdf" target="_blank" rel="external">统计学与 R 读书笔记</a> (PDF)</li>
-</ul>
-<h3 id="reStructuredText">reStructuredText</h3><ul>
-<li><a href="http://www.pythondoc.com/sphinx/rest.html" target="_blank" rel="external">reStructuredText 入门</a></li>
-<li><a href="http://jwch.sdut.edu.cn/book/rst.html" target="_blank" rel="external">reStructuredText 简明教程</a></li>
-</ul>
-<h3 id="Ruby">Ruby</h3><ul>
-<li><a href="https://github.com/JuanitoFatas/rails-style-guide/blob/master/README-zhCN.md" target="_blank" rel="external">Rails 风格指南</a></li>
-<li><a href="http://railstutorial-china.org" target="_blank" rel="external">Ruby on Rails Tutorial 原书第 2 版</a></li>
-<li><a href="http://ihower.tw/rails4/" target="_blank" rel="external">Ruby on Rails 实战圣经</a></li>
-<li><a href="https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md" target="_blank" rel="external">Ruby 风格指南</a></li>
-<li><a href="http://lrthw.github.io" target="_blank" rel="external">笨方法学 Ruby</a></li>
-</ul>
-<h3 id="Scala">Scala</h3><ul>
-<li><a href="http://twitter.github.io/effectivescala/index-cn.html" target="_blank" rel="external">Effective Scala</a></li>
-<li><a href="http://twitter.github.io/scala_school/zh_cn/index.html" target="_blank" rel="external">Scala 课堂</a> (Twitter的Scala中文教程)</li>
-<li><a href="https://www.gitbook.com/book/windor/beginners-guide-to-scala/details" target="_blank" rel="external">Scala 初学者指南</a> (The Neophyte’s Guide to Scala)</li>
-</ul>
-<h3 id="Scheme">Scheme</h3><ul>
-<li><a href="http://deathking.github.io/yast-cn/" target="_blank" rel="external">Scheme 入门教程</a> (《Yet Another Scheme Tutorial》中文版)</li>
-<li><a href="http://r6rs.mrliu.org" target="_blank" rel="external">算法语言Scheme修订<sup>6</sup>报告</a>（R<sup>6</sup>RS简体中文翻译）</li>
-</ul>
-<h3 id="Shell">Shell</h3><ul>
-<li><a href="http://wiki.ubuntu.org.cn/Shell%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80" target="_blank" rel="external">Shell 编程基础</a></li>
-<li><a href="https://github.com/qinjx/30min_guides/blob/master/shell.md" target="_blank" rel="external">Shell 脚本编程30分钟入门</a></li>
-<li><a href="http://billie66.github.io/TLCL/book/zh" target="_blank" rel="external">The Linux Command Line 中文版</a></li>
-</ul>
-<h3 id="Swift">Swift</h3><ul>
-<li><a href="https://www.gitbook.io/book/numbbbbb/-the-swift-programming-language-" target="_blank" rel="external">《The Swift Programming Language》中文版</a></li>
-</ul>
-<h3 id="Vim">Vim</h3><ul>
-<li><a href="http://www.study-area.org/tips/vim/index.html" target="_blank" rel="external">大家來學 VIM</a></li>
-<li><a href="http://man.chinaunix.net/newsoft/vi/doc/help.html" target="_blank" rel="external">Vim Manual(中文版)</a></li>
-</ul>
-<h3 id="Visual_Prolog">Visual Prolog</h3><ul>
-<li><a href="http://wiki.visual-prolog.com/index.php?title=A_Beginners_Guide_to_Visual_Prolog_in_Chinese" target="_blank" rel="external">Visual Prolog 7初学指南</a></li>
-<li><a href="http://wiki.visual-prolog.com/index.php?title=Visual_Prolog_for_Tyros_in_Chinese" target="_blank" rel="external">Visual Prolog 7边练边学</a></li>
-</ul>
+    <title><![CDATA[安装 Docker Machine]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/machine/install-machine/"/>
+    <id>http://yoursite.com/2015/12/08/docker/machine/install-machine/</id>
+    <published>2015-12-08T07:16:23.723Z</published>
+    <updated>2015-12-08T07:16:23.723Z</updated>
+    <content type="html"><![CDATA[<h1 id="安装_Docker_Machine">安装 Docker Machine</h1><p>Docker Machine 支持 Windows ,OS X ,和 Linux，并且被安装为一个独立的二进制文件。用于各平台架构的二进制文件链接如下：</p>
+<ul>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-386.exe" target="_blank" rel="external">Windows - 32bit</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe" target="_blank" rel="external">Windows - 64bit</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64" target="_blank" rel="external">OSX - x86_64</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-386" target="_blank" rel="external">OSX - (老款 macs)</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64" target="_blank" rel="external">Linux - x86_64</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-386" target="_blank" rel="external">Linux - i386</a></li>
+</ul>
+<h2 id="OS_X_和_Linux">OS X 和 Linux</h2><p>在 Linux 或者 OSX 上安装，你需要下载二进制文件到你的 <code>PATH</code> 路径中( 例如: <code>/usr/local/bin</code>)，并且给与可执行权限。例如，在大多数的 OSX 系统上使用如下命令就可以完成安装了：</p>
+<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/machine/releases</span><span class="regexp">/download/v</span>0.<span class="number">3.0</span>/docker-machine_darwin-amd64 &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>-machine
+<span class="variable">$ </span>chmod +x /usr/local/bin/docker-machine
+</code></pre><p>对于Linux，只是将上边的二进制名称中的 “darwin” 替换成 “linux”。</p>
+<p>现在你可以使用 <code>docker-machine -v</code> 命令来查看版本信息。</p>
+<pre><code>$ docker-machine -v
+machine version <span class="number">0.3</span><span class="number">.0</span>
+</code></pre><p>为了在您的机器上避免使用 ssh 来运行 Docker 命令，请确保您已经安装好了 Docker 客户端。</p>
+<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/get.docker.com/builds</span><span class="regexp">/Darwin/x</span>86_64/docker-latest &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>
+</code></pre><p>##Windows</p>
+<p>目前，Docker 建议你在 Windows 上通过 <a href="https://msysgit.github.io/" target="_blank" rel="external">msysgit</a> 安装使用 Docker Machine,这将为 Docker Machine 提供一些依赖的程序，如 ssh ，还有 shell 功能。</p>
+<p>当你安装好 msysgit ，启动终端命令提示行，并运行如下命令。这里假设你是在 64 位的 Windows 下安装，如果你使用 32 位系统安装，请将 URL 中的 “x86_64” 替换成 “i386”。</p>
+<p>首先，安装 Docker clent 二进制文件 :</p>
+<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/get.docker.com/builds</span><span class="regexp">/Windows/x</span>86_64/docker-latest.exe &gt; <span class="regexp">/bin/docker</span>
+</code></pre><p>下一步，安装 Docker Machine 二进制文件:</p>
+<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/machine/releases</span><span class="regexp">/download/v</span>0.<span class="number">3.0</span>/docker-machine_windows-amd64.exe &gt; <span class="regexp">/bin/docker</span>-machine
+</code></pre><p>现在，检查 <code>docker-machine</code> 是否工作 :</p>
+<pre><code>$ docker-machine -v
+machine version <span class="number">0.3</span><span class="number">.0</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="安装_Docker_Machine">安装 Docker Machine</h1><p>Docker Machine 支持 Windows ,OS X ,和 Linux，并且被安装为一个独立的二进制文件。用于各平台架构的二进制文件链接如下：</p>
+<ul>
+<l]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Kitematic
+安装]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/kitematic/README/"/>
+    <id>http://yoursite.com/2015/12/08/docker/kitematic/README/</id>
+    <published>2015-12-08T07:16:13.453Z</published>
+    <updated>2015-12-08T07:16:13.453Z</updated>
+    <content type="html"><![CDATA[<h1 id="Kitematic:_安装_Kitematic">Kitematic: 安装 Kitematic</h1><p>你可以在 Mac 或者 Windows PC 上像安装其它应用一样来安装 Kitematic：下载安装包，运行安装程序。</p>
+<p>##下载 Kitematic</p>
+<p><a href="https://kitematic.com/download/" target="_blank" rel="external">下载 Kitematic的 zip 文件</a>,双击解压文件，然后双击运行安装程序。您可能还需要将你的应用程序放到您的应用程序文件夹。</p>
+<p>##初始化设置</p>
+<p>第一次打开 Kitematic 会为你能够运行 Docker 容器而进行一些必要的设置。如果你没有安装 Virtualbox， Kitematic 会下载和安装最新版本。</p>
+<p><img src="../images/installing.png" alt="安装图片"></p>
+<p>做完这些之后！在一分钟之内，你就可以准备开始运行你的第一个容器。</p>
+<p><img src="../images/containers.png" alt="容器"></p>
+<p>##技术详细信息</p>
+<p>Kitematic 是一个建立在其它应用上的 app，能够处理异常：</p>
+<ul>
+<li>如果 Virtualbox 没有安装，它将会安装它。</li>
+</ul>
+<h2 id="为什么_Kitematic_需要_root_密码">为什么 Kitematic 需要 root 密码</h2><p>为什么 Kitematic 需要你的 root 密码，这里有两个原因：</p>
+<ul>
+<li>安装 Virtualbox 需要 root 权限，因为安装的时候需要对 Mac OS X 内核进行扩展。</li>
+<li>如果你在安装 Kitematic 之前更改了默认的目录权限，当你复制 <code>docker</code> 和 <code>docker-machine</code> 到 <code>/usr/local/bin</code> 是需要 root 权限的。</li>
+</ul>
+<p>##下一步</p>
+<p>有关使用 Kitematic 的信息，请查看<a href="userguide.md">用户指南</a>。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="目录">目录</h2><ul>
-<li><a href="#语言无关">语言无关</a><ul>
-<li><a href="#在线教育">在线教育</a></li>
-<li><a href="#软件开发方法">软件开发方法</a></li>
-<li><a href]]>
+    <![CDATA[<h1 id="Kitematic:_安装_Kitematic">Kitematic: 安装 Kitematic</h1><p>你可以在 Mac 或者 Windows PC 上像安装其它应用一样来安装 Kitematic：下载安装包，运行安装程序。</p>
+<p>##下载 Kit]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/rackspace/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/rackspace/</id>
+    <published>2015-12-08T07:05:15.474Z</published>
+    <updated>2015-09-30T15:27:59.000Z</updated>
+    <content type="html"><![CDATA[<p>#Rackspace Cloud</p>
+<p>由 Rackspace 提供的 Ubuntu 安装 Docker 是非常简单的，你可以大多按照<a href="../installation/ubuntu.md" title="Ubuntu">Ubuntu</a>的安装指南。</p>
+<p><strong>不过请注意：</strong></p>
+<p>如果你使用的 Linux 发行版没有运行 3.8 内核，你就必须升级内核，这个在 Rackspace 上是有些困难的。</p>
+<p>Rackspace 使用 grub 的 <code>menu.lst</code> 启动服务，虽然它们运行正常，但是并不像非虚拟软件包（如xen兼容）内核那样。所以你必须手动设置内核。</p>
+<p>不要在上线部署的机器上尝试这样做：</p>
+<pre><code><span class="preprocessor"># 更新apt</span>
+$ apt-<span class="keyword">get</span> update
+
+<span class="preprocessor"># 安装新内核</span>
+$ apt-<span class="keyword">get</span> install linux-generic-lts-raring
+</code></pre><p>非常好，现在你已经将内核安装到 <code>/boot/</code> 下，下一步你需要让它在重新启动后生效。</p>
+<pre><code><span class="comment"># find the exact names</span>
+$ find <span class="regexp">/boot/</span> -name <span class="string">'*3.8*'</span>
+
+<span class="comment"># this should return some results</span>
+</code></pre><p>现在你需要手动编译 <code>/boot/grub/menu.list</code> ,在底部有相关选项。复制和替换成新内核，确保新内核在最上边，仔细检查内核和 initrd 指向的文件是否正确。</p>
+<p>要特别注意检查内核和 initrd 条目。</p>
+<pre><code># 现在编辑 /boot/grub/<span class="keyword">menu</span>.lst
+ <span class="keyword">vi</span> /boot/grub/<span class="keyword">menu</span>.lst
+</code></pre><p>这是配置好的样子：</p>
+<pre><code>## ## End <span class="keyword">Default</span> <span class="keyword">Options</span> ##
+
+title              Ubuntu <span class="number">12.04</span>.<span class="number">2</span> LTS, kernel <span class="number">3.8</span>.x generic
+root               (hd0)
+kernel             <span class="regexp">/boot/</span>vmlinuz-<span class="number">3.8</span>.<span class="number">0</span>-<span class="number">19</span>-generic root=<span class="regexp">/dev/</span>xvda1 ro quiet splash console=hvc0
+initrd             <span class="regexp">/boot/i</span>nitrd.img-<span class="number">3.8</span>.<span class="number">0</span>-<span class="number">19</span>-generic
+
+title              Ubuntu <span class="number">12.04</span>.<span class="number">2</span> LTS, kernel <span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual
+root               (hd0)
+kernel             <span class="regexp">/boot/</span>vmlinuz-<span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual root=<span class="regexp">/dev/</span>xvda1 ro quiet splash console=hvc0
+initrd             <span class="regexp">/boot/i</span>nitrd.img-<span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual
+
+title              Ubuntu <span class="number">12.04</span>.<span class="number">2</span> LTS, kernel <span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual (recovery mode)
+root               (hd0)
+kernel             <span class="regexp">/boot/</span>vmlinuz-<span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual root=<span class="regexp">/dev/</span>xvda1 ro quiet splash  single
+initrd             <span class="regexp">/boot/i</span>nitrd.img-<span class="number">3.2</span>.<span class="number">0</span>-<span class="number">38</span>-virtual
+</code></pre><p>重启你的服务器（通过命令行或者控制台）：</p>
+<pre><code>reboot
+</code></pre><p>验证你的内核是否升级成功</p>
+<pre><code>$ uname -a
+<span class="preprocessor"># Linux docker-<span class="number">12</span>-<span class="number">04</span> <span class="number">3.8</span><span class="number">.0</span>-<span class="number">19</span>-generic #<span class="number">30</span>~precise1-Ubuntu SMP Wed May <span class="number">1</span> <span class="number">22</span>:<span class="number">26</span>:<span class="number">36</span> UTC <span class="number">2013</span> x86_64 x86_64 x86_64 GNU/Linux</span>
+
+<span class="preprocessor"># nice! <span class="number">3.8</span>.</span>
+</code></pre><p>现在升级内核完成，更多信息查看<a href="../installation/ubuntu.md">ubuntu文档安装</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>#Rackspace Cloud</p>
+<p>由 Rackspace 提供的 Ubuntu 安装 Docker 是非常简单的，你可以大多按照<a href="../installation/ubuntu.md" title="Ubuntu">Ubuntu</a>的安装指南]]>
     </summary>
     
   </entry>
   
   <entry>
     <title></title>
-    <link href="http://yoursite.com/2015/11/10/stack/"/>
-    <id>http://yoursite.com/2015/11/10/stack/</id>
-    <published>2015-11-10T02:22:15.426Z</published>
-    <updated>2015-11-10T02:22:15.426Z</updated>
-    <content type="html"><![CDATA[<p>title: 技术栈<br>date: 2015-09-29 07:56:29<br>categories: blog<br>tags: [前端，技术，数据库，javascript]  </p>
-<p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
-<p><a href="http://yangwei.info/test/WebFrontEndStack-master/ux/WebFrontEndStack.htm" target="_blank" rel="external">2.WebFrontEndStack</a></p>
-<p><a href="http://yangwei.info/test/DatabaseStack-master/ux/DatabaseStack.htm" target="_blank" rel="external">3.DatabaseStack</a></p>
-<p><a href="http://coodict.github.io/javascript-in-one-pic/" target="_blank" rel="external">4.javascript-in-one-pic</a></p>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/joyent/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/joyent/</id>
+    <published>2015-12-08T07:05:15.471Z</published>
+    <updated>2015-09-30T15:27:59.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="Joyent_公有云安装_Docker">Joyent 公有云安装 Docker</h2><ol>
+<li><p>登录 Joyent <a href="https://my.joyent.com/" target="_blank" rel="external">用户中心</a></p>
+</li>
+<li><p><a href="https://docs.joyent.com/jpc/managing-docker-containers/creating-a-docker-host" target="_blank" rel="external">创建一个 Docker 主机</a>.</p>
+</li>
+</ol>
+<h2 id="启动和管理容器">启动和管理容器</h2><ol>
+<li><p><a href="https://docs.joyent.com/jpc/managing-docker-containers/starting-a-container" target="_blank" rel="external">在 WEB 界面中启动容器</a></p>
+</li>
+<li><p><a href="https://docs.joyent.com/jpc/managing-docker-containers/access-your-jpc-docker-hosts-from-the-docker-cli" target="_blank" rel="external">在你的电脑上配置 Docker </a> 连接远程主机来开启和管理容器。</p>
+</li>
+<li><p>在 Docker 主机中添加 SSH.</p>
+</li>
+<li><p>使用 Docker 命令行来启动容器.</p>
+</li>
+</ol>
+<p>##下一步</p>
+<p>查看 <a href="../userguide/">用户指南</a>, 或阅读 Joyent’s <a href="https://www.joyent.com/blog/first-steps-with-joyents-container-service" target="_blank" rel="external"> 博客中的开始教程 </a>和 <a href="https://docs.joyent.com/jpc/managing-docker-containers" target="_blank" rel="external">管理容器文档</a>.</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>title: 技术栈<br>date: 2015-09-29 07:56:29<br>categories: blog<br>tags: [前端，技术，数据库，javascript]  </p>
-<p><a href="http://yangwei.info/test/Do]]>
+    <![CDATA[<h2 id="Joyent_公有云安装_Docker">Joyent 公有云安装 Docker</h2><ol>
+<li><p>登录 Joyent <a href="https://my.joyent.com/" target="_blank" rel="external">用]]>
     </summary>
     
   </entry>
   
   <entry>
     <title></title>
-    <link href="http://yoursite.com/2015/11/10/xbox/"/>
-    <id>http://yoursite.com/2015/11/10/xbox/</id>
-    <published>2015-11-10T02:21:24.912Z</published>
-    <updated>2015-11-10T02:21:24.912Z</updated>
-    <content type="html"><![CDATA[<p>title: js绘图<br>date: 2015-09-29 07:56:29<br>categories: blog<br>tags: [SVG，技术] </p>
-<p><a href="http://yangwei.info/archives/xbox.html" target="_blank" rel="external">1.XBox-one</a><br><a href="http://yangwei.info/archives/heptagram.html" target="_blank" rel="external">2.heptagram</a><br><img src="/archives/heptagram.jpg" alt=""><br>The Acute Heptagram of Impact – Seth Godin<br>How come Seth Godin is so full of simple but clever and practical ideas?</p>
-<p>Here’s another .. The Heptagram of Impact</p>
-<p>“Not as catchy a title as Maslow’s Hierarchy of Needs, but I hope you’ll walk through this with me:</p>
-<p>I can outline a strategy for you, but if you don’t have the tactics in place or you’re not skilled enough to execute, it won’t matter if the strategy is a good one.</p>
-<p>Your project’s success is going to be influenced in large measure by the reputation of the people who join in and the organization that brings it forward. That’s nothing you can completely change in a day, but it’s something that will change (like it or not) every day.</p>
-<p>None of this matters if you and your team don’t persist, and your persistence will largely be driven by the desire you have to succeed, which of course is relentlessly undermined by the fear we all wrestle with every day.</p>
-<p>These seven elements: Strategy, Tactics, Execution, Reputation, Persistence, Desire and Fear, make up the seven points of the acute heptagram of impact. If your project isn’t working, it’s almost certainly because one or more of these elements aren’t right. And in my experience, it’s all of them. We generally pick the easiest and safest one to work on (probably tactics) without taking a deep breath and understanding where the real problem is.</p>
-<p>Feel free to share the AHI, but please don’t have it tattooed on your hip or anything.”</p>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/gentoo/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/gentoo/</id>
+    <published>2015-12-08T07:05:15.469Z</published>
+    <updated>2015-09-30T15:27:59.000Z</updated>
+    <content type="html"><![CDATA[<p>#Gentoo</p>
+<p>在 Gentoo Linux 上安装 Docker 可以通过以下两种方式的任一种实现：官方安装方法和 <code>docker-overlay</code> 方法。</p>
+<p>官方 <a href="https://wiki.gentoo.org/wiki/Project:Docker" target="_blank" rel="external"> Gentoo Docker </a> 团队页面。</p>
+<h2 id="官方方式">官方方式</h2><p>如果你正在寻找一种稳定的方案，最好的办法就是直接在 portage tree 上安装官方的 app-emulation/docker 包。</p>
+<p>如果 ebuild 时出现任何问题，包括缺少内核配置标识或依赖，请到 Gentoo 的 <a href="https://bugs.gentoo.org/" target="_blank" rel="external"> Bugzilla </a> 网站上指定的 <code>docker AT gentoo DOT org</code> 提交问题，或者加入 Freenode 的 Gentoo 官方 <a href="http://webchat.freenode.net?channels=%23gentoo-containers&amp;uio=d4" target="_blank" rel="external">IRC</a> 频道来提问。</p>
+<h2 id="docker-overlay_方法">docker-overlay 方法</h2><p>如果你正在寻找一个 <code>-bin</code> ebuild, live ebuild, 或者 bleeding edge ebuild，可以使用 overlay  提供的<a href="https://github.com/tianon/docker-overlay" target="_blank" rel="external">docker-overlay</a>。使用 app-portage/layman 来添加第三方的 portage。查看最新的安装和使用 overlay 的文档请，请点击 <a href="https://github.com/tianon/docker-overlay/blob/master/README.md#using-this-overlay" target="_blank" rel="external">the overlay README</a>。</p>
+<p>如果 ebuild 或者生成的二进制文件时出现任何问题，包括特别是缺少内核配置标识或依赖关系，请 <a href="https://github.com/tianon/docker-overlay/issues" target="_blank" rel="external">在 docker-overlay 仓库提交一个 issue</a> 或者直接在 freenode 网络的 #docker IRC 频道上联系 tianon。</p>
+<h2 id="安装">安装</h2><h3 id="Available_USE_flags">Available USE flags</h3><table><br><thead><br><tr><br><th>USE Flag</th><br><th align="center">Default</th><br><th align="left">Description</th><br></tr><br></thead><br><tbody><br><tr><br><td>aufs</td><br><td align="center"></td><br><td align="left">Enables dependencies for the “aufs” graph driver, including necessary kernel flags.</td><br></tr><br><tr><br><td>btrfs</td><br><td align="center"></td><br><td align="left">Enables dependencies for the “btrfs” graph driver, including necessary kernel flags.</td><br></tr><br><tr><br><td>contrib</td><br><td align="center">Yes</td><br><td align="left">Install additional contributed scripts and components.</td><br></tr><br><tr><br><td>device-mapper</td><br><td align="center">Yes</td><br><td align="left">Enables dependencies for the “devicemapper” graph driver, including necessary kernel flags.</td><br></tr><br><tr><br><td>doc</td><br><td align="center"></td><br><td align="left">Add extra documentation (API, Javadoc, etc). It is recommended to enable per package instead of globally.</td><br></tr><br><tr><br><td>lxc</td><br><td align="center"></td><br><td align="left">Enables dependencies for the “lxc” execution driver.</td><br></tr><br><tr><br><td>vim-syntax</td><br><td align="center"></td><br><td align="left">Pulls in related vim syntax scripts.</td><br></tr><br><tr><br><td>zsh-completion</td><br><td align="center"></td><br><td align="left">Enable zsh completion support.</td><br></tr><br></tbody><br></table>
+
+
+<p>这个包会适当的获取必要的依赖和提示的内核选项。</p>
+<p><a href="https://tianon.github.io/post/2014/05/17/docker-on-gentoo.html" target="_blank" rel="external"> tianon’s </a> 的博客中有详细的使用标识的介绍。</p>
+<pre><code><span class="variable">$ </span>sudo emerge -av app-emulation/docker
+</code></pre><blockquote>
+<p>注：有时候官方的 <strong>Gentoo tree</strong> 和 <strong>docker-overlay</strong> 的最新版本还是有差距的，请耐心等待，最新版本会很快更新。</p>
+</blockquote>
+<p>##启动 Docker</p>
+<p>请确保您运行的内核包含了所有必要的模块和配置（可选的 device-mapper 和 AUFS 或 Btrfs ，这主要取决于你要使用的存储驱动程序）。</p>
+<p>使用 Docker，docker 进程必须以 <strong>root</strong> 用户运行。</p>
+<p>用 <strong>非root</strong> 用户使用 Docker，可以使用下边的命令，将你自己的用户添加到 <strong>docker</strong> 用户组 。</p>
+<pre><code>$ sudo usermod -<span class="tag">a</span> -G docker user
+</code></pre><p>###OpenRC</p>
+<p>启动 <code>docker</code> 进程：</p>
+<pre><code><span class="variable">$ </span>sudo /etc/init.d/docker start
+</code></pre><p>开机启动：</p>
+<pre><code>$ sudo rc-<span class="operator"><span class="keyword">update</span> <span class="keyword">add</span> docker <span class="keyword">default</span></span>
+</code></pre><p>###systemd</p>
+<p>启动 <code>docker</code> 进程：</p>
+<pre><code><span class="variable">$ </span>sudo systemctl start docker.service
+</code></pre><p>开机启动：</p>
+<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker.service
+</code></pre><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="../articles/systemd.md">如何定制 Docker 进程</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>title: js绘图<br>date: 2015-09-29 07:56:29<br>categories: blog<br>tags: [SVG，技术] </p>
-<p><a href="http://yangwei.info/archives/xbox.html" t]]>
+    <![CDATA[<p>#Gentoo</p>
+<p>在 Gentoo Linux 上安装 Docker 可以通过以下两种方式的任一种实现：官方安装方法和 <code>docker-overlay</code> 方法。</p>
+<p>官方 <a href="https://wiki.gentoo.]]>
     </summary>
     
   </entry>
   
   <entry>
     <title></title>
-    <link href="http://yoursite.com/2015/09/18/dabai/"/>
-    <id>http://yoursite.com/2015/09/18/dabai/</id>
-    <published>2015-09-18T02:53:42.665Z</published>
-    <updated>2015-09-18T02:53:42.665Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://yangwei.info/test/dabai.jpg" alt="dabai" title="dabai"><br><img src="http://github.global.ssl.fastly.net/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Mark" title="GitHub Mark"><br><a href="http://yangwei8888.github.io/test/dabai.html" target="_blank" rel="external">1.css3 大白</a></p>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/frugalware/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/frugalware/</id>
+    <published>2015-12-08T07:05:15.468Z</published>
+    <updated>2015-09-30T15:27:59.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="FrugalWare">FrugalWare</h1><p>在FrugalWare上使用官方包来安装:</p>
+<ul>
+<li><a href="http://www.frugalware.org/packages/200141" target="_blank" rel="external">lxc-docker i686</a></li>
+<li><a href="http://www.frugalware.org/packages/200130" target="_blank" rel="external">lxc-docker x86_64</a></li>
+</ul>
+<p><code>lxc-docker</code> 包将会安装最新版本的 Docker。</p>
+<p>###依赖关系</p>
+<p>Docker 有几个依赖包需要安装，核心依赖包如下：</p>
+<ul>
+<li>systemd</li>
+<li>lvm2</li>
+<li>sqlite3</li>
+<li>libguestfs</li>
+<li>lxc</li>
+<li>iproute2</li>
+<li>bridge-utils</li>
+</ul>
+<p>###安装</p>
+<p>只需一步就可以完整安装：</p>
+<pre><code><span class="title">pacman</span> -S lxc-docker
+</code></pre><p>###开始用docker</p>
+<p>Docker 会创建一个系统服务，使用下面的命令启动该服务：</p>
+<pre><code><span class="variable">$ </span>sudo systemctl start lxc-docker
+</code></pre><p>设置开机启动：</p>
+<pre><code>$ sudo systemctl <span class="built_in">enable</span> lxc-docker
+</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://yangwei.info/test/dabai.jpg" alt="dabai" title="dabai"><br><img src="http://github.global.ssl.fastly.net/images/modules/]]>
+    <![CDATA[<h1 id="FrugalWare">FrugalWare</h1><p>在FrugalWare上使用官方包来安装:</p>
+<ul>
+<li><a href="http://www.frugalware.org/packages/200141" target="_blank"]]>
     </summary>
     
   </entry>
   
   <entry>
     <title></title>
-    <link href="http://yoursite.com/2015/09/17/helloworld/"/>
-    <id>http://yoursite.com/2015/09/17/helloworld/</id>
-    <published>2015-09-17T03:19:00.877Z</published>
-    <updated>2015-09-17T03:14:46.991Z</updated>
-    <content type="html"><![CDATA[<p>你好！GitBlog</p>
-<p><a href="http://segmentfault.com/a/1190000002620961" target="_blank" rel="external">1.在ubuntu上部署Kubernetes管理docker集群示例</a></p>
-<p><a href="http://blog.csdn.net/thomas0yang/article/details/8562910/" target="_blank" rel="external">7.Hadoop mapreduce原理学习</a></p>
-<p><a href="https://leancloud.cn/docs/leanengine_guide-node.html#" target="_blank" rel="external">26.LeanEngine 指南</a></p>
-<p><a href="http://dockone.io/article/489" target="_blank" rel="external">28.回顾容器标准之争：Docker赢了，而CoreOS未必就输了</a></p>
-<p><a href="http://www.infoq.com/cn/news/2015/04/google-borg/" target="_blank" rel="external">29.Google发布论文 披露大规模集群管理工具Borg的细节</a></p>
-<p><a href="https://registry.hub.docker.com/u/urlgrey/dynamic-redis/" target="_blank" rel="external">31.dynamic-redis</a></p>
-<p><a href="http://blog.csdn.net/codemosi/article/details/44015179" target="_blank" rel="external">38.mdrill安装（1）</a></p>
-<p><a href="http://www.open-open.com/lib/view/open1410954520648.html" target="_blank" rel="external">40.Solr与HBase架构设计</a></p>
-<p><a href="http://www.suchso.com/productdesign/bootstrap-small-manage-system-template-ace.html" target="_blank" rel="external">42.Bootstrap 轻量级后台管理系统模板–ACE使用介绍</a></p>
-<p><a href="https://github.com/makuk66/docker-solr" target="_blank" rel="external">43.makuk66/docker-solr</a></p>
-<p><a href="http://wenku.it168.com/d_000053840.shtml" target="_blank" rel="external">44.The GraphDB Landscape and sones</a></p>
-<p><a href="http://blog.liuts.com/post/242/" target="_blank" rel="external">45.构建一个高可用及自动发现的Docker基础架构-HECD[原创]  不指定</a></p>
-<p><a href="http://yaxin-cn.github.io/Docker/how-to-delete-a-docker-image.html" target="_blank" rel="external">46.docker中如何删除image（镜像）</a></p>
-<p><a href="http://dockone.io/article/180" target="_blank" rel="external">47.用Docker构建分布式Redis集群</a></p>
-<p><a href="http://blog.csdn.net/xautlx/article/details/45481477" target="_blank" rel="external">49.基于Nutch&amp;Solr定向采集解析和索引搜索的整合技术指南文档</a></p>
-<p><a href="http://www.21ops.com/linux/13512.html" target="_blank" rel="external">50.15 分钟掌握 15 个 Docker 小窍门</a></p>
-<p><a href="http://www.blogjava.net/yongboy/archive/2013/12/12/407498.html" target="_blank" rel="external">52.Docker学习笔记之一，搭建一个JAVA Tomcat运行环境</a></p>
-<p><a href="http://blog.csdn.net/cjsafty/article/details/8653021" target="_blank" rel="external">53.moinmoin-wiki</a></p>
-<p><a href="http://golangtc.com/download" target="_blank" rel="external">54.Golang下载</a></p>
-<p><a href="http://dockerpool.com/static/books/docker_practice/fig/wordpress.html" target="_blank" rel="external">55.使用 Wordpress 入门 Fig</a></p>
-<p><a href="http://segmentfault.com/a/1190000002464365" target="_blank" rel="external">56.Docker集中化web界面管理平台shipyard</a></p>
-<p><a href="http://www.zhihu.com/question/24378012" target="_blank" rel="external">57.nodejs与go语言比较如何，它们的发展前景怎样，网站后台开发，选择nodejs好还是go好？</a></p>
-<p><a href="http://www.ryanday.net/2012/10/01/installing-go-and-gopath/" target="_blank" rel="external">58.微软开源 rDSN 分布式系统开发框架</a></p>
-<p><a href="http://www.csdn.net/article/2015-06-09/2824906" target="_blank" rel="external">59.基于Mesos和Docker的分布式计算平台</a></p>
-<p><a href="http://www.cnblogs.com/yexiaochai/p/3759959.html" target="_blank" rel="external">60.【webapp的优化整理】要做移动前端优化的朋友进来看看吧</a></p>
-<p><a href="http://blog.csdn.net/wind19/article/details/8600083" target="_blank" rel="external">61.系统吞吐量、TPS（QPS）、用户并发量、性能测试概念和公式</a></p>
-<p><a href="http://blog.codingnow.com/2011/11/dev_note_2.html" target="_blank" rel="external">62.开发笔记 (2) ：redis 数据库结构设计</a></p>
-<p><a href="http://blog.csdn.net/lincyang/article/details/43850867" target="_blank" rel="external">63.Docker实践4：搭建wordpress</a></p>
-<p><a href="http://www.ryanday.net/2012/10/01/installing-go-and-gopath/" target="_blank" rel="external">64.Installing Go and $GOPATH</a></p>
-<p><a href="http://www.tuicool.com/articles/YniIfu" target="_blank" rel="external">65.使用 Etcd 和 Haproxy 做 Docker 服务发现</a></p>
-<p><a href="http://my.oschina.net/u/1396253/blog/178125" target="_blank" rel="external">66.Docker的WEB管理界面shipyard</a></p>
-<p><a href="http://www.jdon.com/artichect/managing-docker-clusters-using-mesos-and-marathon.html" target="_blank" rel="external">67.使用Mesos和Marathon管理Docker集群</a></p>
-<p><a href="http://www.blogjava.net/yongboy/archive/2013/12/31/408297.html" target="_blank" rel="external">68.Docker学习笔记之四，构建一个Redis as a Service(RAAS)</a></p>
-<p><a href="http://dockone.io/article/180" target="_blank" rel="external">69.用Docker构建分布式Redis集群</a></p>
-<p><a href="http://blog.csdn.net/shimiso/article/details/21830313" target="_blank" rel="external">70.同源策略和跨域访问</a></p>
-<p><a href="http://blog.csdn.net/baron_blogs/article/details/39996989" target="_blank" rel="external">71.对微信、陌陌等进行了分析（IM）</a></p>
-<p><a href="http://www.tuicool.com/articles/2QrAVr" target="_blank" rel="external">72.Creating a REST API using Go (GoLang) and JAS (JSON API Server)</a></p>
-<p><a href="http://blog.csdn.net/zdw12242/article/details/8687644" target="_blank" rel="external">73.利用python、Gephi绘制人人的社交网络图</a></p>
-<p><a href="http://www.ryanday.net/2012/10/01/installing-go-and-gopath/" target="_blank" rel="external">74.Installing Go and $GOPATH</a></p>
-<p><a href="http://zhidao.baidu.com/link?url=F59LrJlWPGBawvcCFtx4L0g3P7D4c9LfvhUR58bmSs4qTv7x40H4FuK9oxzOlWBhplLKXnrBt6eoRYnA4T5getKXKnMwwLtpRMVTegWclFq" target="_blank" rel="external">75.Apache的Mesos和Google的Kubernetes 有什么不同</a></p>
-<p><a href="http://keylines.com/network-visualization/visualizing-titan-the-scalable-graph-database" target="_blank" rel="external">76.Visualizing Titan – the scalable graph database</a></p>
-<p><a href="http://www.kankanews.com/ICkengine/archives/145210.shtml" target="_blank" rel="external">77.图形数据库和NOSQL</a></p>
-<p><a href="http://mp.weixin.qq.com/s?__biz=MzA5OTAyNzQ2OA==&amp;mid=207127336&amp;idx=1&amp;sn=ee19657852acf7683b2db8fcf55e6e61&amp;scene=5#rd" target="_blank" rel="external">78.SAMI：来自三星的基于Docker和Mesos的容器解决方案</a></p>
-<p><a href="http://blog.csdn.net/malefactor/article/details/39347187" target="_blank" rel="external">79.大数据图数据库之TAO数据库</a></p>
-<p><a href="http://www.cnblogs.com/xia520pi/p/3615554.html" target="_blank" rel="external">80.Nutch搜索引擎（第1期）_ Nutch简介及安装</a></p>
-<p><a href="http://blog.fens.me/nosql-neo4j-intro/" target="_blank" rel="external">81.Neo4j集群安装实践</a></p>
-<p><a href="http://blog.csdn.net/wangloveall/article/details/21407531" target="_blank" rel="external">82.Hadoop之MapReduce</a></p>
-<p><a href="http://blog.sciencenet.cn/blog-496649-838067.html" target="_blank" rel="external">83.citespace</a></p>
-<p><a href="http://www.yiibai.com/sqlite/sqlite_select_query.html" target="_blank" rel="external">84.SQLite</a></p>
-<p><a href="http://limu.iteye.com/blog/765173" target="_blank" rel="external">85.Facebook让网站速度提升一倍的BigPipe技术分析</a></p>
-<p><a href="http://sofar.blog.51cto.com/353572/1369266/" target="_blank" rel="external">86.采用RedisLive监控Redis服务</a></p>
-<p><a href="http://www.cnblogs.com/sharpxiajun/p/3531665.html" target="_blank" rel="external">87.系统架构：Web应用架构的新趋势—前端和后端分离的一点想法</a></p>
-<p><a href="http://www.cnblogs.com/mcgrady/archive/2015/08/12/4725038.html" target="_blank" rel="external">88..NET开发知识体系</a></p>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/fedora/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/fedora/</id>
+    <published>2015-12-08T07:05:15.468Z</published>
+    <updated>2015-09-30T15:27:59.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="Fedora">Fedora</h1><p>Docker 已经支持以下版本的 Fedora :</p>
+<ul>
+<li><a href="#fedora-20-installation"><em>Fedora 20 (64-bit)</em></a></li>
+<li><a href="#fedora-21-and-later-installation"><em>Fedora 21 and later (64-bit)</em></a></li>
+</ul>
+<p>目前的 Fedora 项目，仅发行版本中的内核支持 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错。</p>
+<h2 id="Fedora_21_或更高版本安装_Docker">Fedora 21 或更高版本安装 Docker</h2><p>在你的主机上安装 <code>docker</code> 包来安装 Docker 。</p>
+<pre><code>$ sudo yum -y <span class="keyword">install</span> docker
+</code></pre><p>更新 <code>docker</code> :</p>
+<pre><code><span class="variable">$ </span>sudo yum -y update docker
+</code></pre><p>请继续阅读启动 Docker 进程 <a href="#starting-the-docker-daemon">Starting the Docker daemon</a>。</p>
+<h2 id="Fedora_20_安装_Docker">Fedora 20 安装 Docker</h2><p>在 <code>Fedora 20</code> 中，一个系统自带的可执行的应用程序与 docker 包名字发生冲突，所以我们给 docker 的RPM包重命名为 docker-io 。</p>
+<p><code>Fedora 20</code> 中 安装 <code>docker-io</code> 之前需要先卸载 <code>docker</code> 包。</p>
+<pre><code>$ sudo yum -y <span class="keyword">remove</span> docker
+$ sudo yum -y <span class="keyword">install</span> docker-io
+</code></pre><p>更新 <code>docker</code></p>
+<pre><code><span class="variable">$ </span>sudo yum -y update docker-io
+</code></pre><p>请继续阅读启动 Docker 进程 <a href="#starting-the-docker-daemon">Starting the Docker daemon</a>。</p>
+<h2 id="Starting_the_Docker_daemon">Starting the Docker daemon</h2><p>当 Docker 安装完成之后，你需要启动 docker 进程。</p>
+<pre><code><span class="variable">$ </span>sudo systemctl start docker
+</code></pre><p>如果我们希望开机时自动启动 Docker ，如下操作：</p>
+<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker
+</code></pre><p>现在，我们来验证 Docker 是否正常工作。</p>
+<pre><code>$ sudo docker run -<span class="tag">i</span> -t fedora /bin/bash
+</code></pre><blockquote>
+<p>注意 ： 如果你使用的时候提示了 <code>Cannot start container</code> 错误，错误中提到了 SELINUX 或者权限不足，你需要更新 SELinux 策略，你可以使用 <code>sudo yum upgrade selinux-policy</code> 来改变 SELinux策略并重启。</p>
+</blockquote>
+<h2 id="为使用_Docker_用户授权">为使用 Docker 用户授权</h2><p><code>docker</code> 命令行工具通过 socket 文件 <code>/var/run/docker.sock</code> 和 <code>docker</code> 守护进程进行通信的。而这个 socket 文件的用户权限是 <code>root:root</code>。 虽然<br><a href="https://lists.projectatomic.io/projectatomic-archives/atomic-devel/2015-January/msg00034.html" target="_blank" rel="external">推荐</a><br>使用 <code>sudo</code> 命令来使用 docker 命令，但是如果你不想使用 <code>sudo</code>, 系统管理员可以创建一个 <code>docker</code> 用户组，并将 <code>/var/run/docker.sock</code> 赋予 docker 用户组权限，然后给 docker 用户组添加用户即可。</p>
+<pre><code>$ sudo groupadd docker
+$ sudo chown root:docker /var/run/docker<span class="class">.sock</span>
+$ sudo usermod -<span class="tag">a</span> -G docker <span class="variable">$USERNAME</span>
+</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
+<h2 id="下一步">下一步</h2><p>阅读 <a href="../userguide/">用户指南</a>.</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>你好！GitBlog</p>
-<p><a href="http://segmentfault.com/a/1190000002620961" target="_blank" rel="external">1.在ubuntu上部署Kubernetes管理docker集群示例<]]>
+    <![CDATA[<h1 id="Fedora">Fedora</h1><p>Docker 已经支持以下版本的 Fedora :</p>
+<ul>
+<li><a href="#fedora-20-installation"><em>Fedora 20 (64-bit)</em></a></li>
+]]>
     </summary>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/crux/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/crux/</id>
+    <published>2015-12-08T07:05:15.466Z</published>
+    <updated>2015-09-30T15:27:59.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="CRUX_Linux">CRUX Linux</h1><p>在CRUX Linux可以通过由 <a href="http://prologic.shortcircuit.net.au/" target="_blank" rel="external">James Mills</a> 提供的 ports，或者官方的 <a href="http://crux.nu/portdb/?a=repo&amp;q=contrib" target="_blank" rel="external">contrib</a> ports.</p>
+<ul>
+<li>docker</li>
+</ul>
+<p><code>docker</code> port 将构建安装最新版本的 Docker。</p>
+<p>###安装</p>
+<p>如果你的版本允许，更新你的 ports 目录树并且安装docker(用root用户)：</p>
+<pre><code><span class="preprocessor"># prt-get depinst docker</span>
+</code></pre><p>如果你想节省你的编译时间，你可以安装<code>docker-bin</code></p>
+<p>###内核要求</p>
+<p>如果使 CRUX + Docker 主机正常工作，你必须确保你的内核安装必要的模块来保证 Docker 进程的正常运行。</p>
+<p>请阅读<code>README</code>：</p>
+<pre><code>$ prt-<span class="keyword">get</span> readme docker
+</code></pre><p><code>docker</code> ports 安装由 Docker 发行版提供的 contrib/check-config.sh 脚本，以供检查你的内核配置是否适合安装 Docker 主机。</p>
+<p>运行下面的命令来检查你的内核：</p>
+<pre><code>$ <span class="regexp">/usr/</span>share<span class="regexp">/docker/</span>check-config.sh
+</code></pre><p>###启动docker</p>
+<p>我们提供一个 rc 脚本来创建 Docker.请使用下列命令来启动 Docker 服务(root用户):</p>
+<pre><code><span class="preprocessor"># /etc/rc.d/docker start</span>
+</code></pre><p>设置开机启动</p>
+<ul>
+<li>编辑 <code>/etc/rc.conf</code></li>
+<li>将 <code>docker</code> 放到 <code>SERVICES=(...)</code> 数组 <code>net</code> 之后.</li>
+</ul>
+<p>###镜像</p>
+<p>“官方库”中提供了由 <a href="http://prologic.shortcircuit.net.au/" target="_blank" rel="external">James Mills</a> 制作的 CRUX 镜像。你可以使用 <code>pull</code> 命令来使用这个镜像，当然你也可以在 <code>Dockerfile(s)</code> 中的 <code>FROM</code> 部分来设置使用。</p>
+<pre><code><span class="variable">$ </span>docker pull crux
+<span class="variable">$ </span>docker run -i -t crux
+</code></pre><p>在 Docker Hub 中也有其他用户贡献的  <a href="https://registry.hub.docker.com/repos/crux/" target="_blank" rel="external">CRUX 基础镜像</a> 。</p>
+<p>###Issues</p>
+<p>如果你有一些问题，请在 <a href="http://crux.nu/bugs/" target="_blank" rel="external">CRUX Bug Tracker</a> 提交。</p>
+<p>###支持</p>
+<p>寻求更多技术支持，请查看 <a href="http://crux.nu/Main/MailingLists" target="_blank" rel="external">CRUX 邮件列表</a> 或加入在 <a href="http://freenode.net/" target="_blank" rel="external">FreeNode</a> 网络上的 <a href="http://crux.nu/Main/IrcChannels" target="_blank" rel="external">IRC Channels</a>.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="CRUX_Linux">CRUX Linux</h1><p>在CRUX Linux可以通过由 <a href="http://prologic.shortcircuit.net.au/" target="_blank" rel="external">James M]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/centos/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/centos/</id>
+    <published>2015-12-08T07:05:15.465Z</published>
+    <updated>2015-09-30T15:27:59.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="CentOS">CentOS</h1><p>以下版本的CentOS 支持 Docker ：</p>
+<ul>
+<li><a href="#installing-docker-centos-7"><em>CentOS 7 (64-bit)</em></a></li>
+<li><a href="#installing-docker-centos-6.5"><em>CentOS 6.5 (64-bit)</em></a> or later</li>
+</ul>
+<p>该指南可能会适用于其它的  EL6/EL7 的 Linux 发行版，譬如 Scientific Linux 。但是我们没有做过任何测试。</p>
+<p>请注意，由于 Docker 的局限性，Docker 只能运行在64位的系统中。</p>
+<h2 id="内核支持">内核支持</h2><p>目前的 CentOS 项目，仅发行版本中的内核支持 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错。</p>
+<p>Docker 运行在 <a href="www.centos.org">CentOS-6.5</a> 或更高的版本的 CentOS 上，需要内核版本是 2.6.32-431 或者更高版本 ，因为这是允许它运行的指定内核补丁版本。</p>
+<p>##安装 - CentOS-7</p>
+<p>Docker 软件包已经包含在默认的 CentOS-Extras 软件源里，安装命令如下：</p>
+<pre><code>$ sudo yum <span class="keyword">install</span> docker
+</code></pre><p>开始运行 <a href="#starting-the-docker-daemon">Docker daemon</a>。</p>
+<h3 id="FirewallD">FirewallD</h3><p>CentOS-7 中介绍了 firewalld，firewall的底层是使用iptables进行数据过滤，建立在iptables之上，这可能会与 Docker 产生冲突。</p>
+<p>当 <code>firewalld</code> 启动或者重启的时候，将会从 iptables 中移除 <code>DOCKER</code> 的规则，从而影响了 Docker 的正常工作。</p>
+<p>当你使用的是 Systemd 的时候， <code>firewalld</code> 会在 Docker 之前启动，但是如果你在 Docker 启动之后再启动 或者重启 <code>firewalld</code> ，你就需要重启 Docker 进程了。</p>
+<h2 id="安装_Docker_-_CentOS-6-5">安装 Docker - CentOS-6.5</h2><p>在 CentOS-6.5 中，Docker 包含在 <a href="https://fedoraproject.org/wiki/EPEL" target="_blank" rel="external">Extra Packages<br>for Enterprise Linux (EPEL)</a> 提供的镜像源中，该组织致力于为 RHEL 发行版创建和维护更多可用的软件包。</p>
+<p>首先，你需要安装 EPEL 镜像源，请查看 <a href="https://fedoraproject.org/wiki/EPEL#How_can_I_use_these_extra_packages.3F" target="_blank" rel="external">EPEL installation instructions</a>.</p>
+<p>在 CentOS-6 中，一个系统自带的可执行的应用程序与 docker 包名字发生冲突，所以我们重新命名 docker 的RPM包名字为 <code>docker-io</code> 。</p>
+<p>CentOS-6 中 安装 <code>docker-io</code> 之前需要先卸载 <code>docker</code> 包。</p>
+<pre><code>$ sudo yum -y <span class="keyword">remove</span> docker
+</code></pre><p>下一步，安装 <code>docker-io</code> 包来为我们的主机安装 Docker。</p>
+<pre><code>$ sudo yum <span class="keyword">install</span> docker-io
+</code></pre><p>开始运行 <a href="#starting-the-docker-daemon">Docker daemon</a>。</p>
+<h2 id="手动安装最新版本的_Docker">手动安装最新版本的 Docker</h2><p>当你使用推荐方法来安装 Docker 的时候，上述的 Docker 包可能不是最新发行版本。 如果你想安装最新版本，<a href="./binaries.md">你可以直接安装二进制包</a></p>
+<p>当你使用二进制安装时，你可能想将 Docker 集成到 Systemd 的系统服务中。为了实现至一点，你需要从github中下载 <a href="https://github.com/docker/docker/tree/master/contrib/init/systemd" target="_blank" rel="external">service and socket</a>两个文件，然后安装到 <code>/etc/systemd/system</code> 中。</p>
+<p>Please continue with the <a href="#starting-the-docker-daemon">Starting the Docker daemon</a>.</p>
+<h2 id="Starting_the_Docker_daemon">Starting the Docker daemon</h2><p>当 Docker 安装完成之后，你需要启动 docker 进程。</p>
+<pre><code><span class="variable">$ </span>sudo service docker start
+</code></pre><p>如果我们希望 Docker 默认开机启动，如下操作：</p>
+<pre><code>$ sudo chkconfig docker <span class="function_start"><span class="keyword">on</span></span>
+</code></pre><p>现在，我们来验证 Docker 是否正常工作。第一步，我们需要下载最新的 <code>centos</code> 镜像。</p>
+<pre><code><span class="variable">$ </span>sudo docker pull centos
+</code></pre><p>下一步，我们运行下边的命令来查看镜像，确认镜像是否存在：</p>
+<pre><code><span class="variable">$ </span>sudo docker images centos
+</code></pre><p>这将会输出如下的信息：</p>
+<pre><code>$ sudo docker images centos
+REPOSITORY      TAG             IMAGE ID          CREATED             VIRTUAL SIZE
+centos          latest          <span class="number">0</span>b443ba03958      <span class="number">2</span> hours ago         <span class="number">297.6</span> MB
+</code></pre><p>运行简单的脚本来测试镜像：</p>
+<pre><code>$ sudo docker run -<span class="tag">i</span> -t centos /bin/bash
+</code></pre><p>如果正常运行，你将会获得一个简单的 bash 提示，输入 <code>exit</code> 来退出。</p>
+<h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
+<h2 id="Dockerfiles">Dockerfiles</h2><p>CentOS 项目为开发者提供了大量的的示例镜像，作为开发模板或者学习 Docker 的实例。你可以在这里找到这些示例：</p>
+<p><a href="https://github.com/CentOS/CentOS-Dockerfiles" target="_blank" rel="external">https://github.com/CentOS/CentOS-Dockerfiles</a></p>
+<p>好！现在你可以去查看<a href="../userguide/README.md">用户指南</a>，或者创建你自己的镜像了。</p>
+<p>##发现问题？</p>
+<p>如果有关于在 CentOS 上的 Docker 问题，请直接在这里提交：<a href="http://bugs.centos.org/" target="_blank" rel="external">CentOS Bug Tracker</a>.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="CentOS">CentOS</h1><p>以下版本的CentOS 支持 Docker ：</p>
+<ul>
+<li><a href="#installing-docker-centos-7"><em>CentOS 7 (64-bit)</em></a></li>]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/binaries/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/binaries/</id>
+    <published>2015-12-08T07:05:15.464Z</published>
+    <updated>2015-09-30T15:27:59.000Z</updated>
+    <content type="html"><![CDATA[<p>#Binaries</p>
+<p>本安装说明是提供给那些想在多种环境中安装 Docker 的 hacker 们的。</p>
+<p>在进行安装之前，请检查你的 Linux 发行版本是否有打包好的 Docker 安装包。我们已经发布了许多发行版包，这样会节省您很多时间。</p>
+<p>##检查运行时的依赖关系</p>
+<p>如果想要 Docker 正常运行，需要安装以下软件:</p>
+<ul>
+<li>iptables version 1.4 or later</li>
+<li>Git version 1.7 or later</li>
+<li>procps (or similar provider of a “ps” executable)</li>
+<li>XZ Utils 4.9 or later</li>
+<li>a <a href="https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount" target="_blank" rel="external">properly mounted</a> cgroupfs hierarchy (having a single, all-encompassing “cgroup” mount point <a href="https://github.com/docker/docker/issues/3485" target="_blank" rel="external">is not sufficien</a>)</li>
+</ul>
+<p>##检查内核的依赖关系</p>
+<p>Docker 进程模式需要特定的内核环境支持。详情请检查您的<a href="../SUMMARY.md">发行版</a>。</p>
+<p>Docker 对 Linux 内核版本的最低要求是3.10，如果内核版本低于 3.10 会缺少一些运行 Docker 容器的功能。这些比较旧的内核，在一定条件下会导致数据丢失和频繁恐慌错误。</p>
+<p>推荐使用版本号为（3.x.y）的 3.10 Linux 内核版本（或者新的维护版本），保持跟上内核的次要版本更新来确保内核的BUG已经被修复。</p>
+<blockquote>
+<p>警告：安装自定义内核时，Linux 版本发行商可能不支持内核软件包。请务必在安装自定义内核之前，先咨询供应商是否支持 Docker。</p>
+<p>警告：一些发行版本上还不能够安装新版本的内核，因为这些发行版本提供的包太老或者与新内核不兼容。</p>
+</blockquote>
+<p>值得注意的是 Docker 可以以客户端模式存在，它几乎可以运行在任何的Linux内核（甚至 OS X 上）。</p>
+<p>##Enable AppArmor and SELinux when possible</p>
+<p>如果你的 Linux 发行版上支持 AppArmor 或者 Selinux 请启用。这有助于提高安全性并阻止某些漏洞。关与如何启动设置推荐的安全机制，在发行版提供的文档上提供了详细的步骤。</p>
+<p>某些 Linux 发行版上默认情况下是启用 AppArmor 或者 Selinux，但是它们的内核不符合安装 Docker 的最低要求（3.10或更高版本）。为了让系统能够启动 Docker 和 运行容器，需要更新内核到3.10或者更高版本。AppArmor/SELinux 用户空间(user space) 工具提供的系统与内核版本的不兼容性可能会阻止 Docker 的运行，容器的启动或者造成容器的意外退出。</p>
+<blockquote>
+<p>警告：如果机器上启用了安全机制，它就不应该被禁用来使 Docker 和 容器运行。这样会使系统失去发行版供应商的支持，并可能打破严格的监管环境和安全策略。</p>
+</blockquote>
+<p>##获取Docker二进制文件</p>
+<p>你可以下载最新版本或者特定版本的二进制版本。下载完二进制文件之后，你必须要给文件可执行权限来运行。</p>
+<p>在 Linux 或 OS X 上指定文件的执行权限：</p>
+<pre><code><span class="variable">$ </span>chmod +x docker
+</code></pre><p>从 Github 上获取稳定的发行版本号列表，请查看 <code>docker/docker</code> <a href="https://github.com/docker/docker/releases" target="_blank" rel="external">发布页面</a></p>
+<blockquote>
+<p>注意</p>
+<p>1) 你可以通过在 URL 中分别附加 MD5 和 SHA256 哈希值来获得二进制包。</p>
+<p>2) 你可以通过 URL 中附加 .tgz 地址来获得压缩的二进制包。</p>
+</blockquote>
+<p>###获取 Linux 二进制包</p>
+<p>通过下边的链接来下载最新版本的 Linux 二进制包：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/i386/docker-latest
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/x86_64/docker-latest
+</code></pre><p>使用下边的链接模式来下载指定版本的 Linux 二进制包：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/i386/docker-&lt;<span class="keyword">version</span>&gt;
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/x86_64/docker-&lt;<span class="keyword">version</span>&gt;
+</code></pre><p>举例：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/i386/docker-<span class="number">1.6</span>.<span class="number">0</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Linux/x86_64/docker-<span class="number">1.6</span>.<span class="number">0</span>
+</code></pre><h3 id="获取_Mac_OS_X_二进制包">获取 Mac OS X 二进制包</h3><p>Mac OS X 的二进制文件仅仅是一个客户端。你不可以使用它来启动 docker 进程。通过下边的链接来下载最新的 Mac OS X 版本：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/i386/docker-latest
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/x86_64/docker-latest
+</code></pre><p>通过下边的 URL 模式来下载指定的 Mac OS X 版本：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/i386/docker-&lt;<span class="keyword">version</span>&gt;
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/x86_64/docker-&lt;<span class="keyword">version</span>&gt;
+</code></pre><p>举例：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/i386/docker-<span class="number">1.6</span>.<span class="number">0</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Darwin/x86_64/docker-<span class="number">1.6</span>.<span class="number">0</span>
+</code></pre><h3 id="获取_Windows_的二进制包">获取 Windows 的二进制包</h3><p>从 1.60 版本开始，你可以只下载 Windows 客户端的二进制包。此外，二进制包仅是一个客户端，你不能用它来启动 docker 进程。通过下边的链接来下载最新的 Windows 版本：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/i386/docker-latest.<span class="keyword">exe</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/x86_64/docker-latest.<span class="keyword">exe</span>
+</code></pre><p>通过下边的 URL 模式来下载指定的 Windows 版本：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/i386/docker-&lt;<span class="keyword">version</span>&gt;.<span class="keyword">exe</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/x86_64/docker-&lt;<span class="keyword">version</span>&gt;.<span class="keyword">exe</span>
+</code></pre><p>举例：</p>
+<pre><code>http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/i386/docker-<span class="number">1.6</span>.<span class="number">0</span>.<span class="keyword">exe</span>
+
+http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/builds/Windows/x86_64/docker-<span class="number">1.6</span>.<span class="number">0</span>.<span class="keyword">exe</span>
+</code></pre><h2 id="运行Docker进程">运行Docker进程</h2><pre><code># <span class="operator"><span class="keyword">start</span> the docker <span class="keyword">in</span> daemon <span class="keyword">mode</span> <span class="keyword">from</span> the <span class="keyword">directory</span> you unpacked
+$ sudo ./docker -<span class="keyword">d</span> &amp;</span>
+</code></pre><p>##非root用户运行</p>
+<p><code>docker</code> 进程一般来说默认用 <code>root</code> 用户运行， docker 进程绑定 unix socket 来代替 TCP 端口。默认情况下由用户 <code>root</code> 来管理 unix socket ,但是你也可以使用 <code>sudo</code> 来使用。</p>
+<p>如果你（你安装的 Docker）创建一个叫 <code>docker</code> 的 unix 群组，并且在群组中添加用户，当进程启动的时候，Docker 群组将有 <code>docker</code> 进程 unix socket 的读/写使用权。docker 进程必须使用root用户运行，但是当使用 Docker 群组的一个用户来运行 Docker 客户端的时候，你不需要在命令前添加 <code>sudo</code> 。</p>
+<blockquote>
+<p>警告：Docker 用户组（或者用<code>-G</code>指定的用户组）和 root 等效，</p>
+</blockquote>
+<p>###更新</p>
+<p>升级你手动安装的 Docker ,需要先关闭你的 docker 进程：</p>
+<pre><code><span class="variable">$ </span>killall docker
+</code></pre><p>然后按照常规的步骤安装。</p>
+<p>###运行你的第一个Docker容器</p>
+<pre><code># <span class="operator"><span class="keyword">check</span> your docker <span class="keyword">version</span>
+$ sudo ./docker <span class="keyword">version</span>
+
+# run a <span class="keyword">container</span> <span class="keyword">and</span> <span class="keyword">open</span> an interactive shell <span class="keyword">in</span> the <span class="keyword">container</span>
+$ sudo ./docker run -<span class="keyword">i</span> -<span class="keyword">t</span> Ubuntu /<span class="keyword">bin</span>/bash</span>
+</code></pre><p>继续阅读<a href="../userguide/README.md">用户指南</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>#Binaries</p>
+<p>本安装说明是提供给那些想在多种环境中安装 Docker 的 hacker 们的。</p>
+<p>在进行安装之前，请检查你的 Linux 发行版本是否有打包好的 Docker 安装包。我们已经发布了许多发行版包，这样会节省您很多时间。</p>]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/amazon/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/amazon/</id>
+    <published>2015-12-08T07:05:15.461Z</published>
+    <updated>2015-09-30T15:27:59.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="Amazon_EC2">Amazon EC2</h1><p>这里有几种方法可以在 AWS EC2 上安装 Docker。你可以使用 Amazon Linux ， 它的软件源中已经包含了 Docker 包，或者你也可以选择其它支持 Docker 的 Linux 镜像 ，例如：<a href="#standard-ubuntu-installation"><em>标准的 Ubuntu 安装</em></a>。</p>
+<p>当然，首先你要创建一个AWS帐号。</p>
+<h2 id="Amazon_QuickStart_with_Amazon_Linux_AMI_2014-09-1">Amazon QuickStart with Amazon Linux AMI 2014.09.1</h2><ol>
+<li><p><strong>选择一个镜像：</strong></p>
+<ul>
+<li><p>在你的 AWS 控制台选择 <a href="https://console.aws.amazon.com/ec2/v2/home?#LaunchInstanceWizard:" title="Create Instance Wizard" target="_blank" rel="external">Create Instance Wizard</a> 菜单。</p>
+</li>
+<li><p>在 Quick Start 按钮中，选择 Amazon 提供的Amazon Linux 2014.09.1  机器镜像(AMI)</p>
+</li>
+<li><p>作为测试，你可以使用默认的(可能免费) <code>t2.micro</code> 实例，（更多价格，<a href="http://aws.amazon.com/ec2/pricing/" target="_blank" rel="external">请查看这里</a>）。</p>
+</li>
+<li><p>单击右下角的 <code>Next: Configure Instance Details</code> 按钮 。</p>
+</li>
+</ul>
+</li>
+<li><p>在几个标准的选项（这里一般默认选择就可以）之后，你的 Amazon Linux 实例可能就运行了。</p>
+</li>
+<li><p>使用 SSH 登录你的实例中 (instance) 来安装 Docker：</p>
+<pre><code>`ssh -i &lt;path <span class="keyword">to</span> your <span class="keyword">private</span> <span class="keyword">key</span>&gt; ec2-user@&lt;your <span class="keyword">public</span> IP address&gt;`
+</code></pre></li>
+<li><p>当你连接到你的实例 （instance）之后，输入 ：</p>
+<pre><code>`sudo yum <span class="operator"><span class="keyword">install</span> -y docker ;</span> sudo service docker <span class="operator"><span class="keyword">start</span><span class="string">`</span></span>
+</code></pre><p> 来安装和启动 Docker 。</p>
+</li>
+</ol>
+<p><strong>如果这是你第一个 AWS 实例，您可能需要配置您的安全组规则来允许 ssh 连接</strong>。默认情况下，新实例(instance) 所有流入端口都会被 AWS 安全组过滤掉。所以当你尝试连接的时候，会出现超时。</p>
+<p>在安装完成 Docker 之后，当你准备试用它的时候，你可以查看<a href="../userguide/README.md">用户指南</a></p>
+<p>###标准Ubuntu安装</p>
+<p>如果你想手动配置安装，请在 EC2 主机上根据 <a href="ubuntu.md">Ubuntu</a> 文档安装 Docker。只要按照步骤1快速选择一个镜像（或者使用你自己现有的），并跳过用户数据的步骤。然后继续按照 <a href="ubuntu.md">Ubuntu</a> 说明进行操作。</p>
+<p>继续查看<a href="../userguide/README.md">用户指南</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Amazon_EC2">Amazon EC2</h1><p>这里有几种方法可以在 AWS EC2 上安装 Docker。你可以使用 Amazon Linux ， 它的软件源中已经包含了 Docker 包，或者你也可以选择其它支持 Docker 的 Linux 镜像]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Google Cloud Platform版本的]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/google/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/google/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:10:42.799Z</updated>
+    <content type="html"><![CDATA[<h1 id="Google_Cloud_Platform">Google Cloud Platform</h1><p>###Google Compute Enginer 镜像快速入门</p>
+<p>1.去谷歌云控制台，创建一个新的云计算项目，启用云引擎</p>
+<p>2.使用如下的命令来下载谷歌云 SDK 并配置您的项目：</p>
+<pre><code>$ curl https://sdk.cloud.google.com | bash
+$ gcloud auth login
+$ gcloud config <span class="operator"><span class="keyword">set</span> <span class="keyword">project</span> &lt;google-cloud-<span class="keyword">project</span>-<span class="keyword">id</span>&gt;</span>
+</code></pre><p>3.启动一个新实例，使用最新的 Container-optimized 镜像:(选择一个接近你所需实例大小的分区)</p>
+<pre><code>$ gcloud compute instances create docker-playground \
+-<span class="ruby">-image <span class="symbol">https:</span>/<span class="regexp">/www.googleapis.com/compute</span><span class="regexp">/v1/projects</span><span class="regexp">/google-containers/global</span><span class="regexp">/images/container</span>-vm-v20140522 \
+</span>-<span class="ruby">-zone us-central1-a \
+</span>-<span class="ruby">-machine-type f1-micro</span>
+</code></pre><p>4.用ssh来连接这个实例：</p>
+<pre><code>$ gcloud compute ssh <span class="comment">--zone us-central1-a docker-playground</span>
+docker-playground:~$ sudo docker <span class="command">run</span> hello-world
+</code></pre><p>当 Docker 输出 hello word 消息的时候，说明你的 Docker 工作正常。</p>
+<p>更多，请阅读 <a href="https://developers.google.com/compute/docs/containers" target="_blank" rel="external"> google 云平台部署容器 </a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Google_Cloud_Platform">Google Cloud Platform</h1><p>###Google Compute Enginer 镜像快速入门</p>
+<p>1.去谷歌云控制台，创建一个新的云计算项目，启用云引擎</p>
+<p>2.使用如]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Docker Hub上的自动化构建]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/docker-hub/builds/"/>
+    <id>http://yoursite.com/2015/12/08/docker/docker-hub/builds/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:06:56.849Z</updated>
+    <content type="html"><![CDATA[<h1 id="Docker_Hub上的自动化构建">Docker Hub上的自动化构建</h1><p>##关于自动化构建</p>
+<p>自动化构建是一个特殊的功能，它允许您在 Docker Hub 上使用构建集群，根据指定的 <code>Dockerfile</code> 或者 GitHub 、 BitBucket 仓库（或环境）来自动创建镜像。该系统将从仓库复制一份，并根据以仓库为环境的 <code>Dockerfile</code> 的描述构建镜像。由此产生的镜像将被上传到注册表，并且自动生成标记。</p>
+<p>自动化构建有许多优势：</p>
+<ul>
+<li>你的自动化构建项目一定是准确按照预期构建的</li>
+<li>在 Docker Hub 注册表上，任何拥有你仓库访问权限的用户都乐意浏览 <code>Dockerfile</code></li>
+<li>自动化构建保证了你的仓库总是最新的</li>
+</ul>
+<p>自动化构建支持 <a href="http://GitHub.com/" target="_blank" rel="external">GitHub</a> 和 <a href="https://bitbucket.org/" target="_blank" rel="external">BitBucket</a> 的私有和公有的仓库。</p>
+<p>要使用自动化构建，你必须拥有经过验证有效的 Docker Hub 账户和 GitHub/Bitbucket 账户。</p>
+<p>##设置GitHub自动化构建</p>
+<p>首先，你需要将 GitHub 账户链接到你的 <a href="https://hub.docker.com/" target="_blank" rel="external">Docker Hub</a> 账户，以允许注册表查看你的仓库。</p>
+<blockquote>
+<p>注：目前我们需要有读写权限以建立 Docker Hub 和 GitHub 的挂钩服务，这是GitHub管理权限的方式，我们别无选择。抱歉！我们将保护您的账户及隐私，确保不会被他人非法获取。</p>
+</blockquote>
+<p>开始构建！登录到你的 Docker Hub 账户，点击屏幕右上方的 “+ Add Repository” 按钮，选择<a href="https://registry.hub.docker.com/builds/add/" target="_blank" rel="external">自动化构建</a>。</p>
+<p>选择<a href="https://registry.hub.docker.com/associate/GitHub/" target="_blank" rel="external">GitHub服务</a></p>
+<p>然后按照说明授权和连接你的 GitHub 账户到 Docker Hub。连接成功后，你就可以选择用来自动化构建的仓库了。</p>
+<p>###创建一个自动化构建项目</p>
+<p>你可以用你的 <code>Dockerfile</code> 从你的公共或者私有仓库<a href="https://registry.hub.docker.com/builds/GitHub/select/" target="_blank" rel="external">创建一个自动化构建项目</a>。</p>
+<p>###GitHub子模块</p>
+<p>如果你的 GitHub 仓库包含了私有子模块的连接，你需要在 Docker Hub 上添加部署秘钥。</p>
+<p>部署秘钥位于自动化构建主页的 “Build Details” 菜单。访问设置 GitHub 仓库的页面，选择 “Deploy keys” 来添加秘钥。</p>
+<table class="table table-bordered"><br>  <thead><br>    <tr><br>      <th>Step</th><br>      <th>Screenshot</th><br>      <th>Description</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <td>1.</td><br>      <td><img style="max-width:100%;" src="../images/github_submodule_deploy_key.png"></td><br>      <td>你的自动化构建部署秘钥位于 “Build Details” 菜单的 “Deploy keys” 下。</td><br>    </tr><br>    <tr><br>      <td>2.</td><br>      <td><img style="max-width:100%;" src="../images/github_submodule_deploy_key_2.png"></td><br>      <td>在你的 GitHub 子模块仓库设置页，添加部署秘钥。</td><br>    </tr><br>  </tbody><br></table>
+
+<p>###GitHub组织</p>
+<p>一旦你的组织成员身份设置为公开，对应的 GitHub 组织状态便会被公开在你的 GitHub 上。为了验证，你可以查看 GitHub 上你的组织的成员选项卡。</p>
+<p>###GitHub服务挂钩</p>
+<p>按照以下步骤配置自动化构建的 GitHub 服务挂钩:</p>
+<table class="table table-bordered"><br>  <thead><br>    <tr><br>      <th>Step</th><br>      <th>Screenshot</th><br>      <th>Description</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <td>1.</td><br>      <td><img src="../images/GitHub_settings.png"></td><br>      <td>登录到 GitHub.com，并转到您的仓库页面，点击右侧页面“Settings”。<br>    执行该操作要求你有该仓库的管理员权限。</td><br>    </tr><br>    <tr><br>      <td>2.</td><br>      <td><img style="max-width:100%;" src="../images/github_service_hooks.png" alt="Webhooks & Services"></td><br>      <td>点击页面左侧的“Webhooks &amp; Services”。</td></tr><br>      <tr><td>3.</td><br>      <td><img style="max-width:100%;" src="../images/github_docker_service_hook.png" alt="Find the service labeled Docker"></td><td>找到 “Docker” 并点击它.</td></tr><br>      <tr><td>4.</td><td><img style="max-width:100%;" src="../images/github_service_hook_docker_activate.png" alt="Activate Service Hooks"></td><br>      <td>确认 “Active” 被选中，然后点击 “Update service” 按钮以保存您的更改。</td><br>    </tr><br>  </tbody><br></table>
+
+<p>##设置BitBucket自动化构建</p>
+<p>为了设置自动化构建，你需要先把 BitBucket 连接到你的 Docker Hub 账户，以允许其访问你的仓库。</p>
+<p>登录到你的 Docker Hub 账户，点击屏幕右上方的 “+ Add Repository” 按钮，选择<a href="https://registry.hub.docker.com/builds/add/" target="_blank" rel="external">自动化构建</a>。</p>
+<p>选择的 <a href="https://registry.hub.docker.com/associate/bitbucket/" target="_blank" rel="external">Bitbucket 服务</a>。 </p>
+<p>然后按照说明授权和连接你的 Bitbucket 账户到 Docker Hub。连接成功后，你就可以选择用来自动化构建的仓库了。</p>
+<p>###创建自动化构建项目</p>
+<p>你可以用你的 <code>Dockerfile</code> 从你的公共或者私有仓库<a href="https://registry.hub.docker.com/builds/bitbucket/select/" target="_blank" rel="external">创建一个自动化构建项目</a>。</p>
+<p>###Bitbucket服务挂钩</p>
+<p>当你成功连接账户以后，一个 <code>POST</code> 挂钩将会自动被添加到你的仓库。请按照以下步骤确认或者更改你的挂钩设置：</p>
+<table class="table table-bordered"><br>  <thead><br>    <tr><br>      <th>Step</th><br>      <th>Screenshot</th><br>      <th>Description</th><br>    </tr><br>  </thead><br>  <tbody><br>    <tr><br>      <td>1.</td><br>      <td><img src="../images/bitbucket_hook_menu.png" alt="Settings" width="180"></td><br>      <td>登录到 Bitbucket.org 进入仓库页面。点击左侧导航下的 “Settings”。执行该操作要求你有该仓库的管理员权限。</td><br>    </tr><br>    <tr><br>      <td>2.</td><br>      <td><img src="../images/bitbucket_hook_menu_2.png" alt="Hooks" width="180"></td><br>      <td>点击左侧 “Settings” 下的 “Hooks”。</td></tr><br>    <tr><br>      <td>3.</td><br>      <td><img style="max-width:100%;" src="../images/bitbucket_hook_post.png" alt="Docker Post Hook"></td><td>现在你应该能看到关联了该仓库的挂钩列表，包括一个指向 registry.hub.docker.com/hooks/bitbucket 的 <code>POST</code> 挂钩。</td><br>    </tr><br>  </tbody><br></table>
+
+<p>##Dockerfile和自动化构建</p>
+<p>在构建过程中，我们将复制 <code>Dockerfile</code> 的内容。我们也将添加它到 Docker Hub 上，使得 Docker 社区（公共仓库）或者得到许可的团队成员可以访问仓库页面。</p>
+<p>##README.md</p>
+<p>如果你的仓库有一个 <code>README.md</code> 文件，我们将使用它作为仓库的描述。构建过程中会寻找 <code>Dockerfile</code> 同一目录下的 <code>README.md</code>。</p>
+<blockquote>
+<p>警告：如果你需要在创建之后修改描述，它会在下一次自动化构建完成之后生效。</p>
+</blockquote>
+<p>###建立触发器</p>
+<p>如果你需要 GitHub 或者 BitBucket 以外的方式来触发自动化构建，你可以创建一个构建触发器。当你打开构建触发器，它会提供给你一个 url 来发送 POST 请求。这将触发自动化构建过程，类似于 GitHub webhook。</p>
+<p>建立触发器可在自动化构建项目的 Settings 菜单中设置。</p>
+<blockquote>
+<p>注：你在五分钟内只能触发一个构建，如果你已经进行一个构建，或你最近提交了构建请求，这些请求将被忽略。你可以在设置页面来找到最后10条触发日志来验证是否一切正常工作。</p>
+</blockquote>
+<p>###Webhooks</p>
+<p>也可以使用 Webhooks 来自动化构建，Webhooks 会在仓库推送成功后被调用。</p>
+<p>此webhook调用将生成一个 HTTP POST，JSON样例如下：</p>
+<pre><code>{
+   "<span class="attribute">push_data</span>":<span class="value">{
+      "<span class="attribute">pushed_at</span>":<span class="value"><span class="number">1385141110</span></span>,
+      "<span class="attribute">images</span>":<span class="value">[
+         <span class="string">"imagehash1"</span>,
+         <span class="string">"imagehash2"</span>,
+         <span class="string">"imagehash3"</span>
+      ]</span>,
+      "<span class="attribute">pusher</span>":<span class="value"><span class="string">"username"</span>
+   </span>}</span>,
+   "<span class="attribute">repository</span>":<span class="value">{
+      "<span class="attribute">status</span>":<span class="value"><span class="string">"Active"</span></span>,
+      "<span class="attribute">description</span>":<span class="value"><span class="string">"my docker repo that does cool things"</span></span>,
+      "<span class="attribute">is_automated</span>":<span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">full_description</span>":<span class="value"><span class="string">"This is my full description"</span></span>,
+      "<span class="attribute">repo_url</span>":<span class="value"><span class="string">"https://registry.hub.docker.com/u/username/reponame/"</span></span>,
+      "<span class="attribute">owner</span>":<span class="value"><span class="string">"username"</span></span>,
+      "<span class="attribute">is_official</span>":<span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">is_private</span>":<span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">name</span>":<span class="value"><span class="string">"reponame"</span></span>,
+      "<span class="attribute">namespace</span>":<span class="value"><span class="string">"username"</span></span>,
+      "<span class="attribute">star_count</span>":<span class="value"><span class="number">1</span></span>,
+      "<span class="attribute">comment_count</span>":<span class="value"><span class="number">1</span></span>,
+      "<span class="attribute">date_created</span>":<span class="value"><span class="number">1370174400</span></span>,
+      "<span class="attribute">dockerfile</span>":<span class="value"><span class="string">"my full dockerfile is listed here"</span></span>,
+      "<span class="attribute">repo_name</span>":<span class="value"><span class="string">"username/reponame"</span>
+   </span>}
+</span>}
+</code></pre><p>Webhooks 可在自动化构建项目的 Settings 菜单中设置。</p>
+<blockquote>
+<p>注意：如果你想测试你的 webhook，我们建议使用像 <a href="http://requestb.in/" target="_blank" rel="external">requestb.in</a> 的工具。 </p>
+</blockquote>
+<p>###仓库链接</p>
+<p>仓库链接是一种建立自动化项目与项目之间关联的方式。如果一个项目得到更新，连接系统还会触发另一个项目的更新构建。这使得你可以轻松地让所有关联项目保持更新同步。</p>
+<p>要添加链接的话，访问你想要添加链接的项目的仓库设置页面，在设置菜单下地右侧点击 “Repository Links”。然后输入你想要与之链接的仓库名称。</p>
+<blockquote>
+<p>警告：您可以添加多个仓库的链接，但要小心。自动化构建之间的双向关系会造成一个永不停止的构建循环。</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Docker_Hub上的自动化构建">Docker Hub上的自动化构建</h1><p>##关于自动化构建</p>
+<p>自动化构建是一个特殊的功能，它允许您在 Docker Hub 上使用构建集群，根据指定的 <code>Dockerfile</code> 或者]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Docker Hub]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/docker-hub/docker-hub/"/>
+    <id>http://yoursite.com/2015/12/08/docker/docker-hub/docker-hub/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:07:05.780Z</updated>
+    <content type="html"><![CDATA[<h1 id="Docker_Hub">Docker Hub</h1><p>先来看看 Docker Hub 的界面：</p>
+<h1 id=""><img src="../images/hub.png" alt=""></h1><p>在这个章节，我们来学习 Docker Hub 的相关话题：</p>
+<p><a href="accounts.md">账户</a></p>
+<p>学习如何创建一个Docker Hub账户来管理你的组织和机构。</p>
+<p><a href="repos.md">仓库</a></p>
+<p>了解如何分享你 Docker Hub 上的 Docker 镜像，以及如何存储和管理你的私人镜像。</p>
+<p><a href="builds.md">自动构建</a></p>
+<p>学习如何自动化构建、部署和管理</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Docker_Hub">Docker Hub</h1><p>先来看看 Docker Hub 的界面：</p>
+<h1 id=""><img src="../images/hub.png" alt=""></h1><p>在这个章节，我们来学习 Docker Hub ]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[windows
+安装 docker]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/windows/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/windows/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:15:37.642Z</updated>
+    <content type="html"><![CDATA[<p>#windows</p>
+<blockquote>
+<p>提示：Docker 已经在windows7.1和windows 8上通过测试，当然它也可以在低版本的windows上使用。但是你的处理器必须支持硬件虚拟化。</p>
+</blockquote>
+<p>Docker 引擎使用的是Linux内核特性，所以我们需要在 Windows 上使用一个轻量级的虚拟机 (VM) 来运行 Docker。我们使用 Windows的Docker客户端来控制 Docker 虚拟化引擎的构建、运行和管理 。</p>
+<p>为了简化这个过程，我们设计了一个叫 <a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="external">Boot2Docker</a> 的应用程序，你可以通过它来安装虚拟机和运行 Docker。</p>
+<p>虽然你使用的是 Windows 的 Docker 客户端，但是 docker 引擎容器依然是运行在 Linux 宿主主机上（现在是通过Virtual box）。直到我们开发了 windows 版本的 Docker 引擎，你只需要在你的 Windows 主机上启动一个 Linux 容器。</p>
+<p>##安装</p>
+<ol>
+<li><p>下载最新版本的<a href="https://github.com/boot2docker/windows-installer/releases/latest" target="_blank" rel="external">Docker for Windows Installer</a></p>
+</li>
+<li><p>运行安装文件，它将会安装virtualbox、MSYS-git boot2docker Linux镜像和Boot2Docker的管理工具。</p>
+<p> <img src="http://widuu.u.qiniudn.com/windows_docker.png" alt="docker windows软件安装"></p>
+</li>
+<li><p>从桌面上或者Program Files中找到Boot2Docker for Windows，运行 <code>Boot2Docker Start</code> 脚本。这个脚本会要求你输入 ssh 密钥密码 - 可以简单点（但是起码看起来比较安全），然后只需要按[Enter]按钮即可。</p>
+</li>
+<li><p><code>Boot2Docker Start</code> 将启动一个 Unix shell 来配置和管理运行在虚拟主机中的 Docker，运行 <code>docker version</code> 来查看它是否正常工作。</p>
+</li>
+</ol>
+<p><img src="../images/windows-boot2docker-start.png" alt="windows docker run"></p>
+<p>###运行 Docker</p>
+<blockquote>
+<p>注意：如果你使用的是一个远程的 Docker 进程，像 <code>Boot2docker</code> ，你就不需要像前边的文档实例中那样在输入 Docker 命令之前输入 <code>sudo</code>。</p>
+</blockquote>
+<p><strong>Boot2docker start</strong> 将会自动启动一个 shell 命令框并配置好环境变量，以便您可以马上使用 Docker ：</p>
+<p>让我们尝试运行 <code>hello-world</code> 例子。 运行：</p>
+<pre><code>$ docker <span class="command">run</span> hello-world
+</code></pre><p>这将会下载一个非常小的 <code>hello-world</code> 镜像，并且打印出 <code>Hello from Docker.</code> 信息。</p>
+<p>###使用 Windows 的命令行(cmd.exe) 来管理运行 Docker</p>
+<p>启动一个 Windows 命令行（cmd.exe）.</p>
+<p>运行 Boot2docker 命令，这需要你的 Windows PATH环境变量中包含了 <code>ssh.exe</code>。因此我们需要将安装的 Git 的 bin 目录 （其中包含了 ssh.exe） 配置到我们的 <code>%PATH%</code> 环境变量中，运行如下命令：</p>
+<pre><code><span class="operator"><span class="keyword">set</span> <span class="keyword">PATH</span>=%<span class="keyword">PATH</span>%;</span>"c:\Program Files (x86)\Git\bin"
+</code></pre><p>现在，我们可以运行 <code>boot2docker start</code> 命令来启动 Boot2docker 虚拟机。（如果有虚拟主机不存在的错误提示，你需要运行 <code>boot2docker init</code> 命令）。复制上边的指令到 cmd.exe 来设置你的 windows 控制台的环境变量，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
+<p><img src="../images/windows-boot2docker-cmd.png" alt="docker cmd.exe"></p>
+<h3 id="PowerShell_中使用_Docker">PowerShell 中使用 Docker</h3><p>启动 PowerShell，你需要将 <code>ssh.exe</code> 添加到你的 PATH 中。</p>
+<pre><code><span class="variable">$Env</span>:Path = <span class="string">"${Env:Path};c:\Program Files (x86)\Git\bin"</span>
+</code></pre><p>之后，运行 <code>boot2docker start</code> 命令行，它会打印出  PowerShell 命令，这些命令是用来设置环境变量来连接运行在虚拟机中 Docker 的。运行这些命令，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
+<p><img src="../images/windows-boot2docker-powershell.png" alt="Powershell Docker"></p>
+<blockquote>
+<p>提示:你可以使用 <code>boot2docker shellinit | Invoke-Expression</code> 来设置你的环境变量来代替复制粘贴 Powershell 命令。</p>
+</blockquote>
+<p>##进一步的细节</p>
+<p>Boot2Docker 管理工具提供了如下几个命令：</p>
+<pre><code>$ boot2docker
+Usage: boot2docker.exe <span class="annotation">[&lt;options&gt;]</span> {help|init|up|ssh|save|down|poweroff|reset|restart|config|status|info|ip|shellinit|delete|download|upgrade|version} <span class="annotation">[&lt;args&gt;]</span>
+</code></pre><p>###升级</p>
+<ul>
+<li>下载最新的 <a href="https://github.com/boot2docker/windows-installer/releases/tag/v1.5.0" target="_blank" rel="external">Docker for Windows Installer</a></li>
+<li>运行安装程序，这将升级 Boot2Docker 管理工具</li>
+<li><p>打开终端输入如下的命令来升级你现有的虚拟机：</p>
+<p>  $ boot2docker stop<br>  $ boot2docker download<br>  $ boot2docker start</p>
+</li>
+</ul>
+<p>###容器端口重定向</p>
+<p>boot2Docker的默认用户是 <code>docker</code> 密码是 <code>tcuser</code>。 </p>
+<p>最新版本的 boot2docker 可以设置网络适配器来给容器提供端口访问。</p>
+<p>如你运行一个暴露内部端口的容器</p>
+<pre><code>docker run --rm -<span class="tag">i</span> -t -<span class="tag">p</span> <span class="number">80</span>:<span class="number">80</span> nginx
+</code></pre><p>当你需要使用一个IP地址来访问 Nginx 服务器，你可以使用如下命令来查看 ip。</p>
+<pre><code>$ <span class="keyword">boot2docker </span><span class="literal">ip</span>
+</code></pre><p>通常情况下，是192.168.59.103,但是它可以通过 virtualbox 的 dhcp 来改变。</p>
+<p>更多细节信息，请查看<a href="http://boot2docker.io/" target="_blank" rel="external">Boot2Docker site</a></p>
+<p>###使用PUTTY登陆来代替CMD命令行</p>
+<p>Boot2Docker使用 <code>%HOMEPATH%\.ssh</code> 目录来生成你的共有和私有密钥。同样登陆的时候你也需要使用这个目录下的私有密钥。</p>
+<p>这个私有密钥需要转换成 PuTTY 所需要的格式。</p>
+<p>你可以使用 <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" target="_blank" rel="external">puttygen</a>来生成，具体操作如下:</p>
+<ol>
+<li><p>打开 <code>puttygen.exe</code> 找到（”File”-&gt;”Load”）按钮来加载 %HOMEPATH%.ssh\id_boot2docker 私有密钥文件。</p>
+</li>
+<li><p>点击<code>&quot;Save Private Key&quot;</code>按钮。</p>
+</li>
+<li><p>在PUTTY中使用刚才保存的文件来登陆 docker@127.0.0.1:2022 </p>
+</li>
+</ol>
+<p>##参考</p>
+<p>如果你已经运行 Docker 主机或者你不希望使用 <code>Boot2docker</code> 安装，你可以安装 docker.exe 使用非官方的包管理器 Chocolately。了解更多新，请查看 <a href="https://chocolatey.org/packages/docker" target="_blank" rel="external">Docker package on Chocolatey</a>。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>#windows</p>
+<blockquote>
+<p>提示：Docker 已经在windows7.1和windows 8上通过测试，当然它也可以在低版本的windows上使用。但是你的处理器必须支持硬件虚拟化。</p>
+</blockquote>
+<p>Docker 引]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Ubuntu
+安装 docker]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/ubuntu/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/ubuntu/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:15:45.274Z</updated>
+    <content type="html"><![CDATA[<h1 id="Ubuntu">Ubuntu</h1><p>Docker 支持以下的 Ubuntu 版本</p>
+<ul>
+<li>Ubuntu Trusty 14.04 (LTS) (64-bit)</li>
+<li>Ubuntu Precise 12.04 (LTS) (64-bit)</li>
+<li>Ubuntu Raring 13.04 and Saucy 13.10 (64 bit)</li>
+</ul>
+<p>这个页面可以指导你安装 Docker 包管理器，并了解其中的安装机制。通过下边的安装方式可以确保你获取的是最新版本的 Docker。如果你想要使用 ‘Ubuntu包管理器’ 安装，你可以查阅你的 Ubuntu 文档。</p>
+<p>###前提条件</p>
+<p>Docker 需要在64位版本的Ubuntu上安装。此外，你还需要保证你的 Ubuntu 内核的最小版本不低于 3.10，其中3.10 小版本和更新维护版也是可以使用的。</p>
+<p>在低于3.10版本的内核上运行 Docker 会丢失一部分功能。在这些旧的版本上运行 Docker 会出现一些BUG，这些BUG在一定的条件里会导致数据的丢失，或者报一些严重的错误。</p>
+<p>打开控制台使用 <code>uname -r</code>命令来查看你当前的内核版本。</p>
+<pre><code>$ uname -r 
+<span class="number">3.11</span><span class="number">.0</span>-<span class="number">15</span>-generic
+</code></pre><blockquote>
+<p>Docker 要求 Ubuntu 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的Ubuntu版本是否支持 Docker 。</p>
+</blockquote>
+<p>###Trusty 14.04</p>
+<p> 这个版本不需要考虑前提条件</p>
+<p>###Precise 12.04 (LTS)</p>
+<p>对于Ubuntu Precise版本, 安装Docker需要内核在3.13及以上版本。如果你的内核版本低于3.13你需要升级你的内核。 通过下边的表，请查阅下边的表来确认你的环境需要哪些包。</p>
+<p> <table class="tg"> <tr> <td class="tg-031">linux-image-generic-lts-trusty</td> <td class="tg-031e">Generic<br>Linux kernel image. This kernel has AUFS built in. This is required to run<br>Docker.</td> </tr> <tr> <td class="tg-031">linux-headers-generic-lts-trusty</td></tr></table></p>
+<p><td class="tg-031e">Allows packages such as ZFS and VirtualBox guest additions<br>which depend on them. If you didn’t install the headers for your existing<br>kernel, then you can skip these headers for the”trusty” kernel. If you’re<br>unsure, you should include this package for safety.</td>  <tr> <td class="tg-031">xserver-xorg-lts-trusty</td> <td class="tg-031e" rowspan="2">Optional in non-graphical environments without Unity/Xorg.<br><i>Required</i> when running Docker on machine with a graphical environment.</td></tr></p>
+<p></p><p>To learn more about the reasons for these packages, read the installation<br>instructions for backported kernels, specifically the <a href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack" target="_blank">LTS<br>Enablement Stack</a> &mdash; refer to note 5 under each version.</p> <p></p>
+<p><tr> <td class="tg-031">libgl1-mesa-glx-lts-trusty</td> </tr>  &nbsp;</p>
+<p>通过下边的操作来升级你的内核和安装额外的包</p>
+<ol>
+<li><p>在Ubuntu系统中打开命令行控制台。</p>
+</li>
+<li><p>升级你的包管理器</p>
+<pre><code>$ sudo apt-<span class="built_in">get</span> <span class="keyword">update</span>
+</code></pre></li>
+<li><p>安装所有必须和可选的包</p>
+<pre><code>$ sudo apt-<span class="built_in">get</span> install linux-<span class="built_in">image</span>-generic-lts-trusty
+</code></pre><p> 根据个人的系统环境来选择是否安装更多的包（前表列出）。</p>
+</li>
+<li><p>重启系统</p>
+<pre><code><span class="variable">$ </span>sudo reboot
+</code></pre></li>
+<li><p>等到系统重启成功之后，查看<a href="#Ubuntu安装Docker">安装Docker</a></p>
+</li>
+</ol>
+<p>###Saucy 13.10 (64 bit)</p>
+<p>Docker 使用 AUFS 作为默认的后端存储方式，如果你之前没有安装 AUFS ，Docker 在安装过程中会自动添加。</p>
+<p>##Ubuntu安装Docker</p>
+<p>首先要确认你的 Ubuntu 版本是否符合安装 Docker 的前提条件。如果没有问题，你可以通过下边的方式来安装 Docker ：</p>
+<ol>
+<li><p>使用具有<code>sudo</code>权限的用户来登录你的Ubuntu。</p>
+</li>
+<li><p>查看你是否安装了<code>wget</code></p>
+<pre><code>$ <span class="built_in">which</span> wget
+</code></pre><p> 如果<code>wget</code>没有安装，先升级包管理器，然后再安装它。</p>
+<pre><code>$ sudo apt-<span class="built_in">get</span> <span class="keyword">update</span> $ sudo apt-<span class="built_in">get</span> install wget
+</code></pre></li>
+<li><p>获取最新版本的 Docker 安装包</p>
+<pre><code>$ wget -qO- http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/ | <span class="keyword">sh</span>
+</code></pre><p> 系统会提示你输入<code>sudo</code>密码，输入完成之后，就会下载脚本并且安装Docker及依赖包。</p>
+</li>
+<li><p>验证 Docker 是否被正确的安装</p>
+<pre><code>$ sudo docker <span class="command">run</span> hello-world
+</code></pre><p>  上边的命令会下载一个测试镜像，并在容器内运行这个镜像。</p>
+</li>
+</ol>
+<p>##Ubuntu Docker可选配置</p>
+<p>这部分主要介绍了 Docker 的可选配置项，使用这些配置能够让 Docker 在 Ubuntu 上更好的工作。</p>
+<ul>
+<li>创建 Docker 用户组</li>
+<li>调整内存和交换空间(swap accounting) </li>
+<li>启用防火墙的端口转发(UFW)</li>
+<li>为 Docker 配置DNS服务</li>
+</ul>
+<p>###创建 Docker 用户组</p>
+<p>docker 进程通过监听一个 Unix Socket 来替代 TCP 端口。在默认情况下，docker 的 Unix Socket属于<code>root</code>用户，当然其他用户可以使用<code>sudo</code>方式来访问。因为这个原因， docker 进程就一直是<code>root</code>用户运行的。</p>
+<p>为了在使用 <code>docker</code> 命令的时候前边不再加<code>sudo</code>，我们需要创建一个叫 <code>docker</code> 的用户组，并且为用户组添加用户。然后在 <code>docker</code> 进程启动的时候，我们的 <code>docker</code> 群组有了 Unix Socket 的所有权，可以对 Socket 文件进行读写。</p>
+<blockquote>
+<p>注意：<code>docker</code> 群组就相当于root用户。有关系统安全影响的细节，请查看 <a href="">Docker 进程表面攻击细节</a></p>
+</blockquote>
+<p>创建 <code>docker</code> 用户组并添加用户</p>
+<ol>
+<li><p>使用具有<code>sudo</code>权限的用户来登录你的Ubuntu。</p>
+<p> 在这过程中，我们假设你已经登录了Ubuntu。</p>
+</li>
+<li><p>创建 <code>docker</code> 用户组并添加用户。</p>
+<pre><code>$ sudo usermod <span class="operator">-a</span>G docker ubuntu
+</code></pre></li>
+<li><p>注销登录并重新登录</p>
+<p> 这里要确保你运行用户的权限。</p>
+</li>
+<li><p>验证 <code>docker</code> 用户不使用 <code>sudo</code> 命令开执行 <code>Docker</code></p>
+<pre><code>$ docker <span class="command">run</span> hello-world
+</code></pre></li>
+</ol>
+<p>###调整内存和交换空间(swap accounting)</p>
+<p>当我们使用 Docker 运行一个镜像的时候，我们可能会看到如下的信息提示：</p>
+<pre><code><span class="label">WARNING: </span>Your kernel does not support cgroup swap limit. WARNING: Your
+kernel does not support swap limit capabilities. Limitation discarded.、
+</code></pre><p>为了防止以上错误信息提示的出现，我们需要在系统中启用内存和交换空间。我们需要修改系统的 GUN GRUB (GNU GRand Unified Bootloader) 来启用内存和交换空间。开启方法如下：</p>
+<ol>
+<li><p>使用具有<code>sudo</code>权限的用户来登录你的Ubuntu。</p>
+</li>
+<li><p>编辑 <code>/etc/default/grub</code> 文件</p>
+</li>
+<li><p>设置 <code>GRUB_CMDLINE_LINUX</code> 的值如下：</p>
+<pre><code><span class="setting">GRUB_CMDLINE_LINUX=<span class="value"><span class="string">"cgroup_enable=memory swapaccount=1"</span></span></span>
+</code></pre></li>
+<li><p>保存和关闭文件 </p>
+</li>
+<li><p>更新 GRUB</p>
+<pre><code><span class="variable">$ </span>sudo update-grub
+</code></pre></li>
+<li><p>重启你的系统。</p>
+</li>
+</ol>
+<h3 id="允许UFW端口转发">允许UFW端口转发</h3><p>当你在运行 <code>docker</code> 的宿主主机上使用UFW（简单的防火墙）。你需要做一些额外的配置。Docker 使用桥接的方式来管理网络。默认情况下，UFW 过滤所有的端口转发策略。因此，当在UFW启用的情况下使用 <code>docker</code> ,你必须适当的设置UFW的端口转发策略。</p>
+<p>默认情况下UFW是过滤掉所有的入站规则。如果其他的主机能够访问你的容器。你需要允许Docker的默认端口(2375)的所有连接。</p>
+<p>设置 UFW 允许Docker 端口的入站规则：</p>
+<ol>
+<li>使用具有<code>sudo</code>权限的用户来登录你的Ubuntu。</li>
+<li><p>验证UFW的安装和启用状态</p>
+<pre><code><span class="variable">$ </span>sudo ufw status
+</code></pre></li>
+<li><p>打开和编辑<code>/etc/default/ufw</code>文件 </p>
+<pre><code>$ sudo nano <span class="regexp">/etc/</span><span class="keyword">default</span><span class="regexp">/ufw</span>
+</code></pre></li>
+<li><p>设置 <code>DEFAULT_FORWARD_POLICY</code> 如下：</p>
+<p> DEFAULT_FORWARD_POLICY=”ACCEPT”</p>
+</li>
+<li><p>保存关闭文件。</p>
+</li>
+<li><p>重新加载UFW来使新规则生效。</p>
+<pre><code><span class="variable">$ </span>sudo ufw reload
+</code></pre></li>
+<li><p>允许 Docker 端口的入站规则</p>
+<pre><code>$ sudo ufw allow <span class="number">2375</span>/tcp
+</code></pre></li>
+</ol>
+<p>###Docker 配置 DNS 服务</p>
+<p>无论是Ubuntu还是Ubuntu 桌面繁衍版在系统运行的时候都是使用<code>/etc/resolv.conf</code>配置文件中的127.0.0.1作为域名服务器(nameserver)。NetworkManager设置dnsmasq使用真实的dns服务器连接，并且设置 /etc/resolv.conf的域名服务为127.0.0.1。</p>
+<p>在桌面环境下使用这些配置来运行 docker 容器的时候， Docker 用户会看到如下的警告：</p>
+<pre><code><span class="label">WARNING: </span>Local (127.0.0.1) DNS resolver found in resolv.conf and containers
+can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
+</code></pre><p>该警告是因为 Docker 容器不能使用本地的DNS服务。相反 Docker 使用一个默认的外部域名服务器。</p>
+<p>为了避免此警告，你可以给 Docker 容器指定一个DNS服务器。或者你可以禁用 NetworkManager 的 <code>dnsmasq</code>。不过当禁止 <code>dnsmasq</code> 可能使某些网络的DNS解析速度变慢。</p>
+<p>为 Docker 指定一个DNS服务器</p>
+<ol>
+<li><p>使用具有<code>sudo</code>权限的用户来登录你的Ubuntu。</p>
+</li>
+<li><p>打开并编辑 <code>/etc/default/docker</code></p>
+<pre><code>$ sudo nano <span class="regexp">/etc/</span><span class="keyword">default</span><span class="regexp">/docker</span>
+</code></pre></li>
+<li><p>添加设置 </p>
+<pre><code><span class="setting">DOCKER_OPTS=<span class="value"><span class="string">"--dns 8.8.8.8"</span></span></span>
+</code></pre><p> 使用8.8.8.8替换如192.168.1.1的本地DNS服务器。你可以指定多个DNS服务器，多个DNS服务器使用空格分割例如</p>
+<pre><code>--dns <span class="number">8.8</span><span class="number">.8</span><span class="number">.8</span> --dns <span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span>
+</code></pre><blockquote>
+<p>警告:如果你正在使用的电脑需要连接到不同的网络,一定要选择一个公共DNS服务器。</p>
+</blockquote>
+</li>
+<li><p>保存关闭文件。 </p>
+</li>
+<li><p>重启 Docker 进程 </p>
+<pre><code><span class="variable">$ </span>sudo restart docker  
+</code></pre></li>
+</ol>
+<p>或者，作为替代先前的操作过程，禁止NetworkManager中的<code>dnsmasq</code>(这样会使你的网络变慢)</p>
+<ol>
+<li><p>打开和编辑 <code>/etc/default/docker</code></p>
+<pre><code><span class="variable">$ </span>sudo nano /etc/<span class="constant">NetworkManager</span>/<span class="constant">NetworkManager</span>.conf
+</code></pre></li>
+<li><p>注释掉 dns = dsnmasq：</p>
+<pre><code><span class="attribute">dns</span>=<span class="string">dnsmasq</span>
+</code></pre></li>
+<li><p>保存关闭文件</p>
+</li>
+<li><p>重启NetworkManager 和 Docker</p>
+<pre><code><span class="variable">$ </span>sudo restart network-manager <span class="variable">$ </span>sudo restart docker
+</code></pre></li>
+</ol>
+<p>###升级Docker</p>
+<p>在<code>wget</code>的时候使用<code>-N</code>参数来安装最新版本的Docker：</p>
+<pre><code>$ wget -<span class="keyword">N</span> http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/ | <span class="keyword">sh</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Ubuntu">Ubuntu</h1><p>Docker 支持以下的 Ubuntu 版本</p>
+<ul>
+<li>Ubuntu Trusty 14.04 (LTS) (64-bit)</li>
+<li>Ubuntu Precise 12.04 (LTS) (64]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[IBM SoftLayer
+安装 docker]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/softlayer/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/softlayer/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:15:53.416Z</updated>
+    <content type="html"><![CDATA[<h1 id="IBM_SoftLayer">IBM SoftLayer</h1><p>1.创建一个 <a href="https://www.softlayer.com/cloud-servers/" target="_blank" rel="external">IBM SoftLayer 账户</a>.</p>
+<p>2.登陆到 <a href="https://control.softlayer.com/" target="_blank" rel="external">SoftLayer Customer Portal</a>.</p>
+<p>3.在 <code>Devices</code> 菜单中选择<a href="https://control.softlayer.com/devices" target="_blank" rel="external">设备列表</a>.</p>
+<p>4.点击位于菜单条下方、窗口顶部右侧的 <em>Order Devices</em>.</p>
+<p>5.在 <code>Virtual Server</code> 下点击 <a href="https://manage.softlayer.com/Sales/orderHourlyComputingInstance" target="_blank" rel="external">Hourly</a>.</p>
+<p>6.创建一个新的 SoftLayer Virtual Server Instance (VSI)，使用全部字段的默认值:</p>
+<ul>
+<li><code>Datacenter</code> 的部署位置</li>
+<li>Ubuntu Linux 12.04 LTS Precise Pangolin - 最小化安装的64位系统</li>
+</ul>
+<p>7.点击底部右侧的 <em>Continue Your Order</em>.</p>
+<p>8.填写 VSI 主机名和域名。</p>
+<p>9.填写用户所需的元数据和订单。</p>
+<p>10.接下来请继续阅读 <a href="https://docs.docker.com/installation/ubuntulinux/#ubuntu-linux" target="_blank" rel="external">Ubuntu</a>.</p>
+<p>###What next</p>
+<p>更多信息请阅读<a href="../userguide/README.md">用户指南</a>。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="IBM_SoftLayer">IBM SoftLayer</h1><p>1.创建一个 <a href="https://www.softlayer.com/cloud-servers/" target="_blank" rel="external">IBM Sof]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Red Hat Enterprise Linux 安装 Docker]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/redhat/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/redhat/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:11:43.079Z</updated>
+    <content type="html"><![CDATA[<h1 id="Red_Hat_Enterprise_Linux">Red Hat Enterprise Linux</h1><p>以下是支持 Docker 的 RHEL 版本：</p>
+<ul>
+<li><a href="#red-hat-enterprise-linux-7-installation"><em>Red Hat Enterprise Linux 7 (64-bit)</em></a></li>
+<li><a href="#red-hat-enterprise-linux-6.5-installation"><em>Red Hat Enterprise Linux 6.5 (64-bit)</em></a> 或更高版本</li>
+</ul>
+<h2 id="内核支持">内核支持</h2><p>如果你的 RHEL 运行的是发行版内核。那就仅支持通过 <em>extras</em> 渠道或者 EPEL 包来安装 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错</p>
+<h2 id="Red_Hat_Enterprise_Linux_7_installation">Red Hat Enterprise Linux 7 installation</h2><p><strong>Red Hat Enterprise Linux 7 （64位）</strong> <a href="https://access.redhat.com/site/products/red-hat-enterprise-linux/docker-and-containers" target="_blank" rel="external">自带Docker</a>. 你可以在<a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.0_Release_Notes/chap-Red_Hat_Enterprise_Linux-7.0_Release_Notes-Linux_Containers_with_Docker_Format.html" target="_blank" rel="external">发行日志</a>中找到概述和指南。</p>
+<p>Docker 包含在 <strong>extras</strong> 镜像源中，使用下面的方法可以安装 Docker:</p>
+<ol>
+<li><p>启用 <strong>extras</strong> 镜像源:</p>
+<pre><code>$ sudo subscription-manager repos <span class="comment">--enable=rhel-7-server-extras-rpms</span>
+</code></pre></li>
+<li><p>安装 Docker :</p>
+<pre><code>$ sudo yum <span class="keyword">install</span> docker 
+</code></pre></li>
+</ol>
+<p>如果你是RHEL客户，更多的 RHEL-7 安装、配置和<a href="https://access.redhat.com/site/articles/881893" target="_blank" rel="external">用户指南</a>可以在<a href="https://access.redhat.com/" target="_blank" rel="external">客户中心</a>中找到。</p>
+<p>请继续阅读 <a href="#starting-the-docker-daemon"> 启动 Docker 进程 </a>.</p>
+<h2 id="Red_Hat_Enterprise_Linux_6-5_installation">Red Hat Enterprise Linux 6.5 installation</h2><p>你需要在 <strong>64位</strong> 的 <a href="https://access.redhat.com/site/articles/3078#RHEL6" target="_blank" rel="external">RHEL 6.5</a> 或更高的版本上来安装 Docker，Docker 工作需要特定的内核补丁, 因此 RHEL 的内核版本应为 2.6.32-431 或者更高。</p>
+<p>Docker 已经包含在 RHEL 的 EPEL 源中。该源是 Extra Packages for Enterprise Linux (EPEL) 的一个额外包，社区中正在努力创建和维护相关镜像。</p>
+<h2 id="内核支持-1">内核支持</h2><p>如果你的 RHEL 运行的是发行版内核。那就仅支持通过 <em>extras</em> 渠道或者 EPEL 包来安装 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错</p>
+<blockquote>
+<p><strong>Warning</strong>:<br>Please keep your system up to date using <code>yum update</code> and rebooting<br>your system. Keeping your system updated ensures critical security<br> vulnerabilities and severe bugs (such as those found in kernel 2.6.32)<br>are fixed.</p>
+</blockquote>
+<p>首先，你需要安装EPEL镜像源，请查看 <a href="https://fedoraproject.org/wiki/EPEL#How_can_I_use_these_extra_packages.3F" target="_blank" rel="external">EPEL installation instructions</a>.</p>
+<p>在EPEL中已经提供了 <code>docker-io</code> 包</p>
+<p>如果你安装了(不相关)的 Docker 包，它将与 <code>docker-io</code> 冲突。在安装 <code>docker-io</code> 之前，请先卸载 Docker</p>
+<p>下一步，我们将要在我们的主机中安装 Docker,也就是 <code>docker-io</code> 包:</p>
+<pre><code>$ sudo yum -y <span class="keyword">install</span> docker-io
+</code></pre><p>更新<code>docker-io</code>包:</p>
+<pre><code><span class="variable">$ </span>sudo yum -y update docker-io
+</code></pre><p>现在 Docker 已经安装好了，我们来启动 docker 进程:</p>
+<pre><code><span class="variable">$ </span>sudo service docker start
+</code></pre><p>设置开机启动:</p>
+<pre><code>$ sudo chkconfig docker <span class="function_start"><span class="keyword">on</span></span>
+</code></pre><p>现在，让我们确认 Docker 是否正常工作：</p>
+<pre><code>$ sudo docker run -<span class="tag">i</span> -t fedora /bin/bash
+</code></pre><p>继续 <a href="#启动Docker进程"> 启动 Docker 进程 </a></p>
+<h2 id="启动_Docker_进程">启动 Docker 进程</h2><p>现在 Docker 已经安装好了，让我们来启动 Docker 进程</p>
+<pre><code><span class="variable">$ </span>sudo service docker start
+</code></pre><p>如果我们想要开机启动 Docker ，我们需要执行如下的命令：</p>
+<pre><code>$ sudo chkconfig docker <span class="function_start"><span class="keyword">on</span></span>
+</code></pre><p>现在测试一下是否正常工作.</p>
+<pre><code>$ sudo docker run -<span class="tag">i</span> -t fedora /bin/bash
+</code></pre><blockquote>
+<p>注意: 如果你运行的时候提示一个  <code>Cannot start container</code> 的错误，错误中提到了 SELINUX 或者 权限不足。你需要更新 SELINUX 规则。你可以使用 <code>sudo yum upgrade selinux-policy</code> 然后重启。</p>
+</blockquote>
+<p><strong>下一步</strong></p>
+<p>好！现在你可以去查看<a href="../userguide/README.md">用户指南</a>。</p>
+<h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
+<p>##问题</p>
+<p>遇到问题请到 <a href="https://bugzilla.redhat.com/enter_bug.cgi?product=Fedora%20EPEL&amp;component=docker-io" target="_blank" rel="external">Red Hat Bugzilla for docker-io component</a> 进行反馈。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Red_Hat_Enterprise_Linux">Red Hat Enterprise Linux</h1><p>以下是支持 Docker 的 RHEL 版本：</p>
+<ul>
+<li><a href="#red-hat-enterprise-linux-7-]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Docker Hub上的仓库和镜像]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/docker-hub/repos/"/>
+    <id>http://yoursite.com/2015/12/08/docker/docker-hub/repos/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:07:14.644Z</updated>
+    <content type="html"><![CDATA[<h1 id="Docker_Hub上的仓库和镜像">Docker Hub上的仓库和镜像</h1><p><img src="../images/repos.png" alt="仓库镜像"></p>
+<p>##搜索仓库和镜像</p>
+<p>你可以使用 Docker 来搜索所有公开可用的仓库和镜像。</p>
+<pre><code><span class="variable">$ </span>docker search ubuntu
+</code></pre><p>这将通过 Docker 提供的关键字匹配来显示您可用的仓库列表。</p>
+<p>私有仓库将不会显示到仓库搜索结果上。你可以通过 Docker Hub 的简况页面来查看仓库的状态。</p>
+<p>##仓库</p>
+<p>你的 Docker Hub 仓库有许多特性。</p>
+<p>###stars</p>
+<p>你的仓库可以用星被标记，你也可以用星标记别的仓库。Stars 也是显示你喜欢这个仓库的一种方法，也是一种简单的方法来标记你喜欢的仓库。</p>
+<p>###评论</p>
+<p>你可以与其他 Docker 社区的成员和维护者留下评论。如果你发现有不当的评论，你可以标记他们以供审核。</p>
+<p>###合作者及其作用</p>
+<p>指定的合作者可以通过你提供的权限访问你的私人仓库。一旦指定，他们可以 <code>push</code> 和 <code>pull</code> 你的仓库。但他们将不会被允许执行任何管理任务，如从删除仓库或者改变其状态。</p>
+<blockquote>
+<p>注：一个合作者不能添加其他合作者。只有仓库的所有者才有管理权限。</p>
+</blockquote>
+<p>你也可以与在 Docker Hub 上的组织和团队进行协作，更多信息。</p>
+<p>##官方仓库</p>
+<p>Docker Hub 包含了许多<a href="http://registry.hub.docker.com/official" target="_blank" rel="external">官方仓库</a>。这些都是 Docker 供应商和 Docker 贡献者提供的认证库，他们包含了来自供应商，如 Oracle 和 Red Hat的镜像,您可以使用它们来构建应用程序和服务。</p>
+<p>如果使用官方库，供应商会对镜像进行持续维护、升级和优化，从而为项目提供强大的驱动力。</p>
+<blockquote>
+<p>注：如果你的组织、产品或者团队想要给官方资源库做贡献。可以再<a href="https://github.com/docker/stackbrew" target="_blank" rel="external">这里</a>查看更多信息。</p>
+</blockquote>
+<p>##私有Docker仓库</p>
+<p>私人仓库用来存储你的私有镜像，前提是你需要一个 Docker 账户，或者你已经属于 Docker Hub 上的某个组织或群组。</p>
+<p>要使用 Docker Hub 私有仓库，首先在<a href="https://registry.hub.docker.com/account/repositories/add/" target="_blank" rel="external">这里</a>进行添加。你的 Docker Hub 账户会免费获得一个私人仓库。如果你需要更多的账户，你需要升级你的 <a href="https://registry.hub.docker.com/plans/" target="_blank" rel="external">Docker Hub 计划</a>。</p>
+<p>私有仓库建立好后，你可以使用 Docker 来 <code>push</code> 和 <code>pull</code> 你的镜像。</p>
+<blockquote>
+<p>注：你需要先登录并获得权限来访问你的私人仓库。</p>
+</blockquote>
+<p>私有仓库和公共仓库基本相同，但是以公共身份是无法浏览或者搜索到私有仓库及其内容的，他们也不会以同样的方式被缓存。</p>
+<p>在设置页面你可以指定哪些人有权限访问（如合作者），在这里你可以切换仓库状态（公共到私有，或者反过来）。你需要有一个可用的私有仓库，并开启相关设置才能做这样的转换。如果你无法进行相关操作，请升级你的 <a href="https://registry.hub.docker.com/plans/" target="_blank" rel="external">Docker Hub 计划</a>。</p>
+<p>##Webhooks</p>
+<p>您可以在仓库设置页面来配置你的 webhooks。只有成功 <code>push</code> 以后，<code>webhook</code> 才会生效。webhooks 会调用 HTTP POST 请求一个json，类似如下所示的例子：</p>
+<blockquote>
+<p>你可以使用 http 工具进行测试，例如 <a href="http://requestb.in/" target="_blank" rel="external">requestb.in.</a></p>
+</blockquote>
+<p>webhook json例子:</p>
+<pre><code>{
+   "<span class="attribute">push_data</span>":<span class="value">{
+      "<span class="attribute">pushed_at</span>":<span class="value"><span class="number">1385141110</span></span>,
+      "<span class="attribute">images</span>":<span class="value">[
+         <span class="string">"imagehash1"</span>,
+         <span class="string">"imagehash2"</span>,
+         <span class="string">"imagehash3"</span>
+      ]</span>,
+      "<span class="attribute">pusher</span>":<span class="value"><span class="string">"username"</span>
+   </span>}</span>,
+   "<span class="attribute">repository</span>":<span class="value">{
+      "<span class="attribute">status</span>":<span class="value"><span class="string">"Active"</span></span>,
+      "<span class="attribute">description</span>":<span class="value"><span class="string">"my docker repo that does cool things"</span></span>,
+      "<span class="attribute">is_automated</span>":<span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">full_description</span>":<span class="value"><span class="string">"This is my full description"</span></span>,
+      "<span class="attribute">repo_url</span>":<span class="value"><span class="string">"https://registry.hub.docker.com/u/username/reponame/"</span></span>,
+      "<span class="attribute">owner</span>":<span class="value"><span class="string">"username"</span></span>,
+      "<span class="attribute">is_official</span>":<span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">is_private</span>":<span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">name</span>":<span class="value"><span class="string">"reponame"</span></span>,
+      "<span class="attribute">namespace</span>":<span class="value"><span class="string">"username"</span></span>,
+      "<span class="attribute">star_count</span>":<span class="value"><span class="number">1</span></span>,
+      "<span class="attribute">comment_count</span>":<span class="value"><span class="number">1</span></span>,
+      "<span class="attribute">date_created</span>":<span class="value"><span class="number">1370174400</span></span>,
+      "<span class="attribute">dockerfile</span>":<span class="value"><span class="string">"my full dockerfile is listed here"</span></span>,
+      "<span class="attribute">repo_name</span>":<span class="value"><span class="string">"username/reponame"</span>
+   </span>}
+</span>}
+</code></pre><p>Webhooks 允许你将你镜像和仓库的更新信息通知指定用户、服务以及其他应用程序。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Docker_Hub上的仓库和镜像">Docker Hub上的仓库和镜像</h1><p><img src="../images/repos.png" alt="仓库镜像"></p>
+<p>##搜索仓库和镜像</p>
+<p>你可以使用 Docker 来搜索所有公开可]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[openSUSE 安装 Docker]]></title>
+    <link href="http://yoursite.com/2015/12/08/docker/installation/opensuse/"/>
+    <id>http://yoursite.com/2015/12/08/docker/installation/opensuse/</id>
+    <published>2015-12-07T23:56:29.000Z</published>
+    <updated>2015-12-08T07:11:11.407Z</updated>
+    <content type="html"><![CDATA[<h1 id="openSUSE">openSUSE</h1><p>Docker 支持 openSUSE 12.3 或更高版本。由于 Docker 的限制，Docker 只能运行在64位的主机上。</p>
+<p>Docker 不被包含在 openSUSE 12.3 和 openSUSE 13.1 的官方镜像仓库中。因此需要添加 OBS 的 <a href="https://build.opensuse.org/project/show/Virtualization" title="Virtualization repository " target="_blank" rel="external">虚拟化仓库</a> 来安装 <code>docker</code> 包</p>
+<p>执行下边的命令来添加虚拟化仓库(Virtualization repository)：</p>
+<pre><code><span class="comment"># openSUSE 12.3</span>
+<span class="variable">$ </span>sudo zypper ar -f <span class="symbol">http:</span>/<span class="regexp">/download.opensuse.org/repositories</span><span class="regexp">/Virtualization/open</span>SUSE_12.<span class="number">3</span>/ <span class="constant">Virtualization</span>
+
+<span class="comment"># openSUSE 13.1</span>
+<span class="variable">$ </span>sudo zypper ar -f <span class="symbol">http:</span>/<span class="regexp">/download.opensuse.org/repositories</span><span class="regexp">/Virtualization/open</span>SUSE_13.<span class="number">1</span>/ <span class="constant">Virtualization</span>
+</code></pre><p>在 openSUSE 13.2版本以后就不需要添加额外的库了。</p>
+<p>###SUSE Linux Enterprise</p>
+<p>可以在 SUSE Linux Enterprise 12 或 更高版本上来运行 Docker 。这里需要注意的是由于 Docker 当前的限制，只能在<strong>64位</strong>的主机上运行。</p>
+<p>##安装</p>
+<p>安装 Docker 包</p>
+<pre><code><span class="variable">$ </span>sudo zypper <span class="keyword">in</span> docker
+</code></pre><p>现在已经安装完毕，让我们来启动 docker 进程</p>
+<pre><code><span class="variable">$ </span>sudo systemctl start docker
+</code></pre><p>设置开机启动 docker：</p>
+<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker
+</code></pre><p>Docker 包会创建一个的叫 <code>docker</code> 的群组 ,如果想使用非 root 用户来运行，这个用户需要是 <code>docker</code> 群组的成员才可以与 docker 进程进行交互，你可以使用如下命令添加用户：</p>
+<pre><code>$ sudo usermod -<span class="tag">a</span> -G docker &lt;username&gt;
+</code></pre><p>确认一切都是否按照预期工作：</p>
+<pre><code>$ sudo docker <span class="command">run</span> <span class="comment">--rm -i -t opensuse /bin/bash</span>
+</code></pre><p>这条命令将下载和导入 <code>opensuse</code> 镜像，并且在容器内运行 bash，输入 exit 来退出容器。</p>
+<p>如果你想要你的容器能够访问外部的网络，你就需要开启 <code>net.ipv4.ip_forward</code> 规则。这里你可以使用 YaST 工具查找 Network Devices -&gt; Network Settings -&gt; Routing 按钮来确认 IPv4 Forwarding 选择框是否被选中。</p>
+<p>当由 Network Manager 来管理网络的时候，就不能按照上边的方法设置了。这里我们需要手动的编辑 <code>/etc/sysconfig/SuSEfirewall2</code> 文件来确保 <code>FW_ROUTE</code> 被设置成 <code>yes</code>,如下：</p>
+<pre><code><span class="setting">FW_ROUTE=<span class="value"><span class="string">"yes"</span></span></span>
+</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
+<p>##下一步</p>
+<p>阅读<a href="../userguide/README.md">用户指南</a>。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="openSUSE">openSUSE</h1><p>Docker 支持 openSUSE 12.3 或更高版本。由于 Docker 的限制，Docker 只能运行在64位的主机上。</p>
+<p>Docker 不被包含在 openSUSE 12.3 和 openS]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
     
   </entry>
   
