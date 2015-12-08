@@ -172,6 +172,106 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/08/docker/installation/softlayer/" itemprop="url">
+                IBM SoftLayer
+安装 docker
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/docker/" itemprop="url" rel="index">
+                  <span itemprop="name">docker</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/08/docker/installation/softlayer/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/softlayer/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="IBM_SoftLayer">IBM SoftLayer</h1><p>1.创建一个 <a href="https://www.softlayer.com/cloud-servers/" target="_blank" rel="external">IBM SoftLayer 账户</a>.</p>
+<p>2.登陆到 <a href="https://control.softlayer.com/" target="_blank" rel="external">SoftLayer Customer Portal</a>.</p>
+<p>3.在 <code>Devices</code> 菜单中选择<a href="https://control.softlayer.com/devices" target="_blank" rel="external">设备列表</a>.</p>
+<p>4.点击位于菜单条下方、窗口顶部右侧的 <em>Order Devices</em>.</p>
+<p>5.在 <code>Virtual Server</code> 下点击 <a href="https://manage.softlayer.com/Sales/orderHourlyComputingInstance" target="_blank" rel="external">Hourly</a>.</p>
+<p>6.创建一个新的 SoftLayer Virtual Server Instance (VSI)，使用全部字段的默认值:</p>
+<ul>
+<li><code>Datacenter</code> 的部署位置</li>
+<li>Ubuntu Linux 12.04 LTS Precise Pangolin - 最小化安装的64位系统</li>
+</ul>
+<p>7.点击底部右侧的 <em>Continue Your Order</em>.</p>
+<p>8.填写 VSI 主机名和域名。</p>
+<p>9.填写用户所需的元数据和订单。</p>
+<p>10.接下来请继续阅读 <a href="https://docs.docker.com/installation/ubuntulinux/#ubuntu-linux" target="_blank" rel="external">Ubuntu</a>.</p>
+<p>###What next</p>
+<p>更多信息请阅读<a href="../userguide/README.md">用户指南</a>。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/08/docker/installation/redhat/" itemprop="url">
                 Red Hat Enterprise Linux 安装 Docker
               </a>
@@ -1024,8 +1124,8 @@ $ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span>
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/SupervisorwithDocker/" itemprop="url">
-                Using Supervior with Docker
+              <a class="post-title-link" href="/2015/12/08/docker/installation/azure/" itemprop="url">
+                Microsoft Azure
               </a>
             
           
@@ -1061,8 +1161,8 @@ $ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span>
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/SupervisorwithDocker/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/SupervisorwithDocker/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/installation/azure/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/azure/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -1077,28 +1177,18 @@ $ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span>
 
       
         
-          <span itemprop="articleBody"><h1 id="Using_Supervior_with_Docker">Using Supervior with Docker</h1><p>注意：如果你不喜欢使用sudo，那么你可以看看<a href="http://docs.docker.com/installation/binaries/#dockergroup" target="_blank" rel="external">Giving non-root access</a></p>
-<p>传统上的docker容器中一次只能运行一个进程，例如一次只运行一个Apache守护进程或SSH服务器守护进程一个进程。你经常遇到需要<br>在一个容器中运行多个进程的情形。有许多方法可以实现这一点，从使用简单的bash脚本来运行的<code>CMD</code>指令到安装进程管理工具。 </p>
-<p>在这个例子中，我们将要利用进程管理工具，<a href="http://supervisord.org/" target="_blank" rel="external"><code>Supervior</code></a>，来管理我们容器中的多个进程。使用Supervior使我们能够更好地控制，管理，<br>和重新启动我们想要运行的进程。为了证明这一点，我们接下来要安装并管理的SSH服务进程和一个Apache守护进程。 </p>
-<h2 id="创建Dockerfile">创建Dockerfile</h2><p>让我们先创建一个基本的<code>Dockerfile</code>来创建我们的新镜像。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:<span class="number">13.04</span></span><br><span class="line">MAINTAINER examples@docker.com</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">"deb http://archive.ubuntu.com/ubuntu precise main universe"</span> &gt; /etc/apt/sources.list</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get upgrade -y</span><br></pre></td></tr></table></figure>
-<h2 id="安装Supervisor">安装Supervisor</h2><p>现在，我们可以安装我们的SSH和Apache，以及Supervisor在我们的容器中。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get install -y openssh-server apache2 supervisor</span><br><span class="line">RUN mkdir -p /var/run/sshd</span><br><span class="line">RUN mkdir -p /var/<span class="built_in">log</span>/supervisor</span><br></pre></td></tr></table></figure>
-<p>这里我们组装了一个包含Openssh-server，Apache2和supervisor（它提供了超级守护进程）的封装包。我们也创建了用来运行<br>我们SSH和Supervisor的两个新目录</p>
-<h2 id="添加Supervisor的配置文件">添加Supervisor的配置文件 </h2><p>现在，让我们为Supervisor添加一个配置文件。默认的文件名为<code>supervisord.conf</code>，位于<code>/etc/supervisor/conf.d/</code>。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf</span><br></pre></td></tr></table></figure>
-<p>让我们来看看supervisord.conf文件。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[supervisord]</span><br><span class="line">nodaemon=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[program:sshd]</span><br><span class="line"><span class="built_in">command</span>=/usr/sbin/sshd -D</span><br><span class="line"></span><br><span class="line">[program:apache2]</span><br><span class="line"><span class="built_in">command</span>=/bin/bash -c <span class="string">"source /etc/apache2/envvars &amp;&amp; exec /usr/sbin/apache2 -DFOREGROUND"</span></span><br></pre></td></tr></table></figure>
-<p>该<code>supervisord.conf</code>配置文件包含了配置Supervisor的指令和Supervisor用来管理进程的指令。第一部分<code>[supervisord]</code>为Supervisor本身的配置。<br>我们使用一个<code>nodaemon</code>指令，来告诉Supervisor以交互方式而非以后台进程方式运行。 </p>
-<p>接下来的两个部分用来管理我们要控制的服务。每个部分控制一个单独的进程。该部分包含一个<code>command</code>指令，指定用什么命令来启动每个过程。 （<em>译者注：要运行什么指令按照相同格式添加即可</em>）</p>
-<h2 id="开放端口以及运行Supervisor">开放端口以及运行Supervisor </h2><p>现在，让我们开放一些需要口，并指定当容器启动时要运行的CMD指令来结束<code>Dockerfile</code>文件。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EXPOSE <span class="number">22</span> <span class="number">80</span></span><br><span class="line">CMD [<span class="string">"/usr/bin/supervisord"</span>]</span><br></pre></td></tr></table></figure>
-<p>在这里，当我们的容器启动时，会自动开放了容器的22和80端口，同时运行<code>/usr/bin/supervisord</code>命令。</p>
-<h2 id="创建我们自己的镜像">创建我们自己的镜像</h2><p>现在，我们可以创建我们的新镜像。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker build -t &lt;yourname&gt;/supervisord .</span><br></pre></td></tr></table></figure>
-<h2 id="启动我们的Supervisor容器">启动我们的Supervisor容器</h2><p>一旦我们创建了一个镜像，我们就可以从它启动一个容器。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -p <span class="number">22</span> -p <span class="number">80</span> -t -i &lt;yourname&gt;/supervisord</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> CRIT Supervisor running as root (no user <span class="keyword">in</span> config file)</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> WARN Included extra file <span class="string">"/etc/supervisor/conf.d/supervisord.conf"</span> during parsing</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">342</span> INFO supervisord started with pid <span class="number">1</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">346</span> INFO spawned: <span class="string">'sshd'</span> with pid <span class="number">6</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">349</span> INFO spawned: <span class="string">'apache2'</span> with pid <span class="number">7</span></span><br><span class="line">. . .</span><br></pre></td></tr></table></figure>
-<p>我们已经使用<code>docker run</code>命令以交互方式启动一个新的容器。该容器已运行Supervisor，并启动了SSH和Apache后台进程。<br>我们已经指定了<code>-p</code>参数开放了端口22和80。通过这种方式我们可以确认我们开放的端口，并且通过这些端口连接到SSH和Apache后台进程。</p>
+          <span itemprop="articleBody"><p>#Microsoft Azure</p>
+<p>##在 Azure 上创建 Docker 主机。</p>
+<p>请仔细阅读由 <a href="http://azure.microsoft.com/" target="_blank" rel="external">Microsoft Azure</a> 网站上提供的详细教程，教程中包含了使用不同方法在 Azure 上创建 Docker 虚拟主机。</p>
+<ul>
+<li><a href="http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-vm-extension/" target="_blank" rel="external"> Azure 的 Docker 虚拟主机组件 </a><ul>
+<li><a href="http://azure.microsoft.com/documentation/articles/virtual-machines-docker-with-xplat-cli/" target="_blank" rel="external"> 如何使用 Azure 提供的跨平台接口使用 Docker 虚拟机组件 </a></li>
+<li><a href="http://azure.microsoft.com/documentation/articles/virtual-machines-docker-with-portal/" target="_blank" rel="external"> 如何在 Azure 用户中心使用 Docker 虚拟机组件 </a> </li>
+</ul>
+</li>
+<li><a href="http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-machine/" target="_blank" rel="external"> 在 Azure 上使用 Docker 虚拟机 </a></li>
+</ul>
+<h2 id="下一步?">下一步?</h2><p>阅读 <a href="../userguide/">用户指南</a>.</p>
 </span>
         
       
@@ -1462,161 +1552,6 @@ $$
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/examples/running_riak_service/" itemprop="url">
-                在Docker中使用Riak服务
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分類於
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/examples/running_riak_service/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/running_riak_service/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="在Docker中使用Riak服务">在Docker中使用Riak服务</h1><p>这个例子的目的是向您展示如何构建一个预装Riak的docker镜象。</p>
-<p>###创建Dockerfile</p>
-<p>创建一个空文件<code>Dockerfile</code></p>
-<pre><code><span class="variable">$ </span>touch <span class="constant">Dockerfile</span>
-</code></pre><p>接下来，定义你想要来建立你镜像的父镜像。我们将使用Ubuntu（tag：最新版），从Docker Hub中下载：</p>
-<pre><code><span class="comment"># Riak</span>
-<span class="comment">#</span>
-<span class="comment"># VERSION       0.1.0</span>
-
-<span class="comment"># Use the Ubuntu base image provided by dotCloud</span>
-<span class="built_in">FROM</span> ubuntu:latest
-<span class="built_in">MAINTAINER</span> Hector Castro hector@basho.com
-</code></pre><p>接下来,我们更新APT缓存和应用更新:</p>
-<pre><code><span class="comment"># Update the APT cache</span>
-<span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/main$/main universe/'</span> /etc/apt/sources.list
-</span><span class="built_in">RUN</span> <span class="bash">apt-get update
-</span><span class="built_in">RUN</span> <span class="bash">apt-get upgrade -y</span>
-</code></pre><p>之后，我们安装和设置一些依赖关系：</p>
-<ul>
-<li><code>CURL</code>来下载 Basho’s APT存储库秘钥。</li>
-<li><code>lsb-release</code>帮助我们查看Ubuntu版本。</li>
-<li><code>openssh-server</code>允许我们登陆远程容器，加入Riak节点组成一个集群。</li>
-<li><p><code>supervisor</code>用于管理<code>OpenSSH</code>和<code>Riak</code>进程。</p>
-<h1 id="Install_and_setup_project_dependencies">Install and setup project dependencies</h1><p>  RUN apt-get install -y curl lsb-release supervisor openssh-server</p>
-<p>  RUN mkdir -p /var/run/sshd<br>  RUN mkdir -p /var/log/supervisor</p>
-<p>  RUN locale-gen en_US en_US.UTF-8</p>
-<p>  ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf</p>
-<p>  RUN echo ‘root:basho’ | chpasswd</p>
-</li>
-</ul>
-<p>下一步，添加 Basho’s APT仓库：</p>
-<pre><code><span class="built_in">RUN</span> <span class="bash">curl <span class="operator">-s</span> http://apt.basho.com/gpg/basho.apt.key | apt-key add --
-</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"deb http://apt.basho.com <span class="variable">$(lsb_release -cs)</span> main"</span> &gt; /etc/apt/sources.list.d/basho.list
-</span><span class="built_in">RUN</span> <span class="bash">apt-get update</span>
-</code></pre><p>之后，我们安装Riak和改变一些默认值：</p>
-<pre><code><span class="comment"># Install Riak and prepare it to run</span>
-<span class="built_in">RUN</span> <span class="bash">apt-get install -y riak
-</span><span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/127.0.0.1/0.0.0.0/'</span> /etc/riak/app.config
-</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"ulimit -n 4096"</span> &gt;&gt; /etc/default/riak</span>
-</code></pre><p>接下来，我们为缺少的<code>initctl</code>来添加一个软连接：</p>
-<pre><code><span class="comment"># Hack for initctl</span>
-<span class="comment"># See: https://github.com/dotcloud/docker/issues/1024</span>
-<span class="built_in">RUN</span> <span class="bash">dpkg-divert --local --rename --add /sbin/initctl
-</span><span class="built_in">RUN</span> <span class="bash">ln <span class="operator">-s</span> /bin/<span class="literal">true</span> /sbin/initctl</span>
-</code></pre><p>然后我们开发Riak协议缓冲区、HTTP接口以及SSH：</p>
-<pre><code><span class="preprocessor"># Expose Riak Protocol Buffers and HTTP interfaces, along with SSH</span>
-EXPOSE <span class="number">8087</span> <span class="number">8098</span> <span class="number">22</span>
-</code></pre><p>最后，运行<code>supervisord</code>这里Riak和OpenSSH将启动：</p>
-<pre><code><span class="built_in">CMD</span> <span class="bash">[<span class="string">"/usr/bin/supervisord"</span>]</span>
-</code></pre><p>###创建一个supervisord配置文件</p>
-<p>创建一个supervisord.conf空文件，并且保证和Dockerfile是平级目录：</p>
-<pre><code><span class="tag">touch</span> <span class="tag">supervisord</span><span class="class">.conf</span>
-</code></pre><p>填充下面定义的程序:</p>
-<pre><code>[supervisord]
-nodaemon=true
-
-[<span class="keyword">program</span>:sshd]
-command=/usr/sbin/sshd -<span class="literal">D</span>
-stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-autorestart=true
-
-[<span class="keyword">program</span>:riak]
-command=bash -c <span class="string">". /etc/default/riak &amp;&amp; /usr/sbin/riak console"</span>
-pidfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/riak/riak.pid
-stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-</code></pre><p>###构建Riak的Docker镜像</p>
-<p>现在你应该能够构建一个Riak的docker镜像:</p>
-<pre><code>$ docker <span class="keyword">build </span>-t <span class="string">"&lt;yourname&gt;/riak"</span> .
-</code></pre><p>###下一步</p>
-<p>Riak是分布式数据库。很多生产部署包括至少5个节点。查看docker-riak<a href="https://github.com/hectcastro/docker-riak" target="_blank" rel="external">https://github.com/hectcastro/docker-riak</a>项目细节来使用Docker和Pipework部署Riak集群。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1669,7 +1604,7 @@ stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

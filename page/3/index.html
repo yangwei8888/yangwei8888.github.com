@@ -172,6 +172,161 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/08/docker/examples/running_riak_service/" itemprop="url">
+                在Docker中使用Riak服务
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/docker/" itemprop="url" rel="index">
+                  <span itemprop="name">docker</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/08/docker/examples/running_riak_service/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/running_riak_service/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="在Docker中使用Riak服务">在Docker中使用Riak服务</h1><p>这个例子的目的是向您展示如何构建一个预装Riak的docker镜象。</p>
+<p>###创建Dockerfile</p>
+<p>创建一个空文件<code>Dockerfile</code></p>
+<pre><code><span class="variable">$ </span>touch <span class="constant">Dockerfile</span>
+</code></pre><p>接下来，定义你想要来建立你镜像的父镜像。我们将使用Ubuntu（tag：最新版），从Docker Hub中下载：</p>
+<pre><code><span class="comment"># Riak</span>
+<span class="comment">#</span>
+<span class="comment"># VERSION       0.1.0</span>
+
+<span class="comment"># Use the Ubuntu base image provided by dotCloud</span>
+<span class="built_in">FROM</span> ubuntu:latest
+<span class="built_in">MAINTAINER</span> Hector Castro hector@basho.com
+</code></pre><p>接下来,我们更新APT缓存和应用更新:</p>
+<pre><code><span class="comment"># Update the APT cache</span>
+<span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/main$/main universe/'</span> /etc/apt/sources.list
+</span><span class="built_in">RUN</span> <span class="bash">apt-get update
+</span><span class="built_in">RUN</span> <span class="bash">apt-get upgrade -y</span>
+</code></pre><p>之后，我们安装和设置一些依赖关系：</p>
+<ul>
+<li><code>CURL</code>来下载 Basho’s APT存储库秘钥。</li>
+<li><code>lsb-release</code>帮助我们查看Ubuntu版本。</li>
+<li><code>openssh-server</code>允许我们登陆远程容器，加入Riak节点组成一个集群。</li>
+<li><p><code>supervisor</code>用于管理<code>OpenSSH</code>和<code>Riak</code>进程。</p>
+<h1 id="Install_and_setup_project_dependencies">Install and setup project dependencies</h1><p>  RUN apt-get install -y curl lsb-release supervisor openssh-server</p>
+<p>  RUN mkdir -p /var/run/sshd<br>  RUN mkdir -p /var/log/supervisor</p>
+<p>  RUN locale-gen en_US en_US.UTF-8</p>
+<p>  ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf</p>
+<p>  RUN echo ‘root:basho’ | chpasswd</p>
+</li>
+</ul>
+<p>下一步，添加 Basho’s APT仓库：</p>
+<pre><code><span class="built_in">RUN</span> <span class="bash">curl <span class="operator">-s</span> http://apt.basho.com/gpg/basho.apt.key | apt-key add --
+</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"deb http://apt.basho.com <span class="variable">$(lsb_release -cs)</span> main"</span> &gt; /etc/apt/sources.list.d/basho.list
+</span><span class="built_in">RUN</span> <span class="bash">apt-get update</span>
+</code></pre><p>之后，我们安装Riak和改变一些默认值：</p>
+<pre><code><span class="comment"># Install Riak and prepare it to run</span>
+<span class="built_in">RUN</span> <span class="bash">apt-get install -y riak
+</span><span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/127.0.0.1/0.0.0.0/'</span> /etc/riak/app.config
+</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"ulimit -n 4096"</span> &gt;&gt; /etc/default/riak</span>
+</code></pre><p>接下来，我们为缺少的<code>initctl</code>来添加一个软连接：</p>
+<pre><code><span class="comment"># Hack for initctl</span>
+<span class="comment"># See: https://github.com/dotcloud/docker/issues/1024</span>
+<span class="built_in">RUN</span> <span class="bash">dpkg-divert --local --rename --add /sbin/initctl
+</span><span class="built_in">RUN</span> <span class="bash">ln <span class="operator">-s</span> /bin/<span class="literal">true</span> /sbin/initctl</span>
+</code></pre><p>然后我们开发Riak协议缓冲区、HTTP接口以及SSH：</p>
+<pre><code><span class="preprocessor"># Expose Riak Protocol Buffers and HTTP interfaces, along with SSH</span>
+EXPOSE <span class="number">8087</span> <span class="number">8098</span> <span class="number">22</span>
+</code></pre><p>最后，运行<code>supervisord</code>这里Riak和OpenSSH将启动：</p>
+<pre><code><span class="built_in">CMD</span> <span class="bash">[<span class="string">"/usr/bin/supervisord"</span>]</span>
+</code></pre><p>###创建一个supervisord配置文件</p>
+<p>创建一个supervisord.conf空文件，并且保证和Dockerfile是平级目录：</p>
+<pre><code><span class="tag">touch</span> <span class="tag">supervisord</span><span class="class">.conf</span>
+</code></pre><p>填充下面定义的程序:</p>
+<pre><code>[supervisord]
+nodaemon=true
+
+[<span class="keyword">program</span>:sshd]
+command=/usr/sbin/sshd -<span class="literal">D</span>
+stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+autorestart=true
+
+[<span class="keyword">program</span>:riak]
+command=bash -c <span class="string">". /etc/default/riak &amp;&amp; /usr/sbin/riak console"</span>
+pidfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/riak/riak.pid
+stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+</code></pre><p>###构建Riak的Docker镜像</p>
+<p>现在你应该能够构建一个Riak的docker镜像:</p>
+<pre><code>$ docker <span class="keyword">build </span>-t <span class="string">"&lt;yourname&gt;/riak"</span> .
+</code></pre><p>###下一步</p>
+<p>Riak是分布式数据库。很多生产部署包括至少5个节点。查看docker-riak<a href="https://github.com/hectcastro/docker-riak" target="_blank" rel="external">https://github.com/hectcastro/docker-riak</a>项目细节来使用Docker和Pipework部署Riak集群。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/08/docker/examples/running_redis_service/" itemprop="url">
                 在Docker中运行Reids服务
               </a>
@@ -1516,102 +1671,6 @@ bla, taggedcount: <span class="number">0</span>
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/docker-hub/accounts/" itemprop="url">
-                Docker Hub账户
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分類於
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/docker-hub/accounts/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/docker-hub/accounts/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Docker_Hub账户">Docker Hub账户</h1><p>##Docker Hub账户</p>
-<p>当没有数字签名和账户的时候，你只能从 <a href="https://hub.docker.com/" target="_blank" rel="external">Docker Hub</a> 上 <code>search</code> 和 <code>pull</code> 一个 Docker 镜像。然后，想要 <code>push</code>镜像到服务器、发表评论或者 star 一个仓库，你就需要去创建一个 <a href="https://hub.docker.com/" target="_blank" rel="external">Docker Hub</a> 账户。</p>
-<p>###注册一个Docker Hub账户</p>
-<p>你可以通过电子邮件来<a href="https://hub.docker.com/account/signup/" target="_blank" rel="external">注册</a>一个 Docker Hub 账户，验证邮箱后即可使用。</p>
-<p>###电子邮件激活过程</p>
-<p>你至少需要有一个有效的电子邮件地址来验证你的账户。如果你未收到验证邮件，你可以通过访问<a href="https://hub.docker.com/account/resend-email-confirmation/" target="_blank" rel="external">此页面</a>来请求重新发送确认邮件。</p>
-<p>###密码重置流程</p>
-<p>如果由于某种原因，你忘记密码，不能访问您的账户，你可以从<a href="https://hub.docker.com/account/forgot-password/" target="_blank" rel="external">密码重置页面</a>来重置你的密码。</p>
-<p>##组织&amp;机构</p>
-<p>Docker Hub 的机构和群组允许你加入组织和团队。你可以在<a href="https://hub.docker.com/account/organizations/" target="_blank" rel="external">这里</a>查看你属于哪个组织，你也可以从选项卡中添加新的组织。</p>
-<p><img src="../images/orgs.png" alt="../images/orgs.png"></p>
-<p>在你的组织中，你可以创建群组，让您进一步管理可以与你的版本库进行交互的人员。</p>
-<p><img src="../images/groups.png" alt="../images/groups.png"></p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1664,7 +1723,7 @@ bla, taggedcount: <span class="number">0</span>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
