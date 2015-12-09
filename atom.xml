@@ -33,6 +33,45 @@
   </entry>
   
   <entry>
+    <title><![CDATA[Kitematic
+安装]]></title>
+    <link href="http://yoursite.com/2015/12/09/docker/kitematic/README/"/>
+    <id>http://yoursite.com/2015/12/09/docker/kitematic/README/</id>
+    <published>2015-12-09T02:34:35.827Z</published>
+    <updated>2015-12-09T02:34:35.812Z</updated>
+    <content type="html"><![CDATA[<h1 id="Kitematic:_安装_Kitematic">Kitematic: 安装 Kitematic</h1><p>你可以在 Mac 或者 Windows PC 上像安装其它应用一样来安装 Kitematic：下载安装包，运行安装程序。</p>
+<p>##下载 Kitematic</p>
+<p><a href="https://kitematic.com/download/" target="_blank" rel="external">下载 Kitematic的 zip 文件</a>,双击解压文件，然后双击运行安装程序。您可能还需要将你的应用程序放到您的应用程序文件夹。</p>
+<p>##初始化设置</p>
+<p>第一次打开 Kitematic 会为你能够运行 Docker 容器而进行一些必要的设置。如果你没有安装 Virtualbox， Kitematic 会下载和安装最新版本。</p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/installing.png" alt="安装图片"></p>
+<p>做完这些之后！在一分钟之内，你就可以准备开始运行你的第一个容器。</p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/containers.png" alt="容器"></p>
+<p>##技术详细信息</p>
+<p>Kitematic 是一个建立在其它应用上的 app，能够处理异常：</p>
+<ul>
+<li>如果 Virtualbox 没有安装，它将会安装它。</li>
+</ul>
+<h2 id="为什么_Kitematic_需要_root_密码">为什么 Kitematic 需要 root 密码</h2><p>为什么 Kitematic 需要你的 root 密码，这里有两个原因：</p>
+<ul>
+<li>安装 Virtualbox 需要 root 权限，因为安装的时候需要对 Mac OS X 内核进行扩展。</li>
+<li>如果你在安装 Kitematic 之前更改了默认的目录权限，当你复制 <code>docker</code> 和 <code>docker-machine</code> 到 <code>/usr/local/bin</code> 是需要 root 权限的。</li>
+</ul>
+<p>##下一步</p>
+<p>有关使用 Kitematic 的信息，请查看<a href="userguide.md">用户指南</a>。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Kitematic:_安装_Kitematic">Kitematic: 安装 Kitematic</h1><p>你可以在 Mac 或者 Windows PC 上像安装其它应用一样来安装 Kitematic：下载安装包，运行安装程序。</p>
+<p>##下载 Kit]]>
+    </summary>
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[安装 Docker Machine]]></title>
     <link href="http://yoursite.com/2015/12/08/docker/machine/install-machine/"/>
     <id>http://yoursite.com/2015/12/08/docker/machine/install-machine/</id>
@@ -71,45 +110,6 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
     <![CDATA[<h1 id="安装_Docker_Machine">安装 Docker Machine</h1><p>Docker Machine 支持 Windows ,OS X ,和 Linux，并且被安装为一个独立的二进制文件。用于各平台架构的二进制文件链接如下：</p>
 <ul>
 <l]]>
-    </summary>
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Kitematic
-安装]]></title>
-    <link href="http://yoursite.com/2015/12/08/docker/kitematic/README/"/>
-    <id>http://yoursite.com/2015/12/08/docker/kitematic/README/</id>
-    <published>2015-12-08T07:16:13.453Z</published>
-    <updated>2015-12-08T07:16:13.453Z</updated>
-    <content type="html"><![CDATA[<h1 id="Kitematic:_安装_Kitematic">Kitematic: 安装 Kitematic</h1><p>你可以在 Mac 或者 Windows PC 上像安装其它应用一样来安装 Kitematic：下载安装包，运行安装程序。</p>
-<p>##下载 Kitematic</p>
-<p><a href="https://kitematic.com/download/" target="_blank" rel="external">下载 Kitematic的 zip 文件</a>,双击解压文件，然后双击运行安装程序。您可能还需要将你的应用程序放到您的应用程序文件夹。</p>
-<p>##初始化设置</p>
-<p>第一次打开 Kitematic 会为你能够运行 Docker 容器而进行一些必要的设置。如果你没有安装 Virtualbox， Kitematic 会下载和安装最新版本。</p>
-<p><img src="../images/installing.png" alt="安装图片"></p>
-<p>做完这些之后！在一分钟之内，你就可以准备开始运行你的第一个容器。</p>
-<p><img src="../images/containers.png" alt="容器"></p>
-<p>##技术详细信息</p>
-<p>Kitematic 是一个建立在其它应用上的 app，能够处理异常：</p>
-<ul>
-<li>如果 Virtualbox 没有安装，它将会安装它。</li>
-</ul>
-<h2 id="为什么_Kitematic_需要_root_密码">为什么 Kitematic 需要 root 密码</h2><p>为什么 Kitematic 需要你的 root 密码，这里有两个原因：</p>
-<ul>
-<li>安装 Virtualbox 需要 root 权限，因为安装的时候需要对 Mac OS X 内核进行扩展。</li>
-<li>如果你在安装 Kitematic 之前更改了默认的目录权限，当你复制 <code>docker</code> 和 <code>docker-machine</code> 到 <code>/usr/local/bin</code> 是需要 root 权限的。</li>
-</ul>
-<p>##下一步</p>
-<p>有关使用 Kitematic 的信息，请查看<a href="userguide.md">用户指南</a>。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="Kitematic:_安装_Kitematic">Kitematic: 安装 Kitematic</h1><p>你可以在 Mac 或者 Windows PC 上像安装其它应用一样来安装 Kitematic：下载安装包，运行安装程序。</p>
-<p>##下载 Kit]]>
     </summary>
     
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>

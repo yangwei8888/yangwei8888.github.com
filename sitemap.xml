@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/12/09/docker/kitematic/README/</loc>
+    <lastmod>2015-12-09T02:34:35.812Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/12/08/docker/docker-hub/accounts/</loc>
     <lastmod>2015-12-09T02:32:29.772Z</lastmod>
   </url>
@@ -44,11 +49,6 @@
   <url>
     <loc>http://yoursite.com/2015/12/08/docker/machine/install-machine/</loc>
     <lastmod>2015-12-08T07:16:23.723Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/kitematic/README/</loc>
-    <lastmod>2015-12-08T07:16:13.453Z</lastmod>
   </url>
   
   <url>
