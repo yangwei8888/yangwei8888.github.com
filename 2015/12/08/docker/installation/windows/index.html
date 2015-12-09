@@ -59,10 +59,10 @@ Docker 引擎使用的是Linux内核特性，所以我们需要在 Windows 上�
 
 Docker 引擎使用的是Linux内核特性，所以我们需要在 Windows 上使用一个轻量级的虚拟机 (VM) 来运行 Docker。我们使用 Windows的Docker客户端来控制 Docker 虚拟化引擎的构建、">
 <meta property="og:image" content="http://widuu.u.qiniudn.com/windows_docker.png">
-<meta property="og:image" content="http://yoursite.com/../images/windows-boot2docker-start.png">
-<meta property="og:image" content="http://yoursite.com/../images/windows-boot2docker-cmd.png">
-<meta property="og:image" content="http://yoursite.com/../images/windows-boot2docker-powershell.png">
-<meta property="og:updated_time" content="2015-12-08T07:15:37.642Z">
+<meta property="og:image" content="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-start.png">
+<meta property="og:image" content="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-cmd.png">
+<meta property="og:image" content="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-powershell.png">
+<meta property="og:updated_time" content="2015-12-09T02:32:28.153Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows
 安装 docker">
@@ -260,7 +260,7 @@ Docker 引擎使用的是Linux内核特性，所以我们需要在 Windows 上�
 <li><p><code>Boot2Docker Start</code> 将启动一个 Unix shell 来配置和管理运行在虚拟主机中的 Docker，运行 <code>docker version</code> 来查看它是否正常工作。</p>
 </li>
 </ol>
-<p><img src="../images/windows-boot2docker-start.png" alt="windows docker run"></p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-start.png" alt="windows docker run"></p>
 <p>###运行 Docker</p>
 <blockquote>
 <p>注意：如果你使用的是一个远程的 Docker 进程，像 <code>Boot2docker</code> ，你就不需要像前边的文档实例中那样在输入 Docker 命令之前输入 <code>sudo</code>。</p>
@@ -274,11 +274,11 @@ Docker 引擎使用的是Linux内核特性，所以我们需要在 Windows 上�
 <p>运行 Boot2docker 命令，这需要你的 Windows PATH环境变量中包含了 <code>ssh.exe</code>。因此我们需要将安装的 Git 的 bin 目录 （其中包含了 ssh.exe） 配置到我们的 <code>%PATH%</code> 环境变量中，运行如下命令：</p>
 <pre><code><span class="operator"><span class="keyword">set</span> <span class="keyword">PATH</span>=%<span class="keyword">PATH</span>%;</span>"c:\Program Files (x86)\Git\bin"
 </code></pre><p>现在，我们可以运行 <code>boot2docker start</code> 命令来启动 Boot2docker 虚拟机。（如果有虚拟主机不存在的错误提示，你需要运行 <code>boot2docker init</code> 命令）。复制上边的指令到 cmd.exe 来设置你的 windows 控制台的环境变量，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
-<p><img src="../images/windows-boot2docker-cmd.png" alt="docker cmd.exe"></p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-cmd.png" alt="docker cmd.exe"></p>
 <h3 id="PowerShell_中使用_Docker">PowerShell 中使用 Docker</h3><p>启动 PowerShell，你需要将 <code>ssh.exe</code> 添加到你的 PATH 中。</p>
 <pre><code><span class="variable">$Env</span>:Path = <span class="string">"${Env:Path};c:\Program Files (x86)\Git\bin"</span>
 </code></pre><p>之后，运行 <code>boot2docker start</code> 命令行，它会打印出  PowerShell 命令，这些命令是用来设置环境变量来连接运行在虚拟机中 Docker 的。运行这些命令，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
-<p><img src="../images/windows-boot2docker-powershell.png" alt="Powershell Docker"></p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-powershell.png" alt="Powershell Docker"></p>
 <blockquote>
 <p>提示:你可以使用 <code>boot2docker shellinit | Invoke-Expression</code> 来设置你的环境变量来代替复制粘贴 Powershell 命令。</p>
 </blockquote>

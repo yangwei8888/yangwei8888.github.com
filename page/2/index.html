@@ -590,9 +590,9 @@
 <p>###在安装之前先来了解一些关键概念</p>
 <p>当我们在一台 Linux 主机上安装完 Docker 之后，我们的机器中就包含了本地主机和 Docker 主机。如果从网络层来划分，本地主机就代表你的电脑，而 Docker 主机就是运行 container 的那台机器。</p>
 <p>在 Linux 机器上的一种典型安装 Docker 方法：Docker 客户端，Docker 后台程序和 container 会直接运行在您的机器上。这就意味着您可以使用标准的本地主机寻址（例如 <code>localhost:8000</code> 或者 <code>0.0.0.0:8376</code>）来为 Docker container 分配一个地址。</p>
-<p><img src="../images/linux_docker_host.svg" alt="linux_docker_host"></p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/linux_docker_host.svg" alt="linux_docker_host"></p>
 <p>在 OS X 上安装的 Docker ，其 Docker 后台程序是运行在一个名为 <code>default</code> 的 Linux 虚拟机上的。<code>default</code> 是 Linux 上的一个轻量级的虚拟机，是专门用于在 Mac OS X 机器上运行 Docker 的。</p>
-<p><img src="../images/mac_docker_host.svg" alt="mac_docker_host"></p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac_docker_host.svg" alt="mac_docker_host"></p>
 <p>在 OS X 中，Docker 主机地址就是 Linux 虚拟机的地址。当你使用 <code>docker-machine</code> 启动虚拟机的时候，该虚拟机会自动获取到 IP 地址。当您开启一个 container 的时候，container 上的端口会映射到虚拟机的端口上。本页面上的实践操作会一一印证上述内容。</p>
 <p>###安装</p>
 <p>如果您有一个正在运行着的 VirtualBox，那么请您在运行安装器（Docker Toolbox）之前务必关闭它。</p>
@@ -603,11 +603,11 @@
 </li>
 <li><p>双击安装包或者通过右击并在快捷菜单中选择“打开”的方式安装 Docker Toolbox。</p>
 <p>此时会弹出“Install Docker Toolbox”（安装 Docker 工具箱）窗口。</p>
-<p><img src="../images/mac-welcome-page.png" alt="mac-welcome-page"></p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-welcome-page.png" alt="mac-welcome-page"></p>
 </li>
 <li><p>点击“继续”（Continue），安装 toolbox。</p>
 <p>此时，toolbox 会展现给你一些选项，供您自定义标准安装。</p>
-<p><img src="../images/mac-page-two.png" alt="mac-page-two"></p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-page-two.png" alt="mac-page-two"></p>
 <p>默认情况下，标准的 Docker Toolbox 安装是这样的：</p>
 <ul>
 <li>向 <code>/usr/local/bin</code> 目录中添加 Docker 工具的二进制文件。</li>
@@ -618,7 +618,7 @@
 </li>
 <li><p>点击“安装”，执行标准安装。</p>
 <p>系统提示您输入密码。</p>
-<p><img src="../images/mac-password-prompt.png" alt="mac-password-prompt"></p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-password-prompt.png" alt="mac-password-prompt"></p>
 </li>
 <li><p>输入密码，继续安装</p>
 <p>安装完成后，Docker Toolbox 会为您提供一些信息，通过这些信息您可以完成一些常见的任务。 </p>
@@ -646,7 +646,7 @@
 <li>将当前终端环境切换到虚拟机环境中。</li>
 </ul>
 <p>一旦启动完成，Docker 快速入门终端会是如下状态：</p>
-<p><img src="../images/mac-success.png" alt="mac-success"><br>现在，您可以运行 <code>docker</code> 命令了。</p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-success.png" alt="mac-success"><br>现在，您可以运行 <code>docker</code> 命令了。</p>
 </li>
 <li><p>通过运行 <code>hello-world</code> container 来核实您的安装是否成功。</p>
 </li>
@@ -778,14 +778,14 @@ NAME                ACTIVE   DRIVER       STATE     URL                         
 </code></pre><p>该命令显示出的内容会告诉你 <code>web</code> container 的 <code>80</code> 端口已经映射到了 Docker Host 上的 <code>49157</code> 端口上。</p>
 </li>
 <li><p>在您的浏览器中输入地址 <code>http://localhost:49157</code>（localhost 就是 0.0.0.0）。</p>
-<p> <img src="../images/bad_host1.png" alt="bad_host1"><br>并没有生效，其原因就是 <code>DOCKER_HOST</code> 的地址并不是你本地的机器的地址（0.0.0.0），而是您的 Docker 虚拟机的地址。</p>
+<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/bad_host1.png" alt="bad_host1"><br>并没有生效，其原因就是 <code>DOCKER_HOST</code> 的地址并不是你本地的机器的地址（0.0.0.0），而是您的 Docker 虚拟机的地址。</p>
 </li>
 <li><p>获取 Docker 虚拟机（即 <code>default</code>）的地址。</p>
 <pre><code>$ docker-machine ip <span class="keyword">default</span>
 <span class="number">192.168</span><span class="number">.59</span><span class="number">.103</span>
 </code></pre></li>
 <li><p>在您的浏览器中输入地址 <code>http://192.168.59.103:49157</code></p>
-<p> <img src="../images/good_host1.png" alt="good_host1"><br>成功了！</p>
+<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/good_host1.png" alt="good_host1"><br>成功了！</p>
 </li>
 <li><p>如果您想停止并删除正在运行的 <code>nginx</code> container 的话，请执行如下操作：</p>
 <pre><code><span class="variable">$ </span>docker stop web
@@ -816,13 +816,13 @@ NAME                ACTIVE   DRIVER       STATE     URL                         
 <span class="number">443</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49165</span>
 </code></pre></li>
 <li><p>在浏览器中输入地址：</p>
-<p> <img src="../images/newsite_view1.png" alt="newsite_view1"></p>
+<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/newsite_view1.png" alt="newsite_view1"></p>
 </li>
 <li><p>立即添加一个文件到 <code>$HOME/siet</code> 目录下。</p>
 <pre><code>$ <span class="built_in">echo</span> <span class="string">"This is cool"</span> &gt; cool.html
 </code></pre></li>
 <li><p>在浏览器中输入地址：</p>
-<p> <img src="../images/cool_view1.png" alt="cool_view1"></p>
+<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/cool_view1.png" alt="cool_view1"></p>
 </li>
 <li><p>停止然后删除正在运行的 <code>mysite</code> container。</p>
 <pre><code><span class="variable">$ </span>docker stop mysite
