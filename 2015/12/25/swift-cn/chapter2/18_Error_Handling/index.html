@@ -1,0 +1,759 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="swift-cn," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="错误处理（Error Handling）
+
+2.1翻译+校对：lyojo ray16897188 2015-10-23校对：shanks 2015-10-24
+
+本页包含内容：
+
+表示并抛出错误
+处理错误
+指定清理操作
+
+错误处理（Error handling）是响应错误以及从错误中恢复的过程。Swift 提供了在运行时对可恢复错误的抛出、捕获、传递和操作的一流支持。
+某些操作无法保证总是执行完所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章-18错误处理（Error Handling）">
+<meta property="og:url" content="http://yoursite.com/2015/12/25/swift-cn/chapter2/18_Error_Handling/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="错误处理（Error Handling）
+
+2.1翻译+校对：lyojo ray16897188 2015-10-23校对：shanks 2015-10-24
+
+本页包含内容：
+
+表示并抛出错误
+处理错误
+指定清理操作
+
+错误处理（Error handling）是响应错误以及从错误中恢复的过程。Swift 提供了在运行时对可恢复错误的抛出、捕获、传递和操作的一流支持。
+某些操作无法保证总是执行完所">
+<meta property="og:updated_time" content="2015-12-15T05:43:41.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二章-18错误处理（Error Handling）">
+<meta name="twitter:description" content="错误处理（Error Handling）
+
+2.1翻译+校对：lyojo ray16897188 2015-10-23校对：shanks 2015-10-24
+
+本页包含内容：
+
+表示并抛出错误
+处理错误
+指定清理操作
+
+错误处理（Error handling）是响应错误以及从错误中恢复的过程。Swift 提供了在运行时对可恢复错误的抛出、捕获、传递和操作的一流支持。
+某些操作无法保证总是执行完所">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 第二章-18错误处理（Error Handling） | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              第二章-18错误处理（Error Handling）
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-25T12:00:09+08:00" content="2015-12-25">
+            2015-12-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/25/swift-cn/chapter2/18_Error_Handling/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter2/18_Error_Handling/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="错误处理（Error_Handling）">错误处理（Error Handling）</h1><hr>
+<blockquote>
+<p>2.1<br>翻译+校对：<a href="https://github.com/lyojo" target="_blank" rel="external">lyojo</a> <a href="https://github.com/ray16897188" target="_blank" rel="external">ray16897188</a> 2015-10-23<br>校对：<a href="http://codebuild.me" target="_blank" rel="external">shanks</a> 2015-10-24</p>
+</blockquote>
+<p>本页包含内容：</p>
+<ul>
+<li><a href="#representing_and_throwing_errors">表示并抛出错误</a></li>
+<li><a href="#handling_errors">处理错误</a></li>
+<li><a href="#specifying_cleanup_actions">指定清理操作</a></li>
+</ul>
+<p><em>错误处理（Error handling）</em>是响应错误以及从错误中恢复的过程。Swift 提供了在运行时对可恢复错误的抛出、捕获、传递和操作的一流支持。</p>
+<p>某些操作无法保证总是执行完所有代码或总是生成有用的结果。可选类型可用来表示值缺失，但是当某个操作失败时，最好能得知失败的原因，从而可以作出相应的应对。</p>
+<p>举个例子，假如有个从磁盘上的某个文件读取数据并进行处理的任务，该任务会有多种可能失败的情况，包括指定路径下文件并不存在，文件不具有可读权限，或者文件编码格式不兼容。区分这些不同的失败情况可以让程序解决并处理某些错误，然后把它解决不了的错误报告给用户。</p>
+<blockquote>
+<p>注意<br>Swift 中的错误处理涉及到错误处理模式，这会用到 Cocoa 和 Objective-C 中的<code>NSError</code>。关于这个类的更多信息请参见 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/index.html#//apple_ref/doc/uid/TP40014216" target="_blank" rel="external">Using Swift with Cocoa and Objective-C (Swift 2.1)</a> 中的<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#//apple_ref/doc/uid/TP40014216-CH7-ID10" target="_blank" rel="external">错误处理</a>。</p>
+</blockquote>
+<p><a name="representing_and_throwing_errors"></a></p>
+<p>##表示并抛出错误</p>
+<p>在 Swift 中，错误用符合<code>ErrorType</code>协议的类型的值来表示。这个空协议表明该类型可以用于错误处理。</p>
+<p>Swift 的枚举类型尤为适合构建一组相关的错误状态，枚举的关联值还可以提供错误状态的额外信息。例如，你可以这样表示在一个游戏中操作自动贩卖机时可能会出现的错误状态：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">VendingMachineError</span>: <span class="title">ErrorType</span> </span>&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="type">InvalidSelection</span>				     <span class="comment">//选择无效</span></span><br><span class="line">	<span class="keyword">case</span> <span class="type">InsufficientFunds</span>(coinsNeeded: <span class="type">Int</span>) <span class="comment">//金额不足</span></span><br><span class="line">	<span class="keyword">case</span> <span class="type">OutOfStock</span>			                 <span class="comment">//缺货</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>抛出一个错误可以让你表明有意外情况发生，导致正常的执行流程无法继续执行。抛出错误使用<code>throws</code>关键字。例如，下面的代码抛出一个错误，提示贩卖机还需要<code>5</code>个硬币：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">throw <span class="type">VendingMachineError</span>.<span class="type">InsufficientFunds</span>(coinsNeeded: <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><a name="handling_errors"></a></p>
+<p>##处理错误</p>
+<p>某个错误被抛出时，附近的某部分代码必须负责处理这个错误，例如纠正这个问题、尝试另外一种方式、或是向用户报告错误。</p>
+<p>Swift 中有<code>4</code>种处理错误的方式。你可以把函数抛出的错误传递给调用此函数的代码、用<code>do-catch</code>语句处理错误、将错误作为可选类型处理、或者断言此错误根本不会发生。每种方式在下面的小节中都有描述。</p>
+<p>当一个函数抛出一个错误时，你的程序流程会发生改变，所以重要的是你能迅速识别代码中会抛出错误的地方。为了标识出这些地方，在调用一个能抛出错误的函数、方法或者构造器之前，加上<code>try</code>关键字，或者<code>try?</code>或<code>try!</code>这种变体。这些关键字在下面的小节中有具体讲解。</p>
+<blockquote>
+<p>注意<br>Swift 中的错误处理和其他语言中用<code>try</code>，<code>catch</code>和<code>throw</code>进行异常处理很像。和其他语言中（包括 Objective-C ）的异常处理不同的是，Swift 中的错误处理并不涉及解除调用栈，这是一个计算代价高昂的过程。就此而言，<code>throw</code>语句的性能特性是可以和<code>return</code>语句相媲美的。</p>
+</blockquote>
+<p>###用 throwing 函数传递错误</p>
+<p>为了表示一个函数、方法或构造器可以抛出错误，在函数声明的参数列表之后加上<code>throws</code>关键字。一个标有<code>throws</code>关键字的函数被称作<em>throwing 函数</em>。如果这个函数指明了返回值类型，<code>throws</code>关键词需要写在箭头（<code>-&gt;</code>）的前面。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">canThrowErrors</span><span class="params">()</span></span> throws -&gt; <span class="type">String</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">cannotThrowErrors</span><span class="params">()</span></span> -&gt; <span class="type">String</span></span><br></pre></td></tr></table></figure>
+<p>一个 throwing 函数可以在其内部抛出错误，并将错误传递到函数被调用时的作用域。</p>
+<blockquote>
+<p>注意<br>只有 throwing 函数可以传递错误。任何在某个非 throwing 函数内部抛出的错误只能在函数内部处理。</p>
+</blockquote>
+<p>下面的例子中，<code>VendingMechine</code>类有一个<code>vend(itemNamed:)</code>方法，如果请求的物品不存在、缺货或者花费超过了投入金额，该方法就会抛出一个相应的<code>VendingMachineError</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> price: <span class="type">Int</span></span><br><span class="line">	<span class="keyword">var</span> <span class="built_in">count</span>: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VendingMachine</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> inventory = [</span><br><span class="line">        <span class="string">"Candy Bar"</span>: <span class="type">Item</span>(price: <span class="number">12</span>, <span class="built_in">count</span>: <span class="number">7</span>),</span><br><span class="line">        <span class="string">"Chips"</span>: <span class="type">Item</span>(price: <span class="number">10</span>, <span class="built_in">count</span>: <span class="number">4</span>),</span><br><span class="line">        <span class="string">"Pretzels"</span>: <span class="type">Item</span>(price: <span class="number">7</span>, <span class="built_in">count</span>: <span class="number">11</span>)</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">var</span> coinsDeposited = <span class="number">0</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">dispenseSnack</span><span class="params">(snack: String)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Dispensing <span class="subst">\(snack)</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">vend</span><span class="params">(itemNamed name: String)</span></span> throws &#123;</span><br><span class="line">        guard <span class="keyword">var</span> item = inventory[name] <span class="keyword">else</span> &#123;</span><br><span class="line">            throw <span class="type">VendingMachineError</span>.<span class="type">InvalidSelection</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        guard item.<span class="built_in">count</span> &gt; <span class="number">0</span> <span class="keyword">else</span> &#123;</span><br><span class="line">            throw <span class="type">VendingMachineError</span>.<span class="type">OutOfStock</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        guard item.price &lt;= coinsDeposited <span class="keyword">else</span> &#123;</span><br><span class="line">            throw <span class="type">VendingMachineError</span>.<span class="type">InsufficientFunds</span>(coinsNeeded: item.price - coinsDeposited)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        coinsDeposited -= item.price</span><br><span class="line">        --item.<span class="built_in">count</span></span><br><span class="line">        inventory[name] = item</span><br><span class="line">        dispenseSnack(name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>vend(itemNamed:)</code>方法的实现中使用了<code>guard</code>语句来提前退出方法，确保在购买某个物品所需的条件中，有任一条件不满足时，能提前退出方法并抛出相应的错误。由于<code>throw</code>语句会立即退出方法，所以物品只有在所有条件都满足时才会被售出。</p>
+<p>因为<code>vend(itemNamed:)</code>方法会传递出它抛出的任何错误，在你的代码中调用此方法的地方，必须要么直接处理这些错误——使用<code>do-catch</code>语句，<code>try?</code>或<code>try!</code>；要么继续将这些错误传递下去。例如下面例子中，<code>buyFavoriteSnack(_:vendingMachine:)</code>同样是一个 throwing 函数，任何由<code>vend(itemNamed:)</code>方法抛出的错误会一直被传递到<code>buyFavoriteSnack(_:vendingMachine:)</code>函数被调用的地方。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> favoriteSnacks = [</span><br><span class="line">	<span class="string">"Alice"</span>: <span class="string">"Chips"</span>,</span><br><span class="line">	<span class="string">"Bob"</span>: <span class="string">"Licorice"</span>,</span><br><span class="line">	<span class="string">"Eve"</span>: <span class="string">"Pretzels"</span>,</span><br><span class="line">]</span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">buyFavoriteSnack</span><span class="params">(person: String, vendingMachine: VendingMachine)</span></span> throws &#123;</span><br><span class="line">	<span class="keyword">let</span> snackName = favoriteSnacks[person] ?? <span class="string">"Candy Bar"</span></span><br><span class="line">	try vendingMachine.vend(itemNamed: snackName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上例中，<code>buyFavoriteSnack(_:vendingMachine:)</code>函数会查找某人最喜欢的零食，并通过调用<code>vend(itemNamed:)</code>方法来尝试为他们购买。因为<code>vend(itemNamed:)</code>方法能抛出错误，所以在调用的它时候在它前面加了<code>try</code>关键字。</p>
+<p>###用 Do-Catch 处理错误</p>
+<p>可以使用一个<code>do-catch</code>语句运行一段闭包代码来处理错误。如果在<code>do</code>子句中的代码抛出了一个错误，这个错误会与<code>catch</code>子句做匹配，从而决定哪条子句能处理它。</p>
+<p>下面是<code>do-catch</code>语句的一般形式：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    try expression</span><br><span class="line">    statements</span><br><span class="line">&#125; catch pattern <span class="number">1</span> &#123;</span><br><span class="line">    statements</span><br><span class="line">&#125; catch pattern <span class="number">2</span> <span class="keyword">where</span> condition &#123;</span><br><span class="line">    statements</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>catch</code>后面写一个匹配模式来表明这个子句能处理什么样的错误。如果一条<code>catch</code>子句没有指定匹配模式，那么这条子句可以匹配任何错误，并且把错误绑定到一个名字为<code>error</code>的局部常量。关于模式匹配的更多信息请参考 <a href="../chapter3/07_Patterns.html">模式</a>。</p>
+<p><code>catch</code>子句不必将<code>do</code>子句中的代码所抛出的每一个可能的错误都作处理。如果所有<code>catch</code>子句都未处理错误，错误就会传递到周围的作用域。然而，错误还是必须要被某个周围的作用域处理的——要么是一个外围的<code>do-catch</code>错误处理语句，要么是一个 throwing 函数的内部。举例来说，下面的代码处理了<code>VendingMachineError</code>枚举类型的全部枚举值，但是所有其它的错误就必须由它周围的作用域处理：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vendingMachine = <span class="type">VendingMachine</span>()</span><br><span class="line">vendingMachine.coinsDeposited = <span class="number">8</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    try buyFavoriteSnack(<span class="string">"Alice"</span>, vendingMachine: vendingMachine)</span><br><span class="line">&#125; catch <span class="type">VendingMachineError</span>.<span class="type">InvalidSelection</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Invalid Selection."</span>)</span><br><span class="line">&#125; catch <span class="type">VendingMachineError</span>.<span class="type">OutOfStock</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Out of Stock."</span>)</span><br><span class="line">&#125; catch <span class="type">VendingMachineError</span>.<span class="type">InsufficientFunds</span>(<span class="keyword">let</span> coinsNeeded) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Insufficient funds. Please insert an additional <span class="subst">\(coinsNeeded)</span> coins."</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 打印 “Insufficient funds. Please insert an additional 2 coins.”</span></span><br></pre></td></tr></table></figure>
+<p>上面的例子中，<code>buyFavoriteSnack(_:vendingMachine:)</code>函数在一个<code>try</code>表达式中调用，因为它能抛出错误。如果错误被抛出，相应的执行会马上转移到<code>catch</code>子句中，并判断这个错误是否要被继续传递下去。如果没有错误抛出，<code>do</code>子句中余下的语句就会被执行。</p>
+<p>###将错误转换成可选值</p>
+<p>可以使用<code>try?</code>通过将错误转换成一个可选值来处理错误。如果在评估<code>try?</code>表达式时一个错误被抛出，那么表达式的值就是<code>nil</code>。例如下面代码中的<code>x</code>和<code>y</code>具有相同的值：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">someThrowingFunction</span><span class="params">()</span></span> throws -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">let</span> x = try? someThrowingFunction()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">let</span> y: <span class="type">Int</span>?</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    y = try someThrowingFunction()</span><br><span class="line">&#125; catch &#123;</span><br><span class="line">    y = <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果<code>someThrowingFunction()</code>抛出一个错误，<code>x</code>和<code>y</code>的值是<code>nil</code>。否则<code>x</code>和<code>y</code>的值就是该函数的返回值。注意，无论<code>someThrowingFunction()</code>的返回值类型是什么类型，<code>x</code>和<code>y</code>都是这个类型的可选类型。例子中此函数返回一个整型，所以<code>x</code>和<code>y</code>是可选整型。</p>
+<p>如果你想对所有的错误都采用同样的方式来处理，用<code>try?</code>就可以让你写出简洁的错误处理代码。例如，下面的代码用几种方式来获取数据，如果所有方式都失败了则返回<code>nil</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">fetchData</span><span class="params">()</span></span> -&gt; <span class="type">Data</span>? &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> data = try? fetchDataFromDisk() &#123; <span class="keyword">return</span> data &#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> data = try? fetchDataFromServer() &#123; <span class="keyword">return</span> data &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="禁用错误传递">禁用错误传递</h3><p>有时你知道某个 throwing 函数实际上在运行时是不会抛出错误的，在这种情况下，你可以在表达式前面写<code>try!</code>来禁用错误传递，这会把调用包装在一个断言不会有错误抛出的运行时断言中。如果实际上抛出了错误，你会得到一个运行时错误。</p>
+<p>例如，下面的代码使用了<code>loadImage(_:)</code>函数，该函数从给定的路径加载图片资源，如果图片无法载入则抛出一个错误。在这种情况下，因为图片是和应用绑定的，运行时不会有错误抛出，所以适合禁用错误传递：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> photo = try! loadImage(<span class="string">"./Resources/John Appleseed.jpg"</span>)</span><br></pre></td></tr></table></figure>
+<p><a name="specifying_cleanup_actions"></a></p>
+<p>##指定清理操作</p>
+<p>可以使用<code>defer</code>语句在即将离开当前代码块时执行一系列语句。该语句让你能执行一些必要的清理工作，不管是以何种方式离开当前代码块的——无论是由于抛出错误而离开，还是由于诸如<code>return</code>或者<code>break</code>的语句。例如，你可以用<code>defer</code>语句来确保文件描述符得以关闭，以及手动分配的内存得以释放。</p>
+<p><code>defer</code>语句将代码的执行延迟到当前的作用域退出之前。该语句由<code>defer</code>关键字和要被延迟执行的语句组成。延迟执行的语句不能包含任何控制转移语句，例如<code>break</code>或是<code>return</code>语句，或是抛出一个错误。延迟执行的操作会按照它们被指定时的顺序的相反顺序执行——也就是说，第一条<code>defer</code>语句中的代码会在第二条<code>defer</code>语句中的代码被执行之后才执行，以此类推。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">processFile</span><span class="params">(filename: String)</span></span> throws &#123;</span><br><span class="line">    <span class="keyword">if</span> exists(filename) &#123;</span><br><span class="line">        <span class="keyword">let</span> file = open(filename)</span><br><span class="line">        defer &#123;</span><br><span class="line">            close(file)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">let</span> line = try file.readline() &#123;</span><br><span class="line">            <span class="comment">// 处理文件。</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// close(file) 会在这里被调用，即作用域的最后。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码使用一条<code>defer</code>语句来确保<code>open(_:)</code>函数有一个相应的对<code>close(_:)</code>函数的调用。</p>
+<blockquote>
+<p>注意<br>即使没有涉及到错误处理，你也可以使用<code>defer</code>语句。</p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift-cn/" rel="tag">#swift-cn</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter2/17_Optional_Chaining/" rel="prev">第二章-17可选链式调用（Optional Chaining）</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter2/19_Type_Casting/" rel="next">第二章-19类型转换（Type Casting）</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#错误处理（Error_Handling）"><span class="nav-number">1.</span> <span class="nav-text">错误处理（Error Handling）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用错误传递"><span class="nav-number">1.0.1.</span> <span class="nav-text">禁用错误传递</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/25/swift-cn/chapter2/18_Error_Handling/';
+      var disqus_title = '第二章-18错误处理（Error Handling）';
+      var disqus_url = 'http://yoursite.com/2015/12/25/swift-cn/chapter2/18_Error_Handling/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

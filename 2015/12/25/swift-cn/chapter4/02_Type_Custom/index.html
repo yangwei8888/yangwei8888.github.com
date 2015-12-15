@@ -1,0 +1,765 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="swift-cn," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="造个类型不是梦-白话Swift类型创建
+
+翻译：老码团队翻译组-Tyrion校对：老码团队翻译组-Oberyn
+
+本页包含内容：
+
+自定义原型
+实现默认值
+支持基本布尔型初始化
+支持Bool类型判断
+支持兼容各们各派的类型
+完善OCBool的布尔基因体系
+
+小伙伴们，Swift中的Bool类型有着非常重要的语法功能，并支撑起了整个Swift体系中的逻辑判断体系，经过老码的研究和学习， Bool类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章-02造个类型不是梦-白话Swift类型创建">
+<meta property="og:url" content="http://yoursite.com/2015/12/25/swift-cn/chapter4/02_Type_Custom/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="造个类型不是梦-白话Swift类型创建
+
+翻译：老码团队翻译组-Tyrion校对：老码团队翻译组-Oberyn
+
+本页包含内容：
+
+自定义原型
+实现默认值
+支持基本布尔型初始化
+支持Bool类型判断
+支持兼容各们各派的类型
+完善OCBool的布尔基因体系
+
+小伙伴们，Swift中的Bool类型有着非常重要的语法功能，并支撑起了整个Swift体系中的逻辑判断体系，经过老码的研究和学习， Bool类型">
+<meta property="og:updated_time" content="2015-12-15T05:46:34.083Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第四章-02造个类型不是梦-白话Swift类型创建">
+<meta name="twitter:description" content="造个类型不是梦-白话Swift类型创建
+
+翻译：老码团队翻译组-Tyrion校对：老码团队翻译组-Oberyn
+
+本页包含内容：
+
+自定义原型
+实现默认值
+支持基本布尔型初始化
+支持Bool类型判断
+支持兼容各们各派的类型
+完善OCBool的布尔基因体系
+
+小伙伴们，Swift中的Bool类型有着非常重要的语法功能，并支撑起了整个Swift体系中的逻辑判断体系，经过老码的研究和学习， Bool类型">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 第四章-02造个类型不是梦-白话Swift类型创建 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              第四章-02造个类型不是梦-白话Swift类型创建
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-25T10:00:09+08:00" content="2015-12-25">
+            2015-12-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/25/swift-cn/chapter4/02_Type_Custom/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter4/02_Type_Custom/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="造个类型不是梦-白话Swift类型创建">造个类型不是梦-白话Swift类型创建</h1><hr>
+<blockquote>
+<p>翻译：<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队翻译组-Tyrion</a><br>校对：<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队翻译组-Oberyn</a></p>
+</blockquote>
+<p>本页包含内容：</p>
+<ul>
+<li><a href="#prototype">自定义原型</a></li>
+<li><a href="#imp-default">实现默认值</a></li>
+<li><a href="#init-by-bool">支持基本布尔型初始化</a></li>
+<li><a href="#condition-by-bool">支持Bool类型判断</a></li>
+<li><a href="#support-all-type">支持兼容各们各派的类型</a></li>
+<li><a href="#make-up-type">完善OCBool的布尔基因体系</a></li>
+</ul>
+<p>小伙伴们，Swift中的Bool类型有着非常重要的语法功能，并支撑起了整个Swift体系中的逻辑判断体系，经过老码的研究和学习， Bool类型本身其实是对基础Boolean类型封装，小伙伴们可能咬着手指头问老码，怎么一会Bool类型，一会Boolean类型，其区别在于，前者是基于枚举的组合类型，而后者则是基本类型，只有两种true和false。</p>
+<p><a name="prefix_expressions"></a></p>
+<p>####自定义原型<br>接下老码根据Bool的思想来创建一个OCBool类型，来让小伙伴们了解一下Swift中到底是怎么玩儿的。<br>来我们先看一下OCBool的定义。</p>
+<p>#####代码示例如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">OCBool</span></span>&#123;</span><br><span class="line"><span class="keyword">case</span> ocTrue</span><br><span class="line"><span class="keyword">case</span> ocFalse</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#####注意：</p>
+<ul>
+<li>代码中第2行和第3行，可以合并到一行写，如苹果官方Blog所写的一样</li>
+<li>代码中命名需要注意：OCBool是类型名，所以首字母必须大写，而case中的ocTrue和ocFalse是小类型则需要首字母小写。</li>
+</ul>
+<p><a name="imp-default"></a></p>
+<p>####实现默认值<br>行，我们给了一个漂亮的定义，不过按照传统语言的经验，Bool值默认情况下是假， 所以我们的OCBool也应该如此，我们使用类型扩展技术增加这个默认特性：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">OCBool</span></span>&#123;</span><br><span class="line">     <span class="keyword">init</span>()&#123;</span><br><span class="line">             <span class="keyword">self</span> =.ocFalse</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#####注意：</p>
+<ul>
+<li>代码中第1行：extension关键字，非常强大，小伙伴们可以通过此创造出许多好玩的东西，建议各位去Github上看一个名为“Swiftz”的项目，它将扩展用到了极致。</li>
+<li>代码中第3行：self = .ocFalse语法，刚入门的小伙伴们很迷糊，为什么会有奇怪的点语法，因为大牛Chris在Swift中增加了类型智能推断功能，在苹果Blog中，提到了“Context”概念，就是这个意思，因为这行语句是在枚举OCBool中的，其上下文就是OCBool的定义体，编译器当然知道.ocFalse就是OCBool.ocFalse了，所以这里直接点语法，非常整齐。<br>现在我们可以使用如下方法使用这个Bool类型。</li>
+</ul>
+<p>#####代码示例如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result:<span class="type">OCBool</span> = <span class="type">OCBool</span>()</span><br><span class="line"><span class="keyword">var</span> result1:<span class="type">OCBool</span> = .ocTrue</span><br></pre></td></tr></table></figure></p>
+<p><a name="init-by-bool"></a></p>
+<p>####支持基本布尔型初始化<br>正如上述代码所述，我们只能通过类型或者枚举项目赋值，这是组合类型的用法，但是编码的日子里，我们总是希望和true，false直接打交道，也就是说，我们希望这么做，<br>代码示例如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isSuccess:<span class="type">OCBool</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>如果小伙伴们直接这么用，则会出现如下错误：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>tyrion-OldCoder<span class="regexp">/Documents/</span>Learning<span class="regexp">/BoolType/</span>BoolType/main.<span class="string">swift:</span><span class="number">30</span>:<span class="number">24</span>: Type <span class="string">'OCBool'</span> does not conform to protocol <span class="string">'BooleanLiteralConvertible'</span></span><br></pre></td></tr></table></figure></p>
+<p>编译器咆哮的原因是，我们的类型没有遵从“布尔字面量转换协议”，接下来修正这个问题，</p>
+<p>#####代码示例如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"></span><br><span class="line"><span class="built_in">println</span>(<span class="string">"Hello, World!"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">OCBool</span></span>&#123;</span><br><span class="line">    <span class="keyword">case</span> ocTrue</span><br><span class="line">    <span class="keyword">case</span> ocFalse</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">OCBool</span>: <span class="title">BooleanLiteralConvertible</span></span>&#123;</span><br><span class="line"><span class="keyword">static</span> <span class="func"><span class="keyword">func</span> <span class="title">convertFromBooleanLiteral</span><span class="params">( value: Bool)</span></span> -&gt;<span class="type">OCBool</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value ? ocTrue : ocFalse</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> isSuccess:<span class="type">OCBool</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>#####注意：</p>
+<ul>
+<li><p>代码中的第11行是重点，我的类型OCBool支持了BooleanLiteralConvertible协议，这个协到底是干什么的呢，小伙伴们在Xcode代码编辑器，按住Command键，然后点击第11行中的BooleanLiteralConvertible协议名，则会进入它的定义，<br>#####其定义如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">BooleanLiteralConvertible</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">BooleanLiteralType</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">convertFromBooleanLiteral</span>(<span class="title">value</span>: <span class="title">BooleanLiteralType</span>) -&gt; <span class="title">Self</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这个定义中有个类方法convertFromBooleanLiteral，它的参数为BooleanLiteralType类型，也就是我传入的Bool类型， 且返回值为实现这个协议的类型本身，在我们的OCBool类型中，其返回值就是OCBool本身。经过这个定义，我们可以直接对OCBool类型直接进行布尔字面量初始化了。</p>
+</li>
+</ul>
+<p><a name="condition-by-bool"></a></p>
+<p>####支持Bool类型判断<br>小伙伴们不安分， 肯定想着我怎么用它实现逻辑判断，所以如果你这么写，</p>
+<p>#####代码示例如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isSuccess:<span class="type">OCBool</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> isSuccess &#123;</span><br><span class="line">    <span class="built_in">println</span>( <span class="string">"老码请你吃火锅！"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>你永远吃不到老码的火锅，因为这里编译器会咆哮：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>tyrion-OldCoder<span class="regexp">/Documents/</span>Learning<span class="regexp">/BoolType/</span>BoolType/main.<span class="string">swift:</span><span class="number">27</span>:<span class="number">4</span>: Type <span class="string">'OCBool'</span> does not conform to protocol <span class="string">'LogicValue'</span></span><br></pre></td></tr></table></figure></p>
+<p>OCBool现在只能用bool类型初始化，而不能直接返回bool型，小火把们还记得在《老码说编程之白话Swift江湖》中，老码多次提到，妈妈再也不担心我们 if a = 1{}的写法了， 因为等号不支持值返回了， 所以在if判断是后面的条件必须有返回值，OCBool没有，所以编译器哭了。我们解决这个问题。</p>
+<p>#####代码示例如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"></span><br><span class="line"><span class="built_in">println</span>(<span class="string">"Hello, World!"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">OCBool</span></span>&#123;</span><br><span class="line">    <span class="keyword">case</span> ocTrue</span><br><span class="line">    <span class="keyword">case</span> ocFalse</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">OCBool</span>: <span class="title">BooleanLiteralConvertible</span></span>&#123;</span><br><span class="line"><span class="keyword">static</span> <span class="func"><span class="keyword">func</span> <span class="title">convertFromBooleanLiteral</span><span class="params">( value: Bool)</span></span> -&gt;<span class="type">OCBool</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value ? ocTrue : ocFalse</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">OCBool</span>: <span class="title">LogicValue</span></span>&#123;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">getLogicValue</span><span class="params">()</span></span> -&gt;<span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> boolValue: <span class="type">Bool</span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> <span class="keyword">self</span>&#123;</span><br><span class="line">        <span class="keyword">case</span> .ocTrue:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        <span class="keyword">case</span> .ocFalse:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> boolValue</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> isSuccess:<span class="type">OCBool</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> isSuccess &#123;</span><br><span class="line">    <span class="built_in">println</span>( <span class="string">"老码请你吃火锅！"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>####运行结果如下：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hello, World!</span><br><span class="line">老码请你吃火锅！</span><br><span class="line"><span class="keyword">Program</span> ended <span class="keyword">with</span> <span class="keyword">exit</span> code: <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>#####注意：</p>
+<ul>
+<li>如果小伙伴们现在用的是Beta版的Xcode，注意苹果官方Blog中，在代码第17行如果在Xcode Beta4下是错误的，这里的协议是，LogicValue而不是BooleanVue，所以记得看错误提示才是好习惯。</li>
+<li>注意代码第34行，完美支持if判断，且输出结果为“老码请你吃火锅”，老码也是说说而已，请不要当真。</li>
+</ul>
+<p><a name="support-all-type"></a></p>
+<p>####支持兼容各们各派的类型<br>小伙伴们，江湖风险，门派众多，老码有自己的OCBool类型，可能嵩山少林有自己的SSBool类型，甚至连郭美美都可能有自己的MMBool类型，所以OCBool必须能够识别这些类型，这些各门各派的类型，只要支持LogicValue协议，就应该可以被识别，看老码怎么做，</p>
+<p>#####代码示例如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">OCBool</span></span>&#123;</span><br><span class="line">    <span class="keyword">init</span>( <span class="number">_</span> v: <span class="type">LogicValue</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> v.getLogicValue()&#123;</span><br><span class="line">            <span class="keyword">self</span> = .ocTrue</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">self</span> = .ocFalse</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mmResult: <span class="type">Bool</span> = <span class="literal">true</span></span><br><span class="line"><span class="keyword">var</span> ocResult:<span class="type">OCBool</span> = <span class="type">OCBool</span>(mmResult)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ocResult &#123;</span><br><span class="line">    <span class="built_in">println</span>( <span class="string">"老码没钱，郭美美请你吃火锅！"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#####代码运行结果如下：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hello, World!</span><br><span class="line">老码没钱，郭美美请你吃火锅！</span><br><span class="line"><span class="keyword">Program</span> ended <span class="keyword">with</span> <span class="keyword">exit</span> code: <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>漂亮！我们的OCBool类型现在支持了所有的逻辑变量初始化。</p>
+<p>#####注意：</p>
+<ul>
+<li>代码中第2行：“_”下横杠的用法，这是一个功能强大的小强，在此的目的是屏蔽外部参数名，所以小伙伴们可以直接：var ocResult:OCBool = OCBool(mmResult)而不是：var ocResult:OCBool = OCBool(v: mmResult)，小伙伴们惊呆了！这个init函数中本来就没有外部参数名啊，还记得老码在书里说过没，Swift的初始化函数会默认使用内部参数名，作为外部参数名。</li>
+</ul>
+<p><a name="make-up-type"></a></p>
+<p>####完善OCBool的布尔基因体系：<br>小伙伴们，bool类型的价值就是在于各种判断，诸如==，!=, &amp;，|,^,!，以及各种组合逻辑运算，我们OCBool也要具备这些功能，否则就会基因缺陷，且看老码如何实现：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">OCBool</span>: <span class="title">Equatable</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//支持等值判断运算符</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> ==<span class="params">( <span class="keyword">left</span>: OCBool, <span class="keyword">right</span>: OCBool )</span></span>-&gt;<span class="type">Bool</span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (<span class="keyword">left</span>, <span class="keyword">right</span>)&#123;</span><br><span class="line">    <span class="keyword">case</span> (.ocTrue, .ocTrue):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//支持位与运算符</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> &amp;<span class="params">( <span class="keyword">left</span>:OCBool, <span class="keyword">right</span>: OCBool)</span></span>-&gt;<span class="type">OCBool</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">left</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">right</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//支持位或运算符</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> |<span class="params">( <span class="keyword">left</span>:OCBool, <span class="keyword">right</span>: OCBool)</span></span>-&gt;<span class="type">OCBool</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">left</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">right</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//支持位异或运算符</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> ^<span class="params">( <span class="keyword">left</span>:OCBool, <span class="keyword">right</span>: OCBool)</span></span>-&gt;<span class="type">OCBool</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">OCBool</span>( <span class="keyword">left</span> != <span class="keyword">right</span> )</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//支持求反运算符</span></span><br><span class="line"><span class="preprocessor">@prefix</span> <span class="func"><span class="keyword">func</span> !<span class="params">( a:OCBool )</span></span>-&gt; <span class="type">OCBool</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a ^ <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//支持组合求与运算符</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> &amp;= <span class="params">(<span class="keyword">inout</span> <span class="keyword">left</span>:OCBool, <span class="keyword">right</span>:OCBool )</span></span>&#123;</span><br><span class="line">    <span class="keyword">left</span> = <span class="keyword">left</span> &amp; <span class="keyword">right</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> isHasMoney:<span class="type">OCBool</span> = <span class="literal">true</span></span><br><span class="line"><span class="keyword">var</span> isHasWife:<span class="type">OCBool</span> = <span class="literal">true</span></span><br><span class="line"><span class="keyword">var</span> isHasHealty:<span class="type">OCBool</span> = <span class="literal">true</span></span><br><span class="line"><span class="keyword">var</span> isHasLover:<span class="type">OCBool</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">isHasMoney != isHasHealty</span><br><span class="line">isHasHealty == isHasMoney</span><br><span class="line">isHasWife ^ isHasLover</span><br><span class="line">isHasWife = !isHasLover</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (isHasMoney | isHasHealty) &amp; isHasHealty&#123;</span><br><span class="line">    <span class="built_in">println</span>( <span class="string">"人生赢家，就像老码一样！"</span>)</span><br><span class="line">&#125;<span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">"人生最苦的事事，人死了钱没花了，人生最苦的事是，人活着，钱没了！"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好了，到这里就到这里了，窗外的雷声叫醒了老码，现在应该去吃饭了，以上老码给大家展示了如果制造一个自己的类型，记得老码的示例是在Xcode6 Beta4下测试的，至于Beta5的改变还没有涉及，小伙伴们要好生练习，以后各种自定类型都是基于这个思想。还有这个章节不是老码的原创，老码认真的阅读了苹果的官方博客，且自己的练习总结，如果小伙伴们费了吃奶的劲还是看不懂，请找度娘谷歌，还是看不懂请到老码官方微博：<a href="http://weibo.com/u/5241713117咆哮。" target="_blank" rel="external">http://weibo.com/u/5241713117咆哮。</a></p>
+<p>本文由翻译自Apple Swift Blog ：<a href="https://developer.apple.com/swift/blog/?id=8" target="_blank" rel="external">https://developer.apple.com/swift/blog/?id=8</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift-cn/" rel="tag">#swift-cn</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter4/01_Access_Control/" rel="prev">第四章-01Access Control 权限控制的黑与白</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter4/03_Ballons/" rel="next">第四章-03WWDC里面的那个“大炮打气球”</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#造个类型不是梦-白话Swift类型创建"><span class="nav-number">1.</span> <span class="nav-text">造个类型不是梦-白话Swift类型创建</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/25/swift-cn/chapter4/02_Type_Custom/';
+      var disqus_title = '第四章-02造个类型不是梦-白话Swift类型创建';
+      var disqus_url = 'http://yoursite.com/2015/12/25/swift-cn/chapter4/02_Type_Custom/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

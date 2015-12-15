@@ -1,0 +1,923 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="swift-cn," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="词法结构（Lexical Structure）
+
+1.0翻译：superkam校对：numbbbbb
+2.0翻译+校对：buginux
+2.1翻译：mmoaay
+
+本页包含内容：
+
+空白与注释
+标识符
+关键字和标点符号
+字面量
+整数字面量 
+浮点数字面量
+字符串字面量
+
+
+运算符
+
+Swift 的“词法结构”描述了能构成该语言中合法符号的字符序列。这些合法符号组成了语言中最底层的构建基块，并在之后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章-02词法结构（Lexical Structure）">
+<meta property="og:url" content="http://yoursite.com/2015/12/25/swift-cn/chapter3/02_Lexical_Structure/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="词法结构（Lexical Structure）
+
+1.0翻译：superkam校对：numbbbbb
+2.0翻译+校对：buginux
+2.1翻译：mmoaay
+
+本页包含内容：
+
+空白与注释
+标识符
+关键字和标点符号
+字面量
+整数字面量 
+浮点数字面量
+字符串字面量
+
+
+运算符
+
+Swift 的“词法结构”描述了能构成该语言中合法符号的字符序列。这些合法符号组成了语言中最底层的构建基块，并在之后">
+<meta property="og:updated_time" content="2015-12-15T05:45:23.246Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三章-02词法结构（Lexical Structure）">
+<meta name="twitter:description" content="词法结构（Lexical Structure）
+
+1.0翻译：superkam校对：numbbbbb
+2.0翻译+校对：buginux
+2.1翻译：mmoaay
+
+本页包含内容：
+
+空白与注释
+标识符
+关键字和标点符号
+字面量
+整数字面量 
+浮点数字面量
+字符串字面量
+
+
+运算符
+
+Swift 的“词法结构”描述了能构成该语言中合法符号的字符序列。这些合法符号组成了语言中最底层的构建基块，并在之后">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 第三章-02词法结构（Lexical Structure） | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              第三章-02词法结构（Lexical Structure）
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-25T11:00:19+08:00" content="2015-12-25">
+            2015-12-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/25/swift-cn/chapter3/02_Lexical_Structure/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/02_Lexical_Structure/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="词法结构（Lexical_Structure）">词法结构（Lexical Structure）</h1><hr>
+<blockquote>
+<p>1.0<br>翻译：<a href="https://github.com/superkam" target="_blank" rel="external">superkam</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a></p>
+<p>2.0<br>翻译+校对：<a href="https://github.com/buginux" target="_blank" rel="external">buginux</a></p>
+<p>2.1<br>翻译：<a href="https://github.com/mmoaay" target="_blank" rel="external">mmoaay</a></p>
+</blockquote>
+<p>本页包含内容：</p>
+<ul>
+<li><a href="#whitespace_and_comments">空白与注释</a></li>
+<li><a href="#identifiers">标识符</a></li>
+<li><a href="#keywords">关键字和标点符号</a></li>
+<li><a href="#literals">字面量</a><ul>
+<li><a href="#integer_literals">整数字面量</a> </li>
+<li><a href="#floating_point_literals">浮点数字面量</a></li>
+<li><a href="#string_literals">字符串字面量</a></li>
+</ul>
+</li>
+<li><a href="#operators">运算符</a></li>
+</ul>
+<p>Swift 的“词法结构”描述了能构成该语言中合法符号的字符序列。这些合法符号组成了语言中最底层的构建基块，并在之后的章节中用于描述语言的其他部分。一个合法符号由一个标识符、关键字、标点符号、字面量或运算符组成。</p>
+<p>通常情况下，符号是根据随后将介绍的语法约束，由 Swift 源文件的输入文本中提取可能的最长子串生成。这种方法称为“最长匹配”，或者“最大适合”。</p>
+<p><a id="whitespace_and_comments"></a></p>
+<h2 id="空白与注释">空白与注释</h2><p>空白有两个用途：分隔源文件中的符号以及帮助区分运算符属于前缀还是后缀（参见 <a href="#operators">运算符</a>），在其他情况下则会被忽略。以下的字符会被当作空白：空格（U+0020）、换行符（U+000A）、回车符（U+000D）、水平制表符（U+0009）、垂直制表符（U+000B）、换页符（U+000C）以及空（U+0000）。</p>
+<p>注释被编译器当作空白处理。单行注释由 <code>//</code> 开始直至遇到换行符（U+000A）或者回车符（U+000D）。多行注释由 <code>/*</code> 开始，以 <code>*/</code> 结束。注释允许嵌套，但注释标记必须匹配。</p>
+<p>正如 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Xcode/Reference/xcode_markup_formatting_ref/index.html#//apple_ref/doc/uid/TP40016497" target="_blank" rel="external"><em>Markup Formatting Reference</em></a> 所述，注释可以包含附加的格式和标记。</p>
+<p><a id="identifiers"></a></p>
+<h2 id="标识符">标识符</h2><p>标识符可以由以下的字符开始：大写或小写的字母 <code>A</code> 到 <code>Z</code>、下划线 <code>_</code>、基本多文种平面中的 Unicode 非组合字符以及基本多文种平面以外的非个人专用区字符。首字符之后，允许使用数字和 Unicode 字符组合。</p>
+<p>使用保留字作为标识符，需要在其前后增加反引号 <code>` </code>。例如，<code>class</code> 不是合法的标识符，但可以使用 <code>`class` </code>。反引号不属于标识符的一部分，<code>`x` </code> 和 <code>x</code> 表示同一标识符。</p>
+<p>闭包中如果没有明确指定参数名称，参数将被隐式命名为 <code>$0</code>、<code>$1</code>、<code>$2</code> 等等。这些命名在闭包作用域范围内是合法的标识符。</p>
+<blockquote>
+<p>标识符语法</p>
+</blockquote>
+<p><a id="identifier"></a></p>
+<blockquote>
+<p><em>标识符</em> → <a href="#identifier-head"><em>头部标识符</em></a> <a href="#identifier-characters"><em>标识符字符组</em></a><sub>可选</sub><br><em>标识符</em> → `<a href="#identifier-head"><em>头部标识符</em></a> <a href="#identifier-characters"><em>标识符字符组</em></a><sub>可选</sub>`<br><em>标识符</em> → <a href="#implicit-parameter-name"><em>隐式参数名</em></a><br><a id="identifier-list"></a><br><em>标识符列表</em> → <a href="#identifier"><em>标识符</em></a> | <a href="#identifier"><em>标识符</em></a> <strong>,</strong> <a href="#identifier-list"><em>标识符列表</em></a></p>
+</blockquote>
+<p><a id="identifier-head"></a>        </p>
+<blockquote>
+<p><em>头部标识符</em> → 大写或小写字母 A - Z<br><em>头部标识符</em> → _<br><em>头部标识符</em> → U+00A8，U+00AA，U+00AD，U+00AF，U+00B2–U+00B5，或者 U+00B7–U+00BA<br><em>头部标识符</em> → U+00BC–U+00BE，U+00C0–U+00D6，U+00D8–U+00F6，或者 U+00F8–U+00FF<br><em>头部标识符</em> → U+0100–U+02FF，U+0370–U+167F，U+1681–U+180D，或者 U+180F–U+1DBF<br><em>头部标识符</em> → U+1E00–U+1FFF<br><em>头部标识符</em> → U+200B–U+200D，U+202A–U+202E，U+203F–U+2040，U+2054，或者 U+2060–U+206F<br><em>头部标识符</em> → U+2070–U+20CF，U+2100–U+218F，U+2460–U+24FF，或者 U+2776–U+2793<br><em>头部标识符</em> → U+2C00–U+2DFF 或者 U+2E80–U+2FFF<br><em>头部标识符</em> → U+3004–U+3007，U+3021–U+302F，U+3031–U+303F，或者 U+3040–U+D7FF<br><em>头部标识符</em> → U+F900–U+FD3D，U+FD40–U+FDCF，U+FDF0–U+FE1F，或者 U+FE30–U+FE44<br><em>头部标识符</em> → U+FE47–U+FFFD<br><em>头部标识符</em> → U+10000–U+1FFFD，U+20000–U+2FFFD，U+30000–U+3FFFD，或者 U+40000–U+4FFFD<br><em>头部标识符</em> → U+50000–U+5FFFD，U+60000–U+6FFFD，U+70000–U+7FFFD，或者 U+80000–U+8FFFD<br><em>头部标识符</em> → U+90000–U+9FFFD，U+A0000–U+AFFFD，U+B0000–U+BFFFD，或者 U+C0000–U+CFFFD<br><em>头部标识符</em> → U+D0000–U+DFFFD 或者 U+E0000–U+EFFFD  </p>
+</blockquote>
+<p><a id="identifier-character"></a></p>
+<blockquote>
+<p><em>标识符字符</em> → 数值 0 - 9<br><em>标识符字符</em> → U+0300–U+036F，U+1DC0–U+1DFF，U+20D0–U+20FF，或者 U+FE20–U+FE2F<br><em>标识符字符</em> → <a href="#identifier-head"><em>头部标识符</em></a><br><a id="identifier-characters"></a><br><em>标识符字符组</em> → <a href="#identifier-character"><em>标识符字符</em></a> <a href="#identifier-characters"><em>标识符字符组</em></a><sub>可选</sub>  </p>
+</blockquote>
+<p><a id="implicit-parameter-name"></a>    </p>
+<blockquote>
+<p><em>隐式参数名</em> → <strong>$</strong> <a href="#decimal-digits"><em>十进制数字列表</em></a>  </p>
+</blockquote>
+<p><a id="keywords"></a></p>
+<h2 id="关键字和标点符号">关键字和标点符号</h2><p>下面这些被保留的关键字不允许用作标识符，除非被反引号转义，具体描述请参考 <a href="#identifiers">标识符</a>。</p>
+<ul>
+<li>用在声明中的关键字： <code>class</code>、<code>deinit</code>、<code>enum</code>、<code>extension</code>、<code>func</code>、<code>import</code>、<code>init</code>、<code>inout</code>、<code>internal</code>、<code>let</code>、<code>operator</code>、<code>private</code>、<code>protocol</code>、<code>public</code>、<code>static</code>、<code>struct</code>、<code>subscript</code>、<code>typealias</code>、<code>var</code>。</li>
+<li>用在语句中的关键字： <code>break</code>、<code>case</code>、<code>continue</code>、<code>default</code>、<code>defer</code>、<code>do</code>、<code>else</code>、<code>fallthrough</code>、<code>for</code>、<code>guard</code>、<code>if</code>、<code>in</code>、<code>repeat</code>、<code>return</code>、<code>switch</code>、<code>where</code>、<code>while</code>。</li>
+<li>用在表达式和类型中的关键字： <code>as</code>、<code>catch</code>、<code>dynamicType</code>、<code>false</code>、<code>is</code>、<code>nil</code>、<code>rethrows</code>、<code>super</code>、<code>self</code>、<code>Self</code>、<code>throw</code>、<code>throws</code>、<code>true</code>、<code>try</code>、<code>__COLUMN__</code>、<code>__FILE__</code>、<code>__FUNCTION__</code>、<code>__LINE__</code>。</li>
+<li>用在模式中的关键字：<code>_</code></li>
+<li>特定上下文中被保留的关键字： <code>associativity</code>、<code>convenience</code>、<code>dynamic</code>、<code>didSet</code>、<code>final</code>、<code>get</code>、<code>infix</code>、<code>indirect</code>、<code>lazy</code>、<code>left</code>、<code>mutating</code>、<code>none</code>、<code>nonmutating</code>、<code>optional</code>、<code>override</code>、<code>postfix</code>、<code>precedence</code>、<code>prefix</code>、<code>Protocol</code>、<code>required</code>、<code>right</code>、<code>set</code>、<code>Type</code>、<code>unowned</code>、<code>weak</code>、<code>willSet</code>，这些关键字在特定上下文之外可以被用做标识符。</li>
+</ul>
+<p>以下符号被当作保留符号，不能用于自定义运算符： <code>(</code>、<code>)</code>、<code>{</code>、<code>}</code>、<code>[</code>、<code>]</code>、<code>.</code>、<code>,</code>、<code>:</code>、<code>;</code>、<code>=</code>、<code>@</code>、<code>#</code>、<code>&amp;</code>（作为前缀运算符）、<code>-&gt;</code>、<code>` </code>、<code>?</code>、<code>!</code>（作为后缀运算符）。</p>
+<p><a id="literals"></a></p>
+<h2 id="字面量">字面量</h2><p>字面量是用来表示源码中某种特定类型的值，比如一个数字或字符串。</p>
+<p>下面是字面量的一些示例：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">42</span>              <span class="comment">// 整数字面量</span></span><br><span class="line"><span class="number">3.14159</span>         <span class="comment">// 浮点数字面量</span></span><br><span class="line"><span class="string">"Hello, world!"</span> <span class="comment">// 字符串字面量</span></span><br><span class="line"><span class="literal">true</span>			<span class="comment">// 布尔值字面量</span></span><br></pre></td></tr></table></figure>
+<p>字面量本身并不包含类型信息。事实上，一个字面量会被解析为拥有无限的精度，然后 Swift 的类型推导会尝试去推导出这个字面量的类型。比如，在 <code>let x: Int8 = 42</code> 这个声明中，Swift 使用了显式类型标注（<code>: Int8</code>）来推导出 <code>42</code> 这个整数字面量的类型是 <code>Int8</code>。如果没有可用的类型信息， Swift 则会从标准库中定义的字面量类型中推导出一个默认的类型。整数字面量的默认类型是 <code>Int</code>，浮点数字面量的默认类型是 <code>Double</code>，字符串字面量的默认类型是 <code>String</code>，布尔值字面量的默认类型是 <code>Bool</code>。比如，在 <code>let str = &quot;Hello, world&quot;</code> 这个声明中，字符串 <code>&quot;Hello, world&quot;</code> 的默认推导类型就是 <code>String</code>。</p>
+<p>当为一个字面量值指定了类型标注的时候，这个标注的类型必须能通过这个字面量值实例化。也就是说，这个类型必须符合这些 Swift 标准库协议中的一个：整数字面量的 <code>IntegerLiteralConvertible</code> 协议、浮点数字面量的 <code>FloatingPointLiteralConvertible</code> 协议、字符串字面量的 <code>StringLiteralConvertible</code> 协议以及布尔值字面量的 <code>BooleanLiteralConvertible</code> 协议。比如，<code>Int8</code> 符合 <code>IntegerLiteralConvertible</code> 协议，因此它能在 <code>let x: Int8 = 42</code> 这个声明中作为整数字面量 <code>42</code> 的类型标注。</p>
+<blockquote>
+<p>字面量语法  </p>
+<p><em>字面量</em> → <a href="#numeric-literal"><em>数值字面量</em></a> | <a href="#string-literal"><em>字符串字面量</em></a> | <a href="#boolean-literal"><em>布尔值字面量</em></a> | <a href="#nil-literal"><em>nil 字面量</em></a>    </p>
+</blockquote>
+<p><a id="numeric-literal"></a>    </p>
+<blockquote>
+<p><em>数值字面量</em> → <strong>-</strong><sub>可选</sub> <a href="#integer-literal"><em>整数字面量</em></a> | <strong>-</strong><sub>可选</sub> <a href="#floating-point-literal"><em>浮点数字面量</em></a><br><a id="boolean-literal"></a><br><em>布尔值字面量</em> → <strong>true</strong> | <strong>false</strong><br><a id="nil-literal"></a><br><em>nil 字面量</em> → <strong>nil</strong></p>
+</blockquote>
+<p><a id="integer_literals"></a></p>
+<h3 id="整数字面量">整数字面量</h3><p>整数字面量表示未指定精度整数的值。整数字面量默认用十进制表示，可以加前缀来指定其他的进制，二进制字面量加 <code>0b</code>，八进制字面量加 <code>0o</code>，十六进制字面量加 <code>0x</code>。</p>
+<p>十进制字面量包含数字 <code>0</code> 至 <code>9</code>。二进制字面量只包含 <code>0</code> 或 <code>1</code>，八进制字面量包含数字 <code>0</code> 至 <code>7</code>，十六进制字面量包含数字 <code>0</code> 至 <code>9</code> 以及字母 <code>A</code> 至 <code>F</code>（大小写均可）。</p>
+<p>负整数的字面量在整数字面量前加负号 <code>-</code>，比如 <code>-42</code>。</p>
+<p>整型字面面可以使用下划线 <code>_</code> 来增加数字的可读性，下划线会被系统忽略，因此不会影响字面量的值。同样地，也可以在数字前加 <code>0</code>，并不会影响字面量的值。</p>
+<p>除非特别指定，整数字面量的默认推导类型为 Swift 标准库类型中的 <code>Int</code>。Swift 标准库还定义了其他不同长度以及是否带符号的整数类型，请参考 <a href="../chapter2/01_The_Basics.html#integers">整数</a>。</p>
+<blockquote>
+<p>整数字面量语法  </p>
+</blockquote>
+<p><a id="integer-literal"></a></p>
+<blockquote>
+<p><em>整数字面量</em> → <a href="#binary-literal"><em>二进制字面量</em></a><br><em>整数字面量</em> → <a href="#octal-literal"><em>八进制字面量</em></a><br><em>整数字面量</em> → <a href="#decimal-literal"><em>十进制字面量</em></a><br><em>整数字面量</em> → <a href="#hexadecimal-literal"><em>十六进制字面量</em></a>  </p>
+</blockquote>
+<p><a id="binary-literal"></a></p>
+<blockquote>
+<p><em>二进制字面量</em> → <strong>0b</strong> <a href="#binary-digit"><em>二进制数字</em></a> <a href="#binary-literal-characters"><em>二进制字面量字符组</em></a><sub>可选</sub><br><a id="binary-digit"></a><br><em>二进制数字</em> → 数值 0 到 1<br><a id="binary-literal-character"></a><br><em>二进制字面量字符</em> → <a href="#binary-digit"><em>二进制数字</em></a> | _<br><a id="binary-literal-characters"></a><br><em>二进制字面量字符组</em> → <a href="#binary-literal-character"><em>二进制字面量字符</em></a> <a href="#binary-literal-characters"><em>二进制字面量字符组</em></a><sub>可选</sub>  </p>
+</blockquote>
+<p><a id="octal-literal"></a>    </p>
+<blockquote>
+<p><em>八进制字面量</em> → <strong>0o</strong> <a href="#octal-digit"><em>八进字数字</em></a> <a href="#octal-literal-characters"><em>八进制字符组</em></a><sub>可选</sub><br><a id="octal-digit"></a><br><em>八进字数字</em> → 数值 0 到 7<br><a id="octal-literal-character"></a><br><em>八进制字符</em> → <a href="#octal-digit"><em>八进字数字</em></a> | _<br><a id="octal-literal-characters"></a><br><em>八进制字符组</em> → <a href="#octal-literal-character"><em>八进制字符</em></a> <a href="#octal-literal-characters"><em>八进制字符组</em></a><sub>可选</sub></p>
+</blockquote>
+<p><a id="decimal-literal"></a>    </p>
+<blockquote>
+<p><em>十进制字面量</em> → <a href="#decimal-digit"><em>十进制数字</em></a> <a href="#decimal-literal-characters"><em>十进制字符组</em></a><sub>可选</sub><br><a id="decimal-digit"></a><br><em>十进制数字</em> → 数值 0 到 9<br><a id="decimal-digits"></a><br><em>十进制数字组</em> → <a href="#decimal-digit"><em>十进制数字</em></a> <a href="#decimal-digits"><em>十进制数字组</em></a><sub>可选</sub><br><a id="decimal-literal-character"></a><br><em>十进制字符</em> → <a href="#decimal-digit"><em>十进制数字</em></a> | _<br><a id="decimal-literal-characters"></a><br><em>十进制字符组</em> → <a href="#decimal-literal-character"><em>十进制字符</em></a> <a href="#decimal-literal-characters"><em>十进制字符组</em></a><sub>可选</sub> </p>
+</blockquote>
+<p><a id="hexadecimal-literal"></a>    </p>
+<blockquote>
+<p><em>十六进制字面量</em> → <strong>0x</strong> <a href="#hexadecimal-digit"><em>十六进制数字</em></a> <a href="#hexadecimal-literal-characters"><em>十六进制字面量字符组</em></a><sub>可选</sub><br><a id="hexadecimal-digit"></a><br><em>十六进制数字</em> → 数值 0 到 9, 字母 a 到 f, 或 A 到 F<br><a id="hexadecimal-literal-character"></a><br><em>十六进制字符</em> → <a href="#hexadecimal-digit"><em>十六进制数字</em></a> | _<br><a id="hexadecimal-literal-characters"></a><br><em>十六进制字面量字符组</em> → <a href="#hexadecimal-literal-character"><em>十六进制字符</em></a> <a href="#hexadecimal-literal-characters"><em>十六进制字面量字符组</em></a><sub>可选</sub>  </p>
+</blockquote>
+<p><a id="floating_point_literals"></a></p>
+<h3 id="浮点数字面量">浮点数字面量</h3><p>浮点数字面量表示未指定精度浮点数的值。</p>
+<p>浮点数字面量默认用十进制表示（无前缀），也可以用十六进制表示（加前缀 <code>0x</code>）。</p>
+<p>十进制浮点数字面量由十进制数字串后跟小数部分或指数部分（或两者皆有）组成。十进制小数部分由小数点 <code>.</code> 后跟十进制数字串组成。指数部分由大写或小写字母 <code>e</code> 为前缀后跟十进制数字串组成，这串数字表示 <code>e</code> 之前的数量乘以 10 的几次方。例如：<code>1.25e2</code> 表示 <code>1.25 ⨉ 10^2</code>，也就是 <code>125.0</code>；同样，<code>1.25e－2</code> 表示 <code>1.25 ⨉ 10^－2</code>，也就是 <code>0.0125</code>。</p>
+<p>十六进制浮点数字面量由前缀 <code>0x</code> 后跟可选的十六进制小数部分以及十六进制指数部分组成。十六进制小数部分由小数点后跟十六进制数字串组成。指数部分由大写或小写字母 <code>p</code> 为前缀后跟十进制数字串组成，这串数字表示 <code>p</code> 之前的数量乘以 2 的几次方。例如：<code>0xFp2</code> 表示 <code>15 ⨉ 2^2</code>，也就是 <code>60</code>；同样，<code>0xFp-2</code> 表示 <code>15 ⨉ 2^-2</code>，也就是 <code>3.75</code>。</p>
+<p>负数的浮点数字面量由负号 <code>-</code> 和浮点数字面量组成，例如 <code>-42.5</code>。</p>
+<p>浮点数字面量允许使用下划线 <code>_</code> 来增强数字的可读性，下划线会被系统忽略，因此不会影响字面量的值。同样地，也可以在数字前加 <code>0</code>，并不会影响字面量的值。</p>
+<p>除非特别指定，浮点数字面量的默认推导类型为 Swift 标准库类型中的 <code>Double</code>，表示 64 位浮点数。Swift 标准库也定义了 <code>Float</code> 类型，表示 32 位浮点数。</p>
+<blockquote>
+<p>浮点数字面量语法  </p>
+</blockquote>
+<p><a id="floating-point-literal"></a> </p>
+<blockquote>
+<p><em>浮点数字面量</em> → <a href="#decimal-literal"><em>十进制字面量</em></a> <a href="#decimal-fraction"><em>十进制分数</em></a><sub>可选</sub> <a href="#decimal-exponent"><em>十进制指数</em></a><sub>可选</sub><br><em>浮点数字面量</em> → <a href="#hexadecimal-literal"><em>十六进制字面量</em></a> <a href="#hexadecimal-fraction"><em>十六进制分数</em></a><sub>可选</sub> <a href="#hexadecimal-exponent"><em>十六进制指数</em></a></p>
+</blockquote>
+<p><a id="decimal-fraction"></a>    </p>
+<blockquote>
+<p><em>十进制分数</em> → <strong>.</strong> <a href="#decimal-literal"><em>十进制字面量</em></a><br><a id="decimal-exponent"></a><br><em>十进制指数</em> → <a href="#floating-point-e"><em>十进制指数 e</em></a> <a href="#sign"><em>正负号</em></a><sub>可选</sub> <a href="#decimal-literal"><em>十进制字面量</em></a>  </p>
+</blockquote>
+<p><a id="hexadecimal-fraction"></a></p>
+<blockquote>
+<p><em>十六进制分数</em> → <strong>.</strong> <a href="#hexadecimal-digit"><em>十六进制数字</em></a> <a href="#hexadecimal-literal-characters"><em>十六进制字面量字符组</em></a><sub>可选</sub><br><a id="hexadecimal-exponent"></a><br><em>十六进制指数</em> → <a href="#floating-point-p"><em>十六进制指数 p</em></a> <a href="#sign"><em>正负号</em></a><sub>可选</sub> <a href="#decimal-literal"><em>十进制字面量</em></a>  </p>
+</blockquote>
+<p><a id="floating-point-e"></a></p>
+<blockquote>
+<p><em>十进制指数 e</em> → <strong>e</strong> | <strong>E</strong><br><a id="floating-point-p"></a><br><em>十六进制指数 p</em> → <strong>p</strong> | <strong>P</strong><br><a id="sign"></a><br><em>正负号</em> → <strong>+</strong> | <strong>-</strong>  </p>
+</blockquote>
+<p><a id="string_literals"></a></p>
+<h3 id="字符串字面量">字符串字面量</h3><p>字符串字面量由被包在双引号中的一串字符组成，形式如下：</p>
+<blockquote>
+<p>“<code>字符</code>“</p>
+</blockquote>
+<p>字符串字面量中不能包含未转义的双引号（<code>&quot;</code>）、未转义的反斜线（<code>\</code>）、回车符、换行符。</p>
+<p>可以在字符串字面量中使用的转义特殊符号如下：</p>
+<ul>
+<li>空字符 <code>\0</code></li>
+<li>反斜线 <code>\\</code></li>
+<li>水平制表符 <code>\t</code></li>
+<li>换行符 <code>\n</code></li>
+<li>回车符 <code>\r</code></li>
+<li>双引号 <code>\&quot;</code></li>
+<li>单引号 <code>\&#39;</code></li>
+<li>Unicode 标量 <code>\u{</code>n<code>}</code>，n 为一到八位的十六进制数字</li>
+</ul>
+<p>字符串字面量允许在反斜杠 <code>\</code> 后的括号 <code>()</code> 中插入表达式的值。插入表达式可以包含字符串字面量，但不能包含未转义的双引号 <code>&quot;</code>、未转义的反斜线 <code>\</code>、回车符、换行符。</p>
+<p>例如，以下所有字符串字面量的值都是相同的：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"1 2 3"</span></span><br><span class="line"><span class="string">"1 2 <span class="subst">\("<span class="number">3</span>")</span>"</span></span><br><span class="line"><span class="string">"1 2 <span class="subst">\(<span class="number">3</span>)</span>"</span></span><br><span class="line"><span class="string">"1 2 <span class="subst">\(<span class="number">1</span> + <span class="number">2</span>)</span>"</span></span><br><span class="line"><span class="keyword">let</span> x = <span class="number">3</span>; <span class="string">"1 2 <span class="subst">\(x)</span>"</span></span><br></pre></td></tr></table></figure>
+<p>字符串字面量的默认推导类型为 <code>String</code>。更多有关 <code>String</code> 类型的信息请参考 <a href="../chapter2/03_Strings_and_Characters.html">字符串和字符</a> 以及 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Reference/Swift_String_Structure/index.html#//apple_ref/doc/uid/TP40015181" target="_blank" rel="external"><em>String Structure Reference</em></a>。</p>
+<p>用 <code>＋</code> 操作符连接的字符型字面量是在编译时进行连接的。比如下面的 <code>textA</code> 和 <code>textB</code> 是完全一样的，<code>textA</code> 没有任何运行时的连接操作。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> textA = <span class="string">"Hello "</span> + <span class="string">"world"</span></span><br><span class="line"><span class="keyword">let</span> textB = <span class="string">"Hello world"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>字符串字面量语法  </p>
+</blockquote>
+<p><a id="string-literal"></a></p>
+<blockquote>
+<p><em>字符串字面量</em> → <a href="#static-string-literal"><em>静态字符串字面量</em></a> | <a href="#interpolated-string-literal"><em>插值字符串字面量</em></a> </p>
+</blockquote>
+<p><a id="static-string-literal"></a></p>
+<blockquote>
+<p><em>静态字符串字面量</em> → <strong>“</strong><a href="#quoted-text"><em>引用文本</em></a><sub>可选</sub><strong>“</strong><br><a id="quoted-text"></a><br><em>引用文本</em> → <a href="#quoted-text-item"><em>引用文本项</em></a> <a href="#quoted-text"><em>引用文本</em></a><sub>可选</sub><br><a id="quoted-text-item"></a><br><em>引用文本项</em> → <a href="#escaped-character"><em>转义字符</em></a><br><em>引用文本项</em> → 除了 <strong>“</strong>、<strong>\</strong>、U+000A、U+000D 以外的所有 Unicode 字符</p>
+</blockquote>
+<p><a id="interpolated-string-literal"></a></p>
+<blockquote>
+<p><em>插值字符串字面量</em> → <strong>“</strong><a href="#interpolated-text"><em>插值文本</em></a><sub>可选</sub><strong>“</strong><br><a id="interpolated-text"></a><br><em>插值文本</em> → <a href="#interpolated-text-item"><em>插值文本项</em></a> <a href="#interpolated-text"><em>插值文本</em></a><sub>可选</sub><br><a id="interpolated-text-item"></a><br><em>插值文本项</em> → <strong>\**</strong>(<strong><a href="./04_Expressions.html"><em>表达式</em></a></strong>)<em>* | [</em>引用文本项*](#quoted-text-item)</p>
+</blockquote>
+<p><a id="escaped-character"></a></p>
+<blockquote>
+<p><em>转义字符</em> → <strong>\**</strong>0<strong> | </strong>\<strong>**\</strong> | <strong>\t</strong> | <strong>\n</strong> | <strong>\r</strong> | <strong>\“</strong> | <strong>\‘</strong><br><em>转义字符</em> → <strong>\u {</strong> <a href="#unicode-scalar-digits"><em>unicode 标量数字</em></a> <strong>}</strong><br><a id="unicode-scalar-digits"></a><br><em>unicode 标量数字</em> → 一到八位的十六进制数字</p>
+</blockquote>
+<p><a id="operators"></a></p>
+<h2 id="运算符">运算符</h2><p>Swift 标准库定义了许多可供使用的运算符，其中大部分在 <a href="../chapter2/02_Basic_Operators.html">基础运算符</a> 和 <a href="../chapter2/25_Advanced_Operators.html">高级运算符</a> 中进行了阐述。这一小节将描述哪些字符能用于自定义运算符。</p>
+<p>自定义运算符可以由以下其中之一的 ASCII 字符 <code>/</code>、<code>=</code>、 <code>-</code>、<code>+</code>、<code>!</code>、<code>*</code>、<code>%</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&amp;</code>、<code>|</code>、<code>^</code>、<code>?</code> 以及 <code>~</code>，或者后面语法中规定的任一个 Unicode 字符开始。在第一个字符之后，允许使用组合型 Unicode 字符。也可以使用两个或者多个的点号来自定义运算符（比如，<code>....</code>）。虽然可以自定义包含问号 <code>?</code> 的运算符，但是这个运算符不能只包含单独的一个问号。</p>
+<blockquote>
+<p>注意<br>以下这些标记 <code>=</code>、<code>-&gt;</code>、<code>//</code>、<code>/*</code>、<code>*/</code>、<code>.</code>、<code>&lt;</code>（前缀运算符）、<code>&amp;</code>、<code>?</code>、<code>?</code>（中缀运算符）、<code>&gt;</code>（后缀运算符）、<code>!</code> 、<code>?</code> 是被系统保留的。这些符号不能被重载，也不能用于自定义运算符。</p>
+</blockquote>
+<p>运算符两侧的空白被用来区分该运算符是否为前缀运算符、后缀运算符或二元运算符。规则总结如下：</p>
+<ul>
+<li>如果运算符两侧都有空白或两侧都无空白，将被看作二元运算符。例如：<code>a+b</code> 和 <code>a + b</code> 中的运算符 <code>+</code> 被看作二元运算符。</li>
+<li>如果运算符只有左侧空白，将被看作前缀一元运算符。例如 <code>a ++b</code> 中的 <code>++</code> 被看作前缀一元运算符。</li>
+<li>如果运算符只有右侧空白，将被看作后缀一元运算符。例如 <code>a++ b</code> 中的 <code>++</code> 被看作后缀一元运算符。</li>
+<li>如果运算符左侧没有空白并紧跟 <code>.</code>，将被看作后缀一元运算符。例如 <code>a++.b</code> 中的 <code>++</code> 被看作后缀一元运算符（即上式被视为 <code>a++ .b</code> 而非 <code>a ++ .b</code>）。</li>
+</ul>
+<p>鉴于这些规则，运算符前的字符 <code>(</code>、<code>[</code> 和 <code>{</code>，运算符后的字符 <code>)</code>、<code>]</code> 和 <code>}</code>，以及字符 <code>,</code>、<code>;</code> 和 <code>:</code> 都被视为空白。</p>
+<p>以上规则需注意一点，如果预定义运算符 <code>!</code> 或 <code>?</code> 左侧没有空白，则不管右侧是否有空白都将被看作后缀运算符。如果将 <code>?</code> 用作可选链式调用运算符，左侧必须无空白。如果用于条件运算符 <code>? :</code>，必须两侧都有空白。</p>
+<p>在某些特定的设计中 ，以 <code>&lt;</code> 或 <code>&gt;</code> 开头的运算符会被分离成两个或多个符号，剩余部分可能会以同样的方式被再次分离。因此，在 <code>Dictionary&lt;String, Array&lt;Int&gt;&gt;</code> 中没有必要添加空白来消除闭合字符 <code>&gt;</code> 的歧义。在这个例子中， 闭合字符 <code>&gt;</code> 不会被视为单独的符号，因而不会被错误解析为 <code>&gt;&gt;</code> 运算符。</p>
+<p>要学习如何自定义运算符，请参考 <a href="../chapter2/25_Advanced_Operators.html#custom_operators">自定义运算符</a> 和 <a href="05_Declarations.html#operator_declaration">运算符声明</a>。要学习如何重载运算符，请参考 <a href="../chapter2/25_Advanced_Operators.html#operator_functions">运算符函数</a>。</p>
+<blockquote>
+<p>运算符语法  </p>
+</blockquote>
+<p><a id="operator"></a></p>
+<blockquote>
+<p><em>运算符</em> → <a href="#operator-head"><em>头部运算符</em></a> <a href="#operator-characters"><em>运算符字符组</em></a><sub>可选</sub><br><em>运算符</em> → <a href="#dot-operator-head"><em>头部点运算符</em></a> <a href="#dot-operator-characters"><em>点运算符字符组</em></a><sub>可选</sub>    </p>
+</blockquote>
+<p><a id="operator-head"></a>    </p>
+<blockquote>
+<p><em>头部运算符</em> → <strong>/</strong> | <strong>=</strong> | <strong>-</strong> | <strong>+</strong> | <strong>!</strong> | <strong>*</strong> | <strong>%</strong> | <strong>&lt;</strong> | <strong>&gt;</strong> | <strong>&amp;</strong> | <strong>|</strong> | <strong>^</strong> | <strong>~</strong> | <strong>?</strong><br><em>头部运算符</em> → U+00A1–U+00A7<br><em>头部运算符</em> → U+00A9 或 U+00AB<br><em>头部运算符</em> → U+00AC 或 U+00AE<br><em>头部运算符</em> → U+00B0–U+00B1，U+00B6，U+00BB，U+00BF，U+00D7，或 U+00F7<br><em>头部运算符</em> → U+2016–U+2017 或 U+2020–U+2027<br><em>头部运算符</em> → U+2030–U+203E<br><em>头部运算符</em> → U+2041–U+2053<br><em>头部运算符</em> → U+2055–U+205E<br><em>头部运算符</em> → U+2190–U+23FF<br><em>头部运算符</em> → U+2500–U+2775<br><em>头部运算符</em> → U+2794–U+2BFF<br><em>头部运算符</em> → U+2E00–U+2E7F<br><em>头部运算符</em> → U+3001–U+3003<br><em>头部运算符</em> → U+3008–U+3030 </p>
+</blockquote>
+<p><a id="operator-character"></a>       </p>
+<blockquote>
+<p><em>运算符字符</em> → <a href="#operator-head"><em>头部运算符</em></a><br><em>运算符字符</em> → U+0300–U+036F<br><em>运算符字符</em> → U+1DC0–U+1DFF<br><em>运算符字符</em> → U+20D0–U+20FF<br><em>运算符字符</em> → U+FE00–U+FE0F<br><em>运算符字符</em> → U+FE20–U+FE2F<br><em>运算符字符</em> → U+E0100–U+E01EF<br><a id="operator-characters"></a><br><em>运算符字符组</em> → <a href="#operator-character"><em>运算符字符</em></a> <a href="#operator-characters"><em>运算符字符组</em></a><sub>可选</sub>    </p>
+</blockquote>
+<p><a id="dot-operator-head"></a>    </p>
+<blockquote>
+<p><em>头部点运算符</em> → <strong>..</strong><br><a id="dot-operator-character"></a><br><em>点运算符字符</em> → <strong>.</strong> | <a href="#operator-character"><em>运算符字符</em></a><br><a id="dot-operator-characters"></a><br><em>点运算符字符组</em> → <a href="#dot-operator-character"><em>点运算符字符</em></a> <a href="#dot-operator-characters"><em>点运算符字符组</em></a><sub>可选</sub></p>
+</blockquote>
+<p><a id="binary-operator"></a></p>
+<blockquote>
+<p><em>二元运算符</em> → <a href="#operator"><em>运算符</em></a><br><a id="prefix-operator"></a><br><em>前缀运算符</em> → <a href="#operator"><em>运算符</em></a><br><a id="postfix-operator"></a><br><em>后缀运算符</em> → <a href="#operator"><em>运算符</em></a>  </p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift-cn/" rel="tag">#swift-cn</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/" rel="prev">第三章-01关于语言参考（About the Language Reference）</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter3/03_Types/" rel="next">第三章-03类型（Types）</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#词法结构（Lexical_Structure）"><span class="nav-number">1.</span> <span class="nav-text">词法结构（Lexical Structure）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#空白与注释"><span class="nav-number">1.1.</span> <span class="nav-text">空白与注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标识符"><span class="nav-number">1.2.</span> <span class="nav-text">标识符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键字和标点符号"><span class="nav-number">1.3.</span> <span class="nav-text">关键字和标点符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字面量"><span class="nav-number">1.4.</span> <span class="nav-text">字面量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整数字面量"><span class="nav-number">1.4.1.</span> <span class="nav-text">整数字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数字面量"><span class="nav-number">1.4.2.</span> <span class="nav-text">浮点数字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串字面量"><span class="nav-number">1.4.3.</span> <span class="nav-text">字符串字面量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符"><span class="nav-number">1.5.</span> <span class="nav-text">运算符</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/25/swift-cn/chapter3/02_Lexical_Structure/';
+      var disqus_title = '第三章-02词法结构（Lexical Structure）';
+      var disqus_url = 'http://yoursite.com/2015/12/25/swift-cn/chapter3/02_Lexical_Structure/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

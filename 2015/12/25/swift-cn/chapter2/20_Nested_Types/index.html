@@ -1,0 +1,722 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="swift-cn," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="嵌套类型（Nested Types）
+
+1.0翻译：Lin-H校对：shinyzhu
+2.0翻译+校对：SergioChan
+2.1校对：shanks，2015-11-01
+
+本页包含内容：
+
+嵌套类型实践
+引用嵌套类型
+
+枚举常被用于为特定类或结构体实现某些功能。类似的，也能够在某个复杂的类型中，方便地定义工具类或结构体来使用。为了实现这种功能，Swift 允许你定义嵌套类型，可以在支持的类型中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章-20嵌套类型（Nested Types）">
+<meta property="og:url" content="http://yoursite.com/2015/12/25/swift-cn/chapter2/20_Nested_Types/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="嵌套类型（Nested Types）
+
+1.0翻译：Lin-H校对：shinyzhu
+2.0翻译+校对：SergioChan
+2.1校对：shanks，2015-11-01
+
+本页包含内容：
+
+嵌套类型实践
+引用嵌套类型
+
+枚举常被用于为特定类或结构体实现某些功能。类似的，也能够在某个复杂的类型中，方便地定义工具类或结构体来使用。为了实现这种功能，Swift 允许你定义嵌套类型，可以在支持的类型中">
+<meta property="og:updated_time" content="2015-12-15T05:43:30.427Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二章-20嵌套类型（Nested Types）">
+<meta name="twitter:description" content="嵌套类型（Nested Types）
+
+1.0翻译：Lin-H校对：shinyzhu
+2.0翻译+校对：SergioChan
+2.1校对：shanks，2015-11-01
+
+本页包含内容：
+
+嵌套类型实践
+引用嵌套类型
+
+枚举常被用于为特定类或结构体实现某些功能。类似的，也能够在某个复杂的类型中，方便地定义工具类或结构体来使用。为了实现这种功能，Swift 允许你定义嵌套类型，可以在支持的类型中">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 第二章-20嵌套类型（Nested Types） | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              第二章-20嵌套类型（Nested Types）
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-25T12:00:07+08:00" content="2015-12-25">
+            2015-12-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/25/swift-cn/chapter2/20_Nested_Types/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter2/20_Nested_Types/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="嵌套类型（Nested_Types）">嵌套类型（Nested Types）</h1><hr>
+<blockquote>
+<p>1.0<br>翻译：<a href="https://github.com/Lin-H" target="_blank" rel="external">Lin-H</a><br>校对：<a href="https://github.com/shinyzhu" target="_blank" rel="external">shinyzhu</a></p>
+<p>2.0<br>翻译+校对：<a href="https://github.com/SergioChan" target="_blank" rel="external">SergioChan</a></p>
+<p>2.1<br>校对：<a href="http://codebuild.me" target="_blank" rel="external">shanks</a>，2015-11-01</p>
+</blockquote>
+<p>本页包含内容：</p>
+<ul>
+<li><a href="#nested_types_in_action">嵌套类型实践</a></li>
+<li><a href="#referring_to_nested_types">引用嵌套类型</a></li>
+</ul>
+<p>枚举常被用于为特定类或结构体实现某些功能。类似的，也能够在某个复杂的类型中，方便地定义工具类或结构体来使用。为了实现这种功能，Swift 允许你定义嵌套类型，可以在支持的类型中定义嵌套的枚举、类和结构体。</p>
+<p>要在一个类型中嵌套另一个类型，将嵌套类型的定义写在其外部类型的<code>{}</code>内，而且可以根据需要定义多级嵌套。</p>
+<p><a name="nested_types_in_action"></a></p>
+<h2 id="嵌套类型实践">嵌套类型实践</h2><p>下面这个例子定义了一个结构体<code>BlackjackCard</code>（二十一点），用来模拟<code>BlackjackCard</code>中的扑克牌点数。<code>BlackjackCard</code>结构体包含两个嵌套定义的枚举类型<code>Suit</code>和<code>Rank</code>。</p>
+<p>在<code>BlackjackCard</code>中，<code>Ace</code>牌可以表示<code>1</code>或者<code>11</code>，<code>Ace</code>牌的这一特征通过一个嵌套在<code>Rank</code>枚举中的结构体<code>Values</code>来表示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BlackjackCard</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 嵌套的 Suit 枚举</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">Suit</span>: <span class="title">Character</span> </span>&#123;</span><br><span class="line">       <span class="keyword">case</span> <span class="type">Spades</span> = <span class="string">"♠"</span>, <span class="type">Hearts</span> = <span class="string">"♡"</span>, <span class="type">Diamonds</span> = <span class="string">"♢"</span>, <span class="type">Clubs</span> = <span class="string">"♣"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 嵌套的 Rank 枚举</span></span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">Rank</span>: <span class="title">Int</span> </span>&#123;</span><br><span class="line">       <span class="keyword">case</span> <span class="type">Two</span> = <span class="number">2</span>, <span class="type">Three</span>, <span class="type">Four</span>, <span class="type">Five</span>, <span class="type">Six</span>, <span class="type">Seven</span>, <span class="type">Eight</span>, <span class="type">Nine</span>, <span class="type">Ten</span></span><br><span class="line">       <span class="keyword">case</span> <span class="type">Jack</span>, <span class="type">Queen</span>, <span class="type">King</span>, <span class="type">Ace</span></span><br><span class="line">       <span class="class"><span class="keyword">struct</span> <span class="title">Values</span> </span>&#123;</span><br><span class="line">           <span class="keyword">let</span> first: <span class="type">Int</span>, second: <span class="type">Int</span>?</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">var</span> values: <span class="type">Values</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> <span class="keyword">self</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> .<span class="type">Ace</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="type">Values</span>(first: <span class="number">1</span>, second: <span class="number">11</span>)</span><br><span class="line">        <span class="keyword">case</span> .<span class="type">Jack</span>, .<span class="type">Queen</span>, .<span class="type">King</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="type">Values</span>(first: <span class="number">10</span>, second: <span class="literal">nil</span>)</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="type">Values</span>(first: <span class="keyword">self</span>.rawValue, second: <span class="literal">nil</span>)</span><br><span class="line">            &#125;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// BlackjackCard 的属性和方法</span></span><br><span class="line">    <span class="keyword">let</span> rank: <span class="type">Rank</span>, suit: <span class="type">Suit</span></span><br><span class="line">    <span class="keyword">var</span> description: <span class="type">String</span> &#123;</span><br><span class="line">    	<span class="keyword">var</span> output = <span class="string">"suit is <span class="subst">\(suit.rawValue)</span>,"</span></span><br><span class="line">        output += <span class="string">" value is <span class="subst">\(rank.values.first)</span>"</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> second = rank.values.second &#123;</span><br><span class="line">            output += <span class="string">" or <span class="subst">\(second)</span>"</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Suit</code>枚举用来描述扑克牌的四种花色，并用一个<code>Character</code>类型的原始值表示花色符号。</p>
+<p><code>Rank</code>枚举用来描述扑克牌从<code>Ace</code>~<code>10</code>，以及<code>J</code>、<code>Q</code>、<code>K</code>，这<code>13</code>种牌，并用一个<code>Int</code>类型的原始值表示牌的面值。（这个<code>Int</code>类型的原始值未用于<code>Ace</code>、<code>J</code>、<code>Q</code>、<code>K</code>这<code>4</code>种牌。）</p>
+<p>如上所述，<code>Rank</code>枚举在内部定义了一个嵌套结构体<code>Values</code>。结构体<code>Values</code>中定义了两个属性，用于反映只有<code>Ace</code>有两个数值，其余牌都只有一个数值：</p>
+<ul>
+<li><code>first</code>的类型为<code>Int</code></li>
+<li><code>second</code>的类型为<code>Int?</code>，或者说“optional <code>Int</code>”</li>
+</ul>
+<p><code>Rank</code>还定义了一个计算型属性<code>values</code>，它将会返回一个<code>Values</code>结构体的实例。这个计算型属性会根据牌的面值，用适当的数值去初始化<code>Values</code>实例。对于<code>J</code>、<code>Q</code>、<code>K</code>、<code>Ace</code>这四种牌，会使用特殊数值。对于数字面值的牌，使用枚举实例的原始值。</p>
+<p><code>BlackjackCard</code>结构体拥有两个属性——<code>rank</code>与<code>suit</code>。它也同样定义了一个计算型属性<code>description</code>，<code>description</code>属性用<code>rank</code>和<code>suit</code>中的内容来构建对扑克牌名字和数值的描述。该属性使用可选绑定来检查可选类型<code>second</code>是否有值，若有值，则在原有的描述中增加对<code>second</code>的描述。</p>
+<p>因为<code>BlackjackCard</code>是一个没有自定义构造器的结构体，在<a href="./14_Initialization.html#memberwise_initializers_for_structure_types">结构体的逐一成员构造器</a>中可知，结构体有默认的成员构造器，所以你可以用默认的构造器去初始化新常量<code>theAceOfSpades</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> theAceOfSpades = <span class="type">BlackjackCard</span>(rank: .<span class="type">Ace</span>, suit: .<span class="type">Spades</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"theAceOfSpades: <span class="subst">\(theAceOfSpades.description)</span>"</span>)</span><br><span class="line"><span class="comment">// 打印 “theAceOfSpades: suit is ♠, value is 1 or 11”</span></span><br></pre></td></tr></table></figure>
+<p>尽管<code>Rank</code>和<code>Suit</code>嵌套在<code>BlackjackCard</code>中，但它们的类型仍可从上下文中推断出来，所以在初始化实例时能够单独通过成员名称（<code>.Ace</code>和<code>.Spades</code>）引用枚举实例。在上面的例子中，<code>description</code>属性正确地反映了黑桃A牌具有<code>1</code>和<code>11</code>两个值。</p>
+<p><a name="referring_to_nested_types"></a></p>
+<h2 id="引用嵌套类型">引用嵌套类型</h2><p>在外部引用嵌套类型时，在嵌套类型的类型名前加上其外部类型的类型名作为前缀：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> heartsSymbol = <span class="type">BlackjackCard</span>.<span class="type">Suit</span>.<span class="type">Hearts</span>.rawValue</span><br><span class="line"><span class="comment">// 红心符号为 “♡”</span></span><br></pre></td></tr></table></figure>
+<p>对于上面这个例子，这样可以使<code>Suit</code>、<code>Rank</code>和<code>Values</code>的名字尽可能的短，因为它们的名字可以由定义它们的上下文来限定。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift-cn/" rel="tag">#swift-cn</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter2/19_Type_Casting/" rel="prev">第二章-19类型转换（Type Casting）</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter2/21_Extensions/" rel="next">第二章-21扩展（Extensions）</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌套类型（Nested_Types）"><span class="nav-number">1.</span> <span class="nav-text">嵌套类型（Nested Types）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套类型实践"><span class="nav-number">1.1.</span> <span class="nav-text">嵌套类型实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用嵌套类型"><span class="nav-number">1.2.</span> <span class="nav-text">引用嵌套类型</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/25/swift-cn/chapter2/20_Nested_Types/';
+      var disqus_title = '第二章-20嵌套类型（Nested Types）';
+      var disqus_url = 'http://yoursite.com/2015/12/25/swift-cn/chapter2/20_Nested_Types/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

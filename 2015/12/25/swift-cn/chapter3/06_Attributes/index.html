@@ -1,0 +1,812 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="swift-cn," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="特性（Attributes）
+
+1.0翻译：Hawstein校对：numbbbbb, stanzhai
+2.0翻译+校对：KYawn
+2.1翻译：小铁匠Linus
+
+本页内容包括：
+
+声明特性
+类型特性
+
+特性提供了关于声明和类型的更多信息。在Swift中有两类特性，用于修饰声明的以及用于修饰类型的。
+通过以下方式指定一个特性：符号@后面跟特性名，如果包含参数，则把参数带上：
+
+@attribut">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章-06特性（Attributes）">
+<meta property="og:url" content="http://yoursite.com/2015/12/25/swift-cn/chapter3/06_Attributes/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="特性（Attributes）
+
+1.0翻译：Hawstein校对：numbbbbb, stanzhai
+2.0翻译+校对：KYawn
+2.1翻译：小铁匠Linus
+
+本页内容包括：
+
+声明特性
+类型特性
+
+特性提供了关于声明和类型的更多信息。在Swift中有两类特性，用于修饰声明的以及用于修饰类型的。
+通过以下方式指定一个特性：符号@后面跟特性名，如果包含参数，则把参数带上：
+
+@attribut">
+<meta property="og:updated_time" content="2015-12-15T05:45:49.428Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三章-06特性（Attributes）">
+<meta name="twitter:description" content="特性（Attributes）
+
+1.0翻译：Hawstein校对：numbbbbb, stanzhai
+2.0翻译+校对：KYawn
+2.1翻译：小铁匠Linus
+
+本页内容包括：
+
+声明特性
+类型特性
+
+特性提供了关于声明和类型的更多信息。在Swift中有两类特性，用于修饰声明的以及用于修饰类型的。
+通过以下方式指定一个特性：符号@后面跟特性名，如果包含参数，则把参数带上：
+
+@attribut">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 第三章-06特性（Attributes） | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              第三章-06特性（Attributes）
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-25T11:00:15+08:00" content="2015-12-25">
+            2015-12-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/25/swift-cn/chapter3/06_Attributes/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/06_Attributes/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="特性（Attributes）">特性（Attributes）</h1><hr>
+<blockquote>
+<p>1.0<br>翻译：<a href="https://github.com/Hawstein" target="_blank" rel="external">Hawstein</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
+<p>2.0<br>翻译+校对：<a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></p>
+<p>2.1<br>翻译：<a href="https://github.com/kevin833752" target="_blank" rel="external">小铁匠Linus</a></p>
+</blockquote>
+<p>本页内容包括：</p>
+<ul>
+<li><a href="#declaration_attributes">声明特性</a></li>
+<li><a href="#type_attributes">类型特性</a></li>
+</ul>
+<p>特性提供了关于声明和类型的更多信息。在Swift中有两类特性，用于修饰声明的以及用于修饰类型的。</p>
+<p>通过以下方式指定一个特性：符号<code>@</code>后面跟特性名，如果包含参数，则把参数带上：</p>
+<blockquote>
+<p>@<code>attribute name</code><br>@<code>attribute name</code>(<code>attribute arguments</code>)  </p>
+</blockquote>
+<p>有些声明特性通过接收参数来指定特性的更多信息以及它是如何修饰一个特定的声明的。这些特性的参数写在小括号内，它们的格式由它们所属的特性来定义。</p>
+<p><a name="declaration_attributes"></a></p>
+<h2 id="声明特性">声明特性</h2><p>声明特性只能应用于声明。然而，你也可以将<code>noreturn</code>特性应用于函数或方法类型。</p>
+<p><code>autoclosure</code></p>
+<p>这个特性通过把表达式自动封装成无参数的闭包来延迟表达式的计算。它可以声明返回表达式自身类型的没有参数的方法类型，也可以用于函数参数的声明。含有<code>autoclosure</code>特性的声明同时也具有<code>noescape</code>的特性，除非传递可选参数<code>escaping</code>.关于怎样使用<code>autoclosure</code>特性的例子，参见<a href="./03_Types.html#function_type">函数类型</a>.</p>
+<p><code>available</code></p>
+<p>将<code>available</code>特性用于声明时，意味着该声明的生命周期会依赖于特定的平台和操作系统版本。</p>
+<p><code>available</code>特性经常与参数列表一同出现，该参数列表至少有两个参数，参数之间由逗号分隔。这些参数由以下这些平台名字中的一个起头：</p>
+<ul>
+<li><code>iOS</code></li>
+<li><code>iOSApplicationExtension</code></li>
+<li><code>OSX</code></li>
+<li><code>OSXApplicationExtension</code></li>
+<li><code>watchOS</code></li>
+</ul>
+<p>当然，你也可以用一个星号(*)来表示，该声明在上面提到的所有平台上都是有效的。</p>
+<p>剩下的参数，可以以任何顺序出现，并且可以添加关于声明生命周期的附加信息，包括重要的里程碑。</p>
+<ul>
+<li><p><code>unavailable</code>参数表示：该声明在特定的平台上是无效的</p>
+</li>
+<li><p><code>introduced</code>参数表示：该声明第一次被引入时所在平台的版本。格式如下：<br></p><p><code>introduced=version number</code></p><p>这里的<code>version number</code>由一个正的十进制整数或浮点数构成。</p>
+</li>
+<li><p><code>deprecated</code>参数表示：该声明第一次被建议弃用时所在平台的版本。格式如下：<br></p><p><code>deprecated=version number</code></p><p>这里的<code>version number</code>由一个正的十进制整数或浮点数构成。</p>
+</li>
+<li><p><code>obsoleted</code>参数表示：该声明第一次被弃用时所在平台的版本。当一个声明被弃用时，它就从此平台中被移除，不能再被使用。格式如下：<br></p><p><code>obsoleted=version number</code></p><p>这里的<code>version number</code>由一个正的十进制整数或浮点数构成。</p>
+</li>
+<li><p><code>message</code>参数用来提供文本信息。当使用建议弃用或者被弃用的声明时，编译器会抛出错误或警告信息。格式如下：<br></p><p><code>message=message</code></p><p>这里的<code>message</code>由一个字符串文字构成。</p>
+</li>
+<li><p><code>renamed</code>参数用来提供文本信息，用以表示被重命名的声明的新名字。当使用这个重命名的声明遇到错误时，编译器会显示出该新名字。格式如下：<br></p><p><code>renamed=new name</code></p><p>这里的<code>new name</code>由一个字符串文字构成。</p>
+</li>
+</ul>
+<p>你可以将<code>renamed</code>参数和<code>unavailable</code>参数以及类型别名声明组合使用，以向用户表示：在你的代码中，一个声明已经被重命名。当一个声明的名字在一个框架或者库的不同发布版本间发生变化时，这会相当有用。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// First release</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyProtocol</span> </span>&#123;</span><br><span class="line">    <span class="comment">// protocol definition</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Subsequent release renames MyProtocol</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyRenamedProtocol</span> </span>&#123;</span><br><span class="line">    <span class="comment">// protocol definition</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@available(*, unavailable, renamed=<span class="string">"MyRenamedProtocol"</span>)</span><br><span class="line"><span class="keyword">typealias</span> <span class="type">MyProtocol</span> = <span class="type">MyRenamedProtocol</span></span><br></pre></td></tr></table></figure>
+<p>你可以在一个单独的声明上使用多个<code>available</code>特性，以详细说明该声明在不同平台上的有效性。编译器只有在当前的目标平台和<code>available</code>特性中指定的平台匹配时，才会使用<code>available</code>特性。</p>
+<p>如果<code>available</code>特性除了平台名称参数外，只指定了一个<code>introduced</code>参数，那么可以使用以下简写语法代替：</p>
+<p>@available(<code>platform name</code> <code>version number</code>, *)</p>
+<p><code>available</code>特性的简写语法可以简明地表达出多个平台的可用性。尽管这两种形式在功能上是相同的，但请尽可能地使用简明语法形式。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@available(iOS <span class="number">8.0</span>, <span class="type">OSX</span> <span class="number">10.10</span>, *)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// class definition</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>objc</code></p>
+<p>该特性用于修饰任何可以在Objective-C中表示的声明。比如，非嵌套类、协议、非泛型枚举（仅限整型值类型）、类和协议的属性和方法（包括<code>getter</code>和<code>setter</code>）、构造器、析构器以及下标。<code>objc</code>特性告诉编译器这个声明可以在Objective-C代码中使用。</p>
+<p>标有<code>objc</code>特性的类必须继承自Objective-C中定义的类。如果你将<code>objc</code>特性应用于一个类或协议，它也会隐式地应用于那个类的成员或协议。对于标记了<code>objc</code>特性的类，编译器会隐式地为它的子类添加<code>objc</code>特性。标记了<code>objc</code>特性的协议不能继承没有标记<code>objc</code>的协议。</p>
+<p>如果你将<code>objc</code>特性应用于枚举，每一个枚举的<code>case</code>都会以枚举名称和<code>case</code>名称组合的方式暴露在Objective-C代码中。例如：一个名为<code>Venus</code>的<code>case</code>在<code>Planet</code>枚举中，这个<code>case</code>暴露在Objective-C代码中时叫做<code>PlanetVenus</code>。</p>
+<p><code>objc</code>特性有一个可选的参数，由标记符组成。当你想把<code>objc</code>所修饰的实体以一个不同的名字暴露给Objective-C时，你就可以使用这个特性参数。你可以使用这个参数来命名类，协议，方法，getters，setters，以及构造器。下面的例子把<code>ExampleClass</code>中<code>enabled</code>属性的getter暴露给Objective-C，名字是<code>isEnabled</code>，而不是它原来的属性名。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@objc</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleClass</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> enabled: <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="preprocessor">@objc</span>(isEnabled) <span class="keyword">get</span> &#123;</span><br><span class="line">        <span class="comment">// Return the appropriate value</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>noescape</code></p>
+<p>在函数或者方法声明上使用该特性，它表示参数将不会被存储用作后续的计算，其用来确保不会超出函数调用的生命周期。对于其属性或方法来说，使用<code>noescape</code>声明属性的函数类型不需要显式的使用<code>self.</code>。</p>
+<p><code>nonobjc</code></p>
+<p>该特性用于方法、属性、下标、或构造器的声明，这些声明本是可以在Objective-C代码中表示的。使用<code>nonobjc</code>特性告诉编译器这个声明不能在Objective-C代码中使用。</p>
+<p>可以使用<code>nonobjc</code>特性解决标有<code>objc</code>的类中桥接方法的循环问题，该特性还允许标有<code>objc</code>的类的构造器和方法进行重载(overload)。</p>
+<p>标有<code>nonobjc</code>特性的方法不能重写(override)一个标有<code>objc</code>特性的方法。然而，标有<code>objc</code>特性的方法可以重写标有<code>nonobjc</code>特性的方法。同样，标有<code>nonobjc</code>特性的方法不能满足一个需要标有<code>@objc</code>特性的方法的协议。</p>
+<p><code>noreturn</code></p>
+<p>该特性用于修饰函数或方法声明，表明该函数或方法的对应类型，<code>T</code>，是<code>@noreturn T</code>。你可以用这个特性修饰函数或方法的类型，这样一来，函数或方法就不会返回到它的调用者中去。</p>
+<p>对于一个没有用<code>noreturn</code>特性标记的函数或方法，你可以将它重写为用该特性标记的。相反，对于一个已经用<code>noreturn</code>特性标记的函数或方法，你则不可以将它重写为没使用该特性标记的。当你在一个comforming类型中实现一个协议方法时，该规则同样适用。</p>
+<p><code>NSApplicationMain</code></p>
+<p>在类上使用该特性表示该类是应用程序委托类，使用该特性与调用<code>NSApplicationMain(_:_:)</code>函数并且把该类的名字作为委托类的名字传递给函数的效果相同。</p>
+<p>如果你不想使用这个特性，可以提供一个<code>main.swift</code>文件，并且提供一个<code>main()</code>函数去调用<code>NSApplicationMain(_:_:)</code>函数。比如，如果你的应用程序使用一个派生于<code>NSApplication</code>的自定义子类作为主要类，你可以调用<code>NSApplicationMain</code>函数而不是使用该特性。</p>
+<p><code>NSCopying</code></p>
+<p>该特性用于修饰一个类的存储型变量属性。该特性将使属性的setter与属性值的一个副本合成，这个值由<code>copyWithZone(_:)</code>方法返回，而不是属性本身的值。该属性的类型必需遵循<code>NSCopying</code>协议。</p>
+<p><code>NSCopying</code>特性的原理与Objective-C中的<code>copy</code>特性相似。</p>
+<p><code>NSManaged</code></p>
+<p>该特性用于修饰<code>NSManagedObject</code>子类中的实例方法或存储型变量属性，表明属性的存储和实现由Core Data在运行时基于相关实体描述动态提供。对于标记了<code>NSManaged</code>特性的属性，Core Data也会在运行时提供存储。</p>
+<p><code>testable</code></p>
+<p>该特性用于<code>import</code>声明可以测试的编译模块，它能访问任何标有<code>internal</code>权限标识符的实体，这和将它声明为<code>public</code>权限标识符有同样的效果。</p>
+<p><code>UIApplicationMain</code></p>
+<p>在类上使用该特性表示该类是应用程序委托类，使用该特性与调用<code>UIApplicationMain(_:_:)</code>函数并且把该类的名字作为委托类的名字传递给函数的效果相同。</p>
+<p>如果你不想使用这个特性，可以提供一个<code>main.swift</code>文件，并且提供一个<code>main</code>函数去调用<code>UIApplicationMain(_:_:)</code>函数。比如，如果你的应用程序使用一个派生于<code>UIApplication</code>的自定义子类作为主要类，你可以调用<code>UIApplicationMain</code>函数而不是使用该特性。</p>
+<p><code>warn_unused_result</code></p>
+<p>该特性应用于方法或函数声明，当方法或函数被调用，但其结果未被使用时，该特性会让编译器会产生警告。</p>
+<p>你可以使用这个特性提供一个警告信息，这个警告信息是关于不正确地使用未变异的方法，这个方法也有一个对应的变异方法。</p>
+<p><code>warn_unused_result</code>特性会有选择地采用下面两个参数之一。</p>
+<ul>
+<li><p><code>message</code>参数用来提供警告信息。在当方法或函数被调用，但其结果未被使用时，会显示警告信息。格式如下：<br></p><p><code>message=message</code></p><p>这里的<code>message</code>由一个字符串文字构成。</p>
+</li>
+<li><p><code>mutable_variant</code>参数用于提供变异方法的名称，如果未变异方法以一个可变的值被调用而且其结果并未被使用时，应该使用此变异方法。格式如下（方法名有字符串构成）：</p><p><code>mutable_variant=method name</code></p><p><br>比如，Swift标准库同时提供了变异方法<code>sortInPlace()</code>和未变异方法<code>sort()</code>集合，它们的元素生成器符合<code>Comparable</code>协议。如果你调用了<code>sort()</code>方法，而没有使用它的结果，其实很有可能，你是打算使用变异方法<code>sortInPlace()</code>。</p>
+</li>
+</ul>
+<h3 id="Interface_Builder使用的声明特性">Interface Builder使用的声明特性</h3><p>Interface Builder特性是Interface Builder用来与Xcode同步的声明特性。Swift提供了以下的Interface Builder特性：<code>IBAction</code>，<code>IBDesignable</code>，<code>IBInspectable</code>，以及<code>IBOutlet</code>。这些特性与Objective-C中对应的特性在概念上是相同的。</p>
+<p><code>IBOutlet</code>和<code>IBInspectable</code>用于修饰一个类的属性声明；<code>IBAction</code>特性用于修饰一个类的方法声明；<code>IBDesignable</code>用于修饰类的声明。</p>
+<p><a name="type_attributes"></a></p>
+<h2 id="类型特性">类型特性</h2><p>类型特性只能用于修饰类型。然而，你也可以用<code>noreturn</code>特性去修饰函数或方法声明。</p>
+<p><code>convention</code></p>
+<p>该特性用于函数的类型，它指出函数调用的约定。</p>
+<p><code>convention</code>特性总是与下面的参数之一一起出现。</p>
+<ul>
+<li><p><code>swift</code>参数用于表明一个Swift函数引用。这是Swift中标准的函数值调用约定。</p>
+</li>
+<li><p><code>block</code>参数用于表明一个Objective-C兼容的块引用。函数值表示为一个块对象的引用，这是一个<code>id-</code>兼容的Objective-C对象，对象中嵌入了调用函数。调用函数使用C的调用约定。</p>
+</li>
+<li><p><code>c</code>参数用于表明一个C函数引用。函数值没有上下文，这个函数也使用C的调用约定。</p>
+</li>
+</ul>
+<p>使用C函数调用约定的函数也可用作使用Objective-C块调用约定的函数，同时使用Objective-C块调用约定的函数也可用作使用Swift函数调用约定的函数。然而，只有非泛型的全局函数和本地函数或者不使用任何本地变量的闭包可以被用作使用C函数调用约定的函数。</p>
+<p><code>noreturn</code></p>
+<p>该特性用于修饰函数或方法的类型，表明该函数或方法不会返回到它的调用者中去。你也可以用它标记函数或方法的声明，表示函数或方法的相应类型，<code>T</code>，是<code>@noreturn T</code>。</p>
+<blockquote>
+<p>特性语法<br><em>特性</em> → <strong>@</strong> <a href="#attribute_name"><em>特性名</em></a> <a href="#attribute_argument_clause"><em>特性参数子句</em></a> (可选)<br><em>特性名</em> → <a href="02_Lexical_Structure.html#identifiers"><em>标识符</em></a><br><em>特性参数子句</em> → <strong>(</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>特性(Attributes)列表</em> → <a href="#attribute"><em>特色</em></a> <a href="#attributes"><em>特性(Attributes)列表</em></a> (可选)<br><em>平衡令牌列表</em> → <a href="#balanced_token"><em>平衡令牌</em></a> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选)<br><em>平衡令牌</em> → <strong>(</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>平衡令牌</em> → <strong>[</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>]</strong><br><em>平衡令牌</em> → <strong>{</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>}</strong><br><em>平衡令牌</em> → <strong>任意标识符, 关键字, 字面量或运算符</strong><br><em>平衡令牌</em> → <strong>任意标点除了(, ), [, ], {, 或 }</strong></p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift-cn/" rel="tag">#swift-cn</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter3/05_Declarations/" rel="prev">第三章-05声明（Declarations）</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/25/swift-cn/chapter3/07_Patterns/" rel="next">第三章-07模式（Patterns）</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#特性（Attributes）"><span class="nav-number">1.</span> <span class="nav-text">特性（Attributes）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#声明特性"><span class="nav-number">1.1.</span> <span class="nav-text">声明特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Interface_Builder使用的声明特性"><span class="nav-number">1.1.1.</span> <span class="nav-text">Interface Builder使用的声明特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型特性"><span class="nav-number">1.2.</span> <span class="nav-text">类型特性</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/25/swift-cn/chapter3/06_Attributes/';
+      var disqus_title = '第三章-06特性（Attributes）';
+      var disqus_url = 'http://yoursite.com/2015/12/25/swift-cn/chapter3/06_Attributes/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
