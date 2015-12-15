@@ -1,0 +1,919 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="Using Swift with Cocoa and Objective-C," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="翻译：shockinglee
+校对：shanyimin ChildhoodAndy Phenmod
+
+与 C 的 API 交互
+本节包含内容：
+
+基本数据类型（Primitive Types）
+枚举（Enumerations）
+指针（Pointer）
+全局常量（Global Constants）
+预处理指令（Preprocessor Directives）
+
+作为与Objective-C语言的互用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02Interoperability-使用Objective-C-05与 C 的 API 交互">
+<meta property="og:url" content="http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/05Interacting with C APIs/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="翻译：shockinglee
+校对：shanyimin ChildhoodAndy Phenmod
+
+与 C 的 API 交互
+本节包含内容：
+
+基本数据类型（Primitive Types）
+枚举（Enumerations）
+指针（Pointer）
+全局常量（Global Constants）
+预处理指令（Preprocessor Directives）
+
+作为与Objective-C语言的互用">
+<meta property="og:updated_time" content="2015-12-15T06:26:05.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="02Interoperability-使用Objective-C-05与 C 的 API 交互">
+<meta name="twitter:description" content="翻译：shockinglee
+校对：shanyimin ChildhoodAndy Phenmod
+
+与 C 的 API 交互
+本节包含内容：
+
+基本数据类型（Primitive Types）
+枚举（Enumerations）
+指针（Pointer）
+全局常量（Global Constants）
+预处理指令（Preprocessor Directives）
+
+作为与Objective-C语言的互用">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 02Interoperability-使用Objective-C-05与 C 的 API 交互 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              02Interoperability-使用Objective-C-05与 C 的 API 交互
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-26T22:00:06+08:00" content="2015-12-26">
+            2015-12-26
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/05Interacting with C APIs/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/05Interacting with C APIs/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>翻译：<a href="https://github.com/shockinglee" target="_blank" rel="external">shockinglee</a></p>
+<p>校对：<a href="https://github.com/shanyimin" target="_blank" rel="external">shanyimin</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a> <a href="https://github.com/Phenmod" target="_blank" rel="external">Phenmod</a></p>
+</blockquote>
+<h1 id="与_C_的_API_交互">与 C 的 API 交互</h1><hr>
+<p>本节包含内容：</p>
+<ul>
+<li><a href="#primitive_types">基本数据类型（Primitive Types）</a></li>
+<li><a href="#enumerations">枚举（Enumerations）</a></li>
+<li><a href="#pointer">指针（Pointer）</a></li>
+<li><a href="#global_constants">全局常量（Global Constants）</a></li>
+<li><a href="#preprocessor_directives">预处理指令（Preprocessor Directives）</a></li>
+</ul>
+<p>作为与Objective-C语言的互用性的一部分，Swift也对一些C语言的类型和特性保持了兼容性。如果你的代码有需要，Swift也提供了一些方式来使用常见的C结构和模式。</p>
+<h2 id="基本数据类型">基本数据类型</h2><p>Swift提供了一些与C语言基本类型如<code>char</code>,<code>int</code>,<code>float</code>和<code>double</code>等的对应类型。然而，这些类型和Swift核心基本类型之间不能进行隐式转换，如Int。因此，只有你的代码明确要求时才使用这些类型，其它任何可能的情况下都应该使用Int。</p>
+<table>
+<thead>
+<tr>
+<th>C 类型</th>
+<th>Swift 类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool</td>
+<td>CBool</td>
+</tr>
+<tr>
+<td>char, signed char</td>
+<td>CChar</td>
+</tr>
+<tr>
+<td>unsigned char</td>
+<td>CUnsignedChar</td>
+</tr>
+<tr>
+<td>short</td>
+<td>CShort</td>
+</tr>
+<tr>
+<td>unsigned short</td>
+<td>CUnsignedShort</td>
+</tr>
+<tr>
+<td>int</td>
+<td>CInt</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td>CUnsignedInt</td>
+</tr>
+<tr>
+<td>long</td>
+<td>CLong</td>
+</tr>
+<tr>
+<td>unsigned long</td>
+<td>CUnsignedLong</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>CLongLong</td>
+</tr>
+<tr>
+<td>unsigned long long</td>
+<td>CUnsignedLongLong</td>
+</tr>
+<tr>
+<td>wchar_t</td>
+<td>CWideChar</td>
+</tr>
+<tr>
+<td>char16_t</td>
+<td>CChar16</td>
+</tr>
+<tr>
+<td>char32_t</td>
+<td>CChar32</td>
+</tr>
+<tr>
+<td>float</td>
+<td>CFloat</td>
+</tr>
+<tr>
+<td>double</td>
+<td>CDouble</td>
+</tr>
+</tbody>
+</table>
+<h2 id="枚举">枚举</h2><p>任何用宏<code>NS_ENUM</code>来声明的C风格的枚举，都会被Swfit导入为一个Swfit枚举类型。无论枚举值是在系统框架还是在自己的代码中定义的，当它们导入到Swift时，它们的前缀名将被截掉。</p>
+<p>例如，看这个Objective-C枚举的声明：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Objective-C</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UITableViewCellStyle</span>) &#123;</span><br><span class="line">    <span class="built_in">UITableViewCellStyleDefault</span>,</span><br><span class="line">    <span class="built_in">UITableViewCellStyleValue1</span>,</span><br><span class="line">    <span class="built_in">UITableViewCellStyleValue2</span>,</span><br><span class="line">    <span class="built_in">UITableViewCellStyleSubtitle</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在Swift中，会被导入为这样：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//Swift</span><br><span class="line"><span class="keyword">enum</span> UITableViewCellStyle: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">Default</span></span><br><span class="line">    <span class="keyword">case</span> Value1</span><br><span class="line">    <span class="keyword">case</span> Value2</span><br><span class="line">    <span class="keyword">case</span> Subtitle</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当你需要使用一个枚举值时，使用以点（.）开头的枚举名称：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="keyword">let</span> cellStyle: UITableViewCellStyle = .<span class="built_in">Default</span></span><br></pre></td></tr></table></figure>
+<h2 id="选项集">选项集</h2><p>对使用宏<code>NS_OPTIONS</code>声明的C风格的枚举，Swift会把它导入为一个Swfit选项集类型。选项集像枚举一样，会把前缀截掉，只剩下选项值名称。</p>
+<p>例如，看这个Objective-C选项的声明：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Objective-C</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">NS_OPTIONS</span><span class="params">(NSUInteger, NSJSONReadingOptions)</span> </span>&#123;</span><br><span class="line">	NSJSONReadingMutableContainers = (<span class="number">1U</span>L &lt;&lt; <span class="number">0</span>),</span><br><span class="line">	NSJSONReadingMutableLeaves = (<span class="number">1U</span>L &lt;&lt; <span class="number">1</span>),</span><br><span class="line">	NSJSONReadingAllowFragments = (<span class="number">1U</span>L &lt;&lt; <span class="number">2</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在Swift中，它被导入为这样：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NSJSONReadingOptions</span> : <span class="title">OptionSetType</span> </span>&#123;</span><br><span class="line">	<span class="keyword">init</span>(rawValue: <span class="type">UInt</span>)</span><br><span class="line">   </span><br><span class="line">   	<span class="keyword">static</span> <span class="keyword">var</span> <span class="type">MutableContainers</span>: <span class="type">NSJSONReadingOptions</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">   	<span class="keyword">static</span> <span class="keyword">var</span> <span class="type">MutableLeaves</span>: <span class="type">NSJSONReadingOptions</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">   	<span class="keyword">static</span> <span class="keyword">var</span> <span class="type">AllowFragments</span>: <span class="type">NSJSONReadingOptions</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>在Objective-C中，一个选项集是整数值的一个位掩码。你可以使用按位或操作符（<code>|</code>）来组合选项值，使用按位与操作符（<code>&amp;</code>）以检测选项值。创建一个选项集，可以使用常量值或者表达式。一个空的选项集使用常数<code>0</code>来表示。</p>
+<p>在Swift中，选项集使用一个遵循<code>OptionSetType</code>协议的结构体来表示，其中每个选项值都是一个静态变量。选项集类似于Swift的集合类型<code>Set</code>，你可以用<code>insert(_:)</code>或者<code>unionInPlace(_:)</code>方法来添加选项值，用<code>remove(_:)</code>或者<code>subtractInPlace(_:)</code>方法来删除选项值，用<code>contains(_:)</code>方法来检测选项值。创建一个选项集的值可以使用一个数组字面量，里面的选项值像枚举一样都用点（<code>.</code>）开头。创建一个空的选项集可以使用一个空的数组字面量，也可以调用默认初始化函数。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line">let options: NSDataBase64EncodingOptions = [</span><br><span class="line">	<span class="class">.Encoding76CharacterLineLength</span>,</span><br><span class="line">   	<span class="class">.EncodingEndLineWithLineFeed</span></span><br><span class="line">   ]</span><br><span class="line">let string = data.<span class="function"><span class="title">base64EncodedStringWithOptions</span><span class="params">(options)</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="共用体">共用体</h2><p>Swift仅部分支持C的共用体（union）类型。在导入混有C的共用体或者位段（bitfields）的类型时，例如Foundation的<code>NSDecimal</code>类型，Swift不能存取不支持的字段。但是，参数和/或返回值为这些类型的C和Objective-C的API是能够在Swift中使用的。</p>
+<h2 id="指针">指针</h2><p>Swift尽可能避免让您直接访问指针。然而，当您需要直接操作内存的时候，Swift也为您提供了多种指针类型。下面的表使用<code>Type</code>作为类型名称的占位符。</p>
+<p>对于返回类型，变量和参数，使用如下形式：</p>
+<table>
+<thead>
+<tr>
+<th>C 句法</th>
+<th>Swift 句法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>const Type *</td>
+<td>UnsafePointer\<type\></type\></td>
+</tr>
+<tr>
+<td>Type *</td>
+<td>UnsafeMutablePointer\<type\></type\></td>
+</tr>
+</tbody>
+</table>
+<p>对于类（class）类型，使用如下形式：</p>
+<table>
+<thead>
+<tr>
+<th>C 句法</th>
+<th>Swift 句法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type <em> const </em></td>
+<td>UnsafePointer\<type\></type\></td>
+</tr>
+<tr>
+<td>Type <em> __strong </em></td>
+<td>UnsafeMutablePointer\<type\></type\></td>
+</tr>
+<tr>
+<td>Type **</td>
+<td>AutoreleasingUnsafeMutablePointer\<type\></type\></td>
+</tr>
+</tbody>
+</table>
+<h3 id="常量指针">常量指针</h3><p>当一个函数被声明为接受<code>UnsafePointer&lt;Type&gt;</code>参数时，这个函数可以接受下列任何一个类型作为参数：</p>
+<ul>
+<li><code>nil</code>，作为空指针传入；</li>
+<li>一个<code>UnsafePointer&lt;Type&gt;</code>，<code>UnsafeMutablePointer&lt;Type&gt;</code>， 或者<code>AutoreleasingUnsafeMutablePointer&lt;Type&gt;</code>的值，在必要情况下会转换成<code>UnsafePointer&lt;Type&gt;</code>的值；</li>
+<li>一个<code>String</code>类型的值，如果<code>Type</code>是<code>Int8</code>或者<code>UInt8</code>的话。该字符串会自动在一个缓冲区内被转换为UTF8，该缓冲区在本次调用期间有效；</li>
+<li>一个左值操作数为<code>Type</code>类型的输入输出（inout）表达式，传入的是这个左值的内存地址；</li>
+<li>一个<code>[Type]</code>值，传入该数组的起始指针，并且它的生命周期将在本次调用期间被延长。</li>
+</ul>
+<p>如果您这样定义了一个函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAPointer</span><span class="params">(x: UnsafePointer&lt;Float&gt;)</span></span> &#123; <span class="comment">/*...*/</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="tag">var</span> x: Float = <span class="number">0.0</span></span><br><span class="line"><span class="tag">var</span> <span class="tag">p</span>: UnsafePointer&lt;Float&gt; = nil</span><br><span class="line"><span class="function"><span class="title">takesAPointer</span><span class="params">(nil)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAPointer</span><span class="params">(p)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAPointer</span><span class="params">(&amp;x)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAPointer</span><span class="params">([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>])</span></span></span><br></pre></td></tr></table></figure>
+<p>如果函数被声明为使用一个<code>UnsafePointer&lt;Void&gt;</code>参数，那么这个函数接受任何<code>Type</code>的<code>UnsafePointer&lt;Type&gt;</code>类型的操作数。<br>￼<br>如果您这样定义了一个函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAVoidPointer</span><span class="params">(x: UnsafePointer&lt;Void&gt;)</span></span>  &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="tag">var</span> x: Float = <span class="number">0.0</span>, y: Int = <span class="number">0</span></span><br><span class="line"><span class="tag">var</span> <span class="tag">p</span>: UnsafePointer&lt;Float&gt; = nil, <span class="tag">q</span>: UnsafePointer&lt;Int&gt; = nil</span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(nil)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(p)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(q)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(&amp;x)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(&amp;y)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>] as [Float])</span></span></span><br><span class="line">let intArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(intArray)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="可变指针">可变指针</h3><p>当一个方法被声明为接受<code>UnsafeMutablePointer&lt;Type&gt;</code>参数时，这个函数可以接受下列任何一个类型作为参数：</p>
+<ul>
+<li><code>nil</code>，作为空指针传入；</li>
+<li>一个<code>UnsafeMutablePointer&lt;Type&gt;</code>类型的值；</li>
+<li>一个输入输出（inout）表达式，其左值操作数是<code>Type</code>类型的，且被存储起来了。传入的是这个左值的内存地址；</li>
+<li>一个输入输出的<code>[Type]</code>类型的值，传入的是该数组的起始指针，并且它的生命周期将在本次调用期间被延长。</li>
+</ul>
+<p>如果您这样定义了一个函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAMutablePointer</span><span class="params">(x: UnsafeMutablePointer&lt;Float&gt;)</span></span> &#123; <span class="comment">/*...*/</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="tag">var</span> x: Float = <span class="number">0.0</span></span><br><span class="line"><span class="tag">var</span> <span class="tag">p</span>: UnsafeMutablePointer&lt;Float&gt; = nil</span><br><span class="line"><span class="tag">var</span> <span class="tag">a</span>: [Float] = [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>]</span><br><span class="line"><span class="function"><span class="title">takesAMutablePointer</span><span class="params">(nil)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutablePointer</span><span class="params">(p)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutablePointer</span><span class="params">(&amp;x)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutablePointer</span><span class="params">(&amp;a)</span></span></span><br></pre></td></tr></table></figure>
+<p>如果函数被声明使用一个<code>UnsafeMutablePointer&lt;Void&gt;</code>参数，那么这个函数接受任何<code>Type</code>的<code>UnsafeMutablePointer&lt;Type&gt;</code>类型的操作数。</p>
+<p>如果您这样定义了一个函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAMutableVoidPointer</span><span class="params">(x: UnsafeMutablePointer&lt;Void&gt;)</span></span>  &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="tag">var</span> x: Float = <span class="number">0.0</span>, y: Int = <span class="number">0</span></span><br><span class="line"><span class="tag">var</span> <span class="tag">p</span>: UnsafeMutablePointer&lt;Float&gt; = nil, <span class="tag">q</span>: UnsafeMutablePointer&lt;Int&gt; = nil</span><br><span class="line"><span class="tag">var</span> <span class="tag">a</span>: [Float] = [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], <span class="tag">b</span>: [Int] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(nil)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(p)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(q)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(&amp;x)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(&amp;y)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(&amp;a)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(&amp;b)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="自动释放指针">自动释放指针</h3><p>当一个函数被声明为接受<code>AutoreleasingUnsafeMutablePointer&lt;Type&gt;</code>参数时，这个函数可以接受下列任何一个类型作为参数：</p>
+<ul>
+<li><code>nil</code>，作为空指针传入；</li>
+<li>一个<code>AutoreleasingUnsafeMutablePointer&lt;Type&gt;</code>类型的值；</li>
+<li>一个输入输出（inout）表达式，其操作数首先被拷贝到一个无拥有者的缓冲区，传递给被调用函数的就是这个缓冲区的地址。在调用返回时，缓冲区中的值被加载、保存、并重新复制给操作数。</li>
+</ul>
+<p>注意，这个列表中没有包含数组。</p>
+<p>如果您这样定义了一个函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAnAutoreleasingPointer</span><span class="params">(x: AutoreleasingUnsafeMutablePointer&lt;NSDate?&gt;)</span></span> &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="keyword">var</span> x: NSDate? = <span class="keyword">nil</span></span><br><span class="line"><span class="keyword">var</span> p: AutoreleasingUnsafeMutablePointer&lt;NSDate?&gt; = <span class="keyword">nil</span></span><br><span class="line">takesAnAutoreleasingPointer(<span class="keyword">nil</span>)</span><br><span class="line">takesAnAutoreleasingPointer(p)</span><br><span class="line">takesAnAutoreleasingPointer(&amp;x)</span><br></pre></td></tr></table></figure>
+<p>被指针指向的类型并不会被桥接。例如，<code>NSString **</code>转换到Swift后，是<code>AutoreleasingUnsafeMutablePointer&lt;NSString?&gt;</code>，而不是<code>AutoreleasingUnsafeMutablePointer&lt;String?&gt;</code>。</p>
+<h3 id="函数指针">函数指针</h3><p>C语言的函数指针通过调用约定，以闭包的形式被引入Swift中，表示形式为<code>@convention(c)</code>。例如，一个类型为<code>int (*)(void)</code>的C语言函数指针，会转换为Swift的<code>@convention(c) () -&gt; Int32</code>。</p>
+<p>在调用一个以函数指针为参数的函数时，给它传的值可以是一个顶层的Swift函数，也可以是个闭包字面量，或者<code>nil</code>。只有符合C语言函数指针调用约定的Swift函数，才能用来给函数指针类型的形参传值。例如，Core Foundation的<code>CFArrayCreateMutable(_:_:_:)</code>函数，它有个参数的类型为<code>CFArrayCallBacks</code>结构体。这个<code>CFArrayCallBacks</code>结构体就是用一些函数指针进行初始化的：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">customCopyDescription</span><span class="params">(p: UnsafePointer&lt;Void&gt;)</span></span> -&gt; <span class="type">Unmanaged</span>&lt;<span class="type">CFString</span>&gt;! &#123;</span><br><span class="line">   	<span class="comment">// return an Unmanaged&lt;CFString&gt;! value</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> callbacks = <span class="type">CFArrayCallBacks</span>(</span><br><span class="line">   	version: <span class="number">0</span> <span class="keyword">as</span> <span class="type">CFIndex</span>,</span><br><span class="line">   	retain: <span class="literal">nil</span>,</span><br><span class="line">   	release: <span class="literal">nil</span>,</span><br><span class="line">   	copyDescription: customCopyDescription,</span><br><span class="line">   	<span class="built_in">equal</span>: &#123; (p1, p2) -&gt; <span class="type">Boolean</span> <span class="keyword">in</span></span><br><span class="line">       	<span class="comment">// return Boolean value</span></span><br><span class="line">   	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mutableArray = <span class="type">CFArrayCreateMutable</span>(<span class="literal">nil</span>, <span class="number">0</span>, callbacks)</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，在<code>CFArrayCallBacks</code>初始化时，传给<code>retain</code>和<code>release</code>作参数的是<code>nil</code>，传给<code>copyDescription</code>作参数的是函数<code>customCopyDescription</code>，传给<code>equal</code>作参数的是一个闭包字面量。</p>
+<h2 id="全局常量">全局常量</h2><p>在C和Objective-C语言源文件中定义的全局常量会自动地被Swift编译引进并做为Swift的全局常量。</p>
+<h2 id="预处理指令">预处理指令</h2><p>Swift编译器不包含预处理器。取而代之的是，它充分利用了编译时属性，生成配置，和语言特性来完成相同的功能。因此，Swift没有引进预处理指令。</p>
+<h3 id="简单宏">简单宏</h3><p>在C和Objective-C中，通常使用<code>#define</code>指令来定义一个简单的常数，在Swift，您可以使用全局常量来代替。例如：定义一个常数的<code>#define FADE_ANIMATION_DURATION 0.35</code>，在Swift使用<code>let FADE_ANIMATION_DURATION = 0.35</code>来表述会更好一些。由于简单的用于定义常量的宏会被直接被映射成Swift全局量，Swift编译器会自动引进在C或Objective-C源文件中定义的简单宏。</p>
+<h3 id="复杂宏">复杂宏</h3><p>在C和Objective-C中使用的复杂宏在Swift中没有相对应的东西。复杂宏是那些不用来定义常量的宏，包含了括号的函数式宏。您在C和Objective-C使用复杂的宏以避免类型检查的限制或避免重新键入大量的样板代码。然而，宏也会造成debug和重构起来更困难。在Swift中你可以使用函数和泛型来达到同样的效果，而没有任何的委屈折中。因此，在C和Objective-C源文件中定义的复杂宏在Swift是不能使用的。</p>
+<h3 id="生成配置">生成配置</h3><p>Swift代码使用和C、Objective-C代码不同的方式进行条件编译。Swift代码可以根据生成配置的组合进行条件编译。生成配置包括<code>true</code>和<code>false</code>字面值，命令行标志，和下表中的平台测试函数。您可以使用<code>-D &lt;＃Flag＃&gt;</code>指定命令行标志。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>有效参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>os()</td>
+<td>OSX，iOS，watchOS</td>
+</tr>
+<tr>
+<td>arch()</td>
+<td>x86_64，arm，arm64，i386</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：生成配置<code>arch(arm)</code>不会为64位ARM设备返回<code>true</code>，生成配置<code>arch(i386)</code>在为32位iOS模拟器编译代码时会返回<code>true</code>。</p>
+</blockquote>
+<p>一个简单的条件编译可以像下面这段代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">if</span> build configuration</span></span><br><span class="line">  statements</span><br><span class="line"><span class="preprocessor">#<span class="keyword">else</span></span></span><br><span class="line">  statements</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>由零个或多个有效的Swift语句组成的<em>statements</em>，可以包括表达式，普通语句和控制流语句。可以使用<code>&amp;&amp;</code>和<code>||</code>操作符往一个条件编译语句上添加新的编译条件，使用<code>!</code>操作符来否定某条件，使用<code>#elseif</code>来添加编译块：</p>
+<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">if</span> build configuration &amp;&amp; !build configuration</span></span><br><span class="line">  statements<span class="preprocessor"></span><br><span class="line">#<span class="keyword">elseif</span> build configuration</span></span><br><span class="line">  statements<span class="preprocessor"></span><br><span class="line">#<span class="keyword">else</span></span></span><br><span class="line">  statements<span class="preprocessor"></span><br><span class="line">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>与C语言编译器的条件编译不同的是，Swift条件编译的语句必须是独立完整、语法有效的代码块。这是因为所有的Swift代码都会做语法检查，而不管会不会被编译。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Using-Swift-with-Cocoa-and-Objective-C/" rel="tag">#Using Swift with Cocoa and Objective-C</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/04Adopting Cocoa Design Patterns/" rel="prev">02Interoperability-使用Objective-C-04采用Cocoa设计模式</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/26/Using Swift with Cocoa and Objective-C/03Mix and Match/Swift and Objective-C in the Same Project/" rel="next">03Mix and Match-使用Objective-C-01Mix and Match 概述（Mix and Match Overview</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">110</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#与_C_的_API_交互"><span class="nav-number">1.</span> <span class="nav-text">与 C 的 API 交互</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举"><span class="nav-number">1.2.</span> <span class="nav-text">枚举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选项集"><span class="nav-number">1.3.</span> <span class="nav-text">选项集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共用体"><span class="nav-number">1.4.</span> <span class="nav-text">共用体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针"><span class="nav-number">1.5.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常量指针"><span class="nav-number">1.5.1.</span> <span class="nav-text">常量指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变指针"><span class="nav-number">1.5.2.</span> <span class="nav-text">可变指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动释放指针"><span class="nav-number">1.5.3.</span> <span class="nav-text">自动释放指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数指针"><span class="nav-number">1.5.4.</span> <span class="nav-text">函数指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局常量"><span class="nav-number">1.6.</span> <span class="nav-text">全局常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理指令"><span class="nav-number">1.7.</span> <span class="nav-text">预处理指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单宏"><span class="nav-number">1.7.1.</span> <span class="nav-text">简单宏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂宏"><span class="nav-number">1.7.2.</span> <span class="nav-text">复杂宏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成配置"><span class="nav-number">1.7.3.</span> <span class="nav-text">生成配置</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/05Interacting with C APIs/';
+      var disqus_title = '02Interoperability-使用Objective-C-05与 C 的 API 交互';
+      var disqus_url = 'http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/05Interacting with C APIs/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

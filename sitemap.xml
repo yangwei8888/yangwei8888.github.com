@@ -2,6 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/05Revision%20History/Document%20Revision%20History/</loc>
+    <lastmod>2015-12-15T06:26:27.773Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/04Migration/Migrating%20Your%20Objective-C%20Code%20to%20Swift/</loc>
+    <lastmod>2015-12-15T06:26:20.301Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project/</loc>
+    <lastmod>2015-12-15T06:26:12.582Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/05Interacting%20with%20C%20APIs/</loc>
+    <lastmod>2015-12-15T06:26:05.070Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/04Adopting%20Cocoa%20Design%20Patterns/</loc>
+    <lastmod>2015-12-15T06:25:58.508Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/03Working%20with%20Cocoa%20Data%20Types/</loc>
+    <lastmod>2015-12-15T06:25:48.585Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/02Writing%20Swift%20Classes%20with%20Objective-C%20Behavior/</loc>
+    <lastmod>2015-12-15T06:25:43.422Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/01Interacting%20with%20Objective-C%20APIs/</loc>
+    <lastmod>2015-12-15T06:25:35.153Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/01Getting%20Started/Basic%20Setup/</loc>
+    <lastmod>2015-12-15T06:25:19.563Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/12/26/swift-cn/SUMMARY/</loc>
     <lastmod>2015-12-15T05:52:12.821Z</lastmod>
   </url>
@@ -239,16 +284,6 @@
   <url>
     <loc>http://yoursite.com/2015/12/25/swift-cn/v1.0/</loc>
     <lastmod>2015-12-15T05:27:10.979Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/25/swift-cn/chapter1/03_revision_history/</loc>
-    <lastmod>2015-12-15T05:19:00.165Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/25/swift-cn/chapter1/02_a_swift_tour/</loc>
-    <lastmod>2015-12-15T05:18:48.490Z</lastmod>
   </url>
   
   <url>
