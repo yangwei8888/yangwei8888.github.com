@@ -397,8 +397,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/schedule/" itemprop="url">
-                swift schedule
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="url">
+                0009-require-self-for-accessing-instance-members
               </a>
             
           
@@ -434,8 +434,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/schedule/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/schedule/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -450,18 +450,61 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Swift_Evolution_Review_Schedule">Swift Evolution Review Schedule</h1><p>The <a href="process.md" title="The Swift evolution process">Swift evolution process</a> describes the process<br>by which Swift evolves. This document tracks the currently active<br>proposals in that process.</p>
-<h2 id="Active_reviews">Active reviews</h2><p>(No proposals under active review)</p>
-<h2 id="Upcoming_reviews">Upcoming reviews</h2><ul>
-<li>December 15–17, 2015: <a href="proposals/0008-lazy-flatmap-for-optionals.md">SE-0008</a></li>
-<li>December 16–20, 2015: <a href="proposals/0009-require-self-for-accessing-instance-members.md">SE-0009</a></li>
-<li>December 18–21, 2015: <a href="proposals/0014-constrained-AnySequence.md">SE-0014</a></li>
+          <span itemprop="articleBody"><h1 id="Require_self_for_accessing_instance_members">Require self for accessing instance members</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0009-require-self-for-accessing-instance-members.md" target="_blank" rel="external">SE-0009</a></li>
+<li>Author(s): <a href="https://github.com/hartbit" target="_blank" rel="external">David Hart</a></li>
+<li>Status: <strong>Awaiting review</strong> (scheduled for December 16–20, 2015)</li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="Proposals_awaiting_scheduling">Proposals awaiting scheduling</h2><ul>
-<li><a href="proposals/0010-add-staticstring-unicodescalarview.md">SE-0010</a></li>
-<li><a href="proposals/0011-replace-typealias-associated.md">SE-0011</a></li>
-<li><a href="proposals/0012-add-noescape-to-public-library-api.md">SE-0012</a></li>
-<li><a href="proposals/0013-remove-partial-application-super.md">SE-0013</a></li>
+<h2 id="Introduction">Introduction</h2><p>The current version of Swift (2.1) requires using <code>self</code> when accessing instance members in closures. The proposal suggests extending this to all member accesses (as is intrinsically the case in Objective-C). It has the benefit of documenting instance properties vs local variables and instance functions vs local functions or closures.</p>
+<h2 id="Motivation">Motivation</h2><p>This proposal makes it obvious which are instance properties vs local variables, as well as which are instance functions vs local functions/closures. This has several advantages:</p>
+<ul>
+<li>More readable at the point of use. </li>
+<li>More consistent than only requiring <code>self</code> in closure contexts.</li>
+<li>Less confusing from a learning point of view.</li>
+<li>Lets the compiler warn users (and avoids bugs) where the authors mean to use a local variable but instead are unknowingly using an instance property (and the other way round).</li>
+</ul>
+<p>One example of a bug avoidable by the proposal (<a href="https://lists.swift.org/pipermail/swift-evolution/2015-December/000243.html" target="_blank" rel="external">provided by Rudolf Adamkovic</a>):</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span> : <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">	<span class="preprocessor">@IBOutlet</span> <span class="keyword">var</span> button: <span class="type">UIButton</span>!</span><br><span class="line">        <span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line"></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">updateButton</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// var title = "Hello \(name)"</span></span><br><span class="line">		button.setTitle(title, forState: .<span class="type">Normal</span>) <span class="comment">// forgot to comment this line but the compiler does not complain and title is now referencing UIViewController’s title by mistake</span></span><br><span class="line">		button.setTitleColor(<span class="type">UIColor</span>.blackColor(), forState: .<span class="type">Normal</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The API Design Guidelines are meant for writing APIs but I still think they represent fundamentals of Swift. The two first points are:</p>
+<ul>
+<li>Clarity at the point of use is your most important goal. Code is read far more than it is written.</li>
+<li>Clarity is more important than brevity. Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.</li>
+</ul>
+<p>And I believe that the proposition is directly in line with those objectives.</p>
+<h2 id="Counter-argument">Counter-argument</h2><p>The counter-argument brought up by two members of the community is that the current behaviour “makes the capturing semantics of self stand out more in closures”. While this is true, the author finds its usefulness lacking.</p>
+<p>In the following lines of code, we know without a shadow of a doubt that <code>foobar</code> is a throwing function and that <code>barfoo</code> does not throw.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">try foobar()</span><br><span class="line">barfoo()</span><br></pre></td></tr></table></figure>
+<p>But with an example of <code>self</code> in a closure:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foobar(&#123;</span><br><span class="line">	<span class="built_in">print</span>(<span class="keyword">self</span>.description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>The <code>self</code> keyword in the previous lines of code gives a hint but does not bring any certitudes:</p>
+<ul>
+<li><code>self</code> might have been forced by the compiler to hint at possible memory issues,</li>
+<li><code>self</code> might have been a programmer choice if the closure is non-escaping.</li>
+</ul>
+<p>And in the reverse example:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">barfoo(&#123;</span><br><span class="line">	<span class="built_in">print</span>(description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>the closure might be non-escaping,</li>
+<li>the <code>description</code> might be referring to a local variable (which we missed the declaration of) shadowing the instance property in an escaping closure.</li>
+</ul>
+<p>In both of these examples, the <code>self</code> keyword does not tell us with any certainty that we should or not be careful about reference cycle issues without checking the signature of the called function, only that self is captured. With the proposition, <code>self</code> gets some meaning back: it indicates which are local and which are instance properties.</p>
+<h2 id="Proposed_Solution">Proposed Solution</h2><p>I suggest that not using <code>self</code> for accessing instance properties and functions is applied in two stages. In Swift 2.x, it could start as a warning and Xcode could provide a Fix-It. Then, it could become a compiler error in Swift 3 and the migrator would help transition code over.</p>
+<p>The following code which used to compile would generate an error at the documented lines:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(name)</span>"</span>) <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		foo() <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code would have to be modified as so to compile correctly:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(<span class="keyword">self</span>.name)</span>"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">self</span>.foo()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A lot of code written since the original change would be impacted by this proposal, but it seems like it can be easily fixed by both the migrator tool and an Xcode Fix-It.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The alternative is to keep the current behaviour, but it has the aforementioned disadvantages.</p>
+<p>An alternative would be to demote from a compiler error to a warning.</p>
+<h2 id="Community_Responses">Community Responses</h2><ul>
+<li>“I actually encountered at least two bugs in my app introduced by this implicit “self” behavior. It can be dangerous and hard to track down.” – Rudolf Adamkovic, salutis@me.com</li>
+<li>“Given this, some teams use underscores for their iVars which is very unfortunate. Myself, I use self whenever possible to be explicit. I’d like the language to force us to be clear.” – Dan, robear18@gmail.com</li>
+<li>“I’m not sure how many Swift users this effects, but I’m colorblind and I really struggle with the local vs properties syntax coloring.” – Tyler Cloutier, cloutiertyler@aol.com</li>
+<li>“+1 I’ve had a lot of weird things happen that I’ve traced to mistakes in properties having the same name as function arguments. I’ve hardly ever had this issue in modern Obj-C.” – Coli Cornaby, colin.cornaby@mac.com</li>
+<li>“Teaching wise, its much less confusing for self to be required so students don’t mix up instance properties and local vars. Especially when self is required in closures, it confuses students. If self is mandatory for all instance properties, it would be so much clearer and much easier to read.” – Yichen Cao, ycao@me.com</li>
+<li>“this avoids confusion, maintains a consistent language approach, and thus helps reducing bugs. Sure, it might lead to less poetic haiku code, but that is not necessarily a bad thing in medium to large scale software products with more than one person working on it and possible/eventual change of people on the project over time.” – Panajev</li>
+<li>“I’m +1 on this, for the reasons already stated by others, but not as strongly as I was a year ago. I was very worried about this with Swift 1 was first released, but since then, I haven’t actually made this mistake, possibly because I’m so paranoid about it.” – Michael Buckley, michael@buckleyisms.com</li>
 </ul>
 </span>
         
@@ -601,8 +644,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="url">
-                0009-require-self-for-accessing-instance-members
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0007-remove-c-style-for-loops/" itemprop="url">
+                0007-remove-c-style-for-loops
               </a>
             
           
@@ -638,8 +681,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0007-remove-c-style-for-loops/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0007-remove-c-style-for-loops/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -654,61 +697,44 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Require_self_for_accessing_instance_members">Require self for accessing instance members</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0009-require-self-for-accessing-instance-members.md" target="_blank" rel="external">SE-0009</a></li>
-<li>Author(s): <a href="https://github.com/hartbit" target="_blank" rel="external">David Hart</a></li>
-<li>Status: <strong>Awaiting review</strong> (scheduled for December 16–20, 2015)</li>
-<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+          <span itemprop="articleBody"><h1 id="Remove_C-style_for-loops_with_conditions_and_incrementers">Remove C-style for-loops with conditions and incrementers</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0007-remove-c-style-for-loops.md" target="_blank" rel="external">SE-0007</a></li>
+<li>Author(s): <a href="https://github.com/erica" target="_blank" rel="external">Erica Sadun</a></li>
+<li>Status: <strong>Accepted</strong> for Swift 3.0 (<a href="https://bugs.swift.org/browse/SR-226" target="_blank" rel="external">Swift 2.2 bug</a>, <a href="https://bugs.swift.org/browse/SR-227" target="_blank" rel="external">Swift 3.0 bug</a>)</li>
+<li>Review manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>The current version of Swift (2.1) requires using <code>self</code> when accessing instance members in closures. The proposal suggests extending this to all member accesses (as is intrinsically the case in Objective-C). It has the benefit of documenting instance properties vs local variables and instance functions vs local functions or closures.</p>
-<h2 id="Motivation">Motivation</h2><p>This proposal makes it obvious which are instance properties vs local variables, as well as which are instance functions vs local functions/closures. This has several advantages:</p>
-<ul>
-<li>More readable at the point of use. </li>
-<li>More consistent than only requiring <code>self</code> in closure contexts.</li>
-<li>Less confusing from a learning point of view.</li>
-<li>Lets the compiler warn users (and avoids bugs) where the authors mean to use a local variable but instead are unknowingly using an instance property (and the other way round).</li>
-</ul>
-<p>One example of a bug avoidable by the proposal (<a href="https://lists.swift.org/pipermail/swift-evolution/2015-December/000243.html" target="_blank" rel="external">provided by Rudolf Adamkovic</a>):</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span> : <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">	<span class="preprocessor">@IBOutlet</span> <span class="keyword">var</span> button: <span class="type">UIButton</span>!</span><br><span class="line">        <span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line"></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">updateButton</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// var title = "Hello \(name)"</span></span><br><span class="line">		button.setTitle(title, forState: .<span class="type">Normal</span>) <span class="comment">// forgot to comment this line but the compiler does not complain and title is now referencing UIViewController’s title by mistake</span></span><br><span class="line">		button.setTitleColor(<span class="type">UIColor</span>.blackColor(), forState: .<span class="type">Normal</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The API Design Guidelines are meant for writing APIs but I still think they represent fundamentals of Swift. The two first points are:</p>
-<ul>
-<li>Clarity at the point of use is your most important goal. Code is read far more than it is written.</li>
-<li>Clarity is more important than brevity. Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.</li>
-</ul>
-<p>And I believe that the proposition is directly in line with those objectives.</p>
-<h2 id="Counter-argument">Counter-argument</h2><p>The counter-argument brought up by two members of the community is that the current behaviour “makes the capturing semantics of self stand out more in closures”. While this is true, the author finds its usefulness lacking.</p>
-<p>In the following lines of code, we know without a shadow of a doubt that <code>foobar</code> is a throwing function and that <code>barfoo</code> does not throw.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">try foobar()</span><br><span class="line">barfoo()</span><br></pre></td></tr></table></figure>
-<p>But with an example of <code>self</code> in a closure:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foobar(&#123;</span><br><span class="line">	<span class="built_in">print</span>(<span class="keyword">self</span>.description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>The <code>self</code> keyword in the previous lines of code gives a hint but does not bring any certitudes:</p>
-<ul>
-<li><code>self</code> might have been forced by the compiler to hint at possible memory issues,</li>
-<li><code>self</code> might have been a programmer choice if the closure is non-escaping.</li>
-</ul>
-<p>And in the reverse example:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">barfoo(&#123;</span><br><span class="line">	<span class="built_in">print</span>(description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>the closure might be non-escaping,</li>
-<li>the <code>description</code> might be referring to a local variable (which we missed the declaration of) shadowing the instance property in an escaping closure.</li>
-</ul>
-<p>In both of these examples, the <code>self</code> keyword does not tell us with any certainty that we should or not be careful about reference cycle issues without checking the signature of the called function, only that self is captured. With the proposition, <code>self</code> gets some meaning back: it indicates which are local and which are instance properties.</p>
-<h2 id="Proposed_Solution">Proposed Solution</h2><p>I suggest that not using <code>self</code> for accessing instance properties and functions is applied in two stages. In Swift 2.x, it could start as a warning and Xcode could provide a Fix-It. Then, it could become a compiler error in Swift 3 and the migrator would help transition code over.</p>
-<p>The following code which used to compile would generate an error at the documented lines:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(name)</span>"</span>) <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		foo() <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The code would have to be modified as so to compile correctly:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(<span class="keyword">self</span>.name)</span>"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">self</span>.foo()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A lot of code written since the original change would be impacted by this proposal, but it seems like it can be easily fixed by both the migrator tool and an Xcode Fix-It.</p>
-<h2 id="Alternatives_considered">Alternatives considered</h2><p>The alternative is to keep the current behaviour, but it has the aforementioned disadvantages.</p>
-<p>An alternative would be to demote from a compiler error to a warning.</p>
+<h2 id="Introduction">Introduction</h2><p>The C-style <code>for-loop</code> appears to be a mechanical carry-over from C rather than a<br>genuinely Swift-specific construct. It is rarely used and not very Swift-like. </p>
+<p>More Swift-typical construction is already available with <code>for-in</code><br>statements and <code>stride</code>. Removing for loops would simplify the language and starve the<br>most common use-points for <code>--</code> and <code>++</code>, which are already due to be eliminated from the<br>language.</p>
+<p>The value of this construct is limited and I believe its removal should be seriously considered.</p>
+<h2 id="Advantages_of_For_Loops">Advantages of For Loops</h2><p>Swift design supported a shallow learning curve using familiar constants and control<br>structures. The <code>for-loop</code> mimics C and limits the effort needed to master this control flow.</p>
+<h2 id="Disadvantages_of_For_Loops">Disadvantages of For Loops</h2><ol>
+<li>Both <code>for-in</code> and <code>stride</code> provide equivalent behavior using Swift-coherent approaches<br>without being tied to legacy terminology. </li>
+<li>There is a distinct expressive disadvantage in using <code>for-loops</code> compared to <code>for-in</code><br>in succinctness</li>
+<li><code>for-loop</code> implementations do not lend themselves to use with collections and other core Swift types.</li>
+<li>The <code>for-loop</code> encourages use of unary incrementors and decrementors, which will be<br>soon removed from the language.</li>
+<li>The semi-colon delimited declaration offers a steep learning curve from users arriving<br>from non C-like languages</li>
+<li>If the <code>for-loop</code> did not exist, I doubt it would be considered for inclusion in Swift 3.</li>
+</ol>
+<h2 id="Proposed_Approach">Proposed Approach</h2><p>I suggest that the for-loop be deprecated in Swift 2.x and removed entirely in Swift 3, with coverage removed from the Swift Programming Language to match the revisions in the current 2.2 update.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>Not removing <code>for-loop</code> from Swift, losing the opportunity to streamline the language<br>and discard an unneeded control flow item.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A search of the Apple Swift codebase suggests this feature is rarely used. Community members of the Swift-Evolution mail list confirm that it does not feature in many pro-level apps and can be worked around for those few times when <code>for-loop</code>s do pop up. For example:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">char *blk_xor(char *dst, const char *src, size_t len)</span><br><span class="line">&#123;</span><br><span class="line"> const char *sp = src;</span><br><span class="line"> <span class="keyword">for</span> (char *dp = dst; sp - src &lt; len; sp++, dp++)</span><br><span class="line">   *dp ^= *sp;</span><br><span class="line"> <span class="keyword">return</span> dst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>versus</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">blk_xor</span><span class="params">(dst: UnsafeMutablePointer&lt;CChar&gt;, src:</span><br><span class="line">UnsafePointer&lt;CChar&gt;, len: Int)</span></span> -&gt; <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">CChar</span>&gt; &#123;</span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;len &#123;</span><br><span class="line">       dst[i] ^= src[i]</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> dst</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A search of github’s Swift gists suggests the approach is used primarily by those new to the language with minimal language skills and is abandoned as language mastery is achieved.</p>
+<p>For example:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; i++ &#123;</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>and </p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">50</span>]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span> ; i &lt; array.<span class="built_in">count</span> ;i++)&#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">"array[i] <span class="subst">\(array[i])</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Community_Responses">Community Responses</h2><ul>
-<li>“I actually encountered at least two bugs in my app introduced by this implicit “self” behavior. It can be dangerous and hard to track down.” – Rudolf Adamkovic, salutis@me.com</li>
-<li>“Given this, some teams use underscores for their iVars which is very unfortunate. Myself, I use self whenever possible to be explicit. I’d like the language to force us to be clear.” – Dan, robear18@gmail.com</li>
-<li>“I’m not sure how many Swift users this effects, but I’m colorblind and I really struggle with the local vs properties syntax coloring.” – Tyler Cloutier, cloutiertyler@aol.com</li>
-<li>“+1 I’ve had a lot of weird things happen that I’ve traced to mistakes in properties having the same name as function arguments. I’ve hardly ever had this issue in modern Obj-C.” – Coli Cornaby, colin.cornaby@mac.com</li>
-<li>“Teaching wise, its much less confusing for self to be required so students don’t mix up instance properties and local vars. Especially when self is required in closures, it confuses students. If self is mandatory for all instance properties, it would be so much clearer and much easier to read.” – Yichen Cao, ycao@me.com</li>
-<li>“this avoids confusion, maintains a consistent language approach, and thus helps reducing bugs. Sure, it might lead to less poetic haiku code, but that is not necessarily a bad thing in medium to large scale software products with more than one person working on it and possible/eventual change of people on the project over time.” – Panajev</li>
-<li>“I’m +1 on this, for the reasons already stated by others, but not as strongly as I was a year ago. I was very worried about this with Swift 1 was first released, but since then, I haven’t actually made this mistake, possibly because I’m so paranoid about it.” – Michael Buckley, michael@buckleyisms.com</li>
+<li>“I am certainly open to considering dropping the C-style for loop.  IMO, it is a rarely used feature of Swift that doesn’t carry its weight.  Many of the reasons to remove them align with the rationale for removing – and ++. “ – Chris Lattner, clattner@apple.com</li>
+<li>“My intuition <em>completely</em> agrees that Swift no longer needs C-style for loops. We have richer, better-structured looping and functional algorithms. That said, one bit of data I’d like to see is how often C-style for loops are actually used in Swift. It’s something a quick crawl through Swift sources on GitHub could establish. If the feature feels anachronistic and is rarely used, it’s a good candidate for removal.” – Douglas Gregnor, dgregor@apple.com</li>
+<li>“Every time I’ve used a C-style for loop in Swift it was because I forgot that .indices existed. If it’s removed, a fixme pointing that direction might be useful.” – David Smith, david_smith@apple.com</li>
+<li>“For what it’s worth we don’t have a single C style for loop in the Lyft codebase.” – Keith Smiley, keithbsmiley@gmail.com</li>
+<li>“Just checked; ditto Khan Academy.” – Andy Matsuchak, andy@andymatuschak.org</li>
+<li>“We’ve developed a number of Swift apps for various clients over the past year and have not needed C style for loops either.” – Eric Chamberlain, eric.chamberlain@arctouch.com</li>
+<li>“Every time I’ve tried to use a C-style for loop, I’ve ended up switching to a while loop because my iteration variable ended up having the wrong type (e.g. having an optional type when the value must be non-optional for the body to execute). The Postmates codebase contains no instances of C-style for loops in Swift.” – Kevin Ballard, kevin@sb.org</li>
+<li>“I found a couple of cases of them in my codebase, but they were trivially transformed into “proper” Swift-style for loops that look better anyway. If it were a vote, I’d vote for eliminating C-style.” – Sean Heber, sean@fifthace.com</li>
 </ul>
 </span>
         
@@ -955,8 +981,8 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/installation/opensuse/" itemprop="url">
-                openSUSE 安装 Docker
+              <a class="post-title-link" href="/2015/12/08/docker/docker-hub/docker-hub/" itemprop="url">
+                Docker Hub
               </a>
             
           
@@ -992,8 +1018,8 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/opensuse/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/opensuse/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/docker-hub/docker-hub/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/docker-hub/docker-hub/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -1008,402 +1034,14 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
 
       
         
-          <span itemprop="articleBody"><h1 id="openSUSE">openSUSE</h1><p>Docker 支持 openSUSE 12.3 或更高版本。由于 Docker 的限制，Docker 只能运行在64位的主机上。</p>
-<p>Docker 不被包含在 openSUSE 12.3 和 openSUSE 13.1 的官方镜像仓库中。因此需要添加 OBS 的 <a href="https://build.opensuse.org/project/show/Virtualization" title="Virtualization repository " target="_blank" rel="external">虚拟化仓库</a> 来安装 <code>docker</code> 包</p>
-<p>执行下边的命令来添加虚拟化仓库(Virtualization repository)：</p>
-<pre><code><span class="comment"># openSUSE 12.3</span>
-<span class="variable">$ </span>sudo zypper ar -f <span class="symbol">http:</span>/<span class="regexp">/download.opensuse.org/repositories</span><span class="regexp">/Virtualization/open</span>SUSE_12.<span class="number">3</span>/ <span class="constant">Virtualization</span>
-
-<span class="comment"># openSUSE 13.1</span>
-<span class="variable">$ </span>sudo zypper ar -f <span class="symbol">http:</span>/<span class="regexp">/download.opensuse.org/repositories</span><span class="regexp">/Virtualization/open</span>SUSE_13.<span class="number">1</span>/ <span class="constant">Virtualization</span>
-</code></pre><p>在 openSUSE 13.2版本以后就不需要添加额外的库了。</p>
-<p>###SUSE Linux Enterprise</p>
-<p>可以在 SUSE Linux Enterprise 12 或 更高版本上来运行 Docker 。这里需要注意的是由于 Docker 当前的限制，只能在<strong>64位</strong>的主机上运行。</p>
-<p>##安装</p>
-<p>安装 Docker 包</p>
-<pre><code><span class="variable">$ </span>sudo zypper <span class="keyword">in</span> docker
-</code></pre><p>现在已经安装完毕，让我们来启动 docker 进程</p>
-<pre><code><span class="variable">$ </span>sudo systemctl start docker
-</code></pre><p>设置开机启动 docker：</p>
-<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker
-</code></pre><p>Docker 包会创建一个的叫 <code>docker</code> 的群组 ,如果想使用非 root 用户来运行，这个用户需要是 <code>docker</code> 群组的成员才可以与 docker 进程进行交互，你可以使用如下命令添加用户：</p>
-<pre><code>$ sudo usermod -<span class="tag">a</span> -G docker &lt;username&gt;
-</code></pre><p>确认一切都是否按照预期工作：</p>
-<pre><code>$ sudo docker <span class="command">run</span> <span class="comment">--rm -i -t opensuse /bin/bash</span>
-</code></pre><p>这条命令将下载和导入 <code>opensuse</code> 镜像，并且在容器内运行 bash，输入 exit 来退出容器。</p>
-<p>如果你想要你的容器能够访问外部的网络，你就需要开启 <code>net.ipv4.ip_forward</code> 规则。这里你可以使用 YaST 工具查找 Network Devices -&gt; Network Settings -&gt; Routing 按钮来确认 IPv4 Forwarding 选择框是否被选中。</p>
-<p>当由 Network Manager 来管理网络的时候，就不能按照上边的方法设置了。这里我们需要手动的编辑 <code>/etc/sysconfig/SuSEfirewall2</code> 文件来确保 <code>FW_ROUTE</code> 被设置成 <code>yes</code>,如下：</p>
-<pre><code><span class="setting">FW_ROUTE=<span class="value"><span class="string">"yes"</span></span></span>
-</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
-<p>##下一步</p>
-<p>阅读<a href="../userguide/README.md">用户指南</a>。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/installation/mac/" itemprop="url">
-                Mac OS X 安装 Docker
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/mac/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/mac/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Mac_OS_X_安装_Docker">Mac OS X 安装 Docker</h1><blockquote>
-<p>注意：<br>该 Docker 版本为了支持 Docker 机,于是不再支持 Boot2Docker 命令行。使用 Docker Toolbox 和其它 Docker 工具来安装 Docker 机。</p>
-</blockquote>
-<p>您可以利用 Docker Toolbox 来安装 Docker。Docker Toolbox 提供了以下工具：</p>
-<ul>
-<li>用于运行 docker-machine 二进制文件的 <code>Docker Machine</code></li>
-<li>用于运行 docker 二进行文件的 <code>Docker Engine</code></li>
-<li>用于运行 docker-compose 二进行文件的 <code>Docker Compose (Mac 特有)</code></li>
-<li>Kitematic，Docker 的图形用户界面</li>
-<li>用于 Docker 命令行环且预先配置好的 shell</li>
-<li>Oracle VM VirtualBox</li>
-</ul>
-<p>由于 Docker 的后台程序使用了 Linux 特有的内核特性，所以您不能直接在 OS X 上运行 Docker。相反，您必须使用 <code>docker-machine</code> 来创建并附加一台虚拟机（VM）。该虚拟机需要安装 Linux 操作系统以便在您 Mac 机上运行 Docker。</p>
-<p>####前提条件</p>
-<p>您 Mac 机的 OS X 版本必须大于等于 10.8 “Snow Leopard” 才可以安装 Docker Toolbox。</p>
-<p>###在安装之前先来了解一些关键概念</p>
-<p>当我们在一台 Linux 主机上安装完 Docker 之后，我们的机器中就包含了本地主机和 Docker 主机。如果从网络层来划分，本地主机就代表你的电脑，而 Docker 主机就是运行 container 的那台机器。</p>
-<p>在 Linux 机器上的一种典型安装 Docker 方法：Docker 客户端，Docker 后台程序和 container 会直接运行在您的机器上。这就意味着您可以使用标准的本地主机寻址（例如 <code>localhost:8000</code> 或者 <code>0.0.0.0:8376</code>）来为 Docker container 分配一个地址。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/linux_docker_host.svg" alt="linux_docker_host"></p>
-<p>在 OS X 上安装的 Docker ，其 Docker 后台程序是运行在一个名为 <code>default</code> 的 Linux 虚拟机上的。<code>default</code> 是 Linux 上的一个轻量级的虚拟机，是专门用于在 Mac OS X 机器上运行 Docker 的。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac_docker_host.svg" alt="mac_docker_host"></p>
-<p>在 OS X 中，Docker 主机地址就是 Linux 虚拟机的地址。当你使用 <code>docker-machine</code> 启动虚拟机的时候，该虚拟机会自动获取到 IP 地址。当您开启一个 container 的时候，container 上的端口会映射到虚拟机的端口上。本页面上的实践操作会一一印证上述内容。</p>
-<p>###安装</p>
-<p>如果您有一个正在运行着的 VirtualBox，那么请您在运行安装器（Docker Toolbox）之前务必关闭它。</p>
-<ol>
-<li><p>进入 <a href="https://www.docker.com/toolbox" target="_blank" rel="external">Docker Toolbox</a> 页面。</p>
-</li>
-<li><p>点击 Docker Toolbox 下载链接，进行下载。</p>
-</li>
-<li><p>双击安装包或者通过右击并在快捷菜单中选择“打开”的方式安装 Docker Toolbox。</p>
-<p>此时会弹出“Install Docker Toolbox”（安装 Docker 工具箱）窗口。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-welcome-page.png" alt="mac-welcome-page"></p>
-</li>
-<li><p>点击“继续”（Continue），安装 toolbox。</p>
-<p>此时，toolbox 会展现给你一些选项，供您自定义标准安装。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-page-two.png" alt="mac-page-two"></p>
-<p>默认情况下，标准的 Docker Toolbox 安装是这样的：</p>
-<ul>
-<li>向 <code>/usr/local/bin</code> 目录中添加 Docker 工具的二进制文件。</li>
-<li>修改权限使得这些二进制文件可供任何用户使用。</li>
-<li>更新现有的 VirtualBox 安装。</li>
-</ul>
-<p><br><br>通过点击“自定义”或“更改安装目录”修改这些默认安装值。</p>
-</li>
-<li><p>点击“安装”，执行标准安装。</p>
-<p>系统提示您输入密码。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-password-prompt.png" alt="mac-password-prompt"></p>
-</li>
-<li><p>输入密码，继续安装</p>
-<p>安装完成后，Docker Toolbox 会为您提供一些信息，通过这些信息您可以完成一些常见的任务。 </p>
-</li>
-<li><p>点击“关闭”，离开当前窗口。</p>
-</li>
-</ol>
-<p>##运行 Docker Container</p>
-<p>想要运行一个 Docker 容器，你需要做如下内容：</p>
-<ul>
-<li>创建一个新的（或开启一台已存在的）Docker 虚拟机</li>
-<li>从您当前的环境切换到新的虚拟机的环境中</li>
-<li>利用 <code>docker</code> 客户端创建，加载并管理 container</li>
-</ul>
-<p>一旦您创建了一台虚拟机，您就可以随时使用它。如同任意一台 VirtualBox 虚拟机，在每次使用它的时候都会保存其配置。</p>
-<p>这里提供两种使用 Docker Toolbox 的方法：使用 Docker 的快速入门终端或使用您的 shell 环境。</p>
-<p>###使用 Docker 的快速入门终端</p>
-<ol>
-<li>打开“应用程序”文件夹或“启动面板”。</li>
-<li><p>找到 Docker 快速入门终端并双击启动它。</p>
-<p>该应用程序：</p>
-<ul>
-<li>开启一个终端窗口</li>
-<li>如果还没有虚拟机的化，请创建一台名叫 <code>default</code> 的虚拟机；如果已经存在这样一台虚拟机，请你开启它。</li>
-<li>将当前终端环境切换到虚拟机环境中。</li>
-</ul>
-<p>一旦启动完成，Docker 快速入门终端会是如下状态：</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-success.png" alt="mac-success"><br>现在，您可以运行 <code>docker</code> 命令了。</p>
-</li>
-<li><p>通过运行 <code>hello-world</code> container 来核实您的安装是否成功。</p>
-</li>
-</ol>
-   <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ docker run hello-world</span><br><span class="line">Unable <span class="built_in">to</span> find image <span class="string">'hello-world:latest'</span> locally</span><br><span class="line"><span class="number">511136</span>ea3c5a: Pull complete</span><br><span class="line"><span class="number">31</span>cbccb51277: Pull complete</span><br><span class="line">e45a5af57b00: Pull complete</span><br><span class="line">hello-world:latest: The image you are pulling has been verified.</span><br><span class="line">Important: image verification is <span class="operator">a</span> tech preview feature <span class="operator">and</span> should <span class="operator">not</span> be</span><br><span class="line">relied <span class="command"><span class="keyword">on</span> <span class="title">to</span> <span class="title">provide</span> <span class="title">security</span>.</span></span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</span><br><span class="line">Hello <span class="built_in">from</span> Docker.</span><br><span class="line">This message shows that your installation appears <span class="built_in">to</span> be working correctly.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">To generate this message, Docker took <span class="operator">the</span> following steps:</span><br><span class="line"><span class="number">1.</span> The Docker client contacted <span class="operator">the</span> Docker daemon.</span><br><span class="line"><span class="number">2.</span> The Docker daemon pulled <span class="operator">the</span> <span class="string">"hello-world"</span> image <span class="built_in">from</span> <span class="operator">the</span> Docker Hub.</span><br><span class="line">   (Assuming <span class="keyword">it</span> was <span class="operator">not</span> already locally available.)</span><br><span class="line"><span class="number">3.</span> The Docker daemon created <span class="operator">a</span> <span class="built_in">new</span> container <span class="built_in">from</span> that image which runs <span class="operator">the</span></span><br><span class="line">   executable that produces <span class="operator">the</span> output you are currently reading.</span><br><span class="line"><span class="number">4.</span> The Docker daemon streamed that output <span class="built_in">to</span> <span class="operator">the</span> Docker client, which sent <span class="keyword">it</span></span><br><span class="line">   <span class="built_in">to</span> your terminal.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">To <span class="keyword">try</span> something more ambitious, you can run <span class="operator">an</span> Ubuntu container <span class="operator">with</span>:</span><br><span class="line">$ docker run -<span class="keyword">it</span> ubuntu bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">For more examples <span class="operator">and</span> ideas, visit:</span><br><span class="line"><span class="keyword">http</span>://docs.docker.com/userguide/</span><br></pre></td></tr></table></figure>
-<p>一个可以和 Docker 工具进行交互的另一种典型方法就是：从您的 shell 命令行入手。</p>
-<p>###使用shell 命令行<br>该部分假设您正在运行一个 Bash shell。您运行的可能是不同的 shell，例如 C shell，但是不用担心，命令都是一样的。</p>
-<ol>
-<li><p>创建一个新的 Docker 虚拟机。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   $ docker-machine <span class="operator"><span class="keyword">create</span> <span class="comment">--driver virtualbox default      </span></span><br><span class="line"></span><br><span class="line">   Creating VirtualBox VM...</span><br><span class="line">   Creating SSH <span class="keyword">key</span>...</span><br><span class="line">   <span class="keyword">Starting</span> VirtualBox VM...</span><br><span class="line">   <span class="keyword">Starting</span> VM...</span><br><span class="line">   <span class="keyword">To</span> see how <span class="keyword">to</span> <span class="keyword">connect</span> Docker <span class="keyword">to</span> this machine, run: docker-machine env <span class="keyword">default</span></span><br><span class="line">   <span class="string">``</span><span class="string">` </span><br><span class="line">  </span><br><span class="line">   这就在 VirtualBox 中创建了一台新的 `</span><span class="keyword">default</span><span class="string">` 虚拟机。</span><br><span class="line">   </span><br><span class="line">   该命令还会在 `</span>~/.docker/machine/machines/<span class="keyword">default</span><span class="string">` 目录下生成一个 docker machine 的配置文件。您只需执行一次 `</span><span class="keyword">create</span><span class="string">` 命令。然后，您可以使用 `</span>docker-machine<span class="string">` 命令来开启，停止，查询并管理虚拟机。</span><br><span class="line"></span><br><span class="line">2. 列出所有可用的 docker machine。</span></span></span><br></pre></td></tr></table></figure>
-<p>$ docker-machine ls<br>NAME                ACTIVE   DRIVER       STATE     URL                         SWARM<br>default             *        virtualbox   Running   tcp://192.168.99.101:2376  </p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   如果您之前安装了现在已经舍弃了的 Boot2Docker 这个应用程序的话或者您运行了 Docker 快速入门终端，在列表中还会有一个 <span class="escape">`d</span>ev<span class="escape">` </span>虚拟机。当   您创建 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的时候，<span class="escape">`d</span>ocker-machine<span class="escape">` </span>命令给出了一些指导，以便您您连接虚拟机。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 获取 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的环境变量</span><br></pre></td></tr></table></figure>
-<p>$ docker-machine env default<br>export DOCKER_TLS_VERIFY=”1”<br>export DOCKER_HOST=”tcp://192.168.99.101:2376”<br>export DOCKER_CERT_PATH=”/Users/mary/.docker/machine/machines/default”<br>export DOCKER_MACHINE_NAME=”default”</p>
-<h1 id="Run_this_command_to_configure_your_shell:">Run this command to configure your shell:</h1><h1 id="eval_“$(docker-machine_env_default)”">eval “$(docker-machine env default)”</h1><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">4</span>. 连接到 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机</span><br></pre></td></tr></table></figure>
-<p>$ eval “$(docker-machine env default)”</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">5</span>. 运行 <span class="escape">`h</span>ello-world<span class="escape">` </span>container 来验证您的安装是否已经成功。</span><br></pre></td></tr></table></figure>
-<p>docker run hello-world</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">##学习 Toolbox 安装</span></span><br><span class="line"></span><br><span class="line">Toolbox 将 Docker Engine 的可执行文件和 Docker 的可执行文件下载到您的系统中。当您使用 Docker 快速入门终端或手动创建一个 `<span class="javascript"><span class="keyword">default</span></span>` 虚拟机的时候，Docker Machine 会更新 `<span class="javascript">~<span class="regexp">/.docker/m</span>achine/machines/<span class="keyword">default</span></span>` 文件。该文件夹中包含了虚拟机的配置文件。</span><br><span class="line"></span><br><span class="line">您可以利用 Docker Machine 在系统中创建多个虚拟机，那么也就会有多个虚拟机的配置文件。如果您想要删除某台虚拟机，请您使用 `<span class="javascript">docker-machine rm &lt;machine-name&gt;</span>` 命令。</span><br><span class="line"></span><br><span class="line"><span class="comment">##从 Boot2Docker 迁移</span></span><br><span class="line">如果您现在用的还是 Boot2Docker 的话，在您的本地系统中还会有一个 `<span class="javascript">boot2docker-vm</span>` 虚拟机。为了允许 Docker Machine 管理该台虚拟机，你可以对它进行迁移。</span><br><span class="line"><span class="number">1.</span> 打开一个终端或 Docker 的命令行界面。</span><br><span class="line"><span class="number">2.</span> 输入以下命令。</span><br></pre></td></tr></table></figure>
-<p>docker-machine create -d virtualbox –virtualbox-import-boot2docker-vm boot2docker-vm docker-vm<br>```</p>
-</li>
-<li>使用 <code>docker-machine</code> 命令与该台要被迁移的虚拟机进行交互。<br><code>docker-machine</code> 的子命令和 <code>boot2docker</code> 的子命令比起来还是有一些不同之处的。下面这个表列出了对比了二者的不同并介绍其功能。   </li>
-</ol>
-<table>
-<thead>
-<tr>
-<th><strong><code>boot2docker</code></strong></th>
-<th><strong><code>docker-machine</code></strong></th>
-<th><strong><code>docker-machine</code></strong> description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>init</td>
-<td>create</td>
-<td>Creates a new docker host.</td>
-</tr>
-<tr>
-<td>up</td>
-<td>start</td>
-<td>Starts a stopped machine.</td>
-</tr>
-<tr>
-<td>ssh</td>
-<td>ssh</td>
-<td>Runs a command or interactive ssh session on the machine.</td>
-</tr>
-<tr>
-<td>save</td>
-<td>-</td>
-<td>Not applicable.</td>
-</tr>
-<tr>
-<td>down</td>
-<td>stop</td>
-<td>Stops a running machine.</td>
-</tr>
-<tr>
-<td>poweroff</td>
-<td>stop</td>
-<td>Stops a running machine.</td>
-</tr>
-<tr>
-<td>reset</td>
-<td>restart</td>
-<td>Restarts a running machine.</td>
-</tr>
-<tr>
-<td>config</td>
-<td>inspect</td>
-<td>Prints machine configuration details.</td>
-</tr>
-<tr>
-<td>status</td>
-<td>ls</td>
-<td>Lists all machines and their status.</td>
-</tr>
-<tr>
-<td>info</td>
-<td>inspect</td>
-<td>Displays a machine’s details.</td>
-</tr>
-<tr>
-<td>ip</td>
-<td>ip</td>
-<td>Displays the machine’s ip address.</td>
-</tr>
-<tr>
-<td>shellinit</td>
-<td>env</td>
-<td>Displays shell commands needed to configure your shell to interact with a machine.</td>
-</tr>
-<tr>
-<td>delete</td>
-<td>rm</td>
-<td>Removes a machine.</td>
-</tr>
-<tr>
-<td>download</td>
-<td>-</td>
-<td>Not applicable.</td>
-</tr>
-<tr>
-<td>upgrade</td>
-<td>upgrade</td>
-<td>Upgrades a machine’s Docker client to the latest stable release.</td>
-</tr>
-</tbody>
-</table>
-<p>##Mac OS X 上 Docker 的实例<br>通过了解本小节，您可以尝试在虚拟机上进行一些可行的 container 任务。现在，您应该有一台运行着的虚拟机，且通过 shell 脚本可以连接到该虚拟机。为了验证上面所说的，可以执行如下命令来验证:</p>
-<pre><code>$ docker-machine ls
-NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-<span class="keyword">default</span>             *        virtualbox   Running   <span class="string">tcp:</span><span class="comment">//192.168.99.100:2376   </span>
-</code></pre><p>该台处于 <code>ACTIVE</code> 状态的虚拟机，即本例中的 default 虚拟机，就是您的环境所指向的虚拟机。</p>
-<p>###访问 container 的端口</p>
-<ol>
-<li><p>在 DOCKER_HOST 上开启一个NGINX container。</p>
-<pre><code>$ docker <span class="command">run</span> -d -P <span class="comment">--name web nginx</span>
-</code></pre><p>一般来说，<code>docker run</code> 命令会开启一个 container，并运行它，最后关闭它。加上 <code>-d</code> 这个参数，container 就可以在您执行了 <code>docker run</code> 这条命令后继续在后台运行了。加上 <code>-P</code> 这个参数就可以将 container 监听的那个端口告知给 Docker Host；这样您就可以在您的 Mac 机上访问 container 了。</p>
-</li>
-<li><p>执行 <code>docker ps</code> 命令，查看运行着的 container</p>
-<pre><code>CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
-<span class="number">5f</span>b65ff765e9        nginx:latest  
-</code></pre><p>此时，您会发现 <code>nginx</code> 依然在后台运行。</p>
-</li>
-<li><p>查看 container 的端口</p>
-<pre><code>$ docker port web
-<span class="number">443</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49156</span>
-<span class="number">80</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49157</span>
-</code></pre><p>该命令显示出的内容会告诉你 <code>web</code> container 的 <code>80</code> 端口已经映射到了 Docker Host 上的 <code>49157</code> 端口上。</p>
-</li>
-<li><p>在您的浏览器中输入地址 <code>http://localhost:49157</code>（localhost 就是 0.0.0.0）。</p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/bad_host1.png" alt="bad_host1"><br>并没有生效，其原因就是 <code>DOCKER_HOST</code> 的地址并不是你本地的机器的地址（0.0.0.0），而是您的 Docker 虚拟机的地址。</p>
-</li>
-<li><p>获取 Docker 虚拟机（即 <code>default</code>）的地址。</p>
-<pre><code>$ docker-machine ip <span class="keyword">default</span>
-<span class="number">192.168</span><span class="number">.59</span><span class="number">.103</span>
-</code></pre></li>
-<li><p>在您的浏览器中输入地址 <code>http://192.168.59.103:49157</code></p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/good_host1.png" alt="good_host1"><br>成功了！</p>
-</li>
-<li><p>如果您想停止并删除正在运行的 <code>nginx</code> container 的话，请执行如下操作：</p>
-<pre><code><span class="variable">$ </span>docker stop web
-<span class="variable">$ </span>docker rm web
-</code></pre></li>
-</ol>
-<p>###为容器挂载一个卷</p>
-<p>当您开启一个 container 的时候，系统会自动将您本机中的 <code>/Users/username</code> 目录共享给 Docker 虚拟机。通过本次共享，您可以将该目录挂载到您的 container 上。下面的内容将会介绍如何做到这些。</p>
-<ol>
-<li><p>跳转到您的用户 <code>$HOME</code> 目录下。</p>
-<pre><code>$ cd <span class="variable">$HOME</span>
-</code></pre></li>
-<li><p>创建一个新的 <code>site</code> 目录。</p>
-<pre><code><span class="variable">$ </span>mkdir site
-</code></pre></li>
-<li><p>跳转到 <code>site</code> 目录中。</p>
-<pre><code>$ <span class="built_in">cd</span> site
-</code></pre></li>
-<li><p>创建一个新的 <code>index.html</code> 文件。</p>
-<pre><code>$ <span class="keyword">echo</span> <span class="string">"my new site"</span> &gt; <span class="built_in">index</span>.html
-</code></pre></li>
-<li><p>开启一个新 <code>nginx</code> container 并将 <code>html</code> 目录替换为 <code>site</code> 目录。</p>
-<pre><code>$ docker run -d -P -v <span class="variable">$HOME</span>/site:/usr/share/nginx/html --name mysite nginx
-</code></pre></li>
-<li><p>获取到 <code>mysite</code> 这个 container 的端口。</p>
-<pre><code>$ docker port mysite
-<span class="number">80</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49166</span>
-<span class="number">443</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49165</span>
-</code></pre></li>
-<li><p>在浏览器中输入地址：</p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/newsite_view1.png" alt="newsite_view1"></p>
-</li>
-<li><p>立即添加一个文件到 <code>$HOME/siet</code> 目录下。</p>
-<pre><code>$ <span class="built_in">echo</span> <span class="string">"This is cool"</span> &gt; cool.html
-</code></pre></li>
-<li><p>在浏览器中输入地址：</p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/cool_view1.png" alt="cool_view1"></p>
-</li>
-<li><p>停止然后删除正在运行的 <code>mysite</code> container。</p>
-<pre><code><span class="variable">$ </span>docker stop mysite
-<span class="variable">$ </span>docker rm mysite
-</code></pre></li>
-</ol>
-<p>##更新 Docker Toolbox</p>
-<p>为更新Docker Toolbox, 需要下载并重新运行<a href="https://docker.com/toolbox/" target="_blank" rel="external">Docker Toolbox安装器</a>.</p>
-<p>##卸载 Docker Toolbox</p>
-<p>按照以下步骤卸载Toolbox：</p>
-<ol>
-<li><p>列出所有的虚拟机</p>
-<pre><code>$ docker-machine ls
-NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-dev                 *        virtualbox   Running   <span class="string">tcp:</span><span class="comment">//192.168.99.100:2376   </span>
-my-docker-machine            virtualbox   Stopped                               
-<span class="keyword">default</span>                      virtualbox   Stopped  
-</code></pre></li>
-<li><p>删除（列出的）每一台虚拟机.</p>
-<pre><code>$ docker-machine rm <span class="built_in">dev</span>
-Successfully removed <span class="built_in">dev</span>
-</code></pre><p>删除一台虚拟机，意味着从<code>VirtualBox</code>和<code>~/.docker/machine/machines</code>目录中同时删除虚拟机文件。 </p>
-</li>
-<li><p>从“应用程序“文件夹中删除Docker快捷终端（Quickstart Terminal）和Kitematic.</p>
-</li>
-<li><p>从/usr/local/bin文件夹中删除docker, docker-compose和 docker-machine命令文件.</p>
-<pre><code>$ rm <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>docker
-</code></pre></li>
-<li><p>从系统中删除 <code>~/.docker</code> 文件夹.</p>
-</li>
-</ol>
-<p>##学习更多</p>
-<p>使用”docker-machine help”命令可以列出关于Docker Machine的全部命令行参考信息.参照<a href="https://docs.docker.com/machine/" target="_blank" rel="external">Docker Machine文档</a>来获得关于如何使用 SSH 或者 SCP 访问虚拟机的信息。<br>接下来，可以继续了解<a href="https://docs.docker.com/userguide" target="_blank" rel="external">Docker用户手册</a> . 如果对使用Kitematic图形界面工具感兴趣，可以参考阅读 <a href="https://docs.docker.com/kitematic/userguide/" target="_blank" rel="external">Kitermatic用户手册</a>.</p>
+          <span itemprop="articleBody"><h1 id="Docker_Hub">Docker Hub</h1><p>先来看看 Docker Hub 的界面：</p>
+<h1 id=""><img src="http://7xlbtp.com1.z0.glb.clouddn.com/hub.png" alt=""></h1><p>在这个章节，我们来学习 Docker Hub 的相关话题：</p>
+<p><a href="accounts.md">账户</a></p>
+<p>学习如何创建一个Docker Hub账户来管理你的组织和机构。</p>
+<p><a href="repos.md">仓库</a></p>
+<p>了解如何分享你 Docker Hub 上的 Docker 镜像，以及如何存储和管理你的私人镜像。</p>
+<p><a href="builds.md">自动构建</a></p>
+<p>学习如何自动化构建、部署和管理</p>
 </span>
         
       
@@ -1503,6 +1141,145 @@ $ gcloud config <span class="operator"><span class="keyword">set</span> <span cl
 docker-playground:~$ sudo docker <span class="command">run</span> hello-world
 </code></pre><p>当 Docker 输出 hello word 消息的时候，说明你的 Docker 工作正常。</p>
 <p>更多，请阅读 <a href="https://developers.google.com/compute/docs/containers" target="_blank" rel="external"> google 云平台部署容器 </a></p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/08/docker/installation/debian/" itemprop="url">
+                Debian支持 Docker
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/docker/" itemprop="url" rel="index">
+                  <span itemprop="name">docker</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/08/docker/installation/debian/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/debian/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Debian">Debian</h1><p>以下版本的 Debian 支持 Docker：</p>
+<ul>
+<li><a href="#debian-jessie-80-64-bit">Debian 8.0 Jessie (64-bit)</a></li>
+<li><a href="#debian-wheezystable-7x-64-bit">Debian 7.7 Wheezy (64-bit)</a></li>
+</ul>
+<p>##Debian Jessie 8.0 (64-bit)Debian</p>
+<p>Debian 8 使用的是 3.14.0 的内核版本，可以从 Debian 的镜像源来安装 <code>docker.io</code> 包。</p>
+<blockquote>
+<p>提示：Debian 包含一个特别老的KDE3/GNOME2包叫 <code>docker</code> ,所以我们把这个包叫<code>docker.io</code>。</p>
+</blockquote>
+<p>###安装</p>
+<p>安装最新版的 Debian 软件包（可能不是最新版本 Docker ）</p>
+<pre><code>$ sudo apt-<span class="built_in">get</span> <span class="keyword">update</span>
+$ sudo apt-<span class="built_in">get</span> install docker.io
+</code></pre><p>验证 Docker 是否正常工作 ：</p>
+<pre><code>$ sudo docker run -<span class="tag">i</span> -t  Ubuntu  /bin/bash
+</code></pre><p>该命令将下载 <code>Ubuntu</code> 镜像，并且在容器内运行 <code>bash</code>.</p>
+<blockquote>
+<p>注意：如果你打算启用内存和交换空间设置，请查看<a href="./ubuntu.md">这里</a></p>
+</blockquote>
+<p>##Debian Wheezy/Stable 7.x (64-bit)</p>
+<p>安装 Docker 需要内核在3.8版本以上，但是 Wheezy 的内核版本是 3.2（<a href="https://github.com/docker/docker/issues/407%20kernel%20versions" target="_blank" rel="external">bug #407</a>对 Docker 需要3.8版本内核进行了讨论。）</p>
+<p>幸运的是，官方提供了 <code>wheezy-backports</code> ，它内核版本是3.16，可以支持 Docker。</p>
+<p>###安装</p>
+<ol>
+<li><p>从 wheezy-backports 镜像源来安装内核</p>
+<p> 在 <code>/etc/apt/sources.list</code> 文件下添加如下内容：</p>
+<pre><code>deb <span class="string">http:</span><span class="comment">//http.debian.net/debian wheezy-backports main</span>
+</code></pre><p> 安装 <code>linux-image-amd64</code> 包  (注意使用 <code>-t wheezy-backports</code>)</p>
+<pre><code>$ sudo apt-get <span class="operator"><span class="keyword">update</span>
+$ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> -<span class="keyword">t</span> wheezy-backports linux-image-amd64</span>
+</code></pre></li>
+<li><p>从 get.docker.com 获取安装脚本并安装：</p>
+<pre><code>curl -sSL http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/ | <span class="keyword">sh</span>
+</code></pre></li>
+</ol>
+<p>###使用非root</p>
+<p>docker 进程通过监听一个 Unix Socket 来替代 TCP 端口。在默认情况下，docker 的 Unix Socket属于<code>root</code>用户，当然其他用户可以使用<code>sudo</code>方式来访问。因为这个原因， docker 进程就一直是<code>root</code>用户运行的。</p>
+<p>如果你（或者说你安装Docker的时候）创建一个叫 <code>docker</code> 的用户组，并为用户组添加用户。这时候，当 Docker 进程启动的时候，<code>docker</code> 用户组对 Unix Socket 有了读/写权限。 你必须使用root用户来运行 docker 进程，但你可以用 <code>docker</code> 群组用户来使用 docker 客户端，你再使用 docker 命令的时候前边就不需要加 <code>sudo</code> 了。从Docker 0.9版本开始，你可以使用<code>-G</code>来指定用户组。</p>
+<blockquote>
+<p>警告：Docker 用户组（或者用 <code>-G</code> 指定的用户组）有等同于root用户的权限，有关系统安全影响的细节，请查看 <a href="">Docker 进程表面攻击细节</a></p>
+</blockquote>
+<p>操作演示：</p>
+<pre><code><span class="comment"># Add the docker group if it doesn't already exist.</span>
+<span class="variable">$ </span>sudo groupadd docker
+
+<span class="comment"># Add the connected user "${USER}" to the docker group.</span>
+<span class="comment"># Change the user name to match your preferred user.</span>
+<span class="comment"># You may have to logout and log back in again for</span>
+<span class="comment"># this to take effect.</span>
+<span class="variable">$ </span>sudo gpasswd -a <span class="variable">${</span><span class="constant">USER</span>} docker
+
+<span class="comment"># Restart the Docker daemon.</span>
+<span class="variable">$ </span>sudo service docker restart
+<span class="comment">##下一步</span>
+</code></pre><p>继续阅读<a href="../userguide/README.md">用户指南</a>。</p>
 </span>
         
       

@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[01Getting Started-基本设置]]></title>
-    <link href="http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/01Getting%20Started/Basic%20Setup/"/>
-    <id>http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/01Getting Started/Basic Setup/</id>
+    <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting%20Started/Basic%20Setup/"/>
+    <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/</id>
     <published>2015-12-26T15:00:00.000Z</published>
     <updated>2015-12-15T06:25:19.563Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -86,8 +86,8 @@
   
   <entry>
     <title><![CDATA[02Interoperability-01与 Objective-C 的 API 交互]]></title>
-    <link href="http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/01Interacting%20with%20Objective-C%20APIs/"/>
-    <id>http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/01Interacting with Objective-C APIs/</id>
+    <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/01Interacting%20with%20Objective-C%20APIs/"/>
+    <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/01Interacting with Objective-C APIs/</id>
     <published>2015-12-26T14:00:10.000Z</published>
     <updated>2015-12-15T06:25:35.153Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -249,8 +249,8 @@
   
   <entry>
     <title><![CDATA[02Interoperability-02特性编写Swift类]]></title>
-    <link href="http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/02Writing%20Swift%20Classes%20with%20Objective-C%20Behavior/"/>
-    <id>http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/02Writing Swift Classes with Objective-C Behavior/</id>
+    <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/02Writing%20Swift%20Classes%20with%20Objective-C%20Behavior/"/>
+    <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/02Writing Swift Classes with Objective-C Behavior/</id>
     <published>2015-12-26T14:00:09.000Z</published>
     <updated>2015-12-15T06:25:43.422Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -369,8 +369,8 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
   
   <entry>
     <title><![CDATA[02Interoperability-03与 Cocoa 数据类型共舞]]></title>
-    <link href="http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/03Working%20with%20Cocoa%20Data%20Types/"/>
-    <id>http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/03Working with Cocoa Data Types/</id>
+    <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/03Working%20with%20Cocoa%20Data%20Types/"/>
+    <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/03Working with Cocoa Data Types/</id>
     <published>2015-12-26T14:00:08.000Z</published>
     <updated>2015-12-15T06:25:48.585Z</updated>
     <content type="html"><![CDATA[<blockquote>
@@ -504,11 +504,11 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
   </entry>
   
   <entry>
-    <title><![CDATA[02Interoperability-使用Objective-C-04采用Cocoa设计模式]]></title>
-    <link href="http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/04Adopting%20Cocoa%20Design%20Patterns/"/>
-    <id>http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/04Adopting Cocoa Design Patterns/</id>
+    <title><![CDATA[02Interoperability-04采用Cocoa设计模式]]></title>
+    <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/04Adopting%20Cocoa%20Design%20Patterns/"/>
+    <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/04Adopting Cocoa Design Patterns/</id>
     <published>2015-12-26T14:00:07.000Z</published>
-    <updated>2015-12-15T06:25:58.508Z</updated>
+    <updated>2015-12-15T06:28:52.845Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/JaceFu" target="_blank" rel="external">JaceFu</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
 <p>校正：<a href="https://github.com/LunaticM" target="_blank" rel="external">LunaticM</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -637,11 +637,11 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
   </entry>
   
   <entry>
-    <title><![CDATA[02Interoperability-使用Objective-C-05与 C 的 API 交互]]></title>
-    <link href="http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/02Interoperability/05Interacting%20with%20C%20APIs/"/>
-    <id>http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/02Interoperability/05Interacting with C APIs/</id>
+    <title><![CDATA[02Interoperability-05与 C 的 API 交互]]></title>
+    <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/05Interacting%20with%20C%20APIs/"/>
+    <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/05Interacting with C APIs/</id>
     <published>2015-12-26T14:00:06.000Z</published>
-    <updated>2015-12-15T06:26:05.070Z</updated>
+    <updated>2015-12-15T06:28:59.906Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/shockinglee" target="_blank" rel="external">shockinglee</a></p>
 <p>校对：<a href="https://github.com/shanyimin" target="_blank" rel="external">shanyimin</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a> <a href="https://github.com/Phenmod" target="_blank" rel="external">Phenmod</a></p>
@@ -883,11 +883,11 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
   </entry>
   
   <entry>
-    <title><![CDATA[03Mix and Match-使用Objective-C-01Mix and Match 概述（Mix and Match Overview]]></title>
-    <link href="http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project/"/>
-    <id>http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/03Mix and Match/Swift and Objective-C in the Same Project/</id>
+    <title><![CDATA[03Mix and Match-01Mix and Match 概述（Mix and Match Overview]]></title>
+    <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project/"/>
+    <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/03Mix and Match/Swift and Objective-C in the Same Project/</id>
     <published>2015-12-26T14:00:05.000Z</published>
-    <updated>2015-12-15T06:26:12.582Z</updated>
+    <updated>2015-12-15T06:32:54.916Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/haolloyin" target="_blank" rel="external">haolloyin</a></p>
 <p>校对：<a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -908,11 +908,11 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
 <p><a name="mix_and_match_overview"></a></p>
 <h2 id="Mix_and_Match_概述">Mix and Match 概述</h2><p>Objective-C 和 Swift 文件可以在一个工程中并存，不管这个工程原本是基于 Objective-C 还是 Swift。你可以直接往现有工程中简单地添加另一种语言的源文件。这种自然的工作流使得创建混合语言的应用或框架 target，与用单独一种语言时一样简单。</p>
 <p>混合语言的工作流程只有一点点区别，这取决于你是在写应用还是写框架。下面描述了普通的用两种语言在一个 target 中导入模型的情况，后续章节会有更多细节。</p>
-<p><img src="https://raw.githubusercontent.com/haolloyin/Welcome-to-Swift/translate/Using%20Swift%20with%20Cocoa%20and%20Objective-C/03Mix%20and%20Match/DAG_2x.png?raw=true" alt="DAG_2x.png"></p>
+<p><img src="http://7xp6cn.com1.z0.glb.clouddn.com/DAG_2x.png" alt="DAG_2x.png"></p>
 <p><a name="importing_code_from_within_the_same_app_target"></a></p>
 <h2 id="在同个应用的_target_中导入">在同个应用的 target 中导入</h2><p>如果你在写混合语言的应用，可能需要用 Swift 代码访问 Objective-C 代码，或者反之。下面的流程描述了在非框架 target 中的应用。</p>
 <h3 id="将_Objective-C_导入_Swift">将 Objective-C 导入 Swift</h3><p>在一个应用的 target 中导入一些 Objective-C 文件供 Swift 代码使用时，你需要依赖于 Objective-C 的桥接头文件（<code>bridging header</code>）来暴露给 Swift。当你添加 Swift 文件到现有的 Objective-C 应用（或反之）时，Xcode 会自动创建这些头文件。</p>
-<p><img src="https://raw.githubusercontent.com/haolloyin/Welcome-to-Swift/translate/Using%20Swift%20with%20Cocoa%20and%20Objective-C/03Mix%20and%20Match/bridgingheader_2x.png?raw=true" alt="bridgingheader_2x.png"></p>
+<p><img src="http://7xp6cn.com1.z0.glb.clouddn.com/bridgingheader_2x.png" alt="bridgingheader_2x.png"></p>
 <p>如果你同意，Xcode 会在源文件创建的同时生成头文件，并用 product 的模块名加上 <code>-Bridging-Header.h</code> 命名。关于 product 的模块名，详见 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-XID_85" target="_blank" rel="external">Naming Your Product Module</a>。</p>
 <p>你应该编辑这个头文件来对 Swift 暴露出 Objective-C 代码。</p>
 <h4 id="在同一_target_中将_Objective-C_代码导入到_Swift_中">在同一 target 中将 Objective-C 代码导入到 Swift 中</h4><ol>
@@ -1080,11 +1080,11 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
   </entry>
   
   <entry>
-    <title><![CDATA[04Migration-使用Objective-C-01为你的Objective-c代码做好迁移准备]]></title>
-    <link href="http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/04Migration/Migrating%20Your%20Objective-C%20Code%20to%20Swift/"/>
-    <id>http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/04Migration/Migrating Your Objective-C Code to Swift/</id>
+    <title><![CDATA[04Migration-01为你的Objective-c代码做好迁移准备]]></title>
+    <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/04Migration/Migrating%20Your%20Objective-C%20Code%20to%20Swift/"/>
+    <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/04Migration/Migrating Your Objective-C Code to Swift/</id>
     <published>2015-12-26T14:00:04.000Z</published>
-    <updated>2015-12-15T06:26:20.301Z</updated>
+    <updated>2015-12-15T06:29:16.810Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/xudeheng" target="_blank" rel="external">xudeheng</a></p>
 <p>校对：<a href="http://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -1150,8 +1150,8 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
   
   <entry>
     <title><![CDATA[05Revision History-Document Revision History]]></title>
-    <link href="http://yoursite.com/2015/12/26/Using%20Swift%20with%20Cocoa%20and%20Objective-C/05Revision%20History/Document%20Revision%20History/"/>
-    <id>http://yoursite.com/2015/12/26/Using Swift with Cocoa and Objective-C/05Revision History/Document Revision History/</id>
+    <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/05Revision%20History/Document%20Revision%20History/"/>
+    <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/05Revision History/Document Revision History/</id>
     <published>2015-12-26T14:00:03.000Z</published>
     <updated>2015-12-15T06:26:27.773Z</updated>
     <content type="html"><![CDATA[<h1 id="文档修订历史">文档修订历史</h1><p>该表格描述了 Using Swift with Cocoa and Objective-C 一书的改动。</p>

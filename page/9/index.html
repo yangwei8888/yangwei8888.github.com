@@ -170,145 +170,6 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/installation/debian/" itemprop="url">
-                Debian支持 Docker
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/debian/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/debian/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Debian">Debian</h1><p>以下版本的 Debian 支持 Docker：</p>
-<ul>
-<li><a href="#debian-jessie-80-64-bit">Debian 8.0 Jessie (64-bit)</a></li>
-<li><a href="#debian-wheezystable-7x-64-bit">Debian 7.7 Wheezy (64-bit)</a></li>
-</ul>
-<p>##Debian Jessie 8.0 (64-bit)Debian</p>
-<p>Debian 8 使用的是 3.14.0 的内核版本，可以从 Debian 的镜像源来安装 <code>docker.io</code> 包。</p>
-<blockquote>
-<p>提示：Debian 包含一个特别老的KDE3/GNOME2包叫 <code>docker</code> ,所以我们把这个包叫<code>docker.io</code>。</p>
-</blockquote>
-<p>###安装</p>
-<p>安装最新版的 Debian 软件包（可能不是最新版本 Docker ）</p>
-<pre><code>$ sudo apt-<span class="built_in">get</span> <span class="keyword">update</span>
-$ sudo apt-<span class="built_in">get</span> install docker.io
-</code></pre><p>验证 Docker 是否正常工作 ：</p>
-<pre><code>$ sudo docker run -<span class="tag">i</span> -t  Ubuntu  /bin/bash
-</code></pre><p>该命令将下载 <code>Ubuntu</code> 镜像，并且在容器内运行 <code>bash</code>.</p>
-<blockquote>
-<p>注意：如果你打算启用内存和交换空间设置，请查看<a href="./ubuntu.md">这里</a></p>
-</blockquote>
-<p>##Debian Wheezy/Stable 7.x (64-bit)</p>
-<p>安装 Docker 需要内核在3.8版本以上，但是 Wheezy 的内核版本是 3.2（<a href="https://github.com/docker/docker/issues/407%20kernel%20versions" target="_blank" rel="external">bug #407</a>对 Docker 需要3.8版本内核进行了讨论。）</p>
-<p>幸运的是，官方提供了 <code>wheezy-backports</code> ，它内核版本是3.16，可以支持 Docker。</p>
-<p>###安装</p>
-<ol>
-<li><p>从 wheezy-backports 镜像源来安装内核</p>
-<p> 在 <code>/etc/apt/sources.list</code> 文件下添加如下内容：</p>
-<pre><code>deb <span class="string">http:</span><span class="comment">//http.debian.net/debian wheezy-backports main</span>
-</code></pre><p> 安装 <code>linux-image-amd64</code> 包  (注意使用 <code>-t wheezy-backports</code>)</p>
-<pre><code>$ sudo apt-get <span class="operator"><span class="keyword">update</span>
-$ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> -<span class="keyword">t</span> wheezy-backports linux-image-amd64</span>
-</code></pre></li>
-<li><p>从 get.docker.com 获取安装脚本并安装：</p>
-<pre><code>curl -sSL http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/ | <span class="keyword">sh</span>
-</code></pre></li>
-</ol>
-<p>###使用非root</p>
-<p>docker 进程通过监听一个 Unix Socket 来替代 TCP 端口。在默认情况下，docker 的 Unix Socket属于<code>root</code>用户，当然其他用户可以使用<code>sudo</code>方式来访问。因为这个原因， docker 进程就一直是<code>root</code>用户运行的。</p>
-<p>如果你（或者说你安装Docker的时候）创建一个叫 <code>docker</code> 的用户组，并为用户组添加用户。这时候，当 Docker 进程启动的时候，<code>docker</code> 用户组对 Unix Socket 有了读/写权限。 你必须使用root用户来运行 docker 进程，但你可以用 <code>docker</code> 群组用户来使用 docker 客户端，你再使用 docker 命令的时候前边就不需要加 <code>sudo</code> 了。从Docker 0.9版本开始，你可以使用<code>-G</code>来指定用户组。</p>
-<blockquote>
-<p>警告：Docker 用户组（或者用 <code>-G</code> 指定的用户组）有等同于root用户的权限，有关系统安全影响的细节，请查看 <a href="">Docker 进程表面攻击细节</a></p>
-</blockquote>
-<p>操作演示：</p>
-<pre><code><span class="comment"># Add the docker group if it doesn't already exist.</span>
-<span class="variable">$ </span>sudo groupadd docker
-
-<span class="comment"># Add the connected user "${USER}" to the docker group.</span>
-<span class="comment"># Change the user name to match your preferred user.</span>
-<span class="comment"># You may have to logout and log back in again for</span>
-<span class="comment"># this to take effect.</span>
-<span class="variable">$ </span>sudo gpasswd -a <span class="variable">${</span><span class="constant">USER</span>} docker
-
-<span class="comment"># Restart the Docker daemon.</span>
-<span class="variable">$ </span>sudo service docker restart
-<span class="comment">##下一步</span>
-</code></pre><p>继续阅读<a href="../userguide/README.md">用户指南</a>。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
               <a class="post-title-link" href="/2015/12/08/docker/installation/azure/" itemprop="url">
                 Microsoft Azure
               </a>
@@ -1532,6 +1393,109 @@ $ sudo docker logs mongo_instance_001
 <span class="preprocessor"># Usage: mongo --port <span class="title">&lt;port you get from `docker ps`&gt;</span> </span>
 $ mongo --port <span class="number">12345</span>
 </code></pre></span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/08/docker/examples/couchdb_data_volumes/" itemprop="url">
+                Docker中运行CouchDB服务
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/docker/" itemprop="url" rel="index">
+                  <span itemprop="name">docker</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/08/docker/examples/couchdb_data_volumes/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/couchdb_data_volumes/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Docker中运行CouchDB服务">Docker中运行CouchDB服务</h1><blockquote>
+<p>注：如果你不喜欢使用sudo，你可以查看<a href="../installation/binaries.md">这里非root用户运行</a></p>
+</blockquote>
+<p>这里有一个例子，使用数据卷在两个CouchDb之间共享相同的数据容器，这个可以用于热升级，测试不同版本的CouchDB数据等等。</p>
+<p>##创建第一个数据库</p>
+<p>现在我们创建/var/lib/couchdb作为数据卷</p>
+<pre><code><span class="constant">COUCH1</span>=<span class="variable">$(</span>sudo docker run -d -p <span class="number">5984</span> -v /var/<span class="class"><span class="keyword">lib</span>/<span class="title">couchdb</span> <span class="title">shykes</span>/<span class="title">couchdb</span>:2013-05-03)</span>
+</code></pre><p>##添加一条数据在第一个数据库中</p>
+<p>我们假设你的docker主机默认是本地localhost.如果不是localhost请换到你docker的公共IP</p>
+<pre><code>HOST=localhost
+URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class="variable">$(sudo docker port $COUCH1 5984 | grep -Po '\d+$')</span>/_utils/"</span>
+<span class="built_in">echo</span> <span class="string">"Navigate to <span class="variable">$URL</span> in your browser, and use the couch interface to add data"</span>
+</code></pre><p>##创建第二个数据库</p>
+<p>这次，我们请求共享访问$COUCH1的卷。</p>
+<pre><code>COUCH2=$(sudo docker run -d -p <span class="number">5984</span> -volumes-from <span class="variable">$COUCH1</span> shykes/couchdb:<span class="number">2013</span>-<span class="number">05</span>-<span class="number">03</span>)
+</code></pre><p>##在第二个数据库上来浏览数据</p>
+<pre><code>HOST=localhost
+URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class="variable">$(sudo docker port $COUCH2 5984 | grep -Po '\d+$')</span>/_utils/"</span>
+<span class="built_in">echo</span> <span class="string">"Navigate to <span class="variable">$URL</span> in your browser. You should see the same data as in the first database"</span><span class="string">'!'</span>
+</code></pre><p>祝贺你，你已经运行了两个Couchdb容器，并且两个都相互独立，除了他们的数据</p>
+</span>
         
       
     </div>

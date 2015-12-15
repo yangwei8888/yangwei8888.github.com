@@ -170,109 +170,6 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/examples/couchdb_data_volumes/" itemprop="url">
-                Docker中运行CouchDB服务
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/examples/couchdb_data_volumes/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/couchdb_data_volumes/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Docker中运行CouchDB服务">Docker中运行CouchDB服务</h1><blockquote>
-<p>注：如果你不喜欢使用sudo，你可以查看<a href="../installation/binaries.md">这里非root用户运行</a></p>
-</blockquote>
-<p>这里有一个例子，使用数据卷在两个CouchDb之间共享相同的数据容器，这个可以用于热升级，测试不同版本的CouchDB数据等等。</p>
-<p>##创建第一个数据库</p>
-<p>现在我们创建/var/lib/couchdb作为数据卷</p>
-<pre><code><span class="constant">COUCH1</span>=<span class="variable">$(</span>sudo docker run -d -p <span class="number">5984</span> -v /var/<span class="class"><span class="keyword">lib</span>/<span class="title">couchdb</span> <span class="title">shykes</span>/<span class="title">couchdb</span>:2013-05-03)</span>
-</code></pre><p>##添加一条数据在第一个数据库中</p>
-<p>我们假设你的docker主机默认是本地localhost.如果不是localhost请换到你docker的公共IP</p>
-<pre><code>HOST=localhost
-URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class="variable">$(sudo docker port $COUCH1 5984 | grep -Po '\d+$')</span>/_utils/"</span>
-<span class="built_in">echo</span> <span class="string">"Navigate to <span class="variable">$URL</span> in your browser, and use the couch interface to add data"</span>
-</code></pre><p>##创建第二个数据库</p>
-<p>这次，我们请求共享访问$COUCH1的卷。</p>
-<pre><code>COUCH2=$(sudo docker run -d -p <span class="number">5984</span> -volumes-from <span class="variable">$COUCH1</span> shykes/couchdb:<span class="number">2013</span>-<span class="number">05</span>-<span class="number">03</span>)
-</code></pre><p>##在第二个数据库上来浏览数据</p>
-<pre><code>HOST=localhost
-URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class="variable">$(sudo docker port $COUCH2 5984 | grep -Po '\d+$')</span>/_utils/"</span>
-<span class="built_in">echo</span> <span class="string">"Navigate to <span class="variable">$URL</span> in your browser. You should see the same data as in the first database"</span><span class="string">'!'</span>
-</code></pre><p>祝贺你，你已经运行了两个Couchdb容器，并且两个都相互独立，除了他们的数据</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
               <a class="post-title-link" href="/2015/12/08/docker/examples/apt-cacher-ng/" itemprop="url">
                 在Docker中运行Apt-Cacher-ng服务
               </a>
@@ -419,9 +316,8 @@ bla, taggedcount: <span class="number">0</span>
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/installation/softlayer/" itemprop="url">
-                IBM SoftLayer
-安装 docker
+              <a class="post-title-link" href="/2015/12/08/docker/docker-hub/repos/" itemprop="url">
+                Docker Hub上的仓库和镜像
               </a>
             
           
@@ -457,8 +353,8 @@ bla, taggedcount: <span class="number">0</span>
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/softlayer/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/softlayer/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/docker-hub/repos/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/docker-hub/repos/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -473,22 +369,74 @@ bla, taggedcount: <span class="number">0</span>
 
       
         
-          <span itemprop="articleBody"><h1 id="IBM_SoftLayer">IBM SoftLayer</h1><p>1.创建一个 <a href="https://www.softlayer.com/cloud-servers/" target="_blank" rel="external">IBM SoftLayer 账户</a>.</p>
-<p>2.登陆到 <a href="https://control.softlayer.com/" target="_blank" rel="external">SoftLayer Customer Portal</a>.</p>
-<p>3.在 <code>Devices</code> 菜单中选择<a href="https://control.softlayer.com/devices" target="_blank" rel="external">设备列表</a>.</p>
-<p>4.点击位于菜单条下方、窗口顶部右侧的 <em>Order Devices</em>.</p>
-<p>5.在 <code>Virtual Server</code> 下点击 <a href="https://manage.softlayer.com/Sales/orderHourlyComputingInstance" target="_blank" rel="external">Hourly</a>.</p>
-<p>6.创建一个新的 SoftLayer Virtual Server Instance (VSI)，使用全部字段的默认值:</p>
-<ul>
-<li><code>Datacenter</code> 的部署位置</li>
-<li>Ubuntu Linux 12.04 LTS Precise Pangolin - 最小化安装的64位系统</li>
-</ul>
-<p>7.点击底部右侧的 <em>Continue Your Order</em>.</p>
-<p>8.填写 VSI 主机名和域名。</p>
-<p>9.填写用户所需的元数据和订单。</p>
-<p>10.接下来请继续阅读 <a href="https://docs.docker.com/installation/ubuntulinux/#ubuntu-linux" target="_blank" rel="external">Ubuntu</a>.</p>
-<p>###What next</p>
-<p>更多信息请阅读<a href="../userguide/README.md">用户指南</a>。</p>
+          <span itemprop="articleBody"><h1 id="Docker_Hub上的仓库和镜像">Docker Hub上的仓库和镜像</h1><p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/repos.png" alt="仓库镜像"></p>
+<p>##搜索仓库和镜像</p>
+<p>你可以使用 Docker 来搜索所有公开可用的仓库和镜像。</p>
+<pre><code><span class="variable">$ </span>docker search ubuntu
+</code></pre><p>这将通过 Docker 提供的关键字匹配来显示您可用的仓库列表。</p>
+<p>私有仓库将不会显示到仓库搜索结果上。你可以通过 Docker Hub 的简况页面来查看仓库的状态。</p>
+<p>##仓库</p>
+<p>你的 Docker Hub 仓库有许多特性。</p>
+<p>###stars</p>
+<p>你的仓库可以用星被标记，你也可以用星标记别的仓库。Stars 也是显示你喜欢这个仓库的一种方法，也是一种简单的方法来标记你喜欢的仓库。</p>
+<p>###评论</p>
+<p>你可以与其他 Docker 社区的成员和维护者留下评论。如果你发现有不当的评论，你可以标记他们以供审核。</p>
+<p>###合作者及其作用</p>
+<p>指定的合作者可以通过你提供的权限访问你的私人仓库。一旦指定，他们可以 <code>push</code> 和 <code>pull</code> 你的仓库。但他们将不会被允许执行任何管理任务，如从删除仓库或者改变其状态。</p>
+<blockquote>
+<p>注：一个合作者不能添加其他合作者。只有仓库的所有者才有管理权限。</p>
+</blockquote>
+<p>你也可以与在 Docker Hub 上的组织和团队进行协作，更多信息。</p>
+<p>##官方仓库</p>
+<p>Docker Hub 包含了许多<a href="http://registry.hub.docker.com/official" target="_blank" rel="external">官方仓库</a>。这些都是 Docker 供应商和 Docker 贡献者提供的认证库，他们包含了来自供应商，如 Oracle 和 Red Hat的镜像,您可以使用它们来构建应用程序和服务。</p>
+<p>如果使用官方库，供应商会对镜像进行持续维护、升级和优化，从而为项目提供强大的驱动力。</p>
+<blockquote>
+<p>注：如果你的组织、产品或者团队想要给官方资源库做贡献。可以再<a href="https://github.com/docker/stackbrew" target="_blank" rel="external">这里</a>查看更多信息。</p>
+</blockquote>
+<p>##私有Docker仓库</p>
+<p>私人仓库用来存储你的私有镜像，前提是你需要一个 Docker 账户，或者你已经属于 Docker Hub 上的某个组织或群组。</p>
+<p>要使用 Docker Hub 私有仓库，首先在<a href="https://registry.hub.docker.com/account/repositories/add/" target="_blank" rel="external">这里</a>进行添加。你的 Docker Hub 账户会免费获得一个私人仓库。如果你需要更多的账户，你需要升级你的 <a href="https://registry.hub.docker.com/plans/" target="_blank" rel="external">Docker Hub 计划</a>。</p>
+<p>私有仓库建立好后，你可以使用 Docker 来 <code>push</code> 和 <code>pull</code> 你的镜像。</p>
+<blockquote>
+<p>注：你需要先登录并获得权限来访问你的私人仓库。</p>
+</blockquote>
+<p>私有仓库和公共仓库基本相同，但是以公共身份是无法浏览或者搜索到私有仓库及其内容的，他们也不会以同样的方式被缓存。</p>
+<p>在设置页面你可以指定哪些人有权限访问（如合作者），在这里你可以切换仓库状态（公共到私有，或者反过来）。你需要有一个可用的私有仓库，并开启相关设置才能做这样的转换。如果你无法进行相关操作，请升级你的 <a href="https://registry.hub.docker.com/plans/" target="_blank" rel="external">Docker Hub 计划</a>。</p>
+<p>##Webhooks</p>
+<p>您可以在仓库设置页面来配置你的 webhooks。只有成功 <code>push</code> 以后，<code>webhook</code> 才会生效。webhooks 会调用 HTTP POST 请求一个json，类似如下所示的例子：</p>
+<blockquote>
+<p>你可以使用 http 工具进行测试，例如 <a href="http://requestb.in/" target="_blank" rel="external">requestb.in.</a></p>
+</blockquote>
+<p>webhook json例子:</p>
+<pre><code>{
+   "<span class="attribute">push_data</span>":<span class="value">{
+      "<span class="attribute">pushed_at</span>":<span class="value"><span class="number">1385141110</span></span>,
+      "<span class="attribute">images</span>":<span class="value">[
+         <span class="string">"imagehash1"</span>,
+         <span class="string">"imagehash2"</span>,
+         <span class="string">"imagehash3"</span>
+      ]</span>,
+      "<span class="attribute">pusher</span>":<span class="value"><span class="string">"username"</span>
+   </span>}</span>,
+   "<span class="attribute">repository</span>":<span class="value">{
+      "<span class="attribute">status</span>":<span class="value"><span class="string">"Active"</span></span>,
+      "<span class="attribute">description</span>":<span class="value"><span class="string">"my docker repo that does cool things"</span></span>,
+      "<span class="attribute">is_automated</span>":<span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">full_description</span>":<span class="value"><span class="string">"This is my full description"</span></span>,
+      "<span class="attribute">repo_url</span>":<span class="value"><span class="string">"https://registry.hub.docker.com/u/username/reponame/"</span></span>,
+      "<span class="attribute">owner</span>":<span class="value"><span class="string">"username"</span></span>,
+      "<span class="attribute">is_official</span>":<span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">is_private</span>":<span class="value"><span class="literal">false</span></span>,
+      "<span class="attribute">name</span>":<span class="value"><span class="string">"reponame"</span></span>,
+      "<span class="attribute">namespace</span>":<span class="value"><span class="string">"username"</span></span>,
+      "<span class="attribute">star_count</span>":<span class="value"><span class="number">1</span></span>,
+      "<span class="attribute">comment_count</span>":<span class="value"><span class="number">1</span></span>,
+      "<span class="attribute">date_created</span>":<span class="value"><span class="number">1370174400</span></span>,
+      "<span class="attribute">dockerfile</span>":<span class="value"><span class="string">"my full dockerfile is listed here"</span></span>,
+      "<span class="attribute">repo_name</span>":<span class="value"><span class="string">"username/reponame"</span>
+   </span>}
+</span>}
+</code></pre><p>Webhooks 允许你将你镜像和仓库的更新信息通知指定用户、服务以及其他应用程序。</p>
 </span>
         
       
@@ -519,8 +467,8 @@ bla, taggedcount: <span class="number">0</span>
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/docker-hub/docker-hub/" itemprop="url">
-                Docker Hub
+              <a class="post-title-link" href="/2015/12/08/docker/installation/opensuse/" itemprop="url">
+                openSUSE 安装 Docker
               </a>
             
           
@@ -556,8 +504,8 @@ bla, taggedcount: <span class="number">0</span>
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/docker-hub/docker-hub/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/docker-hub/docker-hub/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/installation/opensuse/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/opensuse/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -572,14 +520,35 @@ bla, taggedcount: <span class="number">0</span>
 
       
         
-          <span itemprop="articleBody"><h1 id="Docker_Hub">Docker Hub</h1><p>先来看看 Docker Hub 的界面：</p>
-<h1 id=""><img src="http://7xlbtp.com1.z0.glb.clouddn.com/hub.png" alt=""></h1><p>在这个章节，我们来学习 Docker Hub 的相关话题：</p>
-<p><a href="accounts.md">账户</a></p>
-<p>学习如何创建一个Docker Hub账户来管理你的组织和机构。</p>
-<p><a href="repos.md">仓库</a></p>
-<p>了解如何分享你 Docker Hub 上的 Docker 镜像，以及如何存储和管理你的私人镜像。</p>
-<p><a href="builds.md">自动构建</a></p>
-<p>学习如何自动化构建、部署和管理</p>
+          <span itemprop="articleBody"><h1 id="openSUSE">openSUSE</h1><p>Docker 支持 openSUSE 12.3 或更高版本。由于 Docker 的限制，Docker 只能运行在64位的主机上。</p>
+<p>Docker 不被包含在 openSUSE 12.3 和 openSUSE 13.1 的官方镜像仓库中。因此需要添加 OBS 的 <a href="https://build.opensuse.org/project/show/Virtualization" title="Virtualization repository " target="_blank" rel="external">虚拟化仓库</a> 来安装 <code>docker</code> 包</p>
+<p>执行下边的命令来添加虚拟化仓库(Virtualization repository)：</p>
+<pre><code><span class="comment"># openSUSE 12.3</span>
+<span class="variable">$ </span>sudo zypper ar -f <span class="symbol">http:</span>/<span class="regexp">/download.opensuse.org/repositories</span><span class="regexp">/Virtualization/open</span>SUSE_12.<span class="number">3</span>/ <span class="constant">Virtualization</span>
+
+<span class="comment"># openSUSE 13.1</span>
+<span class="variable">$ </span>sudo zypper ar -f <span class="symbol">http:</span>/<span class="regexp">/download.opensuse.org/repositories</span><span class="regexp">/Virtualization/open</span>SUSE_13.<span class="number">1</span>/ <span class="constant">Virtualization</span>
+</code></pre><p>在 openSUSE 13.2版本以后就不需要添加额外的库了。</p>
+<p>###SUSE Linux Enterprise</p>
+<p>可以在 SUSE Linux Enterprise 12 或 更高版本上来运行 Docker 。这里需要注意的是由于 Docker 当前的限制，只能在<strong>64位</strong>的主机上运行。</p>
+<p>##安装</p>
+<p>安装 Docker 包</p>
+<pre><code><span class="variable">$ </span>sudo zypper <span class="keyword">in</span> docker
+</code></pre><p>现在已经安装完毕，让我们来启动 docker 进程</p>
+<pre><code><span class="variable">$ </span>sudo systemctl start docker
+</code></pre><p>设置开机启动 docker：</p>
+<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker
+</code></pre><p>Docker 包会创建一个的叫 <code>docker</code> 的群组 ,如果想使用非 root 用户来运行，这个用户需要是 <code>docker</code> 群组的成员才可以与 docker 进程进行交互，你可以使用如下命令添加用户：</p>
+<pre><code>$ sudo usermod -<span class="tag">a</span> -G docker &lt;username&gt;
+</code></pre><p>确认一切都是否按照预期工作：</p>
+<pre><code>$ sudo docker <span class="command">run</span> <span class="comment">--rm -i -t opensuse /bin/bash</span>
+</code></pre><p>这条命令将下载和导入 <code>opensuse</code> 镜像，并且在容器内运行 bash，输入 exit 来退出容器。</p>
+<p>如果你想要你的容器能够访问外部的网络，你就需要开启 <code>net.ipv4.ip_forward</code> 规则。这里你可以使用 YaST 工具查找 Network Devices -&gt; Network Settings -&gt; Routing 按钮来确认 IPv4 Forwarding 选择框是否被选中。</p>
+<p>当由 Network Manager 来管理网络的时候，就不能按照上边的方法设置了。这里我们需要手动的编辑 <code>/etc/sysconfig/SuSEfirewall2</code> 文件来确保 <code>FW_ROUTE</code> 被设置成 <code>yes</code>,如下：</p>
+<pre><code><span class="setting">FW_ROUTE=<span class="value"><span class="string">"yes"</span></span></span>
+</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
+<p>##下一步</p>
+<p>阅读<a href="../userguide/README.md">用户指南</a>。</p>
 </span>
         
       
@@ -1389,6 +1358,127 @@ $ sudo docker run raring cat /etc/lsb-release
 <h2 id="启动我们的Supervisor容器">启动我们的Supervisor容器</h2><p>一旦我们创建了一个镜像，我们就可以从它启动一个容器。 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -p <span class="number">22</span> -p <span class="number">80</span> -t -i &lt;yourname&gt;/supervisord</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> CRIT Supervisor running as root (no user <span class="keyword">in</span> config file)</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> WARN Included extra file <span class="string">"/etc/supervisor/conf.d/supervisord.conf"</span> during parsing</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">342</span> INFO supervisord started with pid <span class="number">1</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">346</span> INFO spawned: <span class="string">'sshd'</span> with pid <span class="number">6</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">349</span> INFO spawned: <span class="string">'apache2'</span> with pid <span class="number">7</span></span><br><span class="line">. . .</span><br></pre></td></tr></table></figure>
 <p>我们已经使用<code>docker run</code>命令以交互方式启动一个新的容器。该容器已运行Supervisor，并启动了SSH和Apache后台进程。<br>我们已经指定了<code>-p</code>参数开放了端口22和80。通过这种方式我们可以确认我们开放的端口，并且通过这些端口连接到SSH和Apache后台进程。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/08/docker/networking/" itemprop="url">
+                网络配置
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/docker/" itemprop="url" rel="index">
+                  <span itemprop="name">docker</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/08/docker/networking/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/networking/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="网络配置">网络配置</h1><p>###TL;DR(原文的这些个符号，几个意思？)</p>
+<p> <code>Dockers</code>启动后，会在宿主机上创建名为<code>docker0</code>的虚拟网卡，并给<code>docker0</code>随机分配一个宿主机没有使用，且满足RFC 1918定义的私有网络地址和子网段。举例来说，在我做这个步骤时，Docker分配的子网段是<code>172.17.42.1/16</code>，（最后那个16是掩码，表示该子网段可以会为宿主机和容器提供65534个地址）。容器的MAC地址根据IP地址生成，可以避免产生ARP冲突，它的范围从 02:42:ac:11:00:00 开始到 02:42:ac:11:ff:ff结束。</p>
+<blockquote>
+<p>注：本文档讨论的是 <code>docker</code> 的网络高级配置选项，初级用户无需阅读。如果想了解<code>docker</code>网络或容器间的连接方式，请查看<a href="../userguide/dockerlinks">docker用户指南</a></p>
+</blockquote>
+<p>当然， <code>docker0</code> 除了是虚拟网卡，还是负责其附属网卡间数据转发的虚拟网桥。<code>docker</code>每新建一个容器，就会同时创建了两个相对应的网卡接口，它们就像一条管道的两端：数据从一端进入（发送），从另一端出来（接受）。这两个网卡，一个被分配给新建的容器做<code>eth0</code>网卡，另一个被分配给宿主机，并取个类似于<code>vethAQI2QT</code>的唯一名称。就这样，通过绑定每个<code>veth*</code>网卡到<code>docker0</code>网桥，<code>Docker</code>在宿主机和各docker容器间搭建起了一个虚拟子网。</p>
+<p>接下来，我们详细阐述如何使用<code>docker</code>参数或Linux网络命令来进一步修改、完善、或者完全替代<code>docker</code>的默认网络配置。</p>
+<p>###参数快速指南</p>
+<p>首先，来浏览<code>docker</code>的网络相关的命令行选项列表，下面的章节对一一进行介绍：</p>
+<p>第一部分：只能在<code>docker</code>服务启动时使用使用的网络命令行选项，一旦运行，不能改变。</p>
+<ul>
+<li><code>-b BRIDGE</code> or <code>--bridge=BRIDGE</code> — 请查看<a href="#bridge-building">搭建私人网桥</a>小节</li>
+<li><code>--bip=CIDR</code> — 请查看<a href="#docker0">定制 docker0</a>小节</li>
+<li><code>-H SOCKET...</code> 或 <code>--host=SOCKET...</code>  —这个参数听起来像是在说容器网络，但实际上是在干另一件事：用来向<code>Docker</code>服务传递类似”运行容器”和“停止容器”的命令。</li>
+<li><code>--icc=true|false</code> — 请查看<a href="#between-containers">容器间通信</a>小节小节</li>
+<li><code>--ip=IP_ADDRESS</code> — 请查看<a href="#binding-port">绑定容器端口</a>小节</li>
+<li><code>--ipv6=true|false</code> — 请查看<a href="#ipv6">IPV6</a>小节</li>
+<li><code>--ip-forward=true|false</code> — 请查看<a href="#the-world">容器与外部通讯</a>小节</li>
+<li><code>--iptables=true|false</code> — 请查看<a href="#between-containers">容器间通信</a>小节</li>
+<li><code>--mtu=BYTES</code> — 请查看<a href="#docker0">定制 docker0</a>小节</li>
+</ul>
+<p>第二部分：下面两个参数，可以在启动时或者当 <code>docker run</code> 运行调用。如果启动时进行了设置，就会作为<code>docker run</code>运行时的初始默认值。</p>
+<ul>
+<li><code>--dns=IP_ADDRESS...</code>  — 请查看<a href="#dns">配置 DNS</a>小节</li>
+<li><code>--dns-search=DOMAIN...</code>  — 请查看<a href="#dns">配置 DNS</a>小节</li>
+</ul>
+<p>第三部分：只能在<code>docker run</code>运行时调用的参数，特别用来定制容器的特性：</p>
+<ul>
+<li><code>-h HOSTNAME</code> or <code>--hostname=HOSTNAME</code>  — 请查看<a href="#dns">配置 DNS</a>小节和<a href="#containers-networking">如何设置容器的网络</a>小节</li>
+<li><code>--link=CONTAINER_NAME:ALIAS</code>  — 请查看<a href="#dns">配置 DNS</a>小节和<a href="#between-containers">容器间通信</a>小节</li>
+<li><code>--net=bridge|none|container:NAME_or_ID|host</code>  — 请查看<a href="#containers-networking">如何设置容器的网络</a>小节</li>
+<li><code>--mac-address=MACADDRESS...</code>  — 请查看<a href="#containers-networking">如何设置容器的网络</a>小节</li>
+<li><code>-p SPEC</code> or <code>--publish=SPEC</code>  — 请查看<a href="#binding-port">绑定容器端口</a>小节</li>
+<li><code>-P</code> or <code>--publish-all=true|false</code>  — 请查看<a href="#binding-port">绑定容器端口</a>小节</li>
+</ul>
+<p>接下来，我们从浅到深的讲解上述题目。</p>
+<p>###配置DNS</p>
+<p>docker如何给每个容器提供独立的主机名和DNS配置呢？当然不是直接把主机名写到镜像里。docker巧妙的利用可刷新的虚拟文件覆盖了容器<code>/etc</code>目录下的三个关键文件。可以在容器内运行<code>mount</code>命令进行查看：</p>
 </span>
         
       

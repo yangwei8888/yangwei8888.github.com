@@ -1,0 +1,739 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="Using Swift with Cocoa and Objective-C," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="翻译：Creolophus
+校正：Evilcome ChildhoodAndy
+
+基本设置
+本页包含内容：
+
+建立你的 Swift 环境
+理解 Swift 导入过程
+
+
+重要事项
+这是一个正在研发的API或技术的概要文件，苹果公司提供这些信息主要是为了帮助你通过苹果产品使用这些技术或者编程接口而做好计划，该信息有可能会在未来发生改变，本文当中提到的软件应该以最终发布的操作系统测试和最终文档为准，未">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01Getting Started-基本设置">
+<meta property="og:url" content="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="翻译：Creolophus
+校正：Evilcome ChildhoodAndy
+
+基本设置
+本页包含内容：
+
+建立你的 Swift 环境
+理解 Swift 导入过程
+
+
+重要事项
+这是一个正在研发的API或技术的概要文件，苹果公司提供这些信息主要是为了帮助你通过苹果产品使用这些技术或者编程接口而做好计划，该信息有可能会在未来发生改变，本文当中提到的软件应该以最终发布的操作系统测试和最终文档为准，未">
+<meta property="og:image" content="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/Art/newproject_2x.png">
+<meta property="og:updated_time" content="2015-12-15T06:25:19.563Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="01Getting Started-基本设置">
+<meta name="twitter:description" content="翻译：Creolophus
+校正：Evilcome ChildhoodAndy
+
+基本设置
+本页包含内容：
+
+建立你的 Swift 环境
+理解 Swift 导入过程
+
+
+重要事项
+这是一个正在研发的API或技术的概要文件，苹果公司提供这些信息主要是为了帮助你通过苹果产品使用这些技术或者编程接口而做好计划，该信息有可能会在未来发生改变，本文当中提到的软件应该以最终发布的操作系统测试和最终文档为准，未">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 01Getting Started-基本设置 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              01Getting Started-基本设置
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-26T23:00:00+08:00" content="2015-12-26">
+            2015-12-26
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>翻译：<a href="https://github.com/Creolophus" target="_blank" rel="external">Creolophus</a></p>
+<p>校正：<a href="https://github.com/Evilcome" target="_blank" rel="external">Evilcome</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
+</blockquote>
+<h1 id="基本设置">基本设置</h1><hr>
+<p>本页包含内容：</p>
+<ul>
+<li><a href="#setting_up_your_swift_environment">建立你的 Swift 环境</a></li>
+<li><a href="#understanding_the_swift_import_process">理解 Swift 导入过程</a></li>
+</ul>
+<blockquote>
+<p>重要事项</p>
+<p>这是一个正在研发的API或技术的概要文件，苹果公司提供这些信息主要是为了帮助你通过苹果产品使用这些技术或者编程接口而做好计划，该信息有可能会在未来发生改变，本文当中提到的软件应该以最终发布的操作系统测试和最终文档为准，未来有可能会提供新版本的文档信息。</p>
+</blockquote>
+<p>Swift 被设计用来无缝兼容 Cocoa 和 Objective-C 。在 Swift 中，你可以使用 Objective-C 的 API（包括系统框架和你自定义的代码），你也可以在 Objective-C中 使用 Swift 的 API。这种兼容性使 Swift 变成了一个简单、方便并且强大的工具集成到你的 Cocoa 应用开发工作流程中。</p>
+<p>这篇指南包括了三个有关兼容性的重要方面方便你更好地利用来开发 Cocoa 应用：</p>
+<ul>
+<li><strong>互用性</strong> 使你将 Swift 和 Objective-C 相接合，允许在 Objective-C 中使用 Swift 的 Class 并且当你在写 Swift 代码时利用熟悉的 Cocoa Class、Pattern、Practice。</li>
+<li><strong>混合和匹配</strong> 允许你创建结合了 Swift 和 Objective-C 文件的混合语言应用，他们能跟彼此进行通信。</li>
+<li><strong>迁移</strong> 由于以上两点，从已经存在的 Objective-C 代码迁移到 Swift 是非常简单的，使得用最新的 Swift 特性代替你的 Objective-C 应用部分内容成为了可能。</li>
+</ul>
+<p>在你开始学习这些特性前，你需要对如何建立 Swift 环境来访问 Cocoa 系统框架有个大体了解。</p>
+<p><a name="setting_up_your_swift_environment"></a></p>
+<p>##建立你的 Swift 环境</p>
+<p>为了开始体验在 Swift 中访问 Cocoa 框架，使用 Xcode 的一个模板来创建一个基于 Swift 应用。</p>
+<p>###在 Xcode 中创建一个 Swift 项目</p>
+<p>1.选择 File &gt; New &gt; Project &gt; (iOS or OS X) &gt; Application &gt; your <em>template of choice</em>。</p>
+<p>2.点击 Language 弹出菜单并选择 Swift。</p>
+<p><img src="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/Art/newproject_2x.png" alt="image"></p>
+<p>Swift 项目的结构几乎和 Objective-C 项目一模一样，只有一个重要的区别：Swift 没有头文件。在实现和接口之间没有显示的划分，所以一个特定类中的所有信息都存储在单独的<code>.swift</code>文件中。</p>
+<p>现在开始，你可以开始体验在<code>app delegate</code>中写 Swift 代码，或者你可以通过选择 File &gt; New &gt; File &gt; (iOS or OS X) &gt; Other &gt; Swift来创建一个 Swift 类。</p>
+<p><a name="understanding_the_swift_import_process"></a></p>
+<p>##理解 Swift 导入过程</p>
+<p>在你建立 Xcode 项目后，你可以在 Swift 里导入任意用 Objective-C 来工作的 Cocoa 平台框架。</p>
+<p>任意 Objective-C 的框架（或 C 类库）将作为一个<em>module</em>，能直接导入到 Swift 中。这些包括了所有 Objective-C 系统框架-比如 Foundation、UIKit 和 SpriteKit，就像系统支持公共 C 类库。举个例子，想导入 Foundation，只要简单地添加 import 语句到你写的 Swift 文件的顶部。</p>
+<blockquote>
+<p>SWIFT</p>
+<p><code>import Foundation</code></p>
+</blockquote>
+<p>这个 import 导入了所有 Foundation 的 API，包括<code>NSDate</code>，<code>NSURL</code>，<code>NSMutableData</code>，并且他们的所有方法、属性和类别都可以在 Swift 中直接使用。</p>
+<p>导入过程是非常简洁的。Objective-C 框架在头文件中申明 API。在 Swift 中，那些头文件被编译成 Objective-C 的 module，接着被导入到 Swift 作为 Swift 的 API。导入决定了 Objective-C 的 Function，Class，Method 和 Type 如何在 Swift 中出现。对于 Function 和 Method，这个过程影响他们的参数和返回值。导入过程可以做下面这些事情：</p>
+<ul>
+<li>重映射确定的 Objective-C 类型到 Swift 中的同等类型，就像 id 到<code>AnyObject</code></li>
+<li>重映射确定的 Objective-C 核心类型到 Swift 中的替代类型， 就像<code>NSString</code>到<code>String</code></li>
+<li>重映射确定的 Objective-C 概念到 Swift 中相匹配的概念，如<code>pointers</code>到<code>optionals</code></li>
+</ul>
+<p>在互用性章节，你将会了解到更多关于这些映射如何在你的 Swift 代码进行取舍。<br>导入 Swift 的模型到 Objective-C 和从 Objective-C 导入 Swift 是非常相似的。Swift 申明它的 API，比如一个框架作为 Swift modules。同时这些 Swift modules 会生成 Objective-C 的头文件。这些头文件可以映射回 Objective-C 的 API 中。一些 Swift 的 API 不映射回 Objective-C 因为他们取舍了语言特性发现这些在 Objective-C 中不可用。关于在 Objective-C 中使用 Swift 的更多特性，请参看<a href="https://github.com/CocoaChina-editors/Welcome-to-Swift/blob/master/Using%20Swift%20with%20Cocoa%20and%20Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project.md" target="_blank" rel="external">在同一项目中使用 Swift 和 Objective-C</a>。</p>
+<blockquote>
+<p>注意</p>
+<p>你不能直接把 C++ 代码导入 Swift。解决办法是为 C++ 代码创建一个 Objective-C 或者 C 的封装。</p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Using-Swift-with-Cocoa-and-Objective-C/" rel="tag">#Using Swift with Cocoa and Objective-C</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/01Interacting with Objective-C APIs/" rel="next">02Interoperability-01与 Objective-C 的 API 交互</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">110</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本设置"><span class="nav-number">1.</span> <span class="nav-text">基本设置</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/';
+      var disqus_title = '01Getting Started-基本设置';
+      var disqus_url = 'http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
