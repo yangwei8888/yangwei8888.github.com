@@ -170,8 +170,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/examples/running_riak_service/" itemprop="url">
-                在Docker中使用Riak服务
+              <a class="post-title-link" href="/2015/12/08/docker/https/" itemprop="url">
+                使用 HTTPS 保护 Docker Socket 进程
               </a>
             
           
@@ -207,8 +207,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/examples/running_riak_service/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/running_riak_service/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/https/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/https/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -223,78 +223,12 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="在Docker中使用Riak服务">在Docker中使用Riak服务</h1><p>这个例子的目的是向您展示如何构建一个预装Riak的docker镜象。</p>
-<p>###创建Dockerfile</p>
-<p>创建一个空文件<code>Dockerfile</code></p>
-<pre><code><span class="variable">$ </span>touch <span class="constant">Dockerfile</span>
-</code></pre><p>接下来，定义你想要来建立你镜像的父镜像。我们将使用Ubuntu（tag：最新版），从Docker Hub中下载：</p>
-<pre><code><span class="comment"># Riak</span>
-<span class="comment">#</span>
-<span class="comment"># VERSION       0.1.0</span>
-
-<span class="comment"># Use the Ubuntu base image provided by dotCloud</span>
-<span class="built_in">FROM</span> ubuntu:latest
-<span class="built_in">MAINTAINER</span> Hector Castro hector@basho.com
-</code></pre><p>接下来,我们更新APT缓存和应用更新:</p>
-<pre><code><span class="comment"># Update the APT cache</span>
-<span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/main$/main universe/'</span> /etc/apt/sources.list
-</span><span class="built_in">RUN</span> <span class="bash">apt-get update
-</span><span class="built_in">RUN</span> <span class="bash">apt-get upgrade -y</span>
-</code></pre><p>之后，我们安装和设置一些依赖关系：</p>
-<ul>
-<li><code>CURL</code>来下载 Basho’s APT存储库秘钥。</li>
-<li><code>lsb-release</code>帮助我们查看Ubuntu版本。</li>
-<li><code>openssh-server</code>允许我们登陆远程容器，加入Riak节点组成一个集群。</li>
-<li><p><code>supervisor</code>用于管理<code>OpenSSH</code>和<code>Riak</code>进程。</p>
-<h1 id="Install_and_setup_project_dependencies">Install and setup project dependencies</h1><p>  RUN apt-get install -y curl lsb-release supervisor openssh-server</p>
-<p>  RUN mkdir -p /var/run/sshd<br>  RUN mkdir -p /var/log/supervisor</p>
-<p>  RUN locale-gen en_US en_US.UTF-8</p>
-<p>  ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf</p>
-<p>  RUN echo ‘root:basho’ | chpasswd</p>
-</li>
-</ul>
-<p>下一步，添加 Basho’s APT仓库：</p>
-<pre><code><span class="built_in">RUN</span> <span class="bash">curl <span class="operator">-s</span> http://apt.basho.com/gpg/basho.apt.key | apt-key add --
-</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"deb http://apt.basho.com <span class="variable">$(lsb_release -cs)</span> main"</span> &gt; /etc/apt/sources.list.d/basho.list
-</span><span class="built_in">RUN</span> <span class="bash">apt-get update</span>
-</code></pre><p>之后，我们安装Riak和改变一些默认值：</p>
-<pre><code><span class="comment"># Install Riak and prepare it to run</span>
-<span class="built_in">RUN</span> <span class="bash">apt-get install -y riak
-</span><span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/127.0.0.1/0.0.0.0/'</span> /etc/riak/app.config
-</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"ulimit -n 4096"</span> &gt;&gt; /etc/default/riak</span>
-</code></pre><p>接下来，我们为缺少的<code>initctl</code>来添加一个软连接：</p>
-<pre><code><span class="comment"># Hack for initctl</span>
-<span class="comment"># See: https://github.com/dotcloud/docker/issues/1024</span>
-<span class="built_in">RUN</span> <span class="bash">dpkg-divert --local --rename --add /sbin/initctl
-</span><span class="built_in">RUN</span> <span class="bash">ln <span class="operator">-s</span> /bin/<span class="literal">true</span> /sbin/initctl</span>
-</code></pre><p>然后我们开发Riak协议缓冲区、HTTP接口以及SSH：</p>
-<pre><code><span class="preprocessor"># Expose Riak Protocol Buffers and HTTP interfaces, along with SSH</span>
-EXPOSE <span class="number">8087</span> <span class="number">8098</span> <span class="number">22</span>
-</code></pre><p>最后，运行<code>supervisord</code>这里Riak和OpenSSH将启动：</p>
-<pre><code><span class="built_in">CMD</span> <span class="bash">[<span class="string">"/usr/bin/supervisord"</span>]</span>
-</code></pre><p>###创建一个supervisord配置文件</p>
-<p>创建一个supervisord.conf空文件，并且保证和Dockerfile是平级目录：</p>
-<pre><code><span class="tag">touch</span> <span class="tag">supervisord</span><span class="class">.conf</span>
-</code></pre><p>填充下面定义的程序:</p>
-<pre><code>[supervisord]
-nodaemon=true
-
-[<span class="keyword">program</span>:sshd]
-command=/usr/sbin/sshd -<span class="literal">D</span>
-stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-autorestart=true
-
-[<span class="keyword">program</span>:riak]
-command=bash -c <span class="string">". /etc/default/riak &amp;&amp; /usr/sbin/riak console"</span>
-pidfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/riak/riak.pid
-stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-</code></pre><p>###构建Riak的Docker镜像</p>
-<p>现在你应该能够构建一个Riak的docker镜像:</p>
-<pre><code>$ docker <span class="keyword">build </span>-t <span class="string">"&lt;yourname&gt;/riak"</span> .
-</code></pre><p>###下一步</p>
-<p>Riak是分布式数据库。很多生产部署包括至少5个节点。查看docker-riak<a href="https://github.com/hectcastro/docker-riak" target="_blank" rel="external">https://github.com/hectcastro/docker-riak</a>项目细节来使用Docker和Pipework部署Riak集群。</p>
+          <span itemprop="articleBody"><h1 id="使用_HTTPS_保护_Docker_Socket_进程">使用 HTTPS 保护 Docker Socket 进程</h1><p>默认情况下，Docker 使用的是无网络环境的 Unix Socket。它可以使用 HTTP Socket 进行通信。</p>
+<p>如果你需要 Docker 使用安全的方式来进行网络通信，你可以使用 <code>tlsverify</code> 标识来启用 TLS，并使用 <code>tlscacert</code> 标识来指定 CA 证书。</p>
+<blockquote>
+<p>警告：使用 TLS 和管理 CA 证书是一个高级话题。在投入生成环境使用之前，你需要自行熟悉了解 OpenSSL，X509 和 TLS 。</p>
+<p>警告：这些 TLS 指令只能生成在 Linux 上工作的证书，Mac OSX 附带的 OpenSSL 版本与 Docker 所需要使用的证书不兼容。</p>
+</blockquote>
 </span>
         
       
@@ -1113,8 +1047,8 @@ URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/examples/apt-cacher-ng/" itemprop="url">
-                在Docker中运行Apt-Cacher-ng服务
+              <a class="post-title-link" href="/2015/12/08/docker/networking/" itemprop="url">
+                网络配置
               </a>
             
           
@@ -1150,8 +1084,8 @@ URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/examples/apt-cacher-ng/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/apt-cacher-ng/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/networking/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/networking/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -1166,70 +1100,45 @@ URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class
 
       
         
-          <span itemprop="articleBody"><h1 id="在Docker中运行Apt-Cacher-ng服务">在Docker中运行Apt-Cacher-ng服务</h1><blockquote>
-<p>注意:——如果你不喜欢sudo,可以查看<a href="installation/binaries.md">非root用户使用</a>，–如何你使用OS X或者通过TCP使用Docker，你需要使用sudo</p>
+          <span itemprop="articleBody"><h1 id="网络配置">网络配置</h1><p>###TL;DR(原文的这些个符号，几个意思？)</p>
+<p> <code>Dockers</code>启动后，会在宿主机上创建名为<code>docker0</code>的虚拟网卡，并给<code>docker0</code>随机分配一个宿主机没有使用，且满足RFC 1918定义的私有网络地址和子网段。举例来说，在我做这个步骤时，Docker分配的子网段是<code>172.17.42.1/16</code>，（最后那个16是掩码，表示该子网段可以会为宿主机和容器提供65534个地址）。容器的MAC地址根据IP地址生成，可以避免产生ARP冲突，它的范围从 02:42:ac:11:00:00 开始到 02:42:ac:11:ff:ff结束。</p>
+<blockquote>
+<p>注：本文档讨论的是 <code>docker</code> 的网络高级配置选项，初级用户无需阅读。如果想了解<code>docker</code>网络或容器间的连接方式，请查看<a href="../userguide/dockerlinks">docker用户指南</a></p>
 </blockquote>
-<p>当你有许多docker服务器，或者不能使用Docker缓存来构建不相干的Docker容器，他可以为你的包缓存代理，这是非常有用的。该容器使第二个下载的任何包几乎瞬间下载。</p>
-<p>使用下边的Dockerfile</p>
-<pre><code><span class="comment">#</span>
-<span class="comment"># Build: docker build -t apt-cacher .</span>
-<span class="comment"># Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher</span>
-<span class="comment">#</span>
-<span class="comment"># and then you can run containers with:</span>
-<span class="comment">#   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash</span>
-<span class="comment">#</span>
-<span class="built_in">FROM</span>        ubuntu
-<span class="built_in">MAINTAINER</span>  SvenDowideit@docker.com
-
-<span class="built_in">VOLUME</span>      <span class="bash">[<span class="string">"/var/cache/apt-cacher-ng"</span>]
-</span><span class="built_in">RUN</span>     <span class="bash">apt-get update ; apt-get install -yq apt-cacher-ng
+<p>当然， <code>docker0</code> 除了是虚拟网卡，还是负责其附属网卡间数据转发的虚拟网桥。<code>docker</code>每新建一个容器，就会同时创建了两个相对应的网卡接口，它们就像一条管道的两端：数据从一端进入（发送），从另一端出来（接受）。这两个网卡，一个被分配给新建的容器做<code>eth0</code>网卡，另一个被分配给宿主机，并取个类似于<code>vethAQI2QT</code>的唯一名称。就这样，通过绑定每个<code>veth*</code>网卡到<code>docker0</code>网桥，<code>Docker</code>在宿主机和各docker容器间搭建起了一个虚拟子网。</p>
+<p>接下来，我们详细阐述如何使用<code>docker</code>参数或Linux网络命令来进一步修改、完善、或者完全替代<code>docker</code>的默认网络配置。</p>
+<p>###参数快速指南</p>
+<p>首先，来浏览<code>docker</code>的网络相关的命令行选项列表，下面的章节对一一进行介绍：</p>
+<p>第一部分：只能在<code>docker</code>服务启动时使用使用的网络命令行选项，一旦运行，不能改变。</p>
+<ul>
+<li><code>-b BRIDGE</code> or <code>--bridge=BRIDGE</code> — 请查看<a href="#bridge-building">搭建私人网桥</a>小节</li>
+<li><code>--bip=CIDR</code> — 请查看<a href="#docker0">定制 docker0</a>小节</li>
+<li><code>-H SOCKET...</code> 或 <code>--host=SOCKET...</code>  —这个参数听起来像是在说容器网络，但实际上是在干另一件事：用来向<code>Docker</code>服务传递类似”运行容器”和“停止容器”的命令。</li>
+<li><code>--icc=true|false</code> — 请查看<a href="#between-containers">容器间通信</a>小节小节</li>
+<li><code>--ip=IP_ADDRESS</code> — 请查看<a href="#binding-port">绑定容器端口</a>小节</li>
+<li><code>--ipv6=true|false</code> — 请查看<a href="#ipv6">IPV6</a>小节</li>
+<li><code>--ip-forward=true|false</code> — 请查看<a href="#the-world">容器与外部通讯</a>小节</li>
+<li><code>--iptables=true|false</code> — 请查看<a href="#between-containers">容器间通信</a>小节</li>
+<li><code>--mtu=BYTES</code> — 请查看<a href="#docker0">定制 docker0</a>小节</li>
+</ul>
+<p>第二部分：下面两个参数，可以在启动时或者当 <code>docker run</code> 运行调用。如果启动时进行了设置，就会作为<code>docker run</code>运行时的初始默认值。</p>
+<ul>
+<li><code>--dns=IP_ADDRESS...</code>  — 请查看<a href="#dns">配置 DNS</a>小节</li>
+<li><code>--dns-search=DOMAIN...</code>  — 请查看<a href="#dns">配置 DNS</a>小节</li>
+</ul>
+<p>第三部分：只能在<code>docker run</code>运行时调用的参数，特别用来定制容器的特性：</p>
+<ul>
+<li><code>-h HOSTNAME</code> or <code>--hostname=HOSTNAME</code>  — 请查看<a href="#dns">配置 DNS</a>小节和<a href="#containers-networking">如何设置容器的网络</a>小节</li>
+<li><code>--link=CONTAINER_NAME:ALIAS</code>  — 请查看<a href="#dns">配置 DNS</a>小节和<a href="#between-containers">容器间通信</a>小节</li>
+<li><code>--net=bridge|none|container:NAME_or_ID|host</code>  — 请查看<a href="#containers-networking">如何设置容器的网络</a>小节</li>
+<li><code>--mac-address=MACADDRESS...</code>  — 请查看<a href="#containers-networking">如何设置容器的网络</a>小节</li>
+<li><code>-p SPEC</code> or <code>--publish=SPEC</code>  — 请查看<a href="#binding-port">绑定容器端口</a>小节</li>
+<li><code>-P</code> or <code>--publish-all=true|false</code>  — 请查看<a href="#binding-port">绑定容器端口</a>小节</li>
+</ul>
+<p>接下来，我们从浅到深的讲解上述题目。</p>
+<p>###配置DNS</p>
+<p>docker如何给每个容器提供独立的主机名和DNS配置呢？当然不是直接把主机名写到镜像里。docker巧妙的利用可刷新的虚拟文件覆盖了容器<code>/etc</code>目录下的三个关键文件。可以在容器内运行<code>mount</code>命令进行查看：</p>
 </span>
-<span class="built_in">EXPOSE</span>      <span class="number">3142</span>
-CMD     chmod <span class="number">777</span> /var/cache/apt-cacher-ng ; /etc/init.d/apt-cacher-ng start ; tail -f /var/log/apt-cacher-ng/*
-</code></pre><p>使用下边的命令构建镜像：</p>
-<pre><code>$ sudo docker <span class="keyword">build </span>-t eg_apt_cacher_ng .
-</code></pre><p>现在运行它，映射内部端口到主机</p>
-<pre><code>$ sudo docker <span class="command">run</span> -d -p <span class="number">3142</span>:<span class="number">3142</span> <span class="comment">--name test_apt_cacher_ng eg_apt_cacher_ng</span>
-</code></pre><p>查看日志文件，默认使用<code>tailed</code>命令，你可以使用</p>
-<pre><code>$ sudo docker logs <span class="operator">-f</span> <span class="built_in">test</span>_apt_cacher_ng
-</code></pre><p>让你Debian-based容器使用代理,你可以做三件事之一：</p>
-<p> 1.添加一个apt代理设置<code>echo &#39;Acquire::http { Proxy &quot;http://dockerhost:3142&quot;; };&#39; &gt;&gt; /etc/apt/conf.d/01proxy</code></p>
-<p> 2.设置环境变量：<code>http_proxy=http://dockerhost:3142/</code></p>
-<p> 3.修改你的<code>sources.list</code>来开始<code>http://dockerhost:3142/</code></p>
-<p>选项1注入是安全设置到你的apt配置在本地的公共基础版本。</p>
-<pre><code><span class="built_in">FROM</span> ubuntu
-<span class="built_in">RUN</span>  <span class="bash"><span class="built_in">echo</span> <span class="string">'Acquire::http { Proxy "http://dockerhost:3142"; };'</span> &gt;&gt; /etc/apt/apt.conf.d/<span class="number">01</span>proxy
-</span><span class="built_in">RUN</span> <span class="bash">apt-get update ; apt-get install vim git
-</span>
-<span class="comment"># docker build -t my_ubuntu .</span>
-</code></pre><p>选项2针对测试时非常好的，但是会破坏其它从http代理的HTTP客户端，如curl 、wget或者其他：</p>
-<pre><code>$ sudo docker <span class="keyword">run</span> --<span class="keyword">rm</span> -t -i -<span class="keyword">e</span> http_proxy=http:<span class="comment">//dockerhost:3142/ debian bash</span>
-</code></pre><p>选项3是最轻便的，但是有时候你可能需要做很多次，你也可以在你的<code>Dockerfile</code>这样做：</p>
-<pre><code>$ sudo docker run <span class="comment">--rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash</span>
-
-$$ /usr/lib/apt-cacher-ng/distkill.pl
-Scanning /var/<span class="operator"><span class="keyword">cache</span>/apt-cacher-ng, please <span class="keyword">wait</span>...
-<span class="keyword">Found</span> distributions:
-bla, taggedcount: <span class="number">0</span>
-     <span class="number">1.</span> precise-<span class="keyword">security</span> (<span class="number">36</span> <span class="keyword">index</span> files)
-     <span class="number">2.</span> wheezy (<span class="number">25</span> <span class="keyword">index</span> files)
-     <span class="number">3.</span> precise-updates (<span class="number">36</span> <span class="keyword">index</span> files)
-     <span class="number">4.</span> precise (<span class="number">36</span> <span class="keyword">index</span> files)
-     <span class="number">5.</span> wheezy-updates (<span class="number">18</span> <span class="keyword">index</span> files)
-
-<span class="keyword">Found</span> architectures:
-     <span class="number">6.</span> amd64 (<span class="number">36</span> <span class="keyword">index</span> files)
-     <span class="number">7.</span> i386 (<span class="number">24</span> <span class="keyword">index</span> files)
-
-<span class="keyword">WARNING</span>: The removal <span class="keyword">action</span> may wipe <span class="keyword">out</span> whole directories containing
-         <span class="keyword">index</span> files. <span class="keyword">Select</span> <span class="keyword">d</span> <span class="keyword">to</span> see detailed <span class="keyword">list</span>.
-
-(<span class="built_in">Number</span> nn: tag distribution <span class="keyword">or</span> architecture nn;</span> 0: exit; d: <span class="operator"><span class="keyword">show</span> details;</span> r: remove tagged; q: quit): q
-</code></pre><p>最后，停止测试容器，删除容器，删除镜像：</p>
-<pre><code><span class="variable">$ </span>sudo docker stop test_apt_cacher_ng
-<span class="variable">$ </span>sudo docker rm test_apt_cacher_ng
-<span class="variable">$ </span>sudo docker rmi eg_apt_cacher_ng
-</code></pre></span>
         
       
     </div>
@@ -1673,7 +1582,7 @@ bla, taggedcount: <span class="number">0</span>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">&raquo;</a>
   </nav>
 
  </div>
@@ -1707,7 +1616,7 @@ bla, taggedcount: <span class="number">0</span>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1721,7 +1630,7 @@ bla, taggedcount: <span class="number">0</span>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -1,0 +1,694 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="swift," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="Swift Evolution ProcessSwift is a powerful and intuitive programming language that is designed to make writing and maintaining correct programs easier. Swift is growing and evolving, guided by a commu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift process">
+<meta property="og:url" content="http://yoursite.com/2015/12/15/swift/process/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="Swift Evolution ProcessSwift is a powerful and intuitive programming language that is designed to make writing and maintaining correct programs easier. Swift is growing and evolving, guided by a commu">
+<meta property="og:updated_time" content="2015-12-15T02:44:32.316Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swift process">
+<meta name="twitter:description" content="Swift Evolution ProcessSwift is a powerful and intuitive programming language that is designed to make writing and maintaining correct programs easier. Swift is growing and evolving, guided by a commu">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> swift process | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              swift process
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/process/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/process/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="Swift_Evolution_Process">Swift Evolution Process</h1><p>Swift is a powerful and intuitive programming language that is designed to make writing and maintaining correct programs easier. Swift is growing and evolving, guided by a community-driven process referred to as the Swift evolution process. This document outlines the Swift evolution process and how a feature grows from a rough idea into something that can improve the Swift development experience for millions of programmers.</p>
+<h2 id="Scope">Scope</h2><p>The Swift evolution process covers all changes to the Swift language and the public interface of the Swift standard library, including new language features and APIs (no matter how small), changes to existing language features or APIs, removal of existing features, and so on. Smaller changes, such as bug fixes, optimizations, or diagnostic improvements can be contributed via the normal contribution process; see <a href="https://swift.org/community/#contributing" target="_blank" rel="external">Contributing to Swift</a>.</p>
+<h2 id="Goals">Goals</h2><p>The Swift evolution process aims to leverage the collective ideas, insights, and experience of the Swift community to improve the Swift development experience. Its two primary goals are:</p>
+<ul>
+<li>Engage the wider Swift community in the ongoing evolution of Swift, and</li>
+<li>Maintain the vision and conceptual coherence of Swift.</li>
+</ul>
+<p>There is a natural tension between these two goals. Open evolution processes are, by nature, chaotic. Yet, maintaining a coherent vision for something as complicated as a programming language requires some level of coordination. The Swift evolution process aims to strike a balance that best serves the Swift community as a whole.</p>
+<h2 id="Participation">Participation</h2><p>Everyone is welcome to propose, discuss, and review ideas to improve<br>the Swift language and standard library on the <a href="https://swift.org/community/#swift-evolution" title="Swift evolution mailing list" target="_blank" rel="external">swift-evolution<br>mailing list</a>. Before posting a review,<br>please see the section “What goes into a review?” below.</p>
+<p>The Swift <a href="https://swift.org/community/#core-team" target="_blank" rel="external">core team</a> is<br>responsible for the strategic direction of Swift. Core team members<br>initiate, participate in, and manage the public review of proposals<br>and have the authority to accept or reject changes to Swift.</p>
+<h2 id="What_goes_into_a_review?">What goes into a review?</h2><p>The goal of the review process is to improve the proposal under review<br>through constructive criticism and, eventually, determine the<br>direction of Swift. When writing your review, here are some questions<br>you might want to answer in your review:</p>
+<ul>
+<li>What is your evaluation of the proposal?</li>
+<li>Is the problem being addressed significant enough to warrant a change to Swift?</li>
+<li>Does this proposal fit well with the feel and direction of Swift?</li>
+<li>If you have used other languages or libraries with a similar feature, how do you feel that this proposal compares to those?</li>
+<li>How much effort did you put into your review? A glance, a quick reading, or an in-depth study?</li>
+</ul>
+<p>Please state explicitly whether you believe that the proposal should be accepted into Swift.</p>
+<h2 id="How_to_propose_a_change">How to propose a change</h2><ul>
+<li><strong>Socialize the idea</strong>: propose a rough sketch of the idea on the <a href="https://swift.org/community/#swift-evolution" title="Swift evolution mailing list" target="_blank" rel="external">swift-evolution mailing list</a>, the problems it solves, what the solution looks like, etc., to gauge interest from the community.</li>
+<li><strong>Develop the proposal</strong>: expand the rough sketch into a complete proposal, using the <a href="0000-template.md">proposal template</a>, and continue to refine the proposal on the evolution mailing list. Prototyping an implementation and its uses along with the proposal is encouraged, because it helps ensure both technical feasibility of the proposal as well as validating that the proposal solves the problems it is meant to solve.</li>
+<li><strong>Request a review</strong>: initiate a pull request to the <a href="https://github.com/apple/swift-evolution" title="Swift evolution repository" target="_blank" rel="external">swift-evolution repository</a> to indicate to the core team that you would like the proposal to be reviewed. When the proposal is sufficiently detailed and clear, and addresses feedback from earlier discussions of the idea, the pull request will be accepted. The proposal will be assigned a proposal number as well as a core team member to manage the review.</li>
+<li><strong>Address feedback</strong>: in general, and especially <a href="#review">during the review period</a>, be responsive to questions and feedback about the proposal.</li>
+</ul>
+<h2 id="Review_process">Review process</h2><p>The review process for a particular proposal begins when a member of<br>the core team accepts a pull request of a new or updated proposal into<br>the <a href="https://github.com/apple/swift-evolution" title="Swift evolution repository" target="_blank" rel="external">swift-evolution repository</a>. That core team<br>member becomes the <em>review manager</em> for the proposal. The proposal<br>is assigned a proposal number (if it is a new proposal), then enters<br>the review queue.</p>
+<p>The review manager will work with the proposal authors to schedule the<br>review. Reviews usually last a single week, but can run longer for<br>particularly large or complex proposals.</p>
+<p>When the scheduled review period arrives, the review manager will post<br>the proposal to the <a href="https://swift.org/community/#swift-evolution" title="Swift evolution mailing list" target="_blank" rel="external">swift-evolution mailing<br>list</a> with the subject “[Review]”<br>followed by the proposal title and update the list of active<br>reviews. To avoid delays, it is important that the proposal authors be<br>available to answer questions, address feedback, and clarify their<br>intent during the review period.</p>
+<p>After the review has completed, the core team will make a decision on<br>the proposal. The review manager is responsible for determining<br>consensus among the core team members, then reporting their decision<br>to the proposal authors and mailing list. The review manager will<br>update the proposal’s state in the <a href="https://github.com/apple/swift-evolution" title="Swift evolution repository" target="_blank" rel="external">swift-evolution<br>repository</a> to reflect that decision.</p>
+<h2 id="Proposal_states">Proposal states</h2><p>A given proposal can be in one of several states:</p>
+<ul>
+<li><strong>Awaiting review</strong>: the proposal is awaiting review. Once known,<br>the dates for the actual review will be placed in the proposal<br>document and updated in the <a href="schedule.md">review schedule</a>. When the<br>review period begins, the review manager will update the state to<br><em>under review</em>.</li>
+<li><strong>Under review</strong>: the proposal is undergoing public review on the <a href="https://swift.org/community/#swift-evolution" title="Swift evolution mailing list" target="_blank" rel="external">swift-evolution mailing list</a>. </li>
+<li><strong>Under revision</strong>: the proposal is undergoing revision by the<br>author(s) based on feedback from the review.</li>
+<li><strong>Deferred</strong>: consideration of the proposal has been deferred<br>because it does not meet the <a href="README.md">goals of the upcoming major Swift<br>release</a>. Deferred proposals will be reconsidered when<br>scoping the next major Swift release.</li>
+<li><strong>Accepted</strong>: the proposal has been accepted and is either awaiting<br>implementation or is actively being implemented. Once a proposal<br>enters the “accepted” state, it gets placed into its <a href="README.md">target Swift<br>release</a>.</li>
+<li><strong>Rejected</strong>: the proposal has been considered and rejected.</li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag">#swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/18/bilibili/2831578/" rel="prev">中二病也要谈恋爱！恋 Lite＋SP 合辑【BD1080P】</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/15/swift/proposals/0001-keywords-as-argument-labels/" rel="next">0001-keywords-as-argument-labels</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift_Evolution_Process"><span class="nav-number">1.</span> <span class="nav-text">Swift Evolution Process</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scope"><span class="nav-number">1.1.</span> <span class="nav-text">Scope</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Goals"><span class="nav-number">1.2.</span> <span class="nav-text">Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Participation"><span class="nav-number">1.3.</span> <span class="nav-text">Participation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What_goes_into_a_review?"><span class="nav-number">1.4.</span> <span class="nav-text">What goes into a review?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How_to_propose_a_change"><span class="nav-number">1.5.</span> <span class="nav-text">How to propose a change</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review_process"><span class="nav-number">1.6.</span> <span class="nav-text">Review process</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proposal_states"><span class="nav-number">1.7.</span> <span class="nav-text">Proposal states</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/15/swift/process/';
+      var disqus_title = 'swift process';
+      var disqus_url = 'http://yoursite.com/2015/12/15/swift/process/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="swift," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="Removing currying func declaration syntax
+Proposal: SE-0002
+Author(s): Joe Groff
+Status: Accepted
+
+IntroductionCurried function declaration syntax func foo(x: Int)(y: Int) is of limitedusefulness and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0002-remove-currying">
+<meta property="og:url" content="http://yoursite.com/2015/12/15/swift/proposals/0002-remove-currying/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="Removing currying func declaration syntax
+Proposal: SE-0002
+Author(s): Joe Groff
+Status: Accepted
+
+IntroductionCurried function declaration syntax func foo(x: Int)(y: Int) is of limitedusefulness and">
+<meta property="og:updated_time" content="2015-12-15T02:44:58.586Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="0002-remove-currying">
+<meta name="twitter:description" content="Removing currying func declaration syntax
+Proposal: SE-0002
+Author(s): Joe Groff
+Status: Accepted
+
+IntroductionCurried function declaration syntax func foo(x: Int)(y: Int) is of limitedusefulness and">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 0002-remove-currying | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              0002-remove-currying
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0002-remove-currying/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0002-remove-currying/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="Removing_currying_func_declaration_syntax">Removing currying <code>func</code> declaration syntax</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0002-remove-currying.md" target="_blank" rel="external">SE-0002</a></li>
+<li>Author(s): <a href="https://github.com/jckarter" target="_blank" rel="external">Joe Groff</a></li>
+<li>Status: <strong>Accepted</strong></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><p>Curried function declaration syntax <code>func foo(x: Int)(y: Int)</code> is of limited<br>usefulness and creates a lot of language and implementation complexity. We<br>should remove it.</p>
+<h2 id="Motivation">Motivation</h2><p>The presence of curried function syntax has knock-on effects, complicating<br>other language features:</p>
+<ul>
+<li>The presence of currying invites confusion over keyword rules and the<br>declaration name of functions. We’ve argued several times over whether<br>curried arguments represent a continuation of the function’s arguments, begin<br>the argument list of a new function, or deserve to follow different rules<br>altogether.</li>
+<li>It has subtle interactions with ‘var’ and ‘inout’ argument<br>annotations. A curried function with ‘inout’ parameters anywhere other than<br>its first clause cannot be partially applied without surprising semantic<br>restrictions, limiting its usefulness. With ‘var’ parameters, there’s the<br>question of at what level the ‘var’ gets bound; many users expect it at the<br>outermost partial application, but we currently bind at the innermost partial<br>application.</li>
+</ul>
+<p>The idioms of the standard library, Cocoa, and most third-party code don’t<br>really make ML-style argument currying of free functions profitable. In<br>Cocoa and the standard library, most things are methods, where we can still get<br>useful partial application via <code>self.method</code> and maybe someday <code>.map { f($0)
+}</code> as well. The curried function design also predates the design of the<br>keyword argument model. We have plans to move away<br>from the arguments-are-a-single-tuple model too (which is already belied by<br>things like <code>@autoclosure</code> and <code>inout</code>), which pushes us even further away from<br>the ML argument model.</p>
+<p>Many users have observed the uselessness of our currying feature, and asked for<br>Scala-style <code>f(_, 1)</code> freeform partial application as an alternative. The fact<br>that even functionally-oriented users don’t see much value in our currying<br>feature makes me feel like we might be better off without it. It definitely fails<br>the “would we add it if we didn’t have it already” test.</p>
+<h2 id="Detailed_design">Detailed design</h2><p>We remove support for multiple argument patterns in <code>func</code> declarations,<br>reducing the grammar for <code>func-signature</code> to allow only one <code>argument</code> clause.<br>For migration purposes, existing code that uses currying declaration syntax<br>can be transformed to explicitly return a closure instead:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Before:</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">curried</span><span class="params">(x: Int)</span></span>(y: <span class="type">String</span>) -&gt; <span class="type">Float</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="type">Float</span>(x) + <span class="type">Float</span>(y)!</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// After:</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">curried</span><span class="params">(x: Int)</span></span> -&gt; (<span class="type">String</span>) -&gt; <span class="type">Float</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;(y: <span class="type">String</span>) -&gt; <span class="type">Float</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> <span class="type">Float</span>(x) + <span class="type">Float</span>(y)!</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>I don’t propose changing the semantics of methods, which formally remain<br>functions of type <code>Self -&gt; Args -&gt; Return</code>.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>This is removing a language feature, so will obviously break existing code<br>that uses the feature. We feel that currying is of sufficiently marginal<br>utility, runs against the grain of emerging language practice, and there’s a<br>reasonable automatic migration, so the impact is acceptable in order to<br>simplify the language.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The alternative would be to preserve currying as-is, which as discussed above,<br>is not ideal. Although I don’t propose taking any immediate action, future<br>alternative designs to provide similar functionality in a more idiomatic way<br>include:</p>
+<ul>
+<li>Scala-like ad-hoc partial application syntax, such that something like<br><code>foo(_, bar: 2)</code> would be shorthand for <code>{ x in foo(x, bar: 2) }</code>. This<br>has the benefit of arguably being more readable with our keyword-argument-<br>oriented API design, and also more flexible than traditional currying,<br>which requires argument order to be preconsidered by the API designer.</li>
+<li>Method and/or operator slicing syntax. We have <code>self.method</code> to partially<br>bind a method to its <code>self</code> parameter, and could potentially add<br><code>.method(argument)</code> to partially bind a method to its non-self arguments,<br>which would be especially useful for higher-order methods like <code>map</code><br>and <code>filter</code>. Haskell-like <code>(2+)</code>/<code>(+2)</code> syntax for partially applying<br>operators might also be nice.</li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag">#swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/15/swift/proposals/0001-keywords-as-argument-labels/" rel="prev">0001-keywords-as-argument-labels</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/15/swift/proposals/0003-remove-var-parameters-patterns/" rel="next">0003-remove-var-parameters-patterns</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Removing_currying_func_declaration_syntax"><span class="nav-number">1.</span> <span class="nav-text">Removing currying func declaration syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.2.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Detailed_design"><span class="nav-number">1.3.</span> <span class="nav-text">Detailed design</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Impact_on_existing_code"><span class="nav-number">1.4.</span> <span class="nav-text">Impact on existing code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Alternatives_considered"><span class="nav-number">1.5.</span> <span class="nav-text">Alternatives considered</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/15/swift/proposals/0002-remove-currying/';
+      var disqus_title = '0002-remove-currying';
+      var disqus_url = 'http://yoursite.com/2015/12/15/swift/proposals/0002-remove-currying/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

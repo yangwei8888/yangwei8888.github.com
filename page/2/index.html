@@ -170,9 +170,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/installation/softlayer/" itemprop="url">
-                IBM SoftLayer
-安装 docker
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="url">
+                0009-require-self-for-accessing-instance-members
               </a>
             
           
@@ -182,8 +181,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
           </time>
         </span>
 
@@ -192,8 +191,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
                 </a>
               </span>
 
@@ -208,8 +207,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/softlayer/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/softlayer/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -224,22 +223,62 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="IBM_SoftLayer">IBM SoftLayer</h1><p>1.创建一个 <a href="https://www.softlayer.com/cloud-servers/" target="_blank" rel="external">IBM SoftLayer 账户</a>.</p>
-<p>2.登陆到 <a href="https://control.softlayer.com/" target="_blank" rel="external">SoftLayer Customer Portal</a>.</p>
-<p>3.在 <code>Devices</code> 菜单中选择<a href="https://control.softlayer.com/devices" target="_blank" rel="external">设备列表</a>.</p>
-<p>4.点击位于菜单条下方、窗口顶部右侧的 <em>Order Devices</em>.</p>
-<p>5.在 <code>Virtual Server</code> 下点击 <a href="https://manage.softlayer.com/Sales/orderHourlyComputingInstance" target="_blank" rel="external">Hourly</a>.</p>
-<p>6.创建一个新的 SoftLayer Virtual Server Instance (VSI)，使用全部字段的默认值:</p>
-<ul>
-<li><code>Datacenter</code> 的部署位置</li>
-<li>Ubuntu Linux 12.04 LTS Precise Pangolin - 最小化安装的64位系统</li>
+          <span itemprop="articleBody"><h1 id="Require_self_for_accessing_instance_members">Require self for accessing instance members</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0009-require-self-for-accessing-instance-members.md" target="_blank" rel="external">SE-0009</a></li>
+<li>Author(s): <a href="https://github.com/hartbit" target="_blank" rel="external">David Hart</a></li>
+<li>Status: <strong>Awaiting review</strong> (scheduled for December 16–20, 2015)</li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<p>7.点击底部右侧的 <em>Continue Your Order</em>.</p>
-<p>8.填写 VSI 主机名和域名。</p>
-<p>9.填写用户所需的元数据和订单。</p>
-<p>10.接下来请继续阅读 <a href="https://docs.docker.com/installation/ubuntulinux/#ubuntu-linux" target="_blank" rel="external">Ubuntu</a>.</p>
-<p>###What next</p>
-<p>更多信息请阅读<a href="../userguide/README.md">用户指南</a>。</p>
+<h2 id="Introduction">Introduction</h2><p>The current version of Swift (2.1) requires using <code>self</code> when accessing instance members in closures. The proposal suggests extending this to all member accesses (as is intrinsically the case in Objective-C). It has the benefit of documenting instance properties vs local variables and instance functions vs local functions or closures.</p>
+<h2 id="Motivation">Motivation</h2><p>This proposal makes it obvious which are instance properties vs local variables, as well as which are instance functions vs local functions/closures. This has several advantages:</p>
+<ul>
+<li>More readable at the point of use. </li>
+<li>More consistent than only requiring <code>self</code> in closure contexts.</li>
+<li>Less confusing from a learning point of view.</li>
+<li>Lets the compiler warn users (and avoids bugs) where the authors mean to use a local variable but instead are unknowingly using an instance property (and the other way round).</li>
+</ul>
+<p>One example of a bug avoidable by the proposal (<a href="https://lists.swift.org/pipermail/swift-evolution/2015-December/000243.html" target="_blank" rel="external">provided by Rudolf Adamkovic</a>):</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span> : <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">	<span class="preprocessor">@IBOutlet</span> <span class="keyword">var</span> button: <span class="type">UIButton</span>!</span><br><span class="line">        <span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line"></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">updateButton</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// var title = "Hello \(name)"</span></span><br><span class="line">		button.setTitle(title, forState: .<span class="type">Normal</span>) <span class="comment">// forgot to comment this line but the compiler does not complain and title is now referencing UIViewController’s title by mistake</span></span><br><span class="line">		button.setTitleColor(<span class="type">UIColor</span>.blackColor(), forState: .<span class="type">Normal</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The API Design Guidelines are meant for writing APIs but I still think they represent fundamentals of Swift. The two first points are:</p>
+<ul>
+<li>Clarity at the point of use is your most important goal. Code is read far more than it is written.</li>
+<li>Clarity is more important than brevity. Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.</li>
+</ul>
+<p>And I believe that the proposition is directly in line with those objectives.</p>
+<h2 id="Counter-argument">Counter-argument</h2><p>The counter-argument brought up by two members of the community is that the current behaviour “makes the capturing semantics of self stand out more in closures”. While this is true, the author finds its usefulness lacking.</p>
+<p>In the following lines of code, we know without a shadow of a doubt that <code>foobar</code> is a throwing function and that <code>barfoo</code> does not throw.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">try foobar()</span><br><span class="line">barfoo()</span><br></pre></td></tr></table></figure>
+<p>But with an example of <code>self</code> in a closure:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foobar(&#123;</span><br><span class="line">	<span class="built_in">print</span>(<span class="keyword">self</span>.description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>The <code>self</code> keyword in the previous lines of code gives a hint but does not bring any certitudes:</p>
+<ul>
+<li><code>self</code> might have been forced by the compiler to hint at possible memory issues,</li>
+<li><code>self</code> might have been a programmer choice if the closure is non-escaping.</li>
+</ul>
+<p>And in the reverse example:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">barfoo(&#123;</span><br><span class="line">	<span class="built_in">print</span>(description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>the closure might be non-escaping,</li>
+<li>the <code>description</code> might be referring to a local variable (which we missed the declaration of) shadowing the instance property in an escaping closure.</li>
+</ul>
+<p>In both of these examples, the <code>self</code> keyword does not tell us with any certainty that we should or not be careful about reference cycle issues without checking the signature of the called function, only that self is captured. With the proposition, <code>self</code> gets some meaning back: it indicates which are local and which are instance properties.</p>
+<h2 id="Proposed_Solution">Proposed Solution</h2><p>I suggest that not using <code>self</code> for accessing instance properties and functions is applied in two stages. In Swift 2.x, it could start as a warning and Xcode could provide a Fix-It. Then, it could become a compiler error in Swift 3 and the migrator would help transition code over.</p>
+<p>The following code which used to compile would generate an error at the documented lines:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(name)</span>"</span>) <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		foo() <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code would have to be modified as so to compile correctly:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(<span class="keyword">self</span>.name)</span>"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">self</span>.foo()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A lot of code written since the original change would be impacted by this proposal, but it seems like it can be easily fixed by both the migrator tool and an Xcode Fix-It.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The alternative is to keep the current behaviour, but it has the aforementioned disadvantages.</p>
+<p>An alternative would be to demote from a compiler error to a warning.</p>
+<h2 id="Community_Responses">Community Responses</h2><ul>
+<li>“I actually encountered at least two bugs in my app introduced by this implicit “self” behavior. It can be dangerous and hard to track down.” – Rudolf Adamkovic, salutis@me.com</li>
+<li>“Given this, some teams use underscores for their iVars which is very unfortunate. Myself, I use self whenever possible to be explicit. I’d like the language to force us to be clear.” – Dan, robear18@gmail.com</li>
+<li>“I’m not sure how many Swift users this effects, but I’m colorblind and I really struggle with the local vs properties syntax coloring.” – Tyler Cloutier, cloutiertyler@aol.com</li>
+<li>“+1 I’ve had a lot of weird things happen that I’ve traced to mistakes in properties having the same name as function arguments. I’ve hardly ever had this issue in modern Obj-C.” – Coli Cornaby, colin.cornaby@mac.com</li>
+<li>“Teaching wise, its much less confusing for self to be required so students don’t mix up instance properties and local vars. Especially when self is required in closures, it confuses students. If self is mandatory for all instance properties, it would be so much clearer and much easier to read.” – Yichen Cao, ycao@me.com</li>
+<li>“this avoids confusion, maintains a consistent language approach, and thus helps reducing bugs. Sure, it might lead to less poetic haiku code, but that is not necessarily a bad thing in medium to large scale software products with more than one person working on it and possible/eventual change of people on the project over time.” – Panajev</li>
+<li>“I’m +1 on this, for the reasons already stated by others, but not as strongly as I was a year ago. I was very worried about this with Swift 1 was first released, but since then, I haven’t actually made this mistake, possibly because I’m so paranoid about it.” – Michael Buckley, michael@buckleyisms.com</li>
+</ul>
 </span>
         
       
@@ -270,8 +309,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/installation/redhat/" itemprop="url">
-                Red Hat Enterprise Linux 安装 Docker
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/" itemprop="url">
+                0010-add-staticstring-unicodescalarview
               </a>
             
           
@@ -281,8 +320,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
           </time>
         </span>
 
@@ -291,8 +330,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
                 </a>
               </span>
 
@@ -307,8 +346,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/redhat/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/redhat/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -323,58 +362,150 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Red_Hat_Enterprise_Linux">Red Hat Enterprise Linux</h1><p>以下是支持 Docker 的 RHEL 版本：</p>
-<ul>
-<li><a href="#red-hat-enterprise-linux-7-installation"><em>Red Hat Enterprise Linux 7 (64-bit)</em></a></li>
-<li><a href="#red-hat-enterprise-linux-6.5-installation"><em>Red Hat Enterprise Linux 6.5 (64-bit)</em></a> 或更高版本</li>
+          <span itemprop="articleBody"><h1 id="Add_StaticString-UnicodeScalarView">Add StaticString.UnicodeScalarView</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0010-add-staticstring-unicodescalarview.md" target="_blank" rel="external">SE-0010</a></li>
+<li>Author: <a href="https://github.com/kballard" target="_blank" rel="external">Kevin Ballard</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="内核支持">内核支持</h2><p>如果你的 RHEL 运行的是发行版内核。那就仅支持通过 <em>extras</em> 渠道或者 EPEL 包来安装 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错</p>
-<h2 id="Red_Hat_Enterprise_Linux_7_installation">Red Hat Enterprise Linux 7 installation</h2><p><strong>Red Hat Enterprise Linux 7 （64位）</strong> <a href="https://access.redhat.com/site/products/red-hat-enterprise-linux/docker-and-containers" target="_blank" rel="external">自带Docker</a>. 你可以在<a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.0_Release_Notes/chap-Red_Hat_Enterprise_Linux-7.0_Release_Notes-Linux_Containers_with_Docker_Format.html" target="_blank" rel="external">发行日志</a>中找到概述和指南。</p>
-<p>Docker 包含在 <strong>extras</strong> 镜像源中，使用下面的方法可以安装 Docker:</p>
+<h2 id="Introduction">Introduction</h2><p>There is no way to create a substring of a <code>StaticString</code> that is still typed<br>as <code>StaticString</code>. There should be.</p>
+<h2 id="Motivation">Motivation</h2><p>It is occasionally useful to be able to produce a substring of a <code>StaticString</code><br>that can be passed to APIs expecting a <code>StaticString</code>. For example, extracting<br>the filename from <code>__FILE__</code>. But there is no way to do this today, as<br><code>StaticString</code> does not provide any means by which to create a new instance<br>beyond the trivial nullary <code>init()</code> initializer (which creates an empty<br>string).</p>
+<h2 id="Proposed_solution">Proposed solution</h2><p>We add a new type <code>StaticString.UnicodeScalarView</code> that conforms to<br><code>CollectionType</code> and a new property <code>unicodeScalars</code> on <code>StaticString</code>. We also<br>add 2 initializers to <code>StaticString</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">init</span>(<span class="number">_</span> unicodeScalars: <span class="type">UnicodeScalarView</span>)</span><br><span class="line"><span class="keyword">init</span>(<span class="number">_</span> unicodeScalars: <span class="type">Slice</span>&lt;<span class="type">UnicodeScalarView</span>&gt;)</span><br></pre></td></tr></table></figure>
+<p>Together, this allows the user to manipulate the unicode scalar view to produce<br>the desired slice, and then to create a <code>StaticString</code> from the results. This<br>has the added benefit of providing a convenient way to work with<br><code>StaticString</code>s as a sequence of <code>UnicodeScalar</code>s instead of as a UTF8 buffer.</p>
+<h2 id="Detailed_design">Detailed design</h2><p>The API looks like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">StaticString</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// The value of `self` as a collection of [Unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value).</span></span><br><span class="line">  public <span class="keyword">var</span> unicodeScalars: <span class="type">UnicodeScalarView</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/// Construct the `StaticString` corresponding to the given</span></span><br><span class="line">  <span class="comment">/// `UnicodeScalarView`.</span></span><br><span class="line">  public <span class="keyword">init</span>(<span class="number">_</span>: <span class="type">UnicodeScalarView</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// Construct the `StaticString` corresponding to the given</span></span><br><span class="line">  <span class="comment">/// `UnicodeScalarView` slice.</span></span><br><span class="line">  public <span class="keyword">init</span>(<span class="number">_</span>: <span class="type">Slice</span>&lt;<span class="type">UnicodeScalarView</span>&gt;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// A collection of [Unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value) that</span></span><br><span class="line">  <span class="comment">/// encode a `StaticString`.</span></span><br><span class="line">  public <span class="class"><span class="keyword">struct</span> <span class="title">UnicodeScalarView</span> : <span class="title">CollectionType</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(<span class="number">_</span>: <span class="type">StaticString</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// A position in a `StaticString.UnicodeScalarView`.</span></span><br><span class="line">    public <span class="class"><span class="keyword">struct</span> <span class="title">Index</span> : <span class="title">BidirectionalIndexType</span>, <span class="title">Comparable</span> </span>&#123;</span><br><span class="line">      <span class="comment">/// Returns the next consecutive value after `self`.</span></span><br><span class="line">      <span class="comment">///</span></span><br><span class="line">      <span class="comment">/// - Requires: The next value is representable.</span></span><br><span class="line">      @warn_unused_result</span><br><span class="line">      public <span class="func"><span class="keyword">func</span> <span class="title">successor</span><span class="params">()</span></span> -&gt; <span class="type">Index</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">/// Returns the previous consecutive value before `self`.</span></span><br><span class="line">      <span class="comment">///</span></span><br><span class="line">      <span class="comment">/// - Requires: The previous value is representable.</span></span><br><span class="line">      @warn_unused_result</span><br><span class="line">      public <span class="func"><span class="keyword">func</span> <span class="title">predecessor</span><span class="params">()</span></span> -&gt; <span class="type">Index</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// The position of the first `UnicodeScalar` if the `StaticString` is</span></span><br><span class="line">    <span class="comment">/// non-empty; identical to `endIndex` otherwise.</span></span><br><span class="line">    public <span class="keyword">var</span> startIndex: <span class="type">Index</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/// The "past the end" position.</span></span><br><span class="line">    <span class="comment">///</span></span><br><span class="line">    <span class="comment">/// `endIndex` is not a valid argument to `subscript`, and is always</span></span><br><span class="line">    <span class="comment">/// reachable from `startIndex` by zero or more applications of</span></span><br><span class="line">    <span class="comment">/// `successor()`.</span></span><br><span class="line">    public <span class="keyword">var</span> endIndex: <span class="type">Index</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/// Returns `true` iff `self` is empty.</span></span><br><span class="line">    public <span class="keyword">var</span> isEmpty: <span class="type">Bool</span></span><br><span class="line"></span><br><span class="line">    public <span class="keyword">subscript</span>(position: <span class="type">Index</span>) -&gt; <span class="type">UnicodeScalar</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>None.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>We could add a <code>subscript(bounds: Range&lt;Index&gt;)</code> to <code>StaticString</code> directly,<br>but there’s no good way to define <code>Index</code> (for the same reasons <code>String</code><br>doesn’t conform to <code>CollectionType</code>).</p>
+<p>We could expose an unsafe initializer from a pointer, so the user can<br>manipulate <code>utf8Start</code> to produce the desired pointer, but this would be very<br>unsafe and allow users to try and trick code taking <code>StaticString</code> into<br>accepting a dynamic string instead.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0011-replace-typealias-associated/" itemprop="url">
+                0011-replace-typealias-associated
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0011-replace-typealias-associated/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0011-replace-typealias-associated/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Replace_typealias_keyword_with_associated_for_associated_type_declarations">Replace <code>typealias</code> keyword with <code>associated</code> for associated type declarations</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0011-replace-typealias-associated.md" target="_blank" rel="external">SE-0011</a></li>
+<li>Author(s): <a href="https://github.com/loiclec" target="_blank" rel="external">Loïc Lecrenier</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><p>The <code>typealias</code> keyword is currently used to declare two kinds of types:</p>
 <ol>
-<li><p>启用 <strong>extras</strong> 镜像源:</p>
-<pre><code>$ sudo subscription-manager repos <span class="comment">--enable=rhel-7-server-extras-rpms</span>
-</code></pre></li>
-<li><p>安装 Docker :</p>
-<pre><code>$ sudo yum <span class="keyword">install</span> docker 
-</code></pre></li>
+<li>Type Aliases (alternative name for an existing type)</li>
+<li>Associated Types (placeholder name to type used as part of a protocol)</li>
 </ol>
-<p>如果你是RHEL客户，更多的 RHEL-7 安装、配置和<a href="https://access.redhat.com/site/articles/881893" target="_blank" rel="external">用户指南</a>可以在<a href="https://access.redhat.com/" target="_blank" rel="external">客户中心</a>中找到。</p>
-<p>请继续阅读 <a href="#starting-the-docker-daemon"> 启动 Docker 进程 </a>.</p>
-<h2 id="Red_Hat_Enterprise_Linux_6-5_installation">Red Hat Enterprise Linux 6.5 installation</h2><p>你需要在 <strong>64位</strong> 的 <a href="https://access.redhat.com/site/articles/3078#RHEL6" target="_blank" rel="external">RHEL 6.5</a> 或更高的版本上来安装 Docker，Docker 工作需要特定的内核补丁, 因此 RHEL 的内核版本应为 2.6.32-431 或者更高。</p>
-<p>Docker 已经包含在 RHEL 的 EPEL 源中。该源是 Extra Packages for Enterprise Linux (EPEL) 的一个额外包，社区中正在努力创建和维护相关镜像。</p>
-<h2 id="内核支持-1">内核支持</h2><p>如果你的 RHEL 运行的是发行版内核。那就仅支持通过 <em>extras</em> 渠道或者 EPEL 包来安装 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错</p>
-<blockquote>
-<p><strong>Warning</strong>:<br>Please keep your system up to date using <code>yum update</code> and rebooting<br>your system. Keeping your system updated ensures critical security<br> vulnerabilities and severe bugs (such as those found in kernel 2.6.32)<br>are fixed.</p>
-</blockquote>
-<p>首先，你需要安装EPEL镜像源，请查看 <a href="https://fedoraproject.org/wiki/EPEL#How_can_I_use_these_extra_packages.3F" target="_blank" rel="external">EPEL installation instructions</a>.</p>
-<p>在EPEL中已经提供了 <code>docker-io</code> 包</p>
-<p>如果你安装了(不相关)的 Docker 包，它将与 <code>docker-io</code> 冲突。在安装 <code>docker-io</code> 之前，请先卸载 Docker</p>
-<p>下一步，我们将要在我们的主机中安装 Docker,也就是 <code>docker-io</code> 包:</p>
-<pre><code>$ sudo yum -y <span class="keyword">install</span> docker-io
-</code></pre><p>更新<code>docker-io</code>包:</p>
-<pre><code><span class="variable">$ </span>sudo yum -y update docker-io
-</code></pre><p>现在 Docker 已经安装好了，我们来启动 docker 进程:</p>
-<pre><code><span class="variable">$ </span>sudo service docker start
-</code></pre><p>设置开机启动:</p>
-<pre><code>$ sudo chkconfig docker <span class="function_start"><span class="keyword">on</span></span>
-</code></pre><p>现在，让我们确认 Docker 是否正常工作：</p>
-<pre><code>$ sudo docker run -<span class="tag">i</span> -t fedora /bin/bash
-</code></pre><p>继续 <a href="#启动Docker进程"> 启动 Docker 进程 </a></p>
-<h2 id="启动_Docker_进程">启动 Docker 进程</h2><p>现在 Docker 已经安装好了，让我们来启动 Docker 进程</p>
-<pre><code><span class="variable">$ </span>sudo service docker start
-</code></pre><p>如果我们想要开机启动 Docker ，我们需要执行如下的命令：</p>
-<pre><code>$ sudo chkconfig docker <span class="function_start"><span class="keyword">on</span></span>
-</code></pre><p>现在测试一下是否正常工作.</p>
-<pre><code>$ sudo docker run -<span class="tag">i</span> -t fedora /bin/bash
-</code></pre><blockquote>
-<p>注意: 如果你运行的时候提示一个  <code>Cannot start container</code> 的错误，错误中提到了 SELINUX 或者 权限不足。你需要更新 SELINUX 规则。你可以使用 <code>sudo yum upgrade selinux-policy</code> 然后重启。</p>
-</blockquote>
-<p><strong>下一步</strong></p>
-<p>好！现在你可以去查看<a href="../userguide/README.md">用户指南</a>。</p>
-<h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
-<p>##问题</p>
-<p>遇到问题请到 <a href="https://bugzilla.redhat.com/enter_bug.cgi?product=Fedora%20EPEL&amp;component=docker-io" target="_blank" rel="external">Red Hat Bugzilla for docker-io component</a> 进行反馈。</p>
+<p>These two kinds of declarations are different and should use distinct keywords.<br>This would emphasize the difference between them and reduce some of the<br>confusion surrounding the use of associated types.</p>
+<p>The proposed new keyword is <code>associated</code>.</p>
+<h2 id="Motivation">Motivation</h2><p>Re-using <code>typealias</code> for associated type declarations is confusing in many ways.</p>
+<ol>
+<li>It is not obvious that <code>typealias</code> in protocols means something else than in<br>other places.</li>
+<li>It hides the existence of associated types to beginners, which allows them<br>to write code they misunderstand.</li>
+<li>It hides the absence of concrete type aliases inside protocols.</li>
+</ol>
+<p>In particular, <strong>2 + 3</strong> leads to programmers writing</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>without realizing that <code>Element</code> is a new associated type with a default value<br>of <code>Container.Generator.Element</code> instead of a type alias to<br><code>Container.Generator.Element</code>.</p>
+<p>However, this code</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>declares <code>Element</code> as a type alias to <code>Container.Generator.Element</code>.</p>
+<p>These subtleties of the language currently require careful consideration to<br>understand.</p>
+<h2 id="Proposed_solution">Proposed solution</h2><p>For declaring associated types, replace the <code>typealias</code> keyword with <code>associated</code>.</p>
+<p>This solves the issues mentioned above:</p>
+<ol>
+<li><code>typealias</code> can now only be used for type aliases declaration.</li>
+<li>Beginners are now forced to learn about associated types when creating protocols.</li>
+<li>An error message can now be displayed when someone tries to create a type alias<br>inside a protocol.</li>
+</ol>
+<p>This eliminates the confusion showed in the previous code snippets.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    associated <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span> <span class="comment">// error: cannot declare type alias inside protocol, use protocol extension instead</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    associated <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Alternative keywords considered: <code>withtype</code>, <code>associatedtype</code>, <code>typeassociation</code>, <code>type</code></p>
+<h2 id="Proposed_Approach">Proposed Approach</h2><p>For declaring associated types, I suggest adding <code>associated</code> and deprecating<br><code>typealias</code> in Swift 2.2, and removing <code>typealias</code> entirely in Swift 3.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>As it simply replaces one keyword for another, the transition to <code>associated</code><br>could be easily automated without any risk of breaking existing code.</p>
+<h2 id="Community_Responses">Community Responses</h2><ul>
+<li>“I think this is a great idea; re-using typealias for associated types was a mistake.” -John McCall</li>
+<li>“Agreed.” -Chris Lattner</li>
+<li>“+1 to the proposal, emphasizing the distinction is important; and I<br>like “associated” as the keyword for this purpose, too.” -Dmitri Gribenko</li>
+<li>“+1 for using a distinct keyword for associated types” -Ilya Belenkiy</li>
+</ul>
 </span>
         
       
@@ -405,8 +536,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/installation/opensuse/" itemprop="url">
-                openSUSE 安装 Docker
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/" itemprop="url">
+                0012-add-noescape-to-public-library-api
               </a>
             
           
@@ -416,8 +547,640 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Add_@noescape_to_public_library_API">Add <code>@noescape</code> to public library API</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0012-add-noescape-to-public-library-api.md" target="_blank" rel="external">SE-0012</a></li>
+<li>Author(s): <a href="https://github.com/jtbandes" target="_blank" rel="external">Jacob Bandes-Storch</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><h3 id="@noescape"><code>@noescape</code></h3><p>Swift provides <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID546" target="_blank" rel="external">a <code>@noescape</code> declaration attribute</a> which can be applied to closure parameters, indicating that the closure’s execution is guaranteed not to escape the function call.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">withLock</span><span class="params">(@noescape perform closure: <span class="params">()</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">    myLock.lock()</span><br><span class="line">    closure()</span><br><span class="line">    myLock.unlock()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Thus, a closure argument is guaranteed to be executed (if executed at all) <em>before</em> the function returns. This enables the compiler to perform various optimizations, such as omitting unnecessary capturing/retaining/releasing of <code>self</code>.</p>
+<p>For example, just as “<code>self.</code>“ may be omitted in the context of a method, since a <code>@noescape</code> closure is known not to capture <code>self</code>, properties and methods can be accessed without the <code>self.</code> prefix:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> counter = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">incrementCounter</span><span class="params">()</span></span> &#123;</span><br><span class="line">        counter += <span class="number">1</span>  <span class="comment">// "self." elided in an instance method</span></span><br><span class="line">        </span><br><span class="line">        withLock &#123;</span><br><span class="line">            <span class="comment">// Without @noescape, the following line would produce the error</span></span><br><span class="line">            <span class="comment">//   "reference to property 'counter' in closure requires</span></span><br><span class="line">            <span class="comment">//    explicit 'self.' to make capture semantics explicit".</span></span><br><span class="line">            counter += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="In_C_and_Objective-C">In C and Objective-C</h3><p>Clang understands the <code>noescape</code> attribute, spelled <code>__attribute__((noescape))</code> or <code>__attribute__((__noescape__))</code>. When function definitions whose block or function-pointer parameters have this attribute are imported to Swift, they are visible with a Swift <code>@noescape</code> attribute.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void performWithLock(__attribute__((noescape)) void (^block)()) &#123;  // exposed as @noescape to Swift</span><br><span class="line">    lock(myLock);</span><br><span class="line">    block();</span><br><span class="line">    unlock(myLock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)performWithLock:(__attribute__((noescape)) void (^)())block &#123;  // exposed as @noescape to Swift&#10;    [myLock lock];&#10;    block();&#10;    [myLock unlock];&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Motivation">Motivation</h2><p>Many standard methods and functions — particularly in Foundation and libdispatch — have non-escaping closure semantics, but <strong>do not have <code>__attribute__((noescape))</code></strong>. This thwarts the compiler optimizations and syntax shortcuts granted by <code>@noescape</code>, when they should otherwise be applied.</p>
+<p>In pure Swift, there is no workaround, but by writing some custom C/Objective-C wrapper functions, users can work around these limitations:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// MyProject-Bridging-Header.h&#10;&#10;NS_INLINE void MyDispatchSyncWrapper(dispatch_queue_t queue, __attribute__((noescape)) dispatch_block_t block)&#10;&#123;&#10;    dispatch_sync(queue, block);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>However, it’s clear that library functions with non-escaping semantics should be marked with the <code>noescape</code> attribute at the source, so that users don’t have to wrap every function they’d like to use.</p>
+<h2 id="Proposed_solution">Proposed solution</h2><ol>
+<li>Audit system C/Objective-C libraries (stdlib, libdispatch, Foundation, …) for functions and methods with closure parameters that are guaranteed not to escape the lifetime of the call.<ul>
+<li><em>See the end of this document for a comprehensive list of candidate functions/methods.</em></li>
+</ul>
+</li>
+<li>Annotate such functions and methods’ block/function-pointer parameters with <code>__attribute__((noescape))</code>.</li>
+<li>For libraries with Swift-specific forks (like <a href="https://github.com/apple/swift-corelibs-libdispatch" target="_blank" rel="external">swift-corelibs-libdispatch</a>), the change should be made in the Apple-internal upstream version as well.</li>
+</ol>
+<h6 id="Example_patch">Example patch</h6><p>An example patch to libdispatch can be seen at <a href="https://github.com/apple/swift-corelibs-libdispatch/pull/6/files" target="_blank" rel="external">https://github.com/apple/swift-corelibs-libdispatch/pull/6/files</a>.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>Users who previously used functions which are newly <code>@noescape</code> may have unnecessary instances of <code>self.</code> in their code. However, there should be no breaking syntax changes and no functional difference.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The Swift compiler’s support for supplementary “API notes” (<code>.apinotes</code> files) could be extended and used to annotate closure parameters as non-escaping.</p>
+<p>However, I believe it’s better to put annotations in headers for the following reasons:</p>
+<ul>
+<li>The presence of <code>__attribute__((noescape))</code> in library headers clarifies API contracts, and encourages users to use this attribute in their own code where applicable.</li>
+<li>With apinotes, the benefits to Swift would be limited to specific libraries and functions, leaving annotation in the hands of the Swift compiler project. Given a version of a library with annotated headeres, however, no extra compiler configuration is required to take advantage of the annotation.</li>
+<li>As Clang itself improves, the benefits of <code>__attribute__((noescape))</code> can be granted to Objective-C callers as well as Swift (for example, by suppressing <code>-Wimplicit-retain-self</code> &lt;rdar://19914650&gt;).</li>
+</ul>
+<h2 id="Comprehensive_list_of_methods/functions_with_non-escaping_block_parameters">Comprehensive list of methods/functions with non-escaping block parameters</h2><p>Note that Objective-C library methods tend to come in three variants:</p>
+<ul>
+<li>“[elements] passing test”</li>
+<li>“[sorted] using comparator”</li>
+<li>“enumerate using block/function”</li>
+</ul>
+<h3 id="stdlib">stdlib</h3><ul>
+<li><code>bsearch()</code>, <code>bsearch_b()</code></li>
+<li><code>heapsort()</code>, <code>heapsort_b()</code></li>
+<li><code>mergesort()</code>, <code>mergesort_b()</code></li>
+<li><code>psort()</code>, <code>psort_b()</code></li>
+<li><code>qsort()</code>, <code>qsort_b()</code></li>
+</ul>
+<h3 id="libdispatch">libdispatch</h3><ul>
+<li><code>dispatch_apply()</code>, <code>dispatch_apply_f()</code></li>
+<li><code>dispatch_barrier_sync()</code>, <code>dispatch_barrier_sync_f()</code></li>
+<li><code>dispatch_block_perform()</code></li>
+<li><code>dispatch_data_apply()</code></li>
+<li><code>dispatch_once()</code>, <code>dispatch_once_f()</code></li>
+<li><code>dispatch_sync()</code>, <code>dispatch_sync_f()</code></li>
+</ul>
+<h3 id="CoreFoundation">CoreFoundation</h3><ul>
+<li><code>CFArrayBSearchValues()</code></li>
+<li><code>CFArraySortValues()</code></li>
+<li><code>CFTreeSortChildren()</code></li>
+</ul>
+<h3 id="Foundation">Foundation</h3><h6 id="“Passing_test”_methods">“Passing test” methods</h6><ul>
+<li><code>-[NSArray indexOfObjectPassingTest:]</code></li>
+<li><code>-[NSArray indexOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSArray indexesOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSArray indexesOfObjectsPassingTest:]</code></li>
+<li><code>-[NSDictionary keysOfEntriesPassingTest:]</code></li>
+<li><code>-[NSDictionary keysOfEntriesWithOptions:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexInRange:options:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexPassingTest:]</code></li>
+<li><code>-[NSIndexSet indexWithOptions:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexesInRange:options:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexesPassingTest:]</code></li>
+<li><code>-[NSIndexSet indexesWithOptions:passingTest:]</code></li>
+<li><code>-[NSOrderedSet indexOfObjectPassingTest:]</code></li>
+<li><code>-[NSOrderedSet indexOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSOrderedSet indexesOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSOrderedSet indexesOfObjectsPassingTest:]</code></li>
+<li><code>-[NSSet objectsPassingTest:]</code></li>
+<li><code>-[NSSet objectsWithOptions:passingTest:]</code></li>
+</ul>
+<h6 id="“Using_comparator/function”_methods">“Using comparator/function” methods</h6><ul>
+<li><code>-[NSArray indexOfObject:inSortedRange:options:usingComparator:]</code></li>
+<li><code>-[NSArray sortedArrayUsingComparator:]</code></li>
+<li><code>-[NSArray sortedArrayUsingFunction:context:]</code></li>
+<li><code>-[NSArray sortedArrayUsingFunction:context:hint:]</code></li>
+<li><code>-[NSArray sortedArrayWithOptions:usingComparator:]</code></li>
+<li><code>-[NSDictionary keysSortedByValueUsingComparator:]</code></li>
+<li><code>-[NSDictionary keysSortedByValueWithOptions:usingComparator:]</code></li>
+<li><code>-[NSMutableArray sortUsingComparator:]</code></li>
+<li><code>-[NSMutableArray sortUsingFunction:context:]</code></li>
+<li><code>-[NSMutableArray sortWithOptions:usingComparator:]</code></li>
+<li><code>-[NSMutableOrderedSet sortRange:options:usingComparator:]</code></li>
+<li><code>-[NSMutableOrderedSet sortWithOptions:usingComparator:]</code></li>
+</ul>
+<h6 id="“Enumerate_using_block”_methods">“Enumerate using block” methods</h6><ul>
+<li><code>-[NSArray enumerateObjectsUsingBlock:]</code></li>
+<li><code>-[NSArray enumerateObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSData enumerateByteRangesUsingBlock:]</code></li>
+<li><code>-[NSDictionary enumerateKeysAndObjectsUsingBlock:]</code></li>
+<li><code>-[NSDictionary enumerateKeysAndObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateIndexesUsingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateIndexesWithOptions:usingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateRangesInRange:options:usingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateRangesUsingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateRangesWithOptions:usingBlock:]</code></li>
+<li><code>-[NSOrderedSet enumerateObjectsUsingBlock:]</code></li>
+<li><code>-[NSOrderedSet enumerateObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSSet enumerateObjectsUsingBlock:]</code></li>
+<li><code>-[NSSet enumerateObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSString enumerateLinesUsingBlock:]</code></li>
+<li><code>-[NSString enumerateSubstringsInRange:options:usingBlock:]</code></li>
+</ul>
+<h3 id="Other">Other</h3><p>The AVFoundation, SceneKit, SpriteKit, AppKit, and MediaPlayer frameworks have methods that could also use <code>__attribute__((noescape))</code>, but those are considered outside the scope of this proposal.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0013-remove-partial-application-super/" itemprop="url">
+                0013-remove-partial-application-super
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0013-remove-partial-application-super/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0013-remove-partial-application-super/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Remove_Partial_Application_of_Non-Final_Super_Methods_(Swift_2-2)">Remove Partial Application of Non-Final Super Methods (Swift 2.2)</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0013-remove-partial-application-super.md" target="_blank" rel="external">SE-0013</a></li>
+<li>Author(s): <a href="https://github.com/bitjammer" target="_blank" rel="external">David Farler</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><p>Prior to Swift 2.2, calls to superclass methods like <code>super.foo()</code> in<br>Native Swift classes were dispatched statically by recording a reference<br>to the function and calling it directly by its mangled name. In Swift<br>2.2, class methods invoked via <code>super</code> will use dynamic dispatch. That<br>is, the method will be looked up in the superclass’s vtable at runtime.<br>However, if the method is marked with <code>final</code>, it will use the old<br>static dispatch, since no class will be able to override it.</p>
+<p>The mechanisms that support currying require thunks to be emitted so<br>that the function can be called at various uncurrying levels. Currying<br>will be removed in Swift 3.0 so, rather than invest more engineering in<br>those mechanisms, I propose that we disallow partial application of<br>non-final methods through <code>super</code>, except where the <code>self</code> parameter is<br>implicitly captured.</p>
+<h2 id="Motivation">Motivation</h2><p>The motivation of this change is partially motivated by implementation<br>concerns. The machinery for curry thunk mechanism has a lot of<br>assumptions about what the ultimate function call will be: an apply of a<br>static <code>function_ref</code> or a dynamic dispatch through a <code>class_method</code>,<br>which originate in something like <code>doFoo(self.foo)</code> (note <code>self</code> instead<br>of <code>super</code>). Rather than risk regressions stemming from significant<br>replumbing, it would a good tradeoff to pull in this limited portion of<br>the currying removals in Swift 3.0.</p>
+<h2 id="Detailed_design">Detailed design</h2><p>In terms of design and implementation, this is a trivial change. In<br>semantic analysis, perform the following check on call expressions: if<br>the call expression is based in super, the referenced function isn’t<br>final, and the application does not fulfill all of the parameters, emit<br>an error diagnostic.</p>
+<h3 id="Example_Code">Example Code</h3><h4 id="Illegal:_Partial_application_of_non-final_method">Illegal: Partial application of non-final method</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">(f: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">  f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span>() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> : <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span>() &#123;</span><br><span class="line">    doFoo(<span class="keyword">super</span>.foo()) <span class="comment">// Illegal - doesn't apply the second time.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="OK:_Partial_application_of_final_method">OK: Partial application of final method</h4><p>This is safe because the new dynamic super dispatch mechanisms don’t<br>kick in for final methods - these fall back to the original static<br>function reference because no class can ever override the original<br>implementation.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">(f: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">  f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">  final <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span>() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> : <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    doFoo(<span class="keyword">super</span>.foo()) <span class="comment">// OK - method is final.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The implementation for this change is available on <a href="https://github.com/apple/swift/tree/remove-partial-super" target="_blank" rel="external">apple/swift/remove-partial-super</a>.</p>
+<h4 id="OK:_Partial_application_with_implicit_self">OK: Partial application with implicit self</h4><p>Partial application of the implicit self parameter is still allowed with<br>this change. When you pass <code>super.foo</code> around, you have in fact<br>partially applied the method - you’ve captured the <code>self</code> argument<br>present in all Swift method calls. This is safe because no explicit<br>thunks need to be generated at SILGen - the <code>partial_apply</code> instruction<br>will create a closure without additional SIL code.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">(f: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">  f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> : <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    doFoo(<span class="keyword">super</span>.foo) <span class="comment">// OK - only partially applies self</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>Given that we’ve decided to remove currying outright, this would be a<br>small percentage of that usage. Generally, calls on <code>super</code> are for<br>delegation, where all arguments are often present.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The only alternative is to make super method dispatch a citizen in the<br>thunk emission process, which requires deep changes to SILGen, symbol<br>mangling, and IRGen. Although this more comprehensive change would allow<br>us to adopt dynamic super dispatch with no source changes for those<br>writing in Swift, I believe the proposal is a reasonable tradeoff.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0014-constrained-AnySequence/" itemprop="url">
+                0014-constrained-AnySequence
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0014-constrained-AnySequence/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0014-constrained-AnySequence/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Constraining_AnySequence-init">Constraining <code>AnySequence.init</code></h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0014-constrained-AnySequence.md" target="_blank" rel="external">SE-0014</a></li>
+<li>Author(s): <a href="https://github.com/moiseev" target="_blank" rel="external">Max Moiseev</a></li>
+<li>Status: <strong>Awaiting review</strong> (schedule December 18–21, 2015)</li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><p>In order to allow <code>AnySequence</code> delegate calls to the underlying sequence,<br>its initializer should have extra constraints.</p>
+<h2 id="Motivation">Motivation</h2><p>At the moment <code>AnyCollection</code> does not delegate calls to <code>SequenceType</code> protocol<br>methods to the underlying base sequence, which results in dynamic downcasts in<br>places where this behavior is needed (see default implementations of<br><code>SequenceType.dropFirst</code> or <code>SequenceType.prefix</code>). Besides, and this is even<br>more important, customized implementations of <code>SequenceType</code> methods would be<br>ignored without delegation.</p>
+<h2 id="Proposed_solution">Proposed solution</h2><p>See the implementation in <a href="https://github.com/apple/swift/pull/220" target="_blank" rel="external">this PR</a>.</p>
+<p>In order for this kind of delegation to become possible, <code>_SequenceBox</code> needs to<br>be able to ‘wrap’ not only the base sequence but also it’s associated<br><code>SubSequence</code>. So instead of being declared like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">internal <span class="class"><span class="keyword">class</span> <span class="title">_SequenceBox</span>&lt;<span class="title">S</span> : <span class="title">SequenceType</span>&gt;</span><br><span class="line">    : <span class="title">_AnySequenceBox</span>&lt;<span class="title">S</span>.<span class="title">Generator</span>.<span class="title">Element</span>&gt; </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>it would become this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">internal <span class="class"><span class="keyword">class</span> <span class="title">_SequenceBox</span>&lt;</span><br><span class="line">  <span class="title">S</span> : <span class="title">SequenceType</span></span><br><span class="line">  <span class="title">where</span></span><br><span class="line">    <span class="title">S</span>.<span class="title">SubSequence</span> : <span class="title">SequenceType</span>,</span><br><span class="line">    <span class="title">S</span>.<span class="title">SubSequence</span>.<span class="title">Generator</span>.<span class="title">Element</span> == <span class="title">S</span>.<span class="title">Generator</span>.<span class="title">Element</span>,</span><br><span class="line">    <span class="title">S</span>.<span class="title">SubSequence</span>.<span class="title">SubSequence</span> == <span class="title">S</span>.<span class="title">SubSequence</span></span><br><span class="line">&gt; : <span class="title">_AnySequenceBox</span>&lt;<span class="title">S</span>.<span class="title">Generator</span>.<span class="title">Element</span>&gt; </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>Which, in it’s turn, will lead to <code>AnySequence.init</code> getting a new set of<br>constraints as follows.</p>
+<p>Before the change:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">AnySequence</span>&lt;<span class="title">Element</span>&gt; : <span class="title">SequenceType</span> </span>&#123;</span><br><span class="line">  public <span class="keyword">init</span>&lt;</span><br><span class="line">    <span class="type">S</span>: <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">where</span></span><br><span class="line">      <span class="type">S</span>.<span class="type">Generator</span>.<span class="type">Element</span> == <span class="type">Element</span></span><br><span class="line">  &gt;(<span class="number">_</span> base: <span class="type">S</span>) &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After the change:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">AnySequence</span>&lt;<span class="title">Element</span>&gt; : <span class="title">SequenceType</span> </span>&#123;</span><br><span class="line">  public <span class="keyword">init</span>&lt;</span><br><span class="line">    <span class="type">S</span>: <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">where</span></span><br><span class="line">      <span class="type">S</span>.<span class="type">Generator</span>.<span class="type">Element</span> == <span class="type">Element</span>,</span><br><span class="line">      <span class="type">S</span>.<span class="type">SubSequence</span> : <span class="type">SequenceType</span>,</span><br><span class="line">      <span class="type">S</span>.<span class="type">SubSequence</span>.<span class="type">Generator</span>.<span class="type">Element</span> == <span class="type">Element</span>,</span><br><span class="line">      <span class="type">S</span>.<span class="type">SubSequence</span>.<span class="type">SubSequence</span> == <span class="type">S</span>.<span class="type">SubSequence</span></span><br><span class="line">  &gt;(<span class="number">_</span> base: <span class="type">S</span>) &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>These constraints, in fact, should be applied to <code>SequenceType</code> protocol itself<br>(although, that is not currently possible), as we expect every <code>SequenceType</code><br>implementation to satisfy them already.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>New constraints do not affect any built-in types that conform to<br><code>SequenceType</code> protocol as they are essentially constructed like this<br>(<code>SubSequence.SubSequence == SubSequence</code>). 3rd party collections, if they use<br>the default <code>SubSequence</code> (i.e. <code>Slice</code>), should also be fine. Those having<br>custom <code>SubSequence</code>s may stop conforming to the protocol.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/schedule/" itemprop="url">
+                swift schedule
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/schedule/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/schedule/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Swift_Evolution_Review_Schedule">Swift Evolution Review Schedule</h1><p>The <a href="process.md" title="The Swift evolution process">Swift evolution process</a> describes the process<br>by which Swift evolves. This document tracks the currently active<br>proposals in that process.</p>
+<h2 id="Active_reviews">Active reviews</h2><p>(No proposals under active review)</p>
+<h2 id="Upcoming_reviews">Upcoming reviews</h2><ul>
+<li>December 15–17, 2015: <a href="proposals/0008-lazy-flatmap-for-optionals.md">SE-0008</a></li>
+<li>December 16–20, 2015: <a href="proposals/0009-require-self-for-accessing-instance-members.md">SE-0009</a></li>
+<li>December 18–21, 2015: <a href="proposals/0014-constrained-AnySequence.md">SE-0014</a></li>
+</ul>
+<h2 id="Proposals_awaiting_scheduling">Proposals awaiting scheduling</h2><ul>
+<li><a href="proposals/0010-add-staticstring-unicodescalarview.md">SE-0010</a></li>
+<li><a href="proposals/0011-replace-typealias-associated.md">SE-0011</a></li>
+<li><a href="proposals/0012-add-noescape-to-public-library-api.md">SE-0012</a></li>
+<li><a href="proposals/0013-remove-partial-application-super.md">SE-0013</a></li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/README/" itemprop="url">
+                swift readme
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/README/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/README/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Swift_Programming_Language_Evolution">Swift Programming Language Evolution</h1><p><strong>Before you initiate a pull request</strong>, please read the process document. Ideas should be thoroughly discussed on the <a href="https://swift.org/community/#swift-evolution" target="_blank" rel="external">swift-evolution mailing list</a> first.</p>
+<p>This repository tracks the ongoing evolution of Swift. It contains:</p>
+<ul>
+<li>Goals for upcoming Swift releases (this document)</li>
+<li>The <a href="schedule.md">Swift evolution review schedule</a> tracking proposals to change Swift</li>
+<li>The <a href="process.md">Swift evolution process</a> that governs the evolution of Swift.</li>
+</ul>
+<p>This document describes goals for the Swift language on a per-release<br>basis, usually listing minor releases adding to the currently shipping<br>version and one major release out.  Each release will have many<br>smaller features or changes independent of these larger goals, and not<br>all goals are reached for each release.</p>
+<p>Goals for past versions are included at the bottom of the document for<br>historical purposes, but are not necessarily indicative of the<br>features shipped. The release notes for each shipped version are the<br>definitive list of notable changes in each release.</p>
+<h2 id="Development_major_version:_Swift_3-0">Development major version:  Swift 3.0</h2><p>Expected release date: Fall 2016</p>
+<p>The primary goal of this release is to stabilize the binary interface<br>of the language and standard library. As part of this process, we will<br>focus and refine the language to provide better overall consistency in<br>feel and implementation. Swift 3.0 will contain <em>source-breaking</em><br>changes from Swift 2.x where necessary to support these goals. More<br>concretely, this release is focused on several key areas:</p>
+<ul>
+<li><strong>Stable ABI</strong>: Stabilize the binary interface (ABI) to guarantee a level of binary compatibility moving forward. This involves finalizing runtime data structures, name mangling, calling conventions, and so on, as well as finalizing some of the details of the language itself that have an impact on its ABI. Stabilizing the ABI also extends to the Standard Library, its data types, and core algorithms. Successful ABI stabilization means that applications and libraries compiled with future versions of Swift can interact at a binary level with applications and libraries compiled with Swift 3.0, even if the source language changes.</li>
+<li><strong>Resilience</strong>: Solve the general problem of <a href="https://en.wikipedia.org/wiki/Fragile_binary_interface_problem" target="_blank" rel="external">fragile binary interface</a>, which currently requires that an application be recompiled if any of the libraries it depends on changes. For example, adding a new stored property or overridable method to a class should not require all subclasses of that class to be recompiled. There are several broad concerns for resilience:<ul>
+<li><em>What changes are resilient?</em>: Define the kinds of changes that can be made to a library without breaking clients of that library. Source-compatible changes to libraries are good candidates for resilient changes, but such decisions also consider the effects on the implementation.</li>
+<li><em>How is a resilient library implemented?</em>: What runtime representations are necessary to allow applications to continue to work after making resilient changes to a library? This dovetails with the stabilization of the ABI, because the stable ABI should be a resilient ABI.</li>
+<li><em>How do we maintain high performance?</em>: Resilient implementations often incur more execution overhead than non-resilient (or <em>fragile</em>) implementations, because resilient implementations need to leave some details unspecified until load time, such as the specific sizes of a class or offsets of a stored property.</li>
+</ul>
+</li>
+<li><strong>Portability</strong>: Make Swift available on other platforms and ensure that one can write portable Swift code that works properly on all of those platforms.</li>
+<li><strong>Type system cleanup and documentation</strong>: Revisit and document the various subtyping and conversion rules in the type system, as well as their implementation in the compiler’s type checker. The intent is to converge on a smaller, simpler type system that is more rigorously defined and more faithfully represented by the type checker.</li>
+<li><strong>Complete generics</strong>: Generics are used pervasively in a number of Swift libraries, especially the standard library. However, there are a number of generics features the standard library requires to fully realize its vision, including recursive protocol constraints, the ability to make a constrained extension conform to a new protocol (i.e., an array of <code>Equatable</code> elements is <code>Equatable</code>), and so on. Swift 3.0 should provide those generics features needed by the standard library, because they affect the standard library’s ABI.</li>
+<li><strong>Focus and refine the language</strong>: Despite being a relatively young language, Swift’s rapid development has meant that it has accumulated some language features and library APIs that don’t fit well with the language as a whole. Swift 3 will remove or improve those features to provide better overall consistency for Swift.</li>
+<li><strong>API design guidelines</strong>: The way in which Swift is used in popular<br>libraries has almost as much of an effect on the character of Swift<br>code as the Swift language itself. The <a href="https://swift.org/documentation/api-design-guidelines.html" target="_blank" rel="external">API design<br>guidelines</a> provide guidance for<br>building great Swift APIs. For Swift 3.0, the Swift standard library<br>and core libraries are being updated to match these guidelines, and<br>Swift’s Objective-C importer will <a href="proposals/0005-objective-c-name-translation.md">automatically map</a> from the <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" target="_blank" rel="external">Cocoa guidelines for<br>Objective-C</a><br>to the Swift API guidelines.</li>
+</ul>
+<h3 id="Out_of_Scope">Out of Scope</h3><p>A significant part of delivering a major release is in deciding what<br><em>not</em> to do, which means deferring many good ideas. The following is a<br>sampling of potentially good ideas that are not in scope for Swift<br>3.0:</p>
+<ul>
+<li><p><strong>Full source compatibility</strong>: Swift 3.0 will not provide full<br>source compatibility. Rather, it can and will introduce<br>source-breaking changes needed to support the main goals of Swift<br>3.0.</p>
+</li>
+<li><p><strong>Concurrency</strong>: Swift 3.0 relies entirely on platform concurrency<br>primitives (libdispatch, Foundation, pthreads, etc.) for<br>concurrency. Language support for concurrency is an often-requested<br>and potentially high-value feature, but is too large to be in scope<br>for Swift 3.0.</p>
+</li>
+<li><p><strong>C++ Interoperability</strong>: Swift’s interoperability with C and<br>Objective-C is one of its major strengths, allowing it to integrate<br>with platform APIs. Interoperability with C++ libraries would<br>enhance Swift’s ability to work with existing libraries and APIs.<br>However, C++ itself is a very complex language, and providing good<br>interoperability with C++ is a significant undertaking that is out<br>of scope for Swift 3.0.</p>
+</li>
+<li><p><strong>Hygienic Macros</strong>: A first-class macro system is something we may consider<br>in future releases.  We don’t want the existence of a macro system to be a<br>workaround that reduces the incentive for making the core language great.</p>
+</li>
+<li><p><strong>Major new library functionality</strong>: The Swift Standard Library is focused on<br>providing core “language” functionality as well as common data structures.  The<br>“corelibs” projects are focused on providing existing Foundation functionality<br>in a portable way.  We <em>will</em> consider minor extensions to their existing<br>feature sets to round out these projects.</p>
+<p>On the other hand, major new libraries (e.g. a new Logging subsystem) are<br>best developed as independent projects on GitHub (or elsewhere) and organized<br>with the Swift Package Manager.  Beyond Swift 3 we may consider standardizing<br>popular packages or expanding the scope of the project.  </p>
+</li>
+</ul>
+<h3 id="Accepted_proposals_for_Swift_3-0">Accepted proposals for Swift 3.0</h3><ul>
+<li><a href="proposals/0005-objective-c-name-translation.md">Better Translation of Objective-C APIs Into Swift</a></li>
+<li><a href="proposals/0002-remove-currying.md">Removing currying <code>func</code> declaration syntax</a></li>
+<li><a href="proposals/0003-remove-var-parameters-patterns.md">Removing <code>var</code> from Function Parameters and Pattern Matching</a></li>
+<li><a href="proposals/0004-remove-pre-post-inc-decrement.md">Remove the <code>++</code> and <code>--</code> operators</a></li>
+<li><a href="proposals/0007-remove-c-style-for-loops.md">Remove C-style for-loops with conditions and incrementers</a></li>
+</ul>
+<h2 id="Development_minor_version:_Swift_2-2">Development minor version:  Swift 2.2</h2><p>Expected release date: Spring 2016</p>
+<p>This release will focus on fixing bugs, improving<br>quality-of-implementation (QoI) with better warnings and diagnostics,<br>improving compile times, and improving performance.  It may also put<br>some finishing touches on features introduced in Swift 2.0, and<br>include some small additive features that don’t break Swift code or<br>fundamentally change the way Swift is used. As a step toward Swift<br>3.0, it will introduce warnings about upcoming source-incompatible<br>changes in Swift 3.0 so that users can begin migrating their code<br>sooner.</p>
+<h3 id="Accepted_proposals_for_Swift_2-2">Accepted proposals for Swift 2.2</h3><ul>
+<li><a href="proposals/0001-keywords-as-argument-labels.md">Allow (most) keywords as argument labels</a></li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/09/docker/kitematic/README/" itemprop="url">
+                Kitematic
+安装
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-09T10:34:35+08:00" content="2015-12-09">
+            2015-12-09
           </time>
         </span>
 
@@ -442,8 +1205,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/opensuse/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/opensuse/" itemprop="commentsCount"></span>
+            <a href="/2015/12/09/docker/kitematic/README/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/09/docker/kitematic/README/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -458,35 +1221,26 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="openSUSE">openSUSE</h1><p>Docker 支持 openSUSE 12.3 或更高版本。由于 Docker 的限制，Docker 只能运行在64位的主机上。</p>
-<p>Docker 不被包含在 openSUSE 12.3 和 openSUSE 13.1 的官方镜像仓库中。因此需要添加 OBS 的 <a href="https://build.opensuse.org/project/show/Virtualization" title="Virtualization repository " target="_blank" rel="external">虚拟化仓库</a> 来安装 <code>docker</code> 包</p>
-<p>执行下边的命令来添加虚拟化仓库(Virtualization repository)：</p>
-<pre><code><span class="comment"># openSUSE 12.3</span>
-<span class="variable">$ </span>sudo zypper ar -f <span class="symbol">http:</span>/<span class="regexp">/download.opensuse.org/repositories</span><span class="regexp">/Virtualization/open</span>SUSE_12.<span class="number">3</span>/ <span class="constant">Virtualization</span>
-
-<span class="comment"># openSUSE 13.1</span>
-<span class="variable">$ </span>sudo zypper ar -f <span class="symbol">http:</span>/<span class="regexp">/download.opensuse.org/repositories</span><span class="regexp">/Virtualization/open</span>SUSE_13.<span class="number">1</span>/ <span class="constant">Virtualization</span>
-</code></pre><p>在 openSUSE 13.2版本以后就不需要添加额外的库了。</p>
-<p>###SUSE Linux Enterprise</p>
-<p>可以在 SUSE Linux Enterprise 12 或 更高版本上来运行 Docker 。这里需要注意的是由于 Docker 当前的限制，只能在<strong>64位</strong>的主机上运行。</p>
-<p>##安装</p>
-<p>安装 Docker 包</p>
-<pre><code><span class="variable">$ </span>sudo zypper <span class="keyword">in</span> docker
-</code></pre><p>现在已经安装完毕，让我们来启动 docker 进程</p>
-<pre><code><span class="variable">$ </span>sudo systemctl start docker
-</code></pre><p>设置开机启动 docker：</p>
-<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker
-</code></pre><p>Docker 包会创建一个的叫 <code>docker</code> 的群组 ,如果想使用非 root 用户来运行，这个用户需要是 <code>docker</code> 群组的成员才可以与 docker 进程进行交互，你可以使用如下命令添加用户：</p>
-<pre><code>$ sudo usermod -<span class="tag">a</span> -G docker &lt;username&gt;
-</code></pre><p>确认一切都是否按照预期工作：</p>
-<pre><code>$ sudo docker <span class="command">run</span> <span class="comment">--rm -i -t opensuse /bin/bash</span>
-</code></pre><p>这条命令将下载和导入 <code>opensuse</code> 镜像，并且在容器内运行 bash，输入 exit 来退出容器。</p>
-<p>如果你想要你的容器能够访问外部的网络，你就需要开启 <code>net.ipv4.ip_forward</code> 规则。这里你可以使用 YaST 工具查找 Network Devices -&gt; Network Settings -&gt; Routing 按钮来确认 IPv4 Forwarding 选择框是否被选中。</p>
-<p>当由 Network Manager 来管理网络的时候，就不能按照上边的方法设置了。这里我们需要手动的编辑 <code>/etc/sysconfig/SuSEfirewall2</code> 文件来确保 <code>FW_ROUTE</code> 被设置成 <code>yes</code>,如下：</p>
-<pre><code><span class="setting">FW_ROUTE=<span class="value"><span class="string">"yes"</span></span></span>
-</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
+          <span itemprop="articleBody"><h1 id="Kitematic:_安装_Kitematic">Kitematic: 安装 Kitematic</h1><p>你可以在 Mac 或者 Windows PC 上像安装其它应用一样来安装 Kitematic：下载安装包，运行安装程序。</p>
+<p>##下载 Kitematic</p>
+<p><a href="https://kitematic.com/download/" target="_blank" rel="external">下载 Kitematic的 zip 文件</a>,双击解压文件，然后双击运行安装程序。您可能还需要将你的应用程序放到您的应用程序文件夹。</p>
+<p>##初始化设置</p>
+<p>第一次打开 Kitematic 会为你能够运行 Docker 容器而进行一些必要的设置。如果你没有安装 Virtualbox， Kitematic 会下载和安装最新版本。</p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/installing.png" alt="安装图片"></p>
+<p>做完这些之后！在一分钟之内，你就可以准备开始运行你的第一个容器。</p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/containers.png" alt="容器"></p>
+<p>##技术详细信息</p>
+<p>Kitematic 是一个建立在其它应用上的 app，能够处理异常：</p>
+<ul>
+<li>如果 Virtualbox 没有安装，它将会安装它。</li>
+</ul>
+<h2 id="为什么_Kitematic_需要_root_密码">为什么 Kitematic 需要 root 密码</h2><p>为什么 Kitematic 需要你的 root 密码，这里有两个原因：</p>
+<ul>
+<li>安装 Virtualbox 需要 root 权限，因为安装的时候需要对 Mac OS X 内核进行扩展。</li>
+<li>如果你在安装 Kitematic 之前更改了默认的目录权限，当你复制 <code>docker</code> 和 <code>docker-machine</code> 到 <code>/usr/local/bin</code> 是需要 root 权限的。</li>
+</ul>
 <p>##下一步</p>
-<p>阅读<a href="../userguide/README.md">用户指南</a>。</p>
+<p>有关使用 Kitematic 的信息，请查看<a href="userguide.md">用户指南</a>。</p>
 </span>
         
       
@@ -517,8 +1271,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/installation/mac/" itemprop="url">
-                Mac OS X 安装 Docker
+              <a class="post-title-link" href="/2015/12/08/docker/machine/install-machine/" itemprop="url">
+                安装 Docker Machine
               </a>
             
           
@@ -528,7 +1282,7 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
+          <time itemprop="dateCreated" datetime="2015-12-08T15:16:23+08:00" content="2015-12-08">
             2015-12-08
           </time>
         </span>
@@ -554,8 +1308,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/mac/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/mac/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/machine/install-machine/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/machine/install-machine/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -570,967 +1324,34 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Mac_OS_X_安装_Docker">Mac OS X 安装 Docker</h1><blockquote>
-<p>注意：<br>该 Docker 版本为了支持 Docker 机,于是不再支持 Boot2Docker 命令行。使用 Docker Toolbox 和其它 Docker 工具来安装 Docker 机。</p>
-</blockquote>
-<p>您可以利用 Docker Toolbox 来安装 Docker。Docker Toolbox 提供了以下工具：</p>
+          <span itemprop="articleBody"><h1 id="安装_Docker_Machine">安装 Docker Machine</h1><p>Docker Machine 支持 Windows ,OS X ,和 Linux，并且被安装为一个独立的二进制文件。用于各平台架构的二进制文件链接如下：</p>
 <ul>
-<li>用于运行 docker-machine 二进制文件的 <code>Docker Machine</code></li>
-<li>用于运行 docker 二进行文件的 <code>Docker Engine</code></li>
-<li>用于运行 docker-compose 二进行文件的 <code>Docker Compose (Mac 特有)</code></li>
-<li>Kitematic，Docker 的图形用户界面</li>
-<li>用于 Docker 命令行环且预先配置好的 shell</li>
-<li>Oracle VM VirtualBox</li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-386.exe" target="_blank" rel="external">Windows - 32bit</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe" target="_blank" rel="external">Windows - 64bit</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64" target="_blank" rel="external">OSX - x86_64</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-386" target="_blank" rel="external">OSX - (老款 macs)</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64" target="_blank" rel="external">Linux - x86_64</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-386" target="_blank" rel="external">Linux - i386</a></li>
 </ul>
-<p>由于 Docker 的后台程序使用了 Linux 特有的内核特性，所以您不能直接在 OS X 上运行 Docker。相反，您必须使用 <code>docker-machine</code> 来创建并附加一台虚拟机（VM）。该虚拟机需要安装 Linux 操作系统以便在您 Mac 机上运行 Docker。</p>
-<p>####前提条件</p>
-<p>您 Mac 机的 OS X 版本必须大于等于 10.8 “Snow Leopard” 才可以安装 Docker Toolbox。</p>
-<p>###在安装之前先来了解一些关键概念</p>
-<p>当我们在一台 Linux 主机上安装完 Docker 之后，我们的机器中就包含了本地主机和 Docker 主机。如果从网络层来划分，本地主机就代表你的电脑，而 Docker 主机就是运行 container 的那台机器。</p>
-<p>在 Linux 机器上的一种典型安装 Docker 方法：Docker 客户端，Docker 后台程序和 container 会直接运行在您的机器上。这就意味着您可以使用标准的本地主机寻址（例如 <code>localhost:8000</code> 或者 <code>0.0.0.0:8376</code>）来为 Docker container 分配一个地址。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/linux_docker_host.svg" alt="linux_docker_host"></p>
-<p>在 OS X 上安装的 Docker ，其 Docker 后台程序是运行在一个名为 <code>default</code> 的 Linux 虚拟机上的。<code>default</code> 是 Linux 上的一个轻量级的虚拟机，是专门用于在 Mac OS X 机器上运行 Docker 的。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac_docker_host.svg" alt="mac_docker_host"></p>
-<p>在 OS X 中，Docker 主机地址就是 Linux 虚拟机的地址。当你使用 <code>docker-machine</code> 启动虚拟机的时候，该虚拟机会自动获取到 IP 地址。当您开启一个 container 的时候，container 上的端口会映射到虚拟机的端口上。本页面上的实践操作会一一印证上述内容。</p>
-<p>###安装</p>
-<p>如果您有一个正在运行着的 VirtualBox，那么请您在运行安装器（Docker Toolbox）之前务必关闭它。</p>
-<ol>
-<li><p>进入 <a href="https://www.docker.com/toolbox" target="_blank" rel="external">Docker Toolbox</a> 页面。</p>
-</li>
-<li><p>点击 Docker Toolbox 下载链接，进行下载。</p>
-</li>
-<li><p>双击安装包或者通过右击并在快捷菜单中选择“打开”的方式安装 Docker Toolbox。</p>
-<p>此时会弹出“Install Docker Toolbox”（安装 Docker 工具箱）窗口。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-welcome-page.png" alt="mac-welcome-page"></p>
-</li>
-<li><p>点击“继续”（Continue），安装 toolbox。</p>
-<p>此时，toolbox 会展现给你一些选项，供您自定义标准安装。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-page-two.png" alt="mac-page-two"></p>
-<p>默认情况下，标准的 Docker Toolbox 安装是这样的：</p>
-<ul>
-<li>向 <code>/usr/local/bin</code> 目录中添加 Docker 工具的二进制文件。</li>
-<li>修改权限使得这些二进制文件可供任何用户使用。</li>
-<li>更新现有的 VirtualBox 安装。</li>
-</ul>
-<p><br><br>通过点击“自定义”或“更改安装目录”修改这些默认安装值。</p>
-</li>
-<li><p>点击“安装”，执行标准安装。</p>
-<p>系统提示您输入密码。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-password-prompt.png" alt="mac-password-prompt"></p>
-</li>
-<li><p>输入密码，继续安装</p>
-<p>安装完成后，Docker Toolbox 会为您提供一些信息，通过这些信息您可以完成一些常见的任务。 </p>
-</li>
-<li><p>点击“关闭”，离开当前窗口。</p>
-</li>
-</ol>
-<p>##运行 Docker Container</p>
-<p>想要运行一个 Docker 容器，你需要做如下内容：</p>
-<ul>
-<li>创建一个新的（或开启一台已存在的）Docker 虚拟机</li>
-<li>从您当前的环境切换到新的虚拟机的环境中</li>
-<li>利用 <code>docker</code> 客户端创建，加载并管理 container</li>
-</ul>
-<p>一旦您创建了一台虚拟机，您就可以随时使用它。如同任意一台 VirtualBox 虚拟机，在每次使用它的时候都会保存其配置。</p>
-<p>这里提供两种使用 Docker Toolbox 的方法：使用 Docker 的快速入门终端或使用您的 shell 环境。</p>
-<p>###使用 Docker 的快速入门终端</p>
-<ol>
-<li>打开“应用程序”文件夹或“启动面板”。</li>
-<li><p>找到 Docker 快速入门终端并双击启动它。</p>
-<p>该应用程序：</p>
-<ul>
-<li>开启一个终端窗口</li>
-<li>如果还没有虚拟机的化，请创建一台名叫 <code>default</code> 的虚拟机；如果已经存在这样一台虚拟机，请你开启它。</li>
-<li>将当前终端环境切换到虚拟机环境中。</li>
-</ul>
-<p>一旦启动完成，Docker 快速入门终端会是如下状态：</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-success.png" alt="mac-success"><br>现在，您可以运行 <code>docker</code> 命令了。</p>
-</li>
-<li><p>通过运行 <code>hello-world</code> container 来核实您的安装是否成功。</p>
-</li>
-</ol>
-   <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ docker run hello-world</span><br><span class="line">Unable <span class="built_in">to</span> find image <span class="string">'hello-world:latest'</span> locally</span><br><span class="line"><span class="number">511136</span>ea3c5a: Pull complete</span><br><span class="line"><span class="number">31</span>cbccb51277: Pull complete</span><br><span class="line">e45a5af57b00: Pull complete</span><br><span class="line">hello-world:latest: The image you are pulling has been verified.</span><br><span class="line">Important: image verification is <span class="operator">a</span> tech preview feature <span class="operator">and</span> should <span class="operator">not</span> be</span><br><span class="line">relied <span class="command"><span class="keyword">on</span> <span class="title">to</span> <span class="title">provide</span> <span class="title">security</span>.</span></span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</span><br><span class="line">Hello <span class="built_in">from</span> Docker.</span><br><span class="line">This message shows that your installation appears <span class="built_in">to</span> be working correctly.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">To generate this message, Docker took <span class="operator">the</span> following steps:</span><br><span class="line"><span class="number">1.</span> The Docker client contacted <span class="operator">the</span> Docker daemon.</span><br><span class="line"><span class="number">2.</span> The Docker daemon pulled <span class="operator">the</span> <span class="string">"hello-world"</span> image <span class="built_in">from</span> <span class="operator">the</span> Docker Hub.</span><br><span class="line">   (Assuming <span class="keyword">it</span> was <span class="operator">not</span> already locally available.)</span><br><span class="line"><span class="number">3.</span> The Docker daemon created <span class="operator">a</span> <span class="built_in">new</span> container <span class="built_in">from</span> that image which runs <span class="operator">the</span></span><br><span class="line">   executable that produces <span class="operator">the</span> output you are currently reading.</span><br><span class="line"><span class="number">4.</span> The Docker daemon streamed that output <span class="built_in">to</span> <span class="operator">the</span> Docker client, which sent <span class="keyword">it</span></span><br><span class="line">   <span class="built_in">to</span> your terminal.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">To <span class="keyword">try</span> something more ambitious, you can run <span class="operator">an</span> Ubuntu container <span class="operator">with</span>:</span><br><span class="line">$ docker run -<span class="keyword">it</span> ubuntu bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">For more examples <span class="operator">and</span> ideas, visit:</span><br><span class="line"><span class="keyword">http</span>://docs.docker.com/userguide/</span><br></pre></td></tr></table></figure>
-<p>一个可以和 Docker 工具进行交互的另一种典型方法就是：从您的 shell 命令行入手。</p>
-<p>###使用shell 命令行<br>该部分假设您正在运行一个 Bash shell。您运行的可能是不同的 shell，例如 C shell，但是不用担心，命令都是一样的。</p>
-<ol>
-<li><p>创建一个新的 Docker 虚拟机。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   $ docker-machine <span class="operator"><span class="keyword">create</span> <span class="comment">--driver virtualbox default      </span></span><br><span class="line"></span><br><span class="line">   Creating VirtualBox VM...</span><br><span class="line">   Creating SSH <span class="keyword">key</span>...</span><br><span class="line">   <span class="keyword">Starting</span> VirtualBox VM...</span><br><span class="line">   <span class="keyword">Starting</span> VM...</span><br><span class="line">   <span class="keyword">To</span> see how <span class="keyword">to</span> <span class="keyword">connect</span> Docker <span class="keyword">to</span> this machine, run: docker-machine env <span class="keyword">default</span></span><br><span class="line">   <span class="string">``</span><span class="string">` </span><br><span class="line">  </span><br><span class="line">   这就在 VirtualBox 中创建了一台新的 `</span><span class="keyword">default</span><span class="string">` 虚拟机。</span><br><span class="line">   </span><br><span class="line">   该命令还会在 `</span>~/.docker/machine/machines/<span class="keyword">default</span><span class="string">` 目录下生成一个 docker machine 的配置文件。您只需执行一次 `</span><span class="keyword">create</span><span class="string">` 命令。然后，您可以使用 `</span>docker-machine<span class="string">` 命令来开启，停止，查询并管理虚拟机。</span><br><span class="line"></span><br><span class="line">2. 列出所有可用的 docker machine。</span></span></span><br></pre></td></tr></table></figure>
-<p>$ docker-machine ls<br>NAME                ACTIVE   DRIVER       STATE     URL                         SWARM<br>default             *        virtualbox   Running   tcp://192.168.99.101:2376  </p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   如果您之前安装了现在已经舍弃了的 Boot2Docker 这个应用程序的话或者您运行了 Docker 快速入门终端，在列表中还会有一个 <span class="escape">`d</span>ev<span class="escape">` </span>虚拟机。当   您创建 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的时候，<span class="escape">`d</span>ocker-machine<span class="escape">` </span>命令给出了一些指导，以便您您连接虚拟机。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 获取 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的环境变量</span><br></pre></td></tr></table></figure>
-<p>$ docker-machine env default<br>export DOCKER_TLS_VERIFY=”1”<br>export DOCKER_HOST=”tcp://192.168.99.101:2376”<br>export DOCKER_CERT_PATH=”/Users/mary/.docker/machine/machines/default”<br>export DOCKER_MACHINE_NAME=”default”</p>
-<h1 id="Run_this_command_to_configure_your_shell:">Run this command to configure your shell:</h1><h1 id="eval_“$(docker-machine_env_default)”">eval “$(docker-machine env default)”</h1><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">4</span>. 连接到 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机</span><br></pre></td></tr></table></figure>
-<p>$ eval “$(docker-machine env default)”</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">5</span>. 运行 <span class="escape">`h</span>ello-world<span class="escape">` </span>container 来验证您的安装是否已经成功。</span><br></pre></td></tr></table></figure>
-<p>docker run hello-world</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">##学习 Toolbox 安装</span></span><br><span class="line"></span><br><span class="line">Toolbox 将 Docker Engine 的可执行文件和 Docker 的可执行文件下载到您的系统中。当您使用 Docker 快速入门终端或手动创建一个 `<span class="javascript"><span class="keyword">default</span></span>` 虚拟机的时候，Docker Machine 会更新 `<span class="javascript">~<span class="regexp">/.docker/m</span>achine/machines/<span class="keyword">default</span></span>` 文件。该文件夹中包含了虚拟机的配置文件。</span><br><span class="line"></span><br><span class="line">您可以利用 Docker Machine 在系统中创建多个虚拟机，那么也就会有多个虚拟机的配置文件。如果您想要删除某台虚拟机，请您使用 `<span class="javascript">docker-machine rm &lt;machine-name&gt;</span>` 命令。</span><br><span class="line"></span><br><span class="line"><span class="comment">##从 Boot2Docker 迁移</span></span><br><span class="line">如果您现在用的还是 Boot2Docker 的话，在您的本地系统中还会有一个 `<span class="javascript">boot2docker-vm</span>` 虚拟机。为了允许 Docker Machine 管理该台虚拟机，你可以对它进行迁移。</span><br><span class="line"><span class="number">1.</span> 打开一个终端或 Docker 的命令行界面。</span><br><span class="line"><span class="number">2.</span> 输入以下命令。</span><br></pre></td></tr></table></figure>
-<p>docker-machine create -d virtualbox –virtualbox-import-boot2docker-vm boot2docker-vm docker-vm<br>```</p>
-</li>
-<li>使用 <code>docker-machine</code> 命令与该台要被迁移的虚拟机进行交互。<br><code>docker-machine</code> 的子命令和 <code>boot2docker</code> 的子命令比起来还是有一些不同之处的。下面这个表列出了对比了二者的不同并介绍其功能。   </li>
-</ol>
-<table>
-<thead>
-<tr>
-<th><strong><code>boot2docker</code></strong></th>
-<th><strong><code>docker-machine</code></strong></th>
-<th><strong><code>docker-machine</code></strong> description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>init</td>
-<td>create</td>
-<td>Creates a new docker host.</td>
-</tr>
-<tr>
-<td>up</td>
-<td>start</td>
-<td>Starts a stopped machine.</td>
-</tr>
-<tr>
-<td>ssh</td>
-<td>ssh</td>
-<td>Runs a command or interactive ssh session on the machine.</td>
-</tr>
-<tr>
-<td>save</td>
-<td>-</td>
-<td>Not applicable.</td>
-</tr>
-<tr>
-<td>down</td>
-<td>stop</td>
-<td>Stops a running machine.</td>
-</tr>
-<tr>
-<td>poweroff</td>
-<td>stop</td>
-<td>Stops a running machine.</td>
-</tr>
-<tr>
-<td>reset</td>
-<td>restart</td>
-<td>Restarts a running machine.</td>
-</tr>
-<tr>
-<td>config</td>
-<td>inspect</td>
-<td>Prints machine configuration details.</td>
-</tr>
-<tr>
-<td>status</td>
-<td>ls</td>
-<td>Lists all machines and their status.</td>
-</tr>
-<tr>
-<td>info</td>
-<td>inspect</td>
-<td>Displays a machine’s details.</td>
-</tr>
-<tr>
-<td>ip</td>
-<td>ip</td>
-<td>Displays the machine’s ip address.</td>
-</tr>
-<tr>
-<td>shellinit</td>
-<td>env</td>
-<td>Displays shell commands needed to configure your shell to interact with a machine.</td>
-</tr>
-<tr>
-<td>delete</td>
-<td>rm</td>
-<td>Removes a machine.</td>
-</tr>
-<tr>
-<td>download</td>
-<td>-</td>
-<td>Not applicable.</td>
-</tr>
-<tr>
-<td>upgrade</td>
-<td>upgrade</td>
-<td>Upgrades a machine’s Docker client to the latest stable release.</td>
-</tr>
-</tbody>
-</table>
-<p>##Mac OS X 上 Docker 的实例<br>通过了解本小节，您可以尝试在虚拟机上进行一些可行的 container 任务。现在，您应该有一台运行着的虚拟机，且通过 shell 脚本可以连接到该虚拟机。为了验证上面所说的，可以执行如下命令来验证:</p>
-<pre><code>$ docker-machine ls
-NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-<span class="keyword">default</span>             *        virtualbox   Running   <span class="string">tcp:</span><span class="comment">//192.168.99.100:2376   </span>
-</code></pre><p>该台处于 <code>ACTIVE</code> 状态的虚拟机，即本例中的 default 虚拟机，就是您的环境所指向的虚拟机。</p>
-<p>###访问 container 的端口</p>
-<ol>
-<li><p>在 DOCKER_HOST 上开启一个NGINX container。</p>
-<pre><code>$ docker <span class="command">run</span> -d -P <span class="comment">--name web nginx</span>
-</code></pre><p>一般来说，<code>docker run</code> 命令会开启一个 container，并运行它，最后关闭它。加上 <code>-d</code> 这个参数，container 就可以在您执行了 <code>docker run</code> 这条命令后继续在后台运行了。加上 <code>-P</code> 这个参数就可以将 container 监听的那个端口告知给 Docker Host；这样您就可以在您的 Mac 机上访问 container 了。</p>
-</li>
-<li><p>执行 <code>docker ps</code> 命令，查看运行着的 container</p>
-<pre><code>CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
-<span class="number">5f</span>b65ff765e9        nginx:latest  
-</code></pre><p>此时，您会发现 <code>nginx</code> 依然在后台运行。</p>
-</li>
-<li><p>查看 container 的端口</p>
-<pre><code>$ docker port web
-<span class="number">443</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49156</span>
-<span class="number">80</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49157</span>
-</code></pre><p>该命令显示出的内容会告诉你 <code>web</code> container 的 <code>80</code> 端口已经映射到了 Docker Host 上的 <code>49157</code> 端口上。</p>
-</li>
-<li><p>在您的浏览器中输入地址 <code>http://localhost:49157</code>（localhost 就是 0.0.0.0）。</p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/bad_host1.png" alt="bad_host1"><br>并没有生效，其原因就是 <code>DOCKER_HOST</code> 的地址并不是你本地的机器的地址（0.0.0.0），而是您的 Docker 虚拟机的地址。</p>
-</li>
-<li><p>获取 Docker 虚拟机（即 <code>default</code>）的地址。</p>
-<pre><code>$ docker-machine ip <span class="keyword">default</span>
-<span class="number">192.168</span><span class="number">.59</span><span class="number">.103</span>
-</code></pre></li>
-<li><p>在您的浏览器中输入地址 <code>http://192.168.59.103:49157</code></p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/good_host1.png" alt="good_host1"><br>成功了！</p>
-</li>
-<li><p>如果您想停止并删除正在运行的 <code>nginx</code> container 的话，请执行如下操作：</p>
-<pre><code><span class="variable">$ </span>docker stop web
-<span class="variable">$ </span>docker rm web
-</code></pre></li>
-</ol>
-<p>###为容器挂载一个卷</p>
-<p>当您开启一个 container 的时候，系统会自动将您本机中的 <code>/Users/username</code> 目录共享给 Docker 虚拟机。通过本次共享，您可以将该目录挂载到您的 container 上。下面的内容将会介绍如何做到这些。</p>
-<ol>
-<li><p>跳转到您的用户 <code>$HOME</code> 目录下。</p>
-<pre><code>$ cd <span class="variable">$HOME</span>
-</code></pre></li>
-<li><p>创建一个新的 <code>site</code> 目录。</p>
-<pre><code><span class="variable">$ </span>mkdir site
-</code></pre></li>
-<li><p>跳转到 <code>site</code> 目录中。</p>
-<pre><code>$ <span class="built_in">cd</span> site
-</code></pre></li>
-<li><p>创建一个新的 <code>index.html</code> 文件。</p>
-<pre><code>$ <span class="keyword">echo</span> <span class="string">"my new site"</span> &gt; <span class="built_in">index</span>.html
-</code></pre></li>
-<li><p>开启一个新 <code>nginx</code> container 并将 <code>html</code> 目录替换为 <code>site</code> 目录。</p>
-<pre><code>$ docker run -d -P -v <span class="variable">$HOME</span>/site:/usr/share/nginx/html --name mysite nginx
-</code></pre></li>
-<li><p>获取到 <code>mysite</code> 这个 container 的端口。</p>
-<pre><code>$ docker port mysite
-<span class="number">80</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49166</span>
-<span class="number">443</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49165</span>
-</code></pre></li>
-<li><p>在浏览器中输入地址：</p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/newsite_view1.png" alt="newsite_view1"></p>
-</li>
-<li><p>立即添加一个文件到 <code>$HOME/siet</code> 目录下。</p>
-<pre><code>$ <span class="built_in">echo</span> <span class="string">"This is cool"</span> &gt; cool.html
-</code></pre></li>
-<li><p>在浏览器中输入地址：</p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/cool_view1.png" alt="cool_view1"></p>
-</li>
-<li><p>停止然后删除正在运行的 <code>mysite</code> container。</p>
-<pre><code><span class="variable">$ </span>docker stop mysite
-<span class="variable">$ </span>docker rm mysite
-</code></pre></li>
-</ol>
-<p>##更新 Docker Toolbox</p>
-<p>为更新Docker Toolbox, 需要下载并重新运行<a href="https://docker.com/toolbox/" target="_blank" rel="external">Docker Toolbox安装器</a>.</p>
-<p>##卸载 Docker Toolbox</p>
-<p>按照以下步骤卸载Toolbox：</p>
-<ol>
-<li><p>列出所有的虚拟机</p>
-<pre><code>$ docker-machine ls
-NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-dev                 *        virtualbox   Running   <span class="string">tcp:</span><span class="comment">//192.168.99.100:2376   </span>
-my-docker-machine            virtualbox   Stopped                               
-<span class="keyword">default</span>                      virtualbox   Stopped  
-</code></pre></li>
-<li><p>删除（列出的）每一台虚拟机.</p>
-<pre><code>$ docker-machine rm <span class="built_in">dev</span>
-Successfully removed <span class="built_in">dev</span>
-</code></pre><p>删除一台虚拟机，意味着从<code>VirtualBox</code>和<code>~/.docker/machine/machines</code>目录中同时删除虚拟机文件。 </p>
-</li>
-<li><p>从“应用程序“文件夹中删除Docker快捷终端（Quickstart Terminal）和Kitematic.</p>
-</li>
-<li><p>从/usr/local/bin文件夹中删除docker, docker-compose和 docker-machine命令文件.</p>
-<pre><code>$ rm <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>docker
-</code></pre></li>
-<li><p>从系统中删除 <code>~/.docker</code> 文件夹.</p>
-</li>
-</ol>
-<p>##学习更多</p>
-<p>使用”docker-machine help”命令可以列出关于Docker Machine的全部命令行参考信息.参照<a href="https://docs.docker.com/machine/" target="_blank" rel="external">Docker Machine文档</a>来获得关于如何使用 SSH 或者 SCP 访问虚拟机的信息。<br>接下来，可以继续了解<a href="https://docs.docker.com/userguide" target="_blank" rel="external">Docker用户手册</a> . 如果对使用Kitematic图形界面工具感兴趣，可以参考阅读 <a href="https://docs.docker.com/kitematic/userguide/" target="_blank" rel="external">Kitermatic用户手册</a>.</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/installation/google/" itemprop="url">
-                Google Cloud Platform版本的
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/google/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/google/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Google_Cloud_Platform">Google Cloud Platform</h1><p>###Google Compute Enginer 镜像快速入门</p>
-<p>1.去谷歌云控制台，创建一个新的云计算项目，启用云引擎</p>
-<p>2.使用如下的命令来下载谷歌云 SDK 并配置您的项目：</p>
-<pre><code>$ curl https://sdk.cloud.google.com | bash
-$ gcloud auth login
-$ gcloud config <span class="operator"><span class="keyword">set</span> <span class="keyword">project</span> &lt;google-cloud-<span class="keyword">project</span>-<span class="keyword">id</span>&gt;</span>
-</code></pre><p>3.启动一个新实例，使用最新的 Container-optimized 镜像:(选择一个接近你所需实例大小的分区)</p>
-<pre><code>$ gcloud compute instances create docker-playground \
--<span class="ruby">-image <span class="symbol">https:</span>/<span class="regexp">/www.googleapis.com/compute</span><span class="regexp">/v1/projects</span><span class="regexp">/google-containers/global</span><span class="regexp">/images/container</span>-vm-v20140522 \
-</span>-<span class="ruby">-zone us-central1-a \
-</span>-<span class="ruby">-machine-type f1-micro</span>
-</code></pre><p>4.用ssh来连接这个实例：</p>
-<pre><code>$ gcloud compute ssh <span class="comment">--zone us-central1-a docker-playground</span>
-docker-playground:~$ sudo docker <span class="command">run</span> hello-world
-</code></pre><p>当 Docker 输出 hello word 消息的时候，说明你的 Docker 工作正常。</p>
-<p>更多，请阅读 <a href="https://developers.google.com/compute/docs/containers" target="_blank" rel="external"> google 云平台部署容器 </a></p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/installation/debian/" itemprop="url">
-                Debian支持 Docker
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/debian/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/debian/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Debian">Debian</h1><p>以下版本的 Debian 支持 Docker：</p>
-<ul>
-<li><a href="#debian-jessie-80-64-bit">Debian 8.0 Jessie (64-bit)</a></li>
-<li><a href="#debian-wheezystable-7x-64-bit">Debian 7.7 Wheezy (64-bit)</a></li>
-</ul>
-<p>##Debian Jessie 8.0 (64-bit)Debian</p>
-<p>Debian 8 使用的是 3.14.0 的内核版本，可以从 Debian 的镜像源来安装 <code>docker.io</code> 包。</p>
-<blockquote>
-<p>提示：Debian 包含一个特别老的KDE3/GNOME2包叫 <code>docker</code> ,所以我们把这个包叫<code>docker.io</code>。</p>
-</blockquote>
-<p>###安装</p>
-<p>安装最新版的 Debian 软件包（可能不是最新版本 Docker ）</p>
-<pre><code>$ sudo apt-<span class="built_in">get</span> <span class="keyword">update</span>
-$ sudo apt-<span class="built_in">get</span> install docker.io
-</code></pre><p>验证 Docker 是否正常工作 ：</p>
-<pre><code>$ sudo docker run -<span class="tag">i</span> -t  Ubuntu  /bin/bash
-</code></pre><p>该命令将下载 <code>Ubuntu</code> 镜像，并且在容器内运行 <code>bash</code>.</p>
-<blockquote>
-<p>注意：如果你打算启用内存和交换空间设置，请查看<a href="./ubuntu.md">这里</a></p>
-</blockquote>
-<p>##Debian Wheezy/Stable 7.x (64-bit)</p>
-<p>安装 Docker 需要内核在3.8版本以上，但是 Wheezy 的内核版本是 3.2（<a href="https://github.com/docker/docker/issues/407%20kernel%20versions" target="_blank" rel="external">bug #407</a>对 Docker 需要3.8版本内核进行了讨论。）</p>
-<p>幸运的是，官方提供了 <code>wheezy-backports</code> ，它内核版本是3.16，可以支持 Docker。</p>
-<p>###安装</p>
-<ol>
-<li><p>从 wheezy-backports 镜像源来安装内核</p>
-<p> 在 <code>/etc/apt/sources.list</code> 文件下添加如下内容：</p>
-<pre><code>deb <span class="string">http:</span><span class="comment">//http.debian.net/debian wheezy-backports main</span>
-</code></pre><p> 安装 <code>linux-image-amd64</code> 包  (注意使用 <code>-t wheezy-backports</code>)</p>
-<pre><code>$ sudo apt-get <span class="operator"><span class="keyword">update</span>
-$ sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> -<span class="keyword">t</span> wheezy-backports linux-image-amd64</span>
-</code></pre></li>
-<li><p>从 get.docker.com 获取安装脚本并安装：</p>
-<pre><code>curl -sSL http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/ | <span class="keyword">sh</span>
-</code></pre></li>
-</ol>
-<p>###使用非root</p>
-<p>docker 进程通过监听一个 Unix Socket 来替代 TCP 端口。在默认情况下，docker 的 Unix Socket属于<code>root</code>用户，当然其他用户可以使用<code>sudo</code>方式来访问。因为这个原因， docker 进程就一直是<code>root</code>用户运行的。</p>
-<p>如果你（或者说你安装Docker的时候）创建一个叫 <code>docker</code> 的用户组，并为用户组添加用户。这时候，当 Docker 进程启动的时候，<code>docker</code> 用户组对 Unix Socket 有了读/写权限。 你必须使用root用户来运行 docker 进程，但你可以用 <code>docker</code> 群组用户来使用 docker 客户端，你再使用 docker 命令的时候前边就不需要加 <code>sudo</code> 了。从Docker 0.9版本开始，你可以使用<code>-G</code>来指定用户组。</p>
-<blockquote>
-<p>警告：Docker 用户组（或者用 <code>-G</code> 指定的用户组）有等同于root用户的权限，有关系统安全影响的细节，请查看 <a href="">Docker 进程表面攻击细节</a></p>
-</blockquote>
-<p>操作演示：</p>
-<pre><code><span class="comment"># Add the docker group if it doesn't already exist.</span>
-<span class="variable">$ </span>sudo groupadd docker
-
-<span class="comment"># Add the connected user "${USER}" to the docker group.</span>
-<span class="comment"># Change the user name to match your preferred user.</span>
-<span class="comment"># You may have to logout and log back in again for</span>
-<span class="comment"># this to take effect.</span>
-<span class="variable">$ </span>sudo gpasswd -a <span class="variable">${</span><span class="constant">USER</span>} docker
-
-<span class="comment"># Restart the Docker daemon.</span>
-<span class="variable">$ </span>sudo service docker restart
-<span class="comment">##下一步</span>
-</code></pre><p>继续阅读<a href="../userguide/README.md">用户指南</a>。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/installation/azure/" itemprop="url">
-                Microsoft Azure
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/azure/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/azure/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>#Microsoft Azure</p>
-<p>##在 Azure 上创建 Docker 主机。</p>
-<p>请仔细阅读由 <a href="http://azure.microsoft.com/" target="_blank" rel="external">Microsoft Azure</a> 网站上提供的详细教程，教程中包含了使用不同方法在 Azure 上创建 Docker 虚拟主机。</p>
-<ul>
-<li><a href="http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-vm-extension/" target="_blank" rel="external"> Azure 的 Docker 虚拟主机组件 </a><ul>
-<li><a href="http://azure.microsoft.com/documentation/articles/virtual-machines-docker-with-xplat-cli/" target="_blank" rel="external"> 如何使用 Azure 提供的跨平台接口使用 Docker 虚拟机组件 </a></li>
-<li><a href="http://azure.microsoft.com/documentation/articles/virtual-machines-docker-with-portal/" target="_blank" rel="external"> 如何在 Azure 用户中心使用 Docker 虚拟机组件 </a> </li>
-</ul>
-</li>
-<li><a href="http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-machine/" target="_blank" rel="external"> 在 Azure 上使用 Docker 虚拟机 </a></li>
-</ul>
-<h2 id="下一步?">下一步?</h2><p>阅读 <a href="../userguide/">用户指南</a>.</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/installation/archlinux/" itemprop="url">
-                Arch Linux
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/archlinux/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/archlinux/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Arch_Linux">Arch Linux</h1><p>你可以使用 Arch Linux 社区发布的 Docker 软件包进行安装：</p>
-<ul>
-<li><a href="https://www.archLinux.org/packages/community/x86_64/docker/" target="_blank" rel="external">docker</a></li>
-</ul>
-<p>或者使用 AUR 包</p>
-<ul>
-<li><a href="https://aur.archLinux.org/packages/docker-git/" target="_blank" rel="external">docker-git</a></li>
-</ul>
-<p><code>docker</code> 软件包将会安装最新版本的 Docker。<code>docker-git</code> 则是由当前master分支构建的包。</p>
-<p>###依赖关系</p>
-<p>Docker 依赖于几个指定的安装包，核心的几个依赖包为：</p>
-<ul>
-<li>bridge-utils</li>
-<li>device-mapper</li>
-<li>iproute2</li>
-<li>lxc</li>
-<li>sqlite</li>
-</ul>
-<p>###安装</p>
-<p>一般包的简单安装：</p>
-<pre><code><span class="title">pacman</span> -S docker
-</code></pre><p>这就安装了你所需要的一切。</p>
-<p>对于AUR包的执行：</p>
-<pre><code><span class="title">yaourt</span> -S docker-git
-</code></pre><p>这里假设你已经安装好了 yaourt.如果你之前没有安装构建过这个包，请参考 <a href="https://wiki.archLinux.org/index.php/Arch_User_Repository#Installing_packages" target="_blank" rel="external">Arch User Repository</a> .</p>
-<p>###开启Docker</p>
-<p>Docker 会创建一个系统服务，用下面命令来启动 Docker：</p>
-<pre><code><span class="variable">$ </span>sudo systemctl start docker
-</code></pre><p>设置开机启动：</p>
-<pre><code>$ sudo systemctl <span class="built_in">enable</span> docker
-</code></pre><h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/compose/install/" itemprop="url">
-                安装 Compose
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/compose/install/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/compose/install/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="安装_Compose">安装 Compose</h1><p>在安装 Compose之前，你需要先安装好 Docker 。然后你需要使用 <code>curl</code> 指令来安装 Compose</p>
-<p>###安装 Docker</p>
-<p>首先，你需要安装大于或者等于1.6版本的 Docker 。</p>
-<ul>
-<li><a href="../installation/mac.md">MAC OSX 安装指南</a></li>
-<li><a href="../installation/ubuntu.md">Ubuntu  安装指南</a></li>
-<li><a href="../installation/">其它系统安装指南</a></li>
-</ul>
-<p>###安装 Compose</p>
-<p>运行下边的命令来安装 Compose：</p>
-<pre><code>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/compose/releases</span><span class="regexp">/download/</span><span class="number">1.3</span>.<span class="number">1</span>/docker-compose-<span class="string">`uname -s`</span>-<span class="string">`uname -m`</span> &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>-compose
-chmod +x /usr/local/bin/docker-compose
-</code></pre><blockquote>
-<p>注意：如果你在安装的时候出现了  “Permission denied” 的错误信息，这说明你的 <code>/usr/local/bin</code> 目录是不可写的，你需要使用超级用户来安装。运行 <code>sudo -i</code> , 然后运行上边的两个命令，然后 <code>exit</code> 退出。</p>
-</blockquote>
-<p>可选，你也可以在 shell 中使用命令行安装。</p>
-<p>Compose 适用于 OS X 和 64位的Linux 。 如果你使用其他平台，你可以安装一个 Compose 的 Python 包来完成安装。</p>
-<pre><code>$ sudo pip <span class="keyword">install</span> -U docker-compose
-</code></pre><p>到这里安装就结束了；Compose已经安装完成。你可以使用 <code>docker-compose --version</code> 来进行测试 。</p>
-<p>###升级</p>
-<p>如果你使用的是 Compose 1.2或者早期版本，当你升级完成后，你需要删除或者迁移你现有的容器。这是因为，1.3版本， Composer 使用 Docker 标签来对容器进行检测，所以它们需要重新创建索引标记。</p>
-<p>如果 Composer 检测到创建的容器没有标签，它将拒绝运行，这样你就不会有两组容器。如果你想要保留已经存在的容器（举例：这里有容器的数据卷上保留这非常重要的数据），你可以使用下边的命令来迁移：</p>
-<pre><code>docker-compose migrate-<span class="keyword">to</span>-labels
-</code></pre><p>或者，如果这些容器是不必要的，你可以删除它们 - Composer 会重新创建一个新的。</p>
-<pre><code>docker rm <span class="operator">-f</span> myapp_web_1 myapp_db_1 ...
-</code></pre><p>###Compose 文档</p>
-<ul>
-<li><a href="../compose/">用户指南</a></li>
-<li><a href="../compose/cli.md">使用命令行</a></li>
-<li><a href="../compose/yml.md">Yaml 文件使用</a></li>
-<li><a href="../compose/env.md">Compose 环境变量</a></li>
-<li><a href="../compose/completion.md">命令行安装Compose</a></li>
-</ul>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/examples/running_ssh_service/" itemprop="url">
-                在Docker中运行SSH进程服务
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/examples/running_ssh_service/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/running_ssh_service/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="在Docker中运行SSH进程服务">在Docker中运行SSH进程服务</h1><p>以下是用<code>Dockerfile</code>设置sshd服务容器，您可以使用连接并检查其他容器的卷,或者可以快速访问测试容器。</p>
-<pre><code><span class="comment"># sshd</span>
-<span class="comment">#</span>
-<span class="comment"># VERSION               0.0.1</span>
-
-<span class="built_in">FROM</span>     ubuntu:<span class="number">12.04</span>
-<span class="built_in">MAINTAINER</span> Thatcher R. Peskens <span class="string">"thatcher@dotcloud.com"</span>
-
-<span class="comment"># make sure the package repository is up to date</span>
-<span class="built_in">RUN</span> <span class="bash">apt-get update
-</span>
-<span class="built_in">RUN</span> <span class="bash">apt-get install -y openssh-server
-</span><span class="built_in">RUN</span> <span class="bash">mkdir /var/run/sshd
-</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">'root:screencast'</span> |chpasswd
-</span>
-<span class="built_in">EXPOSE</span> <span class="number">22</span>
-CMD    [<span class="string">"/usr/sbin/sshd"</span>, <span class="string">"-D"</span>]
-</code></pre><p>使用如下命令构建镜像：</p>
-<pre><code>$ sudo docker build <span class="comment">--rm -t eg_sshd .</span>
-</code></pre><p>然后运行它，你可以使用<code>docker port</code>来找出容器端口22映射到主机的端口</p>
-<pre><code>$ sudo docker run -d -P --name test_sshd eg_sshd
-$ sudo docker port test_sshd <span class="number">22</span>
-<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49154</span>
-</code></pre><p>现在你可以使用ssh登陆Docker进程的主机IP地址，端口是49154(IP地址可以使用ifconfig获取)：</p>
-<pre><code>$ ssh root@<span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span> -p <span class="number">49154</span>
-<span class="preprocessor"># The password is ``screencast``.</span>
-$$
-</code></pre><p>最后，清理停止的容器，并且删除容器，然后删除镜像。</p>
-<pre><code><span class="variable">$ </span>sudo docker stop test_sshd
-<span class="variable">$ </span>sudo docker rm test_sshd
-<span class="variable">$ </span>sudo docker rmi eg_sshd
+<h2 id="OS_X_和_Linux">OS X 和 Linux</h2><p>在 Linux 或者 OSX 上安装，你需要下载二进制文件到你的 <code>PATH</code> 路径中( 例如: <code>/usr/local/bin</code>)，并且给与可执行权限。例如，在大多数的 OSX 系统上使用如下命令就可以完成安装了：</p>
+<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/machine/releases</span><span class="regexp">/download/v</span>0.<span class="number">3.0</span>/docker-machine_darwin-amd64 &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>-machine
+<span class="variable">$ </span>chmod +x /usr/local/bin/docker-machine
+</code></pre><p>对于Linux，只是将上边的二进制名称中的 “darwin” 替换成 “linux”。</p>
+<p>现在你可以使用 <code>docker-machine -v</code> 命令来查看版本信息。</p>
+<pre><code>$ docker-machine -v
+machine version <span class="number">0.3</span><span class="number">.0</span>
+</code></pre><p>为了在您的机器上避免使用 ssh 来运行 Docker 命令，请确保您已经安装好了 Docker 客户端。</p>
+<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/get.docker.com/builds</span><span class="regexp">/Darwin/x</span>86_64/docker-latest &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>
+</code></pre><p>##Windows</p>
+<p>目前，Docker 建议你在 Windows 上通过 <a href="https://msysgit.github.io/" target="_blank" rel="external">msysgit</a> 安装使用 Docker Machine,这将为 Docker Machine 提供一些依赖的程序，如 ssh ，还有 shell 功能。</p>
+<p>当你安装好 msysgit ，启动终端命令提示行，并运行如下命令。这里假设你是在 64 位的 Windows 下安装，如果你使用 32 位系统安装，请将 URL 中的 “x86_64” 替换成 “i386”。</p>
+<p>首先，安装 Docker clent 二进制文件 :</p>
+<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/get.docker.com/builds</span><span class="regexp">/Windows/x</span>86_64/docker-latest.exe &gt; <span class="regexp">/bin/docker</span>
+</code></pre><p>下一步，安装 Docker Machine 二进制文件:</p>
+<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/machine/releases</span><span class="regexp">/download/v</span>0.<span class="number">3.0</span>/docker-machine_windows-amd64.exe &gt; <span class="regexp">/bin/docker</span>-machine
+</code></pre><p>现在，检查 <code>docker-machine</code> 是否工作 :</p>
+<pre><code>$ docker-machine -v
+machine version <span class="number">0.3</span><span class="number">.0</span>
 </code></pre></span>
         
       
@@ -1554,7 +1375,7 @@ $$
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
   </nav>
 
  </div>
@@ -1588,7 +1409,7 @@ $$
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1602,7 +1423,7 @@ $$
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
