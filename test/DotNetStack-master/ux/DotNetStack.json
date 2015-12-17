@@ -1,0 +1,603 @@
+﻿{
+  "name": ".NET",
+  "children": [
+    { "name": "Common Language Infrastructure (CLI)" },
+    {
+      "name": "Common Language Runtime (CLR)",
+      "children": [
+        { "name": "Just-In-Time (JIT)" },
+        {
+          "name": "Garbage Collector (GC)",
+          "children": [
+            { "name": "Object Pinning" },
+            {
+              "name": "Generations",
+              "children": [
+                { "name": "Gen 0" },
+                { "name": "Gen 1" },
+                { "name": "Gen 2" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Memeory Management",
+          "children": [
+            { "name": "Stack" },
+            {
+              "name": "Managed Heap",
+              "children": [
+                { "name": "Large Object Heap" },
+                { "name": "Fragmentation" },
+                { "name": "Compaction" }
+              ]
+            }
+          ]
+        },
+        { "name": "Security" }
+      ]
+    },
+    { "name": "Common Type System (CTS)" },
+    { "name": "Common Language Specification (CLS)" },
+    { "name": "Common Intermediate Language (CIL)" },
+    {
+      "name": ".NET Frameworks",
+      "children": [
+        {
+          "name": ".NET Framework",
+          "children": [
+            { "name": "1.0" },
+            {
+              "name": "2.0",
+              "children": [
+                { "name": "Generics" }
+              ]
+            },
+            {
+              "name": "3.0",
+              "children": [
+                { "name": "WPF" },
+                { "name": "WCF" },
+                { "name": "WF" }
+              ]
+            },
+            {
+              "name": "3.5",
+              "children": [
+                { "name": "LINQ" }
+              ]
+            },
+            {
+              "name": "4.0",
+              "children": [
+                { "name": "PLINQ" },
+                { "name": "TPL" }
+              ]
+            },
+            {
+              "name": "4.5",
+              "children": [
+                { "name": "Modern UI" },
+                { "name": "async/await" }
+              ]
+            },
+            {
+              "name": "4.6"
+            }
+          ]
+        },
+        { "name": ".NET Core" },
+        { "name": "Mono" },
+        { "name": "DNX (.NET Execution Environment)" },
+        { "name": ".NET Micro Framework (MF)" },
+        { "name": ".NET Compact Framework (CF)" }
+      ]
+    },
+    {
+      "name": "Base Class Library (BCL)",
+      "children": [
+        {
+          "name": "System Types"
+        },
+        { "name": "Collections" },
+        { "name": "Diagnostics" },
+        { "name": "Globalization" },
+        { "name": "IO" },
+        { "name": "Security" },
+        { "name": "Threading" },
+        { "name": "Text" }
+      ]
+    },
+    {
+      "name": "Runtime Infrastructure Library (RIL)",
+      "children": [
+        {
+          "name": "System",
+          "children": [
+            { "name": "App Domain" },
+            { "name": "Pointers" },
+            { "name": "Handles" }
+          ]
+        },
+        { "name": "Reflection" }
+      ]
+    },
+    {
+      "name": "Framework Class Library (FCL)",
+      "children": [
+        {
+          "name": "ADO.NET"
+        },
+        { "name": "XML" },
+        { "name": "Net" },
+        { "name": "Drawing" },
+        {
+          "name": "LINQ",
+          "children": [
+            {
+              "name": "Parallel LINQ (PLINQ)"
+            }
+          ]
+        },
+        {
+          "name": "Interoperability (InterOp)",
+          "children": [
+            {
+              "name": "Platform Invoke (P/Invoke)"
+            }
+          ]
+        },
+        { "name": "Task Parallel Library (TPL)" },
+        { "name": "Serialization" }
+      ]
+    },
+    {
+      "name": "Core Concepts",
+      "children": [
+        {
+          "name": "App Domain"
+        },
+        { "name": "Assembly" },
+        { "name": "Namespace" },
+        { "name": "Code Access Security (CAS)" },
+        {
+          "name": "Generics"
+        },
+        {
+          "name": "Global Assembly Cache (GAC)"
+        },
+        { "name": "Strong Name" },
+        { "name": "Weak Reference" },
+        { "name": "Event Model" },
+        {
+          "name": "Tasked Based Async Model",
+          "children": [
+            {
+              "name": "async/await"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Core Features",
+      "children": [
+        {
+          "name": "Language independence"
+        },
+        { "name": "Interoperability" },
+        { "name": "Portability" }
+      ]
+    },
+    {
+      "name": "Core Objects",
+      "children": [
+        {
+          "name": "Class"
+        },
+        { "name": "Function" },
+        { "name": "Property" },
+        { "name": "Field" },
+        { "name": "Event" },
+        {
+          "name": "Types",
+          "children": [
+            {
+              "name": "Reference Types"
+            },
+            {
+              "name": "Values Types"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CLI Languages",
+      "children": [
+        {
+          "name": "C#"
+        },
+        { "name": "VB.NET" },
+        { "name": "F#" },
+        { "name": "C++/CLI" },
+        { "name": "ClojureCLR" },
+        { "name": "Fantom" }
+      ]
+    },
+    {
+      "name": "Dynamic Language Runtime (DLR)",
+      "children": [
+        {
+          "name": "DLR Languages",
+          "children": [
+            { "name": "IronPython" },
+            { "name": "IronRuby" },
+            { "name": "IronScheme" },
+            { "name": "IronLisp" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Desktop",
+      "children": [
+        {
+          "name": "GUI",
+          "children": [
+            { "name": "Windows Forms" },
+            {
+              "name": "Windows Presentation Foundation(WPF)",
+              "children": [
+                { "name": "XAML" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CUI",
+          "children": [
+            { "name": "Console" }
+          ]
+        },
+        {
+          "name": "Windows Service"
+        }
+      ]
+    },
+    {
+      "name": "Web",
+      "children": [
+        {
+          "name": "ASP.NET",
+          "children": [
+            { "name": "ASP.NET Runtime" },
+            { "name": "ASP.NET Web Pages" },
+            {
+              "name": "ASP.NET Web Forms",
+              "children": [
+                { "name": "Ajax Control Toolkit" }
+              ]
+            },
+            {
+              "name": "ASP.NET MVC",
+              "children": [
+                { "name": "Razor" },
+                { "name": "Routing" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Silverlight"
+        },
+        {
+          "name": "SharePoint"
+        },
+        {
+          "name": "IIS"
+        }
+      ]
+    },
+    {
+      "name": "SOA",
+      "children": [
+        {
+          "name": "ASP.NET Web API"
+        },
+        {
+          "name": "ASP.NET Web Services"
+        },
+        {
+          "name": "Windows Communication Foundation(WCF)"
+        },
+        {
+          "name": ".NET Remoting"
+        }
+      ]
+    },
+    {
+      "name": "Open Web Interface for .NET (OWIN)",
+      "children": [
+        {
+          "name": "SignalR"
+        },
+        {
+          "name": "Nancy"
+        },
+        {
+          "name": "Katana"
+        }
+      ]
+    },
+    {
+      "name": "SDKs",
+      "children": [
+        {
+          "name": "Windows Workflow Foundation (WWF)"
+        },
+        {
+          "name": "Managed Extensibility Framework (MEF)"
+        },
+        {
+          "name": "Reactive Extensions (Rx)"
+        },
+        {
+          "name": "Enterprise Library"
+        }
+      ]
+    },
+    {
+      "name": "Development",
+      "children": [
+        {
+          "name": "Visual Studio"
+        },
+        {
+          "name": "Visual Studio Online"
+        },
+        {
+          "name": "Visual Studio Code"
+        },
+        {
+          "name": "Blend"
+        },
+        {
+          "name": "LightSwitch"
+        },
+        {
+          "name": "MonoDevelop"
+        },
+        {
+          "name": "SharpDevelop"
+        }
+      ]
+    },
+    {
+      "name": "Platforms",
+      "children": [
+        {
+          "name": "Windows Runtime (WinRT)"
+        },
+        {
+          "name": "Xamarin"
+        },
+        {
+          "name": "Universal Apps",
+          "children": [
+            {
+              "name": "WinJS"
+            }
+          ]
+        },
+        {
+          "name": ".NET Native"
+        },
+        {
+          "name": "Windows Phone SDK"
+        },
+        {
+          "name": "Azure"
+        }
+      ]
+    },
+    {
+      "name": "Productivity",
+      "children": [
+        {
+          "name": "Team Foundation Server (TFS)"
+        },
+        {
+          "name": "NuGet"
+        },
+        {
+          "name": "Chocolatey"
+        },
+        {
+          "name": "PowerShell"
+        }
+      ]
+    },
+    {
+      "name": "Build",
+      "children": [
+        {
+          "name": "MSBuild"
+        },
+        {
+          "name": "CodeDom"
+        },
+        {
+          "name": "Roslyn"
+        },
+        {
+          "name": "CruiseControl.NET"
+        },
+        {
+          "name": "csc/vbc/fsc"
+        }
+      ]
+    },
+    {
+      "name": "Testing",
+      "children": [
+        {
+          "name": "MSTest"
+        },
+        {
+          "name": "NUnit"
+        },
+        {
+          "name": "Mock",
+          "children": [
+            {
+              "name": "Moq"
+            }
+          ]
+        },
+        {
+          "name": "Fakes"
+        },
+        {
+          "name": "Microsoft Test Manager"
+        }
+      ]
+    },
+    {
+      "name": "Deploy/Publish",
+      "children": [
+        {
+          "name": "ClickOnce"
+        },
+        {
+          "name": "Web/FTP"
+        },
+        {
+          "name": "Cloud"
+        },
+        {
+          "name": "File"
+        }
+      ]
+    },
+    {
+      "name": "Framework (Fx) Tools",
+      "children": [
+        {
+          "name": "Ildasm (MSIL Disassembler)"
+        },
+        {
+          "name": "NGen (Native Generation, Ahead-Of-Time)"
+        },
+        {
+          "name": "sn (Strong Name)"
+        },
+        {
+          "name": "gacutil"
+        },
+        {
+          "name": "FxCop"
+        }
+      ]
+    },
+    {
+      "name": "Data",
+      "children": [
+        {
+          "name": "ADO.NET",
+          "children": [
+            {
+              "name": "SQL Server"
+            },
+            {
+              "name": "Oracle"
+            },
+            {
+              "name": "MySQL"
+            },
+            {
+              "name": "Sqlite"
+            }
+          ]
+        },
+        {
+          "name": "Object/Relationship Mapping (O/RM)",
+          "children": [
+            {
+              "name": "Entity Framework"
+            },
+            {
+              "name": "NHinbernate"
+            },
+            {
+              "name": "AutoMapper"
+            }
+          ]
+        },
+        {
+          "name": "NoSQL",
+          "children": [
+            {
+              "name": "RavenDB"
+            },
+            {
+              "name": "Azure Document DB"
+            }
+          ]
+        },
+        {
+          "name": "Cache",
+          "children": [
+            {
+              "name": "NCache"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Components",
+      "children": [
+        {
+          "name": "IoC",
+          "children": [
+            {
+              "name": "Autofac"
+            },
+            {
+              "name": "Unity"
+            },
+            {
+              "name": "NInject"
+            },
+            {
+              "name": "Windsor"
+            }
+          ]
+        },
+        {
+          "name": "Messaging/Queue",
+          "children": [
+            {
+              "name": "NServieBus"
+            },
+            {
+              "name": "RabbitMQ"
+            },
+            {
+              "name": "MassTransit"
+            }
+          ]
+        },
+        {
+          "name": "Schedule",
+          "children": [
+            {
+              "name": "Quartz.NET"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
