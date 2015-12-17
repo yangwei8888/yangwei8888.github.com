@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/12/19/awesome-power-mode-master/</loc>
+    <lastmod>2015-12-17T09:27:20.924Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project/</loc>
     <lastmod>2015-12-15T06:32:54.916Z</lastmod>
   </url>
