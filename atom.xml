@@ -4,7 +4,7 @@
   <subtitle><![CDATA[ѧ��]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-12-15T06:25:19.563Z</updated>
+  <updated>2015-12-17T11:15:08.815Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting%20Started/Basic%20Setup/"/>
     <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/</id>
     <published>2015-12-26T15:00:00.000Z</published>
-    <updated>2015-12-15T06:25:19.563Z</updated>
+    <updated>2015-12-17T11:15:08.815Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/Creolophus" target="_blank" rel="external">Creolophus</a></p>
 <p>校正：<a href="https://github.com/Evilcome" target="_blank" rel="external">Evilcome</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -66,7 +66,7 @@
 <li>重映射确定的 Objective-C 核心类型到 Swift 中的替代类型， 就像<code>NSString</code>到<code>String</code></li>
 <li>重映射确定的 Objective-C 概念到 Swift 中相匹配的概念，如<code>pointers</code>到<code>optionals</code></li>
 </ul>
-<p>在互用性章节，你将会了解到更多关于这些映射如何在你的 Swift 代码进行取舍。<br>导入 Swift 的模型到 Objective-C 和从 Objective-C 导入 Swift 是非常相似的。Swift 申明它的 API，比如一个框架作为 Swift modules。同时这些 Swift modules 会生成 Objective-C 的头文件。这些头文件可以映射回 Objective-C 的 API 中。一些 Swift 的 API 不映射回 Objective-C 因为他们取舍了语言特性发现这些在 Objective-C 中不可用。关于在 Objective-C 中使用 Swift 的更多特性，请参看<a href="https://github.com/CocoaChina-editors/Welcome-to-Swift/blob/master/Using%20Swift%20with%20Cocoa%20and%20Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project.md" target="_blank" rel="external">在同一项目中使用 Swift 和 Objective-C</a>。</p>
+<p>在互用性章节，你将会了解到更多关于这些映射如何在你的 Swift 代码进行取舍。<br>导入 Swift 的模型到 Objective-C 和从 Objective-C 导入 Swift 是非常相似的。Swift 申明它的 API，比如一个框架作为 Swift modules。同时这些 Swift modules 会生成 Objective-C 的头文件。这些头文件可以映射回 Objective-C 的 API 中。一些 Swift 的 API 不映射回 Objective-C 因为他们取舍了语言特性发现这些在 Objective-C 中不可用。关于在 Objective-C 中使用 Swift 的更多特性，请参看<a href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project/">在同一项目中使用 Swift 和 Objective-C</a>。</p>
 <blockquote>
 <p>注意</p>
 <p>你不能直接把 C++ 代码导入 Swift。解决办法是为 C++ 代码创建一个 Objective-C 或者 C 的封装。</p>
@@ -80,7 +80,7 @@
     
       <category term="Using Swift with Cocoa and Objective-C" scheme="http://yoursite.com/tags/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
-      <category term="swift-cn" scheme="http://yoursite.com/categories/swift-cn/"/>
+      <category term="Using-Swift-with-Cocoa-and-Objective-C" scheme="http://yoursite.com/categories/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
   </entry>
   
@@ -89,7 +89,7 @@
     <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/01Interacting%20with%20Objective-C%20APIs/"/>
     <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/01Interacting with Objective-C APIs/</id>
     <published>2015-12-26T14:00:10.000Z</published>
-    <updated>2015-12-15T06:25:35.153Z</updated>
+    <updated>2015-12-17T11:11:15.941Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/Creolophus" target="_blank" rel="external">Creolophus</a></p>
 <p>校正：<a href="https://github.com/Evilcome" target="_blank" rel="external">Evilcome</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -243,7 +243,7 @@
     
       <category term="Using Swift with Cocoa and Objective-C" scheme="http://yoursite.com/tags/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
-      <category term="swift-cn" scheme="http://yoursite.com/categories/swift-cn/"/>
+      <category term="Using-Swift-with-Cocoa-and-Objective-C" scheme="http://yoursite.com/categories/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
   </entry>
   
@@ -252,7 +252,7 @@
     <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/02Writing%20Swift%20Classes%20with%20Objective-C%20Behavior/"/>
     <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/02Writing Swift Classes with Objective-C Behavior/</id>
     <published>2015-12-26T14:00:09.000Z</published>
-    <updated>2015-12-15T06:25:43.422Z</updated>
+    <updated>2015-12-17T11:11:20.922Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/halinuya" target="_blank" rel="external">halinuya</a></p>
 <p>校对：<a href="https://github.com/song-buaa" target="_blank" rel="external">song-buaa</a> <a href="https://github.com/MonicaZhou" target="_blank" rel="external">MonicaZhou</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -363,7 +363,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     
       <category term="Using Swift with Cocoa and Objective-C" scheme="http://yoursite.com/tags/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
-      <category term="swift-cn" scheme="http://yoursite.com/categories/swift-cn/"/>
+      <category term="Using-Swift-with-Cocoa-and-Objective-C" scheme="http://yoursite.com/categories/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
   </entry>
   
@@ -372,7 +372,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/03Working%20with%20Cocoa%20Data%20Types/"/>
     <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/03Working with Cocoa Data Types/</id>
     <published>2015-12-26T14:00:08.000Z</published>
-    <updated>2015-12-15T06:25:48.585Z</updated>
+    <updated>2015-12-17T11:11:25.216Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/wongzigii" target="_blank" rel="external">wongzigii</a>、<a href="https://github.com/SemperIdem" target="_blank" rel="external">星夜暮晨</a></p>
 <p>校对：<a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -499,7 +499,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     
       <category term="Using Swift with Cocoa and Objective-C" scheme="http://yoursite.com/tags/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
-      <category term="swift-cn" scheme="http://yoursite.com/categories/swift-cn/"/>
+      <category term="Using-Swift-with-Cocoa-and-Objective-C" scheme="http://yoursite.com/categories/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
   </entry>
   
@@ -508,7 +508,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/04Adopting%20Cocoa%20Design%20Patterns/"/>
     <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/04Adopting Cocoa Design Patterns/</id>
     <published>2015-12-26T14:00:07.000Z</published>
-    <updated>2015-12-15T06:28:52.845Z</updated>
+    <updated>2015-12-17T11:11:29.709Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/JaceFu" target="_blank" rel="external">JaceFu</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
 <p>校正：<a href="https://github.com/LunaticM" target="_blank" rel="external">LunaticM</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -632,7 +632,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     
       <category term="Using Swift with Cocoa and Objective-C" scheme="http://yoursite.com/tags/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
-      <category term="swift-cn" scheme="http://yoursite.com/categories/swift-cn/"/>
+      <category term="Using-Swift-with-Cocoa-and-Objective-C" scheme="http://yoursite.com/categories/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
   </entry>
   
@@ -641,7 +641,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/05Interacting%20with%20C%20APIs/"/>
     <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/05Interacting with C APIs/</id>
     <published>2015-12-26T14:00:06.000Z</published>
-    <updated>2015-12-15T06:28:59.906Z</updated>
+    <updated>2015-12-17T11:11:34.065Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/shockinglee" target="_blank" rel="external">shockinglee</a></p>
 <p>校对：<a href="https://github.com/shanyimin" target="_blank" rel="external">shanyimin</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a> <a href="https://github.com/Phenmod" target="_blank" rel="external">Phenmod</a></p>
@@ -878,7 +878,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     
       <category term="Using Swift with Cocoa and Objective-C" scheme="http://yoursite.com/tags/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
-      <category term="swift-cn" scheme="http://yoursite.com/categories/swift-cn/"/>
+      <category term="Using-Swift-with-Cocoa-and-Objective-C" scheme="http://yoursite.com/categories/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
   </entry>
   
@@ -887,7 +887,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project/"/>
     <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/03Mix and Match/Swift and Objective-C in the Same Project/</id>
     <published>2015-12-26T14:00:05.000Z</published>
-    <updated>2015-12-15T06:32:54.916Z</updated>
+    <updated>2015-12-17T11:11:46.846Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/haolloyin" target="_blank" rel="external">haolloyin</a></p>
 <p>校对：<a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -1075,7 +1075,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     
       <category term="Using Swift with Cocoa and Objective-C" scheme="http://yoursite.com/tags/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
-      <category term="swift-cn" scheme="http://yoursite.com/categories/swift-cn/"/>
+      <category term="Using-Swift-with-Cocoa-and-Objective-C" scheme="http://yoursite.com/categories/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
   </entry>
   
@@ -1084,7 +1084,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/04Migration/Migrating%20Your%20Objective-C%20Code%20to%20Swift/"/>
     <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/04Migration/Migrating Your Objective-C Code to Swift/</id>
     <published>2015-12-26T14:00:04.000Z</published>
-    <updated>2015-12-15T06:29:16.810Z</updated>
+    <updated>2015-12-17T11:11:53.546Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>翻译：<a href="https://github.com/xudeheng" target="_blank" rel="external">xudeheng</a></p>
 <p>校对：<a href="http://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
@@ -1144,7 +1144,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     
       <category term="Using Swift with Cocoa and Objective-C" scheme="http://yoursite.com/tags/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
-      <category term="swift-cn" scheme="http://yoursite.com/categories/swift-cn/"/>
+      <category term="Using-Swift-with-Cocoa-and-Objective-C" scheme="http://yoursite.com/categories/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
   </entry>
   
@@ -1153,7 +1153,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     <link href="http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/05Revision%20History/Document%20Revision%20History/"/>
     <id>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/05Revision History/Document Revision History/</id>
     <published>2015-12-26T14:00:03.000Z</published>
-    <updated>2015-12-15T06:26:27.773Z</updated>
+    <updated>2015-12-17T11:12:01.482Z</updated>
     <content type="html"><![CDATA[<h1 id="文档修订历史">文档修订历史</h1><p>该表格描述了 Using Swift with Cocoa and Objective-C 一书的改动。</p>
 <table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">日期</th><br>       <th scope="col">变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2015-06-08</td><br>    <td><ul class="list-bullet"><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID35" target="_blank" rel="external"> Interacting with Objective-C APIs </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WritingSwiftClassesWithObjective-CBehavior.html#//apple_ref/doc/uid/TP40014216-CH5-ID152" target="_blank" rel="external"> NSCoding </a>部分。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WorkingWithCocoaDataTypes.html#//apple_ref/doc/uid/TP40014216-CH6-ID61" target="_blank" rel="external"> Working with Cocoa Data Types </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WorkingWithCocoaDataTypes.html#//apple_ref/doc/uid/TP40014216-CH6-ID83" target="_blank" rel="external"> Memory Managed Objects </a>部分。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WorkingWithCocoaDataTypes.html#//apple_ref/doc/uid/TP40014216-CH6-ID61" target="_blank" rel="external"> Working with Cocoa Data Types </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WorkingWithCocoaDataTypes.html#//apple_ref/doc/uid/TP40014216-CH6-ID151" target="_blank" rel="external"> Sets </a>部分。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/index.html#//apple_ref/doc/uid/TP40014216-CH2-ID2" target="_blank" rel="external"> Setting Up Your Swift Environment </a>中补充说明有关由命令行建立的可执行文件的 Swift target 系统要求。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID35" target="_blank" rel="external"> Interacting with Objective-C APIs </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID45" target="_blank" rel="external"> Nullability and Optionals </a>部分。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID35" target="_blank" rel="external"> Interacting with Objective-C APIs </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-ID170" target="_blank" rel="external"> Unions </a>部分。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID35" target="_blank" rel="external"> Interacting with Objective-C APIs </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-ID169" target="_blank" rel="external"> Option Sets </a>部分。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#//apple_ref/doc/uid/TP40014216-CH7-ID6" target="_blank" rel="external"> Adopting Cocoa Design Patterns </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#//apple_ref/doc/uid/TP40014216-CH7-ID160" target="_blank" rel="external"> API Availability </a>部分。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID35" target="_blank" rel="external"> Interacting with Objective-C APIs </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-ID162" target="_blank" rel="external"> Overriding Swift Names for Objective-C Interfaces </a>部分。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#//apple_ref/doc/uid/TP40014216-CH7-ID6" target="_blank" rel="external"> Adopting Cocoa Design Patterns </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#//apple_ref/doc/uid/TP40014216-CH7-ID10" target="_blank" rel="external"> Error Handling </a>部分。<br>        </p></li><br>        <li><p><br>        更新<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-ID122" target="_blank" rel="external"> Swift and Objective-C in the Same Project </a>章节中关于 @testable 注解的信息。<br>        </p></li><br>        <li><p><br>        更新<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-ID148" target="_blank" rel="external"> Function Pointers </a>章节中关于将 Swift 函数和闭包与 C 函数指针桥接的信息。<br>        </p></li><br>        <li><p><br>        更新<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-ID146" target="_blank" rel="external"> Constant Pointers </a>章节中关于将 Swift String 值与 C 指针桥接的信息。<br>        </p></li><br>        <li><p><br>        更新<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID55" target="_blank" rel="external"> Exposing Swift Interfaces in Objective-C </a>章节中关于在 Swift 中使用 @objc 来标注枚举的信息。<br>        </p></li><br>        <li><p><br>        更新<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WorkingWithCocoaDataTypes.html#//apple_ref/doc/uid/TP40014216-CH6-ID69" target="_blank" rel="external"> Collection Classes </a>章节，讨论 Swift 对 Objective-C 集合类的参数化桥接。<br>        </p></li><br>        </ul><br>    </td><br>  </tr><br><br>      <tr><br>    <td scope="row">2015-02-23</td><br>    <td><ul class="list-bullet"><br>        <li><p><br>        更新<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WorkingWithCocoaDataTypes.html#//apple_ref/doc/uid/TP40014216-CH6-ID61" target="_blank" rel="external"> Working with Cocoa Data Types </a>章节，在 Swift 1.2 中使用 as! 操作符和桥接语义。<br>        </p></li><br>        </ul><br>    </td><br>   </tr><br><br>    <tr><br>    <td scope="row">2015-01-18</td><br>    <td><ul class="list-bullet"><br>        <li><p><br>        修复了 UIBezierPath 例子以正确的创建一个三角形<br>        </p></li><br>        </ul><br>    </td><br>   </tr><br><br>    <tr><br>    <td scope="row">2015-01-18</td><br>    <td><ul class="list-bullet"><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID35" target="_blank" rel="external"> Interacting with Objective-C APIs </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID145" target="_blank" rel="external"> Failable Initialization </a>部分。<br><br>        </p></li><br>        </ul><br>    </td><br>   </tr><br><br>       <tr><br>    <td scope="row">2014-09-02</td><br>    <td><ul class="list-bullet"><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WritingSwiftClassesWithObjective-CBehavior.html#//apple_ref/doc/uid/TP40014216-CH5-ID86" target="_blank" rel="external"> Writing Swift Classes with Objective-C Behavior </a>中添加<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WritingSwiftClassesWithObjective-CBehavior.html#//apple_ref/doc/uid/TP40014216-CH5-ID107" target="_blank" rel="external"> Using Swift Class Names with Objective-C APIs </a>部分。<br>        </p></li><br>        <li><p><br>        纠正<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WritingSwiftClassesWithObjective-CBehavior.html#//apple_ref/doc/uid/TP40014216-CH5-ID98" target="_blank" rel="external"> Live Rendering </a>只对编译在框架中的 designable 类生效的陈述。这个限制已经不再存在。<br>        </p></li><br>        <li><p><br>        在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#//apple_ref/doc/uid/TP40014216-CH7-ID12" target="_blank" rel="external"> Key-Value Observing </a>中添加对 deinit 的实现以及以往代码中对 super 的调用。<br>        </p></li><br>        </ul><br>    </td><br>   </tr><br></tbody><br></table>
 ]]></content>
@@ -1164,7 +1164,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
     
       <category term="Using Swift with Cocoa and Objective-C" scheme="http://yoursite.com/tags/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
-      <category term="swift-cn" scheme="http://yoursite.com/categories/swift-cn/"/>
+      <category term="Using-Swift-with-Cocoa-and-Objective-C" scheme="http://yoursite.com/categories/Using-Swift-with-Cocoa-and-Objective-C/"/>
     
   </entry>
   

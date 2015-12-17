@@ -2,53 +2,53 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2015/12/19/awesome-power-mode-master/</loc>
-    <lastmod>2015-12-17T09:32:30.980Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project/</loc>
-    <lastmod>2015-12-15T06:32:54.916Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/04Migration/Migrating%20Your%20Objective-C%20Code%20to%20Swift/</loc>
-    <lastmod>2015-12-15T06:29:16.810Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/05Interacting%20with%20C%20APIs/</loc>
-    <lastmod>2015-12-15T06:28:59.906Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/04Adopting%20Cocoa%20Design%20Patterns/</loc>
-    <lastmod>2015-12-15T06:28:52.845Z</lastmod>
+    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting%20Started/Basic%20Setup/</loc>
+    <lastmod>2015-12-17T11:15:08.815Z</lastmod>
   </url>
   
   <url>
     <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/05Revision%20History/Document%20Revision%20History/</loc>
-    <lastmod>2015-12-15T06:26:27.773Z</lastmod>
+    <lastmod>2015-12-17T11:12:01.482Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/04Migration/Migrating%20Your%20Objective-C%20Code%20to%20Swift/</loc>
+    <lastmod>2015-12-17T11:11:53.546Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/03Mix%20and%20Match/Swift%20and%20Objective-C%20in%20the%20Same%20Project/</loc>
+    <lastmod>2015-12-17T11:11:46.846Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/05Interacting%20with%20C%20APIs/</loc>
+    <lastmod>2015-12-17T11:11:34.065Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/04Adopting%20Cocoa%20Design%20Patterns/</loc>
+    <lastmod>2015-12-17T11:11:29.709Z</lastmod>
   </url>
   
   <url>
     <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/03Working%20with%20Cocoa%20Data%20Types/</loc>
-    <lastmod>2015-12-15T06:25:48.585Z</lastmod>
+    <lastmod>2015-12-17T11:11:25.216Z</lastmod>
   </url>
   
   <url>
     <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/02Writing%20Swift%20Classes%20with%20Objective-C%20Behavior/</loc>
-    <lastmod>2015-12-15T06:25:43.422Z</lastmod>
+    <lastmod>2015-12-17T11:11:20.922Z</lastmod>
   </url>
   
   <url>
     <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/01Interacting%20with%20Objective-C%20APIs/</loc>
-    <lastmod>2015-12-15T06:25:35.153Z</lastmod>
+    <lastmod>2015-12-17T11:11:15.941Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting%20Started/Basic%20Setup/</loc>
-    <lastmod>2015-12-15T06:25:19.563Z</lastmod>
+    <loc>http://yoursite.com/2015/12/19/awesome-power-mode-master/</loc>
+    <lastmod>2015-12-17T09:32:30.980Z</lastmod>
   </url>
   
   <url>
