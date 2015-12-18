@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Why ‘enum’? &mdash; Swift Programming Language documentation 0.1.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Swift Programming Language documentation 0.1.9 documentation" href="../index.html"/>
+<style type="text/css">
+  table.right { float: right; margin-left: 20px; }
+  table.right td { border: 1px solid #ccc; }
+</style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Swift Programming Language documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">swift docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ABI.html">The Swift ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ARCOptimization.html">ARC Optimization for Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControl.html">Access Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html">Scope and introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html#public"><cite>public</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html#internal"><cite>internal</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html#private"><cite>private</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html#leading-underscore-rule">Leading Underscore Rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Arrays.html">The Swift Array Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CallingConvention.html">The Swift Calling Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DebuggingTheCompiler.html">Debugging the Swift Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dependency Analysis.html">Dependency Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DriverInternals.html">Driver Design &amp; Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DriverParseableOutput.html">Parseable Driver Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ErrorHandling.html">Error Handling in Swift 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ErrorHandlingRationale.html">Error Handling Rationale and Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Failable Initializers.html">Failable initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Generics.html">Generics in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GitWorkflows.html">Git Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GitWorkflows.html#svn-git-workflows">SVN -&gt; GIT Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HighLevelSILOptimizations.html">High-Level Optimizations in SIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Import.html">IMPORT SYNTAX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Import.html#resolving-name-clashes">RESOLVING NAME CLASHES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Import.html#future-extensions">FUTURE EXTENSIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../IndexInvalidation.html">Index Invalidation Rules in the Swift Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#using-versioned-api">Using Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#publishing-versioned-api">Publishing Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#giving-up-flexibility">Giving Up Flexibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#optimization">Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#resilience-domains">Resilience Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#protocol-conformances">Protocol Conformances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#checking-binary-compatibility">Checking Binary Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#summary">Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Literals.html">Literals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LogicalObjects.html">Logical Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules.html">High-Level Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules.html#import"><code class="docutils literal"><span class="pre">import</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules.html#interoperability-with-objective-c-via-clang">Interoperability with Objective-C via Clang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MutationModel.html">Immutability and Read-Only Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ObjectInitialization.html">Object Initialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html">Writing High-Performance Swift Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#enabling-optimizations">Enabling Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#whole-module-optimizations">Whole Module Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#reducing-dynamic-dispatch">Reducing Dynamic Dispatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#using-container-types-efficiently">Using Container Types Efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#unchecked-operations">Unchecked operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#generics">Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#the-cost-of-large-swift-values">The cost of large swift values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#unsafe-code">Unsafe code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#protocols">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#footnotes">Footnotes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Pattern Matching.html">Pattern Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SIL.html">Swift Intermediate Language (SIL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SequencesAndCollections.html">Sequences And Collections in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Serialization.html">Swift Binary Serialization Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StdlibAPIGuidelines.html">Swift Standard Library API Design Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StdlibRationales.html">Rationales for the Swift standard library designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StoredAndComputedVariables.html">Stored and Computed Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StringDesign.html">Swift String Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Testing.html">Testing Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TextFormatting.html">Text Formatting in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TransparentAttr.html"><code class="docutils literal"><span class="pre">&#64;_transparent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TypeChecker.html">Type Checker Design and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weak.html">Weak References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Swift Programming Language documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Why &#8216;enum&#8217;?</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/proposals/Enums.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>Swift supports what type theory calls &#8220;algebraic data types&#8221;, or ADTs, which
+are an amalgam of two familiar C-family language features, enums and unions.
+They are similar to enums in that they allow collections of independent symbolic
+values to be collected into a type and switched over:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Color {
+  case Red, Green, Blue, Black, White
+}
+
+var c : Color = .Red
+switch c {
+case .Red:
+  ...
+case .Green:
+  ...
+case .Blue:
+  ...
+}
+</pre></div>
+</div>
+<p>They are also similar to C unions in that they allow a single type to
+contain a value of two or more other types. Unlike C unions, however, ADTs
+remember which type they contain, and can be switched over, guaranteeing that
+only the currently inhabited type is ever used:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Pattern {
+  case Solid(Color)
+  case Outline(Color)
+  case Checkers(Color, Color)
+}
+
+var p : Pattern = .Checkers(.Black, .White)
+switch p {
+case .Solid(var c):
+  print(&quot;solid \(c)&quot;)
+case .Outline(var c):
+  print(&quot;outlined \(c)&quot;)
+case .Checkers(var a, var b):
+  print(&quot;checkered \(a) and \(b)&quot;)
+}
+</pre></div>
+</div>
+<p>Given the choice between two familiar keywords, we decided to use &#8216;enum&#8217; to
+name these types. Here are some of the reasons why:</p>
+<div class="section" id="why-enum">
+<h1>Why &#8216;enum&#8217;?<a class="headerlink" href="#why-enum" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-common-case-works-like-c">
+<h2>The common case works like C<a class="headerlink" href="#the-common-case-works-like-c" title="Permalink to this headline">¶</a></h2>
+<p>C programmers with no interest in learning about ADTs can use &#8216;enum&#8217; like they
+always have.</p>
+</div>
+<div class="section" id="union-doesn-t-exist-to-cocoa-programmers">
+<h2>&#8220;Union&#8221; doesn&#8217;t exist to Cocoa programmers<a class="headerlink" href="#union-doesn-t-exist-to-cocoa-programmers" title="Permalink to this headline">¶</a></h2>
+<p>Cocoa programmers really don&#8217;t think about unions at all. The frameworks vend
+no public unions. If a Cocoa programmer knows what a union is, it&#8217;s as a
+broken C bit-bangy thing. Cocoa programmers are used to more safely
+and idiomatically modeling ADTs in Objective-C as class hierarchies. The
+concept of closed-hierarchy variant value types is new territory for them, so
+we have some freedom in choosing how to present the feature. Trying to relate
+it to C&#8217;s &#8216;union&#8217;, a feature with negative connotations, is a disservice if
+anything that will dissuade users from wanting to learn and take advantage of
+it.</p>
+</div>
+<div class="section" id="it-parallels-our-extension-of-switch">
+<h2>It parallels our extension of &#8216;switch&#8217;<a class="headerlink" href="#it-parallels-our-extension-of-switch" title="Permalink to this headline">¶</a></h2>
+<p>The idiomatic relationship between &#8216;enum&#8217; and &#8216;switch&#8217; in C is
+well-established&#8211;If you have an enum, the best practice for consuming it is to
+switch over it so the compiler can check exhaustiveness for you. We&#8217;ve extended
+&#8216;switch&#8217; with pattern matching, another new concept for our target audience,
+and one that happens to be dual to the concept of enums with payload. In the
+whitepaper, we introduce pattern matching by starting from the familiar C case
+of switching over an integer and gradually introduce the new capabilities of
+Swift&#8217;s switch. If all ADTs are &#8216;enums&#8217;, this lets us introduce both features
+to C programmers organically, starting from the familiar case that looks like
+C:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Foo { case A, B, C, D }
+
+func use(x:Foo) {
+  switch x {
+  case .A:
+  case .B:
+  case .C:
+  case .D:
+  }
+}
+</pre></div>
+</div>
+<p>and then introducing the parallel new concepts of payloads and patterns
+together:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Foo { case A, B, C, D, Other(String) }
+
+func use(x:Foo) {
+  switch x {
+  case .A:
+  case .B:
+  case .C:
+  case .D:
+  case .Other(var s):
+  }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="people-already-use-enum-to-define-adts-badly">
+<h2>People already use &#8216;enum&#8217; to define ADTs, badly<a class="headerlink" href="#people-already-use-enum-to-define-adts-badly" title="Permalink to this headline">¶</a></h2>
+<p>Enums are already used and abused in C in various ways as a building block for
+ADT-like types. An enum is of course the obvious choice to represented the
+discriminator in a tagged-union structure. Instead of saying &#8216;you write union
+and get the enum for free&#8217;, we can switch the message around: &#8216;you write enum
+and get the union for free&#8217;. Aside from that case, though, there are many uses
+in C of enums as ordered integer-convertible values that are really trying to
+express more complex symbolic ADTs. For example, there&#8217;s the pervasive LLVM
+convention of &#8216;First_*&#8217; and &#8216;Last_*&#8217; sigils:</p>
+<div class="highlight-python"><div class="highlight"><pre>/* C */
+enum Pet {
+  First_Reptile,
+    Lizard = First_Reptile,
+    Snake,
+  Last_Reptile = Snake,
+
+  First_Mammal,
+    Cat = First_Mammal,
+    Dog,
+  Last_Mammal = Dog,
+};
+</pre></div>
+</div>
+<p>which is really crying out for a nested ADT representation:</p>
+<div class="highlight-python"><div class="highlight"><pre>// Swift
+enum Reptile { case Lizard, Snake }
+enum Mammal { case Cat, Dog }
+enum Pet {
+  case Reptile(Reptile)
+  case Mammal(Mammal)
+}
+</pre></div>
+</div>
+<p>Or there&#8217;s the common case of an identifier with standardized symbolic values
+and a &#8216;user-defined&#8217; range:</p>
+<div class="highlight-python"><div class="highlight"><pre>/* C */
+enum Language : uint16_t {
+  C89,
+  C99,
+  Cplusplus98,
+  Cplusplus11,
+  First_UserDefined = 0x8000,
+  Last_UserDefined = 0xFFFF
+};
+</pre></div>
+</div>
+<p>which again is better represented as an ADT:</p>
+<div class="highlight-python"><div class="highlight"><pre>// Swift
+enum Language {
+  case C89, C99, Cplusplus98, Cplusplus11
+  case UserDefined(UInt16)
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="rust-does-it">
+<h2>Rust does it<a class="headerlink" href="#rust-does-it" title="Permalink to this headline">¶</a></h2>
+<p>Rust also labels their ADTs &#8216;enum&#8217;, so there is some alignment with the
+&#8220;extended family&#8221; of C-influenced modern systems programming languages in making
+the same choice</p>
+</div>
+</div>
+<div class="section" id="design">
+<h1>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>The &#8216;enum&#8217; keyword introduces an ADT (hereon called an &#8220;enum&#8221;). Within an enum,
+the &#8216;case&#8217; keyword introduces a value of the enum. This can either be a purely
+symbolic case or can declare a payload type that is stored with the value:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Color {
+  case Red
+  case Green
+  case Blue
+}
+
+enum Optional&lt;T&gt; {
+  case Some(T)
+  case None
+}
+
+enum IntOrInfinity {
+  case Int(Int)
+  case NegInfinity
+  case PosInfinity
+}
+</pre></div>
+</div>
+<p>Multiple &#8216;case&#8217; declarations may be specified in a single declaration, separated
+by commas:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum IntOrInfinity {
+  case NegInfinity, Int(Int), PosInfinity
+}
+</pre></div>
+</div>
+<p>Enum declarations may also contain the same sorts of nested declarations as
+structs, including nested types, methods, constructors, and properties:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum IntOrInfinity {
+  case NegInfinity, Int(Int), PosInfinity
+
+  constructor() {
+    this = .Int(0)
+  }
+
+  func min(x:IntOrInfinity) -&gt; IntOrInfinity {
+    switch (self, x) {
+    case (.NegInfinity, _):
+    case (_, .NegInfinity):
+      return .NegInfinity
+    case (.Int(var a), .Int(var b)):
+      return min(a, b)
+    case (.Int(var a), .PosInfinity):
+      return a
+    case (.PosInfinity, .Int(var b)):
+      return b
+    }
+  }
+}
+</pre></div>
+</div>
+<p>They may not however contain physical properties.</p>
+<p>Enums do not have default constructors (unless one is explicitly declared).
+Enum values are constructed by referencing one of its cases, which are scoped
+as if static values inside the enum type:</p>
+<div class="highlight-python"><div class="highlight"><pre>var red = Color.Red
+var zero = IntOrInfinity.Int(0)
+var inf = IntOrInfinity.PosInfinity
+</pre></div>
+</div>
+<p>If the enum type can be deduced from context, it can be elided and the case
+can be referenced using leading dot syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre>var inf : IntOrInfinity = .PosInfinity
+return inf.min(.NegInfinity)
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-rawrepresentable-protocol">
+<h2>The &#8216;RawRepresentable&#8217; protocol<a class="headerlink" href="#the-rawrepresentable-protocol" title="Permalink to this headline">¶</a></h2>
+<p>In the library, we define a compiler-blessed &#8216;RawRepresentable&#8217; protocol that
+models the traditional relationship between a C enum and its raw type:</p>
+<div class="highlight-python"><div class="highlight"><pre>protocol RawRepresentable {
+  /// The raw representation type.
+  typealias RawType
+
+  /// Convert the conforming type to its raw type.
+  /// Every valid value of the conforming type should map to a unique
+  /// raw value.
+  func toRaw() -&gt; RawType
+
+  /// Convert a value of raw type to the corresponding value of the
+  /// conforming type.
+  /// Returns None if the raw value has no corresponding conforming type
+  /// value.
+  class func fromRaw(_:RawType) -&gt; Self?
+}
+</pre></div>
+</div>
+<p>Any type may manually conform to the RawRepresentable protocol following the above
+invariants, regardless of whether it supports compiler derivation as underlined
+below.</p>
+</div>
+<div class="section" id="deriving-the-rawrepresentable-protocol-for-enums">
+<h2>Deriving the &#8216;RawRepresentable&#8217; protocol for enums<a class="headerlink" href="#deriving-the-rawrepresentable-protocol-for-enums" title="Permalink to this headline">¶</a></h2>
+<p>An enum can obtain a compiler-derived &#8216;RawRepresentable&#8217; conformance by
+declaring &#8220;inheritance&#8221; from its raw type in the following
+circumstances:</p>
+<ul class="simple">
+<li>The inherited raw type must be IntegerLiteralConvertible,
+FloatLiteralConvertible, CharLiteralConvertible, and/or
+StringLiteralConvertible.</li>
+<li>None of the cases of the enum may have non-void payloads.</li>
+</ul>
+<p>If an enum declares an raw type, then its cases may declare raw
+values. raw values must be integer, float, character, or string
+literals, and must be unique within the enum. If the raw type is
+IntegerLiteralConvertible, then the raw values default to
+auto-incrementing integer literal values starting from &#8216;0&#8217;, as in C. If the
+raw type is not IntegerLiteralConvertible, the raw values must
+all be explicitly declared:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Color : Int {
+  case Black   // = 0
+  case Cyan    // = 1
+  case Magenta // = 2
+  case White   // = 3
+}
+
+enum Signal : Int32 {
+  case SIGKILL = 9, SIGSEGV = 11
+}
+
+enum NSChangeDictionaryKey : String {
+  // All raw values are required because String is not
+  // IntegerLiteralConvertible
+  case NSKeyValueChangeKindKey = &quot;NSKeyValueChangeKindKey&quot;
+  case NSKeyValueChangeNewKey = &quot;NSKeyValueChangeNewKey&quot;
+  case NSKeyValueChangeOldKey = &quot;NSKeyValueChangeOldKey&quot;
+}
+</pre></div>
+</div>
+<p>The compiler, on seeing a valid raw type for an enum, derives a RawRepresentable
+conformance, using &#8216;switch&#8217; to implement the fromRaw and toRaw
+methods. The NSChangeDictionaryKey definition behaves as if defined:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum NSChangeDictionaryKey : RawRepresentable {
+  typealias RawType = String
+
+  case NSKeyValueChangeKindKey
+  case NSKeyValueChangeNewKey
+  case NSKeyValueChangeOldKey
+
+  func toRaw() -&gt; String {
+    switch self {
+    case .NSKeyValueChangeKindKey:
+      return &quot;NSKeyValueChangeKindKey&quot;
+    case .NSKeyValueChangeNewKey:
+      return &quot;NSKeyValueChangeNewKey&quot;
+    case .NSKeyValueChangeOldKey:
+      return &quot;NSKeyValueChangeOldKey&quot;
+    }
+  }
+
+  static func fromRaw(s:String) -&gt; NSChangeDictionaryKey? {
+    switch s {
+    case &quot;NSKeyValueChangeKindKey&quot;:
+      return .NSKeyValueChangeKindKey
+    case &quot;NSKeyValueChangeNewKey&quot;:
+      return .NSKeyValueChangeNewKey
+    case &quot;NSKeyValueChangeOldKey&quot;:
+      return .NSKeyValueChangeOldKey
+    default:
+      return nil
+    }
+  }
+}
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright apple.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

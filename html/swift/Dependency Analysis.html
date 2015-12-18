@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Dependency Analysis &mdash; Swift Programming Language documentation 0.1.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Swift Programming Language documentation 0.1.9 documentation" href="index.html"/>
+        <link rel="next" title="Driver Design &amp; Internals" href="DriverInternals.html"/>
+        <link rel="prev" title="Debugging the Swift Compiler" href="DebuggingTheCompiler.html"/>
+<style type="text/css">
+  table.right { float: right; margin-left: 20px; }
+  table.right td { border: 1px solid #ccc; }
+</style>
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Swift Programming Language documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">swift docs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ABI.html">The Swift ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ARCOptimization.html">ARC Optimization for Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControl.html">Access Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html">Scope and introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#public"><cite>public</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#internal"><cite>internal</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#private"><cite>private</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#leading-underscore-rule">Leading Underscore Rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Arrays.html">The Swift Array Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CallingConvention.html">The Swift Calling Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DebuggingTheCompiler.html">Debugging the Swift Compiler</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Dependency Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kinds-of-dependency">Kinds of Dependency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cascading-vs-non-cascading-dependencies">Cascading vs. Non-Cascading Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#external-dependencies">External Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#complications">Complications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DriverInternals.html">Driver Design &amp; Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DriverParseableOutput.html">Parseable Driver Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ErrorHandling.html">Error Handling in Swift 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ErrorHandlingRationale.html">Error Handling Rationale and Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Failable Initializers.html">Failable initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generics.html">Generics in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GitWorkflows.html">Git Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GitWorkflows.html#svn-git-workflows">SVN -&gt; GIT Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HighLevelSILOptimizations.html">High-Level Optimizations in SIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Import.html">IMPORT SYNTAX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Import.html#resolving-name-clashes">RESOLVING NAME CLASHES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Import.html#future-extensions">FUTURE EXTENSIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IndexInvalidation.html">Index Invalidation Rules in the Swift Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#using-versioned-api">Using Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#publishing-versioned-api">Publishing Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#giving-up-flexibility">Giving Up Flexibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#optimization">Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#resilience-domains">Resilience Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#protocol-conformances">Protocol Conformances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#checking-binary-compatibility">Checking Binary Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#summary">Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Literals.html">Literals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LogicalObjects.html">Logical Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html">High-Level Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#import"><code class="docutils literal"><span class="pre">import</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#interoperability-with-objective-c-via-clang">Interoperability with Objective-C via Clang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MutationModel.html">Immutability and Read-Only Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ObjectInitialization.html">Object Initialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html">Writing High-Performance Swift Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#enabling-optimizations">Enabling Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#whole-module-optimizations">Whole Module Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#reducing-dynamic-dispatch">Reducing Dynamic Dispatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#using-container-types-efficiently">Using Container Types Efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#unchecked-operations">Unchecked operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#generics">Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#the-cost-of-large-swift-values">The cost of large swift values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#unsafe-code">Unsafe code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#protocols">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#footnotes">Footnotes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pattern Matching.html">Pattern Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SIL.html">Swift Intermediate Language (SIL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SequencesAndCollections.html">Sequences And Collections in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Serialization.html">Swift Binary Serialization Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StdlibAPIGuidelines.html">Swift Standard Library API Design Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StdlibRationales.html">Rationales for the Swift standard library designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StoredAndComputedVariables.html">Stored and Computed Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StringDesign.html">Swift String Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Testing.html">Testing Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TextFormatting.html">Text Formatting in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TransparentAttr.html"><code class="docutils literal"><span class="pre">&#64;_transparent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="TypeChecker.html">Type Checker Design and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents.html">Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weak.html">Weak References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Swift Programming Language documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Dependency Analysis</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/Dependency Analysis.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dependency-analysis">
+<h1>Dependency Analysis<a class="headerlink" href="#dependency-analysis" title="Permalink to this headline">¶</a></h1>
+<p>Swift&#8217;s intra-module dependency analysis is based on a &#8220;provides&#8221; / &#8220;depends&#8221;
+system, which is ultimately trying to prove which files do not need to be
+rebuilt. In its simplest form, every file has a list of what it &#8220;provides&#8221; and
+what it &#8220;depends on&#8221;, and when a file is touched, every file that &#8220;depends on&#8221;
+what the first file &#8220;provides&#8221; needs to be rebuilt.</p>
+<p>The golden rule of dependency analysis is to be conservative. Rebuilding a file
+when you don&#8217;t have to is annoying. <em>Not</em> rebuilding a file when you <em>do</em> have
+to is tantamount to a debug-time miscompile!</p>
+<div class="section" id="kinds-of-dependency">
+<h2>Kinds of Dependency<a class="headerlink" href="#kinds-of-dependency" title="Permalink to this headline">¶</a></h2>
+<p>There are four major kinds of dependency between files:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">top-level</span></code>: use of an unqualified name that is looked up at module scope,
+and definition of a name at module scope. This includes free functions,
+top-level type definitions, and global constants and variables.</li>
+<li><code class="docutils literal"><span class="pre">nominal</span></code>: use of a particular type, in any way, and declarations that
+change the &#8220;shape&#8221; of the type (the original definition, and extensions that
+add conformances). The type is identified by its mangled name.</li>
+<li><code class="docutils literal"><span class="pre">member</span></code>: a two-part entry that constitutes either <em>providing</em> a member or
+<em>accessing</em> a specific member of a type. This has some complications; see
+below.</li>
+<li><code class="docutils literal"><span class="pre">dynamic-lookup</span></code>: use of a specific member accessed through <code class="docutils literal"><span class="pre">AnyObject</span></code>,
+which has special <code class="docutils literal"><span class="pre">id</span></code>-like rules for member accesses, and definitions of
+<code class="docutils literal"><span class="pre">&#64;objc</span></code> members that can be accessed this way.</li>
+</ul>
+<p>The <code class="docutils literal"><span class="pre">member</span></code> dependency kind has a special entry where the member name is
+empty. This is in the &#8220;provides&#8221; set of <em>every file that adds non-private
+members</em> to a type, making it a superset of provided <code class="docutils literal"><span class="pre">nominal</span></code> entries. When
+listed as a dependency, it means that something in the file needs to be
+recompiled whenever <em>any</em> members are added to the type in question. This is
+currently used for cases of inheritance: superclasses and protocol conformances.</p>
+<p>The &#8220;provides&#8221; sets for each file are computed after type-checking has
+completed. The &#8220;depends&#8221; sets are tracked by instrumenting lookups in the
+compiler. The most common kinds of lookups (qualified name lookup, unqualified
+name lookup, and protocol conformance checks) will already properly record
+dependencies, but direct lookups into a type or module will not, nor will
+dependencies not modeled by a query of some kind. These latter dependencies
+must be handled on a case-by-case basis.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The compiler currently does not track <code class="docutils literal"><span class="pre">nominal</span></code> dependencies separate from
+<code class="docutils literal"><span class="pre">member</span></code> dependencies. Instead, it considers every <code class="docutils literal"><span class="pre">member</span></code> dependency
+to implicitly be a <code class="docutils literal"><span class="pre">nominal</span></code> dependency, since adding a protocol to a type
+may change its members drastically.</p>
+</div>
+</div>
+<div class="section" id="cascading-vs-non-cascading-dependencies">
+<h2>Cascading vs. Non-Cascading Dependencies<a class="headerlink" href="#cascading-vs-non-cascading-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>If file A depends on file B, and file B depends on file C, does file A depend
+on file C? The answer is: maybe! It depends how file B is using file C. If all
+uses are inside function bodies, for example, then changing file C only
+requires rebuilding file B, not file A. The terminology here is that file B has
+a <em>non-cascading</em> dependency on file C.</p>
+<p>By contrast, if changing file C affects the interface of file B, then the
+dependency is said to be <em>cascading,</em> and changing file C would require
+rebuilding both file B and file A.</p>
+<p>The various dependency tracking throughout the compiler will look at the
+context in which information is being used and attempt to determine whether or
+not a particular dependency should be considered cascading. If there&#8217;s not
+enough context to decide, the compiler has to go with the conservative choice
+and record it as cascading.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the current on-disk representation of dependency information, cascading
+dependencies are the default. Non-cascading dependencies are marked
+<code class="docutils literal"><span class="pre">private</span></code> by analogy with the Swift <code class="docutils literal"><span class="pre">private</span></code> keyword.</p>
+</div>
+</div>
+<div class="section" id="external-dependencies">
+<h2>External Dependencies<a class="headerlink" href="#external-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>External dependencies, including imported Swift module files and Clang headers,
+are tracked using a special <code class="docutils literal"><span class="pre">depends-external</span></code> set. The Swift driver
+interprets this set specially and decides whether or not the cross-module
+dependencies have changed.</p>
+<p>Because every Swift file in the module at least has its imports resolved,
+currently every file in the module has the same (complete) list of external
+dependencies. This means if an external dependency changes, everything in the
+module is rebuilt.</p>
+</div>
+<div class="section" id="complications">
+<h2>Complications<a class="headerlink" href="#complications" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A file&#8217;s &#8220;provides&#8221; set may be different before and after it is compiled &#8211;
+declarations can be both added and removed, and other files may depend on the
+declarations that were added and the declarations that were removed. This
+means the dependency graph has to be updated after each file during
+compilation. (This is also why reusing build products is hard.)</li>
+<li>If a build stops in the middle, we need to make sure the next build takes
+care of anything that was scheduled to be rebuilt but didn&#8217;t get rebuilt this
+time.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="DriverInternals.html" class="btn btn-neutral float-right" title="Driver Design &amp; Internals" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="DebuggingTheCompiler.html" class="btn btn-neutral" title="Debugging the Swift Compiler" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright apple.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

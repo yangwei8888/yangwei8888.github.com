@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parseable Driver Output &mdash; Swift Programming Language documentation 0.1.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Swift Programming Language documentation 0.1.9 documentation" href="index.html"/>
+        <link rel="up" title="Contents" href="contents.html"/>
+        <link rel="next" title="Error Handling in Swift 2.0" href="ErrorHandling.html"/>
+        <link rel="prev" title="Driver Design &amp; Internals" href="DriverInternals.html"/>
+<style type="text/css">
+  table.right { float: right; margin-left: 20px; }
+  table.right td { border: 1px solid #ccc; }
+</style>
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Swift Programming Language documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">swift docs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ABI.html">The Swift ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ARCOptimization.html">ARC Optimization for Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControl.html">Access Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html">Scope and introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#public"><cite>public</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#internal"><cite>internal</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#private"><cite>private</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#leading-underscore-rule">Leading Underscore Rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Arrays.html">The Swift Array Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CallingConvention.html">The Swift Calling Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DebuggingTheCompiler.html">Debugging the Swift Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependency Analysis.html">Dependency Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DriverInternals.html">Driver Design &amp; Internals</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Parseable Driver Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#message-format">Message Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#message-kinds">Message Kinds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#began-message">Began Message</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finished-message">Finished Message</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#signalled-message">Signalled Message</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#skipped-message">Skipped Message</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#message-names">Message Names</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ErrorHandling.html">Error Handling in Swift 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ErrorHandlingRationale.html">Error Handling Rationale and Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Failable Initializers.html">Failable initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generics.html">Generics in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GitWorkflows.html">Git Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GitWorkflows.html#svn-git-workflows">SVN -&gt; GIT Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HighLevelSILOptimizations.html">High-Level Optimizations in SIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Import.html">IMPORT SYNTAX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Import.html#resolving-name-clashes">RESOLVING NAME CLASHES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Import.html#future-extensions">FUTURE EXTENSIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IndexInvalidation.html">Index Invalidation Rules in the Swift Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#using-versioned-api">Using Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#publishing-versioned-api">Publishing Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#giving-up-flexibility">Giving Up Flexibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#optimization">Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#resilience-domains">Resilience Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#protocol-conformances">Protocol Conformances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#checking-binary-compatibility">Checking Binary Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#summary">Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Literals.html">Literals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LogicalObjects.html">Logical Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html">High-Level Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#import"><code class="docutils literal"><span class="pre">import</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#interoperability-with-objective-c-via-clang">Interoperability with Objective-C via Clang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MutationModel.html">Immutability and Read-Only Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ObjectInitialization.html">Object Initialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html">Writing High-Performance Swift Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#enabling-optimizations">Enabling Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#whole-module-optimizations">Whole Module Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#reducing-dynamic-dispatch">Reducing Dynamic Dispatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#using-container-types-efficiently">Using Container Types Efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#unchecked-operations">Unchecked operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#generics">Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#the-cost-of-large-swift-values">The cost of large swift values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#unsafe-code">Unsafe code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#protocols">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#footnotes">Footnotes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pattern Matching.html">Pattern Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SIL.html">Swift Intermediate Language (SIL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SequencesAndCollections.html">Sequences And Collections in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Serialization.html">Swift Binary Serialization Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StdlibAPIGuidelines.html">Swift Standard Library API Design Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StdlibRationales.html">Rationales for the Swift standard library designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StoredAndComputedVariables.html">Stored and Computed Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StringDesign.html">Swift String Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Testing.html">Testing Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TextFormatting.html">Text Formatting in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TransparentAttr.html"><code class="docutils literal"><span class="pre">&#64;_transparent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="TypeChecker.html">Type Checker Design and Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Contents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="IndexInvalidation.html">Index Invalidation Rules in the Swift Standard Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AccessControl.html">Access Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DriverInternals.html">Driver Design &amp; Internals</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Parseable Driver Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#message-format">Message Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#message-kinds">Message Kinds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#began-message">Began Message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#finished-message">Finished Message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#signalled-message">Signalled Message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#skipped-message">Skipped Message</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#message-names">Message Names</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ErrorHandling.html">Error Handling in Swift 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ErrorHandlingRationale.html">Error Handling Rationale and Proposal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Generics.html">Generics in Swift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LogicalObjects.html">Logical Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ObjectInitialization.html">Object Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pattern Matching.html">Pattern Matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StoredAndComputedVariables.html">Stored and Computed Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SIL.html">Swift Intermediate Language (SIL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TypeChecker.html">Type Checker Design and Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DebuggingTheCompiler.html">Debugging the Swift Compiler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="weak.html">Weak References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Swift Programming Language documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="contents.html">Contents</a> &raquo;</li>
+      
+    <li>Parseable Driver Output</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/DriverParseableOutput.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parseable-driver-output">
+<h1>Parseable Driver Output<a class="headerlink" href="#parseable-driver-output" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#message-format" id="id3">Message Format</a></li>
+<li><a class="reference internal" href="#message-kinds" id="id4">Message Kinds</a><ul>
+<li><a class="reference internal" href="#began-message" id="id5">Began Message</a></li>
+<li><a class="reference internal" href="#finished-message" id="id6">Finished Message</a></li>
+<li><a class="reference internal" href="#signalled-message" id="id7">Signalled Message</a></li>
+<li><a class="reference internal" href="#skipped-message" id="id8">Skipped Message</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#message-names" id="id9">Message Names</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This document serves to describe the parseable output format provided by the
+Swift compiler driver with the &#8220;-parseable-output&#8221; flag. This output format is
+intended to be parsed by other programs; one such use case is to allow an IDE to
+construct a detailed log based on the commands the driver issued.</p>
+</div>
+<div class="section" id="message-format">
+<h2><a class="toc-backref" href="#id3">Message Format</a><a class="headerlink" href="#message-format" title="Permalink to this headline">¶</a></h2>
+<p>The parseable output provided by the Swift driver is provided as messages
+encoded in JSON objects. All messages are structured like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;Message Length&gt;\n
+{
+  &quot;kind&quot;: &quot;&lt;Message Kind&gt;&quot;,
+  &quot;name&quot;: &quot;&lt;Message Name&gt;&quot;,
+  &quot;&lt;key&gt;&quot;: &quot;&lt;value&gt;&quot;,
+  ...
+}\n
+</pre></div>
+</div>
+<p>This allows the driver to pass as much information as it wants about the ongoing
+compilation, and programs which parse this data can decide what to use and what
+to ignore.</p>
+</div>
+<div class="section" id="message-kinds">
+<h2><a class="toc-backref" href="#id4">Message Kinds</a><a class="headerlink" href="#message-kinds" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#began-message" id="id10">Began Message</a></li>
+<li><a class="reference internal" href="#finished-message" id="id11">Finished Message</a></li>
+<li><a class="reference internal" href="#signalled-message" id="id12">Signalled Message</a></li>
+<li><a class="reference internal" href="#skipped-message" id="id13">Skipped Message</a></li>
+</ul>
+</div>
+<p>The driver may emit four kinds of messages: &#8220;began&#8221;, &#8220;finished&#8221;, &#8220;signalled&#8221;,
+and &#8220;skipped&#8221;.</p>
+<div class="section" id="began-message">
+<h3><a class="toc-backref" href="#id10">Began Message</a><a class="headerlink" href="#began-message" title="Permalink to this headline">¶</a></h3>
+<p>A &#8220;began&#8221; message indicates that a new task began. As with all task-based
+messages, it will include the task&#8217;s PID under the &#8220;pid&#8221; key. It may specify the
+task&#8217;s inputs as an array of paths under the &#8220;inputs&#8221; key. It may specify the
+task&#8217;s outputs as an array of objects under the &#8220;outputs&#8221; key. An &#8220;outputs&#8221;
+object will have two fields, a &#8220;kind&#8221; describing the type of the output, and a
+&#8220;path&#8221; containing the path to the output. A &#8220;began&#8221; message will specify the
+command which was executed under the &#8220;command&#8221; key.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s">&quot;kind&quot;</span><span class="p">:</span> <span class="s">&quot;began&quot;</span><span class="p">,</span>
+  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;compile&quot;</span><span class="p">,</span>
+  <span class="s">&quot;pid&quot;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">,</span>
+  <span class="s">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="s">&quot;/src/foo.swift&quot;</span> <span class="p">],</span>
+  <span class="s">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">[</span>
+     <span class="p">{</span>
+       <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;object&quot;</span><span class="p">,</span>
+       <span class="s">&quot;path&quot;</span><span class="p">:</span> <span class="s">&quot;/build/foo.o&quot;</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+       <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;swiftmodule&quot;</span><span class="p">,</span>
+       <span class="s">&quot;path&quot;</span><span class="p">:</span> <span class="s">&quot;/build/foo.swiftmodule&quot;</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+       <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;diagnostics&quot;</span><span class="p">,</span>
+       <span class="s">&quot;path&quot;</span><span class="p">:</span> <span class="s">&quot;/build/foo.dia&quot;</span>
+     <span class="p">},</span>
+  <span class="p">],</span>
+  <span class="s">&quot;command&quot;</span><span class="p">:</span> <span class="s">&quot;swift -frontend -c -primary-file /src/foo.swift /src/bar.swift -emit-module-path /build/foo.swiftmodule -emit-diagnostics-path /build/foo.dia&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="finished-message">
+<h3><a class="toc-backref" href="#id11">Finished Message</a><a class="headerlink" href="#finished-message" title="Permalink to this headline">¶</a></h3>
+<p>A &#8220;finished&#8221; message indicates that a task finished execution. As with all task-
+based messages, it will include the task&#8217;s PID under the &#8220;pid&#8221; key. It will
+include the exit status of the task under the &#8220;exit-status&#8221; key. It may include
+the stdout/stderr of the task under the &#8220;output&#8221; key; if this key is missing,
+no output was generated by the task.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>{
+  &quot;kind&quot;: &quot;finished&quot;,
+  &quot;name&quot;: &quot;compile&quot;,
+  &quot;pid&quot;: 12345,
+  &quot;exit-status&quot;: 0
+  // &quot;output&quot; key omitted because there was no stdout/stderr.
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="signalled-message">
+<h3><a class="toc-backref" href="#id12">Signalled Message</a><a class="headerlink" href="#signalled-message" title="Permalink to this headline">¶</a></h3>
+<p>A &#8220;signalled&#8221; message indicates that a task exited abnormally due to a signal.
+As with all task-based message, it will include the task&#8217;s PID under the &#8220;pid&#8221;
+key. It may include an error message describing the signal under the
+&#8220;error-message&#8221; key. As with the &#8220;finished&#8221; message, it may include the
+stdout/stderr of the task under the &#8220;output&#8221; key; if this key is missing, no
+output was generated by the task.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>{
+  &quot;kind&quot;: &quot;signalled&quot;,
+  &quot;name&quot;: &quot;compile&quot;,
+  &quot;pid&quot;: 12345,
+  &quot;error-message&quot;: &quot;Segmentation fault: 11&quot;
+  // &quot;output&quot; key omitted because there was no stdout/stderr.
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="skipped-message">
+<h3><a class="toc-backref" href="#id13">Skipped Message</a><a class="headerlink" href="#skipped-message" title="Permalink to this headline">¶</a></h3>
+<p>A &#8220;skipped&#8221; message indicates that the driver determined a command did not need to
+run during the current compilation. A &#8220;skipped&#8221; message is equivalent to a &#8220;began&#8221;
+message, with the exception that it does not include the &#8220;pid&#8221; key.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s">&quot;kind&quot;</span><span class="p">:</span> <span class="s">&quot;skipped&quot;</span><span class="p">,</span>
+  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;compile&quot;</span><span class="p">,</span>
+  <span class="s">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="s">&quot;/src/foo.swift&quot;</span> <span class="p">],</span>
+  <span class="s">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">[</span>
+     <span class="p">{</span>
+       <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;object&quot;</span><span class="p">,</span>
+       <span class="s">&quot;path&quot;</span><span class="p">:</span> <span class="s">&quot;/build/foo.o&quot;</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+       <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;swiftmodule&quot;</span><span class="p">,</span>
+       <span class="s">&quot;path&quot;</span><span class="p">:</span> <span class="s">&quot;/build/foo.swiftmodule&quot;</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+       <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;diagnostics&quot;</span><span class="p">,</span>
+       <span class="s">&quot;path&quot;</span><span class="p">:</span> <span class="s">&quot;/build/foo.dia&quot;</span>
+     <span class="p">},</span>
+  <span class="p">],</span>
+  <span class="s">&quot;command&quot;</span><span class="p">:</span> <span class="s">&quot;swift -frontend -c -primary-file /src/foo.swift /src/bar.swift -emit-module-path /build/foo.swiftmodule -emit-diagnostics-path /build/foo.dia&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="message-names">
+<h2><a class="toc-backref" href="#id9">Message Names</a><a class="headerlink" href="#message-names" title="Permalink to this headline">¶</a></h2>
+<p>The name of the message identifies the kind of command the message describes.
+Some valid values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>compile</li>
+<li>merge-module</li>
+<li>link</li>
+<li>generate-dsym</li>
+</ul>
+</div></blockquote>
+<p>A &#8220;compile&#8221; message represents a regular Swift frontend command.
+A &#8220;merge-module&#8221; message represents an invocation of the Swift frontend which is
+used to merge partial swiftmodule files into a complete swiftmodule. A &#8220;link&#8221;
+message indicates that the driver is invoking the linker to produce an
+executable or a library. A &#8220;generate-dsym&#8221; message indicates that the driver is
+invoking dsymutil to generate a dSYM.</p>
+<p>Parsers of this format should be resilient in the event of an unknown name, as
+the driver may emit messages with new names whenever it needs to execute a new
+kind of command.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ErrorHandling.html" class="btn btn-neutral float-right" title="Error Handling in Swift 2.0" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="DriverInternals.html" class="btn btn-neutral" title="Driver Design &amp; Internals" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright apple.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

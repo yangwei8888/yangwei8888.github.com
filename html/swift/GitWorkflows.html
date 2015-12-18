@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Git Workflows &mdash; Swift Programming Language documentation 0.1.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Swift Programming Language documentation 0.1.9 documentation" href="index.html"/>
+        <link rel="next" title="High-Level Optimizations in SIL" href="HighLevelSILOptimizations.html"/>
+        <link rel="prev" title="Generics in Swift" href="Generics.html"/>
+<style type="text/css">
+  table.right { float: right; margin-left: 20px; }
+  table.right td { border: 1px solid #ccc; }
+</style>
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Swift Programming Language documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">swift docs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ABI.html">The Swift ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ARCOptimization.html">ARC Optimization for Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControl.html">Access Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html">Scope and introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#public"><cite>public</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#internal"><cite>internal</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#private"><cite>private</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#leading-underscore-rule">Leading Underscore Rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Arrays.html">The Swift Array Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CallingConvention.html">The Swift Calling Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DebuggingTheCompiler.html">Debugging the Swift Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependency Analysis.html">Dependency Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DriverInternals.html">Driver Design &amp; Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DriverParseableOutput.html">Parseable Driver Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ErrorHandling.html">Error Handling in Swift 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ErrorHandlingRationale.html">Error Handling Rationale and Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Failable Initializers.html">Failable initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generics.html">Generics in Swift</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Git Workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#svn-git-workflows">SVN -&gt; GIT Workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quicksetup-tldr">Quicksetup (TLDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preliminary">Preliminary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checkout">Checkout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#repository-configuration-enabling-default-rebasing">Repository Configuration (Enabling Default Rebasing)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update">Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commit">Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#revert">Revert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#browsing">Browsing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="HighLevelSILOptimizations.html">High-Level Optimizations in SIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Import.html">IMPORT SYNTAX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Import.html#resolving-name-clashes">RESOLVING NAME CLASHES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Import.html#future-extensions">FUTURE EXTENSIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IndexInvalidation.html">Index Invalidation Rules in the Swift Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#using-versioned-api">Using Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#publishing-versioned-api">Publishing Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#giving-up-flexibility">Giving Up Flexibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#optimization">Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#resilience-domains">Resilience Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#protocol-conformances">Protocol Conformances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#checking-binary-compatibility">Checking Binary Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#summary">Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Literals.html">Literals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LogicalObjects.html">Logical Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html">High-Level Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#import"><code class="docutils literal"><span class="pre">import</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#interoperability-with-objective-c-via-clang">Interoperability with Objective-C via Clang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MutationModel.html">Immutability and Read-Only Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ObjectInitialization.html">Object Initialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html">Writing High-Performance Swift Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#enabling-optimizations">Enabling Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#whole-module-optimizations">Whole Module Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#reducing-dynamic-dispatch">Reducing Dynamic Dispatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#using-container-types-efficiently">Using Container Types Efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#unchecked-operations">Unchecked operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#generics">Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#the-cost-of-large-swift-values">The cost of large swift values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#unsafe-code">Unsafe code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#protocols">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#footnotes">Footnotes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pattern Matching.html">Pattern Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SIL.html">Swift Intermediate Language (SIL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SequencesAndCollections.html">Sequences And Collections in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Serialization.html">Swift Binary Serialization Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StdlibAPIGuidelines.html">Swift Standard Library API Design Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StdlibRationales.html">Rationales for the Swift standard library designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StoredAndComputedVariables.html">Stored and Computed Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StringDesign.html">Swift String Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Testing.html">Testing Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TextFormatting.html">Text Formatting in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TransparentAttr.html"><code class="docutils literal"><span class="pre">&#64;_transparent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="TypeChecker.html">Type Checker Design and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents.html">Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weak.html">Weak References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Swift Programming Language documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Git Workflows</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/GitWorkflows.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="git-workflows">
+<h1>Git Workflows<a class="headerlink" href="#git-workflows" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Swift development has been based on SVN since its inception.  As part of the
+transition to Git this document helps to address questions about how common SVN
+workflows we use today translate to their Git counterparts as well as to discuss
+Git workflow practices we plan on having — at least initially — after the Git
+transition.  Notably we will follow a model where commits to trunk — which is
+the ‘master’ branch in Git — has commits land (in the common case) via rebasing
+instead of merging.  This model is open to evolution later, but this mimics the
+workflow we have today with SVN.</p>
+</div>
+</div>
+<div class="section" id="svn-git-workflows">
+<h1>SVN -&gt; GIT Workflows<a class="headerlink" href="#svn-git-workflows" title="Permalink to this headline">¶</a></h1>
+<p>The general SVN workflow consists of the following commands:</p>
+<ol class="arabic simple">
+<li>Checkout: This means checking out/setting up a new repository.</li>
+<li>Update: Pulling the latest remote changes into a local repository.</li>
+<li>Committing: Committing a change to the remote repository.</li>
+<li>Reverting: Reverting a change from a remote repository.</li>
+<li>Browsing: Looking at commits.</li>
+</ol>
+<p>This document will show how to translate these commands to Git and additionally
+how to configure Git. It assumes that one is attempting to manipulate a Git
+repository via bash in a terminal. A lot of information since this is supposed
+to be a short, actionable guide. For more information, please see the Git crash
+course guide for SVN users at &lt;<a class="reference external" href="https://git-scm.com/course/SVN.html">https://git-scm.com/course/SVN.html</a>&gt;</p>
+<p><em>NOTE</em> Whenever we say the Swift repository, we mean any repository in the
+Swift project.</p>
+<div class="section" id="quicksetup-tldr">
+<h2>Quicksetup (TLDR)<a class="headerlink" href="#quicksetup-tldr" title="Permalink to this headline">¶</a></h2>
+<p>For those who do not want to read the full document, use the following commands
+to perform a simple repo setup for the Swift repository:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git config --global user.name &quot;&lt;My Name&gt;&quot;
+$ git config --global user.email &quot;&lt;My Email&gt;&quot;
+$ mkdir swift-source &amp;&amp; cd swift-source
+$ git clone &lt;LLVM_REPO_URL&gt;
+$ git clone &lt;CLANG_REPO_URL&gt;
+$ git clone &lt;SWIFT_REPO_URL&gt;
+$ (cd swift &amp;&amp; git config branch.autosetuprebase always)
+$ git clone &lt;CMARK_REPO_URL&gt;
+$ git clone &lt;NINJA_REPO_URL&gt;
+</pre></div>
+</div>
+<p>Then to commit a new commit to the remote swift repository:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git commit
+$ git push origin master
+</pre></div>
+</div>
+<p>and to pull new commits from the remote swift repository:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git pull origin master
+</pre></div>
+</div>
+<p>In order to ease updating all repositories, consider using the script in
+&#8216;./utils/update-checkout&#8217;. This will automate updating the repositories in the
+proper way.</p>
+</div>
+<div class="section" id="preliminary">
+<h2>Preliminary<a class="headerlink" href="#preliminary" title="Permalink to this headline">¶</a></h2>
+<p>Before beginning, we need to perform some global configuration of Git. Git
+includes a username/email of the committer in every commit. By default this is
+the current logged in user and the hostname of the machine. This is /not/ what
+one wants. We configure Git globally (i.e. across all repositories) to have our
+proper name and email by running the following commands:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git config --global user.name &quot;&lt;My Name&gt;&quot;
+$ git config --global user.email &quot;&lt;My Email&gt;&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="checkout">
+<h2>Checkout<a class="headerlink" href="#checkout" title="Permalink to this headline">¶</a></h2>
+<p>Normally if one wishes to checkout a repository in SVN, one would use a command
+like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ SVN co &lt;repository url&gt; &lt;local directory&gt;
+</pre></div>
+</div>
+<p>This would then checkout the latest revision from the repository specified by
+&#8216;repository url&#8217; and place it into the directory &#8216;local directory&#8217;. In Git,
+instead of checking out the repository, one clones the repository. This is done
+as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git clone &lt;repository url&gt; &lt;local directory&gt;
+</pre></div>
+</div>
+<p>This will cause Git to clone the repository at &#8216;repository url&#8217; and check out
+the &#8216;master&#8217; branch. The &#8216;master&#8217; branch corresponds to &#8216;trunk&#8217; in SVN. For more
+information about branching in Git please see
+&lt;<a class="reference external" href="https://git-scm.com/course/SVN.html#branch">https://git-scm.com/course/SVN.html#branch</a>&gt;</p>
+<p>Before beginning to commit though, we /must/ perform some default configuration
+of our repository to match the Swift repository default configuration by
+enabling default rebasing.</p>
+</div>
+<div class="section" id="repository-configuration-enabling-default-rebasing">
+<h2>Repository Configuration (Enabling Default Rebasing)<a class="headerlink" href="#repository-configuration-enabling-default-rebasing" title="Permalink to this headline">¶</a></h2>
+<p>Once we have cloned the repository, we need to configure the repository for our
+use. Specifically we want to configure the swift repository so that we rebase
+whenever we update the repository (see the update section below for more
+details):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git config branch.autosetuprebase always
+</pre></div>
+</div>
+<p>By default when updating, Git will attempt to merge the remote changes and your
+local changes. Ignoring what that sentence means, this is not an SVN-esque
+model. Instead we want any local changes that we have to be applied on top of
+any new remote changes. The &#8216;branch.autosetuprebase&#8217; flag causes this to be done
+automatically when ever one updates the local repository.</p>
+</div>
+<div class="section" id="update">
+<h2>Update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h2>
+<p>In SVN, one updates your local repository by running the update command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ SVN update
+</pre></div>
+</div>
+<p>In Git, instead of performing SVN update, one pulls from the remote repository:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git pull --rebase origin master
+</pre></div>
+</div>
+<p>This will pull any new remote commits into your local repository and then replay
+your current local commits on top of those new commits.</p>
+<p>By default the &#8216;&#8211;rebase&#8217; flag is not necessary for the Swift repository because
+it is configured to always rebase by setting the &#8216;branch.autosetuprebase&#8217; flag
+(see the section &#8216;Repository Configuration (Enabling Default Rebasing)&#8217; above).</p>
+</div>
+<div class="section" id="commit">
+<h2>Commit<a class="headerlink" href="#commit" title="Permalink to this headline">¶</a></h2>
+<p>In SVN, committing always means submitting changes to a remote repository. In
+Git, committing refers to the process of first telling Git to track a change by
+staging the change and then committing all staged changes into a change in the
+local repository. One can have many such commits. Then when one is ready, one
+pushes the new local changes to the remote repository. We go through these steps
+in more detail below:</p>
+<p>In terms of replicating the SVN model, there are now two steps. In order to
+commit changes one first stages a changed file using &#8216;git add&#8217;:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git add &lt;path&gt;
+</pre></div>
+</div>
+<p>Then once all changes that you want to be apart of the commit have been staged,
+a commit is created in the local repository via the &#8216;commit&#8217; command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git commit
+</pre></div>
+</div>
+<p>As a shortcut to commit /all/ changes to local files that are already being
+tracked by Git to the local repository, you can use the &#8216;-a&#8217; command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git commit -a
+</pre></div>
+</div>
+<p>In both of these cases, an editor will pop up to accept a commit message. To
+specify a short commit message at the commandline, you can use the &#8216;-m&#8217; flag:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git commit -m &#39;My great commit message.&#39;
+</pre></div>
+</div>
+<p>In order to see the diff of changes that have not been staged, run the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git diff
+</pre></div>
+</div>
+<p>To see all changes that have been staged, run the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git diff --staged
+</pre></div>
+</div>
+<p>To get a diff for a specific revision/path, perform the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git diff &lt;revision&gt; &lt;path&gt;
+</pre></div>
+</div>
+<p>In order to get a more concise view of the files that have staged and or
+unstaged changes, run the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git status
+</pre></div>
+</div>
+<p>In order to restore a file from the last revision, one uses the checkout
+command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git checkout &lt;path&gt;
+</pre></div>
+</div>
+<p>To restore a file to a specific revision, one must use a longer form of the
+command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git checkout &lt;revision&gt; -- &lt;path&gt;
+</pre></div>
+</div>
+<p>To unstage a file, one uses the &#8216;reset&#8217; command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git reset &lt;path&gt;
+</pre></div>
+</div>
+<p>This tells Git to reset &#8216;&lt;path&gt;&#8217; in the staging area to the top of tree commit
+(which in Git is called &#8216;HEAD&#8217;). In order to correct a mistake, you can pass the
+&#8216;amend&#8217; flag to Git:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git commit --amend
+</pre></div>
+</div>
+<p>This will cause all staged changes to be merged into &#8216;HEAD&#8217;. Once one has made
+all the relevant commits, in order to push the changes to the remote repository
+the &#8216;push&#8217; command is used:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git push origin master
+</pre></div>
+</div>
+<p>If a different committer has committed changes such that there are remote
+commits that are not present locally, this will fail. In order to get around
+this issue, perform:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git pull --rebase origin master
+</pre></div>
+</div>
+<p>in order to pull the new remote commits and replay your new commits on top. Then
+try to push again. See the &#8216;Checkout&#8217; section above how to configure the local
+swift repository to always rebase allowing you to drop the &#8216;&#8211;rebase&#8217; flag.</p>
+</div>
+<div class="section" id="revert">
+<h2>Revert<a class="headerlink" href="#revert" title="Permalink to this headline">¶</a></h2>
+<p>In SVN reverting a commit implies performing a reverse merge. In Git, this is no
+longer true. Instead one now just uses the &#8216;revert&#8217; command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git revert &lt;revision&gt;
+</pre></div>
+</div>
+<p>This will cause Git to perform the reverse merge of that revision for you
+against HEAD and bring up a message window for you to write a commit
+message. This will be autofilled in with the title of the commit that is going
+to be reverted and the revision number of that commit like so:</p>
+<div class="highlight-python"><div class="highlight"><pre>Revert &quot;&lt;FIRST LINE OF REVERTED COMMITS COMMIT MSG&gt;&quot;
+
+This reverts commit &lt;REVISION&gt;.
+</pre></div>
+</div>
+<p>One can edit this message as one sees fit. Once this has been done, the revert
+will become a normal commit in your repository like any other commit. Thus to
+revert the commit in the remote repository, you need to perform a Git push:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git push origin master
+</pre></div>
+</div>
+</div>
+<div class="section" id="browsing">
+<h2>Browsing<a class="headerlink" href="#browsing" title="Permalink to this headline">¶</a></h2>
+<p>This section explains how one can view Git changes. In order to view a history
+of all changes on a branch to the beginning of time use the &#8216;log&#8217; command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git log
+</pre></div>
+</div>
+<p>This will for each commit show the following information:</p>
+<div class="highlight-python"><div class="highlight"><pre>commit &lt;REVISION&gt;
+Author: &lt;AUTHOR NAME&gt; &lt;AUTHOR EMAIL&gt;
+Date:   &lt;TIMESTAMP&gt;
+
+    &lt;COMMIT MSG&gt;
+</pre></div>
+</div>
+<p>To see history starting at a specific commit use the following form of a Git log
+command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git log &lt;REVISION&gt;
+</pre></div>
+</div>
+<p>To see a oneline summary that includes just the title of the commit and its
+hash, pass the &#8216;&#8211;oneline&#8217; command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git log --oneline
+</pre></div>
+</div>
+<p>It will not show you what was actually changed in each commit. In order to see
+what was actually changed in a commit, use the command &#8216;show&#8217;:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git show
+</pre></div>
+</div>
+<p>This will show the aforementioned information shown by Git log, but additionally
+will perform a diff against top of tree showing you the contents of the
+change. To see the changes for a specific commit, pass the revision to Git
+show:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git show &lt;REVISION&gt;
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="HighLevelSILOptimizations.html" class="btn btn-neutral float-right" title="High-Level Optimizations in SIL" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Generics.html" class="btn btn-neutral" title="Generics in Swift" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright apple.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

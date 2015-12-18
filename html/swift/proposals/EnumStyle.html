@@ -1,0 +1,618 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Case Initializers &mdash; Swift Programming Language documentation 0.1.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Swift Programming Language documentation 0.1.9 documentation" href="../index.html"/>
+<style type="text/css">
+  table.right { float: right; margin-left: 20px; }
+  table.right td { border: 1px solid #ccc; }
+</style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Swift Programming Language documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">swift docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ABI.html">The Swift ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ARCOptimization.html">ARC Optimization for Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControl.html">Access Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html">Scope and introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html#public"><cite>public</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html#internal"><cite>internal</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html#private"><cite>private</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AccessControlInStdlib.html#leading-underscore-rule">Leading Underscore Rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Arrays.html">The Swift Array Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CallingConvention.html">The Swift Calling Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DebuggingTheCompiler.html">Debugging the Swift Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dependency Analysis.html">Dependency Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DriverInternals.html">Driver Design &amp; Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DriverParseableOutput.html">Parseable Driver Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ErrorHandling.html">Error Handling in Swift 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ErrorHandlingRationale.html">Error Handling Rationale and Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Failable Initializers.html">Failable initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Generics.html">Generics in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GitWorkflows.html">Git Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GitWorkflows.html#svn-git-workflows">SVN -&gt; GIT Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HighLevelSILOptimizations.html">High-Level Optimizations in SIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Import.html">IMPORT SYNTAX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Import.html#resolving-name-clashes">RESOLVING NAME CLASHES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Import.html#future-extensions">FUTURE EXTENSIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../IndexInvalidation.html">Index Invalidation Rules in the Swift Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#using-versioned-api">Using Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#publishing-versioned-api">Publishing Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#giving-up-flexibility">Giving Up Flexibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#optimization">Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#resilience-domains">Resilience Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#protocol-conformances">Protocol Conformances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#checking-binary-compatibility">Checking Binary Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#summary">Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryEvolution.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Literals.html">Literals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LogicalObjects.html">Logical Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules.html">High-Level Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules.html#import"><code class="docutils literal"><span class="pre">import</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules.html#interoperability-with-objective-c-via-clang">Interoperability with Objective-C via Clang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MutationModel.html">Immutability and Read-Only Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ObjectInitialization.html">Object Initialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html">Writing High-Performance Swift Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#enabling-optimizations">Enabling Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#whole-module-optimizations">Whole Module Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#reducing-dynamic-dispatch">Reducing Dynamic Dispatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#using-container-types-efficiently">Using Container Types Efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#unchecked-operations">Unchecked operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#generics">Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#the-cost-of-large-swift-values">The cost of large swift values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#unsafe-code">Unsafe code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#protocols">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OptimizationTips.html#footnotes">Footnotes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Pattern Matching.html">Pattern Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SIL.html">Swift Intermediate Language (SIL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SequencesAndCollections.html">Sequences And Collections in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Serialization.html">Swift Binary Serialization Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StdlibAPIGuidelines.html">Swift Standard Library API Design Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StdlibRationales.html">Rationales for the Swift standard library designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StoredAndComputedVariables.html">Stored and Computed Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StringDesign.html">Swift String Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Testing.html">Testing Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TextFormatting.html">Text Formatting in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TransparentAttr.html"><code class="docutils literal"><span class="pre">&#64;_transparent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TypeChecker.html">Type Checker Design and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weak.html">Weak References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Swift Programming Language documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Case Initializers</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/proposals/EnumStyle.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>One of the issues that came up in our design discussions around <code class="docutils literal"><span class="pre">Result</span></code> was
+that enum cases don&#8217;t really follow the conventions of anything else in our
+system. Our current convention for enum cases is to use
+<code class="docutils literal"><span class="pre">CapitalizedCamelCase</span></code>. This convention arose from the Cocoa
+<code class="docutils literal"><span class="pre">NSEnumNameCaseName</span></code> convention for constants, but the convention feels
+foreign even in the context of Objective-C. Non-enum type constants in Cocoa
+are often namespaced into classes, using class methods such as <code class="docutils literal"><span class="pre">[UIColor</span>
+<span class="pre">redColor]</span></code> (and would likely have been class properties if those were
+supported by ObjC). It&#8217;s also worth noting that our &#8220;builtin&#8221; enum-like
+keywords such as <code class="docutils literal"><span class="pre">true</span></code>, <code class="docutils literal"><span class="pre">false</span></code>, and <code class="docutils literal"><span class="pre">nil</span></code> are lowercased, more like
+properties.</p>
+<p>Swift also has enum cases with associated values, which don&#8217;t have an immediate
+analog in Cocoa to draw inspiration from, but if anything feel
+&#8220;initializer-like&#8221;.  Aside from naming style, working with enum values also
+requires a different set of tools from other types, pattern matching with
+<code class="docutils literal"><span class="pre">switch</span></code> or <code class="docutils literal"><span class="pre">if</span> <span class="pre">case</span></code> instead of working with more readily-composable
+expressions. The compound effect of these style mismatches is that enums in the
+wild tend to grow a bunch of boilerplate helper members in order to make them
+fit better with other types.  For example, <code class="docutils literal"><span class="pre">Optional</span></code>, aside from the massive
+amounts of language sugar it&#8217;s given, vends initializers corresponding to
+<code class="docutils literal"><span class="pre">Some</span></code> and <code class="docutils literal"><span class="pre">None</span></code> cases:</p>
+<div class="highlight-python"><div class="highlight"><pre>extension Optional {
+  init(_ value: Wrapped) {
+    self = .Some(value)
+  }
+
+  init() {
+    self = .None
+  }
+}
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">Result</span></code> was proposed to have not only initializers corresponding to its
+<code class="docutils literal"><span class="pre">Success</span></code> and <code class="docutils literal"><span class="pre">Error</span></code> cases, but accessor properties as well:</p>
+<div class="highlight-python"><div class="highlight"><pre>extension Result {
+  init(success: Wrapped) {
+    self = .Success(success)
+  }
+  init(error: ErrorType) {
+    self = .Error(error)
+  }
+
+  var success: Wrapped? {
+    switch self {
+    case .Success(let success): return success
+    case .Error: return nil
+    }
+  }
+  var error: ErrorType? {
+    switch self {
+    case .Success: return nil
+    case .Error(let error): return error
+    }
+  }
+}
+</pre></div>
+</div>
+<p>This pattern of boilerplate also occurs in third-party frameworks that make
+heavy use of enums. Some examples from Github:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/antitypical/Manifold/blob/ae94eb96085c2c8195d457e06df485b1cca455cb/Manifold/Name.swift">https://github.com/antitypical/Manifold/blob/ae94eb96085c2c8195d457e06df485b1cca455cb/Manifold/Name.swift</a></li>
+<li><a class="reference external" href="https://github.com/antitypical/TesseractCore/blob/73099ae5fa772b90cefa49395f237290d8363f76/TesseractCore/Symbol.swift">https://github.com/antitypical/TesseractCore/blob/73099ae5fa772b90cefa49395f237290d8363f76/TesseractCore/Symbol.swift</a></li>
+<li><a class="reference external" href="https://github.com/antitypical/TesseractCore/blob/73099ae5fa772b90cefa49395f237290d8363f76/TesseractCore/Value.swift">https://github.com/antitypical/TesseractCore/blob/73099ae5fa772b90cefa49395f237290d8363f76/TesseractCore/Value.swift</a></li>
+</ul>
+<p>That people inside and outside of our team consider this boilerplate necessary
+for enums is a strong sign we should improve our core language design.
+I&#8217;d like to start discussion by proposing the following:</p>
+<ul>
+<li><p class="first">Because cases with associated values are initializer-like, declaring and
+using them ought to feel like using initializers on other types.
+A <code class="docutils literal"><span class="pre">case</span></code> declaration should be able to declare an initializer, which
+follows the same keyword naming rules as other initializers, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Result&lt;Wrapped&gt; {
+  case init(success: Wrapped)
+  case init(error: ErrorType)
+}
+</pre></div>
+</div>
+<p>Constructing a value of the case can then be done with the usual initializer
+syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre>let success = Result(success: 1)
+let error = Result(error: SillyError.JazzHands)
+</pre></div>
+</div>
+<p>And case initializers can be pattern-matched using initializer-like
+matching syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre>switch result {
+case Result(success: let success):
+  ...
+case Result(error: let error):
+  ...
+}
+</pre></div>
+</div>
+</li>
+<li><p class="first">Enums with associated values implicitly receive <code class="docutils literal"><span class="pre">internal</span></code> properties
+corresponding to the argument labels of those associated values. The
+properties are optional-typed unless a value with the same name and type
+appears in every <code class="docutils literal"><span class="pre">case</span></code>. For example, this enum:</p>
+<div class="highlight-python"><div class="highlight"><pre>public enum Example {
+  case init(foo: Int, alwaysPresent: String)
+  case init(bar: Int, alwaysPresent: String)
+}
+</pre></div>
+</div>
+<p>receives the following implicit members:</p>
+<div class="highlight-python"><div class="highlight"><pre>/*implicit*/
+internal extension Example {
+  var foo: Int? { get }
+  var bar: Int? { get }
+  var alwaysPresent: String { get } // Not optional
+}
+</pre></div>
+</div>
+</li>
+<li><p class="first">Because cases without associated values are property-like, they ought to
+follow the <code class="docutils literal"><span class="pre">lowercaseCamelCase</span></code> naming convention of other properties.
+For example:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum ComparisonResult {
+  case descending, same, ascending
+}
+
+enum Bool {
+  case true, false
+}
+
+enum Optional&lt;Wrapped&gt; {
+  case nil
+  case init(_ some: Wrapped)
+}
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Since this proposal affects how we name things, it has ABI stability
+implications (albeit ones we could hack our way around with enough symbol
+aliasing), so I think we should consider this now. It also meshes with other
+naming convention discussions that have been happening.</p>
+<p>I&#8217;ll discuss the points above in more detail:</p>
+<div class="section" id="case-initializers">
+<h1>Case Initializers<a class="headerlink" href="#case-initializers" title="Permalink to this headline">¶</a></h1>
+<p>Our standard recommended style for cases with associated values should be
+to declare them as initializers with keyword arguments, much as we do
+other kinds of initializer:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Result&lt;Wrapped&gt; {
+  case init(success: Wrapped)
+  case init(error: ErrorType)
+}
+
+enum List&lt;Element&gt; {
+  case empty
+  indirect case init(element: Element, rest: List&lt;Element&gt;)
+}
+</pre></div>
+</div>
+<p>It should be possible to declare unlabeled case initializers too, for types
+like Optional with a natural &#8220;primary&#8221; case:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Optional&lt;Wrapped&gt; {
+  case nil
+  case init(_ some: Wrapped)
+}
+</pre></div>
+</div>
+<p>Patterns should also be able to match against case initializers:</p>
+<div class="highlight-python"><div class="highlight"><pre>switch result {
+case Result(success: let s):
+  ...
+case Result(error: let e):
+  ...
+}
+</pre></div>
+</div>
+<div class="section" id="overloading">
+<h2>Overloading<a class="headerlink" href="#overloading" title="Permalink to this headline">¶</a></h2>
+<p>I think it would also be reasonable to allow overloading of case initializers,
+as long as the associated value types cannot overlap. (If the keyword labels
+are overloaded and the associated value types overlap, there would
+be no way to distinguish the cases.) Overloading is not essential, though, and
+it would be simpler to disallow it.</p>
+</div>
+<div class="section" id="named-cases-with-associated-values">
+<h2>Named cases with associated values<a class="headerlink" href="#named-cases-with-associated-values" title="Permalink to this headline">¶</a></h2>
+<p>One question would be, if we allow <code class="docutils literal"><span class="pre">case</span> <span class="pre">init</span></code> declarations, whether we
+should also remove the existing ability to declare named cases with associated
+values:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Foo {
+  // OK
+  case init(foo: Int)
+  // Should this become an error?
+  case foo(Int)
+}
+</pre></div>
+</div>
+<p>Doing so would help unambiguously push the new style, but would drive a
+syntactic wedge between associated-value and no-associated-value cases.
+If we keep named cases with associated values, I think we should consider
+altering the declaration syntax to require keyword labels (or explicit <code class="docutils literal"><span class="pre">_</span></code>
+to suppress labels), for better consistency with other function-like decls:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Foo {
+  // Should be a syntax error, &#39;label:&#39; expected
+  case foo(Int)
+
+  // OK
+  case foo(_: Int)
+
+  // OK
+  case foo(label: Int)
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="shorthand-for-init-style-cases">
+<h2>Shorthand for init-style cases<a class="headerlink" href="#shorthand-for-init-style-cases" title="Permalink to this headline">¶</a></h2>
+<p>Unlike enum cases and static methods, initializers currently don&#8217;t have any
+contextual shorthand when the type of an initialization can be inferred from
+context. This could be seen as an expressivity regression in some cases.
+With named cases, one can write:</p>
+<div class="highlight-python"><div class="highlight"><pre>foo(.Left(x))
+</pre></div>
+</div>
+<p>but with case initializers, they have to write:</p>
+<div class="highlight-python"><div class="highlight"><pre>foo(Either(left: x))
+</pre></div>
+</div>
+<p>Some would argue this is clearer. It&#8217;s a bit more painful in <code class="docutils literal"><span class="pre">switch</span></code>
+patterns, though, where the type would need to be repeated redundantly:</p>
+<div class="highlight-python"><div class="highlight"><pre>switch x {
+case Either(left: let left):
+  ...
+case Either(right: let right):
+  ...
+}
+</pre></div>
+</div>
+<p>One possibility would be to allow <code class="docutils literal"><span class="pre">.init</span></code>, like we do other static methods:</p>
+<div class="highlight-python"><div class="highlight"><pre>switch x {
+case .init(left: let left):
+  ...
+case .init(right: let right):
+  ...
+}
+</pre></div>
+</div>
+<p>Or maybe allow labeled tuple patterns to match, leaving the name off
+altogether:</p>
+<div class="highlight-python"><div class="highlight"><pre>switch x {
+case (left: let left):
+  ...
+case (right: let right):
+  ...
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="implicit-case-properties">
+<h1>Implicit Case Properties<a class="headerlink" href="#implicit-case-properties" title="Permalink to this headline">¶</a></h1>
+<p>The only native operation enums currently support is <code class="docutils literal"><span class="pre">switch</span></code>-ing. This is
+nice and type-safe, but <code class="docutils literal"><span class="pre">switch</span></code> is heavyweight and not very expressive.
+We now have a large set of language features and library operators for working
+with <code class="docutils literal"><span class="pre">Optional</span></code>, so it is expressive and convenient in many cases to be able
+to project associated values from enums as <code class="docutils literal"><span class="pre">Optional</span></code> values. As noted above,
+third-party developers using enums often write out the boilerplate to do this.
+We should automate it. For every <code class="docutils literal"><span class="pre">case</span> <span class="pre">init</span></code> with labeled associated values,
+we can generate an <code class="docutils literal"><span class="pre">internal</span></code> property to access that associated value.
+The value will be <code class="docutils literal"><span class="pre">Optional</span></code>, unless every <code class="docutils literal"><span class="pre">case</span></code> has the same associated
+value, in which case it can be nonoptional. To repeat the above example, this
+enum:</p>
+<div class="highlight-python"><div class="highlight"><pre>public enum Example {
+  case init(foo: Int, alwaysPresent: String)
+  case init(bar: Int, alwaysPresent: String)
+}
+</pre></div>
+</div>
+<p>receives the following implicit members:</p>
+<div class="highlight-python"><div class="highlight"><pre>/*implicit*/
+internal extension Example {
+  var foo: Int? { get }
+  var bar: Int? { get }
+  var alwaysPresent: String { get } // Not optional
+}
+</pre></div>
+</div>
+<p>Similar to the elementwise initializer for <code class="docutils literal"><span class="pre">struct</span></code> types, these property
+accessors should be <code class="docutils literal"><span class="pre">internal</span></code>, since they rely on potentially fragile layout
+characteristics of the enum. (Like the struct elementwise initializer, we
+ought to have a way to easily export these properties as <code class="docutils literal"><span class="pre">public</span></code> when
+desired too, but that can be designed separately.)</p>
+<p>These implicit properties should be read-only, until we design a model for
+enum mutation-by-part.</p>
+<p>An associated value property should be suppressed if:</p>
+<ul>
+<li><p class="first">there&#8217;s an explicit declaration in the type with the same name:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Foo {
+  case init(foo: Int)
+
+  var foo: String { return &quot;foo&quot; } // suppresses implicit &quot;foo&quot; property
+}
+</pre></div>
+</div>
+</li>
+<li><p class="first">there are associated values with the same label but conflicting types:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Foo {
+  case init(foo: Int, bar: Int)
+  case init(foo: String, bas: Int)
+
+  // No &#39;foo&#39; property, because of conflicting associated values
+}
+</pre></div>
+</div>
+</li>
+<li><p class="first">if the associated value has no label:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Foo {
+  case init(_: Int)
+
+  // No property for the associated value
+}
+</pre></div>
+</div>
+<p>An associated value could be unlabeled but still provide an internal argument
+name to name its property:</p>
+<div class="highlight-python"><div class="highlight"><pre>enum Foo {
+  case init(_ x: Int)
+  case init(_ y: String)
+
+  // var x: Int?
+  // var y: String?
+}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="naming-conventions-for-enum-cases">
+<h1>Naming Conventions for Enum Cases<a class="headerlink" href="#naming-conventions-for-enum-cases" title="Permalink to this headline">¶</a></h1>
+<p>To normalize enums and bring them into the &#8220;grand unified theory&#8221; of type
+interfaces shared by other Swift types, I think we should encourage the
+following conventions:</p>
+<ul class="simple">
+<li>Cases with associated values should be declared as <code class="docutils literal"><span class="pre">case</span> <span class="pre">init</span></code>
+initializers with labeled associated values.</li>
+<li>Simple cases without associated values should be named like properties,
+using <code class="docutils literal"><span class="pre">lowercaseCamelCase</span></code>. We should also import Cocoa <code class="docutils literal"><span class="pre">NS_ENUM</span></code>
+and <code class="docutils literal"><span class="pre">NS_OPTIONS</span></code> constants using <code class="docutils literal"><span class="pre">lowercaseCamelCase</span></code>.</li>
+</ul>
+<p>This is a big change from the status quo, including the Cocoa tradition for
+C enum constants, but I think it&#8217;s the right thing to do. Cocoa uses
+the <code class="docutils literal"><span class="pre">NSEnumNameCaseName</span></code> convention largely because enum constants are
+not namespaced in Objective-C. When Cocoa associates constants with
+class types, it uses its normal method naming conventions, as in
+<code class="docutils literal"><span class="pre">UIColor.redColor</span></code>.  In Swift&#8217;s standard library, type constants for structs
+follow the same convention, for example <code class="docutils literal"><span class="pre">Int.max</span></code> and <code class="docutils literal"><span class="pre">Int.min</span></code>. The
+literal keywords <code class="docutils literal"><span class="pre">true</span></code>, <code class="docutils literal"><span class="pre">false</span></code>, and <code class="docutils literal"><span class="pre">nil</span></code> are arguably enum-case-like
+and also lowercased. Simple enum cases are essentially static constant
+properties of their type, so they should follow the same conventions.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright apple.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

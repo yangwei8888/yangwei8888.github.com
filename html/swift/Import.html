@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IMPORT SYNTAX &mdash; Swift Programming Language documentation 0.1.9 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Swift Programming Language documentation 0.1.9 documentation" href="index.html"/>
+        <link rel="next" title="Index Invalidation Rules in the Swift Standard Library" href="IndexInvalidation.html"/>
+        <link rel="prev" title="High-Level Optimizations in SIL" href="HighLevelSILOptimizations.html"/>
+<style type="text/css">
+  table.right { float: right; margin-left: 20px; }
+  table.right td { border: 1px solid #ccc; }
+</style>
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Swift Programming Language documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">swift docs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ABI.html">The Swift ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ARCOptimization.html">ARC Optimization for Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControl.html">Access Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html">Scope and introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#public"><cite>public</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#internal"><cite>internal</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#private"><cite>private</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="AccessControlInStdlib.html#leading-underscore-rule">Leading Underscore Rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Arrays.html">The Swift Array Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CallingConvention.html">The Swift Calling Convention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DebuggingTheCompiler.html">Debugging the Swift Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependency Analysis.html">Dependency Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DriverInternals.html">Driver Design &amp; Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DriverParseableOutput.html">Parseable Driver Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ErrorHandling.html">Error Handling in Swift 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ErrorHandlingRationale.html">Error Handling Rationale and Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Failable Initializers.html">Failable initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Generics.html">Generics in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GitWorkflows.html">Git Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GitWorkflows.html#svn-git-workflows">SVN -&gt; GIT Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HighLevelSILOptimizations.html">High-Level Optimizations in SIL</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">IMPORT SYNTAX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#importing-modules">Importing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#importing-individual-declarations">Importing Individual Declarations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#resolving-name-clashes">RESOLVING NAME CLASHES</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-imports">Module imports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#declaration-imports">Declaration imports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-names">Module names</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#future-extensions">FUTURE EXTENSIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IndexInvalidation.html">Index Invalidation Rules in the Swift Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#using-versioned-api">Using Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#publishing-versioned-api">Publishing Versioned API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#giving-up-flexibility">Giving Up Flexibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#optimization">Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#resilience-domains">Resilience Domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#protocol-conformances">Protocol Conformances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#checking-binary-compatibility">Checking Binary Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#summary">Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryEvolution.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Literals.html">Literals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LogicalObjects.html">Logical Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html">High-Level Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#import"><code class="docutils literal"><span class="pre">import</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#interoperability-with-objective-c-via-clang">Interoperability with Objective-C via Clang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modules.html#glossary">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MutationModel.html">Immutability and Read-Only Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ObjectInitialization.html">Object Initialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html">Writing High-Performance Swift Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#enabling-optimizations">Enabling Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#whole-module-optimizations">Whole Module Optimizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#reducing-dynamic-dispatch">Reducing Dynamic Dispatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#using-container-types-efficiently">Using Container Types Efficiently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#unchecked-operations">Unchecked operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#generics">Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#the-cost-of-large-swift-values">The cost of large swift values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#unsafe-code">Unsafe code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#protocols">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OptimizationTips.html#footnotes">Footnotes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pattern Matching.html">Pattern Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SIL.html">Swift Intermediate Language (SIL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SequencesAndCollections.html">Sequences And Collections in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Serialization.html">Swift Binary Serialization Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StdlibAPIGuidelines.html">Swift Standard Library API Design Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StdlibRationales.html">Rationales for the Swift standard library designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StoredAndComputedVariables.html">Stored and Computed Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StringDesign.html">Swift String Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Testing.html">Testing Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TextFormatting.html">Text Formatting in Swift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TransparentAttr.html"><code class="docutils literal"><span class="pre">&#64;_transparent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="TypeChecker.html">Type Checker Design and Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents.html">Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weak.html">Weak References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Swift Programming Language documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>IMPORT SYNTAX</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/Import.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This document represents an early proposal for <code class="docutils literal"><span class="pre">import</span></code> syntax and
+has not been kept up to date.</p>
+</div>
+<div class="section" id="import-syntax">
+<h1>IMPORT SYNTAX<a class="headerlink" href="#import-syntax" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>import-decl ::= &#39;import&#39; import-item-list
+import-item-list ::= import-item (&#39;,&#39; import-item)*
+
+import-item ::= import-kind? identifier-path
+import-item ::= identifier-path &#39;.&#39; &#39;(&#39; import-item-list &#39;)&#39;
+
+import-kind ::= &#39;module&#39;
+
+import-kind ::= &#39;class&#39;
+import-kind ::= &#39;enum&#39;
+import-kind ::= &#39;func&#39;
+import-kind ::= &#39;protocol&#39;
+import-kind ::= &#39;struct&#39;
+import-kind ::= &#39;typealias&#39;
+import-kind ::= &#39;var&#39;
+// ...
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">import</span></code> makes declarations exported from another module available inside
+the current module. Imports are not reexported by default.</p>
+<div class="section" id="importing-modules">
+<h2>Importing Modules<a class="headerlink" href="#importing-modules" title="Permalink to this headline">¶</a></h2>
+<p>In its simplest form, <code class="docutils literal"><span class="pre">import</span></code> gives the qualified name of a module and
+imports all exported symbols from the module, as well as the module name itself
+for qualified lookup:</p>
+<div class="highlight-python"><div class="highlight"><pre>import Cocoa
+
+// Reference the NSArray type from Cocoa
+var a1 : NSArray
+// Same, but qualified
+var a2 : Cocoa.NSArray
+</pre></div>
+</div>
+<p>In this form, the qualified name <em>must</em> refer to a module:</p>
+<div class="highlight-python"><div class="highlight"><pre>// Import the Cocoa.NSWindow module, *not* the NSWindow class from inside
+// Cocoa
+import Cocoa.NSWindow
+
+// Reference the NSWindow type from Cocoa.NSWindow
+var w1 : NSWindow
+// Same, but qualified
+var w2 : Cocoa.NSWindow.NSWindow
+</pre></div>
+</div>
+<p>Multiple modules may appear in a comma-separated list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">Foundation</span><span class="o">,</span> <span class="nn">iAd</span><span class="o">,</span> <span class="nn">CoreGraphics</span>
+</pre></div>
+</div>
+<p>As a shorthand, multiple submodules with a common parent module may be listed
+in parens under the parent module:</p>
+<div class="highlight-python"><div class="highlight"><pre>import OpenGL.(GL3, GL3.Ext)
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-individual-declarations">
+<h2>Importing Individual Declarations<a class="headerlink" href="#importing-individual-declarations" title="Permalink to this headline">¶</a></h2>
+<p>Instead of importing the entire contents of a module, individual declarations
+may be imported. This is done by naming the kind of declaration being imported
+before the qualified name, such as <code class="docutils literal"><span class="pre">func</span></code>, <code class="docutils literal"><span class="pre">var</span></code>, or <code class="docutils literal"><span class="pre">class</span></code>. The module
+name is still imported for qualified lookup of other symbols:</p>
+<div class="highlight-python"><div class="highlight"><pre>// Import only the Cocoa.NSWindow class
+import class Cocoa.NSWindow
+
+var w1 : NSWindow
+var title : Cocoa.NSString
+</pre></div>
+</div>
+<p>As with modules, multiple declarations may be imported in a comma-separated
+list, or imported out of a common parent module with a parenthesized list:</p>
+<div class="highlight-python"><div class="highlight"><pre>import func OpenGL.GL3.glDrawArrays, func OpenGL.GL3.Ext.glTextureRangeAPPLE
+// Equivalent
+import OpenGL.GL3.(func glDrawArrays, func Ext.glTextureRangeAPPLE)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="resolving-name-clashes">
+<h1>RESOLVING NAME CLASHES<a class="headerlink" href="#resolving-name-clashes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-imports">
+<h2>Module imports<a class="headerlink" href="#module-imports" title="Permalink to this headline">¶</a></h2>
+<p>Because the local names introduced by a whole-module import are implicit,
+a name clash between imported modules is not an error unless a clashing name is
+actually used without qualification:</p>
+<div class="highlight-python"><div class="highlight"><pre>import abcde // abcde exports A, B, C, D, E
+import aeiou // aeiou exports A, E, I, O, U
+
+var b : B // OK, references abcde.B
+var i : I // OK, references aeiou.I
+var e : E // Error, ambiguous
+var e : abcde.E // OK, qualified reference to abcde.E
+</pre></div>
+</div>
+<p>Conflicts are resolved in favor of individually imported or
+locally defined declarations when available:</p>
+<div class="highlight-python"><div class="highlight"><pre>import abcde         // abcde exports A, B, C, D, E
+import aeiou         // aeiou exports A, E, I, O, U
+import class asdf.A  // explicitly import A from some other module
+import class abcde.E // explicitly import E from abcde
+
+class U { } // Local class shadows whole-module import
+
+var a : A // OK, references asdf.A
+var e : E // OK, references abcde.E
+var u : U // OK, references local U
+</pre></div>
+</div>
+</div>
+<div class="section" id="declaration-imports">
+<h2>Declaration imports<a class="headerlink" href="#declaration-imports" title="Permalink to this headline">¶</a></h2>
+<p>Individual declaration imports shadow whole-module imports, as described above.
+If two declarations with the same name are individually imported from different
+modules, references to either import must be qualified:</p>
+<div class="highlight-python"><div class="highlight"><pre>import class abcde.E
+import class aeiou.E
+
+var e : E        // Error, ambiguous
+var e1 : abcde.E // OK
+</pre></div>
+</div>
+<p>A local definition with the same name as an explicitly imported symbol
+shadows the unqualified import:</p>
+<div class="highlight-python"><div class="highlight"><pre>import class abcde.E
+
+class E { }
+
+var e : E       // Refers to local E
+var e : abcde.E // Refers to abcde.E
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-names">
+<h2>Module names<a class="headerlink" href="#module-names" title="Permalink to this headline">¶</a></h2>
+<p>FIXME: What is a good rule here? This sucks.</p>
+<p>If a module name clashes with a local definition or imported declaration, the
+declaration is favored in name lookup. If a member lookup into the declaration
+fails, we fall back to qualified lookup into the module:</p>
+<div class="highlight-python"><div class="highlight"><pre>import Foo // exports bas
+
+class Foo {
+  class func bar()
+}
+
+Foo.bar() // bar method from Foo class
+Foo.bas() // bas method from Foo module
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="future-extensions">
+<h1>FUTURE EXTENSIONS<a class="headerlink" href="#future-extensions" title="Permalink to this headline">¶</a></h1>
+<p>In the future, we should allow the import declaration to provide an alias
+for the imported module or declaration:</p>
+<div class="highlight-python"><div class="highlight"><pre>import C = Cocoa
+import NSW = class Cocoa.NSWindow
+import Cocoa.(NSW = class NSWindow, NSV = class NSView)
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="IndexInvalidation.html" class="btn btn-neutral float-right" title="Index Invalidation Rules in the Swift Standard Library" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="HighLevelSILOptimizations.html" class="btn btn-neutral" title="High-Level Optimizations in SIL" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright apple.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
