@@ -2,6 +2,101 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/12/30/avos/ios_statistics/</loc>
+    <lastmod>2015-12-18T10:25:15.451Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/ios_push_guide/</loc>
+    <lastmod>2015-12-18T10:24:54.855Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/ios_push_cert/</loc>
+    <lastmod>2015-12-18T10:24:45.791Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/ios_os_x_guide/</loc>
+    <lastmod>2015-12-18T10:24:32.071Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/ios_os_x_faq/</loc>
+    <lastmod>2015-12-18T10:24:21.548Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/ios_crashreporting_guide/</loc>
+    <lastmod>2015-12-18T10:24:12.068Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/faq/</loc>
+    <lastmod>2015-12-18T10:24:01.208Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/error_code/</loc>
+    <lastmod>2015-12-18T10:23:52.853Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/dotnet_realtime/</loc>
+    <lastmod>2015-12-18T10:23:30.049Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/dotnet_push_guide/</loc>
+    <lastmod>2015-12-18T10:23:17.705Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/dotnet_guide/</loc>
+    <lastmod>2015-12-18T10:23:08.806Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/data_security/</loc>
+    <lastmod>2015-12-18T10:22:58.806Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/cql_guide/</loc>
+    <lastmod>2015-12-18T10:22:50.498Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/cloud_code_faq/</loc>
+    <lastmod>2015-12-18T10:22:41.164Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/android_start/</loc>
+    <lastmod>2015-12-18T10:22:30.479Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/android_statistics/</loc>
+    <lastmod>2015-12-18T10:22:27.806Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/30/avos/android_faq/</loc>
+    <lastmod>2015-12-18T10:21:50.943Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/18/avos/android_push_guide/</loc>
+    <lastmod>2015-12-18T05:58:36.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/18/avos/ios_start/</loc>
+    <lastmod>2015-12-18T05:58:36.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting%20Started/Basic%20Setup/</loc>
     <lastmod>2015-12-17T11:15:08.815Z</lastmod>
   </url>
@@ -397,12 +492,12 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/docker-hub/</loc>
+    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/repos/</loc>
     <lastmod>2015-12-09T02:32:28.107Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/repos/</loc>
+    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/docker-hub/</loc>
     <lastmod>2015-12-09T02:32:28.107Z</lastmod>
   </url>
   
