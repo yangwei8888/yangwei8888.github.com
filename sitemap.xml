@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/12/30/avos/dotnet_realtime/</loc>
+    <lastmod>2015-12-21T03:19:06.612Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/12/30/avos/unity_start/</loc>
     <lastmod>2015-12-21T01:56:30.425Z</lastmod>
   </url>
@@ -84,11 +89,6 @@
   <url>
     <loc>http://yoursite.com/2015/12/30/avos/error_code/</loc>
     <lastmod>2015-12-18T10:23:52.853Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/dotnet_realtime/</loc>
-    <lastmod>2015-12-18T10:23:30.049Z</lastmod>
   </url>
   
   <url>
