@@ -51,9 +51,9 @@
 <meta property="og:description" content="iOS / OS X 数据存储开发指南如果还没有安装 LeanCloud iOS SDK，请阅读 快速入门 来获得该 SDK，并在 Xcode 中运行和熟悉示例代码。我们的 SDK 支持 iOS 5.1.1 及更高版本。
 如果想从项目中学习，请到我们的 GitHub 资源库中获取 iOS SDK Demos 。其中，我们推荐与这个指南配套的 LeanStorageDemo。
 介绍LeanCloud">
-<meta property="og:image" content="http://yoursite.com/images/ios_qiniu_http.png">
-<meta property="og:image" content="http://yoursite.com/images/ios_file_ssl_config.png">
-<meta property="og:updated_time" content="2015-12-18T10:24:32.071Z">
+<meta property="og:image" content="http://yoursite.com/avos/images/ios_qiniu_http.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/ios_file_ssl_config.png">
+<meta property="og:updated_time" content="2015-12-21T01:51:26.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS / OS X 数据存储开发指南">
 <meta name="twitter:description" content="iOS / OS X 数据存储开发指南如果还没有安装 LeanCloud iOS SDK，请阅读 快速入门 来获得该 SDK，并在 Xcode 中运行和熟悉示例代码。我们的 SDK 支持 iOS 5.1.1 及更高版本。
@@ -571,11 +571,11 @@
 <h4 id="项目中配置访问策略">项目中配置访问策略</h4><p>一是在项目中额外配置一下该接口的访问策略。选择项目的 Info.plist，右击以 Source Code 的方式打开。在 plist -&gt; dict 节点中加入以下文本：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">key</span>&gt;</span>NSAppTransportSecurity<span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dict</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">key</span>&gt;</span>NSExceptionDomains<span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">key</span>&gt;</span>clouddn.com<span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dict</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">key</span>&gt;</span>NSIncludesSubdomains<span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">true</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">key</span>&gt;</span>NSTemporaryExceptionAllowsInsecureHTTPLoads<span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dict</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dict</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>或者在 Target 的 Info 标签中修改配置：</p>
-<p><img src="images/ios_qiniu_http.png" alt="Info.plist Setting"></p>
+<p><img src="/avos/images/ios_qiniu_http.png" alt="Info.plist Setting"></p>
 <p>如果是美国节点，请把上面的 <code>clouddn.com</code> 换成 <code>amazonaws.com</code>。</p>
 <p>也可以根据项目需要，允许所有的 HTTP 访问，更多可参考 <a href="https://github.com/ChenYilong/iOS9AdaptationTips" target="_blank" rel="external">iOS 9 适配系列教程</a>。</p>
 <h4 id="启用文件_SSL_域名">启用文件 SSL 域名</h4><p>另外一种方法是在网站控制台中进入相关的应用，点击上方的设置选项卡，勾选「启用文件 SSL 域名（对应 _File 中存储的文件）」选项。这样便启用了文件 SSL 域名，支持 HTTPS 访问。如图所示：</p>
-<p><img src="images/ios_file_ssl_config.png" alt="File SSL Config"></p>
+<p><img src="/avos/images/ios_file_ssl_config.png" alt="File SSL Config"></p>
 <p>如果启用文件 SSL 域名前已经保存了许多文件，启用之后，这些文件的 URL 也会跟着变化，来支持 HTTPS 访问。</p>
 <p>这两种方式都能解决这个问题。但需要注意的是，实时通信组件 LeanMessage 也用了 AVFile 来保存消息的图片、音频等文件，并且把文件的地址写入到了消息内容中。开启了文件 SSL 域名后，历史消息中的文件地址将不会像控制台里 _File 表那样跟着改变。所以如果使用了实时通信组件并已上线，推荐使用方式一。</p>
 <h2 id="用户">用户</h2><p>用户是一个应用程序的核心。对于个人开发者来说，能够让自己的应用程序积累更多的用户，就能给自己带来更多的创作动力。因此 LeanCloud 提供了一个专门的用户类 <code>AVUser</code>，来自动处理用户账户管理所需的功能。有了这个类，你就可以在应用程序中添加用户账户功能。</p>
@@ -683,13 +683,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/30/avos/dotnet_push_guide/" rel="prev">Windows Phone 消息推送开发指南</a>
+              <a href="/2015/12/30/avos/ios_os_x_faq/" rel="prev">iOS / OS X SDK 常见问题和解答</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/30/avos/error_code/" rel="next">错误码详解</a>
+              <a href="/2015/12/30/avos/ios_push_cert/" rel="next">iOS 推送证书设置指南</a>
             
           </div>
         </div>
@@ -755,7 +755,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">130</span>
+              <span class="site-state-item-count">135</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -1,0 +1,1468 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="leancloud," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="实时通信服务总览实时通信服务是 LeanCloud 消息服务中的重要一环。你不但可以为应用加入实时聊天、私信等常用功能，还能实现游戏对战等实时互动功能。
+目前，我们提供 Android、iOS、JavaScript、Windows Phone 四个主要平台的客户端 SDK，也提供了一些 Demo 帮助你快速入门：
+
+iOS 聊天应用：
+
+LeanMessageDemo iOS 版 (推荐)
+Lea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实时通信服务总览">
+<meta property="og:url" content="http://yoursite.com/2015/12/30/avos/realtime_v2/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="实时通信服务总览实时通信服务是 LeanCloud 消息服务中的重要一环。你不但可以为应用加入实时聊天、私信等常用功能，还能实现游戏对战等实时互动功能。
+目前，我们提供 Android、iOS、JavaScript、Windows Phone 四个主要平台的客户端 SDK，也提供了一些 Demo 帮助你快速入门：
+
+iOS 聊天应用：
+
+LeanMessageDemo iOS 版 (推荐)
+Lea">
+<meta property="og:image" content="http://yoursite.com/avos/images/realtime_ios_push.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/leanmessage_signature2.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/realtime_faq_push.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/realtime_faq_console.png">
+<meta property="og:updated_time" content="2015-12-21T01:51:27.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实时通信服务总览">
+<meta name="twitter:description" content="实时通信服务总览实时通信服务是 LeanCloud 消息服务中的重要一环。你不但可以为应用加入实时聊天、私信等常用功能，还能实现游戏对战等实时互动功能。
+目前，我们提供 Android、iOS、JavaScript、Windows Phone 四个主要平台的客户端 SDK，也提供了一些 Demo 帮助你快速入门：
+
+iOS 聊天应用：
+
+LeanMessageDemo iOS 版 (推荐)
+Lea">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 实时通信服务总览 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              实时通信服务总览
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-30T07:56:29+08:00" content="2015-12-30">
+            2015-12-30
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/leancloud/" itemprop="url" rel="index">
+                  <span itemprop="name">leancloud</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/30/avos/realtime_v2/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/realtime_v2/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="实时通信服务总览">实时通信服务总览</h1><p>实时通信服务是 LeanCloud 消息服务中的重要一环。你不但可以为应用加入实时聊天、私信等常用功能，还能实现游戏对战等实时互动功能。</p>
+<p>目前，我们提供 Android、iOS、JavaScript、Windows Phone 四个主要平台的客户端 SDK，也提供了一些 Demo 帮助你快速入门：</p>
+<ul>
+<li><p>iOS 聊天应用：</p>
+<ul>
+<li><a href="https://github.com/leancloud/LeanMessage-Demo" target="_blank" rel="external">LeanMessageDemo iOS 版</a> (推荐)</li>
+<li><a href="https://github.com/leancloud/leanchat-ios" target="_blank" rel="external">LeanChat iOS 版</a></li>
+</ul>
+</li>
+<li><p>Android 聊天应用：</p>
+<ul>
+<li><a href="https://github.com/leancloud/LeanMessage-Demo" target="_blank" rel="external">LeanMessageDemo Android 版</a> (推荐)</li>
+<li><a href="https://github.com/leancloud/leanchat-android" target="_blank" rel="external">LeanChat Android 版</a></li>
+</ul>
+</li>
+<li><p>JavaScript 聊天应用</p>
+<ul>
+<li><a href="http://leancloud.github.io/js-realtime-sdk/demo/demo2/" target="_blank" rel="external">聊天 Demo</a> (可与 iOS/Android 版 LeanMessageDemo 通信)</li>
+<li><a href="https://github.com/leancloud/js-realtime-sdk/tree/master/demo" target="_blank" rel="external">Demo 源码</a></li>
+</ul>
+</li>
+</ul>
+<p>关于这些项目的更多介绍、截图预览，可见 <a href="https://github.com/leancloud/leancloud-demos" target="_blank" rel="external">LeanCloud Demos</a> 。</p>
+<p>目前新版本实时通信服务接口与旧版本并不兼容，不能互相通信。我们推荐所有新用户直接使用新版本。已有的旧版本用户可以继续参考 <a href="realtime.html">v1 版本文档</a>，我们仍然会对已有版本提供支持，并可能在未来提供无缝的迁移方案。已经发布的旧版本用户不会在功能、资源等各个方面受到任何影响，请放心使用。</p>
+<h2 id="功能和特性">功能和特性</h2><p>LeanCloud 实时通信服务定位于完美实现网络层的通讯能力，其设计目标聚焦在：</p>
+<ul>
+<li><strong>快捷</strong><br><br>LeanCloud 云端要能支持上亿终端同时在线，并且消息传递延时需要严格控制在毫秒以内。</li>
+<li><strong>灵活</strong><br><br>既要为完全依托 LeanCloud 平台的开发者考虑，也要为自有账户系统的用户设计：如果用户自己有完备的后台和账户系统，应该完全不用暴露内部数据就能使用我们的服务。而且，消息通知的手段要多样化，要让开发者有更多定制的能力。譬如聊天时对方不在线，应该能走「消息推送（Push Notification）」通道来及时提醒对方，并允许开发者对推送内容进行「私人定制」等等。</li>
+<li><strong>安全</strong><br><br>除了简单的 appId 和 secretKey 之外，还应该赋予开发者更多的安全控制能力，来保证聊天通道的私密性。</li>
+</ul>
+<p>LeanCloud 实时通信服务的特性主要有：</p>
+<ul>
+<li><strong>与账户系统解耦合</strong><br><br>任何终端用户要加入聊天，只需要提供一个唯一标识自己的 clientId 即可，这样可以尽量避免自有账户系统的应用数据暴露，也可以促使通信服务专注做好底层的「信使」角色；</li>
+<li><strong>多账号登录</strong><br><br>支持单个设备多个账号、单个账号多个设备同时登录，实时消息同步到所有设备。</li>
+<li><strong>完整的聊天功能</strong><br><br>支持单聊、群聊、聊天室等不同聊天形式，并且具备完善的群组管理功能。</li>
+<li><strong>支持富媒体、自定义类型消息</strong><br><br>支持文本、图片、音频、视频和地理位置等多种格式的富媒体消息，并且开发者还可方便地自定义扩展。</li>
+<li><strong>离线消息推送</strong><br><br>消息在对方离线时，会自动通过 <a href="#离线推送通知">消息推送</a> 来及时送达对方，并且推送的消息文本可以由开发者自己控制。</li>
+<li><strong>敏感词过滤</strong><br><br>实时消息中出现的敏感词，会自动被过滤掉；对于部分 VIP 客户，我们还允许自定义仅属于自己应用的敏感词列表。</li>
+<li><strong>聊天记录保存在云端</strong><br><br>聊天记录自动保存在云端，允许开发者自由获取。</li>
+<li><strong>第三方操作鉴权机制</strong><br><br>为了保证信道的安全，也给开发者最大的控制自由，我们提供了操作鉴权的机制：开发者使用自己的服务器来充当鉴权服务器，对消息流向进行「许可控制」。对于消息路由过程中的重要操作（譬如登录、开启对话、邀请加入群组、从群组踢出某人等），实时消息 SDK 在发送请求之前，会先到鉴权服务器获得操作签名，LeanCloud 云端会验证签名有效性并完全按照鉴权结果来对操作放行或拒绝。</li>
+<li><strong>系统账号、机器人 Hook 和公众号后台</strong><br><br>支持系统中的小助手、机器人和公众号等场景，方便用户将实时通信系统和自己已有的系统无缝集成，支持二次开发机器人和消息后台。</li>
+</ul>
+<p>我们提供几个层面用户接口：</p>
+<ul>
+<li>原生的 Android、iOS、Windows Phone 和 Web (JavaScript) 语言的客户端 SDK</li>
+<li>帮助开发者完成后台管理和服务器端相关功能的 REST API</li>
+<li>部署在 LeanCloud 环境中的云引擎 Hook 便于开发者修改默认的系统行为</li>
+<li>可以实时监控在线用户数、消息数的开发者控制台</li>
+</ul>
+<h2 id="核心概念">核心概念</h2><h3 id="ClientID、用户和登录">ClientID、用户和登录</h3><p>实时通信服务中的每一个终端称为一个 client。client 拥有一个在应用内唯一标识自己的 id。这个 id 由应用自己定义，必须是不多于 64 个字符的字符串。在大部分场合，client 都可以对应到应用中的某个「用户」，但是并不是只有真的用户才能做为 client，你完全可以把一个探测器当成一个 client，把它收集到的数据通过实时通信服务广播给更多「人」。</p>
+<p>默认情况下，LeanCloud 通信服务允许一个 clientId 在多个不同的设备上登录，也允许一个设备上有多个 clientId 同时登录。如果使用场景中需要限制用户只在一处登录，可以在登录时明确设置当前设备的 tag，<br>当 LeanCloud 检测到同一个 tag 的设备出现冲突时，会自动踢出已存在设备上的登录状态。开发者可以根据自己的应用场景选择合适的使用方式。</p>
+<p>使用 LeanCloud 实时通信 SDK 完成登录后，开发者就不必关心网络连接等状态，SDK 会自动为开发者保持连接状态，并根据网络状态自动重连。对于 Android 平台，我们使用常驻后台的服务保持在线状态；对于 iOS 和 Windows Phone<br>等平台，我们会在应用仍在前台时保持连接，当应用退到后台时，自动断开连接再激活平台原生的推送服务。</p>
+<h4 id="在线状态">在线状态</h4><p>我们目前在 SDK 和 REST API 上提供主动查询的机制帮助开发者查询目标用户的在线状态。</p>
+<h3 id="对话（Conversation）">对话（Conversation）</h3><p>用户登录之后，与其他人进行消息沟通，即为开启了一个对话（Conversation）。开始聊天之前，需要先创建或者加入一个对话，然后再邀请其他人进来，之后所有参与者在这个对话内进行交流。所有消息都是由某一个 client 发往一个「对话」。</p>
+<p>系统每创建一个对话，就会在云端的 <code>_Conversation</code> 表中增加一条记录，可以进入控制台 &gt; <strong>应用</strong> &gt; <strong>存储</strong> &gt; <strong>数据</strong> 来查看该数据。</p>
+<p><code>_Conversation</code> 表中字段名与对话的各个属性的对应关系为：</p>
+<table>
+<thead>
+<tr>
+<th>表字段</th>
+<th>属性名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>attr</strong></td>
+<td>attributes</td>
+<td>Object</td>
+<td>可选</td>
+<td>自定义属性，供开发者扩展使用。</td>
+</tr>
+<tr>
+<td><strong>objectId</strong></td>
+<td>conversationId</td>
+<td>String</td>
+<td></td>
+<td>对话 id（只读），由云端为该对话生成的一个全局唯一的 id。</td>
+</tr>
+<tr>
+<td><strong>c</strong></td>
+<td>creator</td>
+<td>String</td>
+<td></td>
+<td>对话创建者的 clientId（只读）</td>
+</tr>
+<tr>
+<td><strong>lm</strong></td>
+<td>lastMessageAt</td>
+<td>Date</td>
+<td></td>
+<td>对话中最后一条消息的发送或接收时间</td>
+</tr>
+<tr>
+<td><strong>m</strong></td>
+<td>members</td>
+<td>Array</td>
+<td></td>
+<td>对话的所有参与者</td>
+</tr>
+<tr>
+<td><strong>mu</strong></td>
+<td>mute</td>
+<td>Array</td>
+<td></td>
+<td>将对话设为静音的参与者，这部分参与者不会收到推送。<br>（仅针对 iOS 以及 Windows Phone 用户有效）</td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td>name</td>
+<td>String</td>
+<td>可选</td>
+<td>对话的名字，可为群组命名。</td>
+</tr>
+<tr>
+<td><strong>tr</strong></td>
+<td>transient</td>
+<td>Boolean</td>
+<td>可选</td>
+<td>是否为暂态对话</td>
+</tr>
+<tr>
+<td><strong>sys</strong></td>
+<td>system</td>
+<td>Boolean</td>
+<td>可选</td>
+<td>是否是系统对话</td>
+</tr>
+<tr>
+<td><strong>unique</strong></td>
+<td>unique</td>
+<td>Boolean</td>
+<td>可选</td>
+<td>内部字段，标记根据成员原子创建的对话</td>
+</tr>
+</tbody>
+</table>
+<p>除了在各平台的 SDK 里面可以调用 API 创建对话外，我们也提供 <a href="./realtime_rest_api.html#通过_REST_API_创建_更新_删除对话数据">REST API</a> 可以让大家预先建立对话：对话的信息存储在 _Conversation 表中，你可以直接通过 <a href="./rest_api.html#%E5%AF%B9%E8%B1%A1-1">数据存储相关的 REST API</a> 对其进行操作。</p>
+<p>这里要特别讨论一下<strong>单聊</strong>、<strong>群聊</strong>、<strong>聊天室</strong>、<strong>公众号</strong>等概念。</p>
+<ul>
+<li><strong>单聊</strong><br><br>就是两个 client 之间的对话，公开与否（能否让其他人看到这个对话存在）由应用层自己控制。一般而言，它是私密的，并且加入新的成员之后，会切换到新的对话（当然，也可以依然不离开当前对话，这一点还是由应用层来决定）。</li>
+<li><strong>群聊</strong><br><br>就是两个（含）以上 client 之间的对话，一般而言，可以添加和删除成员，并且会赋予群聊一个名字。随着成员的减少，群聊也可能只有两个甚至一个成员（成员的多少并不是区分群聊和单聊的关键）。群聊能否公开（譬如支持名字搜索），由应用自己决定。</li>
+<li><strong>聊天室</strong><br><br>很多应用使用的开放聊天室、弹幕、网页直播等都可以抽象成「聊天室」，它与群聊类似，都是多人参与的群组，但是也有一些区别：其一在于聊天室人数可能远大于群聊人数；其二在于聊天室强调的是在线人数，所有参与者进入聊天界面就算加入，关闭界面就算退出，所以聊天室不需要离线消息和推送通知，在线成员数比具体成员列表更有意义。</li>
+<li><strong>公众号、机器人</strong><br><br>对全部或者部分用户可见（由应用开发者决定）的账号，开发者可以利用这个账号给用户发广播通知，用户也可以通过这个账号反馈内容给开发者，开发者可以在后台看到消息，也可以利用 API 或 Web Hook 将自己的业务系统集成进来。</li>
+</ul>
+<p>我们将以上场景抽象为「对话」这一概念，并分离出以下类型的对话：</p>
+<h4 id="普通对话（Normal_Conversation）">普通对话（Normal Conversation）</h4><p>这是我们经常会用到的「对话」，单聊和群聊都通过它来实现。我们建议开发者将单聊/群聊、私密/公开等属性存入到 Conversation.attributes 之中，在应用层进行区别对待。</p>
+<p>为了提高系统的灵活性，我们允许多个对话保持相同的成员，因此创建对话时系统总是默认创建新的对话。<br>如果开发者希望使用固定的对话，可以在创建对话时设置相应 SDK 上的 <code>unique</code> 选项，系统将查找对应成员相同且 <code>unique</code> 选项为 true 的对话，如果找到即返回已有的对话，如果没有则自动创建。<br>（注意，这种方式查找的对话仅对已经使用 <code>unique</code> 选项的对话有效，并且创建对话时不会触发 <code>_Conversation</code> 表在云引擎上的 <code>beforeSave</code> 等 hook）</p>
+<h4 id="暂态对话（Transient_Conversation）">暂态对话（Transient Conversation）</h4><p>这是专门用来处理「聊天室」这种需求的。与普通对话一样，它也支持创建、加入/踢出成员等操作，消息记录会被保存并可供获取；但根据应用场景，暂态对话与普通对话在功能上存在一定的取舍，具体为：</p>
+<ul>
+<li>没有固定成员概念，加入即为成员，断线即为退出</li>
+<li>暂态对话不支持查询成员列表，你可以通过相关 API 查询在线人数。</li>
+<li>暂态对话不支持离线消息、离线推送通知等功能。</li>
+<li>暂态对话没有成员加入、离开的通知。</li>
+<li>一个用户一次登录只能加入一个暂态对话，加入新的暂态对话后会自动离开旧的暂态对话。</li>
+<li>加入暂态对话后半小时内断网重连会自动加入原暂态对话，超过这个时间则需要重新加入。</li>
+</ul>
+<h4 id="系统对话（System_Conversation）">系统对话（System Conversation）</h4><p>这是用于实现机器人、公众号、服务账号等场景的对话，也可以用作发送应用内通知的通道。这种对话具有以下特点：</p>
+<ul>
+<li>在 <code>_Conversation</code> 表中，以 <code>sys</code> 为 <code>true</code> 来标记（<code>m</code>列在系统对话中将被忽略）</li>
+<li>该对话没有成员，开发者维护用户和系统对话的订阅关系</li>
+<li>开发者可以通过 REST API 以系统对话的渠道给指定的用户发消息</li>
+<li>用户可以给系统对话发消息，消息和相关信息会存储在数据存储中的 <code>_SysMessage</code> 表，并不会被其他订阅用户收到</li>
+<li>开发者可以配置 Web Hook 地址接收用户发给系统对话的消息，并利用 REST API 发消息回复</li>
+<li>在 SDK 层面，系统对话的接口与普通对话完全一致</li>
+</ul>
+<h4 id="对话类型比较">对话类型比较</h4><table>
+<thead>
+<tr>
+<th>功能点</th>
+<th>普通对话</th>
+<th>暂态对话</th>
+<th>系统对话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>表字段</strong><span>*</span></td>
+<td>m</td>
+<td>tr</td>
+<td>sys</td>
+</tr>
+<tr>
+<td><strong>成员管理</strong></td>
+<td>成员体现在 m 字段上，<br>持久化保存</td>
+<td>没有持久化的成员数据，<br>随时加入随时退出</td>
+<td>没有成员概念，无法加入和退出，<br>开发者维护订阅关系</td>
+</tr>
+<tr>
+<td><strong>收发消息</strong></td>
+<td>只有成员可以收发消息</td>
+<td>所有用户都可以发消息，<br>当前在线的成员可以收到消息</td>
+<td>开发者通过 API 给特定用户发消息，<br>用户发送的消息到达数据库和 Web Hook</td>
+</tr>
+<tr>
+<td><strong>离线消息</strong></td>
+<td>支持</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>离线推送</strong></td>
+<td>支持</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>消息记录</strong></td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>用例</strong></td>
+<td>单聊、群聊</td>
+<td>聊天室、弹幕、网页实时评论</td>
+<td>公众号、机器人、下发加好友通知</td>
+</tr>
+</tbody>
+</table>
+<p><span> * </span> 指 <code>_Conversation</code> 系统表中的字段</p>
+<h4 id="创建对话">创建对话</h4><p>对话可以通过 SDK 和 <a href="./realtime_rest_api.html#创建一个对话">REST API</a> 创建。</p>
+<p>在大部分使用场景中，普通对话通过 SDK 创建，用于最终用户之间自发的通信。<br>暂态对话和系统对话通常和应用中的特定实体绑定，可以通过 REST API 提前创建，通过应用中的业务逻辑<br>把对话 ID 下发给最终用户。</p>
+<h3 id="消息（Message）">消息（Message）</h3><p>实时通信服务的消息。我们的消息允许用户一次传输不超过 <strong>5 KB</strong> 的文本数据。在底层实时通信允许开发者传输任何基于文本的消息数据，系统对消息格式没有任何要求，<br>开发者可以在文本协议基础上定义自己的应用层协议。</p>
+<p>消息分为「普通消息」和「暂态消息」。LeanCloud 云端对于普通消息会提供接收回执、自动持久化存储、离线推送等功能。<br>但是暂态消息，则不会被自动保存，也不支持延迟接收，离线用户更不会收到推送通知，所以适合用来做控制协议。<br>譬如聊天过程中「某某正在输入中…」这样的状态信息，就适合通过暂态消息来发送，而用户输入的正式消息，则应该用普通消息来发送。</p>
+<p>LeanCloud 对普通消息提供「至少一次」的到达保证，并且在官方 SDK 中支持对消息的去重，开发者无需关心。除了基于「推」模型的消息机制，我们还提供消息记录的机制允许<br>SDK 和 REST API 通过「拉」的方式获取任意时间点前的消息。目前 LeanCloud 对消息记录提供永久存储。</p>
+<p>开发者可以通过 SDK 或 <a href="./realtime_rest_api.html#通过_REST_API_发消息">REST API</a> 发送消息。<br>SDK 通常用于最终用户发送消息，而 REST API 是开发者从服务器端发送消息的接口。当从 REST API<br>发送消息时，开发者可以指定消息的发送者、对话 ID，对于系统对话还可以指定消息的接收者。</p>
+<h4 id="富媒体消息">富媒体消息</h4><p>为了方便开发者的使用，我们提供了几种封装好的基于 JSON 格式的富媒体消息类型（TypedMessage），譬如：</p>
+<ul>
+<li>文本（TextMessage）</li>
+<li>图片（ImageMessage）</li>
+<li>音频（AudioMessage）</li>
+<li>视频（VideoMessage）</li>
+<li>位置（LocationMessage）</li>
+</ul>
+<p>这些消息类型可最大程度地简化使用步骤，能更好地满足通用需求。开发者也可以基于我们的框架，方便地扩展出自己的消息类型。</p>
+<p>这些消息类型的层次关系为：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">                                    Message</span><br><span class="line">                                       |<span class="string"></span><br><span class="line">                                  TypedMessage</span><br><span class="line">                                       </span>|</span><br><span class="line">     __________________________________|<span class="string">__________________________________</span><br><span class="line">     </span>|<span class="string">             </span>|<span class="string">            </span>|<span class="string">             </span>|<span class="string">               </span>|<span class="string">           </span>|</span><br><span class="line">TextMessage  ImageMessage  AudioMessage  VideoMessage  LocationMessage   。。。</span><br></pre></td></tr></table></figure>
+<p>关于这部分消息的格式请参考<br><a href="realtime_rest_api.html#%E5%AF%8C%E5%AA%92%E4%BD%93%E6%B6%88%E6%81%AF%E6%A0%BC%E5%BC%8F%E8%AF%B4%E6%98%8E">《实时通信 REST API - 富媒体消息格式说明》</a>了解。</p>
+<h4 id="离线消息">离线消息</h4><p>开发者可以通过 <a href="/messaging.html?appid=#/message/realtime/tool"><strong>控制台</strong> &gt; <strong>消息</strong> &gt; <strong>实时消息</strong> &gt; <strong>帮助</strong></a> 界面查询某个 Client ID 的在线状态和离线消息数。</p>
+<p>当用户重新登录后，LeanCloud 提供两种方式进行下发离线消息：</p>
+<ol>
+<li><strong>默认方式</strong>：服务器端会对每个对话推送至多最近 20 条消息。这部分消息在用户上线后会以新消息的形式到达客户端，对于轻量级的应用这种方式可以满足开发者对离线消息的需求；</li>
+<li><strong>未读数量方式</strong>：服务器端会返回离线期间产生未读消息的对话列表及未读消息数，开发者可以根据这个通知拉取离线消息记录收取离线消息，这种方式下开发者对消息的数量可以完全的控制；</li>
+</ol>
+<h4 id="离线推送通知">离线推送通知</h4><h5 id="静态内容">静态内容</h5><p>对离线的 iOS 和 Windows Phone 用户，每次有离线消息时，我们会触发一个对应平台的推送通知。<br>由于不同平台的不同限制，且用户的消息正文可能还包含上层协议，所以我们允许用户在控制台中为应用设置一个静态的 APNs JSON，推送一条内容固定的通知。</p>
+<p>进入 <a href="/messaging.html?appid=#/message/realtime/conf">控制台 &gt;<span class="text-muted">（选择应用）</span>&gt; 消息 &gt; 实时消息 &gt; 设置 &gt; iOS 用户离线推送设置</a>，填入：</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"alert"</span>:<span class="string">"您有新的消息"</span>, <span class="string">"badge"</span>:<span class="string">"Increment"</span>&#125;`</span><br></pre></td></tr></table></figure>
+<p>注意，<code>Increment</code> 大小写敏感，表示自动增加应用 badge 上的数字计数。清除 badge 的操作请参考 <a href="ios_push_guide.html#清除_Badge">iOS 推送指南 &middot; 清除 badge</a>。</p>
+<p><img src="/avos/images/realtime_ios_push.png" alt="image"></p>
+<h5 id="动态内容">动态内容</h5><p>如果希望推送通知显示动态内容，比如消息的实际内容，或根据消息内容、对话信息等上下文信息来自定义内容，则需要通过 <a href="#_receiversOffline">云引擎 Hook <code>_receiversOffline</code></a> 来实现。</p>
+<h5 id="其他设置">其他设置</h5><p>推送默认使用<strong>生产证书</strong>，你也可以在 JSON 中增加一个 <code>_profile</code> 内部属性来选择实际推送的证书，如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">alert</span>":    <span class="value"><span class="string">"您有一条未读消息"</span></span>,</span><br><span class="line">  "<span class="attribute">_profile</span>": <span class="value"><span class="string">"dev"</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p><code>_profile</code> 属性不会实际推送。</p>
+<p>目前，设置界面的推送内容支持部分内置变量，你可以将上下文信息直接设置到推送内容中：</p>
+<ul>
+<li><code>${convId}</code> 推送相关的对话 ID</li>
+<li><code>${timestamp}</code> 触发推送的时间戳（Unix 时间戳）</li>
+<li><code>${fromClientId}</code> 消息发送者的 Client ID</li>
+</ul>
+<p>这部分平台的用户，在完成登录时，SDK 会自动关联当前的 Client ID 和设备。关联的方式是通过设备<strong>订阅</strong>名为 Client ID 的 Channel 实现的。开发者可以在数据存储<br>的 <code>_Installation</code> 表中的 <code>channel</code> 字段查到这组关联关系。在实际离线推送时，系统根据用户 Client ID 找到对应的关联设备进行推送。</p>
+<p>另外，由于实时通信触发的推送量比较大，内容单一，这部分记录不会保存到消息菜单的推送记录。</p>
+<h4 id="敏感词过滤">敏感词过滤</h4><p>根据政策的要求，我们为多人的普通对话、暂态对话和系统对话进行敏感词过滤。海外节点暂未启用。</p>
+<p>过滤的词库由 LeanCloud 提供，命中的敏感词将会被替换为 <code>***</code>。如果开发者的应用中也有固定的词库需要过滤，可以联系我们进行针对应用的定制。</p>
+<p>如果开发者有较为复杂的过滤需求，我们推荐使用下文提到的云引擎 hook 来实现过滤，在 hook 中开发者对消息的内容有完全的控制力。</p>
+<h2 id="权限和认证">权限和认证</h2><p>为了保证聊天通道的安全，我们设计了签名的概念。默认这一功能是关闭的，你可以在 LeanCloud 应用控制台 &gt; <strong>设置</strong> &gt; <strong>应用选项</strong> 中强制启用签名。启用后，所有的用户登录、新建或加入对话、邀请/踢出对话成员等操作都需要包含签名，这样你可以对聊天过程进行充分的控制。</p>
+<p><img src="/avos/images/leanmessage_signature2.png" alt="image"></p>
+<ol>
+<li>客户端进行登录或新建对话等操作，SDK 会调用 SignatureFactory 的实现，并携带用户信息和用户行为（登录、新建对话或群组操作）请求签名；</li>
+<li>应用自有的权限系统，或应用在 LeanCloud 云引擎上的签名程序收到请求，进行权限验证，如果通过则利用下文所述的 <a href="#用户登录的签名">签名算法</a> 生成时间戳、随机字符串和签名返回给客户端；</li>
+<li>客户端获得签名后，编码到请求中，发给 LeanCloud 实时通信服务器；</li>
+<li>实时通信服务器对请求的内容和签名做一遍验证，确认这个操作是被应用服务器允许的，进而执行后续的实际操作。</li>
+</ol>
+<p>签名采用 <strong>Hmac-sha1</strong> 算法，输出字节流的十六进制字符串（hex dump）。针对不同的请求，需要拼装不同组合的字符串，加上 UTC timestamp 以及随机字符串作为签名的消息。</p>
+<h3 id="云引擎签名范例">云引擎签名范例</h3><p>我们提供了一个运行在 LeanCloud <a href="leanengine_guide-cloudcode.html">云引擎</a> 上的 <a href="https://github.com/leancloud/realtime-messaging-signature-cloudcode" target="_blank" rel="external">签名范例程序</a><br>，它提供了基于 Web Hosting 和云函数两种方式的签名实现，你可以根据实际情况选择自己的实现。</p>
+<h3 id="用户登录的签名">用户登录的签名</h3><p>签名采用 ，签名的消息格式如下：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">appid:</span><span class="string">clientid:</span>:<span class="string">timestamp:</span>nonce</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明<a name="signature-param-table"></a><!--2015-09-04 --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>appid</td>
+<td>应用的 id</td>
+</tr>
+<tr>
+<td>clientid</td>
+<td>登录时使用的 clientId</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>当前的 UTC 时间距离 unix epoch 的<strong>秒数</strong></td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>随机字符串</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：签名的 key <strong>必须</strong> 是应用的 master key，你可以在应用 &gt; <strong>设置</strong> &gt; <strong>应用 Key</strong> 里找到。<strong>请保护好 master key，不要泄露给任何无关人员。</strong></p>
+</blockquote>
+<p>开发者可以实现自己的 SignatureFactory，调用远程服务器的签名接口获得签名。如果你没有自己的服务器，可以直接在 LeanCloud 云引擎上通过 <strong>网站托管</strong> 来实现自己的签名接口。在移动应用中直接做签名的作法 <strong>非常危险</strong>，它可能导致你的 <strong>master key</strong> 泄漏。</p>
+<h3 id="开启对话签名">开启对话签名</h3><p>新建一个对话的时候，签名的消息格式为：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">appid:</span><span class="string">clientid:</span><span class="string">sorted_member_ids:</span><span class="string">timestamp:</span>nonce</span><br></pre></td></tr></table></figure>
+<ul>
+<li>appid、clientid、timestamp 和 nonce 的含义 <a href="#signature-param-table">同上</a>。</li>
+<li>sorted_member_ids 是以半角冒号（:）分隔、<strong>升序排序</strong> 的 user id，即邀请参与该对话的成员列表。</li>
+</ul>
+<h3 id="群组功能的签名">群组功能的签名</h3><p>在群组功能中，我们对<strong>加群</strong>、<strong>邀请</strong>和<strong>踢出群</strong>这三个动作也允许加入签名，签名格式是：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">appid:</span><span class="string">clientid:</span><span class="string">convid:</span><span class="string">sorted_member_ids:</span><span class="string">timestamp:</span><span class="string">nonce:</span>action</span><br></pre></td></tr></table></figure>
+<ul>
+<li>appid、clientid、sorted_member_ids、timestamp 和 nonce  的含义同上。对加入群的情况，这里 sorted_member_ids 是空字符串。</li>
+<li>convid - 此次行为关联的对话 id。</li>
+<li>action - 此次行为的动作，分为 <strong>add</strong> （加群和邀请）与 <strong>remove</strong> （踢出群）两种，但出于兼容考虑，签名时分别使用常量 <strong>invite</strong> 和 <strong>kick</strong> 来进行表示。</li>
+</ul>
+<h2 id="云引擎_Hook">云引擎 Hook</h2><p>对于普通消息，如果发送时部分成员不在线，LeanCloud 提供了选项，支持将离线消息以推送形式发送到客户端。但是，推送的内容开发者如果希望进行修改的话，该怎么实现呢？可以使用「云引擎 Hook」！</p>
+<p>云引擎 Hook 允许你通过自定义的云引擎函数处理实时通信中的某些事件，修改默认的流程等等。目前开放的 hook 云函数包括：</p>
+<ul>
+<li><strong>_messageReceived</strong><br><br>消息达到服务器，群组成员已解析完成之后，发送给收件人之前。</li>
+<li><strong>_receiversOffline</strong><br><br>消息发送完成，存在离线的收件人。</li>
+<li><strong>_conversationStart</strong><br><br>创建对话，在签名校验（如果开启）之后，实际创建之前。</li>
+<li><strong>_conversationAdd</strong><br><br>向对话添加成员，在签名校验（如果开启）之后，实际加入之前，包括主动加入和被其他用户加入两种情况。</li>
+<li><strong>_conversationRemove</strong><br><br>从对话中踢出成员，在签名校验（如果开启）之后，实际踢出之前，用户自己退出对话不会调用。</li>
+</ul>
+<h3 id="使用场景">使用场景</h3><p>示例应用 <a href="https://github.com/leancloud/leanchat-android" target="_blank" rel="external">LeanChat</a> 也用了云引擎 Hook 功能来自定义消息推送，通过解析上层消息协议获取消息类型和内容，以 <code>fromPeer</code> 得到发送者的名称，组装成 <code>pushMessage</code>，这样能使推送通知的用户体验更好。可参考 <a href="https://github.com/leancloud/leanchat-cloudcode/blob/master/cloud.js" target="_blank" rel="external">leanchat-cloudcode 代码</a>。</p>
+<p>与 conversation 相关的 hook 可以在应用签名之外增加额外的权限判断，控制对话是否允许被建立、某些用户是否允许被加入对话等。你可以用这一 hook 实现黑名单功能。</p>
+<h3 id="_messageReceived"><code>_messageReceived</code></h3><p>这个 hook 发生在消息到达 LeanCloud 云端之后。如果是群组消息，我们会解析出所有消息收件人。</p>
+<p>你可以通过返回参数控制消息是否需要被丢弃，删除个别收件人，还可以修改消息内容。返回空对象（<code>response.success({})</code>）则会执行系统默认的流程。</p>
+<div class="callout callout-info">请注意，在这个 hook 的代码实现的任何分支上<strong>请确保最终会调用 response.success 返回结果</strong>，使得消息可以尽快投递给收件人。这个 hook 将<strong>阻塞发送流程</strong>，因此请尽量减少无谓的代码调用，提升效率。</div>
+
+<p>如果你使用了 LeanCloud 默认提供的富媒体消息格式，云引擎参数中的 <code>content</code> 接收的是 JSON 结构的字符串形式。关于这个结构的详细说明，请参考 <a href="./realtime_rest_api.html#富媒体消息格式说明">实时通信 REST API 指南 - 富媒体消息格式说明</a>。</p>
+<h4 id="参数">参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fromPeer</td>
+<td>消息发送者的 ID</td>
+</tr>
+<tr>
+<td>convId</td>
+<td>消息所属对话的 ID</td>
+</tr>
+<tr>
+<td>toPeers</td>
+<td>解析出的对话相关的 Client ID</td>
+</tr>
+<tr>
+<td>transient</td>
+<td>是否是 transient 消息</td>
+</tr>
+<tr>
+<td>content</td>
+<td>消息体字符串</td>
+</tr>
+<tr>
+<td>receipt</td>
+<td>是否要求回执</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>服务器收到消息的时间戳（毫秒）</td>
+</tr>
+<tr>
+<td>sourceIP</td>
+<td>消息发送者的 IP</td>
+</tr>
+</tbody>
+</table>
+<h4 id="返回">返回</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>drop</td>
+<td>可选</td>
+<td>如果返回真值消息将被丢弃</td>
+</tr>
+<tr>
+<td>code</td>
+<td>可选</td>
+<td>当 drop 为 true 时可以下发一个应用自定义的整型错误码</td>
+</tr>
+<tr>
+<td>content</td>
+<td>可选</td>
+<td>修改后的 content，如果不提供则保留原消息。</td>
+</tr>
+<tr>
+<td>toPeers</td>
+<td>可选</td>
+<td>数组，修改后的收件人，如果不提供则保留原收件人。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_receiversOffline"><code>_receiversOffline</code></h3><p>这个 hook 发生在有收件人离线的情况下，你可以通过它来自定义离线推送行为，包括推送内容、被推送用户或略过推送。你也可以直接在 hook 中触发自定义的推送。发往暂态对话的消息不会触发此 hook。</p>
+<h4 id="自定义离线消息推送通知的内容">自定义离线消息推送通知的内容</h4><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">AV<span class="built_in">.</span>Cloud<span class="built_in">.</span><span class="class"><span class="keyword">define</span></span>(<span class="string">'_receiversOffline'</span>, function(request, response) &#123;</span><br><span class="line">    <span class="built_in">var</span> <span class="keyword">params</span> = request<span class="built_in">.</span><span class="keyword">params</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">var</span> json = &#123;</span><br><span class="line">        <span class="comment">// 自增未读消息的数目，不想自增就设为数字</span></span><br><span class="line">        badge: <span class="string">"Increment"</span>,</span><br><span class="line">        sound: <span class="string">"default"</span>,</span><br><span class="line">        <span class="comment">// 使用开发证书</span></span><br><span class="line">        _profile: <span class="string">"dev"</span>,</span><br><span class="line">        <span class="comment">// content 为消息的实际内容</span></span><br><span class="line">        alert: <span class="keyword">params</span><span class="built_in">.</span>content</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">var</span> pushMessage = JSON<span class="built_in">.</span>stringify(json);</span><br><span class="line"></span><br><span class="line">    response<span class="built_in">.</span>success(&#123;<span class="string">"pushMessage"</span>: pushMessage&#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>有关可以在推送内容中加入的内置变量和其他可用设置，请参考 <a href="#离线推送通知">离线推送通知</a>。</p>
+<h4 id="参数-1">参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fromPeer</td>
+<td>消息发送者 ID</td>
+</tr>
+<tr>
+<td>convId</td>
+<td>消息所属对话的 ID</td>
+</tr>
+<tr>
+<td>offlinePeers</td>
+<td>数组，离线的收件人列表</td>
+</tr>
+<tr>
+<td>content</td>
+<td>消息内容</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>服务器收到消息的时间戳（毫秒）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="返回-1">返回</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>skip</td>
+<td>可选</td>
+<td>如果为真将跳过推送（比如已经在云引擎里触发了推送或者其他通知）</td>
+</tr>
+<tr>
+<td>offlinePeers</td>
+<td>可选</td>
+<td>数组，筛选过的推送收件人。</td>
+</tr>
+<tr>
+<td>pushMessage</td>
+<td>可选</td>
+<td>推送内容，支持自定义 JSON 结构。</td>
+</tr>
+<tr>
+<td>force</td>
+<td>可选</td>
+<td>如果为真将强制推送给 offlinePeers 里 mute 的用户，默认 false。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_conversationStart"><code>_conversationStart</code></h3><p>在创建对话时调用，发生在签名验证之后、创建对话之前。</p>
+<h4 id="参数-2">参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initBy</td>
+<td>由谁发起的 clientId</td>
+</tr>
+<tr>
+<td>members</td>
+<td>初始成员数组，包含初始成员</td>
+</tr>
+<tr>
+<td>attr</td>
+<td>创建对话时的额外属性</td>
+</tr>
+</tbody>
+</table>
+<h4 id="返回-2">返回</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reject</td>
+<td>可选</td>
+<td>是否拒绝，默认为 <strong>false</strong>。</td>
+</tr>
+<tr>
+<td>code</td>
+<td>可选</td>
+<td>当 reject 为 true 时可以下发一个应用自定义的整型错误码。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_conversationAdd"><code>_conversationAdd</code></h3><p>在将用户加入到对话时调用，发生在签名验证之后、加入对话之前。如果是自己加入，那么 <strong>initBy</strong> 和 <strong>members</strong> 的唯一元素是一样的。</p>
+<h4 id="参数-3">参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initBy</td>
+<td>由谁发起的 clientId</td>
+</tr>
+<tr>
+<td>members</td>
+<td>要加入的成员，数组</td>
+</tr>
+<tr>
+<td>convId</td>
+<td>对话 id</td>
+</tr>
+</tbody>
+</table>
+<h4 id="返回-3">返回</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reject</td>
+<td>可选</td>
+<td>是否拒绝，默认为 <strong>false</strong>。</td>
+</tr>
+<tr>
+<td>code</td>
+<td>可选</td>
+<td>当 reject 为 true 时可以下发一个应用自定义的整型错误码。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_conversationRemove"><code>_conversationRemove</code></h3><p>在创建对话时调用，发生在签名验证之后、从对话移除成员之前。移除自己时不会触发这个 hook。</p>
+<h4 id="参数-4">参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initBy</td>
+<td>由谁发起</td>
+</tr>
+<tr>
+<td>members</td>
+<td>要踢出的成员，数组。</td>
+</tr>
+<tr>
+<td>convId</td>
+<td>对话 id</td>
+</tr>
+</tbody>
+</table>
+<h4 id="返回-4">返回</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reject</td>
+<td>可选</td>
+<td>是否拒绝，默认为 <strong>false</strong>。</td>
+</tr>
+<tr>
+<td>code</td>
+<td>可选</td>
+<td>当 reject 为 true 时可以下发一个应用自定义的整型错误码。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="部署环境">部署环境</h3><p>实时通信的云引擎 Hook 要求云引擎部署在云引擎的 <strong>生产环境</strong>，测试环境仅用于开发者手动调用测试。由于缓存的原因，首次部署的云引擎 Hook 需要至多三分钟来正式生效，后续修改会实时生效。</p>
+<p>更多使用详情请参考 <a href="leanengine_guide-cloudcode.html#云函数">云引擎 - 云函数</a>。所有云引擎调用都有默认超时时间和容错机制，在出错情况下系统将按照默认的流程执行后续操作。</p>
+<h2 id="Android_开发指南">Android 开发指南</h2><p>参考 <a href="realtime_guide-android.html">Android 实时通信开发指南</a></p>
+<h2 id="iOS_开发指南">iOS 开发指南</h2><p>参考 <a href="realtime_guide-ios.html">iOS 实时通信开发指南</a></p>
+<h2 id="JavaScript_开发指南">JavaScript 开发指南</h2><p>参考 <a href="js_realtime.html">JavaScript 实时通信开发指南</a>。另外，我们已经开源了 JavaScript  Realtime SDK， 见 <a href="https://github.com/leancloud/js-realtime-sdk" target="_blank" rel="external"> LeanCloud JavaScript Realtime SDK - Github 资源库</a> 。</p>
+<h2 id="REST_API">REST API</h2><p>参考 <a href="realtime_rest_api.html">实时通信 REST API</a>。</p>
+<h2 id="系统对话">系统对话</h2><p>系统对话可以用于实现机器人自动回复、公众号、服务账号等功能。在我们的 <a href="http://leancloud.github.io/leanmessage-demo/" target="_blank" rel="external">官方聊天 Demo</a> 中就有一个使用系统对话 hook 实现的机器人 MathBot，它能计算用户发送来的数学表达式并返回结果，<a href="https://github.com/leancloud/leanmessage-demo/tree/master/server" target="_blank" rel="external">其服务端源码</a> 可以从 GitHub 上获取。</p>
+<h3 id="系统对话消息结构">系统对话消息结构</h3><h4 id="_SysMessage"><code>_SysMessage</code></h4><p>用户发给系统对话的消息会存储在 <code>_SysMessage</code> 表中，各字段含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>convId</td>
+<td>消息关联的系统对话 ID</td>
+</tr>
+<tr>
+<td>msgId</td>
+<td>消息的内部 ID</td>
+</tr>
+<tr>
+<td>from</td>
+<td>发消息用户的 Client ID</td>
+</tr>
+<tr>
+<td>fromIp</td>
+<td>发消息用户的 IP</td>
+</tr>
+<tr>
+<td>data</td>
+<td>消息内容</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Web_Hook">Web Hook</h4><p>开发者可以自定义 Web Hook 来实时接收用户发给系统对话的消息，消息的数据结构与上文所述的 <code>_SysMessage</code> 一致。</p>
+<p>当有用户向系统对话发送消息时，我们会通过 HTTP POST 请求将 JSON 格式的数据发送到用户设置的 Web Hook 上。</p>
+<p>超时时间为 5 秒，当用户 hook 地址超时没有响应，我们会重试至多 3 次。</p>
+<p>发送的消息格式为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    "<span class="attribute">fromIp</span>":      <span class="value"><span class="string">"121.238.214.92"</span></span>,</span><br><span class="line">    "<span class="attribute">conv</span>": <span class="value">&#123;</span><br><span class="line">      "<span class="attribute">__type</span>":    <span class="value"><span class="string">"Pointer"</span></span>,</span><br><span class="line">      "<span class="attribute">className</span>": <span class="value"><span class="string">"_Conversation"</span></span>,</span><br><span class="line">      "<span class="attribute">objectId</span>":  <span class="value"><span class="string">"55b99ad700b0387b8a3d7bf0"</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">msgId</span>":       <span class="value"><span class="string">"nYH9iBSBS_uogCEgvZwE7Q"</span></span>,</span><br><span class="line">    "<span class="attribute">from</span>":        <span class="value"><span class="string">"A"</span></span>,</span><br><span class="line">    "<span class="attribute">bin</span>":         <span class="value"><span class="literal">false</span></span>,</span><br><span class="line">    "<span class="attribute">data</span>":        <span class="value"><span class="string">"你好，sys"</span></span>,</span><br><span class="line">    "<span class="attribute">createdAt</span>": <span class="value">&#123;</span><br><span class="line">      "<span class="attribute">__type</span>":    <span class="value"><span class="string">"Date"</span></span>,</span><br><span class="line">      "<span class="attribute">iso</span>":       <span class="value"><span class="string">"2015-07-30T14:37:42.584Z"</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">updatedAt</span>":  <span class="value">&#123;</span><br><span class="line">      "<span class="attribute">__type</span>":   <span class="value"><span class="string">"Date"</span></span>,</span><br><span class="line">      "<span class="attribute">iso</span>":      <span class="value"><span class="string">"2015-07-30T14:37:42.584Z"</span></span><br><span class="line">    </span>&#125;</span><br><span class="line">  </span>&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h3 id="开发者给系统对话发送消息">开发者给系统对话发送消息</h3><p>请参考 <a href="./realtime_rest_api.html#给系统对话发消息">REST API - 给系统对话发消息</a>。</p>
+<h2 id="限制">限制</h2><ul>
+<li>对于客户端主动发起的操作会按照操作类型限制其频率。发消息操作限制为 <strong>每分钟 60 次</strong>，历史消息查询操作限制为 <strong>每分钟 120 次</strong>，其它类型操作包括加入对话、离开对话、建立/关闭连接等均限制为 <strong>每分钟 30 次</strong>。当调用超过限制时，服务端会丢弃超出的消息。</li>
+<li>客户端发送的单条消息大小不得超过 5 KB。</li>
+<li>目前单个普通对话的成员上限为 500 个。</li>
+</ul>
+<h2 id="服务器端错误码说明">服务器端错误码说明</h2><p>实时通信的错误码会以 SDK 异常或 WebSocket 关闭状态码的形式返回给客户端。当出现异常情况时，SDK 会输出状态码到日志里，以下是对部分状态码的简单说明：</p>
+<!--2015-10-27 Da Li: add <code style="white-space:nowrap"> to prevent unexpected line wrapping. DO NOT REMOVE -->
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>消息</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td></td>
+<td>websocket 正常关闭，可能发生在服务器重启，或本地网络异常的情况。SDK 会自动重连，无需人工干预。</td>
+</tr>
+<tr>
+<td><code style="white-space:nowrap">1006</code></td>
+<td></td>
+<td>websocket 连接非正常关闭，通常见于路由器配置对长连接限制的情况。SDK 会自动重连，无需人工干预。</td>
+</tr>
+<tr>
+<td><code>4100</code></td>
+<td><code>APP_NOT_AVAILABLE</code></td>
+<td>应用不存在或应用禁用了实时通信服务</td>
+</tr>
+<tr>
+<td><code>4103</code></td>
+<td><code>INVALID_LOGIN</code></td>
+<td>Client Id 格式错误，超过 64 个字符。</td>
+</tr>
+<tr>
+<td><code>4105</code></td>
+<td><code>SESSION_REQUIRED</code></td>
+<td>Session 没有打开就发送消息，或执行其他操作。常见的错误场景是调用 open session 后直接发送消息，正确的用法是在 Session 打开的回调里执行。</td>
+</tr>
+<tr>
+<td><code>4107</code></td>
+<td><code>READ_TIMEOUT</code></td>
+<td>读超时，服务器端长时间没有收到客户端的数据，切断连接。SDK 包装了心跳包的机制，出现此错误通常是网络问题。SDK 会自动重连，无需人工干预。</td>
+</tr>
+<tr>
+<td><code>4108</code></td>
+<td><code>LOGIN_TIMEOUT</code></td>
+<td>登录超时，连接后长时间没有完成 session open。通常是登录被拒绝等原因，出现此问题可能是使用方式有误，可以 <a href="http://ticket.leancloud.cn/" target="_blank" rel="external">创建工单</a>，由我们技术顾问来给出建议。</td>
+</tr>
+<tr>
+<td><code>4109</code></td>
+<td><code>FRAME_TOO_LONG</code></td>
+<td>包过长。消息大小超过 5 KB，请缩短消息或者拆分消息。</td>
+</tr>
+<tr>
+<td><code>4110</code></td>
+<td><code>INVALID_ORIGIN</code></td>
+<td>设置安全域名后，当前登录的域名与安全域名不符合。</td>
+</tr>
+<tr>
+<td><code>4200</code></td>
+<td><code>INTERNAL_ERROR</code></td>
+<td>服务器内部错误，如果反复出现请收集相关线索并 <a href="http://ticket.leancloud.cn/" target="_blank" rel="external">创建工单</a>，我们会尽快解决。</td>
+</tr>
+<tr>
+<td><code>4201</code></td>
+<td><code>SEND_MESSAGE_TIMEOUT</code></td>
+<td>通过 API 发送消息超时</td>
+</tr>
+<tr>
+<td><code>4302</code></td>
+<td><code style="white-space:nowrap">CONVERSATION_SIGNATURE_FAILED</code></td>
+<td>对话相关操作签名错误</td>
+</tr>
+<tr>
+<td><code>4303</code></td>
+<td><code>CONVERSATION_NOT_FOUND</code></td>
+<td>发送消息，或邀请等操作对应的对话不存在。</td>
+</tr>
+<tr>
+<td><code>4304</code></td>
+<td><code>CONVERSATION_FULL</code></td>
+<td>对话成员已满，不能再添加。</td>
+</tr>
+<tr>
+<td><code>4305</code></td>
+<td><code>CONVERSATION_REJECTED_BY_APP</code></td>
+<td>对话操作被应用的云引擎 Hook 拒绝</td>
+</tr>
+<tr>
+<td><code>4306</code></td>
+<td><code>CONVERSATION_UPDATE_FAILED</code></td>
+<td>更新对话操作失败</td>
+</tr>
+<tr>
+<td><code>4307</code></td>
+<td><code>CONVERSATION_READ_ONLY</code></td>
+<td>该对话为只读，不能更新或增删成员。</td>
+</tr>
+<tr>
+<td><code>4308</code></td>
+<td><code>CONVERSATION_NOT_ALLOWED</code></td>
+<td>该对话禁止当前用户发送消息</td>
+</tr>
+<tr>
+<td><code>4401</code></td>
+<td><code>INVALID_MESSAGING_TARGET</code></td>
+<td>发送消息的对话不存在，或当前用户不在对话中。</td>
+</tr>
+<tr>
+<td><code>4402</code></td>
+<td><code>MESSAGE_REJECTED_BY_APP</code></td>
+<td>发送的消息被应用的云引擎 Hook 拒绝</td>
+</tr>
+</tbody>
+</table>
+<h2 id="常见问题_FAQ">常见问题 FAQ</h2><h3 id="要让单个群组消息进入「免打扰模式」，该如何做">要让单个群组消息进入「免打扰模式」，该如何做</h3><p>对于普通对话的新消息，LeanCloud 实时通信服务有选项支持将消息以 Push Notification 的方式通知当前不在线的成员，但是有时候，这种推送会非常频繁对用户造成干扰。LeanCloud 提供选项，支持让单个用户关闭特定对话的离线消息推送。具体可以看相应平台的开发指南文档。</p>
+<h3 id="聊天好友关系如何实现">聊天好友关系如何实现</h3><p>LeanCloud 实时通信服务是完全独立的实时通信业务抽象，专注在实时通信本身，所以实时通信的业务逻辑中，并不含有好友关系，以及对应的聊天用户数据信息（如头像、名称等）。实时通信与其他业务逻辑完全隔离，不耦合，唯一关联的就是 clientId。这样做的好处是显而易见的，比如你可以很容易让匿名用户直接通信，你也可以自定义一些好友逻辑，总之可以做成因为任意逻辑而匹配产生的聊天行为。</p>
+<p>当然，如果你想维护一套好友关系，完全可以使用你自己的逻辑，只要存储着每个用户在实时通信中的 clientId 即可。我们推荐使用 LeanCloud 的存储，即 LeanStorage，这样可以结合 LeanCloud 中的 User 相关对象来简单地实现账户系统，以及与之相关的存储，详情可以阅读对应的 SDK 开发指南。</p>
+<h3 id="聊天记录的保存时间和条数">聊天记录的保存时间和条数</h3><p>我们暂时不限制用户应用中聊天记录的保存时间和条数。未来如有变化我们会提前通知用户，你也随时可以通过 <a href="./realtime_rest_api.html#获取聊天记录">REST API</a> 将聊天记录同步到自己的服务器上。</p>
+<h3 id="聊天消息没有收到">聊天消息没有收到</h3><p>当出现聊天消息没有收到的情况，你可以按照以下思路排查：</p>
+<ul>
+<li>调用消息记录 API 查看消息是否到达了服务器端</li>
+<li>如果只有一个消息接收者，可以检查消息记录中对应条目的 <code>ack-at</code> 字段判断消息是否到达了客户端</li>
+<li>在 <a href="/messaging.html?appid=#/message/realtime/tool"><strong>控制台</strong> &gt; <strong>消息</strong> &gt; <strong>实时消息</strong> &gt; <strong>帮助</strong></a> 页面的文本框里输入对应的 Client ID，查看是否在线，以及是否有离线消息。</li>
+</ul>
+<h3 id="为什么我的_iPhone_收不到离线消息推送">为什么我的 iPhone 收不到离线消息推送</h3><p>请先参考 <a href="#聊天消息没有收到">聊天消息没有收到</a>。在 <a href="/messaging.html?appid=#/message/realtime/conf"><strong>控制台</strong> &gt; <strong>消息</strong> &gt; <strong>实时消息</strong> &gt; <strong>设置</strong> &gt; <strong>iOS 用户离线推送设置</strong> &gt; <strong>推送内容</strong></a> 填写「您有新的未读消息」后，当对方不在线的时候，便会触发一个 APNs 的推送。首先，请确保控制台能向 iOS 推送消息，也即如下图所示的推送能顺利到达 iOS 系统，请参考 <a href="ios_push_guide.html">iOS 推送开发文档</a>。</p>
+<p><img src="/avos/images/realtime_faq_push.png" alt="image"></p>
+<p>之后，还要确保对方确实是离线，如果对方程序在前台并且网络良好，则不会触发推送。如果对方网络未连接，则下次联网的时候收到回调，也不触发推送。也可以利用控制台实时消息页的用户状态查询来确保对方处于离线状态，如下图。</p>
+<p><img src="/avos/images/realtime_faq_console.png" alt="image"></p>
+<p>离线消息推送默认用的是生产环境编辑框里上传的证书。所以，调试时可能要上传开发证书，并在推送内容中设置 <code>_profile</code> 属性来选择开发证书推送，如 <code>{&quot;alert&quot;: &quot;你有一条未读消息&quot;, &quot;_profile&quot;: &quot;dev&quot;}</code></p>
+<p>检查方法总结如下：</p>
+<ul>
+<li>检查普通的 iOS 推送是否到达</li>
+<li>检查证书设置</li>
+<li>在控制台检查接收方是否在离线状态</li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/leancloud/" rel="tag">#leancloud</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/30/avos/ios_statistics/" rel="prev">iOS 统计 SDK 开发指南</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/" rel="next">01Getting Started-基本设置</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实时通信服务总览"><span class="nav-number">1.</span> <span class="nav-text">实时通信服务总览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能和特性"><span class="nav-number">1.1.</span> <span class="nav-text">功能和特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心概念"><span class="nav-number">1.2.</span> <span class="nav-text">核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ClientID、用户和登录"><span class="nav-number">1.2.1.</span> <span class="nav-text">ClientID、用户和登录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在线状态"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">在线状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对话（Conversation）"><span class="nav-number">1.2.2.</span> <span class="nav-text">对话（Conversation）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#普通对话（Normal_Conversation）"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">普通对话（Normal Conversation）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#暂态对话（Transient_Conversation）"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">暂态对话（Transient Conversation）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统对话（System_Conversation）"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">系统对话（System Conversation）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对话类型比较"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">对话类型比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建对话"><span class="nav-number">1.2.2.5.</span> <span class="nav-text">创建对话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息（Message）"><span class="nav-number">1.2.3.</span> <span class="nav-text">消息（Message）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#富媒体消息"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">富媒体消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#离线消息"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">离线消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#离线推送通知"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">离线推送通知</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#静态内容"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">静态内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态内容"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">动态内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他设置"><span class="nav-number">1.2.3.3.3.</span> <span class="nav-text">其他设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#敏感词过滤"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">敏感词过滤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限和认证"><span class="nav-number">1.3.</span> <span class="nav-text">权限和认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#云引擎签名范例"><span class="nav-number">1.3.1.</span> <span class="nav-text">云引擎签名范例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户登录的签名"><span class="nav-number">1.3.2.</span> <span class="nav-text">用户登录的签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启对话签名"><span class="nav-number">1.3.3.</span> <span class="nav-text">开启对话签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#群组功能的签名"><span class="nav-number">1.3.4.</span> <span class="nav-text">群组功能的签名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#云引擎_Hook"><span class="nav-number">1.4.</span> <span class="nav-text">云引擎 Hook</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景"><span class="nav-number">1.4.1.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#_messageReceived"><span class="nav-number">1.4.2.</span> <span class="nav-text">_messageReceived</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">返回</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#_receiversOffline"><span class="nav-number">1.4.3.</span> <span class="nav-text">_receiversOffline</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义离线消息推送通知的内容"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">自定义离线消息推送通知的内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-1"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回-1"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">返回</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#_conversationStart"><span class="nav-number">1.4.4.</span> <span class="nav-text">_conversationStart</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-2"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回-2"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">返回</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#_conversationAdd"><span class="nav-number">1.4.5.</span> <span class="nav-text">_conversationAdd</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-3"><span class="nav-number">1.4.5.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回-3"><span class="nav-number">1.4.5.2.</span> <span class="nav-text">返回</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#_conversationRemove"><span class="nav-number">1.4.6.</span> <span class="nav-text">_conversationRemove</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-4"><span class="nav-number">1.4.6.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回-4"><span class="nav-number">1.4.6.2.</span> <span class="nav-text">返回</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署环境"><span class="nav-number">1.4.7.</span> <span class="nav-text">部署环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android_开发指南"><span class="nav-number">1.5.</span> <span class="nav-text">Android 开发指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS_开发指南"><span class="nav-number">1.6.</span> <span class="nav-text">iOS 开发指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript_开发指南"><span class="nav-number">1.7.</span> <span class="nav-text">JavaScript 开发指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REST_API"><span class="nav-number">1.8.</span> <span class="nav-text">REST API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统对话"><span class="nav-number">1.9.</span> <span class="nav-text">系统对话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统对话消息结构"><span class="nav-number">1.9.1.</span> <span class="nav-text">系统对话消息结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#_SysMessage"><span class="nav-number">1.9.1.1.</span> <span class="nav-text">_SysMessage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web_Hook"><span class="nav-number">1.9.1.2.</span> <span class="nav-text">Web Hook</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发者给系统对话发送消息"><span class="nav-number">1.9.2.</span> <span class="nav-text">开发者给系统对话发送消息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制"><span class="nav-number">1.10.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器端错误码说明"><span class="nav-number">1.11.</span> <span class="nav-text">服务器端错误码说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题_FAQ"><span class="nav-number">1.12.</span> <span class="nav-text">常见问题 FAQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#要让单个群组消息进入「免打扰模式」，该如何做"><span class="nav-number">1.12.1.</span> <span class="nav-text">要让单个群组消息进入「免打扰模式」，该如何做</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聊天好友关系如何实现"><span class="nav-number">1.12.2.</span> <span class="nav-text">聊天好友关系如何实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聊天记录的保存时间和条数"><span class="nav-number">1.12.3.</span> <span class="nav-text">聊天记录的保存时间和条数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聊天消息没有收到"><span class="nav-number">1.12.4.</span> <span class="nav-text">聊天消息没有收到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么我的_iPhone_收不到离线消息推送"><span class="nav-number">1.12.5.</span> <span class="nav-text">为什么我的 iPhone 收不到离线消息推送</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/30/avos/realtime_v2/';
+      var disqus_title = '实时通信服务总览';
+      var disqus_url = 'http://yoursite.com/2015/12/30/avos/realtime_v2/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

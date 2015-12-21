@@ -170,8 +170,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="url">
-                0009-require-self-for-accessing-instance-members
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0014-constrained-AnySequence/" itemprop="url">
+                0014-constrained-AnySequence
               </a>
             
           
@@ -207,8 +207,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0014-constrained-AnySequence/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0014-constrained-AnySequence/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -223,62 +223,26 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Require_self_for_accessing_instance_members">Require self for accessing instance members</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0009-require-self-for-accessing-instance-members.md" target="_blank" rel="external">SE-0009</a></li>
-<li>Author(s): <a href="https://github.com/hartbit" target="_blank" rel="external">David Hart</a></li>
-<li>Status: <strong>Awaiting review</strong> (scheduled for December 16–20, 2015)</li>
+          <span itemprop="articleBody"><h1 id="Constraining_AnySequence-init">Constraining <code>AnySequence.init</code></h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0014-constrained-AnySequence.md" target="_blank" rel="external">SE-0014</a></li>
+<li>Author(s): <a href="https://github.com/moiseev" target="_blank" rel="external">Max Moiseev</a></li>
+<li>Status: <strong>Awaiting review</strong> (schedule December 18–21, 2015)</li>
 <li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>The current version of Swift (2.1) requires using <code>self</code> when accessing instance members in closures. The proposal suggests extending this to all member accesses (as is intrinsically the case in Objective-C). It has the benefit of documenting instance properties vs local variables and instance functions vs local functions or closures.</p>
-<h2 id="Motivation">Motivation</h2><p>This proposal makes it obvious which are instance properties vs local variables, as well as which are instance functions vs local functions/closures. This has several advantages:</p>
-<ul>
-<li>More readable at the point of use. </li>
-<li>More consistent than only requiring <code>self</code> in closure contexts.</li>
-<li>Less confusing from a learning point of view.</li>
-<li>Lets the compiler warn users (and avoids bugs) where the authors mean to use a local variable but instead are unknowingly using an instance property (and the other way round).</li>
-</ul>
-<p>One example of a bug avoidable by the proposal (<a href="https://lists.swift.org/pipermail/swift-evolution/2015-December/000243.html" target="_blank" rel="external">provided by Rudolf Adamkovic</a>):</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span> : <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">	<span class="preprocessor">@IBOutlet</span> <span class="keyword">var</span> button: <span class="type">UIButton</span>!</span><br><span class="line">        <span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line"></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">updateButton</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// var title = "Hello \(name)"</span></span><br><span class="line">		button.setTitle(title, forState: .<span class="type">Normal</span>) <span class="comment">// forgot to comment this line but the compiler does not complain and title is now referencing UIViewController’s title by mistake</span></span><br><span class="line">		button.setTitleColor(<span class="type">UIColor</span>.blackColor(), forState: .<span class="type">Normal</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The API Design Guidelines are meant for writing APIs but I still think they represent fundamentals of Swift. The two first points are:</p>
-<ul>
-<li>Clarity at the point of use is your most important goal. Code is read far more than it is written.</li>
-<li>Clarity is more important than brevity. Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.</li>
-</ul>
-<p>And I believe that the proposition is directly in line with those objectives.</p>
-<h2 id="Counter-argument">Counter-argument</h2><p>The counter-argument brought up by two members of the community is that the current behaviour “makes the capturing semantics of self stand out more in closures”. While this is true, the author finds its usefulness lacking.</p>
-<p>In the following lines of code, we know without a shadow of a doubt that <code>foobar</code> is a throwing function and that <code>barfoo</code> does not throw.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">try foobar()</span><br><span class="line">barfoo()</span><br></pre></td></tr></table></figure>
-<p>But with an example of <code>self</code> in a closure:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foobar(&#123;</span><br><span class="line">	<span class="built_in">print</span>(<span class="keyword">self</span>.description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>The <code>self</code> keyword in the previous lines of code gives a hint but does not bring any certitudes:</p>
-<ul>
-<li><code>self</code> might have been forced by the compiler to hint at possible memory issues,</li>
-<li><code>self</code> might have been a programmer choice if the closure is non-escaping.</li>
-</ul>
-<p>And in the reverse example:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">barfoo(&#123;</span><br><span class="line">	<span class="built_in">print</span>(description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>the closure might be non-escaping,</li>
-<li>the <code>description</code> might be referring to a local variable (which we missed the declaration of) shadowing the instance property in an escaping closure.</li>
-</ul>
-<p>In both of these examples, the <code>self</code> keyword does not tell us with any certainty that we should or not be careful about reference cycle issues without checking the signature of the called function, only that self is captured. With the proposition, <code>self</code> gets some meaning back: it indicates which are local and which are instance properties.</p>
-<h2 id="Proposed_Solution">Proposed Solution</h2><p>I suggest that not using <code>self</code> for accessing instance properties and functions is applied in two stages. In Swift 2.x, it could start as a warning and Xcode could provide a Fix-It. Then, it could become a compiler error in Swift 3 and the migrator would help transition code over.</p>
-<p>The following code which used to compile would generate an error at the documented lines:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(name)</span>"</span>) <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		foo() <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The code would have to be modified as so to compile correctly:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(<span class="keyword">self</span>.name)</span>"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">self</span>.foo()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A lot of code written since the original change would be impacted by this proposal, but it seems like it can be easily fixed by both the migrator tool and an Xcode Fix-It.</p>
-<h2 id="Alternatives_considered">Alternatives considered</h2><p>The alternative is to keep the current behaviour, but it has the aforementioned disadvantages.</p>
-<p>An alternative would be to demote from a compiler error to a warning.</p>
-<h2 id="Community_Responses">Community Responses</h2><ul>
-<li>“I actually encountered at least two bugs in my app introduced by this implicit “self” behavior. It can be dangerous and hard to track down.” – Rudolf Adamkovic, salutis@me.com</li>
-<li>“Given this, some teams use underscores for their iVars which is very unfortunate. Myself, I use self whenever possible to be explicit. I’d like the language to force us to be clear.” – Dan, robear18@gmail.com</li>
-<li>“I’m not sure how many Swift users this effects, but I’m colorblind and I really struggle with the local vs properties syntax coloring.” – Tyler Cloutier, cloutiertyler@aol.com</li>
-<li>“+1 I’ve had a lot of weird things happen that I’ve traced to mistakes in properties having the same name as function arguments. I’ve hardly ever had this issue in modern Obj-C.” – Coli Cornaby, colin.cornaby@mac.com</li>
-<li>“Teaching wise, its much less confusing for self to be required so students don’t mix up instance properties and local vars. Especially when self is required in closures, it confuses students. If self is mandatory for all instance properties, it would be so much clearer and much easier to read.” – Yichen Cao, ycao@me.com</li>
-<li>“this avoids confusion, maintains a consistent language approach, and thus helps reducing bugs. Sure, it might lead to less poetic haiku code, but that is not necessarily a bad thing in medium to large scale software products with more than one person working on it and possible/eventual change of people on the project over time.” – Panajev</li>
-<li>“I’m +1 on this, for the reasons already stated by others, but not as strongly as I was a year ago. I was very worried about this with Swift 1 was first released, but since then, I haven’t actually made this mistake, possibly because I’m so paranoid about it.” – Michael Buckley, michael@buckleyisms.com</li>
-</ul>
+<h2 id="Introduction">Introduction</h2><p>In order to allow <code>AnySequence</code> delegate calls to the underlying sequence,<br>its initializer should have extra constraints.</p>
+<h2 id="Motivation">Motivation</h2><p>At the moment <code>AnyCollection</code> does not delegate calls to <code>SequenceType</code> protocol<br>methods to the underlying base sequence, which results in dynamic downcasts in<br>places where this behavior is needed (see default implementations of<br><code>SequenceType.dropFirst</code> or <code>SequenceType.prefix</code>). Besides, and this is even<br>more important, customized implementations of <code>SequenceType</code> methods would be<br>ignored without delegation.</p>
+<h2 id="Proposed_solution">Proposed solution</h2><p>See the implementation in <a href="https://github.com/apple/swift/pull/220" target="_blank" rel="external">this PR</a>.</p>
+<p>In order for this kind of delegation to become possible, <code>_SequenceBox</code> needs to<br>be able to ‘wrap’ not only the base sequence but also it’s associated<br><code>SubSequence</code>. So instead of being declared like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">internal <span class="class"><span class="keyword">class</span> <span class="title">_SequenceBox</span>&lt;<span class="title">S</span> : <span class="title">SequenceType</span>&gt;</span><br><span class="line">    : <span class="title">_AnySequenceBox</span>&lt;<span class="title">S</span>.<span class="title">Generator</span>.<span class="title">Element</span>&gt; </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>it would become this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">internal <span class="class"><span class="keyword">class</span> <span class="title">_SequenceBox</span>&lt;</span><br><span class="line">  <span class="title">S</span> : <span class="title">SequenceType</span></span><br><span class="line">  <span class="title">where</span></span><br><span class="line">    <span class="title">S</span>.<span class="title">SubSequence</span> : <span class="title">SequenceType</span>,</span><br><span class="line">    <span class="title">S</span>.<span class="title">SubSequence</span>.<span class="title">Generator</span>.<span class="title">Element</span> == <span class="title">S</span>.<span class="title">Generator</span>.<span class="title">Element</span>,</span><br><span class="line">    <span class="title">S</span>.<span class="title">SubSequence</span>.<span class="title">SubSequence</span> == <span class="title">S</span>.<span class="title">SubSequence</span></span><br><span class="line">&gt; : <span class="title">_AnySequenceBox</span>&lt;<span class="title">S</span>.<span class="title">Generator</span>.<span class="title">Element</span>&gt; </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>Which, in it’s turn, will lead to <code>AnySequence.init</code> getting a new set of<br>constraints as follows.</p>
+<p>Before the change:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">AnySequence</span>&lt;<span class="title">Element</span>&gt; : <span class="title">SequenceType</span> </span>&#123;</span><br><span class="line">  public <span class="keyword">init</span>&lt;</span><br><span class="line">    <span class="type">S</span>: <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">where</span></span><br><span class="line">      <span class="type">S</span>.<span class="type">Generator</span>.<span class="type">Element</span> == <span class="type">Element</span></span><br><span class="line">  &gt;(<span class="number">_</span> base: <span class="type">S</span>) &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After the change:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">AnySequence</span>&lt;<span class="title">Element</span>&gt; : <span class="title">SequenceType</span> </span>&#123;</span><br><span class="line">  public <span class="keyword">init</span>&lt;</span><br><span class="line">    <span class="type">S</span>: <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">where</span></span><br><span class="line">      <span class="type">S</span>.<span class="type">Generator</span>.<span class="type">Element</span> == <span class="type">Element</span>,</span><br><span class="line">      <span class="type">S</span>.<span class="type">SubSequence</span> : <span class="type">SequenceType</span>,</span><br><span class="line">      <span class="type">S</span>.<span class="type">SubSequence</span>.<span class="type">Generator</span>.<span class="type">Element</span> == <span class="type">Element</span>,</span><br><span class="line">      <span class="type">S</span>.<span class="type">SubSequence</span>.<span class="type">SubSequence</span> == <span class="type">S</span>.<span class="type">SubSequence</span></span><br><span class="line">  &gt;(<span class="number">_</span> base: <span class="type">S</span>) &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>These constraints, in fact, should be applied to <code>SequenceType</code> protocol itself<br>(although, that is not currently possible), as we expect every <code>SequenceType</code><br>implementation to satisfy them already.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>New constraints do not affect any built-in types that conform to<br><code>SequenceType</code> protocol as they are essentially constructed like this<br>(<code>SubSequence.SubSequence == SubSequence</code>). 3rd party collections, if they use<br>the default <code>SubSequence</code> (i.e. <code>Slice</code>), should also be fine. Those having<br>custom <code>SubSequence</code>s may stop conforming to the protocol.</p>
 </span>
         
       
@@ -309,8 +273,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/" itemprop="url">
-                0008-lazy-flatmap-for-optionals
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/" itemprop="url">
+                0006-apply-api-guidelines-to-the-standard-library
               </a>
             
           
@@ -346,8 +310,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -362,31 +326,26 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Add_a_Lazy_flatMap_for_Sequences_of_Optionals">Add a Lazy flatMap for Sequences of Optionals</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0008-lazy-flatmap-for-optionals.md" target="_blank" rel="external">SE-0008</a></li>
-<li>Author(s): <a href="https://github.com/oisdk" target="_blank" rel="external">Oisin Kidney</a></li>
-<li>Status: <strong>Awaiting review</strong> (scheduled for December 15–17, 2015)</li>
-<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+          <span itemprop="articleBody"><h1 id="Apply_API_Guidelines_to_the_Standard_Library">Apply API Guidelines to the Standard Library</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0006-apply-api-guidelines-to-the-standard-library.md" target="_blank" rel="external">SE-0006</a></li>
+<li>Author(s): <a href="https://github.com/dabrahams" target="_blank" rel="external">Dave Abrahams</a>, <a href="https://github.com/gribozavr" target="_blank" rel="external">Dmitri Gribenko</a>, <a href="https://github.com/moiseev" target="_blank" rel="external">Maxim Moiseev</a></li>
+<li>Status: <strong>Awaiting Review</strong></li>
+<li>Review manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>Currently, the Swift standard library has two versions of <code>flatMap</code>. One which flattens a sequence of sequences after a transformation:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n..&lt;<span class="number">5</span> &#125; </span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 2, 3, 4, 3, 4]</span></span><br></pre></td></tr></table></figure>
-<p>And another which flattens a sequence of <code>Optional</code>s:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>...<span class="number">10</span>)</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n % <span class="number">2</span> == <span class="number">0</span> ? n/<span class="number">2</span> : <span class="literal">nil</span> &#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
-<p>However, there is only a lazy implementation for the first version:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">  .lazy</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n..&lt;<span class="number">5</span> &#125;</span><br><span class="line"><span class="comment">// LazyCollection&lt;FlattenBidirectionalCollection&lt;LazyMapCollection&lt;Array&lt;Int&gt;, Range&lt;Int&gt;&gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line">(<span class="number">1</span>...<span class="number">10</span>)</span><br><span class="line">  .lazy</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n % <span class="number">2</span> == <span class="number">0</span> ? n/<span class="number">2</span> : <span class="literal">nil</span> &#125;</span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
-<h2 id="Motivation">Motivation</h2><p>Seeing as the already-existing <code>flatMap</code> has a lazy version for nested sequences, a missing lazy version for sequences of <code>Optional</code>s seems like a gap. The usefulness of lazy sequences is well documented, especially when refactoring imperative nested for-loops into chains of methods, which can unnecessarily allocate intermediate arrays if done eagerly.</p>
-<h2 id="Proposed_Approach">Proposed Approach</h2><p>Making use of already-existing types in the standard library, <code>flatMap</code>‘s functionality can be achieved with a <code>map</code>-<code>filter</code>-<code>map</code> chain:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LazySequenceType</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  @warn_unused_result</span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">flatMap</span><span class="generics">&lt;T&gt;</span><span class="params">(transform: Elements.Generator.Element -&gt; T?)</span></span></span><br><span class="line">    -&gt; <span class="type">LazyMapSequence</span>&lt;<span class="type">LazyFilterSequence</span>&lt;<span class="type">LazyMapSequence</span>&lt;<span class="type">Elements</span>, <span class="type">T</span>?&gt;&gt;, <span class="type">T</span>&gt; &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">self</span></span><br><span class="line">        .<span class="built_in">map</span>(transform)</span><br><span class="line">        .<span class="built_in">filter</span> &#123; opt <span class="keyword">in</span> opt != <span class="literal">nil</span> &#125;</span><br><span class="line">        .<span class="built_in">map</span> &#123; notNil <span class="keyword">in</span> notNil! &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Detailed_Design">Detailed Design</h2><p>A version for <code>LazyCollectionType</code>s is almost identical:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LazyCollectionType</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  @warn_unused_result</span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">flatMap</span><span class="generics">&lt;T&gt;</span><span class="params">(transform: Elements.Generator.Element -&gt; T?)</span></span></span><br><span class="line">    -&gt; <span class="type">LazyMapCollection</span>&lt;<span class="type">LazyFilterCollection</span>&lt;<span class="type">LazyMapCollection</span>&lt;<span class="type">Elements</span>, <span class="type">T</span>?&gt;&gt;, <span class="type">T</span>&gt; &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">self</span></span><br><span class="line">        .<span class="built_in">map</span>(transform)</span><br><span class="line">        .<span class="built_in">filter</span> &#123; opt <span class="keyword">in</span> opt != <span class="literal">nil</span> &#125;</span><br><span class="line">        .<span class="built_in">map</span> &#123; notNil <span class="keyword">in</span> notNil! &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>However, a “bidirectional” version cannot be written in this way, since no <code>FilterBidirectionalCollection</code> exists.</p>
-<p>The other form of <code>flatMap</code> uses a <code>flatten</code> method on nested sequences, which has both a <code>CollectionType</code> form and a form for <code>CollectionType</code>s with <code>BidirectionalIndexType</code>s. </p>
-<p>However, Swift’s current type system doesn’t allow a similar method to be defined on sequences of <code>Optional</code>s. This means we have to rely on <code>filter</code>, which only has a <code>SequenceType</code> and <code>CollectionType</code> implementation.</p>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><h2 id="Alternatives_considered">Alternatives considered</h2><h3 id="Custom_struct">Custom struct</h3><p>It would also be possible to add a new struct, and a method on <code>LazySequenceType</code>:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">FlatMapOptionalGenerator</span>&lt;<span class="title">G</span>: <span class="title">GeneratorType</span>, <span class="title">Element</span>&gt;: <span class="title">GeneratorType</span> </span>&#123;</span><br><span class="line">  private <span class="keyword">let</span> transform: <span class="type">G</span>.<span class="type">Element</span> -&gt; <span class="type">Element</span>?</span><br><span class="line">  private <span class="keyword">var</span> generator: <span class="type">G</span></span><br><span class="line">  public <span class="keyword">mutating</span> <span class="func"><span class="keyword">func</span> <span class="title">next</span><span class="params">()</span></span> -&gt; <span class="type">Element</span>? &#123;</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">let</span> next = generator.next() &#123;</span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">let</span> transformed = transform(next) &#123;</span><br><span class="line">        <span class="keyword">return</span> transformed</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">FlatMapOptionalSequence</span>&lt;<span class="title">S</span>: <span class="title">LazySequenceType</span>, <span class="title">Element</span>&gt;: <span class="title">LazySequenceType</span> </span>&#123;</span><br><span class="line">  private <span class="keyword">let</span> transform: <span class="type">S</span>.<span class="type">Generator</span>.<span class="type">Element</span> -&gt; <span class="type">Element</span>?</span><br><span class="line">  private <span class="keyword">let</span> sequence: <span class="type">S</span></span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">generate</span><span class="params">()</span></span> -&gt; <span class="type">FlatMapOptionalGenerator</span>&lt;<span class="type">S</span>.<span class="type">Generator</span>, <span class="type">Element</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">FlatMapOptionalGenerator</span>(transform: transform, generator: sequence.generate())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LazySequenceType</span> </span>&#123;</span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">flatMap</span><span class="generics">&lt;T&gt;</span><span class="params">(transform: Generator.Element -&gt; T?)</span></span> -&gt; <span class="type">FlatMapOptionalSequence</span>&lt;<span class="type">Self</span>, <span class="type">T</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">FlatMapOptionalSequence</span>(transform: transform, sequence: <span class="keyword">self</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>However, this implementation does not have a <code>LazyCollectionType</code> version. To add one, and a bidirectional implementation, six new types (three <code>SequenceType</code>s, three <code>GeneratorType</code>s) would have to be added to the standard library. </p>
-<h3 id="New_Filter_struct">New Filter struct</h3><p>This would involve adding a <code>FilterBidirectionalCollection</code> to the standard library. Arguably, this is a gap currently. It would allow both <code>flatMap</code> versions to mirror each other, with minimal new types.</p>
-<h3 id="Make_Optional_Conform_to_SequenceType">Make Optional Conform to SequenceType</h3><p>This is a far-reaching, separate proposal, but it would solve the issue that this proposal seeks to solve. It’s worth bearing in mind, though, that <code>Optional</code> <em>probably</em> wouldn’t have a <code>BidirectionalIndexType</code>, so the bidirectional version of <code>flatMap</code> wouldn’t exist on <code>Optional</code>s, anyway.</p>
+<h2 id="Introduction">Introduction</h2><p><a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design Guidelines</a> being developed as<br>part of Swift 3.  It is important that the Standard Library is an exemplar of<br>Swift API Design Guidelines: the APIs from the Standard Library are, probably,<br>the most frequently used Swift APIs in any application domain; the Standard<br>Library also sets precedent for other libraries.</p>
+<p>In this project, we are reviewing the entire Standard Library and updating it<br>to follow the guidelines.</p>
+<h2 id="Proposed_solution">Proposed solution</h2><p>The actual work is being performed on the <a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines<br>branch</a> of the <a href="https://github.com/apple/swift" title="Swift repository" target="_blank" rel="external">Swift repository</a>.<br>On high level, the changes can be summarized as follows.</p>
+<ul>
+<li><p>Strip <code>Type</code> suffix from remaining protocol names.  In a few special cases<br>this means adding a <code>Protocol</code> suffix to get out of the way of type<br>names that are primary (though most of these we expect to be<br>obsoleted by Swift 3 language features).</p>
+</li>
+<li><p>The concept of <code>generator</code> is renamed to <code>iterator</code>.</p>
+</li>
+<li><p><code>IndexingGenerator</code> is renamed to <code>DefaultCollectionIterator</code>.</p>
+</li>
+</ul>
+<p><strong>More changes will be summarized here as they are implemented.</strong></p>
+<h2 id="API_diffs">API diffs</h2><p>Differences between Swift 2.2 Standard library API and the proposed API are<br>added to this section as they are being implemented on the<br><a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines branch</a>.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>The proposed changes are massively source-breaking for Swift code, and will<br>require a migrator to translate Swift 2 code into Swift 3 code.  The API diffs<br>from this proposal will be the primary source of the information about the<br>required transformations.  In addition, to the extent the language allows, the<br>library will keep old names as unavailable symbols with a <code>renamed</code> annotation,<br>that allows the compiler to produce good error messages and emit Fix-Its.</p>
 </span>
         
       
@@ -539,8 +498,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/" itemprop="url">
-                0006-apply-api-guidelines-to-the-standard-library
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/" itemprop="url">
+                0008-lazy-flatmap-for-optionals
               </a>
             
           
@@ -576,8 +535,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -592,26 +551,695 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Apply_API_Guidelines_to_the_Standard_Library">Apply API Guidelines to the Standard Library</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0006-apply-api-guidelines-to-the-standard-library.md" target="_blank" rel="external">SE-0006</a></li>
-<li>Author(s): <a href="https://github.com/dabrahams" target="_blank" rel="external">Dave Abrahams</a>, <a href="https://github.com/gribozavr" target="_blank" rel="external">Dmitri Gribenko</a>, <a href="https://github.com/moiseev" target="_blank" rel="external">Maxim Moiseev</a></li>
-<li>Status: <strong>Awaiting Review</strong></li>
-<li>Review manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+          <span itemprop="articleBody"><h1 id="Add_a_Lazy_flatMap_for_Sequences_of_Optionals">Add a Lazy flatMap for Sequences of Optionals</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0008-lazy-flatmap-for-optionals.md" target="_blank" rel="external">SE-0008</a></li>
+<li>Author(s): <a href="https://github.com/oisdk" target="_blank" rel="external">Oisin Kidney</a></li>
+<li>Status: <strong>Awaiting review</strong> (scheduled for December 15–17, 2015)</li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p><a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design Guidelines</a> being developed as<br>part of Swift 3.  It is important that the Standard Library is an exemplar of<br>Swift API Design Guidelines: the APIs from the Standard Library are, probably,<br>the most frequently used Swift APIs in any application domain; the Standard<br>Library also sets precedent for other libraries.</p>
-<p>In this project, we are reviewing the entire Standard Library and updating it<br>to follow the guidelines.</p>
-<h2 id="Proposed_solution">Proposed solution</h2><p>The actual work is being performed on the <a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines<br>branch</a> of the <a href="https://github.com/apple/swift" title="Swift repository" target="_blank" rel="external">Swift repository</a>.<br>On high level, the changes can be summarized as follows.</p>
+<h2 id="Introduction">Introduction</h2><p>Currently, the Swift standard library has two versions of <code>flatMap</code>. One which flattens a sequence of sequences after a transformation:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n..&lt;<span class="number">5</span> &#125; </span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 2, 3, 4, 3, 4]</span></span><br></pre></td></tr></table></figure>
+<p>And another which flattens a sequence of <code>Optional</code>s:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>...<span class="number">10</span>)</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n % <span class="number">2</span> == <span class="number">0</span> ? n/<span class="number">2</span> : <span class="literal">nil</span> &#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<p>However, there is only a lazy implementation for the first version:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">  .lazy</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n..&lt;<span class="number">5</span> &#125;</span><br><span class="line"><span class="comment">// LazyCollection&lt;FlattenBidirectionalCollection&lt;LazyMapCollection&lt;Array&lt;Int&gt;, Range&lt;Int&gt;&gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line">(<span class="number">1</span>...<span class="number">10</span>)</span><br><span class="line">  .lazy</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n % <span class="number">2</span> == <span class="number">0</span> ? n/<span class="number">2</span> : <span class="literal">nil</span> &#125;</span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
+<h2 id="Motivation">Motivation</h2><p>Seeing as the already-existing <code>flatMap</code> has a lazy version for nested sequences, a missing lazy version for sequences of <code>Optional</code>s seems like a gap. The usefulness of lazy sequences is well documented, especially when refactoring imperative nested for-loops into chains of methods, which can unnecessarily allocate intermediate arrays if done eagerly.</p>
+<h2 id="Proposed_Approach">Proposed Approach</h2><p>Making use of already-existing types in the standard library, <code>flatMap</code>‘s functionality can be achieved with a <code>map</code>-<code>filter</code>-<code>map</code> chain:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LazySequenceType</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  @warn_unused_result</span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">flatMap</span><span class="generics">&lt;T&gt;</span><span class="params">(transform: Elements.Generator.Element -&gt; T?)</span></span></span><br><span class="line">    -&gt; <span class="type">LazyMapSequence</span>&lt;<span class="type">LazyFilterSequence</span>&lt;<span class="type">LazyMapSequence</span>&lt;<span class="type">Elements</span>, <span class="type">T</span>?&gt;&gt;, <span class="type">T</span>&gt; &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">self</span></span><br><span class="line">        .<span class="built_in">map</span>(transform)</span><br><span class="line">        .<span class="built_in">filter</span> &#123; opt <span class="keyword">in</span> opt != <span class="literal">nil</span> &#125;</span><br><span class="line">        .<span class="built_in">map</span> &#123; notNil <span class="keyword">in</span> notNil! &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Detailed_Design">Detailed Design</h2><p>A version for <code>LazyCollectionType</code>s is almost identical:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LazyCollectionType</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  @warn_unused_result</span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">flatMap</span><span class="generics">&lt;T&gt;</span><span class="params">(transform: Elements.Generator.Element -&gt; T?)</span></span></span><br><span class="line">    -&gt; <span class="type">LazyMapCollection</span>&lt;<span class="type">LazyFilterCollection</span>&lt;<span class="type">LazyMapCollection</span>&lt;<span class="type">Elements</span>, <span class="type">T</span>?&gt;&gt;, <span class="type">T</span>&gt; &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">self</span></span><br><span class="line">        .<span class="built_in">map</span>(transform)</span><br><span class="line">        .<span class="built_in">filter</span> &#123; opt <span class="keyword">in</span> opt != <span class="literal">nil</span> &#125;</span><br><span class="line">        .<span class="built_in">map</span> &#123; notNil <span class="keyword">in</span> notNil! &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>However, a “bidirectional” version cannot be written in this way, since no <code>FilterBidirectionalCollection</code> exists.</p>
+<p>The other form of <code>flatMap</code> uses a <code>flatten</code> method on nested sequences, which has both a <code>CollectionType</code> form and a form for <code>CollectionType</code>s with <code>BidirectionalIndexType</code>s. </p>
+<p>However, Swift’s current type system doesn’t allow a similar method to be defined on sequences of <code>Optional</code>s. This means we have to rely on <code>filter</code>, which only has a <code>SequenceType</code> and <code>CollectionType</code> implementation.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><h2 id="Alternatives_considered">Alternatives considered</h2><h3 id="Custom_struct">Custom struct</h3><p>It would also be possible to add a new struct, and a method on <code>LazySequenceType</code>:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">FlatMapOptionalGenerator</span>&lt;<span class="title">G</span>: <span class="title">GeneratorType</span>, <span class="title">Element</span>&gt;: <span class="title">GeneratorType</span> </span>&#123;</span><br><span class="line">  private <span class="keyword">let</span> transform: <span class="type">G</span>.<span class="type">Element</span> -&gt; <span class="type">Element</span>?</span><br><span class="line">  private <span class="keyword">var</span> generator: <span class="type">G</span></span><br><span class="line">  public <span class="keyword">mutating</span> <span class="func"><span class="keyword">func</span> <span class="title">next</span><span class="params">()</span></span> -&gt; <span class="type">Element</span>? &#123;</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">let</span> next = generator.next() &#123;</span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">let</span> transformed = transform(next) &#123;</span><br><span class="line">        <span class="keyword">return</span> transformed</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">FlatMapOptionalSequence</span>&lt;<span class="title">S</span>: <span class="title">LazySequenceType</span>, <span class="title">Element</span>&gt;: <span class="title">LazySequenceType</span> </span>&#123;</span><br><span class="line">  private <span class="keyword">let</span> transform: <span class="type">S</span>.<span class="type">Generator</span>.<span class="type">Element</span> -&gt; <span class="type">Element</span>?</span><br><span class="line">  private <span class="keyword">let</span> sequence: <span class="type">S</span></span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">generate</span><span class="params">()</span></span> -&gt; <span class="type">FlatMapOptionalGenerator</span>&lt;<span class="type">S</span>.<span class="type">Generator</span>, <span class="type">Element</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">FlatMapOptionalGenerator</span>(transform: transform, generator: sequence.generate())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LazySequenceType</span> </span>&#123;</span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">flatMap</span><span class="generics">&lt;T&gt;</span><span class="params">(transform: Generator.Element -&gt; T?)</span></span> -&gt; <span class="type">FlatMapOptionalSequence</span>&lt;<span class="type">Self</span>, <span class="type">T</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">FlatMapOptionalSequence</span>(transform: transform, sequence: <span class="keyword">self</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>However, this implementation does not have a <code>LazyCollectionType</code> version. To add one, and a bidirectional implementation, six new types (three <code>SequenceType</code>s, three <code>GeneratorType</code>s) would have to be added to the standard library. </p>
+<h3 id="New_Filter_struct">New Filter struct</h3><p>This would involve adding a <code>FilterBidirectionalCollection</code> to the standard library. Arguably, this is a gap currently. It would allow both <code>flatMap</code> versions to mirror each other, with minimal new types.</p>
+<h3 id="Make_Optional_Conform_to_SequenceType">Make Optional Conform to SequenceType</h3><p>This is a far-reaching, separate proposal, but it would solve the issue that this proposal seeks to solve. It’s worth bearing in mind, though, that <code>Optional</code> <em>probably</em> wouldn’t have a <code>BidirectionalIndexType</code>, so the bidirectional version of <code>flatMap</code> wouldn’t exist on <code>Optional</code>s, anyway.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="url">
+                0009-require-self-for-accessing-instance-members
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Require_self_for_accessing_instance_members">Require self for accessing instance members</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0009-require-self-for-accessing-instance-members.md" target="_blank" rel="external">SE-0009</a></li>
+<li>Author(s): <a href="https://github.com/hartbit" target="_blank" rel="external">David Hart</a></li>
+<li>Status: <strong>Awaiting review</strong> (scheduled for December 16–20, 2015)</li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><p>The current version of Swift (2.1) requires using <code>self</code> when accessing instance members in closures. The proposal suggests extending this to all member accesses (as is intrinsically the case in Objective-C). It has the benefit of documenting instance properties vs local variables and instance functions vs local functions or closures.</p>
+<h2 id="Motivation">Motivation</h2><p>This proposal makes it obvious which are instance properties vs local variables, as well as which are instance functions vs local functions/closures. This has several advantages:</p>
 <ul>
-<li><p>Strip <code>Type</code> suffix from remaining protocol names.  In a few special cases<br>this means adding a <code>Protocol</code> suffix to get out of the way of type<br>names that are primary (though most of these we expect to be<br>obsoleted by Swift 3 language features).</p>
-</li>
-<li><p>The concept of <code>generator</code> is renamed to <code>iterator</code>.</p>
-</li>
-<li><p><code>IndexingGenerator</code> is renamed to <code>DefaultCollectionIterator</code>.</p>
-</li>
+<li>More readable at the point of use. </li>
+<li>More consistent than only requiring <code>self</code> in closure contexts.</li>
+<li>Less confusing from a learning point of view.</li>
+<li>Lets the compiler warn users (and avoids bugs) where the authors mean to use a local variable but instead are unknowingly using an instance property (and the other way round).</li>
 </ul>
-<p><strong>More changes will be summarized here as they are implemented.</strong></p>
-<h2 id="API_diffs">API diffs</h2><p>Differences between Swift 2.2 Standard library API and the proposed API are<br>added to this section as they are being implemented on the<br><a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines branch</a>.</p>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>The proposed changes are massively source-breaking for Swift code, and will<br>require a migrator to translate Swift 2 code into Swift 3 code.  The API diffs<br>from this proposal will be the primary source of the information about the<br>required transformations.  In addition, to the extent the language allows, the<br>library will keep old names as unavailable symbols with a <code>renamed</code> annotation,<br>that allows the compiler to produce good error messages and emit Fix-Its.</p>
+<p>One example of a bug avoidable by the proposal (<a href="https://lists.swift.org/pipermail/swift-evolution/2015-December/000243.html" target="_blank" rel="external">provided by Rudolf Adamkovic</a>):</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span> : <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">	<span class="preprocessor">@IBOutlet</span> <span class="keyword">var</span> button: <span class="type">UIButton</span>!</span><br><span class="line">        <span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line"></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">updateButton</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// var title = "Hello \(name)"</span></span><br><span class="line">		button.setTitle(title, forState: .<span class="type">Normal</span>) <span class="comment">// forgot to comment this line but the compiler does not complain and title is now referencing UIViewController’s title by mistake</span></span><br><span class="line">		button.setTitleColor(<span class="type">UIColor</span>.blackColor(), forState: .<span class="type">Normal</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The API Design Guidelines are meant for writing APIs but I still think they represent fundamentals of Swift. The two first points are:</p>
+<ul>
+<li>Clarity at the point of use is your most important goal. Code is read far more than it is written.</li>
+<li>Clarity is more important than brevity. Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.</li>
+</ul>
+<p>And I believe that the proposition is directly in line with those objectives.</p>
+<h2 id="Counter-argument">Counter-argument</h2><p>The counter-argument brought up by two members of the community is that the current behaviour “makes the capturing semantics of self stand out more in closures”. While this is true, the author finds its usefulness lacking.</p>
+<p>In the following lines of code, we know without a shadow of a doubt that <code>foobar</code> is a throwing function and that <code>barfoo</code> does not throw.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">try foobar()</span><br><span class="line">barfoo()</span><br></pre></td></tr></table></figure>
+<p>But with an example of <code>self</code> in a closure:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foobar(&#123;</span><br><span class="line">	<span class="built_in">print</span>(<span class="keyword">self</span>.description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>The <code>self</code> keyword in the previous lines of code gives a hint but does not bring any certitudes:</p>
+<ul>
+<li><code>self</code> might have been forced by the compiler to hint at possible memory issues,</li>
+<li><code>self</code> might have been a programmer choice if the closure is non-escaping.</li>
+</ul>
+<p>And in the reverse example:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">barfoo(&#123;</span><br><span class="line">	<span class="built_in">print</span>(description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>the closure might be non-escaping,</li>
+<li>the <code>description</code> might be referring to a local variable (which we missed the declaration of) shadowing the instance property in an escaping closure.</li>
+</ul>
+<p>In both of these examples, the <code>self</code> keyword does not tell us with any certainty that we should or not be careful about reference cycle issues without checking the signature of the called function, only that self is captured. With the proposition, <code>self</code> gets some meaning back: it indicates which are local and which are instance properties.</p>
+<h2 id="Proposed_Solution">Proposed Solution</h2><p>I suggest that not using <code>self</code> for accessing instance properties and functions is applied in two stages. In Swift 2.x, it could start as a warning and Xcode could provide a Fix-It. Then, it could become a compiler error in Swift 3 and the migrator would help transition code over.</p>
+<p>The following code which used to compile would generate an error at the documented lines:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(name)</span>"</span>) <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		foo() <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code would have to be modified as so to compile correctly:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(<span class="keyword">self</span>.name)</span>"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">self</span>.foo()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A lot of code written since the original change would be impacted by this proposal, but it seems like it can be easily fixed by both the migrator tool and an Xcode Fix-It.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The alternative is to keep the current behaviour, but it has the aforementioned disadvantages.</p>
+<p>An alternative would be to demote from a compiler error to a warning.</p>
+<h2 id="Community_Responses">Community Responses</h2><ul>
+<li>“I actually encountered at least two bugs in my app introduced by this implicit “self” behavior. It can be dangerous and hard to track down.” – Rudolf Adamkovic, salutis@me.com</li>
+<li>“Given this, some teams use underscores for their iVars which is very unfortunate. Myself, I use self whenever possible to be explicit. I’d like the language to force us to be clear.” – Dan, robear18@gmail.com</li>
+<li>“I’m not sure how many Swift users this effects, but I’m colorblind and I really struggle with the local vs properties syntax coloring.” – Tyler Cloutier, cloutiertyler@aol.com</li>
+<li>“+1 I’ve had a lot of weird things happen that I’ve traced to mistakes in properties having the same name as function arguments. I’ve hardly ever had this issue in modern Obj-C.” – Coli Cornaby, colin.cornaby@mac.com</li>
+<li>“Teaching wise, its much less confusing for self to be required so students don’t mix up instance properties and local vars. Especially when self is required in closures, it confuses students. If self is mandatory for all instance properties, it would be so much clearer and much easier to read.” – Yichen Cao, ycao@me.com</li>
+<li>“this avoids confusion, maintains a consistent language approach, and thus helps reducing bugs. Sure, it might lead to less poetic haiku code, but that is not necessarily a bad thing in medium to large scale software products with more than one person working on it and possible/eventual change of people on the project over time.” – Panajev</li>
+<li>“I’m +1 on this, for the reasons already stated by others, but not as strongly as I was a year ago. I was very worried about this with Swift 1 was first released, but since then, I haven’t actually made this mistake, possibly because I’m so paranoid about it.” – Michael Buckley, michael@buckleyisms.com</li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/" itemprop="url">
+                0010-add-staticstring-unicodescalarview
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Add_StaticString-UnicodeScalarView">Add StaticString.UnicodeScalarView</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0010-add-staticstring-unicodescalarview.md" target="_blank" rel="external">SE-0010</a></li>
+<li>Author: <a href="https://github.com/kballard" target="_blank" rel="external">Kevin Ballard</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><p>There is no way to create a substring of a <code>StaticString</code> that is still typed<br>as <code>StaticString</code>. There should be.</p>
+<h2 id="Motivation">Motivation</h2><p>It is occasionally useful to be able to produce a substring of a <code>StaticString</code><br>that can be passed to APIs expecting a <code>StaticString</code>. For example, extracting<br>the filename from <code>__FILE__</code>. But there is no way to do this today, as<br><code>StaticString</code> does not provide any means by which to create a new instance<br>beyond the trivial nullary <code>init()</code> initializer (which creates an empty<br>string).</p>
+<h2 id="Proposed_solution">Proposed solution</h2><p>We add a new type <code>StaticString.UnicodeScalarView</code> that conforms to<br><code>CollectionType</code> and a new property <code>unicodeScalars</code> on <code>StaticString</code>. We also<br>add 2 initializers to <code>StaticString</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">init</span>(<span class="number">_</span> unicodeScalars: <span class="type">UnicodeScalarView</span>)</span><br><span class="line"><span class="keyword">init</span>(<span class="number">_</span> unicodeScalars: <span class="type">Slice</span>&lt;<span class="type">UnicodeScalarView</span>&gt;)</span><br></pre></td></tr></table></figure>
+<p>Together, this allows the user to manipulate the unicode scalar view to produce<br>the desired slice, and then to create a <code>StaticString</code> from the results. This<br>has the added benefit of providing a convenient way to work with<br><code>StaticString</code>s as a sequence of <code>UnicodeScalar</code>s instead of as a UTF8 buffer.</p>
+<h2 id="Detailed_design">Detailed design</h2><p>The API looks like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">StaticString</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// The value of `self` as a collection of [Unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value).</span></span><br><span class="line">  public <span class="keyword">var</span> unicodeScalars: <span class="type">UnicodeScalarView</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/// Construct the `StaticString` corresponding to the given</span></span><br><span class="line">  <span class="comment">/// `UnicodeScalarView`.</span></span><br><span class="line">  public <span class="keyword">init</span>(<span class="number">_</span>: <span class="type">UnicodeScalarView</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// Construct the `StaticString` corresponding to the given</span></span><br><span class="line">  <span class="comment">/// `UnicodeScalarView` slice.</span></span><br><span class="line">  public <span class="keyword">init</span>(<span class="number">_</span>: <span class="type">Slice</span>&lt;<span class="type">UnicodeScalarView</span>&gt;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// A collection of [Unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value) that</span></span><br><span class="line">  <span class="comment">/// encode a `StaticString`.</span></span><br><span class="line">  public <span class="class"><span class="keyword">struct</span> <span class="title">UnicodeScalarView</span> : <span class="title">CollectionType</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(<span class="number">_</span>: <span class="type">StaticString</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// A position in a `StaticString.UnicodeScalarView`.</span></span><br><span class="line">    public <span class="class"><span class="keyword">struct</span> <span class="title">Index</span> : <span class="title">BidirectionalIndexType</span>, <span class="title">Comparable</span> </span>&#123;</span><br><span class="line">      <span class="comment">/// Returns the next consecutive value after `self`.</span></span><br><span class="line">      <span class="comment">///</span></span><br><span class="line">      <span class="comment">/// - Requires: The next value is representable.</span></span><br><span class="line">      @warn_unused_result</span><br><span class="line">      public <span class="func"><span class="keyword">func</span> <span class="title">successor</span><span class="params">()</span></span> -&gt; <span class="type">Index</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">/// Returns the previous consecutive value before `self`.</span></span><br><span class="line">      <span class="comment">///</span></span><br><span class="line">      <span class="comment">/// - Requires: The previous value is representable.</span></span><br><span class="line">      @warn_unused_result</span><br><span class="line">      public <span class="func"><span class="keyword">func</span> <span class="title">predecessor</span><span class="params">()</span></span> -&gt; <span class="type">Index</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// The position of the first `UnicodeScalar` if the `StaticString` is</span></span><br><span class="line">    <span class="comment">/// non-empty; identical to `endIndex` otherwise.</span></span><br><span class="line">    public <span class="keyword">var</span> startIndex: <span class="type">Index</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/// The "past the end" position.</span></span><br><span class="line">    <span class="comment">///</span></span><br><span class="line">    <span class="comment">/// `endIndex` is not a valid argument to `subscript`, and is always</span></span><br><span class="line">    <span class="comment">/// reachable from `startIndex` by zero or more applications of</span></span><br><span class="line">    <span class="comment">/// `successor()`.</span></span><br><span class="line">    public <span class="keyword">var</span> endIndex: <span class="type">Index</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/// Returns `true` iff `self` is empty.</span></span><br><span class="line">    public <span class="keyword">var</span> isEmpty: <span class="type">Bool</span></span><br><span class="line"></span><br><span class="line">    public <span class="keyword">subscript</span>(position: <span class="type">Index</span>) -&gt; <span class="type">UnicodeScalar</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>None.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>We could add a <code>subscript(bounds: Range&lt;Index&gt;)</code> to <code>StaticString</code> directly,<br>but there’s no good way to define <code>Index</code> (for the same reasons <code>String</code><br>doesn’t conform to <code>CollectionType</code>).</p>
+<p>We could expose an unsafe initializer from a pointer, so the user can<br>manipulate <code>utf8Start</code> to produce the desired pointer, but this would be very<br>unsafe and allow users to try and trick code taking <code>StaticString</code> into<br>accepting a dynamic string instead.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0011-replace-typealias-associated/" itemprop="url">
+                0011-replace-typealias-associated
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0011-replace-typealias-associated/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0011-replace-typealias-associated/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Replace_typealias_keyword_with_associated_for_associated_type_declarations">Replace <code>typealias</code> keyword with <code>associated</code> for associated type declarations</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0011-replace-typealias-associated.md" target="_blank" rel="external">SE-0011</a></li>
+<li>Author(s): <a href="https://github.com/loiclec" target="_blank" rel="external">Loïc Lecrenier</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><p>The <code>typealias</code> keyword is currently used to declare two kinds of types:</p>
+<ol>
+<li>Type Aliases (alternative name for an existing type)</li>
+<li>Associated Types (placeholder name to type used as part of a protocol)</li>
+</ol>
+<p>These two kinds of declarations are different and should use distinct keywords.<br>This would emphasize the difference between them and reduce some of the<br>confusion surrounding the use of associated types.</p>
+<p>The proposed new keyword is <code>associated</code>.</p>
+<h2 id="Motivation">Motivation</h2><p>Re-using <code>typealias</code> for associated type declarations is confusing in many ways.</p>
+<ol>
+<li>It is not obvious that <code>typealias</code> in protocols means something else than in<br>other places.</li>
+<li>It hides the existence of associated types to beginners, which allows them<br>to write code they misunderstand.</li>
+<li>It hides the absence of concrete type aliases inside protocols.</li>
+</ol>
+<p>In particular, <strong>2 + 3</strong> leads to programmers writing</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>without realizing that <code>Element</code> is a new associated type with a default value<br>of <code>Container.Generator.Element</code> instead of a type alias to<br><code>Container.Generator.Element</code>.</p>
+<p>However, this code</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>declares <code>Element</code> as a type alias to <code>Container.Generator.Element</code>.</p>
+<p>These subtleties of the language currently require careful consideration to<br>understand.</p>
+<h2 id="Proposed_solution">Proposed solution</h2><p>For declaring associated types, replace the <code>typealias</code> keyword with <code>associated</code>.</p>
+<p>This solves the issues mentioned above:</p>
+<ol>
+<li><code>typealias</code> can now only be used for type aliases declaration.</li>
+<li>Beginners are now forced to learn about associated types when creating protocols.</li>
+<li>An error message can now be displayed when someone tries to create a type alias<br>inside a protocol.</li>
+</ol>
+<p>This eliminates the confusion showed in the previous code snippets.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    associated <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span> <span class="comment">// error: cannot declare type alias inside protocol, use protocol extension instead</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    associated <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Alternative keywords considered: <code>withtype</code>, <code>associatedtype</code>, <code>typeassociation</code>, <code>type</code></p>
+<h2 id="Proposed_Approach">Proposed Approach</h2><p>For declaring associated types, I suggest adding <code>associated</code> and deprecating<br><code>typealias</code> in Swift 2.2, and removing <code>typealias</code> entirely in Swift 3.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>As it simply replaces one keyword for another, the transition to <code>associated</code><br>could be easily automated without any risk of breaking existing code.</p>
+<h2 id="Community_Responses">Community Responses</h2><ul>
+<li>“I think this is a great idea; re-using typealias for associated types was a mistake.” -John McCall</li>
+<li>“Agreed.” -Chris Lattner</li>
+<li>“+1 to the proposal, emphasizing the distinction is important; and I<br>like “associated” as the keyword for this purpose, too.” -Dmitri Gribenko</li>
+<li>“+1 for using a distinct keyword for associated types” -Ilya Belenkiy</li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/" itemprop="url">
+                0012-add-noescape-to-public-library-api
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Add_@noescape_to_public_library_API">Add <code>@noescape</code> to public library API</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0012-add-noescape-to-public-library-api.md" target="_blank" rel="external">SE-0012</a></li>
+<li>Author(s): <a href="https://github.com/jtbandes" target="_blank" rel="external">Jacob Bandes-Storch</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><h3 id="@noescape"><code>@noescape</code></h3><p>Swift provides <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID546" target="_blank" rel="external">a <code>@noescape</code> declaration attribute</a> which can be applied to closure parameters, indicating that the closure’s execution is guaranteed not to escape the function call.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">withLock</span><span class="params">(@noescape perform closure: <span class="params">()</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">    myLock.lock()</span><br><span class="line">    closure()</span><br><span class="line">    myLock.unlock()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Thus, a closure argument is guaranteed to be executed (if executed at all) <em>before</em> the function returns. This enables the compiler to perform various optimizations, such as omitting unnecessary capturing/retaining/releasing of <code>self</code>.</p>
+<p>For example, just as “<code>self.</code>“ may be omitted in the context of a method, since a <code>@noescape</code> closure is known not to capture <code>self</code>, properties and methods can be accessed without the <code>self.</code> prefix:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> counter = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">incrementCounter</span><span class="params">()</span></span> &#123;</span><br><span class="line">        counter += <span class="number">1</span>  <span class="comment">// "self." elided in an instance method</span></span><br><span class="line">        </span><br><span class="line">        withLock &#123;</span><br><span class="line">            <span class="comment">// Without @noescape, the following line would produce the error</span></span><br><span class="line">            <span class="comment">//   "reference to property 'counter' in closure requires</span></span><br><span class="line">            <span class="comment">//    explicit 'self.' to make capture semantics explicit".</span></span><br><span class="line">            counter += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="In_C_and_Objective-C">In C and Objective-C</h3><p>Clang understands the <code>noescape</code> attribute, spelled <code>__attribute__((noescape))</code> or <code>__attribute__((__noescape__))</code>. When function definitions whose block or function-pointer parameters have this attribute are imported to Swift, they are visible with a Swift <code>@noescape</code> attribute.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void performWithLock(__attribute__((noescape)) void (^block)()) &#123;  // exposed as @noescape to Swift</span><br><span class="line">    lock(myLock);</span><br><span class="line">    block();</span><br><span class="line">    unlock(myLock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)performWithLock:(__attribute__((noescape)) void (^)())block &#123;  // exposed as @noescape to Swift&#10;    [myLock lock];&#10;    block();&#10;    [myLock unlock];&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Motivation">Motivation</h2><p>Many standard methods and functions — particularly in Foundation and libdispatch — have non-escaping closure semantics, but <strong>do not have <code>__attribute__((noescape))</code></strong>. This thwarts the compiler optimizations and syntax shortcuts granted by <code>@noescape</code>, when they should otherwise be applied.</p>
+<p>In pure Swift, there is no workaround, but by writing some custom C/Objective-C wrapper functions, users can work around these limitations:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// MyProject-Bridging-Header.h&#10;&#10;NS_INLINE void MyDispatchSyncWrapper(dispatch_queue_t queue, __attribute__((noescape)) dispatch_block_t block)&#10;&#123;&#10;    dispatch_sync(queue, block);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>However, it’s clear that library functions with non-escaping semantics should be marked with the <code>noescape</code> attribute at the source, so that users don’t have to wrap every function they’d like to use.</p>
+<h2 id="Proposed_solution">Proposed solution</h2><ol>
+<li>Audit system C/Objective-C libraries (stdlib, libdispatch, Foundation, …) for functions and methods with closure parameters that are guaranteed not to escape the lifetime of the call.<ul>
+<li><em>See the end of this document for a comprehensive list of candidate functions/methods.</em></li>
+</ul>
+</li>
+<li>Annotate such functions and methods’ block/function-pointer parameters with <code>__attribute__((noescape))</code>.</li>
+<li>For libraries with Swift-specific forks (like <a href="https://github.com/apple/swift-corelibs-libdispatch" target="_blank" rel="external">swift-corelibs-libdispatch</a>), the change should be made in the Apple-internal upstream version as well.</li>
+</ol>
+<h6 id="Example_patch">Example patch</h6><p>An example patch to libdispatch can be seen at <a href="https://github.com/apple/swift-corelibs-libdispatch/pull/6/files" target="_blank" rel="external">https://github.com/apple/swift-corelibs-libdispatch/pull/6/files</a>.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>Users who previously used functions which are newly <code>@noescape</code> may have unnecessary instances of <code>self.</code> in their code. However, there should be no breaking syntax changes and no functional difference.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The Swift compiler’s support for supplementary “API notes” (<code>.apinotes</code> files) could be extended and used to annotate closure parameters as non-escaping.</p>
+<p>However, I believe it’s better to put annotations in headers for the following reasons:</p>
+<ul>
+<li>The presence of <code>__attribute__((noescape))</code> in library headers clarifies API contracts, and encourages users to use this attribute in their own code where applicable.</li>
+<li>With apinotes, the benefits to Swift would be limited to specific libraries and functions, leaving annotation in the hands of the Swift compiler project. Given a version of a library with annotated headeres, however, no extra compiler configuration is required to take advantage of the annotation.</li>
+<li>As Clang itself improves, the benefits of <code>__attribute__((noescape))</code> can be granted to Objective-C callers as well as Swift (for example, by suppressing <code>-Wimplicit-retain-self</code> &lt;rdar://19914650&gt;).</li>
+</ul>
+<h2 id="Comprehensive_list_of_methods/functions_with_non-escaping_block_parameters">Comprehensive list of methods/functions with non-escaping block parameters</h2><p>Note that Objective-C library methods tend to come in three variants:</p>
+<ul>
+<li>“[elements] passing test”</li>
+<li>“[sorted] using comparator”</li>
+<li>“enumerate using block/function”</li>
+</ul>
+<h3 id="stdlib">stdlib</h3><ul>
+<li><code>bsearch()</code>, <code>bsearch_b()</code></li>
+<li><code>heapsort()</code>, <code>heapsort_b()</code></li>
+<li><code>mergesort()</code>, <code>mergesort_b()</code></li>
+<li><code>psort()</code>, <code>psort_b()</code></li>
+<li><code>qsort()</code>, <code>qsort_b()</code></li>
+</ul>
+<h3 id="libdispatch">libdispatch</h3><ul>
+<li><code>dispatch_apply()</code>, <code>dispatch_apply_f()</code></li>
+<li><code>dispatch_barrier_sync()</code>, <code>dispatch_barrier_sync_f()</code></li>
+<li><code>dispatch_block_perform()</code></li>
+<li><code>dispatch_data_apply()</code></li>
+<li><code>dispatch_once()</code>, <code>dispatch_once_f()</code></li>
+<li><code>dispatch_sync()</code>, <code>dispatch_sync_f()</code></li>
+</ul>
+<h3 id="CoreFoundation">CoreFoundation</h3><ul>
+<li><code>CFArrayBSearchValues()</code></li>
+<li><code>CFArraySortValues()</code></li>
+<li><code>CFTreeSortChildren()</code></li>
+</ul>
+<h3 id="Foundation">Foundation</h3><h6 id="“Passing_test”_methods">“Passing test” methods</h6><ul>
+<li><code>-[NSArray indexOfObjectPassingTest:]</code></li>
+<li><code>-[NSArray indexOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSArray indexesOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSArray indexesOfObjectsPassingTest:]</code></li>
+<li><code>-[NSDictionary keysOfEntriesPassingTest:]</code></li>
+<li><code>-[NSDictionary keysOfEntriesWithOptions:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexInRange:options:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexPassingTest:]</code></li>
+<li><code>-[NSIndexSet indexWithOptions:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexesInRange:options:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexesPassingTest:]</code></li>
+<li><code>-[NSIndexSet indexesWithOptions:passingTest:]</code></li>
+<li><code>-[NSOrderedSet indexOfObjectPassingTest:]</code></li>
+<li><code>-[NSOrderedSet indexOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSOrderedSet indexesOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSOrderedSet indexesOfObjectsPassingTest:]</code></li>
+<li><code>-[NSSet objectsPassingTest:]</code></li>
+<li><code>-[NSSet objectsWithOptions:passingTest:]</code></li>
+</ul>
+<h6 id="“Using_comparator/function”_methods">“Using comparator/function” methods</h6><ul>
+<li><code>-[NSArray indexOfObject:inSortedRange:options:usingComparator:]</code></li>
+<li><code>-[NSArray sortedArrayUsingComparator:]</code></li>
+<li><code>-[NSArray sortedArrayUsingFunction:context:]</code></li>
+<li><code>-[NSArray sortedArrayUsingFunction:context:hint:]</code></li>
+<li><code>-[NSArray sortedArrayWithOptions:usingComparator:]</code></li>
+<li><code>-[NSDictionary keysSortedByValueUsingComparator:]</code></li>
+<li><code>-[NSDictionary keysSortedByValueWithOptions:usingComparator:]</code></li>
+<li><code>-[NSMutableArray sortUsingComparator:]</code></li>
+<li><code>-[NSMutableArray sortUsingFunction:context:]</code></li>
+<li><code>-[NSMutableArray sortWithOptions:usingComparator:]</code></li>
+<li><code>-[NSMutableOrderedSet sortRange:options:usingComparator:]</code></li>
+<li><code>-[NSMutableOrderedSet sortWithOptions:usingComparator:]</code></li>
+</ul>
+<h6 id="“Enumerate_using_block”_methods">“Enumerate using block” methods</h6><ul>
+<li><code>-[NSArray enumerateObjectsUsingBlock:]</code></li>
+<li><code>-[NSArray enumerateObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSData enumerateByteRangesUsingBlock:]</code></li>
+<li><code>-[NSDictionary enumerateKeysAndObjectsUsingBlock:]</code></li>
+<li><code>-[NSDictionary enumerateKeysAndObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateIndexesUsingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateIndexesWithOptions:usingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateRangesInRange:options:usingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateRangesUsingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateRangesWithOptions:usingBlock:]</code></li>
+<li><code>-[NSOrderedSet enumerateObjectsUsingBlock:]</code></li>
+<li><code>-[NSOrderedSet enumerateObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSSet enumerateObjectsUsingBlock:]</code></li>
+<li><code>-[NSSet enumerateObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSString enumerateLinesUsingBlock:]</code></li>
+<li><code>-[NSString enumerateSubstringsInRange:options:usingBlock:]</code></li>
+</ul>
+<h3 id="Other">Other</h3><p>The AVFoundation, SceneKit, SpriteKit, AppKit, and MediaPlayer frameworks have methods that could also use <code>__attribute__((noescape))</code>, but those are considered outside the scope of this proposal.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0013-remove-partial-application-super/" itemprop="url">
+                0013-remove-partial-application-super
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0013-remove-partial-application-super/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0013-remove-partial-application-super/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Remove_Partial_Application_of_Non-Final_Super_Methods_(Swift_2-2)">Remove Partial Application of Non-Final Super Methods (Swift 2.2)</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0013-remove-partial-application-super.md" target="_blank" rel="external">SE-0013</a></li>
+<li>Author(s): <a href="https://github.com/bitjammer" target="_blank" rel="external">David Farler</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><p>Prior to Swift 2.2, calls to superclass methods like <code>super.foo()</code> in<br>Native Swift classes were dispatched statically by recording a reference<br>to the function and calling it directly by its mangled name. In Swift<br>2.2, class methods invoked via <code>super</code> will use dynamic dispatch. That<br>is, the method will be looked up in the superclass’s vtable at runtime.<br>However, if the method is marked with <code>final</code>, it will use the old<br>static dispatch, since no class will be able to override it.</p>
+<p>The mechanisms that support currying require thunks to be emitted so<br>that the function can be called at various uncurrying levels. Currying<br>will be removed in Swift 3.0 so, rather than invest more engineering in<br>those mechanisms, I propose that we disallow partial application of<br>non-final methods through <code>super</code>, except where the <code>self</code> parameter is<br>implicitly captured.</p>
+<h2 id="Motivation">Motivation</h2><p>The motivation of this change is partially motivated by implementation<br>concerns. The machinery for curry thunk mechanism has a lot of<br>assumptions about what the ultimate function call will be: an apply of a<br>static <code>function_ref</code> or a dynamic dispatch through a <code>class_method</code>,<br>which originate in something like <code>doFoo(self.foo)</code> (note <code>self</code> instead<br>of <code>super</code>). Rather than risk regressions stemming from significant<br>replumbing, it would a good tradeoff to pull in this limited portion of<br>the currying removals in Swift 3.0.</p>
+<h2 id="Detailed_design">Detailed design</h2><p>In terms of design and implementation, this is a trivial change. In<br>semantic analysis, perform the following check on call expressions: if<br>the call expression is based in super, the referenced function isn’t<br>final, and the application does not fulfill all of the parameters, emit<br>an error diagnostic.</p>
+<h3 id="Example_Code">Example Code</h3><h4 id="Illegal:_Partial_application_of_non-final_method">Illegal: Partial application of non-final method</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">(f: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">  f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span>() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> : <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span>() &#123;</span><br><span class="line">    doFoo(<span class="keyword">super</span>.foo()) <span class="comment">// Illegal - doesn't apply the second time.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="OK:_Partial_application_of_final_method">OK: Partial application of final method</h4><p>This is safe because the new dynamic super dispatch mechanisms don’t<br>kick in for final methods - these fall back to the original static<br>function reference because no class can ever override the original<br>implementation.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">(f: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">  f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">  final <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span>() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> : <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    doFoo(<span class="keyword">super</span>.foo()) <span class="comment">// OK - method is final.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The implementation for this change is available on <a href="https://github.com/apple/swift/tree/remove-partial-super" target="_blank" rel="external">apple/swift/remove-partial-super</a>.</p>
+<h4 id="OK:_Partial_application_with_implicit_self">OK: Partial application with implicit self</h4><p>Partial application of the implicit self parameter is still allowed with<br>this change. When you pass <code>super.foo</code> around, you have in fact<br>partially applied the method - you’ve captured the <code>self</code> argument<br>present in all Swift method calls. This is safe because no explicit<br>thunks need to be generated at SILGen - the <code>partial_apply</code> instruction<br>will create a closure without additional SIL code.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">(f: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">  f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> : <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    doFoo(<span class="keyword">super</span>.foo) <span class="comment">// OK - only partially applies self</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>Given that we’ve decided to remove currying outright, this would be a<br>small percentage of that usage. Generally, calls on <code>super</code> are for<br>delegation, where all arguments are often present.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The only alternative is to make super method dispatch a citizen in the<br>thunk emission process, which requires deep changes to SILGen, symbol<br>mangling, and IRGen. Although this more comprehensive change would allow<br>us to adopt dynamic super dispatch with no source changes for those<br>writing in Swift, I believe the proposal is a reasonable tradeoff.</p>
 </span>
         
       
@@ -1140,529 +1768,11 @@ if path.<b>isEmpty</b> { ... }
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/09/docker/kitematic/README/" itemprop="url">
-                Kitematic
-安装
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-09T10:34:35+08:00" content="2015-12-09">
-            2015-12-09
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/09/docker/kitematic/README/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/09/docker/kitematic/README/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Kitematic:_安装_Kitematic">Kitematic: 安装 Kitematic</h1><p>你可以在 Mac 或者 Windows PC 上像安装其它应用一样来安装 Kitematic：下载安装包，运行安装程序。</p>
-<p>##下载 Kitematic</p>
-<p><a href="https://kitematic.com/download/" target="_blank" rel="external">下载 Kitematic的 zip 文件</a>,双击解压文件，然后双击运行安装程序。您可能还需要将你的应用程序放到您的应用程序文件夹。</p>
-<p>##初始化设置</p>
-<p>第一次打开 Kitematic 会为你能够运行 Docker 容器而进行一些必要的设置。如果你没有安装 Virtualbox， Kitematic 会下载和安装最新版本。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/installing.png" alt="安装图片"></p>
-<p>做完这些之后！在一分钟之内，你就可以准备开始运行你的第一个容器。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/containers.png" alt="容器"></p>
-<p>##技术详细信息</p>
-<p>Kitematic 是一个建立在其它应用上的 app，能够处理异常：</p>
-<ul>
-<li>如果 Virtualbox 没有安装，它将会安装它。</li>
-</ul>
-<h2 id="为什么_Kitematic_需要_root_密码">为什么 Kitematic 需要 root 密码</h2><p>为什么 Kitematic 需要你的 root 密码，这里有两个原因：</p>
-<ul>
-<li>安装 Virtualbox 需要 root 权限，因为安装的时候需要对 Mac OS X 内核进行扩展。</li>
-<li>如果你在安装 Kitematic 之前更改了默认的目录权限，当你复制 <code>docker</code> 和 <code>docker-machine</code> 到 <code>/usr/local/bin</code> 是需要 root 权限的。</li>
-</ul>
-<p>##下一步</p>
-<p>有关使用 Kitematic 的信息，请查看<a href="userguide.md">用户指南</a>。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/machine/install-machine/" itemprop="url">
-                安装 Docker Machine
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T15:16:23+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/machine/install-machine/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/machine/install-machine/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="安装_Docker_Machine">安装 Docker Machine</h1><p>Docker Machine 支持 Windows ,OS X ,和 Linux，并且被安装为一个独立的二进制文件。用于各平台架构的二进制文件链接如下：</p>
-<ul>
-<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-386.exe" target="_blank" rel="external">Windows - 32bit</a></li>
-<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe" target="_blank" rel="external">Windows - 64bit</a></li>
-<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64" target="_blank" rel="external">OSX - x86_64</a></li>
-<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-386" target="_blank" rel="external">OSX - (老款 macs)</a></li>
-<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64" target="_blank" rel="external">Linux - x86_64</a></li>
-<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-386" target="_blank" rel="external">Linux - i386</a></li>
-</ul>
-<h2 id="OS_X_和_Linux">OS X 和 Linux</h2><p>在 Linux 或者 OSX 上安装，你需要下载二进制文件到你的 <code>PATH</code> 路径中( 例如: <code>/usr/local/bin</code>)，并且给与可执行权限。例如，在大多数的 OSX 系统上使用如下命令就可以完成安装了：</p>
-<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/machine/releases</span><span class="regexp">/download/v</span>0.<span class="number">3.0</span>/docker-machine_darwin-amd64 &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>-machine
-<span class="variable">$ </span>chmod +x /usr/local/bin/docker-machine
-</code></pre><p>对于Linux，只是将上边的二进制名称中的 “darwin” 替换成 “linux”。</p>
-<p>现在你可以使用 <code>docker-machine -v</code> 命令来查看版本信息。</p>
-<pre><code>$ docker-machine -v
-machine version <span class="number">0.3</span><span class="number">.0</span>
-</code></pre><p>为了在您的机器上避免使用 ssh 来运行 Docker 命令，请确保您已经安装好了 Docker 客户端。</p>
-<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/get.docker.com/builds</span><span class="regexp">/Darwin/x</span>86_64/docker-latest &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>
-</code></pre><p>##Windows</p>
-<p>目前，Docker 建议你在 Windows 上通过 <a href="https://msysgit.github.io/" target="_blank" rel="external">msysgit</a> 安装使用 Docker Machine,这将为 Docker Machine 提供一些依赖的程序，如 ssh ，还有 shell 功能。</p>
-<p>当你安装好 msysgit ，启动终端命令提示行，并运行如下命令。这里假设你是在 64 位的 Windows 下安装，如果你使用 32 位系统安装，请将 URL 中的 “x86_64” 替换成 “i386”。</p>
-<p>首先，安装 Docker clent 二进制文件 :</p>
-<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/get.docker.com/builds</span><span class="regexp">/Windows/x</span>86_64/docker-latest.exe &gt; <span class="regexp">/bin/docker</span>
-</code></pre><p>下一步，安装 Docker Machine 二进制文件:</p>
-<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/machine/releases</span><span class="regexp">/download/v</span>0.<span class="number">3.0</span>/docker-machine_windows-amd64.exe &gt; <span class="regexp">/bin/docker</span>-machine
-</code></pre><p>现在，检查 <code>docker-machine</code> 是否工作 :</p>
-<pre><code>$ docker-machine -v
-machine version <span class="number">0.3</span><span class="number">.0</span>
-</code></pre></span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/https/" itemprop="url">
-                使用 HTTPS 保护 Docker Socket 进程
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/https/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/https/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="使用_HTTPS_保护_Docker_Socket_进程">使用 HTTPS 保护 Docker Socket 进程</h1><p>默认情况下，Docker 使用的是无网络环境的 Unix Socket。它可以使用 HTTP Socket 进行通信。</p>
-<p>如果你需要 Docker 使用安全的方式来进行网络通信，你可以使用 <code>tlsverify</code> 标识来启用 TLS，并使用 <code>tlscacert</code> 标识来指定 CA 证书。</p>
-<blockquote>
-<p>警告：使用 TLS 和管理 CA 证书是一个高级话题。在投入生成环境使用之前，你需要自行熟悉了解 OpenSSL，X509 和 TLS 。</p>
-<p>警告：这些 TLS 指令只能生成在 Linux 上工作的证书，Mac OSX 附带的 OpenSSL 版本与 Docker 所需要使用的证书不兼容。</p>
-</blockquote>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/baseimages/" itemprop="url">
-                baseimages
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/baseimages/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/baseimages/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="创建一个基本镜像">创建一个基本镜像</h1><p>==================</p>
-<p>你想创建你自己的<a href="../terms/image.md">基础镜像</a>？很好！</p>
-<p>具体的过程会严重依赖于你想打包的Linux发行版。我们有下面一些例子供你参考。<br>同时，我们鼓励你通过提交推送请求来贡献你的新镜像。</p>
-<h3 id="使用_tar_来创建一个完整的镜像">使用 tar 来创建一个完整的镜像</h3><p>通常，你要先运行一个可工作的发行版的机器，来打包一个基础镜像。虽然有一些<br>工具不是必需的，比如 Debian 的 Deboostrap，但是你还是可以用它来生成 Ubuntu<br>镜像。</p>
-<p>下面的例子尽可能简单地创建一个 Ubuntu 基础镜像：</p>
-<pre><code>$ sudo debootstrap raring raring &gt; /dev/null
-$ sudo tar -C raring -c . | sudo docker <span class="keyword">import</span> - raring
-a29c15f1bf7a
-$ sudo docker run raring cat /etc/lsb-release
-<span class="constant">DISTRIB_ID</span>=Ubuntu
-<span class="constant">DISTRIB_RELEASE</span>=<span class="number">13.04</span>
-<span class="constant">DISTRIB_CODENAME</span>=raring
-<span class="constant">DISTRIB_DESCRIPTION</span>=<span class="string">"Ubuntu 13.04"</span>
-</code></pre><p>在 Docker 的 GitHub 上，有更多的创建基础镜像的脚本示例：</p>
-<ul>
-<li><a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-busybox.sh" target="_blank" rel="external">BusyBox</a></li>
-<li>CentOS / Scientific Linux CERN (SLC) <a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-rinse.sh" target="_blank" rel="external">on Debian/Ubuntu</a> or on <a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-yum.sh" target="_blank" rel="external">CentOS/RHEL/SLC/etc</a>.</li>
-<li><a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-debootstrap.sh" target="_blank" rel="external">Debian / Ubuntu</a></li>
-</ul>
-<h3 id="使用_scratch_创建简单的基础镜像">使用 scratch 创建简单的基础镜像</h3><p>在 Docker 的注册中，有一个使用空的 tar 文件创建的特殊的版本库，叫 scratch ：</p>
-<pre><code>$ tar cv --files-<span class="keyword">from</span> <span class="regexp">/dev/</span><span class="keyword">null</span> | docker <span class="keyword">import</span> - scratch
-</code></pre><p>你可以用 <strong><em> docker pull </em></strong> 把它拉取下来。然后你就可以基于它来做新的最小<br>的容器了：</p>
-<pre><code><span class="built_in">FROM</span> scratch
-<span class="built_in">COPY</span> <span class="bash"><span class="literal">true</span>-asm /<span class="literal">true</span>
-</span><span class="built_in">CMD</span> <span class="bash">[<span class="string">"/true"</span>]</span>
-</code></pre><p>上面的 Dockerfile 来自外部的一个最小镜像：<a href="https://github.com/tianon/dockerfiles/tree/master/true" target="_blank" rel="external">tianon/true</a>。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/SupervisorwithDocker/" itemprop="url">
-                Using Supervior with Docker
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/SupervisorwithDocker/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/SupervisorwithDocker/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Using_Supervior_with_Docker">Using Supervior with Docker</h1><p>注意：如果你不喜欢使用sudo，那么你可以看看<a href="http://docs.docker.com/installation/binaries/#dockergroup" target="_blank" rel="external">Giving non-root access</a></p>
-<p>传统上的docker容器中一次只能运行一个进程，例如一次只运行一个Apache守护进程或SSH服务器守护进程一个进程。你经常遇到需要<br>在一个容器中运行多个进程的情形。有许多方法可以实现这一点，从使用简单的bash脚本来运行的<code>CMD</code>指令到安装进程管理工具。 </p>
-<p>在这个例子中，我们将要利用进程管理工具，<a href="http://supervisord.org/" target="_blank" rel="external"><code>Supervior</code></a>，来管理我们容器中的多个进程。使用Supervior使我们能够更好地控制，管理，<br>和重新启动我们想要运行的进程。为了证明这一点，我们接下来要安装并管理的SSH服务进程和一个Apache守护进程。 </p>
-<h2 id="创建Dockerfile">创建Dockerfile</h2><p>让我们先创建一个基本的<code>Dockerfile</code>来创建我们的新镜像。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:<span class="number">13.04</span></span><br><span class="line">MAINTAINER examples@docker.com</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">"deb http://archive.ubuntu.com/ubuntu precise main universe"</span> &gt; /etc/apt/sources.list</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get upgrade -y</span><br></pre></td></tr></table></figure>
-<h2 id="安装Supervisor">安装Supervisor</h2><p>现在，我们可以安装我们的SSH和Apache，以及Supervisor在我们的容器中。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get install -y openssh-server apache2 supervisor</span><br><span class="line">RUN mkdir -p /var/run/sshd</span><br><span class="line">RUN mkdir -p /var/<span class="built_in">log</span>/supervisor</span><br></pre></td></tr></table></figure>
-<p>这里我们组装了一个包含Openssh-server，Apache2和supervisor（它提供了超级守护进程）的封装包。我们也创建了用来运行<br>我们SSH和Supervisor的两个新目录</p>
-<h2 id="添加Supervisor的配置文件">添加Supervisor的配置文件 </h2><p>现在，让我们为Supervisor添加一个配置文件。默认的文件名为<code>supervisord.conf</code>，位于<code>/etc/supervisor/conf.d/</code>。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf</span><br></pre></td></tr></table></figure>
-<p>让我们来看看supervisord.conf文件。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[supervisord]</span><br><span class="line">nodaemon=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[program:sshd]</span><br><span class="line"><span class="built_in">command</span>=/usr/sbin/sshd -D</span><br><span class="line"></span><br><span class="line">[program:apache2]</span><br><span class="line"><span class="built_in">command</span>=/bin/bash -c <span class="string">"source /etc/apache2/envvars &amp;&amp; exec /usr/sbin/apache2 -DFOREGROUND"</span></span><br></pre></td></tr></table></figure>
-<p>该<code>supervisord.conf</code>配置文件包含了配置Supervisor的指令和Supervisor用来管理进程的指令。第一部分<code>[supervisord]</code>为Supervisor本身的配置。<br>我们使用一个<code>nodaemon</code>指令，来告诉Supervisor以交互方式而非以后台进程方式运行。 </p>
-<p>接下来的两个部分用来管理我们要控制的服务。每个部分控制一个单独的进程。该部分包含一个<code>command</code>指令，指定用什么命令来启动每个过程。 （<em>译者注：要运行什么指令按照相同格式添加即可</em>）</p>
-<h2 id="开放端口以及运行Supervisor">开放端口以及运行Supervisor </h2><p>现在，让我们开放一些需要口，并指定当容器启动时要运行的CMD指令来结束<code>Dockerfile</code>文件。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EXPOSE <span class="number">22</span> <span class="number">80</span></span><br><span class="line">CMD [<span class="string">"/usr/bin/supervisord"</span>]</span><br></pre></td></tr></table></figure>
-<p>在这里，当我们的容器启动时，会自动开放了容器的22和80端口，同时运行<code>/usr/bin/supervisord</code>命令。</p>
-<h2 id="创建我们自己的镜像">创建我们自己的镜像</h2><p>现在，我们可以创建我们的新镜像。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker build -t &lt;yourname&gt;/supervisord .</span><br></pre></td></tr></table></figure>
-<h2 id="启动我们的Supervisor容器">启动我们的Supervisor容器</h2><p>一旦我们创建了一个镜像，我们就可以从它启动一个容器。 </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -p <span class="number">22</span> -p <span class="number">80</span> -t -i &lt;yourname&gt;/supervisord</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> CRIT Supervisor running as root (no user <span class="keyword">in</span> config file)</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> WARN Included extra file <span class="string">"/etc/supervisor/conf.d/supervisord.conf"</span> during parsing</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">342</span> INFO supervisord started with pid <span class="number">1</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">346</span> INFO spawned: <span class="string">'sshd'</span> with pid <span class="number">6</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">349</span> INFO spawned: <span class="string">'apache2'</span> with pid <span class="number">7</span></span><br><span class="line">. . .</span><br></pre></td></tr></table></figure>
-<p>我们已经使用<code>docker run</code>命令以交互方式启动一个新的容器。该容器已运行Supervisor，并启动了SSH和Apache后台进程。<br>我们已经指定了<code>-p</code>参数开放了端口22和80。通过这种方式我们可以确认我们开放的端口，并且通过这些端口连接到SSH和Apache后台进程。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/11/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/9/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/11/">&raquo;</a>
   </nav>
 
  </div>
@@ -1696,7 +1806,7 @@ $ sudo docker run raring cat /etc/lsb-release
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">130</span>
+              <span class="site-state-item-count">135</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

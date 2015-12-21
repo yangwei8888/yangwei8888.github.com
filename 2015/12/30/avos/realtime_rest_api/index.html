@@ -1,0 +1,1019 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="leancloud," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="实时通信 REST API 使用指南对话数据操作你可以通过 REST API 对对话（相应的聊天室、群组或单聊等）进行操作，例如提前创建聊天室，关联聊天室到其他数据实体。LeanCloud 实时通信系统采用透明的设计，对话数据在 LeanCloud 系统中是普通的数据表，表名为 _Conversation，你可以直接调用 数据存储相关的 API 进行数据操作。_Conversation 表 包含一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实时通信 REST API 使用指南">
+<meta property="og:url" content="http://yoursite.com/2015/12/30/avos/realtime_rest_api/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="实时通信 REST API 使用指南对话数据操作你可以通过 REST API 对对话（相应的聊天室、群组或单聊等）进行操作，例如提前创建聊天室，关联聊天室到其他数据实体。LeanCloud 实时通信系统采用透明的设计，对话数据在 LeanCloud 系统中是普通的数据表，表名为 _Conversation，你可以直接调用 数据存储相关的 API 进行数据操作。_Conversation 表 包含一">
+<meta property="og:updated_time" content="2015-12-21T01:35:16.150Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实时通信 REST API 使用指南">
+<meta name="twitter:description" content="实时通信 REST API 使用指南对话数据操作你可以通过 REST API 对对话（相应的聊天室、群组或单聊等）进行操作，例如提前创建聊天室，关联聊天室到其他数据实体。LeanCloud 实时通信系统采用透明的设计，对话数据在 LeanCloud 系统中是普通的数据表，表名为 _Conversation，你可以直接调用 数据存储相关的 API 进行数据操作。_Conversation 表 包含一">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 实时通信 REST API 使用指南 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7e8961fdae021b7bf62f2c767bb18c23";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              实时通信 REST API 使用指南
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-30T07:56:29+08:00" content="2015-12-30">
+            2015-12-30
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/leancloud/" itemprop="url" rel="index">
+                  <span itemprop="name">leancloud</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/30/avos/realtime_rest_api/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/realtime_rest_api/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="实时通信_REST_API_使用指南">实时通信 REST API 使用指南</h1><h2 id="对话数据操作">对话数据操作</h2><p>你可以通过 REST API 对对话（相应的聊天室、群组或单聊等）进行操作，例如提前创建聊天室，关联聊天室到其他数据实体。LeanCloud 实时通信系统采用透明的设计，对话数据在 LeanCloud 系统中是普通的数据表，表名为 <code>_Conversation</code>，你可以直接调用 <a href="./rest_api.html#对象-1">数据存储相关的 API 进行数据操作</a>。<code>_Conversation</code> 表 包含一些内置的关键字段定义了对话的属性、成员等，你可以在 <a href="./realtime_v2.html#对话_Conversation_">实时通信概览 - 对话</a> 了解。</p>
+<h3 id="创建一个对话">创建一个对话</h3><p>创建一个对话即在 <code>_Conversation</code> 表中创建一条记录。对于没有使用过实时通信服务的新用户， <code>_Conversation</code> 表会在第一条记录创建后出现。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;appkey&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"name":"My Private Room","m": ["BillGates", "SteveJobs"]&#125;'</span> \</span><br><span class="line">  https://api.leancloud.cn/<span class="number">1.1</span>/classes/_Conversation</span><br></pre></td></tr></table></figure>
+<p>上面的例子会创建一个最简单的对话，包括两个 client ID 为 BillGates 和 SteveJobs 的初始成员。对话创建成功会返回 objectId，即实时通信中的对话 ID，客户端就可以通过这个 ID 发送消息了。</p>
+<p>常见的开放聊天室的场景，需要通过 REST API 预先创建聊天室，并把对话 ID 与应用内的某个对象关联（如视频、比赛等）。创建开放聊天室只需要包含一个 <strong>tr</strong> 参数，设置为 true 即可。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;appkey&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"name": "OpenConf","tr": true&#125;'</span> \</span><br><span class="line">  https://api.leancloud.cn/<span class="number">1.1</span>/classes/_Conversation</span><br></pre></td></tr></table></figure>
+<p>系统对话通常也需要通过 REST API 预先创建，创建时需要设置关键的 <code>sys</code> 属性：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;appkey&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"name": "Notification Channel","sys": true&#125;'</span> \</span><br><span class="line">  https://api.leancloud.cn/<span class="number">1.1</span>/classes/_Conversation</span><br></pre></td></tr></table></figure>
+<h3 id="增删普通对话成员">增删普通对话成员</h3><p>你可以通过 REST API 操作对话数据的 <strong>m</strong> 字段来实现成员的增删。m  字段是一个数组字段，使用数组的操作符进行修改。</p>
+<p>增加一个 client id 为 LarryPage 的用户到已有（以对话 id 5552c0c6e4b0846760927d5a 为例）对话：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;appkey&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"m": &#123;"__op":"AddUnique","objects":["LarryPage"]&#125;&#125;'</span> \</span><br><span class="line">  https://api.leancloud.cn/<span class="number">1.1</span>/classes/_Conversation/<span class="number">5552</span>c0c6e4b0846760927d5a</span><br></pre></td></tr></table></figure>
+<p>将不再活跃的 SteveJobs 清除出对话（以对话 id 5552c0c6e4b0846760927d5a 为例）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;appkey&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"m": &#123;"__op":"Remove","objects":["SteveJobs"]&#125;&#125;'</span> \</span><br><span class="line">  https://api.leancloud.cn/<span class="number">1.1</span>/classes/_Conversation/<span class="number">5552</span>c0c6e4b0846760927d5a</span><br></pre></td></tr></table></figure>
+<p>对 <code>_Conversation</code> 表的查询等其他操作与普通表完全一致，可以参考 <a href="./rest_api.html#查询">REST API - 查询</a> 的相应说明，这里不再赘述。</p>
+<h2 id="获取聊天记录">获取聊天记录</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;appkey&#125;&#125;"</span> \</span><br><span class="line">  https://leancloud.cn/<span class="number">1.1</span>/rtm/messages/logs</span><br></pre></td></tr></table></figure>
+<h3 id="获取某个对话的聊天记录">获取某个对话的聊天记录</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>convid</td>
+<td><strong>必须</strong></td>
+<td>对话 id</td>
+</tr>
+<tr>
+<td>max_ts</td>
+<td>可选</td>
+<td>查询起始的时间戳，返回小于这个时间(不包含)的记录。默认是当前时间。</td>
+</tr>
+<tr>
+<td>msgid</td>
+<td>可选</td>
+<td>起始的消息 id，与 max_ts 一起作为查询的起点。</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>可选</td>
+<td>返回条数限制，可选，默认 100 条，最大 1000 条。</td>
+</tr>
+<tr>
+<td>peerid</td>
+<td>可选</td>
+<td>查看者id（签名参数）</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>可选</td>
+<td>签名随机字符串（签名参数）</td>
+</tr>
+<tr>
+<td>signature_ts</td>
+<td>可选</td>
+<td>签名时间戳（签名参数）</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>可选</td>
+<td>签名时间戳（签名参数）</td>
+</tr>
+</tbody>
+</table>
+<p>为了保证获取聊天记录的安全性，可以开启签名认证（控制台 &gt; <strong>应用选项</strong> &gt; <strong>聊天推送</strong> &gt;<br><strong>聊天记录查询签名认证</strong>）。了解更详细的签名规则请参考 <a href="realtime_v2.html#开启对话签名">聊天签名方法</a>。签名参数仅在开启应用选项后有效，如果没有开启选项，就不需要传签名参数。</p>
+<p>签名采用 Hmac-sha1 算法，输出字节流的十六进制字符串 (hex dump)，签名的 key 必须是应用的 master key，签名的消息格式如下：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">appid:</span><span class="string">peerid:</span><span class="string">convid:</span><span class="string">nonce:</span>signature_ts</span><br></pre></td></tr></table></figure>
+<p>返回数据格式，JSON 数组，按消息记录从新到旧排序。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    "<span class="attribute">timestamp</span>": <span class="value"><span class="number">1408008498571</span></span>,</span><br><span class="line">    "<span class="attribute">conv-id</span>":   <span class="value"><span class="string">"219946ef32e40c515d33ae6975a5c593"</span></span>,</span><br><span class="line">    "<span class="attribute">data</span>":      <span class="value"><span class="string">"今天天气不错！"</span></span>,</span><br><span class="line">    "<span class="attribute">from</span>":      <span class="value"><span class="string">"u111872755_9d0461adf9c267ae263b3742c60fa"</span></span>,</span><br><span class="line">    "<span class="attribute">msg-id</span>":    <span class="value"><span class="string">"vdkGm4dtRNmhQ5gqUTFBiA"</span></span>,</span><br><span class="line">    "<span class="attribute">is-conv</span>":   <span class="value"><span class="literal">true</span></span>,</span><br><span class="line">    "<span class="attribute">is-room</span>":   <span class="value"><span class="literal">false</span></span>,</span><br><span class="line">    "<span class="attribute">to</span>":        <span class="value"><span class="string">"5541c02ce4b0f83f4d44414e"</span></span>,</span><br><span class="line">    "<span class="attribute">bin</span>":       <span class="value"><span class="literal">false</span></span>,</span><br><span class="line">    "<span class="attribute">from-ip</span>":   <span class="value"><span class="string">"202.117.15.217"</span></span><br><span class="line">  </span>&#125;,</span><br><span class="line">  ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>以上返回字段的说明如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>conv-id</td>
+<td>用于查询的对话 id</td>
+</tr>
+<tr>
+<td>from</td>
+<td>消息来自 id</td>
+</tr>
+<tr>
+<td>data</td>
+<td>消息内容</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>消息到达服务器的 Unix 时间戳（毫秒）</td>
+</tr>
+<tr>
+<td>msg-id</td>
+<td>消息 id</td>
+</tr>
+<tr>
+<td>is-conv</td>
+<td>是否是 v2 中对话模型的消息</td>
+</tr>
+<tr>
+<td>from-ip</td>
+<td>消息的来源 IP</td>
+</tr>
+<tr>
+<td>ack-at</td>
+<td>消息接收者返回的确认到达服务器的 Unix 时间戳（毫秒）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="获取某个用户发送的聊天记录">获取某个用户发送的聊天记录</h3><p>此接口仅支持 master key <a href="rest_api.html#更安全的鉴权方式">鉴权认证</a>，建议仅在服务端使用。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from</td>
+<td><strong>必须</strong></td>
+<td>发送人 id</td>
+</tr>
+<tr>
+<td>max_ts</td>
+<td>可选</td>
+<td>查询起始的时间戳，返回小于这个时间（不包含）的记录。默认是当前时间。</td>
+</tr>
+<tr>
+<td>msgid</td>
+<td>可选</td>
+<td>起始的消息 id，与 max_ts 一起作为查询的起点。</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>可选</td>
+<td>返回条数限制，默认 100 条，最大 1000 条。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="获取应用的所有聊天记录">获取应用的所有聊天记录</h3><p>此接口仅支持 master key <a href="rest_api.html#更安全的鉴权方式">鉴权认证</a>，建议仅在服务端使用</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_ts</td>
+<td>可选</td>
+<td>查询起始的时间戳，返回小于这个时间（不包含）的记录。默认是 <strong>当前时间</strong>。</td>
+</tr>
+<tr>
+<td>msgid</td>
+<td>可选</td>
+<td>起始的消息 id，与 max_ts 一起作为查询的起点。</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>可选</td>
+<td>返回条数限制，默认 100 条，最大 1000 条。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="获取系统对话中某个特定用户与系统的消息记录">获取系统对话中某个特定用户与系统的消息记录</h3><p>获取系统对话中某个特定用户与系统的消息记录，需要按照一定的规则构建 <code>convid</code> 参数，构建规则为：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">md5</span><span class="params">([系统对话 id] + <span class="string">":"</span> + [用户 Client ID])</span></span></span><br></pre></td></tr></table></figure>
+<p>即将系统对话 ID 加半角冒号（<code>:</code>）与用户 ID 拼接后取 MD5 。</p>
+<h2 id="删除聊天记录">删除聊天记录</h2><p>删除一条指定的聊天历史记录，必须采用 master key 授权，所以不建议在客户端使用此接口。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -X DELETE \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;masterkey&#125;&#125;,master"</span> \</span><br><span class="line">  -G \</span><br><span class="line">  --data-urlencode <span class="string">'convid=219946ef32e40c515d33ae6975a5c593'</span> \</span><br><span class="line">  --data-urlencode <span class="string">'msgid=PESlY'</span> \</span><br><span class="line">  --data-urlencode <span class="string">'timestamp=1408008498571'</span> \</span><br><span class="line">  https://leancloud.cn/<span class="number">1.1</span>/rtm/messages/logs</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>convid</td>
+<td>对话 id</td>
+</tr>
+<tr>
+<td>msgid</td>
+<td>消息 id</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>消息时间戳</td>
+</tr>
+</tbody>
+</table>
+<h3 id="构建对话_ID">构建对话 ID</h3><p>实时通信中 convid 的构建规则为：目前版本中，convid 即对话 ID。</p>
+<p>对早期版本来说：</p>
+<ul>
+<li>对点对点通信，convid 为所有对话参与者的 peer id <strong>排序</strong> 后以半角冒号（:）分隔，做 md5 所得。如对话参与者 peer id 为 <code>u1234</code> 和 <code>u0988</code>，那么对话 ID 为 <code>bcd26a54e98687390b0abb4d83683d4b</code>。</li>
+<li>对群组功能，convid 即群组 ID。</li>
+</ul>
+<h2 id="取未读消息数">取未读消息数</h2><p>您可以从服务器端通过 REST API 调用获取实时通信中，某个 Client ID 的未读消息数。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;appkey&#125;&#125;"</span> \</span><br><span class="line">  https://leancloud.cn/<span class="number">1.1</span>/rtm/messages/unread/CLIENT_ID</span><br></pre></td></tr></table></figure>
+<p>返回：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;"<span class="attribute">count</span>": <span class="value"><span class="number">4</span></span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="通过_REST_API_发消息">通过 REST API 发消息</h2><p>我们目前提供 REST API 允许向一个已有对话发送消息。</p>
+<p><strong>注意</strong>，由于这个接口的管理性质，当你通过这个接口发送消息时，我们不会检查 <strong>from_peer</strong> 是否有权限给这个对话发送消息，而是统统放行，请谨慎使用这个接口。<br>如果你在应用中使用了我们内部定义的 <a href="./realtime_v2.html#消息_Message_">富媒体消息格式</a>，在发送消息时 <strong>message</strong> 字段需要遵守一定的格式要求，下文 <a href="./realtime_rest_api.html#富媒体消息格式说明">富媒体消息格式说明</a> 中将详细说明。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;masterkey&#125;&#125;,master"</span> \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"from_peer": "1a", "message": "helloworld", "conv_id": "...", "transient": false&#125;'</span> \</span><br><span class="line">  https://leancloud.cn/<span class="number">1.1</span>/rtm/messages</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from_peer</td>
+<td></td>
+<td>消息的发件人 id</td>
+</tr>
+<tr>
+<td>conv_id</td>
+<td></td>
+<td>发送到对话 id</td>
+</tr>
+<tr>
+<td>transient</td>
+<td>可选</td>
+<td>是否为暂态消息（<strong>由于向后兼容的考虑，默认为 true</strong>，请注意设置这个值。）</td>
+</tr>
+<tr>
+<td>message</td>
+<td></td>
+<td>消息内容（这里的消息内容的本质是字符串，但是我们对字符串内部的格式没有做限定，<br>理论上开发者可以随意发送任意格式，只要大小不超过 5 KB 限制即可。）</td>
+</tr>
+<tr>
+<td>no_sync</td>
+<td>可选</td>
+<td>默认情况下消息会被同步给在线的 from_peer 用户的客户端，设置为 true 禁用此功能。</td>
+</tr>
+</tbody>
+</table>
+<p>返回说明：</p>
+<p>默认情况下发送消息 API 使用异步的方式，调用后直接返回空结果 <code>{}</code>。</p>
+<p>对早期版本的实时通信，可以使用 to_peers（数组）或 group_id 参数分别发消息到用户或群组。</p>
+<h3 id="给系统对话发消息">给系统对话发消息</h3><p>利用 REST API 给通过系统对话给用户发消息时，除了 conv_id 需要设置为对应系统对话的 ID 以外，还需要设置 to_peers（数组）指定实际接收消息的 Client ID。</p>
+<p>目前你可以在一次调用中传入至多 20 个 Client ID。</p>
+<h3 id="富媒体消息格式说明">富媒体消息格式说明</h3><p>富媒体消息的参数格式相对于普通文本来说，仅仅是将 message 参数换成了一个 JSON <strong>字符串</strong>。</p>
+<blockquote>
+<p>注意：由于 LeanCloud 实时通信中所有的消息都是文本，所以这里发送 JSON 结构时<strong>需要首先序列化成字符串</strong>。</p>
+</blockquote>
+<h4 id="文本消息">文本消息</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X <span class="keyword">POST</span> \</span><br><span class="line">  -<span class="keyword">H</span> <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -<span class="keyword">H</span> <span class="string">"X-LC-Key: &#123;&#123;masterkey&#125;&#125;,master"</span> \</span><br><span class="line">  -<span class="keyword">H</span> <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  -<span class="keyword">d</span> '&#123;<span class="string">"from_peer"</span>: <span class="string">"1a"</span>, <span class="string">"message"</span>: <span class="string">"&#123;\"</span>_lctype\<span class="string">":-1,\"</span>_lctext\<span class="string">":\"</span>这是一个纯文本消息\<span class="string">",\"</span>_lcattrs\<span class="string">":&#123;\"</span>a\<span class="string">":\"</span>_lcattrs 是用来存储用户自定义的一些键值对\<span class="string">"&#125;&#125;"</span>, <span class="string">"conv_id"</span>: <span class="string">"..."</span>, <span class="string">"transient"</span>: false&#125;' \</span><br><span class="line">  https:<span class="comment">//leancloud.cn/1.1/rtm/messages</span></span><br></pre></td></tr></table></figure>
+<p>发送文本消息可以按照以上的格式进行，参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_lctype</code></td>
+<td></td>
+<td>富媒体消息的类型<br><br><pre>文本消息 -1<br>图像　　 -2<br>音频　　 -3<br>视频　　 -4<br>地理位置 -5<br>通用文件 -6</pre></td>
+</tr>
+<tr>
+<td><code>_lctext</code></td>
+<td></td>
+<td>富媒体消息的文　字说明</td>
+</tr>
+<tr>
+<td><code>_lcattrs</code></td>
+<td></td>
+<td>JSON 字符串，用来给开发者存储自定义属性。</td>
+</tr>
+<tr>
+<td><code>_lcfile</code></td>
+<td></td>
+<td>如果是包含了文件（图像，音频，视频，通用文件）的消息 ，<br><code>_lcfile</code> 就包含了它的文件实体的相关信息。</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td></td>
+<td>文件在上传之后的物理地址</td>
+</tr>
+<tr>
+<td><code>objId</code></td>
+<td>可选</td>
+<td>文件对应的在 _File 表里面的 objectId</td>
+</tr>
+<tr>
+<td><code>metaData</code></td>
+<td>可选</td>
+<td>文件的元数据</td>
+</tr>
+</tbody>
+</table>
+<p><strong>以上参数针对所有富媒体消息都有效</strong>。</p>
+<h4 id="图像消息">图像消息</h4><p>在新版本的聊天中，支持了内建的富媒体消息格式，以下针对整个消息体 JSON 格式化之后的参数说明，例如如下的图像消息：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"_lctype"</span>:    -<span class="number">2</span>,                    <span class="comment">//必要参数</span></span><br><span class="line">  <span class="string">"_lctext"</span>:    <span class="string">"图像的文字说明"</span>,</span><br><span class="line">  <span class="string">"_lcattrs"</span>: &#123;</span><br><span class="line">    <span class="string">"a"</span>:        <span class="string">"_lcattrs 是用来存储用户自定义的一些键值对"</span>,</span><br><span class="line">    <span class="string">"b"</span>:        <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"c"</span>:        <span class="number">12</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"_lcfile"</span>: &#123;</span><br><span class="line">    <span class="string">"url"</span>:      <span class="string">"http://ac-p2bpmgci.clouddn.com/246b8acc-2e12-4a9d-a255-8d17a3059d25"</span>, <span class="comment">//必要参数</span></span><br><span class="line">    <span class="string">"objId"</span>:    <span class="string">"54699d87e4b0a56c64f470a4//文件对应的AVFile.objectId"</span>,</span><br><span class="line">    <span class="string">"metaData"</span>: &#123;</span><br><span class="line">      <span class="string">"name"</span>:   <span class="string">"IMG_20141223.jpeg"</span>,   <span class="comment">//图像的名称</span></span><br><span class="line">      <span class="string">"format"</span>: <span class="string">"png"</span>,                 <span class="comment">//图像的格式</span></span><br><span class="line">      <span class="string">"height"</span>: <span class="number">768</span>,                   <span class="comment">//单位：像素</span></span><br><span class="line">      <span class="string">"width"</span>:  <span class="number">1024</span>,                  <span class="comment">//单位：像素</span></span><br><span class="line">      <span class="string">"size"</span>:   <span class="number">18</span>                     <span class="comment">//单位：b</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上是完整版的格式，如果想简单的发送一个 URL 可以参照以下格式：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">_lctype</span>": <span class="value">-<span class="number">2</span></span>,</span><br><span class="line">  "<span class="attribute">_lcfile</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">url</span>":   <span class="value"><span class="string">"http://ac-p2bpmgci.clouddn.com/246b8acc-2e12-4a9d-a255-8d17a3059d25"</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="音频消息">音频消息</h4><p>与图像类似，音频格式的完整格式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"_lctype"</span>:      -<span class="number">3</span>,</span><br><span class="line">  <span class="string">"_lctext"</span>:      <span class="string">"这是一个音频消息"</span>,</span><br><span class="line">  <span class="string">"_lcattrs"</span>: &#123;</span><br><span class="line">    <span class="string">"a"</span>:          <span class="string">"_lcattrs 是用来存储用户自定义的一些键值对"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"_lcfile"</span>: &#123;</span><br><span class="line">    <span class="string">"url"</span>:        <span class="string">"http://ac-p2bpmgci.clouddn.com/246b8acc-2e12-4a9d-a255-8d17a3059d25"</span>,</span><br><span class="line">    <span class="string">"objId"</span>:      <span class="string">"54699d87e4b0a56c64f470a4//文件对应的AVFile.objectId"</span>,</span><br><span class="line">    <span class="string">"metaData"</span>: &#123;</span><br><span class="line">      <span class="string">"name"</span>:     <span class="string">"我的滑板鞋.wav"</span>,</span><br><span class="line">      <span class="string">"format"</span>:   <span class="string">"wav"</span>,</span><br><span class="line">      <span class="string">"duration"</span>: <span class="number">26</span>,    <span class="comment">//单位：秒</span></span><br><span class="line">      <span class="string">"size"</span>:     <span class="number">2738</span>   <span class="comment">//单位：b</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简略版：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">_lctype</span>": <span class="value">-<span class="number">3</span></span>,</span><br><span class="line">  "<span class="attribute">_lcfile</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">url</span>":   <span class="value"><span class="string">"http://www.somemusic.com/x.mp3"</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="视频消息">视频消息</h4><p>完整版：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"_lctype"</span>:      -<span class="number">4</span>,</span><br><span class="line">  <span class="string">"_lctext"</span>:      <span class="string">"这是一个视频消息"</span>,</span><br><span class="line">  <span class="string">"_lcattrs"</span>: &#123;</span><br><span class="line">    <span class="string">"a"</span>:          <span class="string">"_lcattrs 是用来存储用户自定义的一些键值对"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"_lcfile"</span>: &#123;</span><br><span class="line">    <span class="string">"url"</span>:        <span class="string">"http://ac-p2bpmgci.clouddn.com/99de0f45-171c-4fdd-82b8-1877b29bdd12"</span>,</span><br><span class="line">    <span class="string">"objId"</span>:      <span class="string">"54699d87e4b0a56c64f470a4"</span>, <span class="comment">//文件对应的 AVFile.objectId</span></span><br><span class="line">    <span class="string">"metaData"</span>: &#123;</span><br><span class="line">      <span class="string">"name"</span>:     <span class="string">"录制的视频.mov"</span>,</span><br><span class="line">      <span class="string">"format"</span>:   <span class="string">"avi"</span>,</span><br><span class="line">      <span class="string">"duration"</span>: <span class="number">168</span>,      <span class="comment">//单位：秒</span></span><br><span class="line">      <span class="string">"size"</span>:     <span class="number">18689</span>     <span class="comment">//单位：b</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简略版：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">_lctype</span>": <span class="value">-<span class="number">4</span></span>,</span><br><span class="line">  "<span class="attribute">_lcfile</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">url</span>":   <span class="value"><span class="string">"http://www.somevideo.com/Y.flv"</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="通用文件消息">通用文件消息</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">_lctype</span>": <span class="value">-<span class="number">6</span></span>,</span><br><span class="line">  "<span class="attribute">_lctext</span>": <span class="value"><span class="string">"这是一个普通文件类型"</span></span>,</span><br><span class="line">  "<span class="attribute">_lcattrs</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">a</span>":     <span class="value"><span class="string">"_lcattrs 是用来存储用户自定义的一些键值对"</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">_lcfile</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">url</span>":   <span class="value"><span class="string">"http://www.somefile.com/jianli.doc"</span></span>,</span><br><span class="line">    "<span class="attribute">name</span>":  <span class="value"><span class="string">"我的简历.doc"</span></span>,</span><br><span class="line">    "<span class="attribute">size</span>":  <span class="value"><span class="number">18689</span>          //单位：b</span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>简略版：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">_lctype</span>": <span class="value">-<span class="number">6</span></span>,</span><br><span class="line">  "<span class="attribute">_lcfile</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">url</span>":   <span class="value"><span class="string">"http://www.somefile.com/jianli.doc"</span></span>,</span><br><span class="line">    "<span class="attribute">name</span>":  <span class="value"><span class="string">"我的简历.doc"</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="地理位置消息">地理位置消息</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">_lctype</span>":     <span class="value">-<span class="number">5</span></span>,</span><br><span class="line">  "<span class="attribute">_lctext</span>":     <span class="value"><span class="string">"这是一个地理位置消息"</span></span>,</span><br><span class="line">  "<span class="attribute">_lcattrs</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">a</span>":         <span class="value"><span class="string">"_lcattrs 是用来存储用户自定义的一些键值对"</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">_lcloc</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">longitude</span>": <span class="value"><span class="number">23.2</span></span>,</span><br><span class="line">    "<span class="attribute">latitude</span>":  <span class="value"><span class="number">45.2</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>简略版：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">_lctype</span>":     <span class="value">-<span class="number">5</span></span>,</span><br><span class="line">  "<span class="attribute">_lcloc</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">longitude</span>": <span class="value"><span class="number">23.2</span></span>,</span><br><span class="line">    "<span class="attribute">latitude</span>":  <span class="value"><span class="number">45.2</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取暂态对话的在线人数">获取暂态对话的在线人数</h2><p>你可以通过这个 API 获得暂态对话的在线人数。由于暂态对话没有成员列表支持，所以通常使用这个 API 获得当前的在线人数。出于性能的考虑，这个 API 有一定的缓存时间，仅用作粗略计数。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gid</code></td>
+<td>暂态对话的 id</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;appkey&#125;&#125;"</span> \</span><br><span class="line">  https://leancloud.cn/<span class="number">1.1</span>/rtm/transient_group/onlines?gid=...</span><br></pre></td></tr></table></figure>
+<p>返回：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;"<span class="attribute">result</span>": <span class="value"><span class="number">0</span></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>这个 API 也可以用于获取早期版本开放群组的在线人数。</p>
+<h2 id="查询在线状态">查询在线状态</h2><p>在线状态查询 API 可以一次至多查询 20 个 Client ID 当前是否在线：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST \</span><br><span class="line">  -H <span class="string">"X-LC-Id: &#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">  -H <span class="string">"X-LC-Key: &#123;&#123;masterkey&#125;&#125;,master"</span> \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"peers": ["7u", "8b", "3h", ...]&#125;'</span> \</span><br><span class="line">  https://leancloud.cn/<span class="number">1.1</span>/rtm/online</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>peers</td>
+<td>要查询的 ID 列表</td>
+</tr>
+</tbody>
+</table>
+<p>返回：</p>
+<p>在线的 ID 列表</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;"<span class="attribute">results</span>":<span class="value">[<span class="string">"7u"</span>]</span>&#125;</span><br></pre></td></tr></table></figure>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/leancloud/" rel="tag">#leancloud</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/30/avos/dotnet_guide/" rel="prev">.NET 数据存储开发指南</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/30/avos/python_start/" rel="next">Python 开发指南</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实时通信_REST_API_使用指南"><span class="nav-number">1.</span> <span class="nav-text">实时通信 REST API 使用指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对话数据操作"><span class="nav-number">1.1.</span> <span class="nav-text">对话数据操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个对话"><span class="nav-number">1.1.1.</span> <span class="nav-text">创建一个对话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增删普通对话成员"><span class="nav-number">1.1.2.</span> <span class="nav-text">增删普通对话成员</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取聊天记录"><span class="nav-number">1.2.</span> <span class="nav-text">获取聊天记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取某个对话的聊天记录"><span class="nav-number">1.2.1.</span> <span class="nav-text">获取某个对话的聊天记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取某个用户发送的聊天记录"><span class="nav-number">1.2.2.</span> <span class="nav-text">获取某个用户发送的聊天记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取应用的所有聊天记录"><span class="nav-number">1.2.3.</span> <span class="nav-text">获取应用的所有聊天记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取系统对话中某个特定用户与系统的消息记录"><span class="nav-number">1.2.4.</span> <span class="nav-text">获取系统对话中某个特定用户与系统的消息记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除聊天记录"><span class="nav-number">1.3.</span> <span class="nav-text">删除聊天记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构建对话_ID"><span class="nav-number">1.3.1.</span> <span class="nav-text">构建对话 ID</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取未读消息数"><span class="nav-number">1.4.</span> <span class="nav-text">取未读消息数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过_REST_API_发消息"><span class="nav-number">1.5.</span> <span class="nav-text">通过 REST API 发消息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#给系统对话发消息"><span class="nav-number">1.5.1.</span> <span class="nav-text">给系统对话发消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#富媒体消息格式说明"><span class="nav-number">1.5.2.</span> <span class="nav-text">富媒体消息格式说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文本消息"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">文本消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图像消息"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">图像消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#音频消息"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">音频消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#视频消息"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">视频消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通用文件消息"><span class="nav-number">1.5.2.5.</span> <span class="nav-text">通用文件消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#地理位置消息"><span class="nav-number">1.5.2.6.</span> <span class="nav-text">地理位置消息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取暂态对话的在线人数"><span class="nav-number">1.6.</span> <span class="nav-text">获取暂态对话的在线人数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询在线状态"><span class="nav-number">1.7.</span> <span class="nav-text">查询在线状态</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/30/avos/realtime_rest_api/';
+      var disqus_title = '实时通信 REST API 使用指南';
+      var disqus_url = 'http://yoursite.com/2015/12/30/avos/realtime_rest_api/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

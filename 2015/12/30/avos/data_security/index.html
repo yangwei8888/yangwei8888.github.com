@@ -49,14 +49,14 @@
 <meta property="og:site_name" content="yosita">
 <meta property="og:description" content="数据和安全安全总览几乎每一位使用 LeanCloud 的用户都会问，如何能够保证自己应用的安全？对安全的关注说明你也位对产品负责、对用户负责、对自己负责、做事态度认真的开发者，这也正是 LeanCloud 所信守的价值观。
 安全界有个说法——绝对的安全是不存在的。其中关键要点是要梳理清楚「安全边界」，即你对于业务安全范围的一个清晰的界定。业内一个很著名的例子就是 Chrome 浏览器的查看密码功能">
-<meta property="og:image" content="http://yoursite.com/images/security/service-switch.png">
-<meta property="og:image" content="http://yoursite.com/images/security/web-host.png">
-<meta property="og:image" content="http://yoursite.com/images/acl.png">
-<meta property="og:image" content="http://yoursite.com/images/cla_permission.png">
-<meta property="og:image" content="http://yoursite.com/images/ijiami_2.png">
-<meta property="og:image" content="http://yoursite.com/images/ijiami_1.png">
-<meta property="og:image" content="http://yoursite.com/images/decompile.png">
-<meta property="og:updated_time" content="2015-12-18T10:22:58.806Z">
+<meta property="og:image" content="http://yoursite.com/avos/images/security/service-switch.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/security/web-host.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/acl.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/cla_permission.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/ijiami_2.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/ijiami_1.png">
+<meta property="og:image" content="http://yoursite.com/avos/images/decompile.png">
+<meta property="og:updated_time" content="2015-12-21T01:51:24.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据和安全">
 <meta name="twitter:description" content="数据和安全安全总览几乎每一位使用 LeanCloud 的用户都会问，如何能够保证自己应用的安全？对安全的关注说明你也位对产品负责、对用户负责、对自己负责、做事态度认真的开发者，这也正是 LeanCloud 所信守的价值观。
@@ -246,13 +246,13 @@
 <p>总之，一切安全设计的背后都是需要你考虑清楚你的 App、你的产品的「安全边界」，制定对应的安全策略。当然安全是后话，首先通过使用 LeanCloud 节省大量时间成本、研发成本、机会成本把产品快速迭代起来才是正经事。</p>
 <h2 id="安全中心">安全中心</h2><p>安全中心，是我们为每个应用提供的设置基本安全的入口，位置在 <a href="/app.html?appid=#/security">控制台 / 设置 / 安全中心</a>。</p>
 <h3 id="服务开关">服务开关</h3><p>服务开关，是用来开启或者关闭当前应用所使用的服务，从根本上防止由于 AppId 和 AppKey 泄露后而可能会引发的服务资源被盗取的问题。</p>
-<p><img src="images/security/service-switch.png" alt="image"></p>
+<p><img src="/avos/images/security/service-switch.png" alt="image"></p>
 <h3 id="Web_安全域名">Web 安全域名</h3><p>如果在前端使用 JavaScript SDK，当你打算正式发布出去的时候，请务必配置 <strong>Web 安全域名</strong>，方法是进入 <a href="/app.html?appid=#/security">控制台 / 设置 / 安全中心 / <strong>Web 安全域名</strong></a>。</p>
 <p>设置「Web 安全域名」后，仅可在该域名下通过 JavaScript SDK 调用服务器资源，域名配置策略与浏览器域安全策略一致，要求域名协议、域和端口号都需严格一致，不支持子域和通配符。所以如果你要配置一个域名，要写清楚协议、域和端口，缺少一个都可能导致访问被禁止。举例说明一下域名的区别：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 跨域</span></span><br><span class="line">www<span class="class">.a</span><span class="class">.com</span>:<span class="number">8080</span></span><br><span class="line">www<span class="class">.a</span><span class="class">.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 跨域 </span></span><br><span class="line">www<span class="class">.a</span><span class="class">.com</span>:<span class="number">8080</span></span><br><span class="line">www<span class="class">.a</span><span class="class">.com</span>:<span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 跨域  </span></span><br><span class="line"><span class="tag">a</span><span class="class">.com</span></span><br><span class="line">www<span class="class">.a</span><span class="class">.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 跨域</span></span><br><span class="line">xxx<span class="class">.a</span><span class="class">.com</span></span><br><span class="line">www<span class="class">.a</span><span class="class">.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不同协议，跨域         </span></span><br><span class="line">http:</span><br><span class="line">https:</span><br></pre></td></tr></table></figure>
 <p>这样就可以防止其他人通过外网其他地址盗用你的服务器资源。但是要注意，<strong>Web 安全域名</strong>所能达到的目的是防御恶意部署，而不是防御伪造脏数据（恶意用户通过绑定 host 方式还是有可能访问到应用的数据），所以要想对数据进行更多细粒度的控制，需要配合 ACL 来使用。</p>
 <p>在 WebView 中使用，建议通过 WebView 去加载一个部署好的、有域名的 Web，然后缓存在本地，这样可以通过 <strong>Web 安全域名</strong> 来做限制。</p>
-<p><img src="images/security/web-host.png" alt="image"></p>
+<p><img src="/avos/images/security/web-host.png" alt="image"></p>
 <h3 id="操作日志">操作日志</h3><p>操作日志中会显示应用创建者及所有协作者的重要操作记录，比如删除数据操作的历史、操作用户名、操作 IP 及操作时间等，这个日志的目的是为了遇到问题更好地定位故障缘由，排查可能的恶意操作，防止应用数据被错误地改动。</p>
 <h2 id="数据">数据</h2><h3 id="自动备份">自动备份</h3><p>LeanCloud 目前会每天备份一次应用数据，防止用户误操作删除了重要数据。如果发生误删除，请及时联系我们进行恢复。</p>
 <h3 id="有效的数据类型">有效的数据类型</h3><p>我们已经仔细设计并实现了客户端 SDK，在你使用 iOS 或者 Android SDK 的时候，通常来说你不需要担心数据是如何保存的。只要简单地往 AVObject 添加数据，它们都能被正确地保存。</p>
@@ -367,7 +367,7 @@
 <h2 id="安全性">安全性</h2><p>对于任何移动应用来说。因为客户端代码运行在一台移动设备上，因此可能会有不受信任的客户强行修改代码并发起恶意的请求。选择正确的方式来保护你的应用非常重要，但是正确的方式取决于你的应用，以及应用存储的数据。</p>
 <p>我们提供多种方式使用权限控制来获得安全性。如果你有关于任何保护你应用安全的最佳方式的问题，我们都鼓励你联系我们的客户支持。</p>
 <h3 id="SSL_加密传输">SSL 加密传输</h3><p>首先，我们所有的 API 请求都通过 <a href="http://zh.wikipedia.org/wiki/%E5%AE%89%E5%85%A8%E5%A5%97%E6%8E%A5%E5%B1%82" target="_blank" rel="external">SSL加密传输</a>，保证传输过程中的数据安全性和可靠性。</p>
-<h3 id="对象级别的权限">对象级别的权限</h3><p><img src="images/acl.png" alt="image"></p>
+<h3 id="对象级别的权限">对象级别的权限</h3><p><img src="/avos/images/acl.png" alt="image"></p>
 <p>最灵活的保护你应用数据安全的方式是通过访问控制列表（Access Control List），通常简称为 ACL 机制。ACL 背后的思想是为每个对象关联一系列 User 或者 Role，这些 User 或者 Role 包含了特定的权限。一个 User 必须拥有读权限（或者属于一个拥有读权限的 Role）才可以获取一个对象的数据，同时，一个 User 需要写权限（或者属于一个拥有写权限的 Role）才可以更改或者删除一个对象。</p>
 <p>大多数应用都通过 ACL 来规范它们的访问模式。例如：</p>
 <ul>
@@ -381,7 +381,7 @@
 <p>代码中如何使用 ACL，请阅读相应的 ACL 文档。</p>
 <h3 id="列级别的权限">列级别的权限</h3><p>这个概念比较简单，通过编辑数据管理页面某个 Class 的列属性，某一列数据可以设置为「只读」。对于 <code>_User</code> 数据表，还可以设置为 「只限当前用户读写」，即只能当前登录的用户读写自己的数据。</p>
 <p>某一列的数据还可以设置为 「客户端不可见」。设置了之后，当客户端发起查询的时候，返回的结果将不包含相关字段。比如，匿名发帖的应用，你仍然希望发帖的时候，也记录下真实的作者，但不希望将此信息返回给客户端，所以，这时候就可以设置作者字段为「客户端不可见」。</p>
-<h3 id="Class_级别的权限">Class 级别的权限</h3><p><img src="images/cla_permission.png" alt="image"></p>
+<h3 id="Class_级别的权限">Class 级别的权限</h3><p><img src="/avos/images/cla_permission.png" alt="image"></p>
 <p>在一些情况下，设置整个class允许的权限是一种更自然的方式。例如，你可能想设置整个 Class 只读，或者只写。</p>
 <p>为了简单地做到这一点，我们让你可以设置每个 Class 允许的操作。为了访问这些设置，请进入数据管理平台，选择一个 Class，并点击右侧菜单中的 <strong>其他</strong> 下拉框找到权限设置。</p>
 <p>你可以为选中的 Class 禁止客户端执行下列操作的能力：</p>
@@ -410,11 +410,11 @@
 </ol>
 <p>相关步骤还可以见下面的截图。</p>
 <p>申请账号，提交应用，下载签名工具：</p>
-<p><img src="images/ijiami_2.png" alt="image"></p>
+<p><img src="/avos/images/ijiami_2.png" alt="image"></p>
 <p>加密后重新签名：</p>
-<p><img src="images/ijiami_1.png" alt="image"></p>
+<p><img src="/avos/images/ijiami_1.png" alt="image"></p>
 <p>这样得到的 apk 文件，普通的反编译之后得到的是，</p>
-<p><img src="images/decompile.png" alt="image"></p>
+<p><img src="/avos/images/decompile.png" alt="image"></p>
 <p>可以看到，代码被隐藏起来了，应用被破解的难度大幅增加了。</p>
 <p>我们一直努力提供更多功能给开发者来保护你的应用，也希望大家持续地给我们反馈，感谢。</p>
 </span>
@@ -434,13 +434,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/30/avos/faq/" rel="prev">LeanCloud FAQ</a>
+              <a href="/2015/12/30/avos/cql_guide/" rel="prev">Cloud Query Language</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/30/avos/cloud_code_faq/" rel="next">云引擎常见问题和解答</a>
+              <a href="/2015/12/30/avos/php_start/" rel="next">PHP 开发指南</a>
             
           </div>
         </div>
@@ -506,7 +506,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">130</span>
+              <span class="site-state-item-count">135</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
