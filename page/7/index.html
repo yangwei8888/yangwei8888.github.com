@@ -170,6 +170,272 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter2/24_Access_Control/" itemprop="url">
+                第二章-24访问控制（Access Control）
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-25T12:00:03+08:00" content="2015-12-25">
+            2015-12-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/25/swift-cn/chapter2/24_Access_Control/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter2/24_Access_Control/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="访问控制（Access_Control）">访问控制（Access Control）</h1><hr>
+<blockquote>
+<p>1.0<br>翻译：<a href="http://www.devtalking.com/" target="_blank" rel="external">JaceFu</a><br>校对：<a href="http://childhood.logdown.com" target="_blank" rel="external">ChildhoodAndy</a></p>
+<p>2.0<br>翻译+校对：<a href="https://github.com/mmoaay" target="_blank" rel="external">mmoaay</a></p>
+<p>2.1<br>翻译：<a href="https://github.com/futantan" target="_blank" rel="external">Prayer</a><br>校对：<a href="http://codebuild.me" target="_blank" rel="external">shanks</a>，2015-11-01</p>
+</blockquote>
+<p>本页内容包括：</p>
+<ul>
+<li><a href="#modules_and_source_files">模块和源文件</a></li>
+<li><a href="#access_levels">访问级别</a><ul>
+<li><a href="#guiding_principle_of_access_levels">访问级别基本原则</a></li>
+<li><a href="#default_access_levels">默认访问级别</a></li>
+<li><a href="#access_levels_for_single-target_apps">单 target 应用程序的访问级别</a></li>
+<li><a href="#access_levels_for_frameworks">框架的访问级别</a></li>
+<li><a href="#access_levels_for_unit_test_targets">单元测试 target 的访问级别</a></li>
+</ul>
+</li>
+<li><a href="#access_control_syntax">访问控制语法</a></li>
+<li><a href="#custom_types">自定义类型</a><ul>
+<li><a href="#tuple_types">元组类型</a></li>
+<li><a href="#function_types">函数类型</a></li>
+<li><a href="#enumeration_types">枚举类型</a></li>
+<li><a href="#nested_types">嵌套类型</a></li>
+</ul>
+</li>
+<li><a href="#subclassing">子类</a></li>
+<li><a href="#constants_variables_properties_subscripts">常量、变量、属性、下标</a><ul>
+<li><a href="#getters_and_setters">Getter和Setter</a></li>
+</ul>
+</li>
+<li><a href="#initializers">构造器</a><ul>
+<li><a href="#default_initializers">默认构造器</a></li>
+<li><a href="#default_memberwise_initializers_for_structure_types">结构体默认的成员逐一构造器</a></li>
+</ul>
+</li>
+<li><a href="#protocols">协议</a><ul>
+<li><a href="#protocol_inheritance">协议继承</a></li>
+<li><a href="#protocol_conformance">协议一致性</a></li>
+</ul>
+</li>
+<li><a href="#extensions">扩展</a><ul>
+<li><a href="#adding_protocol_conformance_with_an_extension">通过扩展添加协议一致性</a></li>
+</ul>
+</li>
+<li><a href="#generics">泛型</a></li>
+<li><a href="#type_aliases">类型别名</a></li>
+</ul>
+<p>访问控制可以限定其他源文件或模块中的代码对你的代码的访问级别。这个特性可以让我们隐藏代码的一些实现细节，并且可以为其他人可以访问和使用的代码提供接口。</p>
+<p>你可以明确地给单个类型（类、结构体、枚举）设置访问级别，也可以给这些类型的属性、方法、构造器、下标等设置访问级别。协议也可以被限定在一定的范围内使用，包括协议里的全局常量、变量和函数。</p>
+<p>Swift 不仅提供了多种不同的访问级别，还为某些典型场景提供了默认的访问级别，这样就不需要我们在每段代码中都申明显式访问级别。其实，如果只是开发一个单一 target 的应用程序，我们完全可以不用显式申明代码的访问级别。</p>
+<blockquote>
+<p>注意<br>为了简单起见，对于代码中可以设置访问级别的特性（属性、基本类型、函数等），在下面的章节中我们会称之为“实体”。</p>
+</blockquote>
+<p><a name="modules_and_source_files"></a></p>
+<h2 id="模块和源文件">模块和源文件</h2><p>Swift 中的访问控制模型基于模块和源文件这两个概念。</p>
+<p>模块指的是独立的代码单元，框架或应用程序会作为一个独立的模块来构建和发布。在 Swift 中，一个模块可以使用 <code>import</code> 关键字导入另外一个模块。</p>
+<p>在 Swift 中，Xcode 的每个 target（例如框架或应用程序）都被当作独立的模块处理。如果你是为了实现某个通用的功能，或者是为了封装一些常用方法而将代码打包成独立的框架，这个框架就是 Swift 中的一个模块。当它被导入到某个应用程序或者其他框架时，框架内容都将属于这个独立的模块。  </p>
+<p>源文件就是 Swift 中的源代码文件，它通常属于一个模块，即一个应用程序或者框架。尽管我们一般会将不同的类型分别定义在不同的源文件中，但是同一个源文件也可以包含多个类型、函数之类的定义。</p>
+<p><a name="access_levels"></a></p>
+<h2 id="访问级别">访问级别</h2><p>Swift 为代码中的实体提供了三种不同的访问级别。这些访问级别不仅与源文件中定义的实体相关，同时也与源文件所属的模块相关。</p>
+<ul>
+<li><code>public</code>：可以访问同一模块源文件中的任何实体，在模块外也可以通过导入该模块来访问源文件里的所有实体。通常情况下，框架中的某个接口可以被任何人使用时，你可以将其设置为 <code>public</code> 级别。</li>
+<li><code>internal</code>：可以访问同一模块源文件中的任何实体，但是不能从模块外访问该模块源文件中的实体。通常情况下，某个接口只在应用程序或框架内部使用时，你可以将其设置为 <code>internal</code> 级别。</li>
+<li><code>private</code>：限制实体只能在所在的源文件内部使用。使用 <code>private</code> 级别可以隐藏某些功能的实现细节。</li>
+</ul>
+<p><code>public</code> 为最高（限制最少）访问级别，<code>private</code> 为最低（限制最多）访问级别。</p>
+<blockquote>
+<p>注意<br>Swift 中的 <code>private</code> 访问级别不同于其他语言，它的范围限于源文件，而不是声明范围内。这就意味着，一个类型可以访问其所在源文件中的所有 <code>private</code> 实体，但是如果它的扩展定义在其他源文件中，那么它的扩展就不能访问它在这个源文件中定义的 <code>private</code> 实体。</p>
+</blockquote>
+<p><a name="guiding_principle_of_access_levels"></a></p>
+<h3 id="访问级别基本原则">访问级别基本原则</h3><p>Swift 中的访问级别遵循一个基本原则：不可以在某个实体中定义访问级别更高的实体。</p>
+<p>例如：</p>
+<ul>
+<li>一个 <code>public</code> 访问级别的变量，其类型的访问级别不能是 <code>internal</code> 或 <code>private</code>。因为无法保证变量的类型在使用变量的地方也具有访问权限。</li>
+<li>函数的访问级别不能高于它的参数类型和返回类型的访问级别。因为如果函数定义为 <code>public</code> 而参数类型或者返回类型定义为 <code>internal</code> 或 <code>private</code>，就会出现函数可以在任何地方被访问，但是它的参数类型和返回类型却不可以。</li>
+</ul>
+<p><a name="default_access_levels"></a></p>
+<h3 id="默认访问级别">默认访问级别</h3><p>如果你不为代码中的实体显式指定访问级别，那么它们默认为 <code>internal</code> 级别（有一些例外情况，稍后会进行说明）。因此，在大多数情况下，我们不需要显式指定实体的访问级别。</p>
+<p><a name="access_levels_for_single-target_apps"></a></p>
+<h3 id="单_target_应用程序的访问级别">单 target 应用程序的访问级别</h3><p>当你编写一个单 target 应用程序时，应用的所有功能都是为该应用服务，而不需要提供给其他应用或者模块使用，所以我们不需要明确设置访问级别，使用默认的访问级别 <code>internal</code> 即可。但是，你也可以使用 <code>private</code> 级别，用于隐藏一些功能的实现细节。</p>
+<p><a name="access_levels_for_frameworks"></a></p>
+<h3 id="框架的访问级别">框架的访问级别</h3><p>当你开发框架时，就需要把一些对外的接口定义为 <code>public</code> 级别，以便使用者导入该框架后可以正常使用其功能。这些被你定义为 <code>public</code> 的接口，就是这个框架的 API。</p>
+<blockquote>
+<p>注意<br>框架依然会使用默认的 <code>internal</code> 级别，也可以指定为 <code>private</code> 级别。当你想把某个实体作为框架的 API 的时候，需显式为其指定 <code>public</code> 级别。</p>
+</blockquote>
+<p><a name="access_levels_for_unit_test_targets"></a></p>
+<h3 id="单元测试_target_的访问级别">单元测试 target 的访问级别</h3><p>当你的应用程序包含单元测试 target 时，为了测试，测试模块需要访问应用程序模块中的代码。默认情况下只有 <code>public</code> 级别的实体才可以被其他模块访问。然而，如果在导入应用程序模块的语句前使用 <code>@testable</code> 特性，然后在允许测试的编译设置（<code>Build Options -&gt; Enable Testability</code>）下编译这个应用程序模块，单元测试 target 就可以访问应用程序模块中所有 <code>internal</code> 级别的实体。</p>
+<p><a name="access_control_syntax"></a></p>
+<h2 id="访问控制语法">访问控制语法</h2><p>通过修饰符 <code>public</code>、<code>internal</code>、<code>private</code> 来声明实体的访问级别：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SomePublicClass</span> </span>&#123;&#125;</span><br><span class="line">internal <span class="class"><span class="keyword">class</span> <span class="title">SomeInternalClass</span> </span>&#123;&#125;</span><br><span class="line">private <span class="class"><span class="keyword">class</span> <span class="title">SomePrivateClass</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">public <span class="keyword">var</span> somePublicVariable = <span class="number">0</span></span><br><span class="line">internal <span class="keyword">let</span> someInternalConstant = <span class="number">0</span></span><br><span class="line">private <span class="func"><span class="keyword">func</span> <span class="title">somePrivateFunction</span><span class="params">()</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>除非专门指定，否则实体默认的访问级别为 <code>internal</code>，可以查阅<a href="#default_access_levels">默认访问级别</a>这一节。这意味着在不使用修饰符显式声明访问级别的情况下，<code>SomeInternalClass</code> 和 <code>someInternalConstant</code> 仍然拥有隐式的访问级别 <code>internal</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeInternalClass</span> </span>&#123;&#125;   <span class="comment">// 隐式访问级别 internal</span></span><br><span class="line"><span class="keyword">var</span> someInternalConstant = <span class="number">0</span> <span class="comment">// 隐式访问级别 internal</span></span><br></pre></td></tr></table></figure>
+<p><a name="custom_types"></a></p>
+<h2 id="自定义类型">自定义类型</h2><p>如果想为一个自定义类型指定访问级别，在定义类型时进行指定即可。新类型只能在它的访问级别限制范围内使用。例如，你定义了一个 <code>private</code> 级别的类，那这个类就只能在定义它的源文件中使用，可以作为属性类型、函数参数类型或者返回类型，等等。</p>
+<p>一个类型的访问级别也会影响到类型成员（属性、方法、构造器、下标）的默认访问级别。如果你将类型指定为 <code>private</code> 级别，那么该类型的所有成员的默认访问级别也会变成 <code>private</code>。如果你将类型指定为 <code>public</code> 或者 <code>internal</code> 级别（或者不明确指定访问级别，而使用默认的 <code>internal</code> 访问级别），那么该类型的所有成员的默认访问级别将是 <code>internal</code>。</p>
+<blockquote>
+<p>注意<br>上面提到，一个 <code>public</code> 类型的所有成员的访问级别默认为 <code>internal</code> 级别，而不是 <code>public</code> 级别。如果你想将某个成员指定为 <code>public</code> 级别，那么你必须显式指定。这样做的好处是，在你定义公共接口的时候，可以明确地选择哪些接口是需要公开的，哪些是内部使用的，避免不小心将内部使用的接口公开。</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SomePublicClass</span> </span>&#123;          <span class="comment">// 显式的 public 类</span></span><br><span class="line">   	public <span class="keyword">var</span> somePublicProperty = <span class="number">0</span>   <span class="comment">// 显式的 public 类成员</span></span><br><span class="line">   	<span class="keyword">var</span> someInternalProperty = <span class="number">0</span>        <span class="comment">// 隐式的 internal 类成员</span></span><br><span class="line">   	private <span class="func"><span class="keyword">func</span> <span class="title">somePrivateMethod</span><span class="params">()</span></span> &#123;&#125; <span class="comment">// 显式的 private 类成员</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeInternalClass</span> </span>&#123;               <span class="comment">// 隐式的 internal 类</span></span><br><span class="line">   	<span class="keyword">var</span> someInternalProperty = <span class="number">0</span>        <span class="comment">// 隐式的 internal 类成员</span></span><br><span class="line">   	private <span class="func"><span class="keyword">func</span> <span class="title">somePrivateMethod</span><span class="params">()</span></span> &#123;&#125; <span class="comment">// 显式的 private 类成员</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private <span class="class"><span class="keyword">class</span> <span class="title">SomePrivateClass</span> </span>&#123;        <span class="comment">// 显式的 private 类</span></span><br><span class="line">   	<span class="keyword">var</span> somePrivateProperty = <span class="number">0</span>         <span class="comment">// 隐式的 private 类成员</span></span><br><span class="line">   	<span class="func"><span class="keyword">func</span> <span class="title">somePrivateMethod</span><span class="params">()</span></span> &#123;&#125;         <span class="comment">// 隐式的 private 类成员</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="tuple_types"></a></p>
+<h3 id="元组类型">元组类型</h3><p>元组的访问级别将由元组中访问级别最严格的类型来决定。例如，如果你构建了一个包含两种不同类型的元组，其中一个类型为 <code>internal</code> 级别，另一个类型为 <code>private</code> 级别，那么这个元组的访问级别为 <code>private</code>。</p>
+<blockquote>
+<p>注意<br>元组不同于类、结构体、枚举、函数那样有单独的定义。元组的访问级别是在它被使用时自动推断出的，而无法明确指定。</p>
+</blockquote>
+<p><a name="function_types"></a></p>
+<h3 id="函数类型">函数类型</h3><p>函数的访问级别根据访问级别最严格的参数类型或返回类型的访问级别来决定。但是，如果这种访问级别不符合函数定义所在环境的默认访问级别，那么就需要明确地指定该函数的访问级别。</p>
+<p>下面的例子定义了一个名为 <code>someFunction</code> 的全局函数，并且没有明确地指定其访问级别。也许你会认为该函数应该拥有默认的访问级别 <code>internal</code>，但事实并非如此。事实上，如果按下面这种写法，代码将无法通过编译：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">someFunction</span><span class="params">()</span></span> -&gt; (<span class="type">SomeInternalClass</span>, <span class="type">SomePrivateClass</span>) &#123;</span><br><span class="line">   	<span class="comment">// 此处是函数实现部分</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，这个函数的返回类型是一个元组，该元组中包含两个自定义的类（可查阅<a href="#custom_types">自定义类型</a>）。其中一个类的访问级别是 <code>internal</code>，另一个的访问级别是 <code>private</code>，所以根据元组访问级别的原则，该元组的访问级别是 <code>private</code>（元组的访问级别与元组中访问级别最低的类型一致）。</p>
+<p>因为该函数返回类型的访问级别是 <code>private</code>，所以你必须使用 <code>private</code> 修饰符，明确指定该函数的访问级别：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private <span class="func"><span class="keyword">func</span> <span class="title">someFunction</span><span class="params">()</span></span> -&gt; (<span class="type">SomeInternalClass</span>, <span class="type">SomePrivateClass</span>) &#123;</span><br><span class="line">   	<span class="comment">// 此处是函数实现部分</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将该函数指定为 <code>public</code> 或 <code>internal</code>，或者使用默认的访问级别 <code>internal</code> 都是错误的，因为如果把该函数当做 <code>public</code> 或 <code>internal</code> 级别来使用的话，可能会无法访问 <code>private</code> 级别的返回值。</p>
+<p><a name="enumeration_types"></a></p>
+<h3 id="枚举类型">枚举类型</h3><p>枚举成员的访问级别和该枚举类型相同，你不能为枚举成员单独指定不同的访问级别。</p>
+<p>比如下面的例子，枚举 <code>CompassPoint</code> 被明确指定为 <code>public</code> 级别，那么它的成员 <code>North</code>、<code>South</code>、<code>East</code>、<code>West</code> 的访问级别同样也是 <code>public</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">enum</span> <span class="title">CompassPoint</span> </span>&#123;</span><br><span class="line">   	<span class="keyword">case</span> <span class="type">North</span></span><br><span class="line">   	<span class="keyword">case</span> <span class="type">South</span></span><br><span class="line">   	<span class="keyword">case</span> <span class="type">East</span></span><br><span class="line">   	<span class="keyword">case</span> <span class="type">West</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="raw_values_and_associated_values"></a></p>
+<h4 id="原始值和关联值">原始值和关联值</h4><p>枚举定义中的任何原始值或关联值的类型的访问级别至少不能低于枚举类型的访问级别。例如，你不能在一个 <code>internal</code> 访问级别的枚举中定义 <code>private</code> 级别的原始值类型。</p>
+<p><a name="nested_types"></a></p>
+<h3 id="嵌套类型">嵌套类型</h3><p>如果在 <code>private</code> 级别的类型中定义嵌套类型，那么该嵌套类型就自动拥有 <code>private</code> 访问级别。如果在 <code>public</code> 或者 <code>internal</code> 级别的类型中定义嵌套类型，那么该嵌套类型自动拥有 <code>internal</code> 访问级别。如果想让嵌套类型拥有 <code>public</code> 访问级别，那么需要明确指定该嵌套类型的访问级别。</p>
+<p><a name="subclassing"></a></p>
+<h2 id="子类">子类</h2><p>子类的访问级别不得高于父类的访问级别。例如，父类的访问级别是 <code>internal</code>，子类的访问级别就不能是 <code>public</code>。</p>
+<p>此外，你可以在符合当前访问级别的条件下重写任意类成员（方法、属性、构造器、下标等）。</p>
+<p>可以通过重写为继承来的类成员提供更高的访问级别。下面的例子中，类 <code>A</code> 的访问级别是 <code>public</code>，它包含一个方法 <code>someMethod()</code>，访问级别为 <code>private</code>。类 <code>B</code> 继承自类 <code>A</code>，访问级别为 <code>internal</code>，但是在类 <code>B</code> 中重写了类 <code>A</code> 中访问级别为 <code>private</code> 的方法 <code>someMethod()</code>，并重新指定为 <code>internal</code> 级别。通过这种方式，我们就可以将某类中 <code>private</code> 级别的类成员重新指定为更高的访问级别，以便其他人使用：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">   	private <span class="func"><span class="keyword">func</span> <span class="title">someMethod</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">internal <span class="class"><span class="keyword">class</span> <span class="title">B</span>: <span class="title">A</span> </span>&#123;</span><br><span class="line">   	<span class="keyword">override</span> internal <span class="func"><span class="keyword">func</span> <span class="title">someMethod</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们甚至可以在子类中，用子类成员去访问访问级别更低的父类成员，只要这一操作在相应访问级别的限制范围内（也就是说，在同一源文件中访问父类 <code>private</code> 级别的成员，在同一模块内访问父类 <code>internal</code> 级别的成员）：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    private <span class="func"><span class="keyword">func</span> <span class="title">someMethod</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">internal <span class="class"><span class="keyword">class</span> <span class="title">B</span>: <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> internal <span class="func"><span class="keyword">func</span> <span class="title">someMethod</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.someMethod()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为父类 <code>A</code> 和子类 <code>B</code> 定义在同一个源文件中，所以在子类 <code>B</code> 可以在重写的 <code>someMethod()</code> 方法中调用 <code>super.someMethod()</code>。</p>
+<p><a name="constants_variables_properties_subscripts"></a></p>
+<h2 id="常量、变量、属性、下标">常量、变量、属性、下标</h2><p>常量、变量、属性不能拥有比它们的类型更高的访问级别。例如，你不能定义一个 <code>public</code> 级别的属性，但是它的类型却是 <code>private</code> 级别的。同样，下标也不能拥有比索引类型或返回类型更高的访问级别。  </p>
+<p>如果常量、变量、属性、下标的类型是 <code>private</code> 级别的，那么它们必须明确指定访问级别为 <code>private</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private <span class="keyword">var</span> privateInstance = <span class="type">SomePrivateClass</span>()</span><br></pre></td></tr></table></figure>
+<p><a name="getters_and_setters"></a></p>
+<h3 id="Getter_和_Setter">Getter 和 Setter</h3><p>常量、变量、属性、下标的 <code>Getters</code> 和 <code>Setters</code> 的访问级别和它们所属类型的访问级别相同。</p>
+<p><code>Setter</code> 的访问级别可以低于对应的 <code>Getter</code> 的访问级别，这样就可以控制变量、属性或下标的读写权限。在 <code>var</code> 或 <code>subscript</code> 关键字之前，你可以通过 <code>private(set)</code> 或 <code>internal(set)</code> 为它们的写入权限指定更低的访问级别。</p>
+<blockquote>
+<p>注意<br>这个规则同时适用于存储型属性和计算型属性。即使你不明确指定存储型属性的 <code>Getter</code> 和 <code>Setter</code>，Swift 也会隐式地为其创建 <code>Getter</code> 和 <code>Setter</code>，用于访问该属性的后备存储。使用 <code>private(set)</code> 和 <code>internal(set)</code> 可以改变 <code>Setter</code> 的访问级别，这对计算型属性也同样适用。  </p>
+</blockquote>
+<p>下面的例子中定义了一个名为 <code>TrackedString</code> 的结构体，它记录了 <code>value</code> 属性被修改的次数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TrackedString</span> </span>&#123;</span><br><span class="line">    private(<span class="keyword">set</span>) <span class="keyword">var</span> numberOfEdits = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> value: <span class="type">String</span> = <span class="string">""</span> &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            numberOfEdits++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>TrackedString</code> 结构体定义了一个用于存储 <code>String</code> 值的属性 <code>value</code>，并将初始值设为 <code>&quot;&quot;</code>（一个空字符串）。该结构体还定义了另一个用于存储 <code>Int</code> 值的属性 <code>numberOfEdits</code>，它用于记录属性 <code>value</code> 被修改的次数。这个功能通过属性 <code>value</code> 的 <code>didSet</code> 观察器实现，每当给 <code>value</code> 赋新值时就会调用 <code>didSet</code> 方法，然后将 <code>numberOfEdits</code> 的值加一。</p>
+<p>结构体 <code>TrackedString</code> 和它的属性 <code>value</code> 均没有显式指定访问级别，所以它们都拥有默认的访问级别 <code>internal</code>。但是该结构体的 <code>numberOfEdits</code> 属性使用了 <code>private(set)</code> 修饰符，这意味着 <code>numberOfEdits</code> 属性只能在定义该结构体的源文件中赋值。<code>numberOfEdits</code> 属性的 <code>Getter</code> 依然是默认的访问级别 <code>internal</code>，但是 <code>Setter</code> 的访问级别是 <code>private</code>，这表示该属性只有在当前的源文件中是可读写的，而在当前源文件所属的模块中只是一个可读的属性。  </p>
+<p>如果你实例化 <code>TrackedString</code> 结构体，并多次对 <code>value</code> 属性的值进行修改，你就会看到 <code>numberOfEdits</code> 的值会随着修改次数而变化：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringToEdit = <span class="type">TrackedString</span>()</span><br><span class="line">stringToEdit.value = <span class="string">"This string will be tracked."</span></span><br><span class="line">stringToEdit.value += <span class="string">" This edit will increment numberOfEdits."</span></span><br><span class="line">stringToEdit.value += <span class="string">" So will this one."</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"The number of edits is <span class="subst">\(stringToEdit.numberOfEdits)</span>"</span>)</span><br><span class="line"><span class="comment">// 打印 “The number of edits is 3”</span></span><br></pre></td></tr></table></figure>
+<p>虽然你可以在其他的源文件中实例化该结构体并且获取到 <code>numberOfEdits</code> 属性的值，但是你不能对其进行赋值。这一限制保护了该记录功能的实现细节，同时还提供了方便的访问方式。</p>
+<p>你可以在必要时为 <code>Getter</code> 和 <code>Setter</code> 显式指定访问级别。下面的例子将 <code>TrackedString</code> 结构体明确指定为了 <code>public</code> 访问级别。结构体的成员（包括 <code>numberOfEdits</code> 属性）拥有默认的访问级别 <code>internal</code>。你可以结合 <code>public</code> 和 <code>private(set)</code> 修饰符把结构体中的 <code>numberOfEdits</code> 属性的 <code>Getter</code> 的访问级别设置为 <code>public</code>，而 <code>Setter</code> 的访问级别设置为 <code>private</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">TrackedString</span> </span>&#123;</span><br><span class="line">    public private(<span class="keyword">set</span>) <span class="keyword">var</span> numberOfEdits = <span class="number">0</span></span><br><span class="line">    public <span class="keyword">var</span> value: <span class="type">String</span> = <span class="string">""</span> &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            numberOfEdits++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="initializers"></a></p>
+<h2 id="构造器">构造器</h2><p>自定义构造器的访问级别可以低于或等于其所属类型的访问级别。唯一的例外是<a href="./14_Initialization.html#required_initializers">必要构造器</a>，它的访问级别必须和所属类型的访问级别相同。</p>
+<p>如同函数或方法的参数，构造器参数的访问级别也不能低于构造器本身的访问级别。</p>
+<p><a name="default_initializers"></a></p>
+<h3 id="默认构造器">默认构造器</h3><p>如<a href="./14_Initialization.html#default_initializers">默认构造器</a>所述，Swift 会为结构体和类提供一个默认的无参数的构造器，只要它们为所有存储型属性设置了默认初始值，并且未提供自定义的构造器。</p>
+<p>默认构造器的访问级别与所属类型的访问级别相同，除非类型的访问级别是 <code>public</code>。如果一个类型被指定为 <code>public</code> 级别，那么默认构造器的访问级别将为 <code>internal</code>。如果你希望一个 <code>public</code> 级别的类型也能在其他模块中使用这种无参数的默认构造器，你只能自己提供一个 <code>public</code> 访问级别的无参数构造器。</p>
+<p><a name="default_memberwise_initializers_for_structure_types"></a></p>
+<h3 id="结构体默认的成员逐一构造器">结构体默认的成员逐一构造器</h3><p>如果结构体中任意存储型属性的访问级别为 <code>private</code>，那么该结构体默认的成员逐一构造器的访问级别就是 <code>private</code>。否则，这种构造器的访问级别依然是 <code>internal</code>。</p>
+<p>如同前面提到的默认构造器，如果你希望一个 <code>public</code> 级别的结构体也能在其他模块中使用其默认的成员逐一构造器，你依然只能自己提供一个 <code>public</code> 访问级别的成员逐一构造器。</p>
+<p><a name="protocols"></a></p>
+<h2 id="协议">协议</h2><p>如果想为一个协议类型明确地指定访问级别，在定义协议时指定即可。这将限制该协议只能在适当的访问级别范围内被采纳。</p>
+<p>协议中的每一个要求都具有和该协议相同的访问级别。你不能将协议中的要求设置为其他访问级别。这样才能确保该协议的所有要求对于任意采纳者都将可用。</p>
+<blockquote>
+<p>注意<br>如果你定义了一个 <code>public</code> 访问级别的协议，那么该协议的所有实现也会是 <code>public</code> 访问级别。这一点不同于其他类型，例如，当类型是 <code>public</code> 访问级别时，其成员的访问级别却只是 <code>internal</code>。</p>
+</blockquote>
+<p><a name="protocol_inheritance"></a></p>
+<h3 id="协议继承">协议继承</h3><p>如果定义了一个继承自其他协议的新协议，那么新协议拥有的访问级别最高也只能和被继承协议的访问级别相同。例如，你不能将继承自 <code>internal</code> 协议的新协议定义为 <code>public</code> 协议。</p>
+<p><a name="protocol_conformance"></a></p>
+<h3 id="协议一致性">协议一致性</h3><p>一个类型可以采纳比自身访问级别低的协议。例如，你可以定义一个 <code>public</code> 级别的类型，它可以在其他模块中使用，同时它也可以采纳一个 <code>internal</code> 级别的协议，但是只能在该协议所在的模块中作为符合该协议的类型使用。</p>
+<p>采纳了协议的类型的访问级别取它本身和所采纳协议两者间最低的访问级别。也就是说如果一个类型是 <code>public</code> 级别，采纳的协议是 <code>internal</code> 级别，那么采纳了这个协议后，该类型作为符合协议的类型时，其访问级别也是 <code>internal</code>。</p>
+<p>如果你采纳了协议，那么实现了协议的所有要求后，你必须确保这些实现的访问级别不能低于协议的访问级别。例如，一个 <code>public</code> 级别的类型，采纳了 <code>internal</code> 级别的协议，那么协议的实现至少也得是 <code>internal</code> 级别。</p>
+<blockquote>
+<p>注意<br>Swift 和 Objective-C 一样，协议的一致性是全局的，也就是说，在同一程序中，一个类型不可能用两种不同的方式实现同一个协议。</p>
+</blockquote>
+<p><a name="extensions"></a></p>
+<h2 id="扩展">扩展</h2><p>你可以在访问级别允许的情况下对类、结构体、枚举进行扩展。扩展成员具有和原始类型成员一致的访问级别。例如，你扩展了一个 <code>public</code> 或者 <code>internal</code> 类型，扩展中的成员具有默认的 <code>internal</code> 访问级别，和原始类型中的成员一致 。如果你扩展了一个 <code>private</code> 类型，扩展成员则拥有默认的 <code>private</code> 访问级别。</p>
+<p>或者，你可以明确指定扩展的访问级别（例如，<code>private extension</code>），从而给该扩展中的所有成员指定一个新的默认访问级别。这个新的默认访问级别仍然可以被单独指定的访问级别所覆盖。</p>
+<p><a name="adding_protocol_conformance_with_an_extension"></a></p>
+<h3 id="通过扩展添加协议一致性">通过扩展添加协议一致性</h3><p>如果你通过扩展来采纳协议，那么你就不能显式指定该扩展的访问级别了。协议拥有相应的访问级别，并会为该扩展中所有协议要求的实现提供默认的访问级别。</p>
+<p><a name="generics"></a></p>
+<h2 id="泛型">泛型</h2><p>泛型类型或泛型函数的访问级别取决于泛型类型或泛型函数本身的访问级别，还需结合类型参数的类型约束的访问级别，根据这些访问级别中的最低访问级别来确定。</p>
+<p><a name="type_aliases"></a></p>
+<h2 id="类型别名">类型别名</h2><p>你定义的任何类型别名都会被当作不同的类型，以便于进行访问控制。类型别名的访问级别不可高于其表示的类型的访问级别。例如，<code>private</code> 级别的类型别名可以作为 <code>public</code>、<code>internal</code>、<code>private</code> 类型的别名，但是 <code>public</code> 级别的类型别名只能作为 <code>public</code> 类型的别名，不能作为 <code>internal</code> 或 <code>private</code> 类型的别名。</p>
+<blockquote>
+<p>注意<br>这条规则也适用于为满足协议一致性而将类型别名用于关联类型的情况。</p>
+</blockquote>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/25/swift-cn/chapter2/25_Advanced_Operators/" itemprop="url">
                 第二章-25高级运算符（Advanced Operators）
               </a>
@@ -527,139 +793,6 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/25/swift-cn/README/" itemprop="url">
-                已同步更新到 Swift 2.1
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T12:00:00+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/README/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/README/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><blockquote>
-<p>已同步更新到 Swift 2.1</p>
-</blockquote>
-<h1 id="2-0_新的开始">2.0 新的开始</h1><blockquote>
-<p>Swift 兴趣交流群：<code>131595168</code>, <code>146932759</code>, <code>151336833</code>, <code>153549217</code>. <strong>加入一个群即可，请勿重复添加</strong></p>
-<p><a target="_blank" href="http://swiftweekly.cn">订阅 Swift 开发者周报，每周获取最新 Swift 资源</a></p>
-</blockquote>
-<!-- -->
-<blockquote>
-<p>如果您觉得这个项目不错，请<a target="_blank" href="https://github.com/numbbbbb/the-swift-programming-language-in-chinese">点击Star一下</a>，您的支持是我们最大的动力。</p>
-</blockquote>
-<h2 id="1">1</h2><p>开源项目完成难，维护更难。</p>
-<p>大家看到的是发布时的瞩目和荣耀，却没有看到项目本身质量不高、错误频出。这并不是翻译者和校对者的问题，他们已经付出了足够的努力。真正的问题在我，没有建立起长期的维护团队，因此后期的校对和更新都难以实施。</p>
-<p>1.0发布之后，我们就再也没能和苹果的文档同步。语法错误、编译不通过、语言不通顺，阅读量直线下降，最低时每天只有不到1000人访问。</p>
-<p>6月9日，calvingit发了一个issue“准备翻译2.0版本吗”，我没有回复，应该已经没人关注这个项目了吧，我想。</p>
-<h2 id="2">2</h2><p>我错了。</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1472352/10558349/74eb84de-74fe-11e5-99d2-155dfacff068.png" alt="1"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558351/79101476-74fe-11e5-82d5-feb815d0b86b.png" alt="2"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558353/7c983272-74fe-11e5-8397-97c5176261ca.png" alt="3"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558354/7cd63ae0-74fe-11e5-9b9d-1d7ec6516319.png" alt="4"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558358/7fe50914-74fe-11e5-9b2b-a7b9129ea638.png" alt="5"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558360/83a8b064-74fe-11e5-9c2f-2e79d3309f62.png" alt="6"></p>
-<p>在我没有任何回复的情况下，不到一天时间，有五位朋友报名。看到这些回复的时候我真的很惊讶，也很感动，无论这个项目存在多少问题，只要有人关注，有人愿意为它付出，那我还有什么理由放弃呢？</p>
-<p>6月28日8点55分，Swift 2.0翻译正式启动。按下发送按钮后，我不停的刷新页面，半个小时过去了，一个回复都没有。“还是不行啊”“如果再过一个小时没人回复我就把issue删掉”，类似的念头不断出现，又不断消失。</p>
-<p>9:35，xtymichael第一个回复，而且一下就认领了三篇！接下来就是不断的回复认领，到中午已经有超过一半章节被认领。</p>
-<p>第二天早晨，37个章节全部认领完毕。</p>
-<h2 id="3">3</h2><p>经过一个多月的努力，我们终于完成了文档的更新。听起来似乎没什么，确实，从1到n总是没有从0到1那么振奋人心。不过真正参与了才知道，修改往往比创造更麻烦，一个需要耐心，一个需要激情，前者往往得不到应有的重视。</p>
-<p>但是我还是想尽最大可能去感谢他们，这个项目能走到今天，靠的不是我，是那个issue，是那些回复，是这几十个兄弟在工作学习的空闲敲下的每一个字符。而我能做的，只是在每篇文章的开头，那个所有人都会忽略的地方，加上他们的ID。</p>
-<p>下次你再打开这篇文档，可以多看看那些列在最上方的ID，哪怕不去follow和star，只是看一眼就好。他们的所有努力和付出，就存在于这短暂的一瞥中。</p>
-<p>Swift 2.0 参与者名单（按照章节顺序）：</p>
-<ul>
-<li><a href="https://github.com/xtymichael" target="_blank" rel="external">xtymichael</a></li>
-<li><a href="https://github.com/AlanMelody" target="_blank" rel="external">AlanMelody</a></li>
-<li><a href="https://github.com/DianQK" target="_blank" rel="external">DianQK</a></li>
-<li><a href="https://github.com/dreamkidd" target="_blank" rel="external">dreamkidd</a></li>
-<li><a href="https://github.com/100mango" target="_blank" rel="external">100mango</a></li>
-<li><a href="https://github.com/futantan" target="_blank" rel="external">futantan</a></li>
-<li><a href="https://github.com/SkyJean" target="_blank" rel="external">SkyJean</a></li>
-<li><a href="https://github.com/yangsiy" target="_blank" rel="external">yangsiy</a></li>
-<li><a href="https://github.com/shanksyang" target="_blank" rel="external">shanksyang</a></li>
-<li><a href="https://github.com/chenmingbiao" target="_blank" rel="external">chenmingbiao</a></li>
-<li><a href="https://github.com/Channe" target="_blank" rel="external">Channe</a></li>
-<li><a href="https://github.com/lyojo" target="_blank" rel="external">lyojo</a></li>
-<li><a href="https://github.com/SergioChan" target="_blank" rel="external">SergioChan</a></li>
-<li><a href="https://github.com/mmoaay" target="_blank" rel="external">mmoaay</a></li>
-<li><a href="https://github.com/buginux" target="_blank" rel="external">buginux</a></li>
-<li><a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></li>
-<li><a href="https://github.com/EudeMorgen" target="_blank" rel="external">EudeMorgen</a></li>
-<li><a href="https://github.com/littledogboy" target="_blank" rel="external">littledogboy</a></li>
-<li><a href="https://github.com/Lenhoon" target="_blank" rel="external">Lenhoon</a></li>
-<li><a href="https://github.com/ray16897188" target="_blank" rel="external">ray16897188</a></li>
-<li><a href="https://github.com/wardenNScaiyi" target="_blank" rel="external">wardenNScaiyi</a></li>
-<li><a href="https://github.com/miaosiqi" target="_blank" rel="external">miaosiqi</a></li>
-</ul>
-<p>最后，感谢<a href="http://wiki.jikexueyuan.com" target="_blank" rel="external">极客学院</a>提供的wiki系统，在国内访问起来速度很快，优化后的样式看起来也更舒服。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
               <a class="post-title-link" href="/2015/12/25/swift-cn/v1.0/" itemprop="url">
                 v1.0
               </a>
@@ -792,6 +925,139 @@
 <li><a href="https://github.com/dabing1022" target="_blank" rel="external">dabing1022</a></li>
 <li><a href="https://github.com/marsprince" target="_blank" rel="external">marsprince</a></li>
 </ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/25/swift-cn/README/" itemprop="url">
+                已同步更新到 Swift 2.1
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-25T12:00:00+08:00" content="2015-12-25">
+            2015-12-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/25/swift-cn/README/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/README/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><blockquote>
+<p>已同步更新到 Swift 2.1</p>
+</blockquote>
+<h1 id="2-0_新的开始">2.0 新的开始</h1><blockquote>
+<p>Swift 兴趣交流群：<code>131595168</code>, <code>146932759</code>, <code>151336833</code>, <code>153549217</code>. <strong>加入一个群即可，请勿重复添加</strong></p>
+<p><a target="_blank" href="http://swiftweekly.cn">订阅 Swift 开发者周报，每周获取最新 Swift 资源</a></p>
+</blockquote>
+<!-- -->
+<blockquote>
+<p>如果您觉得这个项目不错，请<a target="_blank" href="https://github.com/numbbbbb/the-swift-programming-language-in-chinese">点击Star一下</a>，您的支持是我们最大的动力。</p>
+</blockquote>
+<h2 id="1">1</h2><p>开源项目完成难，维护更难。</p>
+<p>大家看到的是发布时的瞩目和荣耀，却没有看到项目本身质量不高、错误频出。这并不是翻译者和校对者的问题，他们已经付出了足够的努力。真正的问题在我，没有建立起长期的维护团队，因此后期的校对和更新都难以实施。</p>
+<p>1.0发布之后，我们就再也没能和苹果的文档同步。语法错误、编译不通过、语言不通顺，阅读量直线下降，最低时每天只有不到1000人访问。</p>
+<p>6月9日，calvingit发了一个issue“准备翻译2.0版本吗”，我没有回复，应该已经没人关注这个项目了吧，我想。</p>
+<h2 id="2">2</h2><p>我错了。</p>
+<p><img src="https://cloud.githubusercontent.com/assets/1472352/10558349/74eb84de-74fe-11e5-99d2-155dfacff068.png" alt="1"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558351/79101476-74fe-11e5-82d5-feb815d0b86b.png" alt="2"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558353/7c983272-74fe-11e5-8397-97c5176261ca.png" alt="3"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558354/7cd63ae0-74fe-11e5-9b9d-1d7ec6516319.png" alt="4"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558358/7fe50914-74fe-11e5-9b2b-a7b9129ea638.png" alt="5"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558360/83a8b064-74fe-11e5-9c2f-2e79d3309f62.png" alt="6"></p>
+<p>在我没有任何回复的情况下，不到一天时间，有五位朋友报名。看到这些回复的时候我真的很惊讶，也很感动，无论这个项目存在多少问题，只要有人关注，有人愿意为它付出，那我还有什么理由放弃呢？</p>
+<p>6月28日8点55分，Swift 2.0翻译正式启动。按下发送按钮后，我不停的刷新页面，半个小时过去了，一个回复都没有。“还是不行啊”“如果再过一个小时没人回复我就把issue删掉”，类似的念头不断出现，又不断消失。</p>
+<p>9:35，xtymichael第一个回复，而且一下就认领了三篇！接下来就是不断的回复认领，到中午已经有超过一半章节被认领。</p>
+<p>第二天早晨，37个章节全部认领完毕。</p>
+<h2 id="3">3</h2><p>经过一个多月的努力，我们终于完成了文档的更新。听起来似乎没什么，确实，从1到n总是没有从0到1那么振奋人心。不过真正参与了才知道，修改往往比创造更麻烦，一个需要耐心，一个需要激情，前者往往得不到应有的重视。</p>
+<p>但是我还是想尽最大可能去感谢他们，这个项目能走到今天，靠的不是我，是那个issue，是那些回复，是这几十个兄弟在工作学习的空闲敲下的每一个字符。而我能做的，只是在每篇文章的开头，那个所有人都会忽略的地方，加上他们的ID。</p>
+<p>下次你再打开这篇文档，可以多看看那些列在最上方的ID，哪怕不去follow和star，只是看一眼就好。他们的所有努力和付出，就存在于这短暂的一瞥中。</p>
+<p>Swift 2.0 参与者名单（按照章节顺序）：</p>
+<ul>
+<li><a href="https://github.com/xtymichael" target="_blank" rel="external">xtymichael</a></li>
+<li><a href="https://github.com/AlanMelody" target="_blank" rel="external">AlanMelody</a></li>
+<li><a href="https://github.com/DianQK" target="_blank" rel="external">DianQK</a></li>
+<li><a href="https://github.com/dreamkidd" target="_blank" rel="external">dreamkidd</a></li>
+<li><a href="https://github.com/100mango" target="_blank" rel="external">100mango</a></li>
+<li><a href="https://github.com/futantan" target="_blank" rel="external">futantan</a></li>
+<li><a href="https://github.com/SkyJean" target="_blank" rel="external">SkyJean</a></li>
+<li><a href="https://github.com/yangsiy" target="_blank" rel="external">yangsiy</a></li>
+<li><a href="https://github.com/shanksyang" target="_blank" rel="external">shanksyang</a></li>
+<li><a href="https://github.com/chenmingbiao" target="_blank" rel="external">chenmingbiao</a></li>
+<li><a href="https://github.com/Channe" target="_blank" rel="external">Channe</a></li>
+<li><a href="https://github.com/lyojo" target="_blank" rel="external">lyojo</a></li>
+<li><a href="https://github.com/SergioChan" target="_blank" rel="external">SergioChan</a></li>
+<li><a href="https://github.com/mmoaay" target="_blank" rel="external">mmoaay</a></li>
+<li><a href="https://github.com/buginux" target="_blank" rel="external">buginux</a></li>
+<li><a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></li>
+<li><a href="https://github.com/EudeMorgen" target="_blank" rel="external">EudeMorgen</a></li>
+<li><a href="https://github.com/littledogboy" target="_blank" rel="external">littledogboy</a></li>
+<li><a href="https://github.com/Lenhoon" target="_blank" rel="external">Lenhoon</a></li>
+<li><a href="https://github.com/ray16897188" target="_blank" rel="external">ray16897188</a></li>
+<li><a href="https://github.com/wardenNScaiyi" target="_blank" rel="external">wardenNScaiyi</a></li>
+<li><a href="https://github.com/miaosiqi" target="_blank" rel="external">miaosiqi</a></li>
+</ul>
+<p>最后，感谢<a href="http://wiki.jikexueyuan.com" target="_blank" rel="external">极客学院</a>提供的wiki系统，在国内访问起来速度很快，优化后的样式看起来也更舒服。</p>
 </span>
         
       
@@ -2574,203 +2840,6 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/06_Attributes/" itemprop="url">
-                第三章-06特性（Attributes）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:15+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/06_Attributes/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/06_Attributes/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="特性（Attributes）">特性（Attributes）</h1><hr>
-<blockquote>
-<p>1.0<br>翻译：<a href="https://github.com/Hawstein" target="_blank" rel="external">Hawstein</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
-<p>2.0<br>翻译+校对：<a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></p>
-<p>2.1<br>翻译：<a href="https://github.com/kevin833752" target="_blank" rel="external">小铁匠Linus</a></p>
-</blockquote>
-<p>本页内容包括：</p>
-<ul>
-<li><a href="#declaration_attributes">声明特性</a></li>
-<li><a href="#type_attributes">类型特性</a></li>
-</ul>
-<p>特性提供了关于声明和类型的更多信息。在Swift中有两类特性，用于修饰声明的以及用于修饰类型的。</p>
-<p>通过以下方式指定一个特性：符号<code>@</code>后面跟特性名，如果包含参数，则把参数带上：</p>
-<blockquote>
-<p>@<code>attribute name</code><br>@<code>attribute name</code>(<code>attribute arguments</code>)  </p>
-</blockquote>
-<p>有些声明特性通过接收参数来指定特性的更多信息以及它是如何修饰一个特定的声明的。这些特性的参数写在小括号内，它们的格式由它们所属的特性来定义。</p>
-<p><a name="declaration_attributes"></a></p>
-<h2 id="声明特性">声明特性</h2><p>声明特性只能应用于声明。然而，你也可以将<code>noreturn</code>特性应用于函数或方法类型。</p>
-<p><code>autoclosure</code></p>
-<p>这个特性通过把表达式自动封装成无参数的闭包来延迟表达式的计算。它可以声明返回表达式自身类型的没有参数的方法类型，也可以用于函数参数的声明。含有<code>autoclosure</code>特性的声明同时也具有<code>noescape</code>的特性，除非传递可选参数<code>escaping</code>.关于怎样使用<code>autoclosure</code>特性的例子，参见<a href="./03_Types.html#function_type">函数类型</a>.</p>
-<p><code>available</code></p>
-<p>将<code>available</code>特性用于声明时，意味着该声明的生命周期会依赖于特定的平台和操作系统版本。</p>
-<p><code>available</code>特性经常与参数列表一同出现，该参数列表至少有两个参数，参数之间由逗号分隔。这些参数由以下这些平台名字中的一个起头：</p>
-<ul>
-<li><code>iOS</code></li>
-<li><code>iOSApplicationExtension</code></li>
-<li><code>OSX</code></li>
-<li><code>OSXApplicationExtension</code></li>
-<li><code>watchOS</code></li>
-</ul>
-<p>当然，你也可以用一个星号(*)来表示，该声明在上面提到的所有平台上都是有效的。</p>
-<p>剩下的参数，可以以任何顺序出现，并且可以添加关于声明生命周期的附加信息，包括重要的里程碑。</p>
-<ul>
-<li><p><code>unavailable</code>参数表示：该声明在特定的平台上是无效的</p>
-</li>
-<li><p><code>introduced</code>参数表示：该声明第一次被引入时所在平台的版本。格式如下：<br></p><p><code>introduced=version number</code></p><p>这里的<code>version number</code>由一个正的十进制整数或浮点数构成。</p>
-</li>
-<li><p><code>deprecated</code>参数表示：该声明第一次被建议弃用时所在平台的版本。格式如下：<br></p><p><code>deprecated=version number</code></p><p>这里的<code>version number</code>由一个正的十进制整数或浮点数构成。</p>
-</li>
-<li><p><code>obsoleted</code>参数表示：该声明第一次被弃用时所在平台的版本。当一个声明被弃用时，它就从此平台中被移除，不能再被使用。格式如下：<br></p><p><code>obsoleted=version number</code></p><p>这里的<code>version number</code>由一个正的十进制整数或浮点数构成。</p>
-</li>
-<li><p><code>message</code>参数用来提供文本信息。当使用建议弃用或者被弃用的声明时，编译器会抛出错误或警告信息。格式如下：<br></p><p><code>message=message</code></p><p>这里的<code>message</code>由一个字符串文字构成。</p>
-</li>
-<li><p><code>renamed</code>参数用来提供文本信息，用以表示被重命名的声明的新名字。当使用这个重命名的声明遇到错误时，编译器会显示出该新名字。格式如下：<br></p><p><code>renamed=new name</code></p><p>这里的<code>new name</code>由一个字符串文字构成。</p>
-</li>
-</ul>
-<p>你可以将<code>renamed</code>参数和<code>unavailable</code>参数以及类型别名声明组合使用，以向用户表示：在你的代码中，一个声明已经被重命名。当一个声明的名字在一个框架或者库的不同发布版本间发生变化时，这会相当有用。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// First release</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyProtocol</span> </span>&#123;</span><br><span class="line">    <span class="comment">// protocol definition</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Subsequent release renames MyProtocol</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyRenamedProtocol</span> </span>&#123;</span><br><span class="line">    <span class="comment">// protocol definition</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@available(*, unavailable, renamed=<span class="string">"MyRenamedProtocol"</span>)</span><br><span class="line"><span class="keyword">typealias</span> <span class="type">MyProtocol</span> = <span class="type">MyRenamedProtocol</span></span><br></pre></td></tr></table></figure>
-<p>你可以在一个单独的声明上使用多个<code>available</code>特性，以详细说明该声明在不同平台上的有效性。编译器只有在当前的目标平台和<code>available</code>特性中指定的平台匹配时，才会使用<code>available</code>特性。</p>
-<p>如果<code>available</code>特性除了平台名称参数外，只指定了一个<code>introduced</code>参数，那么可以使用以下简写语法代替：</p>
-<p>@available(<code>platform name</code> <code>version number</code>, *)</p>
-<p><code>available</code>特性的简写语法可以简明地表达出多个平台的可用性。尽管这两种形式在功能上是相同的，但请尽可能地使用简明语法形式。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@available(iOS <span class="number">8.0</span>, <span class="type">OSX</span> <span class="number">10.10</span>, *)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// class definition</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>objc</code></p>
-<p>该特性用于修饰任何可以在Objective-C中表示的声明。比如，非嵌套类、协议、非泛型枚举（仅限整型值类型）、类和协议的属性和方法（包括<code>getter</code>和<code>setter</code>）、构造器、析构器以及下标。<code>objc</code>特性告诉编译器这个声明可以在Objective-C代码中使用。</p>
-<p>标有<code>objc</code>特性的类必须继承自Objective-C中定义的类。如果你将<code>objc</code>特性应用于一个类或协议，它也会隐式地应用于那个类的成员或协议。对于标记了<code>objc</code>特性的类，编译器会隐式地为它的子类添加<code>objc</code>特性。标记了<code>objc</code>特性的协议不能继承没有标记<code>objc</code>的协议。</p>
-<p>如果你将<code>objc</code>特性应用于枚举，每一个枚举的<code>case</code>都会以枚举名称和<code>case</code>名称组合的方式暴露在Objective-C代码中。例如：一个名为<code>Venus</code>的<code>case</code>在<code>Planet</code>枚举中，这个<code>case</code>暴露在Objective-C代码中时叫做<code>PlanetVenus</code>。</p>
-<p><code>objc</code>特性有一个可选的参数，由标记符组成。当你想把<code>objc</code>所修饰的实体以一个不同的名字暴露给Objective-C时，你就可以使用这个特性参数。你可以使用这个参数来命名类，协议，方法，getters，setters，以及构造器。下面的例子把<code>ExampleClass</code>中<code>enabled</code>属性的getter暴露给Objective-C，名字是<code>isEnabled</code>，而不是它原来的属性名。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@objc</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleClass</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> enabled: <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="preprocessor">@objc</span>(isEnabled) <span class="keyword">get</span> &#123;</span><br><span class="line">        <span class="comment">// Return the appropriate value</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>noescape</code></p>
-<p>在函数或者方法声明上使用该特性，它表示参数将不会被存储用作后续的计算，其用来确保不会超出函数调用的生命周期。对于其属性或方法来说，使用<code>noescape</code>声明属性的函数类型不需要显式的使用<code>self.</code>。</p>
-<p><code>nonobjc</code></p>
-<p>该特性用于方法、属性、下标、或构造器的声明，这些声明本是可以在Objective-C代码中表示的。使用<code>nonobjc</code>特性告诉编译器这个声明不能在Objective-C代码中使用。</p>
-<p>可以使用<code>nonobjc</code>特性解决标有<code>objc</code>的类中桥接方法的循环问题，该特性还允许标有<code>objc</code>的类的构造器和方法进行重载(overload)。</p>
-<p>标有<code>nonobjc</code>特性的方法不能重写(override)一个标有<code>objc</code>特性的方法。然而，标有<code>objc</code>特性的方法可以重写标有<code>nonobjc</code>特性的方法。同样，标有<code>nonobjc</code>特性的方法不能满足一个需要标有<code>@objc</code>特性的方法的协议。</p>
-<p><code>noreturn</code></p>
-<p>该特性用于修饰函数或方法声明，表明该函数或方法的对应类型，<code>T</code>，是<code>@noreturn T</code>。你可以用这个特性修饰函数或方法的类型，这样一来，函数或方法就不会返回到它的调用者中去。</p>
-<p>对于一个没有用<code>noreturn</code>特性标记的函数或方法，你可以将它重写为用该特性标记的。相反，对于一个已经用<code>noreturn</code>特性标记的函数或方法，你则不可以将它重写为没使用该特性标记的。当你在一个comforming类型中实现一个协议方法时，该规则同样适用。</p>
-<p><code>NSApplicationMain</code></p>
-<p>在类上使用该特性表示该类是应用程序委托类，使用该特性与调用<code>NSApplicationMain(_:_:)</code>函数并且把该类的名字作为委托类的名字传递给函数的效果相同。</p>
-<p>如果你不想使用这个特性，可以提供一个<code>main.swift</code>文件，并且提供一个<code>main()</code>函数去调用<code>NSApplicationMain(_:_:)</code>函数。比如，如果你的应用程序使用一个派生于<code>NSApplication</code>的自定义子类作为主要类，你可以调用<code>NSApplicationMain</code>函数而不是使用该特性。</p>
-<p><code>NSCopying</code></p>
-<p>该特性用于修饰一个类的存储型变量属性。该特性将使属性的setter与属性值的一个副本合成，这个值由<code>copyWithZone(_:)</code>方法返回，而不是属性本身的值。该属性的类型必需遵循<code>NSCopying</code>协议。</p>
-<p><code>NSCopying</code>特性的原理与Objective-C中的<code>copy</code>特性相似。</p>
-<p><code>NSManaged</code></p>
-<p>该特性用于修饰<code>NSManagedObject</code>子类中的实例方法或存储型变量属性，表明属性的存储和实现由Core Data在运行时基于相关实体描述动态提供。对于标记了<code>NSManaged</code>特性的属性，Core Data也会在运行时提供存储。</p>
-<p><code>testable</code></p>
-<p>该特性用于<code>import</code>声明可以测试的编译模块，它能访问任何标有<code>internal</code>权限标识符的实体，这和将它声明为<code>public</code>权限标识符有同样的效果。</p>
-<p><code>UIApplicationMain</code></p>
-<p>在类上使用该特性表示该类是应用程序委托类，使用该特性与调用<code>UIApplicationMain(_:_:)</code>函数并且把该类的名字作为委托类的名字传递给函数的效果相同。</p>
-<p>如果你不想使用这个特性，可以提供一个<code>main.swift</code>文件，并且提供一个<code>main</code>函数去调用<code>UIApplicationMain(_:_:)</code>函数。比如，如果你的应用程序使用一个派生于<code>UIApplication</code>的自定义子类作为主要类，你可以调用<code>UIApplicationMain</code>函数而不是使用该特性。</p>
-<p><code>warn_unused_result</code></p>
-<p>该特性应用于方法或函数声明，当方法或函数被调用，但其结果未被使用时，该特性会让编译器会产生警告。</p>
-<p>你可以使用这个特性提供一个警告信息，这个警告信息是关于不正确地使用未变异的方法，这个方法也有一个对应的变异方法。</p>
-<p><code>warn_unused_result</code>特性会有选择地采用下面两个参数之一。</p>
-<ul>
-<li><p><code>message</code>参数用来提供警告信息。在当方法或函数被调用，但其结果未被使用时，会显示警告信息。格式如下：<br></p><p><code>message=message</code></p><p>这里的<code>message</code>由一个字符串文字构成。</p>
-</li>
-<li><p><code>mutable_variant</code>参数用于提供变异方法的名称，如果未变异方法以一个可变的值被调用而且其结果并未被使用时，应该使用此变异方法。格式如下（方法名有字符串构成）：</p><p><code>mutable_variant=method name</code></p><p><br>比如，Swift标准库同时提供了变异方法<code>sortInPlace()</code>和未变异方法<code>sort()</code>集合，它们的元素生成器符合<code>Comparable</code>协议。如果你调用了<code>sort()</code>方法，而没有使用它的结果，其实很有可能，你是打算使用变异方法<code>sortInPlace()</code>。</p>
-</li>
-</ul>
-<h3 id="Interface_Builder使用的声明特性">Interface Builder使用的声明特性</h3><p>Interface Builder特性是Interface Builder用来与Xcode同步的声明特性。Swift提供了以下的Interface Builder特性：<code>IBAction</code>，<code>IBDesignable</code>，<code>IBInspectable</code>，以及<code>IBOutlet</code>。这些特性与Objective-C中对应的特性在概念上是相同的。</p>
-<p><code>IBOutlet</code>和<code>IBInspectable</code>用于修饰一个类的属性声明；<code>IBAction</code>特性用于修饰一个类的方法声明；<code>IBDesignable</code>用于修饰类的声明。</p>
-<p><a name="type_attributes"></a></p>
-<h2 id="类型特性">类型特性</h2><p>类型特性只能用于修饰类型。然而，你也可以用<code>noreturn</code>特性去修饰函数或方法声明。</p>
-<p><code>convention</code></p>
-<p>该特性用于函数的类型，它指出函数调用的约定。</p>
-<p><code>convention</code>特性总是与下面的参数之一一起出现。</p>
-<ul>
-<li><p><code>swift</code>参数用于表明一个Swift函数引用。这是Swift中标准的函数值调用约定。</p>
-</li>
-<li><p><code>block</code>参数用于表明一个Objective-C兼容的块引用。函数值表示为一个块对象的引用，这是一个<code>id-</code>兼容的Objective-C对象，对象中嵌入了调用函数。调用函数使用C的调用约定。</p>
-</li>
-<li><p><code>c</code>参数用于表明一个C函数引用。函数值没有上下文，这个函数也使用C的调用约定。</p>
-</li>
-</ul>
-<p>使用C函数调用约定的函数也可用作使用Objective-C块调用约定的函数，同时使用Objective-C块调用约定的函数也可用作使用Swift函数调用约定的函数。然而，只有非泛型的全局函数和本地函数或者不使用任何本地变量的闭包可以被用作使用C函数调用约定的函数。</p>
-<p><code>noreturn</code></p>
-<p>该特性用于修饰函数或方法的类型，表明该函数或方法不会返回到它的调用者中去。你也可以用它标记函数或方法的声明，表示函数或方法的相应类型，<code>T</code>，是<code>@noreturn T</code>。</p>
-<blockquote>
-<p>特性语法<br><em>特性</em> → <strong>@</strong> <a href="#attribute_name"><em>特性名</em></a> <a href="#attribute_argument_clause"><em>特性参数子句</em></a> (可选)<br><em>特性名</em> → <a href="02_Lexical_Structure.html#identifiers"><em>标识符</em></a><br><em>特性参数子句</em> → <strong>(</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>特性(Attributes)列表</em> → <a href="#attribute"><em>特色</em></a> <a href="#attributes"><em>特性(Attributes)列表</em></a> (可选)<br><em>平衡令牌列表</em> → <a href="#balanced_token"><em>平衡令牌</em></a> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选)<br><em>平衡令牌</em> → <strong>(</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>平衡令牌</em> → <strong>[</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>]</strong><br><em>平衡令牌</em> → <strong>{</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>}</strong><br><em>平衡令牌</em> → <strong>任意标识符, 关键字, 字面量或运算符</strong><br><em>平衡令牌</em> → <strong>任意标点除了(, ), [, ], {, 或 }</strong></p>
-</blockquote>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2809,7 +2878,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">136</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

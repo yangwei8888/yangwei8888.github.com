@@ -1692,6 +1692,162 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/30/avos/ios_crashreporting_guide/" itemprop="url">
+                iOS 崩溃报告使用指南
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-30T07:56:29+08:00" content="2015-12-30">
+            2015-12-30
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/leancloud/" itemprop="url" rel="index">
+                  <span itemprop="name">leancloud</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/30/avos/ios_crashreporting_guide/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/ios_crashreporting_guide/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="iOS_崩溃报告使用指南">iOS 崩溃报告使用指南</h1><p>崩溃报告可以自动收集用户端产生的各种异常崩溃信息，包括完整的调用堆栈、设备信息、应用信息等等。如果还没有安装 LeanCloud iOS SDK，请阅读 <a href="/start.html">快速入门</a> 来获得该 SDK，并在 Xcode 中运行和熟悉示例代码。</p>
+<h2 id="启用">启用</h2><p>要启用崩溃报告功能，需要将 AVOSCloudCrashReporting.framework 添加到项目的依赖库列表，然后在 AppDelegate 之中，在 LeanCloud SDK 初始化之前添加如下代码：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enable Crash Reporting</span></span><br><span class="line">[<span class="built_in">AVOSCloudCrashReporting</span> enable];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Setup AVOSCloud</span></span><br><span class="line">[<span class="built_in">AVOSCloud</span> setApplicationId:<span class="string">@"&#123;&#123;appid&#125;&#125;"</span> clientKey:<span class="string">@"&#123;&#123;appkey&#125;&#125;"</span>];</span><br></pre></td></tr></table></figure>
+<p>崩溃报告打开后，应用的崩溃信息会发送到 LeanCloud 云端，具体内容可在 <a href="/stat.html?appid=#/stat/crashreport">控制台 / 分析 / 错误分析</a> 里看到。</p>
+<h2 id="符号化">符号化</h2><p>将应用每个版本的符号文件上传至 LeanCloud，会有助于 LeanCLoud 后台正确解析崩溃堆栈信息，更准确地定位问题，因此这一步骤非常重要。</p>
+<p>上传符号文件有两种方式：每次构建应用时自动上传和手动上传。我们推荐使用自动上传，这样开发者就不需要在每次发布版本时，还要记着去上传符号文件。实现符号文件<strong>自动上传</strong>的步骤如下：</p>
+<p>安装客户端工具（如果出现权限错误，可以在命令前面加上 <code>sudo</code>）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem update --system</span><br><span class="line">gem install --no-wrappers -n /usr/<span class="built_in">local</span>/bin leancloud</span><br></pre></td></tr></table></figure>
+<p>在应用的 Targets 中，选择 <strong>Build Settings</strong> &gt; <strong>Build Options</strong> &gt; <strong>Debug Information Format</strong>，将其设置为 <strong>DWARF with dSYM File</strong>；再打开 <strong>Build Phases</strong> &gt;<span class="text-muted">（点击 + 号）</span>&gt; <strong>New Run Script Phase</strong>，添加一个 <strong>Run Script</strong> 步骤：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">leancloud upload_symbol \</span><br><span class="line"><span class="operator">-f</span> <span class="string">"<span class="variable">$&#123;DWARF_DSYM_FOLDER_PATH&#125;</span>/<span class="variable">$&#123;DWARF_DSYM_FILE_NAME&#125;</span>"</span> \</span><br><span class="line">-i <span class="string">"&#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">-k <span class="string">"&#123;&#123;appkey&#125;&#125;"</span></span><br></pre></td></tr></table></figure>
+<p>如果只想在 Archive 发布时运行这个脚本，可以勾选 <strong>Run script only when installing</strong>，这样可以加快调试时 Build 的速度。</p>
+<p>要手动上传符号文件，则使用：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">leancloud upload_symbol \</span><br><span class="line"><span class="operator">-f</span> <span class="string">"&lt;dSYM/xcarchive/DWARF 请按下面提示替换本路径&gt;"</span> \</span><br><span class="line">-i <span class="string">"&#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">-k <span class="string">"&#123;&#123;appkey&#125;&#125;"</span></span><br></pre></td></tr></table></figure>
+<p>符号文件将默认上传到中国节点。如果你的应用使用了中国之外的其他节点，例如美国节点，需要通过 <code>-r</code> 或 <code>--region</code> 选项来设置：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">leancloud upload_symbol -r us \</span><br><span class="line"><span class="operator">-f</span> <span class="string">"&lt;dSYM/xcarchive/DWARF 请按下面提示替换本路径&gt;"</span> \</span><br><span class="line">-i <span class="string">"&#123;&#123;appid&#125;&#125;"</span> \</span><br><span class="line">-k <span class="string">"&#123;&#123;appkey&#125;&#125;"</span></span><br></pre></td></tr></table></figure>
+<p>目前支持以下节点：</p>
+<ul>
+<li><strong>cn</strong>：中国</li>
+<li><strong>us</strong>：美国</li>
+</ul>
+<p>符号文件的存放位置，与你的发布流程有关，具体为：</p>
+<ul>
+<li><p><strong>xcarchive 文件</strong>：对应用进行 Archive 后会生成一个 .xcarchive 文件，在 Xcode 中打开 <strong>Window</strong> / <strong>Organizer</strong> / <strong>Archives</strong> 选项卡里可以看到它的位置。</p>
+</li>
+<li><p><strong>dSYM 文件</strong>：一般仅在使用 Release 或 Archiving 构建应用时产生，可以在 /Xcode/DerivedData 文件夹下，与生成的 .app 同级的文件夹里找到。</p>
+</li>
+<li><p><strong>DWARF 文件</strong>：在路径的最底层，它可以通过 strip 应用生成的二进制文件来获得。</p>
+</li>
+</ul>
+<p>请参考以下路径结构，应用文件名为 Demo.app：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">├── Build</span><br><span class="line">    ├── Intermediates</span><br><span class="line">        ├── ArchiveIntermediates</span><br><span class="line">            └── Demo</span><br><span class="line">                ├── BuildProductsPath</span><br><span class="line">                    └── Release-iphoneos</span><br><span class="line">                        ├── Demo<span class="class">.app</span> -&gt; /Users/admin/Library/Developer/Xcode/DerivedData/Demo-dkvwhbscbgyeoldhsxxzmorfqmyf/Build/Intermediates/ArchiveIntermediates/Demo/InstallationBuildProductsLocation/Applications/Demo<span class="class">.app</span></span><br><span class="line">                        └── Demo<span class="class">.app</span><span class="class">.dSYM</span></span><br><span class="line">                            └── Contents</span><br><span class="line">                                ├── Info<span class="class">.plist</span></span><br><span class="line">                                └── Resources</span><br><span class="line">                                    └── DWARF</span><br><span class="line">                                        └── Demo</span><br></pre></td></tr></table></figure>
+<p>如果在发布应用时忘了上传符号文件，可以手动来上传。如果一个崩溃报告没有对应的符号文件，系统会提示要符号化。</p>
+<h2 id="测试">测试</h2><p>崩溃报告启用之后，要测试崩溃信息是否能发送到 LeanCloud 云端，可以在 view controller 或 AppDelegate 中添加一个 <code>crash</code> 方法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)crash &#123;</span><br><span class="line">    [<span class="built_in">NSException</span> raise:<span class="built_in">NSGenericException</span> format:<span class="string">@"只是测试，模拟一条崩溃信息。"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后把下面的调用代码插入到主 view controller 的 <code>viewDidLoad</code> 方法中，或 AppDelegate 的 <code>application:didFinishLaunchingWithOptions:</code> 方法中：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(crash) withObject:<span class="literal">nil</span> afterDelay:<span class="number">5.0</span>];</span><br></pre></td></tr></table></figure>
+<p>接下来的步骤：</p>
+<ol>
+<li>build、run，然后 stop 应用；</li>
+<li>在 Home 界面点开应用（不要使用调试器开启应用，因为调试器开启时不会收集崩溃信息）；</li>
+<li>等待应用崩溃；</li>
+<li>再次运行应用。应用将在启动时自动将崩溃报告发送给 LeanCloud 云端。</li>
+</ol>
+<p>这时打开应用控制台的 <a href="/stat.html?appid=#/stat/crashreport">错误分析</a>，就会看到刚才的崩溃信息。</p>
+<blockquote>
+<p>注意：崩溃信息可能会延迟几分钟显示。</p>
+</blockquote>
+<h2 id="流程">流程</h2><p>使用崩溃报告可以极大地改进应用质量，提升用户体验。我们推荐使用以下流程来有效地修复应用崩溃问题：</p>
+<ol>
+<li>确认要修复的崩溃；<br><br>后台的错误分析列表，可以显示出崩溃发生的次数。由此，你可以分析出哪项崩溃对应用影响最大，对其进行优先修复。点击每条崩溃记录可以查看到更详细的信息，包括调用堆栈、系统版本、设备类型和受影响的应用版本等等。</li>
+<li>修复崩溃；<br><br>调试代码，修复崩溃问题。</li>
+<li>构建新的版本；</li>
+<li>标记已修复的崩溃，向 App Store 发布新版本；<br><br>标记为「已修复」的崩溃不会在默认的列表中出现。如果同样的崩溃在新版本中再次出现，那么这条崩溃记录将自动恢复成「未修复」状态，并且重新出现在默认列表里面。</li>
+<li>重复以上步骤，不断改进应用。</li>
+</ol>
+<h2 id="排错">排错</h2><p><strong>为什么编译的时候会报错：Undefined symbols for architecture i386: “std::<strong>1::basic_string&lt;char, std::</strong>1::char_traits<char>…？</char></strong></p>
+<p>这是在项目依赖里面缺少 libc++.dylib 库。打开项目的 <strong>TARGETS</strong> / <strong>General</strong> / <strong>Linked Frameworks and Libraries</strong>，添加 libc++.dylib 即可。</p>
+<p><strong>为什么我的崩溃没有在后台显示？</strong></p>
+<p>你的应用可能没有向 LeanCloud 云端发送崩溃报告。需要检查：</p>
+<ul>
+<li>确认在 LeanCloud SDK 初始化之前开启了崩溃报告。</li>
+<li>如果正在测试崩溃报告，要确认应用不是通过调试器运行的；需要执行 build、run、stop 之后，再在 Home 界面点开应用。</li>
+<li>崩溃信息是在崩溃发生之后、下次应用启动之时发送的，确保应用不会在崩溃信息发送之前再次崩溃。如果是在调试崩溃报告，可以添加一段延时做为保障。</li>
+<li>确保没有使用其他崩溃报告的库，否则会互相干扰。</li>
+</ul>
+<p><strong>为什么我的崩溃没有符号化？</strong></p>
+<p>你可能没有上传与应用版本对应的符号文件。请检查：</p>
+<ul>
+<li>如果设置了自动上传符号文件，切换到 Xcode 的 Report Navigator（Command + 8），验证一下上传是否正常。</li>
+<li>确认日志正常，上传过程没有错误。</li>
+<li>如果为之前没有符号化的崩溃上传了对应的符号文件，当同一崩溃再次发生时它就会被符号化；而之前没有符号化的崩溃信息不会再被符号化了。所以，这时可以把之前的崩溃记录标记为「已解决」并等待其再次发生。</li>
+<li>如果使用了自定义的动态链接框架（dynamic framework），并且部分堆栈信息没有符号化，请确认所有动态链接框架以及主应用的符号文件都已经上传。</li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/" itemprop="url">
                 01Getting Started-基本设置
               </a>
@@ -2625,316 +2781,6 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/05Interacting with C APIs/" itemprop="url">
-                02Interoperability-05与 C 的 API 交互
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-26T22:00:06+08:00" content="2015-12-26">
-            2015-12-26
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Using-Swift-with-Cocoa-and-Objective-C/" itemprop="url" rel="index">
-                  <span itemprop="name">Using-Swift-with-Cocoa-and-Objective-C</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/05Interacting with C APIs/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/05Interacting with C APIs/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><blockquote>
-<p>翻译：<a href="https://github.com/shockinglee" target="_blank" rel="external">shockinglee</a></p>
-<p>校对：<a href="https://github.com/shanyimin" target="_blank" rel="external">shanyimin</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a> <a href="https://github.com/Phenmod" target="_blank" rel="external">Phenmod</a></p>
-</blockquote>
-<h1 id="与_C_的_API_交互">与 C 的 API 交互</h1><hr>
-<p>本节包含内容：</p>
-<ul>
-<li><a href="#primitive_types">基本数据类型（Primitive Types）</a></li>
-<li><a href="#enumerations">枚举（Enumerations）</a></li>
-<li><a href="#pointer">指针（Pointer）</a></li>
-<li><a href="#global_constants">全局常量（Global Constants）</a></li>
-<li><a href="#preprocessor_directives">预处理指令（Preprocessor Directives）</a></li>
-</ul>
-<p>作为与Objective-C语言的互用性的一部分，Swift也对一些C语言的类型和特性保持了兼容性。如果你的代码有需要，Swift也提供了一些方式来使用常见的C结构和模式。</p>
-<h2 id="基本数据类型">基本数据类型</h2><p>Swift提供了一些与C语言基本类型如<code>char</code>,<code>int</code>,<code>float</code>和<code>double</code>等的对应类型。然而，这些类型和Swift核心基本类型之间不能进行隐式转换，如Int。因此，只有你的代码明确要求时才使用这些类型，其它任何可能的情况下都应该使用Int。</p>
-<table>
-<thead>
-<tr>
-<th>C 类型</th>
-<th>Swift 类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>bool</td>
-<td>CBool</td>
-</tr>
-<tr>
-<td>char, signed char</td>
-<td>CChar</td>
-</tr>
-<tr>
-<td>unsigned char</td>
-<td>CUnsignedChar</td>
-</tr>
-<tr>
-<td>short</td>
-<td>CShort</td>
-</tr>
-<tr>
-<td>unsigned short</td>
-<td>CUnsignedShort</td>
-</tr>
-<tr>
-<td>int</td>
-<td>CInt</td>
-</tr>
-<tr>
-<td>unsigned int</td>
-<td>CUnsignedInt</td>
-</tr>
-<tr>
-<td>long</td>
-<td>CLong</td>
-</tr>
-<tr>
-<td>unsigned long</td>
-<td>CUnsignedLong</td>
-</tr>
-<tr>
-<td>long long</td>
-<td>CLongLong</td>
-</tr>
-<tr>
-<td>unsigned long long</td>
-<td>CUnsignedLongLong</td>
-</tr>
-<tr>
-<td>wchar_t</td>
-<td>CWideChar</td>
-</tr>
-<tr>
-<td>char16_t</td>
-<td>CChar16</td>
-</tr>
-<tr>
-<td>char32_t</td>
-<td>CChar32</td>
-</tr>
-<tr>
-<td>float</td>
-<td>CFloat</td>
-</tr>
-<tr>
-<td>double</td>
-<td>CDouble</td>
-</tr>
-</tbody>
-</table>
-<h2 id="枚举">枚举</h2><p>任何用宏<code>NS_ENUM</code>来声明的C风格的枚举，都会被Swfit导入为一个Swfit枚举类型。无论枚举值是在系统框架还是在自己的代码中定义的，当它们导入到Swift时，它们的前缀名将被截掉。</p>
-<p>例如，看这个Objective-C枚举的声明：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Objective-C</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UITableViewCellStyle</span>) &#123;</span><br><span class="line">    <span class="built_in">UITableViewCellStyleDefault</span>,</span><br><span class="line">    <span class="built_in">UITableViewCellStyleValue1</span>,</span><br><span class="line">    <span class="built_in">UITableViewCellStyleValue2</span>,</span><br><span class="line">    <span class="built_in">UITableViewCellStyleSubtitle</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在Swift中，会被导入为这样：</p>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//Swift</span><br><span class="line"><span class="keyword">enum</span> UITableViewCellStyle: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">Default</span></span><br><span class="line">    <span class="keyword">case</span> Value1</span><br><span class="line">    <span class="keyword">case</span> Value2</span><br><span class="line">    <span class="keyword">case</span> Subtitle</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当你需要使用一个枚举值时，使用以点（.）开头的枚举名称：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="keyword">let</span> cellStyle: UITableViewCellStyle = .<span class="built_in">Default</span></span><br></pre></td></tr></table></figure>
-<h2 id="选项集">选项集</h2><p>对使用宏<code>NS_OPTIONS</code>声明的C风格的枚举，Swift会把它导入为一个Swfit选项集类型。选项集像枚举一样，会把前缀截掉，只剩下选项值名称。</p>
-<p>例如，看这个Objective-C选项的声明：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Objective-C</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">NS_OPTIONS</span><span class="params">(NSUInteger, NSJSONReadingOptions)</span> </span>&#123;</span><br><span class="line">	NSJSONReadingMutableContainers = (<span class="number">1U</span>L &lt;&lt; <span class="number">0</span>),</span><br><span class="line">	NSJSONReadingMutableLeaves = (<span class="number">1U</span>L &lt;&lt; <span class="number">1</span>),</span><br><span class="line">	NSJSONReadingAllowFragments = (<span class="number">1U</span>L &lt;&lt; <span class="number">2</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在Swift中，它被导入为这样：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NSJSONReadingOptions</span> : <span class="title">OptionSetType</span> </span>&#123;</span><br><span class="line">	<span class="keyword">init</span>(rawValue: <span class="type">UInt</span>)</span><br><span class="line">   </span><br><span class="line">   	<span class="keyword">static</span> <span class="keyword">var</span> <span class="type">MutableContainers</span>: <span class="type">NSJSONReadingOptions</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">   	<span class="keyword">static</span> <span class="keyword">var</span> <span class="type">MutableLeaves</span>: <span class="type">NSJSONReadingOptions</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">   	<span class="keyword">static</span> <span class="keyword">var</span> <span class="type">AllowFragments</span>: <span class="type">NSJSONReadingOptions</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>在Objective-C中，一个选项集是整数值的一个位掩码。你可以使用按位或操作符（<code>|</code>）来组合选项值，使用按位与操作符（<code>&amp;</code>）以检测选项值。创建一个选项集，可以使用常量值或者表达式。一个空的选项集使用常数<code>0</code>来表示。</p>
-<p>在Swift中，选项集使用一个遵循<code>OptionSetType</code>协议的结构体来表示，其中每个选项值都是一个静态变量。选项集类似于Swift的集合类型<code>Set</code>，你可以用<code>insert(_:)</code>或者<code>unionInPlace(_:)</code>方法来添加选项值，用<code>remove(_:)</code>或者<code>subtractInPlace(_:)</code>方法来删除选项值，用<code>contains(_:)</code>方法来检测选项值。创建一个选项集的值可以使用一个数组字面量，里面的选项值像枚举一样都用点（<code>.</code>）开头。创建一个空的选项集可以使用一个空的数组字面量，也可以调用默认初始化函数。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line">let options: NSDataBase64EncodingOptions = [</span><br><span class="line">	<span class="class">.Encoding76CharacterLineLength</span>,</span><br><span class="line">   	<span class="class">.EncodingEndLineWithLineFeed</span></span><br><span class="line">   ]</span><br><span class="line">let string = data.<span class="function"><span class="title">base64EncodedStringWithOptions</span><span class="params">(options)</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="共用体">共用体</h2><p>Swift仅部分支持C的共用体（union）类型。在导入混有C的共用体或者位段（bitfields）的类型时，例如Foundation的<code>NSDecimal</code>类型，Swift不能存取不支持的字段。但是，参数和/或返回值为这些类型的C和Objective-C的API是能够在Swift中使用的。</p>
-<h2 id="指针">指针</h2><p>Swift尽可能避免让您直接访问指针。然而，当您需要直接操作内存的时候，Swift也为您提供了多种指针类型。下面的表使用<code>Type</code>作为类型名称的占位符。</p>
-<p>对于返回类型，变量和参数，使用如下形式：</p>
-<table>
-<thead>
-<tr>
-<th>C 句法</th>
-<th>Swift 句法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>const Type *</td>
-<td>UnsafePointer\<type\></type\></td>
-</tr>
-<tr>
-<td>Type *</td>
-<td>UnsafeMutablePointer\<type\></type\></td>
-</tr>
-</tbody>
-</table>
-<p>对于类（class）类型，使用如下形式：</p>
-<table>
-<thead>
-<tr>
-<th>C 句法</th>
-<th>Swift 句法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Type <em> const </em></td>
-<td>UnsafePointer\<type\></type\></td>
-</tr>
-<tr>
-<td>Type <em> __strong </em></td>
-<td>UnsafeMutablePointer\<type\></type\></td>
-</tr>
-<tr>
-<td>Type **</td>
-<td>AutoreleasingUnsafeMutablePointer\<type\></type\></td>
-</tr>
-</tbody>
-</table>
-<h3 id="常量指针">常量指针</h3><p>当一个函数被声明为接受<code>UnsafePointer&lt;Type&gt;</code>参数时，这个函数可以接受下列任何一个类型作为参数：</p>
-<ul>
-<li><code>nil</code>，作为空指针传入；</li>
-<li>一个<code>UnsafePointer&lt;Type&gt;</code>，<code>UnsafeMutablePointer&lt;Type&gt;</code>， 或者<code>AutoreleasingUnsafeMutablePointer&lt;Type&gt;</code>的值，在必要情况下会转换成<code>UnsafePointer&lt;Type&gt;</code>的值；</li>
-<li>一个<code>String</code>类型的值，如果<code>Type</code>是<code>Int8</code>或者<code>UInt8</code>的话。该字符串会自动在一个缓冲区内被转换为UTF8，该缓冲区在本次调用期间有效；</li>
-<li>一个左值操作数为<code>Type</code>类型的输入输出（inout）表达式，传入的是这个左值的内存地址；</li>
-<li>一个<code>[Type]</code>值，传入该数组的起始指针，并且它的生命周期将在本次调用期间被延长。</li>
-</ul>
-<p>如果您这样定义了一个函数：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAPointer</span><span class="params">(x: UnsafePointer&lt;Float&gt;)</span></span> &#123; <span class="comment">/*...*/</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="tag">var</span> x: Float = <span class="number">0.0</span></span><br><span class="line"><span class="tag">var</span> <span class="tag">p</span>: UnsafePointer&lt;Float&gt; = nil</span><br><span class="line"><span class="function"><span class="title">takesAPointer</span><span class="params">(nil)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAPointer</span><span class="params">(p)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAPointer</span><span class="params">(&amp;x)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAPointer</span><span class="params">([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>])</span></span></span><br></pre></td></tr></table></figure>
-<p>如果函数被声明为使用一个<code>UnsafePointer&lt;Void&gt;</code>参数，那么这个函数接受任何<code>Type</code>的<code>UnsafePointer&lt;Type&gt;</code>类型的操作数。<br>￼<br>如果您这样定义了一个函数：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAVoidPointer</span><span class="params">(x: UnsafePointer&lt;Void&gt;)</span></span>  &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="tag">var</span> x: Float = <span class="number">0.0</span>, y: Int = <span class="number">0</span></span><br><span class="line"><span class="tag">var</span> <span class="tag">p</span>: UnsafePointer&lt;Float&gt; = nil, <span class="tag">q</span>: UnsafePointer&lt;Int&gt; = nil</span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(nil)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(p)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(q)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(&amp;x)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(&amp;y)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">([<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>] as [Float])</span></span></span><br><span class="line">let intArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="function"><span class="title">takesAVoidPointer</span><span class="params">(intArray)</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="可变指针">可变指针</h3><p>当一个方法被声明为接受<code>UnsafeMutablePointer&lt;Type&gt;</code>参数时，这个函数可以接受下列任何一个类型作为参数：</p>
-<ul>
-<li><code>nil</code>，作为空指针传入；</li>
-<li>一个<code>UnsafeMutablePointer&lt;Type&gt;</code>类型的值；</li>
-<li>一个输入输出（inout）表达式，其左值操作数是<code>Type</code>类型的，且被存储起来了。传入的是这个左值的内存地址；</li>
-<li>一个输入输出的<code>[Type]</code>类型的值，传入的是该数组的起始指针，并且它的生命周期将在本次调用期间被延长。</li>
-</ul>
-<p>如果您这样定义了一个函数：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAMutablePointer</span><span class="params">(x: UnsafeMutablePointer&lt;Float&gt;)</span></span> &#123; <span class="comment">/*...*/</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="tag">var</span> x: Float = <span class="number">0.0</span></span><br><span class="line"><span class="tag">var</span> <span class="tag">p</span>: UnsafeMutablePointer&lt;Float&gt; = nil</span><br><span class="line"><span class="tag">var</span> <span class="tag">a</span>: [Float] = [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>]</span><br><span class="line"><span class="function"><span class="title">takesAMutablePointer</span><span class="params">(nil)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutablePointer</span><span class="params">(p)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutablePointer</span><span class="params">(&amp;x)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutablePointer</span><span class="params">(&amp;a)</span></span></span><br></pre></td></tr></table></figure>
-<p>如果函数被声明使用一个<code>UnsafeMutablePointer&lt;Void&gt;</code>参数，那么这个函数接受任何<code>Type</code>的<code>UnsafeMutablePointer&lt;Type&gt;</code>类型的操作数。</p>
-<p>如果您这样定义了一个函数：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAMutableVoidPointer</span><span class="params">(x: UnsafeMutablePointer&lt;Void&gt;)</span></span>  &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="tag">var</span> x: Float = <span class="number">0.0</span>, y: Int = <span class="number">0</span></span><br><span class="line"><span class="tag">var</span> <span class="tag">p</span>: UnsafeMutablePointer&lt;Float&gt; = nil, <span class="tag">q</span>: UnsafeMutablePointer&lt;Int&gt; = nil</span><br><span class="line"><span class="tag">var</span> <span class="tag">a</span>: [Float] = [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], <span class="tag">b</span>: [Int] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(nil)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(p)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(q)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(&amp;x)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(&amp;y)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(&amp;a)</span></span></span><br><span class="line"><span class="function"><span class="title">takesAMutableVoidPointer</span><span class="params">(&amp;b)</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="自动释放指针">自动释放指针</h3><p>当一个函数被声明为接受<code>AutoreleasingUnsafeMutablePointer&lt;Type&gt;</code>参数时，这个函数可以接受下列任何一个类型作为参数：</p>
-<ul>
-<li><code>nil</code>，作为空指针传入；</li>
-<li>一个<code>AutoreleasingUnsafeMutablePointer&lt;Type&gt;</code>类型的值；</li>
-<li>一个输入输出（inout）表达式，其操作数首先被拷贝到一个无拥有者的缓冲区，传递给被调用函数的就是这个缓冲区的地址。在调用返回时，缓冲区中的值被加载、保存、并重新复制给操作数。</li>
-</ul>
-<p>注意，这个列表中没有包含数组。</p>
-<p>如果您这样定义了一个函数：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">takesAnAutoreleasingPointer</span><span class="params">(x: AutoreleasingUnsafeMutablePointer&lt;NSDate?&gt;)</span></span> &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>那么您可以使用以下任何一种方式来调用这个函数：</p>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//Swift</span></span><br><span class="line">   <span class="keyword">var</span> x: NSDate? = <span class="keyword">nil</span></span><br><span class="line"><span class="keyword">var</span> p: AutoreleasingUnsafeMutablePointer&lt;NSDate?&gt; = <span class="keyword">nil</span></span><br><span class="line">takesAnAutoreleasingPointer(<span class="keyword">nil</span>)</span><br><span class="line">takesAnAutoreleasingPointer(p)</span><br><span class="line">takesAnAutoreleasingPointer(&amp;x)</span><br></pre></td></tr></table></figure>
-<p>被指针指向的类型并不会被桥接。例如，<code>NSString **</code>转换到Swift后，是<code>AutoreleasingUnsafeMutablePointer&lt;NSString?&gt;</code>，而不是<code>AutoreleasingUnsafeMutablePointer&lt;String?&gt;</code>。</p>
-<h3 id="函数指针">函数指针</h3><p>C语言的函数指针通过调用约定，以闭包的形式被引入Swift中，表示形式为<code>@convention(c)</code>。例如，一个类型为<code>int (*)(void)</code>的C语言函数指针，会转换为Swift的<code>@convention(c) () -&gt; Int32</code>。</p>
-<p>在调用一个以函数指针为参数的函数时，给它传的值可以是一个顶层的Swift函数，也可以是个闭包字面量，或者<code>nil</code>。只有符合C语言函数指针调用约定的Swift函数，才能用来给函数指针类型的形参传值。例如，Core Foundation的<code>CFArrayCreateMutable(_:_:_:)</code>函数，它有个参数的类型为<code>CFArrayCallBacks</code>结构体。这个<code>CFArrayCallBacks</code>结构体就是用一些函数指针进行初始化的：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">customCopyDescription</span><span class="params">(p: UnsafePointer&lt;Void&gt;)</span></span> -&gt; <span class="type">Unmanaged</span>&lt;<span class="type">CFString</span>&gt;! &#123;</span><br><span class="line">   	<span class="comment">// return an Unmanaged&lt;CFString&gt;! value</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> callbacks = <span class="type">CFArrayCallBacks</span>(</span><br><span class="line">   	version: <span class="number">0</span> <span class="keyword">as</span> <span class="type">CFIndex</span>,</span><br><span class="line">   	retain: <span class="literal">nil</span>,</span><br><span class="line">   	release: <span class="literal">nil</span>,</span><br><span class="line">   	copyDescription: customCopyDescription,</span><br><span class="line">   	<span class="built_in">equal</span>: &#123; (p1, p2) -&gt; <span class="type">Boolean</span> <span class="keyword">in</span></span><br><span class="line">       	<span class="comment">// return Boolean value</span></span><br><span class="line">   	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mutableArray = <span class="type">CFArrayCreateMutable</span>(<span class="literal">nil</span>, <span class="number">0</span>, callbacks)</span><br></pre></td></tr></table></figure>
-<p>在上面的例子中，在<code>CFArrayCallBacks</code>初始化时，传给<code>retain</code>和<code>release</code>作参数的是<code>nil</code>，传给<code>copyDescription</code>作参数的是函数<code>customCopyDescription</code>，传给<code>equal</code>作参数的是一个闭包字面量。</p>
-<h2 id="全局常量">全局常量</h2><p>在C和Objective-C语言源文件中定义的全局常量会自动地被Swift编译引进并做为Swift的全局常量。</p>
-<h2 id="预处理指令">预处理指令</h2><p>Swift编译器不包含预处理器。取而代之的是，它充分利用了编译时属性，生成配置，和语言特性来完成相同的功能。因此，Swift没有引进预处理指令。</p>
-<h3 id="简单宏">简单宏</h3><p>在C和Objective-C中，通常使用<code>#define</code>指令来定义一个简单的常数，在Swift，您可以使用全局常量来代替。例如：定义一个常数的<code>#define FADE_ANIMATION_DURATION 0.35</code>，在Swift使用<code>let FADE_ANIMATION_DURATION = 0.35</code>来表述会更好一些。由于简单的用于定义常量的宏会被直接被映射成Swift全局量，Swift编译器会自动引进在C或Objective-C源文件中定义的简单宏。</p>
-<h3 id="复杂宏">复杂宏</h3><p>在C和Objective-C中使用的复杂宏在Swift中没有相对应的东西。复杂宏是那些不用来定义常量的宏，包含了括号的函数式宏。您在C和Objective-C使用复杂的宏以避免类型检查的限制或避免重新键入大量的样板代码。然而，宏也会造成debug和重构起来更困难。在Swift中你可以使用函数和泛型来达到同样的效果，而没有任何的委屈折中。因此，在C和Objective-C源文件中定义的复杂宏在Swift是不能使用的。</p>
-<h3 id="生成配置">生成配置</h3><p>Swift代码使用和C、Objective-C代码不同的方式进行条件编译。Swift代码可以根据生成配置的组合进行条件编译。生成配置包括<code>true</code>和<code>false</code>字面值，命令行标志，和下表中的平台测试函数。您可以使用<code>-D &lt;＃Flag＃&gt;</code>指定命令行标志。</p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>有效参数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>os()</td>
-<td>OSX，iOS，watchOS</td>
-</tr>
-<tr>
-<td>arch()</td>
-<td>x86_64，arm，arm64，i386</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>注意：生成配置<code>arch(arm)</code>不会为64位ARM设备返回<code>true</code>，生成配置<code>arch(i386)</code>在为32位iOS模拟器编译代码时会返回<code>true</code>。</p>
-</blockquote>
-<p>一个简单的条件编译可以像下面这段代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">if</span> build configuration</span></span><br><span class="line">  statements</span><br><span class="line"><span class="preprocessor">#<span class="keyword">else</span></span></span><br><span class="line">  statements</span><br><span class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-<p>由零个或多个有效的Swift语句组成的<em>statements</em>，可以包括表达式，普通语句和控制流语句。可以使用<code>&amp;&amp;</code>和<code>||</code>操作符往一个条件编译语句上添加新的编译条件，使用<code>!</code>操作符来否定某条件，使用<code>#elseif</code>来添加编译块：</p>
-<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">if</span> build configuration &amp;&amp; !build configuration</span></span><br><span class="line">  statements<span class="preprocessor"></span><br><span class="line">#<span class="keyword">elseif</span> build configuration</span></span><br><span class="line">  statements<span class="preprocessor"></span><br><span class="line">#<span class="keyword">else</span></span></span><br><span class="line">  statements<span class="preprocessor"></span><br><span class="line">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-<p>与C语言编译器的条件编译不同的是，Swift条件编译的语句必须是独立完整、语法有效的代码块。这是因为所有的Swift代码都会做语法检查，而不管会不会被编译。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2973,7 +2819,7 @@ let myPersonClass:AnyClass(NSClassFromString("MyGreatApp.Person"))
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">136</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
