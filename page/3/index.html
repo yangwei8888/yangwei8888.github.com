@@ -170,208 +170,6 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/30/avos/js_start/" itemprop="url">
-                js 开发指南
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-30T07:56:29+08:00" content="2015-12-30">
-            2015-12-30
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/leancloud/" itemprop="url" rel="index">
-                  <span itemprop="name">leancloud</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/30/avos/js_start/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/js_start/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>把下面这行代码加入你的测试页面中：</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://cdn1.lncld.net/static/js/av-mini-&#123;&#123;sdkversion.javascript&#125;&#125;.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span><br><span class="line">/</span><span class="regexp">/或者你只是用最核心的存储、推送等功能，可以使用精简版的core.js</span><br><span class="line">&lt;script src="https:/</span><span class="regexp">/cdn1.lncld.net/static</span><span class="regexp">/js/av</span>-core-mini-<span class="expansion">&#123;&#123;sdkversion.javascript&#125;&#125;</span>.js<span class="string">"&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>进行代码初始化，加入这行代码后，就可以创建 class 或任何其他操作了。</p>
-<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">AV.initialize('</span><span class="expression">&#123;&#123;<span class="variable">appid</span>&#125;&#125;</span><span class="xml">', '</span><span class="expression">&#123;&#123;<span class="variable">appkey</span>&#125;&#125;</span><span class="xml">');</span><br><span class="line">// 初始化 param1：应用 id、param2：应用 key</span></span><br></pre></td></tr></table></figure>
-<p>创建应用后，可以在 <a href="/app.html?appid=#/key">控制台 - 应用设置</a> 里面找到应用对应的 id 和 key。</p>
-<p>开始测试。初始化后加入下面代码：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> TestObject = AV.Object.extend(<span class="string">'TestObject'</span>);</span><br><span class="line"><span class="keyword">var</span> testObject = <span class="keyword">new</span> TestObject();</span><br><span class="line">testObject.save(&#123;</span><br><span class="line">  foo: <span class="string">'bar'</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  success: <span class="function"><span class="keyword">function</span><span class="params">(object)</span> </span>&#123;</span><br><span class="line">    alert(<span class="string">'LeanCloud works!'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>大功告成，访问 <a href="/data.html?appid=#/TestObject">控制台 - 数据管理</a> 可以看到上面创建的 TestObject 的相关数据。</p>
-<p>如果你希望在 <a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a> 环境使用 JavaScript SDK 也可以，使用 npm 安装 SDK：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> avoscloud-sdk <span class="comment">--save</span></span></span><br></pre></td></tr></table></figure>
-<p>然后代码中使用 SDK：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> AV = <span class="built_in">require</span>(<span class="string">'avoscloud-sdk'</span>);</span><br><span class="line">AV.initialize(<span class="string">'&#123;&#123;appid&#125;&#125;'</span>, <span class="string">'&#123;&#123;appkey&#125;&#125;'</span>);</span><br></pre></td></tr></table></figure>
-<p>LeanCloud 同时也提供了一个完整的 Nodejs 环境，我们称之为 LeanEngine，更推荐基于 LeanEngine 来实现并部署 Nodejs 相关的代码。详细请参考<a href="https://leancloud.cn/docs/leanengine_guide-node.html" target="_blank" rel="external">云引擎文档</a> 。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/30/avos/php_start/" itemprop="url">
-                PHP 开发指南
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-30T07:56:29+08:00" content="2015-12-30">
-            2015-12-30
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/leancloud/" itemprop="url" rel="index">
-                  <span itemprop="name">leancloud</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/30/avos/php_start/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/php_start/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h4 id="安装">安装</h4><p>运行环境要求 PHP 5.3 及以上版本，以及<br><a href="http://php.net/manual/zh/book.curl.php" target="_blank" rel="external">cURL</a>。</p>
-<p><strong>composer 安装</strong></p>
-<p>如果你的项目使用 composer, 那么安装 LeanCloud PHP SDK 将非常容易：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require leancloud/leancloud-sdk</span><br></pre></td></tr></table></figure>
-<p><strong>手动下载安装</strong></p>
-<ul>
-<li>前往发布页面下载最新版本: <a href="https://github.com/leancloud/php-sdk/releases" target="_blank" rel="external">https://github.com/leancloud/php-sdk/releases</a></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$APP_ROOT</span></span><br><span class="line">wget https://github.com/leancloud/php-sdk/archive/vX.X.X.zip</span><br></pre></td></tr></table></figure>
-<ul>
-<li>将压缩文件解压并置于项目文件夹下，如 $APP_ROOT/vendor/leancloud</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unzip vX.X.X.zip</span><br><span class="line">mv php-sdk-X.X.X <span class="variable">$APP_ROOT</span>/vendor/leancloud</span><br></pre></td></tr></table></figure>
-<h4 id="初始化">初始化</h4><p>完成上述安装后，请加载库（在项目的一开始就需要加载，且只需加载一次）：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span>(<span class="string">"vendor/autoload.php"</span>);               <span class="comment">// composer 安装</span></span><br><span class="line"><span class="keyword">require_once</span>(<span class="string">"vendor/leancloud/src/autoload.php"</span>); <span class="comment">// 手动安装</span></span><br></pre></td></tr></table></figure>
-<p>如果已经创建应用，可以在 <a href="/app.html?appid=#/key"><strong>控制台</strong> &gt; <strong>应用设置</strong></a><br>里面找到应用的 id 和 key。然后需要对应用初始化：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参数依次为 appId, appKey, masterKey</span></span><br><span class="line">LeanCloud\LeanClient::initialize(<span class="string">"&#123;&#123;appid&#125;&#125;"</span>, <span class="string">"&#123;&#123;appkey&#125;&#125;"</span>, <span class="string">"&#123;&#123;masterkey&#125;&#125;"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们目前支持 CN 和 US 区域，默认使用 CN 区域，可以切换为 US 区域</span></span><br><span class="line">LeanCloud\LeanClient::useRegion(<span class="string">"US"</span>);</span><br></pre></td></tr></table></figure>
-<p>测试应用已经正确初始化：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LeanCloud\LeanClient::get(<span class="string">"/date"</span>); <span class="comment">// 获取服务器时间</span></span><br><span class="line"><span class="comment">// =&gt; &#123;"__type": "Date", "iso": "2015-10-01T09:45:45.123Z"&#125;</span></span><br></pre></td></tr></table></figure>
-<h4 id="使用">使用</h4><p>初始化应用后，就可以开始创建数据了：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">LeanCloud</span>\<span class="title">LeanObject</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">LeanCloud</span>\<span class="title">CloudException</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> LeanObject(<span class="string">"TestObject"</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;set(<span class="string">"name"</span>, <span class="string">"alice"</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;set(<span class="string">"height"</span>, <span class="number">60.0</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;set(<span class="string">"weight"</span>, <span class="number">4.5</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;set(<span class="string">"birthdate"</span>, <span class="keyword">new</span> \DateTime());</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="variable">$obj</span>-&gt;save();</span><br><span class="line">&#125; <span class="keyword">catch</span> (CloudException <span class="variable">$ex</span>) &#123;</span><br><span class="line">    <span class="comment">// CloudException 会被抛出，如果保存失败</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取字段值</span></span><br><span class="line"><span class="variable">$obj</span>-&gt;get(<span class="string">"name"</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;get(<span class="string">"height"</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;get(<span class="string">"birthdate"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原子增加一个数</span></span><br><span class="line"><span class="variable">$obj</span>-&gt;increment(<span class="string">"age"</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在数组字段中添加，添加唯一，删除</span></span><br><span class="line"><span class="comment">// 注意: 由于API限制，不同数组操作之间必须保存，否则会报错</span></span><br><span class="line"><span class="variable">$obj</span>-&gt;addIn(<span class="string">"colors"</span>, <span class="string">"blue"</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;save();</span><br><span class="line"><span class="variable">$obj</span>-&gt;addUniqueIn(<span class="string">"colors"</span>, <span class="string">"orange"</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;save();</span><br><span class="line"><span class="variable">$obj</span>-&gt;removeIn(<span class="string">"colors"</span>, <span class="string">"blue"</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;save();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在云存储上删除它</span></span><br><span class="line"><span class="variable">$obj</span>-&gt;destroy();</span><br></pre></td></tr></table></figure>
-<p>大功告成，访问 <a href="/data.html?appid=#/TestObject"><strong>控制台</strong> &gt; <strong>数据管理</strong></a><br>可以看到上面创建的 TestObject 的相关数据。</p>
-<p>请参考详细的 <a href="/api-docs/php">API 文档</a>。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
               <a class="post-title-link" href="/2015/12/30/avos/python_start/" itemprop="url">
                 Python 开发指南
               </a>
@@ -1987,6 +1785,249 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/30/avos/ios_push_guide/" itemprop="url">
+                iOS 消息推送开发指南
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-30T07:56:29+08:00" content="2015-12-30">
+            2015-12-30
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/leancloud/" itemprop="url" rel="index">
+                  <span itemprop="name">leancloud</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/30/avos/ios_push_guide/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/ios_push_guide/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="iOS_消息推送开发指南">iOS 消息推送开发指南</h1><p>本文介绍了如何在 iOS 设备中使用 LeanCloud 的推送功能。请先阅读我们的博客文章《<a href="https://blog.leancloud.cn/1163/" target="_blank" rel="external">细说 iOS 消息推送</a>》，再通过 <a href="push_guide.html">消息推送概览</a> 了解和巩固相关概念。</p>
+<h2 id="配置_iOS_推送证书">配置 iOS 推送证书</h2><p>配置 iOS 证书相对麻烦，但是却是必须的步骤，请详读 <a href="ios_push_cert.html">iOS 推送证书设置指南</a>。</p>
+<h2 id="多证书场景">多证书场景</h2><p>对于一些应用，他们在发布和上架时分为不同的版本（司机版、乘客版），但数据和消息是互通的，这种场景下我们允许应用上传多个自定义证书并对不同的设备设置 <code>deviceProfile</code>，从而可以用合适的证书给不同版本的应用推送。</p>
+<p>当你上传自定义证书时会被要求输入「证书类型」，即 deviceProfile 的名字。当 installation 上保存了 deviceProfile 时，我们将忽略原先的开发和生产证书设置，而直接按照 deviceProfile 推送。</p>
+<h2 id="保存_Installation">保存 Installation</h2><p>在保存 installation 前，要先通过下列代码获取用户推送权限：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Before iOS 8:</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application</span><br><span class="line">didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// Register for push notifications</span></span><br><span class="line">    [application registerForRemoteNotificationTypes:</span><br><span class="line">                                <span class="built_in">UIRemoteNotificationTypeBadge</span> |</span><br><span class="line">                                <span class="built_in">UIRemoteNotificationTypeAlert</span> |</span><br><span class="line">                                <span class="built_in">UIRemoteNotificationTypeSound</span>];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//For iOS 8:</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application</span><br><span class="line">didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="built_in">UIUserNotificationSettings</span> *settings = [<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:<span class="built_in">UIUserNotificationTypeAlert</span></span><br><span class="line">                                            | <span class="built_in">UIUserNotificationTypeBadge</span></span><br><span class="line">                                            | <span class="built_in">UIUserNotificationTypeSound</span></span><br><span class="line">                                                                             categories:<span class="literal">nil</span>];</span><br><span class="line">    [application registerUserNotificationSettings:settings];</span><br><span class="line">    [application registerForRemoteNotifications];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 iOS 设备中，Installation 的类是 AVInstallation，并且是 AVObject 的子类，使用同样的 API 存储和查询。如果要访问当前应用的 Installation 对象，可以通过 <code>[AVInstallation currentInstallation]</code> 方法。当你第一次保存 AVInstallation 的时候，它会插入 <code>_Installation</code> 表，你可以在 <a href="/data.html?appid=&lt;!--￼26--">数据管理</a> 平台看到和查询。当 deviceToken 一被保存，你就可以向这台设备推送消息了。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)app didRegisterForRemoteNotificationsWithDeviceToken:(<span class="built_in">NSData</span> *)deviceToken &#123;</span><br><span class="line">    <span class="built_in">AVInstallation</span> *currentInstallation = [<span class="built_in">AVInstallation</span> currentInstallation];</span><br><span class="line">    [currentInstallation setDeviceTokenFromData:deviceToken];</span><br><span class="line">    [currentInstallation saveInBackground];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以像修改 AVObject 那样去修改 AVInstallation，但是有一些特殊字段可以帮你管理目标设备：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>badge</td>
+<td>应用图标旁边的红色数字，修改 AVInstallation 的这个值将修改应用的 badge。修改应该保存到服务器，以便为以后做 badge 增量式的推送做准备。</td>
+</tr>
+<tr>
+<td>channels</td>
+<td>当前设备所订阅的频道数组</td>
+</tr>
+<tr>
+<td>appName</td>
+<td>应用名称（只读）</td>
+</tr>
+<tr>
+<td>appVersion</td>
+<td>应用版本（只读）</td>
+</tr>
+<tr>
+<td>deviceProfile</td>
+<td>设备对应的后台自定义证书名称，用于多证书推送</td>
+</tr>
+</tbody>
+</table>
+<h2 id="发送推送消息">发送推送消息</h2><p>发送 iOS 推送消息，可以通过 REST API，或者我们的消息推送 web 平台，请进入你的应用管理界面查看。</p>
+<h2 id="使用频道">使用频道</h2><p>使用频道（channel）可以实现「发布—订阅」的模型。设备订阅某个频道，然后发送消息的时候指定要发送的频道即可。</p>
+<div class="callout callout-info">每个 channel 名称只能包含 26 个英文字母和数字。</div>
+
+<h3 id="订阅和退订">订阅和退订</h3><p>订阅 Giants 频道：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当用户表示喜欢 Giants，则为其订阅该频道。</span></span><br><span class="line"><span class="built_in">AVInstallation</span> *currentInstallation = [<span class="built_in">AVInstallation</span> currentInstallation];</span><br><span class="line">[currentInstallation addUniqueObject:<span class="string">@"Giants"</span> forKey:<span class="string">@"channels"</span>];</span><br><span class="line">[currentInstallation saveInBackground];</span><br></pre></td></tr></table></figure>
+<p>订阅后要记得保存，即可在 <a href="/data.html?appid=&lt;!--￼27--">数据管理</a>平台看到该 installation 的 channels 字段多了一个「Giants」。</p>
+<p>退订：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">AVInstallation</span> *currentInstallation = [<span class="built_in">AVInstallation</span> currentInstallation];</span><br><span class="line">[currentInstallation removeObject:<span class="string">@"Giants"</span> forKey:<span class="string">@"channels"</span>];</span><br><span class="line">[currentInstallation saveInBackground];</span><br></pre></td></tr></table></figure>
+<p>获取所有订阅的频道：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *subscribedChannels = [<span class="built_in">AVInstallation</span> currentInstallation]<span class="variable">.channels</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="发送消息到频道">发送消息到频道</h3><p>发送消息到刚才订阅的「Giants」频道：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Send a notification to all devices subscribed to the "Giants" channel.</span></span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[push setChannel:<span class="string">@"Giants"</span>];</span><br><span class="line">[push setMessage:<span class="string">@"Giants 太牛掰了"</span>];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<p>如果你想发送到多个频道，可以指定 channels 数组：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *channels = [<span class="built_in">NSArray</span> arrayWithObjects:<span class="string">@"Giants"</span>, <span class="string">@"Mets"</span>, <span class="literal">nil</span>];</span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Be sure to use the plural 'setChannels'.</span></span><br><span class="line">[push setChannels:channels];</span><br><span class="line">[push setMessage:<span class="string">@"The Giants won against the Mets 2-3."</span>];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<h3 id="选择证书">选择证书</h3><p>默认情况下，从客户端发起的推送都是使用你在消息菜单上传的生产证书，如果想使用开发证书，可以通过 <code>setProductionMode</code> 方法：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr_selector">[AVPush setProductionMode:NO]</span>;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h2 id="高级定向发送">高级定向发送</h2><p>频道对于大多数应用来说可能就足够了。但是某些情况下，你可能需要更高精度的定向推送。LeanCloud 允许你通过 AVQuery API 查询 Installation 列表，并向指定条件的 query 推送消息。</p>
+<p>因为 AVInstallation 同时是 AVObject 的子类，因此你可以保存任何数据类型到 AVInstallation，并将它和你的其他应用数据对象关联起来，这样以来，你可以非常灵活地向你用户群做定制化、动态的推送。</p>
+<h3 id="保存_Installation_数据">保存 Installation 数据</h3><p>为 AVInstallation 添加三个新字段：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Store app language and version</span></span><br><span class="line"><span class="built_in">AVInstallation</span> *installation = [<span class="built_in">AVInstallation</span> currentInstallation];</span><br><span class="line"></span><br><span class="line"><span class="comment">//字段依次为：比赛分数、比赛结果、受伤报告</span></span><br><span class="line">[installation setObject:@(<span class="literal">YES</span>) forKey:<span class="string">@"scores"</span>];</span><br><span class="line">[installation setObject:@(<span class="literal">YES</span>) forKey:<span class="string">@"gameResults"</span>];</span><br><span class="line">[installation setObject:@(<span class="literal">YES</span>) forKey:<span class="string">@"injuryReports"</span>];</span><br><span class="line">[installation saveInBackground];</span><br></pre></td></tr></table></figure>
+<p>你可以给 Installation 添加 owner 属性，比如当前的登录用户：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Saving the device's owner</span></span><br><span class="line"><span class="built_in">AVInstallation</span> *installation = [<span class="built_in">AVInstallation</span> currentInstallation];</span><br><span class="line">[installation setObject:[<span class="built_in">AVUser</span> currentUser] forKey:<span class="string">@"owner"</span>];</span><br><span class="line">[installation saveInBackground];</span><br></pre></td></tr></table></figure>
+<h3 id="根据查询来推送消息">根据查询来推送消息</h3><p>一旦 Installation 保存了你的应用数据，你可以使用 AVQuery 来查询出设备的一个子集做推送。Installation 的查询跟其他对象的查询没有什么不同，只是使用特殊的静态方法<br> <code>[AVInstallation query]</code> 创建查询对象：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create our Installation query</span></span><br><span class="line"><span class="built_in">AVQuery</span> *pushQuery = [<span class="built_in">AVInstallation</span> query];</span><br><span class="line">[pushQuery whereKey:<span class="string">@"injuryReports"</span> equalTo:@(<span class="literal">YES</span>)];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Send push notification to query</span></span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[push setQuery:pushQuery]; <span class="comment">// Set our Installation query</span></span><br><span class="line">[push setMessage:<span class="string">@"Willie Hayes injured by own pop fly."</span>];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<p>你也可以在查询中添加 channels 的条件：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create our Installation query</span></span><br><span class="line"><span class="built_in">AVQuery</span> *pushQuery = [<span class="built_in">AVInstallation</span> query];</span><br><span class="line">[pushQuery whereKey:<span class="string">@"channels"</span> equalTo:<span class="string">@"Giants"</span>]; <span class="comment">// Set channel</span></span><br><span class="line">[pushQuery whereKey:<span class="string">@"scores"</span> equalTo:@(<span class="literal">YES</span>)];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Send push notification to query</span></span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[push setQuery:pushQuery];</span><br><span class="line">[push setMessage:<span class="string">@"Giants scored against the A's! It's now 2-2."</span>];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<p>如果你在 Installation 还保存了其他对象的关系，我们同样可以在查询条件中使用这些数据，例如，向靠近北京大学的设备推送消息：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Find users near a given location</span></span><br><span class="line"><span class="built_in">AVQuery</span> *userQuery = [<span class="built_in">AVUser</span> query];</span><br><span class="line">[userQuery whereKey:<span class="string">@"location"</span></span><br><span class="line">        nearGeoPoint:beijingUniversityLocation,</span><br><span class="line">         withinMiles:[<span class="built_in">NSNumber</span> numberWithInt:<span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment">// Find devices associated with these users</span></span><br><span class="line"><span class="built_in">AVQuery</span> *pushQuery = [<span class="built_in">AVInstallation</span> query];</span><br><span class="line">[pushQuery whereKey:<span class="string">@"user"</span> matchesQuery:userQuery];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Send push notification to query</span></span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[push setQuery:pushQuery]; <span class="comment">// Set our Installation query</span></span><br><span class="line">[push setMessage:<span class="string">@"Free hotdogs at the AVOSCloud concession stand!"</span>];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<h2 id="发送选项">发送选项</h2><p>除了发送一个文本信息之外，你还可以播放一个声音，设置 badge 数字或者其他想自定义的数据。你还可以设置一个消息的过期时间，如果对消息的时效性特别敏感的话。</p>
+<h3 id="定制通知">定制通知</h3><p>如果你不仅想发送一条文本消息，你需要一个 NSDictionary 来打包想发送的数据。这里有一些保留字段，具有特殊含义，需要说明：</p>
+<table>
+<thead>
+<tr>
+<th>保留字段</th>
+<th>平台</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>alert</td>
+<td>通用</td>
+<td>推送消息的文本内容</td>
+</tr>
+<tr>
+<td>badge</td>
+<td>iOS</td>
+<td>应用图标右上角的数字。可以设置一个值或者递增当前值。</td>
+</tr>
+<tr>
+<td>sound</td>
+<td>iOS</td>
+<td>应用 bundle 里的声音文件名称。</td>
+</tr>
+<tr>
+<td>content-available</td>
+<td>iOS</td>
+<td>如果你在使用 Newsstand, 设置为 1 来开始一次后台下载。</td>
+</tr>
+<tr>
+<td>action</td>
+<td>Android</td>
+<td>当消息收到的时候，触发的 Intent 名称。如果没有设置 title 或者 alert，Intent 将触发，但是不会显示通知给用户。</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Android</td>
+<td>显示在系统通知栏的标题。</td>
+</tr>
+</tbody>
+</table>
+<p>例如，递增 badge 数字，并播放声音可以这样做:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *data = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</span><br><span class="line">    <span class="string">@"The Mets scored! The game is now tied 1-1!"</span>, <span class="string">@"alert"</span>,</span><br><span class="line">    <span class="string">@"Increment"</span>, <span class="string">@"badge"</span>,</span><br><span class="line">    <span class="string">@"cheering.caf"</span>, <span class="string">@"sound"</span>,</span><br><span class="line">    <span class="literal">nil</span>];</span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[push setChannels:[<span class="built_in">NSArray</span> arrayWithObjects:<span class="string">@"Mets"</span>, <span class="literal">nil</span>]];</span><br><span class="line">[push setData:data];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<p>当然，你还可以添加其他自定义的数据。你会在接收推送一节看到，当应用通过推送打开你的应用的时候，你就可以访问这些数据。当你要在用户打开通知的时候显示一个不同的 view controller 的时候，这特别有用。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *data = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</span><br><span class="line">    <span class="string">@"Ricky Vaughn was injured in last night's game!"</span>, <span class="string">@"alert"</span>,</span><br><span class="line">    <span class="string">@"Vaughn"</span>, <span class="string">@"name"</span>,</span><br><span class="line">    <span class="string">@"Man bites dog"</span>, <span class="string">@"newsItem"</span>,</span><br><span class="line">    <span class="literal">nil</span>];</span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[push setQuery:injuryReportsQuery];</span><br><span class="line">[push setChannel:<span class="string">@"Indians"</span>];</span><br><span class="line">[push setData:data];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<h3 id="设置过期日期">设置过期日期</h3><p>当设备关闭或者无法连接到网络的时候，推送通知就无法被送达。如果你有一条时间敏感的推送通知，不希望在太长时间后被用户读到，那么可以设置一个过期时间来避免打扰用户。</p>
+<p>AVPush 提供了两个方法来设置通知的过期日期，首先是 expireAtDate：接收 NSDate 来告诉 LeanCloud 不要再去发送通知。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDateComponents</span> *comps = [[<span class="built_in">NSDateComponents</span> alloc] init];</span><br><span class="line">[comps setYear:<span class="number">2013</span>];</span><br><span class="line">[comps setMonth:<span class="number">10</span>];</span><br><span class="line">[comps setDay:<span class="number">12</span>];</span><br><span class="line"><span class="built_in">NSCalendar</span> *gregorian =</span><br><span class="line">  [[<span class="built_in">NSCalendar</span> alloc] initWithCalendarIdentifier:<span class="built_in">NSGregorianCalendar</span>];</span><br><span class="line"><span class="built_in">NSDate</span> *date = [gregorian dateFromComponents:comps];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Send push notification with expiration date</span></span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[push expireAtDate:date];</span><br><span class="line">[push setQuery:everyoneQuery];</span><br><span class="line">[push setMessage:<span class="string">@"Season tickets on sale until October 12th"</span>];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<p>这个方法有个隐患，因为设备的时钟是无法保证精确的，你可能得到错误的结果。因此，AVPush 还提供了 <code>expireAfterTimeInterval</code> 方法，接收 NSTimeInterval 对象。通知将在指定间隔时间后失效：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create time interval</span></span><br><span class="line"><span class="built_in">NSTimeInterval</span> interval = <span class="number">60</span>*<span class="number">60</span>*<span class="number">24</span>*<span class="number">7</span>; <span class="comment">// 1 week</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Send push notification with expiration interval</span></span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[push expireAfterTimeInterval:interval];</span><br><span class="line">[push setQuery:everyoneQuery];</span><br><span class="line">[push setMessage:<span class="string">@"Season tickets on sale until October 18th"</span>];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<div class="callout callout-info">我们建议给 iOS 设备的推送都设置过期时间，才能保证推送的当时，如果用户设置了飞行模式，在关闭飞行模式之后可以收到推送消息，可以参考 <a href="http://stackoverflow.com/questions/24026544/push-notification-is-not-being-delivered-when-iphone-comes-back-online" target="_blank" rel="external">Stackoverflow - Push notification is not being delivered when iPhone comes back online</a>。</div>
+
+<h3 id="指定设备平台">指定设备平台</h3><p>跨平台的应用，可能想指定发送的平台，比如 iOS 或者 Android:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">AVQuery</span> *query = [<span class="built_in">AVInstallation</span> query];</span><br><span class="line">[query whereKey:<span class="string">@"channels"</span> equalTo:<span class="string">@"suitcaseOwners"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Notification for Android users</span></span><br><span class="line">[query whereKey:<span class="string">@"deviceType"</span> equalTo:<span class="string">@"android"</span>];</span><br><span class="line"><span class="built_in">AVPush</span> *androidPush = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[androidPush setMessage:<span class="string">@"Your suitcase has been filled with tiny robots!"</span>];</span><br><span class="line">[androidPush setQuery:query];</span><br><span class="line">[androidPush sendPushInBackground];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Notification for iOS users</span></span><br><span class="line">[query whereKey:<span class="string">@"deviceType"</span> equalTo:<span class="string">@"ios"</span>];</span><br><span class="line"><span class="built_in">AVPush</span> *iOSPush = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[iOSPush setMessage:<span class="string">@"Your suitcase has been filled with tiny apples!"</span>];</span><br><span class="line">[iOSPush setChannel:<span class="string">@"suitcaseOwners"</span>];</span><br><span class="line">[iOSPush setQuery:query];</span><br><span class="line">[iOSPush sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<h2 id="定时推送">定时推送</h2><p>请进入消息推送的 Web 管理平台，可以做到定时推送（延迟或者指定时间）。</p>
+<h2 id="接收推送通知">接收推送通知</h2><p>正如 <a href="#定制通知">定制通知</a> 一节提到，你可以随通知发送任意的数据。我们使用这些数据修改应用的行为，当应用是通过通知打开的时候。例如，当打开一条通知告诉你有一个新朋友的时候，这时候如果显示一张图片会非常好。</p>
+<p>由于 Apple 的对消息大小的限制，请尽量缩小要发送的数据大小，否则可能被截断：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *data = @&#123;</span><br><span class="line">  <span class="string">@"alert"</span>: <span class="string">@"James commented on your photo!"</span>,</span><br><span class="line">  <span class="string">@"p"</span>: <span class="string">@"vmRZXZ1Dvo"</span> <span class="comment">// Photo's object id</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">AVPush</span> *push = [[<span class="built_in">AVPush</span> alloc] init];</span><br><span class="line">[push setQuery:photoOwnerQuery];</span><br><span class="line">[push setData:data];</span><br><span class="line">[push sendPushInBackground];</span><br></pre></td></tr></table></figure>
+<h2 id="响应通知数据">响应通知数据</h2><p>当应用是被通知打开的时候，你可以通过 <code>application:didFinishLaunchingWithOptions:</code>方法的 <code>launchOptions</code> 参数所使用的 dictionary 访问到数据：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">  . . .</span><br><span class="line">  <span class="comment">// Extract the notification data</span></span><br><span class="line">  <span class="built_in">NSDictionary</span> *notificationPayload = launchOptions[<span class="built_in">UIApplicationLaunchOptionsRemoteNotificationKey</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Create a pointer to the Photo object</span></span><br><span class="line">  <span class="built_in">NSString</span> *photoId = [notificationPayload objectForKey:<span class="string">@"p"</span>];</span><br><span class="line">  <span class="built_in">AVObject</span> *targetPhoto = [<span class="built_in">AVObject</span> objectWithoutDataWithClassName:<span class="string">@"Photo"</span></span><br><span class="line">                                                          objectId:photoId];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Fetch photo object</span></span><br><span class="line">  [targetPhoto fetchIfNeededInBackgroundWithBlock:^(<span class="built_in">AVObject</span> *object, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">    <span class="comment">// Show photo view controller</span></span><br><span class="line">    <span class="keyword">if</span> (!error &amp;&amp; [<span class="built_in">AVUser</span> currentUser]) &#123;</span><br><span class="line">      PhotoVC *viewController = [[PhotoVC alloc] initWithPhoto:object];</span><br><span class="line">      [<span class="keyword">self</span><span class="variable">.navController</span> pushViewController:viewController animated:<span class="literal">YES</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果当通知到达的时候，你的应用已经在运行，那么你可以通过 <code>application:didReceiveRemoteNotification:fetchCompletionHandler:</code> 方法的 <code>userInfo</code> 参数所使用 dictionary 访问到数据：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application</span><br><span class="line">      didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo</span><br><span class="line">            fetchCompletionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">UIBackgroundFetchResult</span>))handler &#123;</span><br><span class="line">  <span class="comment">// Create empty photo object</span></span><br><span class="line">  <span class="built_in">NSString</span> *photoId = [userInfo objectForKey:<span class="string">@"p"</span>];</span><br><span class="line">  <span class="built_in">AVObject</span> *targetPhoto = [<span class="built_in">AVObject</span> objectWithoutDataWithClassName:<span class="string">@"Photo"</span></span><br><span class="line">                                                          objectId:photoId];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Fetch photo object</span></span><br><span class="line">  [targetPhoto fetchIfNeededInBackgroundWithBlock:^(<span class="built_in">AVObject</span> *object, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">    <span class="comment">// Show photo view controller</span></span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">      handler(<span class="built_in">UIBackgroundFetchResultFailed</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="built_in">AVUser</span> currentUser]) &#123;</span><br><span class="line">      PhotoVC *viewController = [[PhotoVC alloc] initWithPhoto:object];</span><br><span class="line">      [<span class="keyword">self</span><span class="variable">.navController</span> pushViewController:viewController animated:<span class="literal">YES</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      handler(<span class="built_in">UIBackgroundFetchResultNoData</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以阅读 <a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html#//apple_ref/doc/uid/TP40008194-CH1-SW1" target="_blank" rel="external">Apple 本地化和推送的文档</a> 来更多地了解推送通知。</p>
+<h2 id="跟踪推送和应用的打开情况">跟踪推送和应用的打开情况</h2><p>通过 AVAnalytics 你可以跟踪通知和应用的打开情况。添加下列代码到上面例子中的 <code>application:didFinishLaunchingWithOptions:</code> 方法来收集打开信息：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (application<span class="variable">.applicationState</span> != <span class="built_in">UIApplicationStateBackground</span>) &#123;</span><br><span class="line">  <span class="comment">// Track an app open here if we launch with a push, unless</span></span><br><span class="line">  <span class="comment">// "content_available" was used to trigger a background push (introduced</span></span><br><span class="line">  <span class="comment">// in iOS 7). In that case, we skip tracking here to avoid double</span></span><br><span class="line">  <span class="comment">// counting the app-open.</span></span><br><span class="line">  <span class="built_in">BOOL</span> preBackgroundPush = ![application respondsToSelector:<span class="keyword">@selector</span>(backgroundRefreshStatus)];</span><br><span class="line">  <span class="built_in">BOOL</span> oldPushHandlerOnly = ![<span class="keyword">self</span> respondsToSelector:<span class="keyword">@selector</span>(application:didReceiveRemoteNotification:fetchCompletionHandler:)];</span><br><span class="line">  <span class="built_in">BOOL</span> noPushPayload = ![launchOptions objectForKey:<span class="built_in">UIApplicationLaunchOptionsRemoteNotificationKey</span>];</span><br><span class="line">  <span class="keyword">if</span> (preBackgroundPush || oldPushHandlerOnly || noPushPayload) &#123;</span><br><span class="line">    [<span class="built_in">AVAnalytics</span> trackAppOpenedWithLaunchOptions:launchOptions];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>传递 nil 或者空白的参数给 <code>trackAppOpenedWithLaunchOptions:</code> 方法只是统计一次标准的应用打开事件（比如不是通过通知打开的应用）。</p>
+<p>你可以在 <a href="/stat.html?appid=#/stat/appuse">控制台 /<span class="text-muted">（选择应用）</span>/ 分析 / 行为分析 / 应用使用</a> 里看到通知和应用打开的情况。</p>
+<p>请注意，如果你的应用正在运行或者在后台，<code>application:didReceiveRemoteNotification:</code>方法将会处理收到的推送通知。</p>
+<div class="callout callout-info">如果你的应用处于运行状态，iOS 系统将不会在系统的通知中心显示推送消息，你可以使用 <code>UILocalNotification</code> 展示一个通知给用户。</div>
+
+<p>如果应用在后台，并且用户点击了通知，那么应用将被带到前台可视，为了跟踪这种通过通知打开应用的情况，你需要在跟踪代码里多作一个检查：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo &#123;</span><br><span class="line">  <span class="keyword">if</span> (application<span class="variable">.applicationState</span> == <span class="built_in">UIApplicationStateActive</span>) &#123;</span><br><span class="line">    <span class="comment">// 此处可以写上应用激活状态下接收到通知的处理代码，如无需处理可忽略</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// The application was just brought from the background to the foreground,</span></span><br><span class="line">    <span class="comment">// so we consider the app as having been "opened by a push notification."</span></span><br><span class="line">    [<span class="built_in">AVAnalytics</span> trackAppOpenedWithRemoteNotificationPayload:userInfo];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果使用 iOS 7 推送的新特性（包括新的 content-available 功能），你需要实现 iOS 7<br>新加的方法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application</span><br><span class="line">        didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo</span><br><span class="line">        fetchCompletionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">UIBackgroundFetchResult</span>))completionHandler &#123;</span><br><span class="line">  <span class="keyword">if</span> (application<span class="variable">.applicationState</span> == <span class="built_in">UIApplicationStateActive</span>) &#123;</span><br><span class="line">    <span class="comment">// 此处可以写上应用激活状态下接收到通知的处理代码，如无需处理可忽略</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    [<span class="built_in">AVAnalytics</span> trackAppOpenedWithRemoteNotificationPayload:userInfo];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="跟踪本地通知_(iOS_only)">跟踪本地通知 (iOS only)</h3><p>为了统计跟踪本地通知消息，需要注意以下两种方法都会调用到：</p>
+<ul>
+<li><code>application:didFinishLaunchingWithOptions:</code></li>
+<li><code>-application:didReceiveLocalNotification:</code></li>
+</ul>
+<p>如果你实现了 <code>application:didReceiveLocalNotification:</code> 这个方法，要注意避免重复统计。</p>
+<h4 id="清除_Badge">清除 Badge</h4><p>清除 Badge 数字的最好时机是打开应用的时候。设置当前 installation 的 badge 属性并保存到服务器：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)applicationDidBecomeActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line">    <span class="keyword">int</span> num=application<span class="variable">.applicationIconBadgeNumber</span>;</span><br><span class="line">    <span class="keyword">if</span>(num!=<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">AVInstallation</span> *currentInstallation = [<span class="built_in">AVInstallation</span> currentInstallation];</span><br><span class="line">        [currentInstallation setBadge:<span class="number">0</span>];</span><br><span class="line">        [currentInstallation saveEventually];</span><br><span class="line">        application<span class="variable">.applicationIconBadgeNumber</span>=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    [application cancelAllLocalNotifications];</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>清除 Badge 数字最相关的三个方法是：</p>
+<ul>
+<li><code>applicationDidBecomeActive:</code></li>
+<li><code>application:didFinishLaunchingWithOptions:</code></li>
+<li><code>application:didReceiveRemoteNotification:</code></li>
+</ul>
+<p>请阅读 <a href="http://developer.apple.com/library/ios/#DOCUMENTATION/UIKit/Reference/UIApplicationDelegate_Protocol/Reference/Reference.html" target="_blank" rel="external">UIApplicationDelegate 文档</a>。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/30/avos/android_start/" itemprop="url">
                 下载 Android SDK
               </a>
@@ -2085,8 +2126,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/30/avos/android_faq/" itemprop="url">
-                Android SDK 常见问题及解答
+              <a class="post-title-link" href="/2015/12/30/avos/android_statistics/" itemprop="url">
+                Android 统计 SDK 开发指南
               </a>
             
           
@@ -2122,8 +2163,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/30/avos/android_faq/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/android_faq/" itemprop="commentsCount"></span>
+            <a href="/2015/12/30/avos/android_statistics/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/android_statistics/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -2138,11 +2179,85 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Android_SDK_常见问题及解答">Android SDK 常见问题及解答</h1><h2 id="代码混淆怎么做">代码混淆怎么做</h2><p>为了保证 SDK 在代码混淆后能正常运作，需要保证部分类和第三方库不被混淆，参考下列配置：</p>
-<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"># proguard.cfg</span><br><span class="line"></span><br><span class="line">-<span class="ruby">keepattributes <span class="constant">Signature</span></span><br><span class="line"></span>-<span class="ruby">dontwarn com.jcraft.jzlib.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">jcraft</span>.<span class="title">jzlib</span>.**  &#123; *;</span>&#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn sun.misc.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">sun</span>.<span class="title">misc</span>.** &#123; *;</span>&#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn com.alibaba.fastjson.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">alibaba</span>.<span class="title">fastjson</span>.** &#123; *;</span>&#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn sun.security.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">sun</span>.<span class="title">security</span>.** &#123; *;</span> &#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn com.google.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">google</span>.** &#123; *;</span>&#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn com.avos.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">avos</span>.** &#123; *;</span>&#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> <span class="title">android</span>.<span class="title">net</span>.<span class="title">http</span>.<span class="title">SslError</span></span></span><br><span class="line"></span>-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> <span class="title">android</span>.<span class="title">webkit</span>.<span class="title">WebViewClient</span></span></span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn android.webkit.<span class="constant">WebView</span></span><br><span class="line"></span>-<span class="ruby">dontwarn android.net.http.<span class="constant">SslError</span></span><br><span class="line"></span>-<span class="ruby">dontwarn android.webkit.<span class="constant">WebViewClient</span></span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn android.support.**</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn org.apache.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">org</span>.<span class="title">apache</span>.** &#123; *;</span>&#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn org.jivesoftware.smack.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">org</span>.<span class="title">jivesoftware</span>.<span class="title">smack</span>.** &#123; *;</span>&#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn com.loopj.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">loopj</span>.** &#123; *;</span>&#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn com.squareup.okhttp.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">squareup</span>.<span class="title">okhttp</span>.** &#123; *;</span>&#125;</span><br><span class="line"></span>-<span class="ruby">keep interface com.squareup.okhttp.** &#123; *; &#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn okio.**</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">dontwarn org.xbill.**</span><br><span class="line"></span>-<span class="ruby">keep <span class="class"><span class="keyword">class</span> <span class="title">org</span>.<span class="title">xbill</span>.** &#123; *;</span>&#125;</span><br><span class="line"></span></span><br><span class="line">-<span class="ruby">keepattributes *<span class="constant">Annotation</span>*</span></span><br></pre></td></tr></table></figure>
-<h2 id="使用美国节点时_SDK_报错：create_SSL_socket_factory_失败">使用美国节点时 SDK 报错：<code>create SSL socket factory</code> 失败</h2><p>在使用美国节点的时候，SDK 初始化时即报错，显示 <code>create SSL socket factory</code> 失败。怎么办？</p>
-<p>这是因为 LeanCloud 的 SSL 证书不在工程资源里面导致的，解决办法如下：</p>
-<p>请下载 <a href="https://download.leancloud.cn/sdk/android/current/avoscloud_us_ssl.bks" target="_blank" rel="external">SSL 证书</a>，并拷贝到你项目的 <code>res/raw/</code> 目录下，重新打包即可。</p>
+          <span itemprop="articleBody"><h1 id="Android_统计_SDK_开发指南">Android 统计 SDK 开发指南</h1><h2 id="安装与初始化">安装与初始化</h2><p>首先在 <a href="https://leancloud.cn/applist.html#/apps" target="_blank" rel="external">控制台</a> 上创建新的应用，然后 <a href="sdk_down.html">下载 LeanCloud Android SDK</a> 以及相应的 Demo。</p>
+<h3 id="导入_SDK">导入 SDK</h3><p>除了必须的 avoscloud.jar 外，你还需要额外的导入 avosstatistics.jar。<br>请将下载的 jar 包放到 libs 目录下，以便你的 IDE（Eclipse 或者 Intellij IDEA 等)可以正常识别导入的 jar 包。如以下图片所示：</p>
+<p><img src="/avos/images/android_statistics_ide.png" alt="image"></p>
+<h3 id="配置_AndroidManifest-xml_文件">配置 AndroidManifest.xml 文件</h3><p>请务必确保你的应用拥有如下权限：</p>
+<ul>
+<li><code>android.permission.INTERNET</code><br><br>向 LeanCloud 的统计服务器发送用户分析数据。</li>
+<li><code>android.permission.READ_PHONE_STATE</code><br><br><code>android.permission.ACCESS_WIFI_STATE</code><br><br>这两个权限是为了获取用户手机的 IMEI 以及 WiFi 的 Mac 地址，用来唯一的标识用户。</li>
+<li><code>android.permission.ACCESS_NETWORK_STATE</code><br><br>检测网络状态。</li>
+<li><code>android.permission.READ_LOGS</code><br><br>获取客户端 crash log。通过将 crash log 汇报到服务器上，你可以了解你的应用 crash 的原因以及次数。</li>
+<li><code>android.permission.WRITE_EXTERNAL_STORAGE</code><br><br>保存离线报告的缓存数据。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">manifest</span> <span class="attribute">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">application</span> <span class="attribute">...</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="tag">&lt;<span class="title">activity</span> <span class="attribute">...</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">application</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.WRITE_EXTERNAL_STORAGE"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.INTERNET"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.READ_PHONE_STATE"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.READ_LOGS"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果你想指定你的发布渠道，请在 AndroidManifest.xml 中加入如下内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">application</span>  <span class="attribute">...</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="title">meta-data</span> <span class="attribute">android:name</span>=<span class="value">"Channel ID"</span> <span class="attribute">android:value</span>=<span class="value">"LeanCloud"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">application</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>你可以根据你的实际发布渠道，修改上述的 android:value 中对应的值，比如将 <code>LeanCloud</code> 改为 <code>Your Channel</code>，重新打包后发布。<strong>请不要修改 <code>android:name=&quot;Channel ID&quot;</code> 字段，以免影响使用。</strong></p>
+<p>由于很多用户反映在部分第三方发布平台中间，不允许出现 meta-data 中间的 key 出现空格字符，我们在 2.6.8 以后，增加了一个等效的 key：<code>leancloud</code>。<br>以下代码也可以用于指定渠道了，但是请不要反复定义。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">application</span>  <span class="attribute">...</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="title">meta-data</span> <span class="attribute">android:name</span>=<span class="value">"leancloud"</span> <span class="attribute">android:value</span>=<span class="value">"LeanCloud"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">application</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当然你也可以通过代码来指定发布渠道。但是代码设置的渠道优先级没有 <code>AndroidManifest.xml</code> 中的配置高，同时出现时优先取 <code>AndroidManifest.xml</code> 中的配置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">AVAnalytics.setAppChannel(<span class="string">"SomeChannel"</span>);</span><br><span class="line"><span class="comment">// 参数依次是 context, appId, appKey</span></span><br><span class="line">AVOSCloud.initialize(getContext(),<span class="string">"&#123;&#123;appid&#125;&#125;"</span>,<span class="string">"&#123;&#123;appKey&#125;&#125;"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="添加使用代码">添加使用代码</h2><h3 id="添加引用">添加引用</h3><p>经过我们的一系列更新升级，使用最新的 SDK 你不需要任何代码上的操作就可以使用统计的基本功能，统计功能为默认打开。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.avos.avoscloud.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">YourApp</span> <span class="keyword">extends</span> <span class="title">Application</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        AVOSCloud.initialize(<span class="keyword">this</span>, <span class="string">"&#123;&#123;appid&#125;&#125;"</span>, <span class="string">"&#123;&#123;appkey&#125;&#125;"</span>);</span><br><span class="line">        <span class="comment">//AVAnalytics.start(this);    已经不再需要这行代码了</span></span><br><span class="line">        AVAnalytics.enableCrashReport(<span class="keyword">this</span>, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="统计页面路径">统计页面路径</h2><p>在需要的 Activity 中调用统计 SDK。在每个 Activity 的 <code>onResume</code> 和 <code>onPause</code> 方法中调用相应的统计方法，传入的参数为当前 context（比如当前的 Activity）的引用。 这里请不要将全局的 Application Context 传入。如示例所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onPause();</span><br><span class="line">    AVAnalytics.onPause(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onResume();</span><br><span class="line">    AVAnalytics.onResume(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>请确保在所需要的所有的 Activity 中都调用 <code>AVAnalytics.onResume()</code> 和 <code>AVAnalytics.onPause()</code> 方法，这两个调用将不会阻塞应用程序的主线程，也不会影响应用程序的性能。</p>
+<p>注意：如果你的 Activity 之间有继承或者控制关系请不要同时在父和子 Activity 中重复添加 onPause 和 onResume 方法，否则会造成重复统计，比如在使用 TabHost、TabActivity、ActivityGroup 时。一个应用程序在多个 Activity 之间连续切换时，将会被视为同一个 session（会话或者一次使用过程）。</p>
+<p>当用户两次使用之间间隔超过 30 秒时，将被认为是两个的独立的 session，例如用户回到 home，或进入其他程序，经过一段时间后再返回之前的应用。我们也提供了新的接口来自定义这个时间间隔，你只要调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AVAnalytics.setSessionContinueMillis(<span class="keyword">long</span> mills);</span><br></pre></td></tr></table></figure>
+<p>传入适当的参数，就可以控制 session 重新启动时间，注意参数是以毫秒为单位的。 例如，如果你认为在 60 秒之内返回应用可视为同一次启动，超过 60 秒返回当前应用可视为一次新的启动，那么请写成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AVAnalytics.setSessionContinueMillis(<span class="number">60</span> * <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="统计_Fragment_页面">统计 Fragment 页面</h2><p>Android 3.0 引入了 Fragment。使用 Fragment，你可以在一个 Activity 中展示多个用户界面，也可根据你的需要，为不同的设备适配界面。LeanCloud SDK 1.4.2 开始增加了对于 Fragment 统计的支持。你可以使用以下代码统计 Fragment 页面：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyListFragment</span> <span class="keyword">extends</span> <span class="title">ListFragment</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAttach</span><span class="params">(Activity activity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onAttach(activity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onStart();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onPause();</span><br><span class="line">        AVAnalytics.onFragmentEnd(<span class="string">"my-list-fragment"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume();</span><br><span class="line">        AVAnalytics.onFragmentStart(<span class="string">"my-list-fragment"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="测试">测试</h2><ul>
+<li>确认所需的权限都已经添加：<ul>
+<li><code>INTERNET</code></li>
+<li><code>READ_PHONE_STATE</code></li>
+<li><code>READ_LOGS</code></li>
+<li><code>WRITE_EXTERNAL_STORAGE</code></li>
+</ul>
+</li>
+<li>确认所有的 Activity 中都调用了 onResume 和 onPause 方法。</li>
+<li>确认测试手机（或者模拟器）已成功连入网络。</li>
+<li>启动应用程序，几分钟之内你应该已经可以在 <a href="/stat.html?appid=}#/statrealtime">控制台 / 分析</a> 中的相应菜单中看到报表了。</li>
+</ul>
+<h2 id="数据时效性">数据时效性</h2><p>在控制台的 <strong>分析</strong> 页面中，有些报告可以展示实时数据，有些报告则依靠 <a href="leaninsight_guide.html">离线数据</a> 进行分析，因此有时你会看不到当天的数据。</p>
+<p>如果当前页面中存在 <strong>日期选择</strong> 选项（通常在页面右上角），你可以以此判断当前的统计结果是否有延迟。如果 <strong>结束日期</strong> 显示为 <strong>当日日期</strong> 或在其下拉菜单中有「今日」选项，即为实时数据；反之则为离线数据（如下图所示），要推迟一天才能看到当日的情况。</p>
+<p><img src="../images/analytics_datepicker_for_offline_data.png" alt="" width="231" height="256"></p>
+<h2 id="使用自定义事件">使用自定义事件</h2><h3 id="基本简单事件">基本简单事件</h3><p>除了基本统计分析功能外，SDK 还支持你自定义的事件分析，例如你可以统计你的应用中有多少人点击了 like 按键，某个文章的点击次数或者视频被播放的次数等等。</p>
+<p>在你希望发送事件报告的代码段，调用如下方法就可以向服务器发送事件记录</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AVAnalytics.onEvent(Context context, String eventName);</span><br></pre></td></tr></table></figure>
+<p>统计 eventName 对应事件的发生次数、变化趋势，例如 like 点击、浏览数量等等。参数 context 为当前 context 的引用。eventName 为当前统计的事件 name。【注意】eventName 中不要加空格或其他的转义字符。</p>
+<p>比如，应用中的一条微视频被转发的事件被定义为「Forward」，那么在点击转发的函数里调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AVAnalytics.onEvent(<span class="keyword">this</span>, <span class="string">"Forward"</span>)</span><br></pre></td></tr></table></figure>
+<p>就会向服务器汇报一个转发的事件。</p>
+<h3 id="多标签事件">多标签事件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AVAnalytics.onEvent(Context context, String eventName, String  tag);</span><br></pre></td></tr></table></figure>
+<p>除了能够统计 eventName 所对应事件的发生次数，变化趋势外，还能统计事件中具体标签所占的比例。tag 为当前标签，同样这里的 eventName 字符串中也请不要使用空格。<br>比如，在玩拍程序中，我们定义了一个发布微视频的多标签事件 Publish，对应的发布内容有 title（发布标题）、Video（发视频）、type（视频类型）来对应不同的发布类型，这样我们不仅可以记录 Publish 事件的点击数量还可以看到不同内容对应的比例。</p>
+<h3 id="事件累计">事件累计</h3><p>在应用程序中某些自定义事件可能会被频繁触发，例如用户点击某个按钮。开发者可以在程序中维护一个计数器，这样某个事件被多次触发但只需要生成一个消息，这个消息中包括该事件被触发的次数。为了支持这个功能，我们提供了重载的接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AVAnalytics.onEvent(Context context, String eventName, <span class="keyword">int</span> count);</span><br><span class="line">AVAnalytics.onEvent(Context context, String eventName, String label, <span class="keyword">int</span> count)</span><br></pre></td></tr></table></figure>
+<p>参数 count 是对应事件（和对应标签）被触发的次数。</p>
+<h2 id="设置数据发送策略">设置数据发送策略</h2><p>你可以进入应用的 <a href="/stat.html?appid=&amp;os=android#/statconfig/trans_strategoy"><strong>分析</strong> &gt; <strong>统计设置</strong><span class="text-muted">（左下角）</span> &gt; <strong>数据发送策略</strong></a> 在线更改 SDK 端的数据报告发送策略。在没有取到在线配置的发送策略的情况下，会使用默认的发送策略。</p>
+<p>以下均为在线配置中的可选策略。</p>
+<h3 id="启动时发送">启动时发送</h3><p>【推荐使用】应用程序每次会在启动时会向服务器发送一次消息，在应用程序过程中产生的所有消息（包括自定义事件和本次使用时长）都会在下次启动时候发送。如果应用程序启动时处在不联网状态，那么消息将会缓存在本地，下次再尝试发送。</p>
+<p>发送策略默认为启动时发送。</p>
+<h3 id="批量发送">批量发送</h3><p>批量发送，默认当消息数量达到 30 条时发送一次。</p>
+<h3 id="按最小间隔发送">按最小间隔发送</h3><p>间隔一段时间发送，每隔一段时间一次性发送到服务器。</p>
+<h2 id="自定义参数设置">自定义参数设置</h2><p>你可以控制台某个应用的 <strong>组件</strong> &gt; <strong>自定义参数</strong> 设置中配置你的自定义在线参数。这些参数会在我们每次更新统计配置时进行更新，你可以用以下方法来获得对应的值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AVAnalytics.getConfigParams(<span class="keyword">this</span>.getContext(), <span class="string">"key"</span>)</span><br></pre></td></tr></table></figure>
+<p>但是请注意三点：</p>
+<ul>
+<li>key 必须跟你在控制台配置的参数一致，大小写敏感。</li>
+<li><p>由于统计参数更新时一个后台更新，你可能在直接调用 <code>AVAnalytics.getConfigParams(this.getContext(), &quot;key&quot;)</code> 时遇到返回值为 null 的情况。你可以通过设置 AVOnlineConfigureListener 和强制调用 updateOnlineConfig 来保证自定义配置的获取。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">AVAnalytics.setOnlineConfigureListener(<span class="keyword">new</span> AVOnlineConfigureListener() &#123;</span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDataReceived</span><span class="params">(JSONObject data)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       AVAnalytics.getConfigParams(getContext(), <span class="string">"key"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;);</span><br><span class="line">AVAnalytics.updateOnlineConfig(getContext());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>由于统计参数在客户端会有定时更新的策略，所以 AVOnlineConfigureListener 在客户端会发生多次调用的情况，请在 OnDataReceived 方法中不要放入太多函数副作用。</p>
+</li>
+</ul>
+<h2 id="开发选项">开发选项</h2><p>如果你不准备区分开发 AppKey 与生产环境 AppKey，但是又不想开发时期的统计数据会影响产品上线后的统计数据，你可以使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AVAnalytics.setAnalyticsEnabled(<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">// 参数依次为 context, AppId, AppKey</span></span><br><span class="line">AVOSCloud.initialize(context,&#123;&#123;appid&#125;&#125;,&#123;&#123;appkey&#125;&#125;);</span><br></pre></td></tr></table></figure>
+<p>在开发阶段关闭统计的功能。</p>
 </span>
         
       
@@ -2173,8 +2288,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/30/avos/ios_os_x_faq/" itemprop="url">
-                iOS / OS X SDK 常见问题和解答
+              <a class="post-title-link" href="/2015/12/30/avos/cloud_code_faq/" itemprop="url">
+                云引擎常见问题和解答
               </a>
             
           
@@ -2210,8 +2325,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/30/avos/ios_os_x_faq/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/ios_os_x_faq/" itemprop="commentsCount"></span>
+            <a href="/2015/12/30/avos/cloud_code_faq/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/cloud_code_faq/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -2226,25 +2341,235 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="iOS_/_OS_X_SDK_常见问题和解答">iOS / OS X SDK 常见问题和解答</h1><h2 id="怎么使用_LeanCloud_iOS_SDK">怎么使用 LeanCloud iOS SDK</h2><p>最简单的方式，使用 CocoaPods，在 PodFile 加入以下内容：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AVOSCloud'</span></span><br></pre></td></tr></table></figure>
-<p>AVOSCloudSNS SDK：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AVOSCloudSNS'</span></span><br></pre></td></tr></table></figure>
-<h3 id="如何使用「用户登录」功能">如何使用「用户登录」功能</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">AVUser</span> logInWithUsernameInBackground:<span class="string">@"zeng"</span> password:<span class="string">@"123456"</span> block:^(<span class="built_in">AVUser</span> *user, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">    <span class="keyword">if</span> (user != null) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"login success"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"signin failed"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<h2 id="如何登出">如何登出</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">AVUser</span> logOut];</span><br></pre></td></tr></table></figure>
-<h2 id="如何使用「新浪微博」登录">如何使用「新浪微博」登录</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">AVOSCloudSNS</span> loginWithCallback:^(<span class="keyword">id</span> object, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//回调代码</span></span><br><span class="line"></span><br><span class="line">&#125; toPlatform:<span class="built_in">AVOSCloudSNSSinaWeibo</span>];</span><br></pre></td></tr></table></figure>
-<h2 id="使用_AVOSCloudSNS，运行时报错：+[AVUser_loginWithAuthData:block:]:_unrecognized_selector_sent_to_class">使用 AVOSCloudSNS，运行时报错：+[AVUser loginWithAuthData:block:]: unrecognized selector sent to class</h2><p>请将 <strong>Build Settings</strong> -&gt; <strong>Linking</strong> -&gt; <strong>Other Linker Flags</strong> 设置为 <strong>-ObjC</strong>。具体原因可以参考苹果官方文档《Technical Q&amp;A QA1490 <a href="https://developer.apple.com/library/mac/qa/qa1490/_index.html" target="_blank" rel="external">Building Objective-C static libraries with categories</a>》。此外，stackoverfow 上也有一个比较详细的答案：《<a href="http://stackoverflow.com/questions/2567498/objective-c-categories-in-static-library" target="_blank" rel="external">Objective-C categories in static library</a>》。</p>
-<h2 id="为什么升级到_3-1-3-2_以上的版本时_BOOL_类型数据保存错误？">为什么升级到 3.1.3.2 以上的版本时 BOOL 类型数据保存错误？</h2><p>在 3.1.3.2 版本中，我们修正了子类化时 <code>BOOL</code> 类型的 <code>property</code> 保存到后端时被认为是 Number 类型而不是 Boolean 类型的问题，即 <code>BOOL</code> 类型不再保存为 <code>0</code> 和 <code>1</code>，而被正确地保存为 <code>true</code> 和 <code>false</code>。但您的代码可能已经适应了修正前的 SDK，并且相应的字段已经是 <code>Number</code> 类型。这时再保存为 <code>Boolean</code> 类型就会报 “Expected type is number, but it is boolean” 之类的错误，如果出现此类错误且要继续保持该字段 Number 类型时，可类似地将 <code>@property (BOOL) isTeamMember;</code> 改为 <code>@property NSInteger isTeamMember;</code>。</p>
-<h2 id="为什么不能真机调试">为什么不能真机调试</h2><p>由于动态库在打包时，Xcode 将动态库的签名意外丢失，导致使用了动态库的应用在真机调试时，签名校验失败。</p>
-<p>我们已经将所有动态库重新签名，修复了这个问题。开发者需要更新动态库。如果是手动集成的，只需要重新下载并替换原 framework 即可。如果是通过 CocoaPods 安装的，需要额外的步骤：</p>
-<ol>
-<li>删掉 Podfile 中的动态库 pod；</li>
-<li>执行 <code>pod install</code> 命令，卸载出问题的动态库；</li>
-<li>删掉 $HOME/Library/Caches/CocoaPods/Pods 这个目录；</li>
-<li>将之前删掉的动态库 pod 重新添加到 Podfile 中；</li>
-<li>执行 <code>pod install</code> 命令，安装新的动态库。</li>
-</ol>
-<p>完成以上几个步骤后，就能在真机上调试应用了。</p>
+          <span itemprop="articleBody"><h1 id="云引擎常见问题和解答">云引擎常见问题和解答</h1><h2 id="如何判断当前是测试环境还是生产环境？">如何判断当前是测试环境还是生产环境？</h2><p>请参考文档 <a href="/leanengine_guide-node.html#运行环境区分">云引擎开发指南 Node.js</a> / <a href="/leanengine_guide-python.html#运行环境区分">Python</a> - 运行环境区分。</p>
+<h2 id="怎么添加第三方模块">怎么添加第三方模块</h2><p>云引擎 2.0 开始支持添加第三方模块（请参考 <a href="leanengine_guide-cloudcode.html#云代码_2_0_版">云引擎指南 - 升级到 2.0</a>），只需要像普通的 Node.js 项目那样，在项目根目录创建文件 <code>package.json</code>，下面是一个范例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">name</span>": <span class="value"><span class="string">"cloud-engine-test"</span></span>,</span><br><span class="line">  "<span class="attribute">description</span>": <span class="value"><span class="string">"Cloud Engine test project."</span></span>,</span><br><span class="line">  "<span class="attribute">version</span>": <span class="value"><span class="string">"0.0.1"</span></span>,</span><br><span class="line">  "<span class="attribute">private</span>": <span class="value"><span class="literal">true</span></span>,</span><br><span class="line">  "<span class="attribute">dependencies</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">async</span>": <span class="value"><span class="string">"0.9.0"</span></span>,</span><br><span class="line">    "<span class="attribute">moment</span>": <span class="value"><span class="string">"2.9.0"</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p><code>dependencies</code> 内的内容表明了该项目依赖的三方模块（比如示例中的 <code>async</code> 和 <code>moment</code>）。</p>
+<p>然后在项目根目录执行：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+<p>即可下载相关三方包到 <code>node_modules</code> 目录。</p>
+<p>然后即可在代码中引入三方包：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">async</span> = <span class="built_in">require</span>(<span class="string">'async'</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：命令行工具部署时是不会上传 <code>node_modules</code> 目录，因为云代码服务器会根据 <code>package.json</code> 的内容自动下载三方包。所以也建议将 <code>node_modules</code> 目录添加到 <code>.gitignore</code> 中，使其不加入版本控制。</p>
+<h2 id="Maximum_call_stack_size_exceeded_如何解决？">Maximum call stack size exceeded 如何解决？</h2><p><code>AV.Object.extend</code> 产生的对象需要作为全局变量保存（即定义在 AV.Cloud.define 方法之外）。因为每调用一次，就会产生一个新的类的实例，并且和之前创建的实例形成一个链表。调用次数过多后（几万次）就会堆栈溢出。如果你的应用时不时出现 <strong>Maximum call stack size exceeded</strong> 错误，请确认是否误用了 <code>AV.Object.extend</code> 方法。</p>
+<p>我们在 <a href="./js_guide.html#AV_Object">JavaScript 指南 - AV.Object</a> 章节中也进行了描述。</p>
+<h2 id="目前支持哪些语言？">目前支持哪些语言？</h2><p>我们提供了 JavaScript SDK，支持 Node.js 和 Python 环境，未来可能会引入 PHP 等其他语言。</p>
+<h2 id="Web_Hosting_备案如何操作？">Web Hosting 备案如何操作？</h2><p>只有网站类的才需要备案，并且在主域名已备案的情况下，二级子域名不需要备案。 如果主站需要托管在我们这边，且还没有备案过，我们可以协助你完成备案，请参考文档 <a href="leanengine_guide-node.html#绑定独立域名">绑定独立域名 Node.js</a> / <a href="leanengine_guide-python.html#绑定独立域名">Python</a>。</p>
+<h2 id="调用云引擎方法如何收费？">调用云引擎方法如何收费？</h2><p>现在云引擎本身不收费，云引擎中如果有 LeanCloud 的存储等 API 调用，按 API 收费策略收费。</p>
+<h2 id="「定义函数」和「Git_部署」可以混用吗？">「定义函数」和「Git 部署」可以混用吗？</h2><p>「定于函数」的产生是为了方便大家初次体验云引擎，或者只是需要一些简单 hook 方法的应用使用。我们的实现方式就是把定义的函数拼接起来，生成一个云引擎项目然后部署。</p>
+<p>所以可以认为「定义函数」和 「git 部署」最终是一样的，都是一个完整的项目。<br>是一个单独功能，可以不用使用基础包，git 等工具快速的生成和编辑云引擎。<br>当然，你也可以使用基础包，自己写代码并部署项目。<br>这两条路是分开的，任何一个部署，就会导致另一种方式失效掉。</p>
+<h2 id="为什么查询_include_没有生效？">为什么查询 include 没有生效？</h2><p>以 JavaScript 云引擎为例子，很多时候，经常会定义一个云函数，在里面使用 <code>AV.Query</code> 查询一张表，并 include 其中一个 pointer 类型的字段，然后返回给客户端:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">AV.Cloud.define(<span class="string">'querySomething'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> query = <span class="keyword">new</span> AV.Query(<span class="string">'Something'</span>);</span><br><span class="line">  <span class="comment">//假设 user 是 Something 表的一个 Pointer 列。</span></span><br><span class="line">  query.include(<span class="string">'user'</span>);</span><br><span class="line">  <span class="comment">//……其他条件或者逻辑……</span></span><br><span class="line">  query.find().then(<span class="function"><span class="keyword">function</span>(<span class="params">results</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//返回查询结果给客户端</span></span><br><span class="line">    res.success(results);</span><br><span class="line">  &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//返回错误给客户端</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>你会看到返回的结果里， user 仍然是 pointer 类型，似乎 include 没有生效？</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> result: [</span><br><span class="line">   &#123;</span><br><span class="line">     ……Something 其他字段</span><br><span class="line">     "user": &#123;</span><br><span class="line">       "className": "_User",</span><br><span class="line">       "__type": "Pointer",</span><br><span class="line">       "objectId": "abcdefg"</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   ……</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这其实是因为 <code>res.success(results)</code> 会调用到 <code>AV.Object#toJSON</code> 方法，将结果序列化为 JSON 对象返回给客户端。<br>而 <code>AV.Object#toJSON</code> 方法为了防止循环引用，当遇到属性是 Pointer 类型会返回 pointer 元信息，不会将 include 的其他字段添加进去。<br>因此，你需要主动将该字段进行 JSON 序列化，例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">query.find().then(<span class="function"><span class="keyword">function</span>(<span class="params">results</span>) </span>&#123;</span><br><span class="line">   <span class="comment">//主动序列化 json 列。</span></span><br><span class="line">   results.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">     result.set(<span class="string">'user'</span>, result.get(<span class="string">'user'</span>) ?  result.get(<span class="string">'user'</span>).toJSON() : <span class="literal">null</span>);</span><br><span class="line">   &#125;);</span><br><span class="line">   <span class="comment">//再返回结果</span></span><br><span class="line">   res.success(results);</span><br><span class="line"> &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">   <span class="comment">//返回错误给客户端</span></span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure></p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/30/avos/cql_guide/" itemprop="url">
+                Cloud Query Language
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-30T07:56:29+08:00" content="2015-12-30">
+            2015-12-30
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/leancloud/" itemprop="url" rel="index">
+                  <span itemprop="name">leancloud</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/30/avos/cql_guide/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/30/avos/cql_guide/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Cloud_Query_Language_详细指南">Cloud Query Language 详细指南</h1><p>Cloud Query Language（简称 CQL） 是 LeanCloud 为查询 API 定制的一套类似 SQL 查询语法的子集和变种，主要目的是降低大家学习 LeanCloud 查询的 API 的成本，可以使用传统的 SQL 语法来查询 LeanCloud 应用内的数据。</p>
+<p>本文档将详细介绍 CQL 的语法和常见用法。</p>
+<h2 id="介绍及基本语法">介绍及基本语法</h2><p>最基本的一个查询某个 class 下的 100 条数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore</span></span><br></pre></td></tr></table></figure>
+<p>等价于（以 Android 为例子）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AVQuery&lt;AVObject&gt; query = <span class="keyword">new</span> AVQuery&lt;AVObject&gt;(<span class="string">"GameScore"</span>);</span><br><span class="line">List&lt;AVObject&gt; avObjects = query.find()</span><br></pre></td></tr></table></figure>
+<p><code>select</code> 一个完整的语法形式类似这样：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> [查询字段列表，逗号隔开] <span class="keyword">from</span> [<span class="keyword">class</span> 名称]</span><br><span class="line">   [<span class="keyword">where</span> [条件列表]</span><br><span class="line">   [<span class="keyword">limit</span> [<span class="keyword">skip</span>],<span class="keyword">limit</span></span><br><span class="line">   [<span class="keyword">order</span> <span class="keyword">by</span> [排序字段列表] [<span class="keyword">asc</span> |<span class="keyword">desc</span>]]]]</span></span><br></pre></td></tr></table></figure>
+<p>一些小例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//查询结果只包含 name,score 以及内置字段(objectId,createdAt等)</span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">name</span>,score <span class="keyword">from</span> GameScore</span><br><span class="line"></span><br><span class="line">//根据 <span class="keyword">name</span> 查找</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'dennis'</span></span><br><span class="line"></span><br><span class="line">//根据 <span class="keyword">name</span> 和 score 同时查找</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">is</span> <span class="keyword">exists</span> <span class="keyword">and</span> score &gt; <span class="number">80</span> <span class="keyword">and</span> score &lt;= <span class="number">100</span></span><br><span class="line"></span><br><span class="line">//分页查找，从第 <span class="number">100</span> 条开始向后查找 <span class="number">10</span> 条数据</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">limit</span> <span class="number">100</span>,<span class="number">10</span></span><br><span class="line"></span><br><span class="line">//根据 score 和 <span class="keyword">name</span> 排序</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">order</span> <span class="keyword">by</span> score,+<span class="keyword">name</span> <span class="keyword">desc</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="查询条件">查询条件</h2><p><code>where</code> 之后的查询条件基本跟 SQL 语法相似，比如支持 <code>or</code> 和 <code>and</code> 的复合查询，支持 <code>=</code>、<code>!=</code>、<code>&lt;</code>、<code>&lt;</code> 等比较运算符，支持子查询、in 查询等。详细解释如下。</p>
+<h3 id="基本查询">基本查询</h3><p>查询指定信息的对象，用 <code>=</code> 比较符：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'dennis'</span></span></span><br></pre></td></tr></table></figure>
+<p>查询不等于指定信息的对象：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span>!=<span class="string">'dennis'</span></span></span><br></pre></td></tr></table></figure>
+<p>也可以用 <code>&lt;&gt;</code> 运算符来表示不等于。</p>
+<p>比较日期，使用 <code>date</code> 函数来转换，比如查询特定时间之前创建的对象：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> createdAt &lt; <span class="built_in">date</span>(<span class="string">'2011-08-20T02:06:57.931Z'</span>)</span></span><br></pre></td></tr></table></figure>
+<p>date 函数接收的日期格式必须是 <code>2011-08-20T02:06:57.931Z</code> 的 UTC 时间。更多内置函数请看最后的 <a href="#内置函数">内置函数</a> 部分。</p>
+<p>一些常见的查询运算符：</p>
+<table><br>  <tr><th>Key</th><th>Operation</th></tr><br>  <tr><td>&lt;</td><td>小于</td></tr><br>  <tr><td>&lt;=</td><td>小于等于</td></tr><br>  <tr><td>&gt;</td><td>大于</td></tr><br>  <tr><td>&gt;=</td><td>大于等于</td></tr><br>  <tr><td> != 或者 &lt;&gt;</td><td>不等于</td></tr><br>  <tr><td>[not] like</td><td>模糊查询</td></tr><br>  <tr><td>[not] regexp</td><td>正则匹配</td></tr><br>  <tr><td>[not] in(子查询或者数组)</td><td>包含或者不包含</td></tr><br>  <tr><td>is [not] exists</td><td>这个 Key 有值或者不存在值</td></tr><br></table>
+
+<p>比较运算符可以用在日期、字符串、数字甚至对象上。</p>
+<h4 id="模糊查询">模糊查询</h4><p>模糊查询可以使用 <code>like</code>，比如查询名字以 dennis 开头的对象。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> <span class="string">'dennis%'</span></span></span><br></pre></td></tr></table></figure>
+<p><code>%</code> 表示模糊匹配的位置占位符。</p>
+<p>like 本质上是转成 <code>regexp</code> 的正则匹配查询，因此上面的例子还可以写成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span> regexp <span class="string">'dennis.*'</span></span></span><br></pre></td></tr></table></figure>
+<p>否定形式，查询名字不以 dennis 开头的对象：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">not</span> <span class="keyword">like</span> <span class="string">'dennis%'</span></span><br><span class="line">或者</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">not</span> regexp <span class="string">'dennis.*'</span></span></span><br></pre></td></tr></table></figure>
+<p>正则匹配的效率一般，类似这种全文搜索请求，我们都推荐采用 <a href="app_search_guide.html">应用内全文搜索</a>。</p>
+<h5 id="值是否存在查询">值是否存在查询</h5><p>只返回 <code>level</code> 字段值存在的对象：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">level</span> <span class="keyword">is</span> <span class="keyword">exists</span></span></span><br></pre></td></tr></table></figure>
+<p>反之，使用 <code>is not exists</code>。</p>
+<h3 id="数组查询">数组查询</h3><p>假设 <code>scores</code> 字段是一个数组，我们想查询分数里有 100 的成绩列表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> scores=<span class="number">100</span></span></span><br></pre></td></tr></table></figure>
+<p>如果想查找分数<strong>只有</strong>两个 100 分的成绩：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> scores all (<span class="number">100</span>,<span class="number">100</span>)</span></span><br></pre></td></tr></table></figure>
+<p><code>all</code> 表示数组完全匹配。</p>
+<p>查询数组长度为特定值的对象：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="function"><span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="title">size</span>(<span class="params">scores</span>) </span>= <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>数组长度查询仅支持等于号，不支持大小和小于等其他比较运算符。</p>
+<h3 id="子查询">子查询</h3><p>使用 <code>in</code> 来做子查询，后面跟的可以是一个列表，例如查询名字是 dennis、catty 和 green 三个玩家的成绩：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">in</span> (<span class="string">'dennis'</span>,<span class="string">'catty'</span>,<span class="string">'green'</span>)</span></span><br></pre></td></tr></table></figure>
+<p>当然，如果想查询的不在列表里，那可以使用 <code>not in</code>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="string">'dennis'</span>,<span class="string">'catty'</span>,<span class="string">'green'</span>)</span></span><br></pre></td></tr></table></figure>
+<p>in 后面还可以是一个子查询，比如查询玩家信息，并且成绩大于 80 分的：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> Player <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">in</span> (<span class="keyword">select</span> <span class="keyword">name</span> <span class="keyword">from</span> GameScore <span class="keyword">where</span> score&gt;<span class="number">80</span>)</span></span><br></pre></td></tr></table></figure>
+<p>注意子查询必须指定查询的字段名称是 <code>select name</code>。</p>
+<p>子查询另一种常见形式是使用 <code>=</code> 或 <code>!=</code> 跟一条查询语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> Player <span class="keyword">where</span> <span class="keyword">name</span> =(<span class="keyword">select</span> <span class="keyword">name</span> <span class="keyword">from</span> GameScore <span class="keyword">where</span> score&gt;<span class="number">80</span>)</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Player <span class="keyword">where</span> <span class="keyword">name</span> !=(<span class="keyword">select</span> <span class="keyword">name</span> <span class="keyword">from</span> GameScore <span class="keyword">where</span> score&lt;=<span class="number">80</span>)</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：子查询的语句也受上限 1000 条记录的限制。</strong></p>
+<h3 id="地理位置信息查询">地理位置信息查询</h3><p>可以通过 CQL 进行地理位置信息查询，比如我想查询自己附近的玩家（从近到远排序），假设 <code>location</code> 字段是 GeoPoint 类型：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> Player <span class="keyword">where</span> location near [<span class="number">116.4</span>, <span class="number">39.9</span>]</span></span><br></pre></td></tr></table></figure>
+<p>其中 <code>[116.4, 39.9]</code> 是经纬度坐标。也可以使用 <code>geopoint</code> 函数来创建：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> Player <span class="keyword">where</span> location near geopoint(<span class="number">116.4</span>, <span class="number">39.9</span>)</span></span><br></pre></td></tr></table></figure>
+<p>只有在地理位置信息查询里才可以使用 <code>[longitude, latitude]</code> 这样的语法。在其他查询里将被作为数组类型。</p>
+<p>为了限定搜索的最大距离，还可以使用 <code>max [距离]</code> 来限定，比如限定在 1 公里内：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> Player <span class="keyword">where</span> location near geopoint(<span class="number">116.4</span>, <span class="number">39.9</span>) <span class="keyword">max</span> <span class="number">1</span> km</span></span><br></pre></td></tr></table></figure>
+<p>距离长度的其他单位包括 <code>miles</code>（英里）和 <code>radians</code>（弧度），如果不提供明确的单位，默认是<strong>弧度</strong>。</p>
+<p>通过 <code>min [距离]</code> 还可以限定最小距离：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> Player <span class="keyword">where</span> location near geopoint(<span class="number">116.4</span>, <span class="number">39.9</span>) <span class="keyword">min</span> <span class="number">0.5</span> km</span></span><br></pre></td></tr></table></figure>
+<p><code>min</code> 和 <code>max</code> 同时限定的时候，<code>min</code> 必须出现在 <code>max</code> 之前：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> Player <span class="keyword">where</span> location near geopoint(<span class="number">116.4</span>, <span class="number">39.9</span>) <span class="keyword">min</span> <span class="number">0.5</span> km <span class="keyword">max</span> <span class="number">1</span> km</span></span><br></pre></td></tr></table></figure>
+<p>如果想查询某个矩形框内的对象，可以使用 <code>within [西南坐标] and [东北坐标]</code> 的语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> Player <span class="keyword">where</span> location <span class="keyword">within</span> [<span class="number">116.33</span>, <span class="number">39.97</span>] <span class="keyword">and</span> [<span class="number">116.37</span>, <span class="number">39.99</span>]</span></span><br></pre></td></tr></table></figure>
+<h3 id="查询个数(count)">查询个数(count)</h3><p>使用 <code>count</code> 查询来返回符合查询条件的数目，比如查询整张表的记录数：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> GameScore</span></span><br></pre></td></tr></table></figure>
+<p><code>count</code> 不支持 <code>distinct</code> 等语法。仅限 <code>count(*)</code> 和 <code>count(objectId)</code>。</p>
+<p>查询分数大于 60 并且小于等于 80 的成绩数目：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> GameScore <span class="keyword">where</span> score&gt;<span class="number">60</span> <span class="keyword">and</span> score&lt;=<span class="number">80</span></span></span><br></pre></td></tr></table></figure>
+<p>查询个数的同时可以返回对象：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(*),* <span class="keyword">from</span> GameScore</span></span><br></pre></td></tr></table></figure>
+<p>也可以返回特定的字段：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(*),<span class="keyword">name</span> <span class="keyword">from</span> GameScore</span></span><br></pre></td></tr></table></figure>
+<h3 id="关系查询">关系查询</h3><p>有几种方式来查询对象之间的关系数据。如果你想获取对象，而这个对象的一个字段对应了另一个对象， 你可以用一个 where 查询，自己构造一个 Pointer，和其他数据类型一样。</p>
+<p>举例说，如果每一个 Comment 有一个 Post 对象在它的 post 字段上（Pointer 类型），你可以对一个 post 取得所有 comment：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">Comment</span> <span class="keyword">where</span> post=pointer(<span class="string">'Post'</span>,<span class="string">'51e3a359e4b015ead4d95ddc'</span>)</span></span><br></pre></td></tr></table></figure>
+<p><code>pointer</code> 函数接收 className 和 objectId。</p>
+<p>如果你想获取对象, 这个对象的一个字段指向的对象（必须是 Pointer）是符合另一个查询的， 你可以使用 in 查询。注意默认的 limit 是 100 而且最大的 limit 是 1000，这个限制同样适用于内部的查询，所以对于较大的数据集你可能需要细心地构建查询来获得期望的行为。举例说，假设你有一个 Post 类和一个 Comment 类，每个 Comment 都有一个指向它的 Post 的 Pointer，你可以找到对于有图片的 Post 的 Comment：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">Comment</span> <span class="keyword">where</span> post <span class="keyword">in</span> (<span class="keyword">select</span> * <span class="keyword">from</span> Post <span class="keyword">where</span> image <span class="keyword">is</span> <span class="keyword">exists</span>)</span></span><br></pre></td></tr></table></figure>
+<p>如果 Post 下面有一个 key 是 Relation 类型，并且叫做 likes，存储了喜欢这个 Post 的 User。你可以找到这些 user，他们都 like 过同一个指定的 post：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> _User <span class="keyword">where</span> related likes <span class="keyword">to</span> pointer(<span class="string">'Post'</span>, <span class="string">'51e3a359e4b015ead4d95ddc'</span>)</span></span><br></pre></td></tr></table></figure>
+<p>基本的查询形式是 <code>releated &lt;key&gt; to &lt;pointer&gt;</code>。</p>
+<p>如果某个字段是 Pointer，默认查询的时候，只会返回 <code>{__type: &#39;Pointer&#39;, objectId: &#39;objectId&#39;, className:&#39;Post&#39;}</code> 这些基本信息，如果希望同时将这个对象的其他信息查询下来，可以使用 include，比如查询 Comment 同时将 Post 带下来：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">include</span> post, * <span class="keyword">from</span> <span class="keyword">Comment</span></span></span><br></pre></td></tr></table></figure>
+<p>在 select 中采用 <code>include &lt;key&gt;</code> 就可以将某个 Pointer 字段关联查询出来。多个字段要多次 include：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">include</span> post,<span class="keyword">include</span> author <span class="keyword">from</span> <span class="keyword">Comment</span></span></span><br></pre></td></tr></table></figure>
+<p>同样，还可以支持嵌套的 include 查询，比如 Post 里还有一个 Pointer 指向 Category：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">include</span> post.<span class="keyword">category</span>,* <span class="keyword">from</span> <span class="keyword">Comment</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="复合查询">复合查询</h3><p>你可以使用 <code>and</code> 和 <code>or</code> 来做符合查询，例如查询分数在 80 到 100 之间，可以用 <code>and</code>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> score&gt;<span class="number">80</span> <span class="keyword">and</span> score&lt;=<span class="number">100</span></span></span><br></pre></td></tr></table></figure>
+<p>再加个条件，或者分数为 0 分的：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> score&gt;<span class="number">80</span> <span class="keyword">and</span> score&lt;=<span class="number">100</span> <span class="keyword">or</span> score=<span class="number">0</span></span></span><br></pre></td></tr></table></figure>
+<p><code>and</code> 的优先级高于 <code>or</code>，因此上面的查询也可以用括号来明确地表示这种优先级：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> (score&gt;<span class="number">80</span> <span class="keyword">and</span> score&lt;=<span class="number">100</span>) <span class="keyword">or</span> score=<span class="number">0</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="限定返回值">限定返回值</h2><p>通过 <code>limit</code> 语句来限定返回结果大小，比如限定返回 100 个：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">Comment</span> <span class="keyword">limit</span> <span class="number">100</span></span></span><br></pre></td></tr></table></figure>
+<p>可以设定从第 m+1 个元素开始，例如从第 101 个元素（包含）开始往后取 10 个：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">Comment</span> <span class="keyword">limit</span> <span class="number">100</span>,<span class="number">10</span></span></span><br></pre></td></tr></table></figure>
+<p>这个形式跟 MySQL 是类似的。</p>
+<h3 id="占位符">占位符</h3><p>查询条件和 limit 子句还支持占位符，也就是可以用问号 <code>?</code> 替代值，值的列表通过 SDK 提供的方法传入，具体请参考各 SDK 用法，例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">where</span> <span class="keyword">name</span>=? <span class="keyword">and</span> score&gt;? <span class="keyword">limit</span> ?,?</span></span><br></pre></td></tr></table></figure>
+<p>占位符支持所有 LeanCloud 平台上的有效类型，复杂类型（如日期、GeoPoint）要求以 <a href="./rest_api.html#数据类型">REST API</a> 文档说明的 JSON 格式来提供。</p>
+<p><strong>我们推荐使用占位符的方式来使用 CQL，查询语句可以通过预编译被缓存起来，降低 CQL 的转换开销。</strong></p>
+<h2 id="排序">排序</h2><p>通过 <code>order</code> 语句来排序，<code>order</code> 语句只能出现在最后，不能在 <code>where</code> 和 <code>limit</code> 之前。</p>
+<p>例如按照分数倒序排（分数高的前）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">order</span> <span class="keyword">by</span> score <span class="keyword">desc</span></span></span><br></pre></td></tr></table></figure>
+<p>也可以写成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">order</span> <span class="keyword">by</span> -score</span></span><br></pre></td></tr></table></figure>
+<p>加号表示升序，减号表示降序。</p>
+<p>多个字段组合排序，例如分数高的前，名字相同的「更小」的在前（字母顺序）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">order</span> <span class="keyword">by</span> -score,<span class="keyword">name</span></span></span><br></pre></td></tr></table></figure>
+<p>同样的语句可以写成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">order</span> <span class="keyword">by</span> score,+<span class="keyword">name</span> <span class="keyword">desc</span></span><br><span class="line">或者</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> GameScore <span class="keyword">order</span> <span class="keyword">by</span> -score,<span class="keyword">name</span> <span class="keyword">asc</span></span></span><br></pre></td></tr></table></figure>
+<p>没有写上明确的加号或者减号的字段，将根据最后的 <code>desc</code> 或者 <code>asc</code> 来决定采用升序还是降序。</p>
+<h2 id="内置函数">内置函数</h2><p>CQL 提供了一些内置函数来方便地创建 pointer、geopoint 等类型：</p>
+<table><br>  <tr><th>Name</th><th>Operation</th></tr><br>  <tr><td>date(‘YYYY-MM-DDTHH:MM:SS.MMMMZ’)</td><td>创建日期类型</td></tr><br>  <tr><td>pointer(className, objectId)</td><td>创建 Pointer</td></tr><br>  <tr><td>geopoint(经度, 纬度)</td><td>创建 GeoPoint</td></tr><br>  <tr><td>file(objectId)</td><td>创建 file 类型</td></tr><br>  <tr><td>base64(base64编码字符串)</td><td>创建 Bytes 类型</td></tr><br>  <tr><td>current_timestamp()</td><td>创建当前日期</td></tr><br></table>
+
+<p>如果不使用这些函数，你也使用 <a href="./rest_api.html#数据类型">REST API 文档</a> 定义的 JSON 对象来创建特定类型，例如 Pointer：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">Comment</span> <span class="keyword">where</span> post=</span><br><span class="line">  &#123;className:<span class="string">'Post'</span>, objectId:<span class="string">'51e3a334e4b0b3eb44adbe1a'</span>,__type:<span class="string">'Pointer'</span>&#125;</span></span><br></pre></td></tr></table></figure>
+<p>当然这样写就相对繁琐了。</p>
+<h2 id="性能和建议">性能和建议</h2><p>CQL 最终还是转换成 <a href="./rest_api.html">REST API</a> 里查询部分提到的各种 where 条件，因为多了一层转换，理论上会比直接使用 <code>where</code> 查询慢一点。并且 CQL 对长度有所限制，要求在 4096 字节以内。</p>
+<p>此外，我们推荐查询语句都采用占位符的方式，使用占位符的查询语句将有机会被缓存复用，避免重复解释的开销。</p>
 </span>
         
       
@@ -2302,7 +2627,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">141</span>
+              <span class="site-state-item-count">142</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

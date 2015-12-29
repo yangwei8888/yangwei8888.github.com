@@ -170,8 +170,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/README/" itemprop="url">
-                swift readme
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0014-constrained-AnySequence/" itemprop="url">
+                0014-constrained-AnySequence
               </a>
             
           
@@ -207,8 +207,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/README/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/README/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0014-constrained-AnySequence/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0014-constrained-AnySequence/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -223,57 +223,26 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Swift_Programming_Language_Evolution">Swift Programming Language Evolution</h1><p><strong>Before you initiate a pull request</strong>, please read the process document. Ideas should be thoroughly discussed on the <a href="https://swift.org/community/#swift-evolution" target="_blank" rel="external">swift-evolution mailing list</a> first.</p>
-<p>This repository tracks the ongoing evolution of Swift. It contains:</p>
-<ul>
-<li>Goals for upcoming Swift releases (this document)</li>
-<li>The <a href="schedule.md">Swift evolution review schedule</a> tracking proposals to change Swift</li>
-<li>The <a href="process.md">Swift evolution process</a> that governs the evolution of Swift.</li>
+          <span itemprop="articleBody"><h1 id="Constraining_AnySequence-init">Constraining <code>AnySequence.init</code></h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0014-constrained-AnySequence.md" target="_blank" rel="external">SE-0014</a></li>
+<li>Author(s): <a href="https://github.com/moiseev" target="_blank" rel="external">Max Moiseev</a></li>
+<li>Status: <strong>Awaiting review</strong> (schedule December 18–21, 2015)</li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<p>This document describes goals for the Swift language on a per-release<br>basis, usually listing minor releases adding to the currently shipping<br>version and one major release out.  Each release will have many<br>smaller features or changes independent of these larger goals, and not<br>all goals are reached for each release.</p>
-<p>Goals for past versions are included at the bottom of the document for<br>historical purposes, but are not necessarily indicative of the<br>features shipped. The release notes for each shipped version are the<br>definitive list of notable changes in each release.</p>
-<h2 id="Development_major_version:_Swift_3-0">Development major version:  Swift 3.0</h2><p>Expected release date: Fall 2016</p>
-<p>The primary goal of this release is to stabilize the binary interface<br>of the language and standard library. As part of this process, we will<br>focus and refine the language to provide better overall consistency in<br>feel and implementation. Swift 3.0 will contain <em>source-breaking</em><br>changes from Swift 2.x where necessary to support these goals. More<br>concretely, this release is focused on several key areas:</p>
-<ul>
-<li><strong>Stable ABI</strong>: Stabilize the binary interface (ABI) to guarantee a level of binary compatibility moving forward. This involves finalizing runtime data structures, name mangling, calling conventions, and so on, as well as finalizing some of the details of the language itself that have an impact on its ABI. Stabilizing the ABI also extends to the Standard Library, its data types, and core algorithms. Successful ABI stabilization means that applications and libraries compiled with future versions of Swift can interact at a binary level with applications and libraries compiled with Swift 3.0, even if the source language changes.</li>
-<li><strong>Resilience</strong>: Solve the general problem of <a href="https://en.wikipedia.org/wiki/Fragile_binary_interface_problem" target="_blank" rel="external">fragile binary interface</a>, which currently requires that an application be recompiled if any of the libraries it depends on changes. For example, adding a new stored property or overridable method to a class should not require all subclasses of that class to be recompiled. There are several broad concerns for resilience:<ul>
-<li><em>What changes are resilient?</em>: Define the kinds of changes that can be made to a library without breaking clients of that library. Source-compatible changes to libraries are good candidates for resilient changes, but such decisions also consider the effects on the implementation.</li>
-<li><em>How is a resilient library implemented?</em>: What runtime representations are necessary to allow applications to continue to work after making resilient changes to a library? This dovetails with the stabilization of the ABI, because the stable ABI should be a resilient ABI.</li>
-<li><em>How do we maintain high performance?</em>: Resilient implementations often incur more execution overhead than non-resilient (or <em>fragile</em>) implementations, because resilient implementations need to leave some details unspecified until load time, such as the specific sizes of a class or offsets of a stored property.</li>
-</ul>
-</li>
-<li><strong>Portability</strong>: Make Swift available on other platforms and ensure that one can write portable Swift code that works properly on all of those platforms.</li>
-<li><strong>Type system cleanup and documentation</strong>: Revisit and document the various subtyping and conversion rules in the type system, as well as their implementation in the compiler’s type checker. The intent is to converge on a smaller, simpler type system that is more rigorously defined and more faithfully represented by the type checker.</li>
-<li><strong>Complete generics</strong>: Generics are used pervasively in a number of Swift libraries, especially the standard library. However, there are a number of generics features the standard library requires to fully realize its vision, including recursive protocol constraints, the ability to make a constrained extension conform to a new protocol (i.e., an array of <code>Equatable</code> elements is <code>Equatable</code>), and so on. Swift 3.0 should provide those generics features needed by the standard library, because they affect the standard library’s ABI.</li>
-<li><strong>Focus and refine the language</strong>: Despite being a relatively young language, Swift’s rapid development has meant that it has accumulated some language features and library APIs that don’t fit well with the language as a whole. Swift 3 will remove or improve those features to provide better overall consistency for Swift.</li>
-<li><strong>API design guidelines</strong>: The way in which Swift is used in popular<br>libraries has almost as much of an effect on the character of Swift<br>code as the Swift language itself. The <a href="https://swift.org/documentation/api-design-guidelines.html" target="_blank" rel="external">API design<br>guidelines</a> provide guidance for<br>building great Swift APIs. For Swift 3.0, the Swift standard library<br>and core libraries are being updated to match these guidelines, and<br>Swift’s Objective-C importer will <a href="proposals/0005-objective-c-name-translation.md">automatically map</a> from the <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" target="_blank" rel="external">Cocoa guidelines for<br>Objective-C</a><br>to the Swift API guidelines.</li>
-</ul>
-<h3 id="Out_of_Scope">Out of Scope</h3><p>A significant part of delivering a major release is in deciding what<br><em>not</em> to do, which means deferring many good ideas. The following is a<br>sampling of potentially good ideas that are not in scope for Swift<br>3.0:</p>
-<ul>
-<li><p><strong>Full source compatibility</strong>: Swift 3.0 will not provide full<br>source compatibility. Rather, it can and will introduce<br>source-breaking changes needed to support the main goals of Swift<br>3.0.</p>
-</li>
-<li><p><strong>Concurrency</strong>: Swift 3.0 relies entirely on platform concurrency<br>primitives (libdispatch, Foundation, pthreads, etc.) for<br>concurrency. Language support for concurrency is an often-requested<br>and potentially high-value feature, but is too large to be in scope<br>for Swift 3.0.</p>
-</li>
-<li><p><strong>C++ Interoperability</strong>: Swift’s interoperability with C and<br>Objective-C is one of its major strengths, allowing it to integrate<br>with platform APIs. Interoperability with C++ libraries would<br>enhance Swift’s ability to work with existing libraries and APIs.<br>However, C++ itself is a very complex language, and providing good<br>interoperability with C++ is a significant undertaking that is out<br>of scope for Swift 3.0.</p>
-</li>
-<li><p><strong>Hygienic Macros</strong>: A first-class macro system is something we may consider<br>in future releases.  We don’t want the existence of a macro system to be a<br>workaround that reduces the incentive for making the core language great.</p>
-</li>
-<li><p><strong>Major new library functionality</strong>: The Swift Standard Library is focused on<br>providing core “language” functionality as well as common data structures.  The<br>“corelibs” projects are focused on providing existing Foundation functionality<br>in a portable way.  We <em>will</em> consider minor extensions to their existing<br>feature sets to round out these projects.</p>
-<p>On the other hand, major new libraries (e.g. a new Logging subsystem) are<br>best developed as independent projects on GitHub (or elsewhere) and organized<br>with the Swift Package Manager.  Beyond Swift 3 we may consider standardizing<br>popular packages or expanding the scope of the project.  </p>
-</li>
-</ul>
-<h3 id="Accepted_proposals_for_Swift_3-0">Accepted proposals for Swift 3.0</h3><ul>
-<li><a href="proposals/0005-objective-c-name-translation.md">Better Translation of Objective-C APIs Into Swift</a></li>
-<li><a href="proposals/0002-remove-currying.md">Removing currying <code>func</code> declaration syntax</a></li>
-<li><a href="proposals/0003-remove-var-parameters-patterns.md">Removing <code>var</code> from Function Parameters and Pattern Matching</a></li>
-<li><a href="proposals/0004-remove-pre-post-inc-decrement.md">Remove the <code>++</code> and <code>--</code> operators</a></li>
-<li><a href="proposals/0007-remove-c-style-for-loops.md">Remove C-style for-loops with conditions and incrementers</a></li>
-</ul>
-<h2 id="Development_minor_version:_Swift_2-2">Development minor version:  Swift 2.2</h2><p>Expected release date: Spring 2016</p>
-<p>This release will focus on fixing bugs, improving<br>quality-of-implementation (QoI) with better warnings and diagnostics,<br>improving compile times, and improving performance.  It may also put<br>some finishing touches on features introduced in Swift 2.0, and<br>include some small additive features that don’t break Swift code or<br>fundamentally change the way Swift is used. As a step toward Swift<br>3.0, it will introduce warnings about upcoming source-incompatible<br>changes in Swift 3.0 so that users can begin migrating their code<br>sooner.</p>
-<h3 id="Accepted_proposals_for_Swift_2-2">Accepted proposals for Swift 2.2</h3><ul>
-<li><a href="proposals/0001-keywords-as-argument-labels.md">Allow (most) keywords as argument labels</a></li>
-</ul>
+<h2 id="Introduction">Introduction</h2><p>In order to allow <code>AnySequence</code> delegate calls to the underlying sequence,<br>its initializer should have extra constraints.</p>
+<h2 id="Motivation">Motivation</h2><p>At the moment <code>AnyCollection</code> does not delegate calls to <code>SequenceType</code> protocol<br>methods to the underlying base sequence, which results in dynamic downcasts in<br>places where this behavior is needed (see default implementations of<br><code>SequenceType.dropFirst</code> or <code>SequenceType.prefix</code>). Besides, and this is even<br>more important, customized implementations of <code>SequenceType</code> methods would be<br>ignored without delegation.</p>
+<h2 id="Proposed_solution">Proposed solution</h2><p>See the implementation in <a href="https://github.com/apple/swift/pull/220" target="_blank" rel="external">this PR</a>.</p>
+<p>In order for this kind of delegation to become possible, <code>_SequenceBox</code> needs to<br>be able to ‘wrap’ not only the base sequence but also it’s associated<br><code>SubSequence</code>. So instead of being declared like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">internal <span class="class"><span class="keyword">class</span> <span class="title">_SequenceBox</span>&lt;<span class="title">S</span> : <span class="title">SequenceType</span>&gt;</span><br><span class="line">    : <span class="title">_AnySequenceBox</span>&lt;<span class="title">S</span>.<span class="title">Generator</span>.<span class="title">Element</span>&gt; </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>it would become this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">internal <span class="class"><span class="keyword">class</span> <span class="title">_SequenceBox</span>&lt;</span><br><span class="line">  <span class="title">S</span> : <span class="title">SequenceType</span></span><br><span class="line">  <span class="title">where</span></span><br><span class="line">    <span class="title">S</span>.<span class="title">SubSequence</span> : <span class="title">SequenceType</span>,</span><br><span class="line">    <span class="title">S</span>.<span class="title">SubSequence</span>.<span class="title">Generator</span>.<span class="title">Element</span> == <span class="title">S</span>.<span class="title">Generator</span>.<span class="title">Element</span>,</span><br><span class="line">    <span class="title">S</span>.<span class="title">SubSequence</span>.<span class="title">SubSequence</span> == <span class="title">S</span>.<span class="title">SubSequence</span></span><br><span class="line">&gt; : <span class="title">_AnySequenceBox</span>&lt;<span class="title">S</span>.<span class="title">Generator</span>.<span class="title">Element</span>&gt; </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>Which, in it’s turn, will lead to <code>AnySequence.init</code> getting a new set of<br>constraints as follows.</p>
+<p>Before the change:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">AnySequence</span>&lt;<span class="title">Element</span>&gt; : <span class="title">SequenceType</span> </span>&#123;</span><br><span class="line">  public <span class="keyword">init</span>&lt;</span><br><span class="line">    <span class="type">S</span>: <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">where</span></span><br><span class="line">      <span class="type">S</span>.<span class="type">Generator</span>.<span class="type">Element</span> == <span class="type">Element</span></span><br><span class="line">  &gt;(<span class="number">_</span> base: <span class="type">S</span>) &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After the change:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">AnySequence</span>&lt;<span class="title">Element</span>&gt; : <span class="title">SequenceType</span> </span>&#123;</span><br><span class="line">  public <span class="keyword">init</span>&lt;</span><br><span class="line">    <span class="type">S</span>: <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">where</span></span><br><span class="line">      <span class="type">S</span>.<span class="type">Generator</span>.<span class="type">Element</span> == <span class="type">Element</span>,</span><br><span class="line">      <span class="type">S</span>.<span class="type">SubSequence</span> : <span class="type">SequenceType</span>,</span><br><span class="line">      <span class="type">S</span>.<span class="type">SubSequence</span>.<span class="type">Generator</span>.<span class="type">Element</span> == <span class="type">Element</span>,</span><br><span class="line">      <span class="type">S</span>.<span class="type">SubSequence</span>.<span class="type">SubSequence</span> == <span class="type">S</span>.<span class="type">SubSequence</span></span><br><span class="line">  &gt;(<span class="number">_</span> base: <span class="type">S</span>) &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>These constraints, in fact, should be applied to <code>SequenceType</code> protocol itself<br>(although, that is not currently possible), as we expect every <code>SequenceType</code><br>implementation to satisfy them already.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>New constraints do not affect any built-in types that conform to<br><code>SequenceType</code> protocol as they are essentially constructed like this<br>(<code>SubSequence.SubSequence == SubSequence</code>). 3rd party collections, if they use<br>the default <code>SubSequence</code> (i.e. <code>Slice</code>), should also be fine. Those having<br>custom <code>SubSequence</code>s may stop conforming to the protocol.</p>
 </span>
         
       
@@ -304,8 +273,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0007-remove-c-style-for-loops/" itemprop="url">
-                0007-remove-c-style-for-loops
+              <a class="post-title-link" href="/2015/12/15/swift/schedule/" itemprop="url">
+                swift schedule
               </a>
             
           
@@ -341,8 +310,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0007-remove-c-style-for-loops/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0007-remove-c-style-for-loops/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/schedule/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/schedule/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -357,44 +326,18 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="Remove_C-style_for-loops_with_conditions_and_incrementers">Remove C-style for-loops with conditions and incrementers</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0007-remove-c-style-for-loops.md" target="_blank" rel="external">SE-0007</a></li>
-<li>Author(s): <a href="https://github.com/erica" target="_blank" rel="external">Erica Sadun</a></li>
-<li>Status: <strong>Accepted</strong> for Swift 3.0 (<a href="https://bugs.swift.org/browse/SR-226" target="_blank" rel="external">Swift 2.2 bug</a>, <a href="https://bugs.swift.org/browse/SR-227" target="_blank" rel="external">Swift 3.0 bug</a>)</li>
-<li>Review manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+          <span itemprop="articleBody"><h1 id="Swift_Evolution_Review_Schedule">Swift Evolution Review Schedule</h1><p>The <a href="process.md" title="The Swift evolution process">Swift evolution process</a> describes the process<br>by which Swift evolves. This document tracks the currently active<br>proposals in that process.</p>
+<h2 id="Active_reviews">Active reviews</h2><p>(No proposals under active review)</p>
+<h2 id="Upcoming_reviews">Upcoming reviews</h2><ul>
+<li>December 15–17, 2015: <a href="proposals/0008-lazy-flatmap-for-optionals.md">SE-0008</a></li>
+<li>December 16–20, 2015: <a href="proposals/0009-require-self-for-accessing-instance-members.md">SE-0009</a></li>
+<li>December 18–21, 2015: <a href="proposals/0014-constrained-AnySequence.md">SE-0014</a></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>The C-style <code>for-loop</code> appears to be a mechanical carry-over from C rather than a<br>genuinely Swift-specific construct. It is rarely used and not very Swift-like. </p>
-<p>More Swift-typical construction is already available with <code>for-in</code><br>statements and <code>stride</code>. Removing for loops would simplify the language and starve the<br>most common use-points for <code>--</code> and <code>++</code>, which are already due to be eliminated from the<br>language.</p>
-<p>The value of this construct is limited and I believe its removal should be seriously considered.</p>
-<h2 id="Advantages_of_For_Loops">Advantages of For Loops</h2><p>Swift design supported a shallow learning curve using familiar constants and control<br>structures. The <code>for-loop</code> mimics C and limits the effort needed to master this control flow.</p>
-<h2 id="Disadvantages_of_For_Loops">Disadvantages of For Loops</h2><ol>
-<li>Both <code>for-in</code> and <code>stride</code> provide equivalent behavior using Swift-coherent approaches<br>without being tied to legacy terminology. </li>
-<li>There is a distinct expressive disadvantage in using <code>for-loops</code> compared to <code>for-in</code><br>in succinctness</li>
-<li><code>for-loop</code> implementations do not lend themselves to use with collections and other core Swift types.</li>
-<li>The <code>for-loop</code> encourages use of unary incrementors and decrementors, which will be<br>soon removed from the language.</li>
-<li>The semi-colon delimited declaration offers a steep learning curve from users arriving<br>from non C-like languages</li>
-<li>If the <code>for-loop</code> did not exist, I doubt it would be considered for inclusion in Swift 3.</li>
-</ol>
-<h2 id="Proposed_Approach">Proposed Approach</h2><p>I suggest that the for-loop be deprecated in Swift 2.x and removed entirely in Swift 3, with coverage removed from the Swift Programming Language to match the revisions in the current 2.2 update.</p>
-<h2 id="Alternatives_considered">Alternatives considered</h2><p>Not removing <code>for-loop</code> from Swift, losing the opportunity to streamline the language<br>and discard an unneeded control flow item.</p>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A search of the Apple Swift codebase suggests this feature is rarely used. Community members of the Swift-Evolution mail list confirm that it does not feature in many pro-level apps and can be worked around for those few times when <code>for-loop</code>s do pop up. For example:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">char *blk_xor(char *dst, const char *src, size_t len)</span><br><span class="line">&#123;</span><br><span class="line"> const char *sp = src;</span><br><span class="line"> <span class="keyword">for</span> (char *dp = dst; sp - src &lt; len; sp++, dp++)</span><br><span class="line">   *dp ^= *sp;</span><br><span class="line"> <span class="keyword">return</span> dst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>versus</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">blk_xor</span><span class="params">(dst: UnsafeMutablePointer&lt;CChar&gt;, src:</span><br><span class="line">UnsafePointer&lt;CChar&gt;, len: Int)</span></span> -&gt; <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">CChar</span>&gt; &#123;</span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;len &#123;</span><br><span class="line">       dst[i] ^= src[i]</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> dst</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>A search of github’s Swift gists suggests the approach is used primarily by those new to the language with minimal language skills and is abandoned as language mastery is achieved.</p>
-<p>For example:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; i++ &#123;</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>and </p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">50</span>]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span> ; i &lt; array.<span class="built_in">count</span> ;i++)&#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">"array[i] <span class="subst">\(array[i])</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Community_Responses">Community Responses</h2><ul>
-<li>“I am certainly open to considering dropping the C-style for loop.  IMO, it is a rarely used feature of Swift that doesn’t carry its weight.  Many of the reasons to remove them align with the rationale for removing – and ++. “ – Chris Lattner, clattner@apple.com</li>
-<li>“My intuition <em>completely</em> agrees that Swift no longer needs C-style for loops. We have richer, better-structured looping and functional algorithms. That said, one bit of data I’d like to see is how often C-style for loops are actually used in Swift. It’s something a quick crawl through Swift sources on GitHub could establish. If the feature feels anachronistic and is rarely used, it’s a good candidate for removal.” – Douglas Gregnor, dgregor@apple.com</li>
-<li>“Every time I’ve used a C-style for loop in Swift it was because I forgot that .indices existed. If it’s removed, a fixme pointing that direction might be useful.” – David Smith, david_smith@apple.com</li>
-<li>“For what it’s worth we don’t have a single C style for loop in the Lyft codebase.” – Keith Smiley, keithbsmiley@gmail.com</li>
-<li>“Just checked; ditto Khan Academy.” – Andy Matsuchak, andy@andymatuschak.org</li>
-<li>“We’ve developed a number of Swift apps for various clients over the past year and have not needed C style for loops either.” – Eric Chamberlain, eric.chamberlain@arctouch.com</li>
-<li>“Every time I’ve tried to use a C-style for loop, I’ve ended up switching to a while loop because my iteration variable ended up having the wrong type (e.g. having an optional type when the value must be non-optional for the body to execute). The Postmates codebase contains no instances of C-style for loops in Swift.” – Kevin Ballard, kevin@sb.org</li>
-<li>“I found a couple of cases of them in my codebase, but they were trivially transformed into “proper” Swift-style for loops that look better anyway. If it were a vote, I’d vote for eliminating C-style.” – Sean Heber, sean@fifthace.com</li>
+<h2 id="Proposals_awaiting_scheduling">Proposals awaiting scheduling</h2><ul>
+<li><a href="proposals/0010-add-staticstring-unicodescalarview.md">SE-0010</a></li>
+<li><a href="proposals/0011-replace-typealias-associated.md">SE-0011</a></li>
+<li><a href="proposals/0012-add-noescape-to-public-library-api.md">SE-0012</a></li>
+<li><a href="proposals/0013-remove-partial-application-super.md">SE-0013</a></li>
 </ul>
 </span>
         
@@ -1051,217 +994,6 @@ if path.<b>isEmpty</b> { ... }
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/" itemprop="url">
-                0008-lazy-flatmap-for-optionals
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
-            2015-12-15
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Add_a_Lazy_flatMap_for_Sequences_of_Optionals">Add a Lazy flatMap for Sequences of Optionals</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0008-lazy-flatmap-for-optionals.md" target="_blank" rel="external">SE-0008</a></li>
-<li>Author(s): <a href="https://github.com/oisdk" target="_blank" rel="external">Oisin Kidney</a></li>
-<li>Status: <strong>Awaiting review</strong> (scheduled for December 15–17, 2015)</li>
-<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
-</ul>
-<h2 id="Introduction">Introduction</h2><p>Currently, the Swift standard library has two versions of <code>flatMap</code>. One which flattens a sequence of sequences after a transformation:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n..&lt;<span class="number">5</span> &#125; </span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 2, 3, 4, 3, 4]</span></span><br></pre></td></tr></table></figure>
-<p>And another which flattens a sequence of <code>Optional</code>s:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>...<span class="number">10</span>)</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n % <span class="number">2</span> == <span class="number">0</span> ? n/<span class="number">2</span> : <span class="literal">nil</span> &#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
-<p>However, there is only a lazy implementation for the first version:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">  .lazy</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n..&lt;<span class="number">5</span> &#125;</span><br><span class="line"><span class="comment">// LazyCollection&lt;FlattenBidirectionalCollection&lt;LazyMapCollection&lt;Array&lt;Int&gt;, Range&lt;Int&gt;&gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line">(<span class="number">1</span>...<span class="number">10</span>)</span><br><span class="line">  .lazy</span><br><span class="line">  .flatMap &#123; n <span class="keyword">in</span> n % <span class="number">2</span> == <span class="number">0</span> ? n/<span class="number">2</span> : <span class="literal">nil</span> &#125;</span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
-<h2 id="Motivation">Motivation</h2><p>Seeing as the already-existing <code>flatMap</code> has a lazy version for nested sequences, a missing lazy version for sequences of <code>Optional</code>s seems like a gap. The usefulness of lazy sequences is well documented, especially when refactoring imperative nested for-loops into chains of methods, which can unnecessarily allocate intermediate arrays if done eagerly.</p>
-<h2 id="Proposed_Approach">Proposed Approach</h2><p>Making use of already-existing types in the standard library, <code>flatMap</code>‘s functionality can be achieved with a <code>map</code>-<code>filter</code>-<code>map</code> chain:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LazySequenceType</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  @warn_unused_result</span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">flatMap</span><span class="generics">&lt;T&gt;</span><span class="params">(transform: Elements.Generator.Element -&gt; T?)</span></span></span><br><span class="line">    -&gt; <span class="type">LazyMapSequence</span>&lt;<span class="type">LazyFilterSequence</span>&lt;<span class="type">LazyMapSequence</span>&lt;<span class="type">Elements</span>, <span class="type">T</span>?&gt;&gt;, <span class="type">T</span>&gt; &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">self</span></span><br><span class="line">        .<span class="built_in">map</span>(transform)</span><br><span class="line">        .<span class="built_in">filter</span> &#123; opt <span class="keyword">in</span> opt != <span class="literal">nil</span> &#125;</span><br><span class="line">        .<span class="built_in">map</span> &#123; notNil <span class="keyword">in</span> notNil! &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Detailed_Design">Detailed Design</h2><p>A version for <code>LazyCollectionType</code>s is almost identical:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LazyCollectionType</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  @warn_unused_result</span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">flatMap</span><span class="generics">&lt;T&gt;</span><span class="params">(transform: Elements.Generator.Element -&gt; T?)</span></span></span><br><span class="line">    -&gt; <span class="type">LazyMapCollection</span>&lt;<span class="type">LazyFilterCollection</span>&lt;<span class="type">LazyMapCollection</span>&lt;<span class="type">Elements</span>, <span class="type">T</span>?&gt;&gt;, <span class="type">T</span>&gt; &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">self</span></span><br><span class="line">        .<span class="built_in">map</span>(transform)</span><br><span class="line">        .<span class="built_in">filter</span> &#123; opt <span class="keyword">in</span> opt != <span class="literal">nil</span> &#125;</span><br><span class="line">        .<span class="built_in">map</span> &#123; notNil <span class="keyword">in</span> notNil! &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>However, a “bidirectional” version cannot be written in this way, since no <code>FilterBidirectionalCollection</code> exists.</p>
-<p>The other form of <code>flatMap</code> uses a <code>flatten</code> method on nested sequences, which has both a <code>CollectionType</code> form and a form for <code>CollectionType</code>s with <code>BidirectionalIndexType</code>s. </p>
-<p>However, Swift’s current type system doesn’t allow a similar method to be defined on sequences of <code>Optional</code>s. This means we have to rely on <code>filter</code>, which only has a <code>SequenceType</code> and <code>CollectionType</code> implementation.</p>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><h2 id="Alternatives_considered">Alternatives considered</h2><h3 id="Custom_struct">Custom struct</h3><p>It would also be possible to add a new struct, and a method on <code>LazySequenceType</code>:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">FlatMapOptionalGenerator</span>&lt;<span class="title">G</span>: <span class="title">GeneratorType</span>, <span class="title">Element</span>&gt;: <span class="title">GeneratorType</span> </span>&#123;</span><br><span class="line">  private <span class="keyword">let</span> transform: <span class="type">G</span>.<span class="type">Element</span> -&gt; <span class="type">Element</span>?</span><br><span class="line">  private <span class="keyword">var</span> generator: <span class="type">G</span></span><br><span class="line">  public <span class="keyword">mutating</span> <span class="func"><span class="keyword">func</span> <span class="title">next</span><span class="params">()</span></span> -&gt; <span class="type">Element</span>? &#123;</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">let</span> next = generator.next() &#123;</span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">let</span> transformed = transform(next) &#123;</span><br><span class="line">        <span class="keyword">return</span> transformed</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">struct</span> <span class="title">FlatMapOptionalSequence</span>&lt;<span class="title">S</span>: <span class="title">LazySequenceType</span>, <span class="title">Element</span>&gt;: <span class="title">LazySequenceType</span> </span>&#123;</span><br><span class="line">  private <span class="keyword">let</span> transform: <span class="type">S</span>.<span class="type">Generator</span>.<span class="type">Element</span> -&gt; <span class="type">Element</span>?</span><br><span class="line">  private <span class="keyword">let</span> sequence: <span class="type">S</span></span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">generate</span><span class="params">()</span></span> -&gt; <span class="type">FlatMapOptionalGenerator</span>&lt;<span class="type">S</span>.<span class="type">Generator</span>, <span class="type">Element</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">FlatMapOptionalGenerator</span>(transform: transform, generator: sequence.generate())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">LazySequenceType</span> </span>&#123;</span><br><span class="line">  public <span class="func"><span class="keyword">func</span> <span class="title">flatMap</span><span class="generics">&lt;T&gt;</span><span class="params">(transform: Generator.Element -&gt; T?)</span></span> -&gt; <span class="type">FlatMapOptionalSequence</span>&lt;<span class="type">Self</span>, <span class="type">T</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">FlatMapOptionalSequence</span>(transform: transform, sequence: <span class="keyword">self</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>However, this implementation does not have a <code>LazyCollectionType</code> version. To add one, and a bidirectional implementation, six new types (three <code>SequenceType</code>s, three <code>GeneratorType</code>s) would have to be added to the standard library. </p>
-<h3 id="New_Filter_struct">New Filter struct</h3><p>This would involve adding a <code>FilterBidirectionalCollection</code> to the standard library. Arguably, this is a gap currently. It would allow both <code>flatMap</code> versions to mirror each other, with minimal new types.</p>
-<h3 id="Make_Optional_Conform_to_SequenceType">Make Optional Conform to SequenceType</h3><p>This is a far-reaching, separate proposal, but it would solve the issue that this proposal seeks to solve. It’s worth bearing in mind, though, that <code>Optional</code> <em>probably</em> wouldn’t have a <code>BidirectionalIndexType</code>, so the bidirectional version of <code>flatMap</code> wouldn’t exist on <code>Optional</code>s, anyway.</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/" itemprop="url">
-                0006-apply-api-guidelines-to-the-standard-library
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
-            2015-12-15
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Apply_API_Guidelines_to_the_Standard_Library">Apply API Guidelines to the Standard Library</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0006-apply-api-guidelines-to-the-standard-library.md" target="_blank" rel="external">SE-0006</a></li>
-<li>Author(s): <a href="https://github.com/dabrahams" target="_blank" rel="external">Dave Abrahams</a>, <a href="https://github.com/gribozavr" target="_blank" rel="external">Dmitri Gribenko</a>, <a href="https://github.com/moiseev" target="_blank" rel="external">Maxim Moiseev</a></li>
-<li>Status: <strong>Awaiting Review</strong></li>
-<li>Review manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
-</ul>
-<h2 id="Introduction">Introduction</h2><p><a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design Guidelines</a> being developed as<br>part of Swift 3.  It is important that the Standard Library is an exemplar of<br>Swift API Design Guidelines: the APIs from the Standard Library are, probably,<br>the most frequently used Swift APIs in any application domain; the Standard<br>Library also sets precedent for other libraries.</p>
-<p>In this project, we are reviewing the entire Standard Library and updating it<br>to follow the guidelines.</p>
-<h2 id="Proposed_solution">Proposed solution</h2><p>The actual work is being performed on the <a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines<br>branch</a> of the <a href="https://github.com/apple/swift" title="Swift repository" target="_blank" rel="external">Swift repository</a>.<br>On high level, the changes can be summarized as follows.</p>
-<ul>
-<li><p>Strip <code>Type</code> suffix from remaining protocol names.  In a few special cases<br>this means adding a <code>Protocol</code> suffix to get out of the way of type<br>names that are primary (though most of these we expect to be<br>obsoleted by Swift 3 language features).</p>
-</li>
-<li><p>The concept of <code>generator</code> is renamed to <code>iterator</code>.</p>
-</li>
-<li><p><code>IndexingGenerator</code> is renamed to <code>DefaultCollectionIterator</code>.</p>
-</li>
-</ul>
-<p><strong>More changes will be summarized here as they are implemented.</strong></p>
-<h2 id="API_diffs">API diffs</h2><p>Differences between Swift 2.2 Standard library API and the proposed API are<br>added to this section as they are being implemented on the<br><a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines branch</a>.</p>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>The proposed changes are massively source-breaking for Swift code, and will<br>require a migrator to translate Swift 2 code into Swift 3 code.  The API diffs<br>from this proposal will be the primary source of the information about the<br>required transformations.  In addition, to the extent the language allows, the<br>library will keep old names as unavailable symbols with a <code>renamed</code> annotation,<br>that allows the compiler to produce good error messages and emit Fix-Its.</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
               <a class="post-title-link" href="/2015/12/15/swift/proposals/0003-remove-var-parameters-patterns/" itemprop="url">
                 0003-remove-var-parameters-patterns
               </a>
@@ -1397,8 +1129,8 @@ if path.<b>isEmpty</b> { ... }
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="url">
-                0009-require-self-for-accessing-instance-members
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0002-remove-currying/" itemprop="url">
+                0002-remove-currying
               </a>
             
           
@@ -1434,8 +1166,8 @@ if path.<b>isEmpty</b> { ... }
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0002-remove-currying/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0002-remove-currying/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -1450,61 +1182,28 @@ if path.<b>isEmpty</b> { ... }
 
       
         
-          <span itemprop="articleBody"><h1 id="Require_self_for_accessing_instance_members">Require self for accessing instance members</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0009-require-self-for-accessing-instance-members.md" target="_blank" rel="external">SE-0009</a></li>
-<li>Author(s): <a href="https://github.com/hartbit" target="_blank" rel="external">David Hart</a></li>
-<li>Status: <strong>Awaiting review</strong> (scheduled for December 16–20, 2015)</li>
-<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+          <span itemprop="articleBody"><h1 id="Removing_currying_func_declaration_syntax">Removing currying <code>func</code> declaration syntax</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0002-remove-currying.md" target="_blank" rel="external">SE-0002</a></li>
+<li>Author(s): <a href="https://github.com/jckarter" target="_blank" rel="external">Joe Groff</a></li>
+<li>Status: <strong>Accepted</strong></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>The current version of Swift (2.1) requires using <code>self</code> when accessing instance members in closures. The proposal suggests extending this to all member accesses (as is intrinsically the case in Objective-C). It has the benefit of documenting instance properties vs local variables and instance functions vs local functions or closures.</p>
-<h2 id="Motivation">Motivation</h2><p>This proposal makes it obvious which are instance properties vs local variables, as well as which are instance functions vs local functions/closures. This has several advantages:</p>
+<h2 id="Introduction">Introduction</h2><p>Curried function declaration syntax <code>func foo(x: Int)(y: Int)</code> is of limited<br>usefulness and creates a lot of language and implementation complexity. We<br>should remove it.</p>
+<h2 id="Motivation">Motivation</h2><p>The presence of curried function syntax has knock-on effects, complicating<br>other language features:</p>
 <ul>
-<li>More readable at the point of use. </li>
-<li>More consistent than only requiring <code>self</code> in closure contexts.</li>
-<li>Less confusing from a learning point of view.</li>
-<li>Lets the compiler warn users (and avoids bugs) where the authors mean to use a local variable but instead are unknowingly using an instance property (and the other way round).</li>
+<li>The presence of currying invites confusion over keyword rules and the<br>declaration name of functions. We’ve argued several times over whether<br>curried arguments represent a continuation of the function’s arguments, begin<br>the argument list of a new function, or deserve to follow different rules<br>altogether.</li>
+<li>It has subtle interactions with ‘var’ and ‘inout’ argument<br>annotations. A curried function with ‘inout’ parameters anywhere other than<br>its first clause cannot be partially applied without surprising semantic<br>restrictions, limiting its usefulness. With ‘var’ parameters, there’s the<br>question of at what level the ‘var’ gets bound; many users expect it at the<br>outermost partial application, but we currently bind at the innermost partial<br>application.</li>
 </ul>
-<p>One example of a bug avoidable by the proposal (<a href="https://lists.swift.org/pipermail/swift-evolution/2015-December/000243.html" target="_blank" rel="external">provided by Rudolf Adamkovic</a>):</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span> : <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">	<span class="preprocessor">@IBOutlet</span> <span class="keyword">var</span> button: <span class="type">UIButton</span>!</span><br><span class="line">        <span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line"></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">updateButton</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// var title = "Hello \(name)"</span></span><br><span class="line">		button.setTitle(title, forState: .<span class="type">Normal</span>) <span class="comment">// forgot to comment this line but the compiler does not complain and title is now referencing UIViewController’s title by mistake</span></span><br><span class="line">		button.setTitleColor(<span class="type">UIColor</span>.blackColor(), forState: .<span class="type">Normal</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The API Design Guidelines are meant for writing APIs but I still think they represent fundamentals of Swift. The two first points are:</p>
+<p>The idioms of the standard library, Cocoa, and most third-party code don’t<br>really make ML-style argument currying of free functions profitable. In<br>Cocoa and the standard library, most things are methods, where we can still get<br>useful partial application via <code>self.method</code> and maybe someday <code>.map { f($0)
+}</code> as well. The curried function design also predates the design of the<br>keyword argument model. We have plans to move away<br>from the arguments-are-a-single-tuple model too (which is already belied by<br>things like <code>@autoclosure</code> and <code>inout</code>), which pushes us even further away from<br>the ML argument model.</p>
+<p>Many users have observed the uselessness of our currying feature, and asked for<br>Scala-style <code>f(_, 1)</code> freeform partial application as an alternative. The fact<br>that even functionally-oriented users don’t see much value in our currying<br>feature makes me feel like we might be better off without it. It definitely fails<br>the “would we add it if we didn’t have it already” test.</p>
+<h2 id="Detailed_design">Detailed design</h2><p>We remove support for multiple argument patterns in <code>func</code> declarations,<br>reducing the grammar for <code>func-signature</code> to allow only one <code>argument</code> clause.<br>For migration purposes, existing code that uses currying declaration syntax<br>can be transformed to explicitly return a closure instead:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Before:</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">curried</span><span class="params">(x: Int)</span></span>(y: <span class="type">String</span>) -&gt; <span class="type">Float</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="type">Float</span>(x) + <span class="type">Float</span>(y)!</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// After:</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">curried</span><span class="params">(x: Int)</span></span> -&gt; (<span class="type">String</span>) -&gt; <span class="type">Float</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;(y: <span class="type">String</span>) -&gt; <span class="type">Float</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> <span class="type">Float</span>(x) + <span class="type">Float</span>(y)!</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>I don’t propose changing the semantics of methods, which formally remain<br>functions of type <code>Self -&gt; Args -&gt; Return</code>.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>This is removing a language feature, so will obviously break existing code<br>that uses the feature. We feel that currying is of sufficiently marginal<br>utility, runs against the grain of emerging language practice, and there’s a<br>reasonable automatic migration, so the impact is acceptable in order to<br>simplify the language.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The alternative would be to preserve currying as-is, which as discussed above,<br>is not ideal. Although I don’t propose taking any immediate action, future<br>alternative designs to provide similar functionality in a more idiomatic way<br>include:</p>
 <ul>
-<li>Clarity at the point of use is your most important goal. Code is read far more than it is written.</li>
-<li>Clarity is more important than brevity. Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.</li>
-</ul>
-<p>And I believe that the proposition is directly in line with those objectives.</p>
-<h2 id="Counter-argument">Counter-argument</h2><p>The counter-argument brought up by two members of the community is that the current behaviour “makes the capturing semantics of self stand out more in closures”. While this is true, the author finds its usefulness lacking.</p>
-<p>In the following lines of code, we know without a shadow of a doubt that <code>foobar</code> is a throwing function and that <code>barfoo</code> does not throw.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">try foobar()</span><br><span class="line">barfoo()</span><br></pre></td></tr></table></figure>
-<p>But with an example of <code>self</code> in a closure:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foobar(&#123;</span><br><span class="line">	<span class="built_in">print</span>(<span class="keyword">self</span>.description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>The <code>self</code> keyword in the previous lines of code gives a hint but does not bring any certitudes:</p>
-<ul>
-<li><code>self</code> might have been forced by the compiler to hint at possible memory issues,</li>
-<li><code>self</code> might have been a programmer choice if the closure is non-escaping.</li>
-</ul>
-<p>And in the reverse example:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">barfoo(&#123;</span><br><span class="line">	<span class="built_in">print</span>(description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>the closure might be non-escaping,</li>
-<li>the <code>description</code> might be referring to a local variable (which we missed the declaration of) shadowing the instance property in an escaping closure.</li>
-</ul>
-<p>In both of these examples, the <code>self</code> keyword does not tell us with any certainty that we should or not be careful about reference cycle issues without checking the signature of the called function, only that self is captured. With the proposition, <code>self</code> gets some meaning back: it indicates which are local and which are instance properties.</p>
-<h2 id="Proposed_Solution">Proposed Solution</h2><p>I suggest that not using <code>self</code> for accessing instance properties and functions is applied in two stages. In Swift 2.x, it could start as a warning and Xcode could provide a Fix-It. Then, it could become a compiler error in Swift 3 and the migrator would help transition code over.</p>
-<p>The following code which used to compile would generate an error at the documented lines:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(name)</span>"</span>) <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		foo() <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The code would have to be modified as so to compile correctly:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(<span class="keyword">self</span>.name)</span>"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">self</span>.foo()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A lot of code written since the original change would be impacted by this proposal, but it seems like it can be easily fixed by both the migrator tool and an Xcode Fix-It.</p>
-<h2 id="Alternatives_considered">Alternatives considered</h2><p>The alternative is to keep the current behaviour, but it has the aforementioned disadvantages.</p>
-<p>An alternative would be to demote from a compiler error to a warning.</p>
-<h2 id="Community_Responses">Community Responses</h2><ul>
-<li>“I actually encountered at least two bugs in my app introduced by this implicit “self” behavior. It can be dangerous and hard to track down.” – Rudolf Adamkovic, salutis@me.com</li>
-<li>“Given this, some teams use underscores for their iVars which is very unfortunate. Myself, I use self whenever possible to be explicit. I’d like the language to force us to be clear.” – Dan, robear18@gmail.com</li>
-<li>“I’m not sure how many Swift users this effects, but I’m colorblind and I really struggle with the local vs properties syntax coloring.” – Tyler Cloutier, cloutiertyler@aol.com</li>
-<li>“+1 I’ve had a lot of weird things happen that I’ve traced to mistakes in properties having the same name as function arguments. I’ve hardly ever had this issue in modern Obj-C.” – Coli Cornaby, colin.cornaby@mac.com</li>
-<li>“Teaching wise, its much less confusing for self to be required so students don’t mix up instance properties and local vars. Especially when self is required in closures, it confuses students. If self is mandatory for all instance properties, it would be so much clearer and much easier to read.” – Yichen Cao, ycao@me.com</li>
-<li>“this avoids confusion, maintains a consistent language approach, and thus helps reducing bugs. Sure, it might lead to less poetic haiku code, but that is not necessarily a bad thing in medium to large scale software products with more than one person working on it and possible/eventual change of people on the project over time.” – Panajev</li>
-<li>“I’m +1 on this, for the reasons already stated by others, but not as strongly as I was a year ago. I was very worried about this with Swift 1 was first released, but since then, I haven’t actually made this mistake, possibly because I’m so paranoid about it.” – Michael Buckley, michael@buckleyisms.com</li>
+<li>Scala-like ad-hoc partial application syntax, such that something like<br><code>foo(_, bar: 2)</code> would be shorthand for <code>{ x in foo(x, bar: 2) }</code>. This<br>has the benefit of arguably being more readable with our keyword-argument-<br>oriented API design, and also more flexible than traditional currying,<br>which requires argument order to be preconsidered by the API designer.</li>
+<li>Method and/or operator slicing syntax. We have <code>self.method</code> to partially<br>bind a method to its <code>self</code> parameter, and could potentially add<br><code>.method(argument)</code> to partially bind a method to its non-self arguments,<br>which would be especially useful for higher-order methods like <code>map</code><br>and <code>filter</code>. Haskell-like <code>(2+)</code>/<code>(+2)</code> syntax for partially applying<br>operators might also be nice.</li>
 </ul>
 </span>
         
@@ -1536,8 +1235,8 @@ if path.<b>isEmpty</b> { ... }
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/" itemprop="url">
-                0010-add-staticstring-unicodescalarview
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0001-keywords-as-argument-labels/" itemprop="url">
+                0001-keywords-as-argument-labels
               </a>
             
           
@@ -1573,8 +1272,8 @@ if path.<b>isEmpty</b> { ... }
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/proposals/0001-keywords-as-argument-labels/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0001-keywords-as-argument-labels/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -1589,22 +1288,36 @@ if path.<b>isEmpty</b> { ... }
 
       
         
-          <span itemprop="articleBody"><h1 id="Add_StaticString-UnicodeScalarView">Add StaticString.UnicodeScalarView</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0010-add-staticstring-unicodescalarview.md" target="_blank" rel="external">SE-0010</a></li>
-<li>Author: <a href="https://github.com/kballard" target="_blank" rel="external">Kevin Ballard</a></li>
-<li>Status: <strong>Awaiting review</strong></li>
-<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+          <span itemprop="articleBody"><h1 id="Allow_(most)_keywords_as_argument_labels">Allow (most) keywords as argument labels</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0001-keywords-as-argument-labels.md" target="_blank" rel="external">SE-0001</a></li>
+<li>Author: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+<li>Status: <strong>Accepted</strong></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>There is no way to create a substring of a <code>StaticString</code> that is still typed<br>as <code>StaticString</code>. There should be.</p>
-<h2 id="Motivation">Motivation</h2><p>It is occasionally useful to be able to produce a substring of a <code>StaticString</code><br>that can be passed to APIs expecting a <code>StaticString</code>. For example, extracting<br>the filename from <code>__FILE__</code>. But there is no way to do this today, as<br><code>StaticString</code> does not provide any means by which to create a new instance<br>beyond the trivial nullary <code>init()</code> initializer (which creates an empty<br>string).</p>
-<h2 id="Proposed_solution">Proposed solution</h2><p>We add a new type <code>StaticString.UnicodeScalarView</code> that conforms to<br><code>CollectionType</code> and a new property <code>unicodeScalars</code> on <code>StaticString</code>. We also<br>add 2 initializers to <code>StaticString</code></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">init</span>(<span class="number">_</span> unicodeScalars: <span class="type">UnicodeScalarView</span>)</span><br><span class="line"><span class="keyword">init</span>(<span class="number">_</span> unicodeScalars: <span class="type">Slice</span>&lt;<span class="type">UnicodeScalarView</span>&gt;)</span><br></pre></td></tr></table></figure>
-<p>Together, this allows the user to manipulate the unicode scalar view to produce<br>the desired slice, and then to create a <code>StaticString</code> from the results. This<br>has the added benefit of providing a convenient way to work with<br><code>StaticString</code>s as a sequence of <code>UnicodeScalar</code>s instead of as a UTF8 buffer.</p>
-<h2 id="Detailed_design">Detailed design</h2><p>The API looks like this:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">StaticString</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// The value of `self` as a collection of [Unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value).</span></span><br><span class="line">  public <span class="keyword">var</span> unicodeScalars: <span class="type">UnicodeScalarView</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/// Construct the `StaticString` corresponding to the given</span></span><br><span class="line">  <span class="comment">/// `UnicodeScalarView`.</span></span><br><span class="line">  public <span class="keyword">init</span>(<span class="number">_</span>: <span class="type">UnicodeScalarView</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// Construct the `StaticString` corresponding to the given</span></span><br><span class="line">  <span class="comment">/// `UnicodeScalarView` slice.</span></span><br><span class="line">  public <span class="keyword">init</span>(<span class="number">_</span>: <span class="type">Slice</span>&lt;<span class="type">UnicodeScalarView</span>&gt;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// A collection of [Unicode scalar values](http://www.unicode.org/glossary/#unicode_scalar_value) that</span></span><br><span class="line">  <span class="comment">/// encode a `StaticString`.</span></span><br><span class="line">  public <span class="class"><span class="keyword">struct</span> <span class="title">UnicodeScalarView</span> : <span class="title">CollectionType</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(<span class="number">_</span>: <span class="type">StaticString</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// A position in a `StaticString.UnicodeScalarView`.</span></span><br><span class="line">    public <span class="class"><span class="keyword">struct</span> <span class="title">Index</span> : <span class="title">BidirectionalIndexType</span>, <span class="title">Comparable</span> </span>&#123;</span><br><span class="line">      <span class="comment">/// Returns the next consecutive value after `self`.</span></span><br><span class="line">      <span class="comment">///</span></span><br><span class="line">      <span class="comment">/// - Requires: The next value is representable.</span></span><br><span class="line">      @warn_unused_result</span><br><span class="line">      public <span class="func"><span class="keyword">func</span> <span class="title">successor</span><span class="params">()</span></span> -&gt; <span class="type">Index</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">/// Returns the previous consecutive value before `self`.</span></span><br><span class="line">      <span class="comment">///</span></span><br><span class="line">      <span class="comment">/// - Requires: The previous value is representable.</span></span><br><span class="line">      @warn_unused_result</span><br><span class="line">      public <span class="func"><span class="keyword">func</span> <span class="title">predecessor</span><span class="params">()</span></span> -&gt; <span class="type">Index</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// The position of the first `UnicodeScalar` if the `StaticString` is</span></span><br><span class="line">    <span class="comment">/// non-empty; identical to `endIndex` otherwise.</span></span><br><span class="line">    public <span class="keyword">var</span> startIndex: <span class="type">Index</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/// The "past the end" position.</span></span><br><span class="line">    <span class="comment">///</span></span><br><span class="line">    <span class="comment">/// `endIndex` is not a valid argument to `subscript`, and is always</span></span><br><span class="line">    <span class="comment">/// reachable from `startIndex` by zero or more applications of</span></span><br><span class="line">    <span class="comment">/// `successor()`.</span></span><br><span class="line">    public <span class="keyword">var</span> endIndex: <span class="type">Index</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/// Returns `true` iff `self` is empty.</span></span><br><span class="line">    public <span class="keyword">var</span> isEmpty: <span class="type">Bool</span></span><br><span class="line"></span><br><span class="line">    public <span class="keyword">subscript</span>(position: <span class="type">Index</span>) -&gt; <span class="type">UnicodeScalar</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>None.</p>
-<h2 id="Alternatives_considered">Alternatives considered</h2><p>We could add a <code>subscript(bounds: Range&lt;Index&gt;)</code> to <code>StaticString</code> directly,<br>but there’s no good way to define <code>Index</code> (for the same reasons <code>String</code><br>doesn’t conform to <code>CollectionType</code>).</p>
-<p>We could expose an unsafe initializer from a pointer, so the user can<br>manipulate <code>utf8Start</code> to produce the desired pointer, but this would be very<br>unsafe and allow users to try and trick code taking <code>StaticString</code> into<br>accepting a dynamic string instead.</p>
+<h2 id="Introduction">Introduction</h2><p>Argument labels are an important part of the interface of a Swift function, describing what particular arguments to the function do and improving readability. Sometimes, the most natural label for an argument coincides with a language keyword, such as <code>in</code>, <code>repeat</code>, or <code>defer</code>. Such keywords should be allowed as argument labels, allowing better expression of these interfaces.</p>
+<h2 id="Motivation">Motivation</h2><p>In some functions, the best argument label for a particular parameter<br>happens to coincide with a language keyword. For example, consider a<br>module-scope function that finds the index of a particular value in a<br>collection. A natural name for this would be <code>indexOf(_:in:)</code>:</p>
+<pre><code><span class="function"><span class="title">indexOf</span><span class="params">(value, in: collection)</span></span>
+</code></pre><p>However, because <code>in</code> is a keyword, one would actually have to use backticks to escape the <code>in</code>, e.g.:</p>
+<pre><code><span class="function"><span class="title">indexOf</span><span class="params">(value, `in`: collection)</span></span>
+</code></pre><p>When defining new APIs in Swift, authors will tend to pick other<br>non-keyword words (e.g., <code>within</code> for this example), even if they<br>aren’t ideal. However, this issue also comes up when importing<br>Objective-C APIs under the “omit needless words” heuristics, requiring<br>escaping to use those APIs. For example:</p>
+<pre><code>event.<span class="function"><span class="title">touchesMatching</span><span class="params">([.Began, .Moved], `in`: view)</span></span>
+<span class="function"><span class="title">NSXPCInterface</span><span class="params">(`protocol`: SomeProtocolType.Protocol)</span></span>
+</code></pre><h2 id="Proposed_solution">Proposed solution</h2><p>Allow the use of all keywords except <code>inout</code>, <code>var</code>, and <code>let</code> as argument labels. This affects the grammar in three places:</p>
+<ul>
+<li><p>Call expressions, such as the examples above. Here, we have no grammatic ambiguities, because “<keyword> `:`“ does not appear in any grammar production within a parenthesized expression list. This is, by far, the most important case.</keyword></p>
+</li>
+<li><p>Function/subscript/initializer declarations: aside from the three exclusions above, there is no ambiguity here because the keyword will always be followed by an identifier, ‘:’, or ‘_’. For example:</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">touchesMatching</span><span class="params">(phase: NSTouchPhase, <span class="keyword">in</span> view: NSView?)</span></span> -&gt; <span class="type">Set</span>&lt;<span class="type">NSTouch</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>  Keywords that introduce or modify a parameter—-currently just<br>“inout”, “let”, and “var”—-will need to retain their former<br>meanings. If we invent an API that uses such keywords, they will still<br>need to be back-ticked:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">addParameter</span><span class="params">(name: String, `<span class="keyword">inout</span>`: Bool)</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Function types: these are actually easier than #2, because the parameter name is always followed by a ‘:’:</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="type">NSTouchPhase</span>, <span class="keyword">in</span>: <span class="type">NSView</span>?) -&gt; <span class="type">Set</span>&lt;<span class="type">NSTouch</span>&gt;</span><br><span class="line">(<span class="type">String</span>, <span class="keyword">inout</span>: <span class="type">Bool</span>) -&gt; <span class="type">Void</span></span><br></pre></td></tr></table></figure>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>This functionality is strictly additive, and does not break any existing<br>code: it only makes some previously ill-formed code well-formed, and<br>does not change the behavior of any well-formed code.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>The primarily alternative here is to do nothing: Swift APIs will<br>continue to avoid keywords for argument labels, even when they are the<br>most natural word for the label, and imported APIs will either<br>continue to use backticks or will need to be renamed. This alternative<br>leaves a large number of imported APIs (nearly 200) requiring either<br>some level of renaming of the API or backticks at the call site.</p>
+<p>A second alternative is to focus on <code>in</code> itself, which is by far the<br>most common keyword argument in imported APIs. In a brief survey of<br>imported APIs, <code>in</code> accounted for 90% of the conflicts with existing<br>keywords. Moreover, the keyword <code>in</code> is only used in two places in the<br>Swift grammar–for loops and closures–so it could be made<br>context-sensitive. However, this solution is somewhat more complicated<br>(because it requires more context-sensitive keyword parsing) and less<br>general.</p>
 </span>
         
       
@@ -1635,8 +1348,8 @@ if path.<b>isEmpty</b> { ... }
           
           
             
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0011-replace-typealias-associated/" itemprop="url">
-                0011-replace-typealias-associated
+              <a class="post-title-link" href="/2015/12/15/swift/process/" itemprop="url">
+                swift process
               </a>
             
           
@@ -1672,8 +1385,8 @@ if path.<b>isEmpty</b> { ... }
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0011-replace-typealias-associated/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0011-replace-typealias-associated/" itemprop="commentsCount"></span>
+            <a href="/2015/12/15/swift/process/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/process/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -1688,50 +1401,299 @@ if path.<b>isEmpty</b> { ... }
 
       
         
-          <span itemprop="articleBody"><h1 id="Replace_typealias_keyword_with_associated_for_associated_type_declarations">Replace <code>typealias</code> keyword with <code>associated</code> for associated type declarations</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0011-replace-typealias-associated.md" target="_blank" rel="external">SE-0011</a></li>
-<li>Author(s): <a href="https://github.com/loiclec" target="_blank" rel="external">Loïc Lecrenier</a></li>
-<li>Status: <strong>Awaiting review</strong></li>
-<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+          <span itemprop="articleBody"><h1 id="Swift_Evolution_Process">Swift Evolution Process</h1><p>Swift is a powerful and intuitive programming language that is designed to make writing and maintaining correct programs easier. Swift is growing and evolving, guided by a community-driven process referred to as the Swift evolution process. This document outlines the Swift evolution process and how a feature grows from a rough idea into something that can improve the Swift development experience for millions of programmers.</p>
+<h2 id="Scope">Scope</h2><p>The Swift evolution process covers all changes to the Swift language and the public interface of the Swift standard library, including new language features and APIs (no matter how small), changes to existing language features or APIs, removal of existing features, and so on. Smaller changes, such as bug fixes, optimizations, or diagnostic improvements can be contributed via the normal contribution process; see <a href="https://swift.org/community/#contributing" target="_blank" rel="external">Contributing to Swift</a>.</p>
+<h2 id="Goals">Goals</h2><p>The Swift evolution process aims to leverage the collective ideas, insights, and experience of the Swift community to improve the Swift development experience. Its two primary goals are:</p>
+<ul>
+<li>Engage the wider Swift community in the ongoing evolution of Swift, and</li>
+<li>Maintain the vision and conceptual coherence of Swift.</li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>The <code>typealias</code> keyword is currently used to declare two kinds of types:</p>
-<ol>
-<li>Type Aliases (alternative name for an existing type)</li>
-<li>Associated Types (placeholder name to type used as part of a protocol)</li>
+<p>There is a natural tension between these two goals. Open evolution processes are, by nature, chaotic. Yet, maintaining a coherent vision for something as complicated as a programming language requires some level of coordination. The Swift evolution process aims to strike a balance that best serves the Swift community as a whole.</p>
+<h2 id="Participation">Participation</h2><p>Everyone is welcome to propose, discuss, and review ideas to improve<br>the Swift language and standard library on the <a href="https://swift.org/community/#swift-evolution" title="Swift evolution mailing list" target="_blank" rel="external">swift-evolution<br>mailing list</a>. Before posting a review,<br>please see the section “What goes into a review?” below.</p>
+<p>The Swift <a href="https://swift.org/community/#core-team" target="_blank" rel="external">core team</a> is<br>responsible for the strategic direction of Swift. Core team members<br>initiate, participate in, and manage the public review of proposals<br>and have the authority to accept or reject changes to Swift.</p>
+<h2 id="What_goes_into_a_review?">What goes into a review?</h2><p>The goal of the review process is to improve the proposal under review<br>through constructive criticism and, eventually, determine the<br>direction of Swift. When writing your review, here are some questions<br>you might want to answer in your review:</p>
+<ul>
+<li>What is your evaluation of the proposal?</li>
+<li>Is the problem being addressed significant enough to warrant a change to Swift?</li>
+<li>Does this proposal fit well with the feel and direction of Swift?</li>
+<li>If you have used other languages or libraries with a similar feature, how do you feel that this proposal compares to those?</li>
+<li>How much effort did you put into your review? A glance, a quick reading, or an in-depth study?</li>
+</ul>
+<p>Please state explicitly whether you believe that the proposal should be accepted into Swift.</p>
+<h2 id="How_to_propose_a_change">How to propose a change</h2><ul>
+<li><strong>Socialize the idea</strong>: propose a rough sketch of the idea on the <a href="https://swift.org/community/#swift-evolution" title="Swift evolution mailing list" target="_blank" rel="external">swift-evolution mailing list</a>, the problems it solves, what the solution looks like, etc., to gauge interest from the community.</li>
+<li><strong>Develop the proposal</strong>: expand the rough sketch into a complete proposal, using the <a href="0000-template.md">proposal template</a>, and continue to refine the proposal on the evolution mailing list. Prototyping an implementation and its uses along with the proposal is encouraged, because it helps ensure both technical feasibility of the proposal as well as validating that the proposal solves the problems it is meant to solve.</li>
+<li><strong>Request a review</strong>: initiate a pull request to the <a href="https://github.com/apple/swift-evolution" title="Swift evolution repository" target="_blank" rel="external">swift-evolution repository</a> to indicate to the core team that you would like the proposal to be reviewed. When the proposal is sufficiently detailed and clear, and addresses feedback from earlier discussions of the idea, the pull request will be accepted. The proposal will be assigned a proposal number as well as a core team member to manage the review.</li>
+<li><strong>Address feedback</strong>: in general, and especially <a href="#review">during the review period</a>, be responsive to questions and feedback about the proposal.</li>
+</ul>
+<h2 id="Review_process">Review process</h2><p>The review process for a particular proposal begins when a member of<br>the core team accepts a pull request of a new or updated proposal into<br>the <a href="https://github.com/apple/swift-evolution" title="Swift evolution repository" target="_blank" rel="external">swift-evolution repository</a>. That core team<br>member becomes the <em>review manager</em> for the proposal. The proposal<br>is assigned a proposal number (if it is a new proposal), then enters<br>the review queue.</p>
+<p>The review manager will work with the proposal authors to schedule the<br>review. Reviews usually last a single week, but can run longer for<br>particularly large or complex proposals.</p>
+<p>When the scheduled review period arrives, the review manager will post<br>the proposal to the <a href="https://swift.org/community/#swift-evolution" title="Swift evolution mailing list" target="_blank" rel="external">swift-evolution mailing<br>list</a> with the subject “[Review]”<br>followed by the proposal title and update the list of active<br>reviews. To avoid delays, it is important that the proposal authors be<br>available to answer questions, address feedback, and clarify their<br>intent during the review period.</p>
+<p>After the review has completed, the core team will make a decision on<br>the proposal. The review manager is responsible for determining<br>consensus among the core team members, then reporting their decision<br>to the proposal authors and mailing list. The review manager will<br>update the proposal’s state in the <a href="https://github.com/apple/swift-evolution" title="Swift evolution repository" target="_blank" rel="external">swift-evolution<br>repository</a> to reflect that decision.</p>
+<h2 id="Proposal_states">Proposal states</h2><p>A given proposal can be in one of several states:</p>
+<ul>
+<li><strong>Awaiting review</strong>: the proposal is awaiting review. Once known,<br>the dates for the actual review will be placed in the proposal<br>document and updated in the <a href="schedule.md">review schedule</a>. When the<br>review period begins, the review manager will update the state to<br><em>under review</em>.</li>
+<li><strong>Under review</strong>: the proposal is undergoing public review on the <a href="https://swift.org/community/#swift-evolution" title="Swift evolution mailing list" target="_blank" rel="external">swift-evolution mailing list</a>. </li>
+<li><strong>Under revision</strong>: the proposal is undergoing revision by the<br>author(s) based on feedback from the review.</li>
+<li><strong>Deferred</strong>: consideration of the proposal has been deferred<br>because it does not meet the <a href="README.md">goals of the upcoming major Swift<br>release</a>. Deferred proposals will be reconsidered when<br>scoping the next major Swift release.</li>
+<li><strong>Accepted</strong>: the proposal has been accepted and is either awaiting<br>implementation or is actively being implemented. Once a proposal<br>enters the “accepted” state, it gets placed into its <a href="README.md">target Swift<br>release</a>.</li>
+<li><strong>Rejected</strong>: the proposal has been considered and rejected.</li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/README/" itemprop="url">
+                swift readme
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/README/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/README/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Swift_Programming_Language_Evolution">Swift Programming Language Evolution</h1><p><strong>Before you initiate a pull request</strong>, please read the process document. Ideas should be thoroughly discussed on the <a href="https://swift.org/community/#swift-evolution" target="_blank" rel="external">swift-evolution mailing list</a> first.</p>
+<p>This repository tracks the ongoing evolution of Swift. It contains:</p>
+<ul>
+<li>Goals for upcoming Swift releases (this document)</li>
+<li>The <a href="schedule.md">Swift evolution review schedule</a> tracking proposals to change Swift</li>
+<li>The <a href="process.md">Swift evolution process</a> that governs the evolution of Swift.</li>
+</ul>
+<p>This document describes goals for the Swift language on a per-release<br>basis, usually listing minor releases adding to the currently shipping<br>version and one major release out.  Each release will have many<br>smaller features or changes independent of these larger goals, and not<br>all goals are reached for each release.</p>
+<p>Goals for past versions are included at the bottom of the document for<br>historical purposes, but are not necessarily indicative of the<br>features shipped. The release notes for each shipped version are the<br>definitive list of notable changes in each release.</p>
+<h2 id="Development_major_version:_Swift_3-0">Development major version:  Swift 3.0</h2><p>Expected release date: Fall 2016</p>
+<p>The primary goal of this release is to stabilize the binary interface<br>of the language and standard library. As part of this process, we will<br>focus and refine the language to provide better overall consistency in<br>feel and implementation. Swift 3.0 will contain <em>source-breaking</em><br>changes from Swift 2.x where necessary to support these goals. More<br>concretely, this release is focused on several key areas:</p>
+<ul>
+<li><strong>Stable ABI</strong>: Stabilize the binary interface (ABI) to guarantee a level of binary compatibility moving forward. This involves finalizing runtime data structures, name mangling, calling conventions, and so on, as well as finalizing some of the details of the language itself that have an impact on its ABI. Stabilizing the ABI also extends to the Standard Library, its data types, and core algorithms. Successful ABI stabilization means that applications and libraries compiled with future versions of Swift can interact at a binary level with applications and libraries compiled with Swift 3.0, even if the source language changes.</li>
+<li><strong>Resilience</strong>: Solve the general problem of <a href="https://en.wikipedia.org/wiki/Fragile_binary_interface_problem" target="_blank" rel="external">fragile binary interface</a>, which currently requires that an application be recompiled if any of the libraries it depends on changes. For example, adding a new stored property or overridable method to a class should not require all subclasses of that class to be recompiled. There are several broad concerns for resilience:<ul>
+<li><em>What changes are resilient?</em>: Define the kinds of changes that can be made to a library without breaking clients of that library. Source-compatible changes to libraries are good candidates for resilient changes, but such decisions also consider the effects on the implementation.</li>
+<li><em>How is a resilient library implemented?</em>: What runtime representations are necessary to allow applications to continue to work after making resilient changes to a library? This dovetails with the stabilization of the ABI, because the stable ABI should be a resilient ABI.</li>
+<li><em>How do we maintain high performance?</em>: Resilient implementations often incur more execution overhead than non-resilient (or <em>fragile</em>) implementations, because resilient implementations need to leave some details unspecified until load time, such as the specific sizes of a class or offsets of a stored property.</li>
+</ul>
+</li>
+<li><strong>Portability</strong>: Make Swift available on other platforms and ensure that one can write portable Swift code that works properly on all of those platforms.</li>
+<li><strong>Type system cleanup and documentation</strong>: Revisit and document the various subtyping and conversion rules in the type system, as well as their implementation in the compiler’s type checker. The intent is to converge on a smaller, simpler type system that is more rigorously defined and more faithfully represented by the type checker.</li>
+<li><strong>Complete generics</strong>: Generics are used pervasively in a number of Swift libraries, especially the standard library. However, there are a number of generics features the standard library requires to fully realize its vision, including recursive protocol constraints, the ability to make a constrained extension conform to a new protocol (i.e., an array of <code>Equatable</code> elements is <code>Equatable</code>), and so on. Swift 3.0 should provide those generics features needed by the standard library, because they affect the standard library’s ABI.</li>
+<li><strong>Focus and refine the language</strong>: Despite being a relatively young language, Swift’s rapid development has meant that it has accumulated some language features and library APIs that don’t fit well with the language as a whole. Swift 3 will remove or improve those features to provide better overall consistency for Swift.</li>
+<li><strong>API design guidelines</strong>: The way in which Swift is used in popular<br>libraries has almost as much of an effect on the character of Swift<br>code as the Swift language itself. The <a href="https://swift.org/documentation/api-design-guidelines.html" target="_blank" rel="external">API design<br>guidelines</a> provide guidance for<br>building great Swift APIs. For Swift 3.0, the Swift standard library<br>and core libraries are being updated to match these guidelines, and<br>Swift’s Objective-C importer will <a href="proposals/0005-objective-c-name-translation.md">automatically map</a> from the <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" target="_blank" rel="external">Cocoa guidelines for<br>Objective-C</a><br>to the Swift API guidelines.</li>
+</ul>
+<h3 id="Out_of_Scope">Out of Scope</h3><p>A significant part of delivering a major release is in deciding what<br><em>not</em> to do, which means deferring many good ideas. The following is a<br>sampling of potentially good ideas that are not in scope for Swift<br>3.0:</p>
+<ul>
+<li><p><strong>Full source compatibility</strong>: Swift 3.0 will not provide full<br>source compatibility. Rather, it can and will introduce<br>source-breaking changes needed to support the main goals of Swift<br>3.0.</p>
+</li>
+<li><p><strong>Concurrency</strong>: Swift 3.0 relies entirely on platform concurrency<br>primitives (libdispatch, Foundation, pthreads, etc.) for<br>concurrency. Language support for concurrency is an often-requested<br>and potentially high-value feature, but is too large to be in scope<br>for Swift 3.0.</p>
+</li>
+<li><p><strong>C++ Interoperability</strong>: Swift’s interoperability with C and<br>Objective-C is one of its major strengths, allowing it to integrate<br>with platform APIs. Interoperability with C++ libraries would<br>enhance Swift’s ability to work with existing libraries and APIs.<br>However, C++ itself is a very complex language, and providing good<br>interoperability with C++ is a significant undertaking that is out<br>of scope for Swift 3.0.</p>
+</li>
+<li><p><strong>Hygienic Macros</strong>: A first-class macro system is something we may consider<br>in future releases.  We don’t want the existence of a macro system to be a<br>workaround that reduces the incentive for making the core language great.</p>
+</li>
+<li><p><strong>Major new library functionality</strong>: The Swift Standard Library is focused on<br>providing core “language” functionality as well as common data structures.  The<br>“corelibs” projects are focused on providing existing Foundation functionality<br>in a portable way.  We <em>will</em> consider minor extensions to their existing<br>feature sets to round out these projects.</p>
+<p>On the other hand, major new libraries (e.g. a new Logging subsystem) are<br>best developed as independent projects on GitHub (or elsewhere) and organized<br>with the Swift Package Manager.  Beyond Swift 3 we may consider standardizing<br>popular packages or expanding the scope of the project.  </p>
+</li>
+</ul>
+<h3 id="Accepted_proposals_for_Swift_3-0">Accepted proposals for Swift 3.0</h3><ul>
+<li><a href="proposals/0005-objective-c-name-translation.md">Better Translation of Objective-C APIs Into Swift</a></li>
+<li><a href="proposals/0002-remove-currying.md">Removing currying <code>func</code> declaration syntax</a></li>
+<li><a href="proposals/0003-remove-var-parameters-patterns.md">Removing <code>var</code> from Function Parameters and Pattern Matching</a></li>
+<li><a href="proposals/0004-remove-pre-post-inc-decrement.md">Remove the <code>++</code> and <code>--</code> operators</a></li>
+<li><a href="proposals/0007-remove-c-style-for-loops.md">Remove C-style for-loops with conditions and incrementers</a></li>
+</ul>
+<h2 id="Development_minor_version:_Swift_2-2">Development minor version:  Swift 2.2</h2><p>Expected release date: Spring 2016</p>
+<p>This release will focus on fixing bugs, improving<br>quality-of-implementation (QoI) with better warnings and diagnostics,<br>improving compile times, and improving performance.  It may also put<br>some finishing touches on features introduced in Swift 2.0, and<br>include some small additive features that don’t break Swift code or<br>fundamentally change the way Swift is used. As a step toward Swift<br>3.0, it will introduce warnings about upcoming source-incompatible<br>changes in Swift 3.0 so that users can begin migrating their code<br>sooner.</p>
+<h3 id="Accepted_proposals_for_Swift_2-2">Accepted proposals for Swift 2.2</h3><ul>
+<li><a href="proposals/0001-keywords-as-argument-labels.md">Allow (most) keywords as argument labels</a></li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0007-remove-c-style-for-loops/" itemprop="url">
+                0007-remove-c-style-for-loops
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0007-remove-c-style-for-loops/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0007-remove-c-style-for-loops/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Remove_C-style_for-loops_with_conditions_and_incrementers">Remove C-style for-loops with conditions and incrementers</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0007-remove-c-style-for-loops.md" target="_blank" rel="external">SE-0007</a></li>
+<li>Author(s): <a href="https://github.com/erica" target="_blank" rel="external">Erica Sadun</a></li>
+<li>Status: <strong>Accepted</strong> for Swift 3.0 (<a href="https://bugs.swift.org/browse/SR-226" target="_blank" rel="external">Swift 2.2 bug</a>, <a href="https://bugs.swift.org/browse/SR-227" target="_blank" rel="external">Swift 3.0 bug</a>)</li>
+<li>Review manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2><p>The C-style <code>for-loop</code> appears to be a mechanical carry-over from C rather than a<br>genuinely Swift-specific construct. It is rarely used and not very Swift-like. </p>
+<p>More Swift-typical construction is already available with <code>for-in</code><br>statements and <code>stride</code>. Removing for loops would simplify the language and starve the<br>most common use-points for <code>--</code> and <code>++</code>, which are already due to be eliminated from the<br>language.</p>
+<p>The value of this construct is limited and I believe its removal should be seriously considered.</p>
+<h2 id="Advantages_of_For_Loops">Advantages of For Loops</h2><p>Swift design supported a shallow learning curve using familiar constants and control<br>structures. The <code>for-loop</code> mimics C and limits the effort needed to master this control flow.</p>
+<h2 id="Disadvantages_of_For_Loops">Disadvantages of For Loops</h2><ol>
+<li>Both <code>for-in</code> and <code>stride</code> provide equivalent behavior using Swift-coherent approaches<br>without being tied to legacy terminology. </li>
+<li>There is a distinct expressive disadvantage in using <code>for-loops</code> compared to <code>for-in</code><br>in succinctness</li>
+<li><code>for-loop</code> implementations do not lend themselves to use with collections and other core Swift types.</li>
+<li>The <code>for-loop</code> encourages use of unary incrementors and decrementors, which will be<br>soon removed from the language.</li>
+<li>The semi-colon delimited declaration offers a steep learning curve from users arriving<br>from non C-like languages</li>
+<li>If the <code>for-loop</code> did not exist, I doubt it would be considered for inclusion in Swift 3.</li>
 </ol>
-<p>These two kinds of declarations are different and should use distinct keywords.<br>This would emphasize the difference between them and reduce some of the<br>confusion surrounding the use of associated types.</p>
-<p>The proposed new keyword is <code>associated</code>.</p>
-<h2 id="Motivation">Motivation</h2><p>Re-using <code>typealias</code> for associated type declarations is confusing in many ways.</p>
-<ol>
-<li>It is not obvious that <code>typealias</code> in protocols means something else than in<br>other places.</li>
-<li>It hides the existence of associated types to beginners, which allows them<br>to write code they misunderstand.</li>
-<li>It hides the absence of concrete type aliases inside protocols.</li>
-</ol>
-<p>In particular, <strong>2 + 3</strong> leads to programmers writing</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>without realizing that <code>Element</code> is a new associated type with a default value<br>of <code>Container.Generator.Element</code> instead of a type alias to<br><code>Container.Generator.Element</code>.</p>
-<p>However, this code</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>declares <code>Element</code> as a type alias to <code>Container.Generator.Element</code>.</p>
-<p>These subtleties of the language currently require careful consideration to<br>understand.</p>
-<h2 id="Proposed_solution">Proposed solution</h2><p>For declaring associated types, replace the <code>typealias</code> keyword with <code>associated</code>.</p>
-<p>This solves the issues mentioned above:</p>
-<ol>
-<li><code>typealias</code> can now only be used for type aliases declaration.</li>
-<li>Beginners are now forced to learn about associated types when creating protocols.</li>
-<li>An error message can now be displayed when someone tries to create a type alias<br>inside a protocol.</li>
-</ol>
-<p>This eliminates the confusion showed in the previous code snippets.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    associated <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span> <span class="comment">// error: cannot declare type alias inside protocol, use protocol extension instead</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    associated <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Alternative keywords considered: <code>withtype</code>, <code>associatedtype</code>, <code>typeassociation</code>, <code>type</code></p>
-<h2 id="Proposed_Approach">Proposed Approach</h2><p>For declaring associated types, I suggest adding <code>associated</code> and deprecating<br><code>typealias</code> in Swift 2.2, and removing <code>typealias</code> entirely in Swift 3.</p>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>As it simply replaces one keyword for another, the transition to <code>associated</code><br>could be easily automated without any risk of breaking existing code.</p>
+<h2 id="Proposed_Approach">Proposed Approach</h2><p>I suggest that the for-loop be deprecated in Swift 2.x and removed entirely in Swift 3, with coverage removed from the Swift Programming Language to match the revisions in the current 2.2 update.</p>
+<h2 id="Alternatives_considered">Alternatives considered</h2><p>Not removing <code>for-loop</code> from Swift, losing the opportunity to streamline the language<br>and discard an unneeded control flow item.</p>
+<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A search of the Apple Swift codebase suggests this feature is rarely used. Community members of the Swift-Evolution mail list confirm that it does not feature in many pro-level apps and can be worked around for those few times when <code>for-loop</code>s do pop up. For example:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">char *blk_xor(char *dst, const char *src, size_t len)</span><br><span class="line">&#123;</span><br><span class="line"> const char *sp = src;</span><br><span class="line"> <span class="keyword">for</span> (char *dp = dst; sp - src &lt; len; sp++, dp++)</span><br><span class="line">   *dp ^= *sp;</span><br><span class="line"> <span class="keyword">return</span> dst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>versus</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">blk_xor</span><span class="params">(dst: UnsafeMutablePointer&lt;CChar&gt;, src:</span><br><span class="line">UnsafePointer&lt;CChar&gt;, len: Int)</span></span> -&gt; <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">CChar</span>&gt; &#123;</span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;len &#123;</span><br><span class="line">       dst[i] ^= src[i]</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> dst</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A search of github’s Swift gists suggests the approach is used primarily by those new to the language with minimal language skills and is abandoned as language mastery is achieved.</p>
+<p>For example:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; i++ &#123;</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>and </p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">50</span>]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span> ; i &lt; array.<span class="built_in">count</span> ;i++)&#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">"array[i] <span class="subst">\(array[i])</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Community_Responses">Community Responses</h2><ul>
-<li>“I think this is a great idea; re-using typealias for associated types was a mistake.” -John McCall</li>
-<li>“Agreed.” -Chris Lattner</li>
-<li>“+1 to the proposal, emphasizing the distinction is important; and I<br>like “associated” as the keyword for this purpose, too.” -Dmitri Gribenko</li>
-<li>“+1 for using a distinct keyword for associated types” -Ilya Belenkiy</li>
+<li>“I am certainly open to considering dropping the C-style for loop.  IMO, it is a rarely used feature of Swift that doesn’t carry its weight.  Many of the reasons to remove them align with the rationale for removing – and ++. “ – Chris Lattner, clattner@apple.com</li>
+<li>“My intuition <em>completely</em> agrees that Swift no longer needs C-style for loops. We have richer, better-structured looping and functional algorithms. That said, one bit of data I’d like to see is how often C-style for loops are actually used in Swift. It’s something a quick crawl through Swift sources on GitHub could establish. If the feature feels anachronistic and is rarely used, it’s a good candidate for removal.” – Douglas Gregnor, dgregor@apple.com</li>
+<li>“Every time I’ve used a C-style for loop in Swift it was because I forgot that .indices existed. If it’s removed, a fixme pointing that direction might be useful.” – David Smith, david_smith@apple.com</li>
+<li>“For what it’s worth we don’t have a single C style for loop in the Lyft codebase.” – Keith Smiley, keithbsmiley@gmail.com</li>
+<li>“Just checked; ditto Khan Academy.” – Andy Matsuchak, andy@andymatuschak.org</li>
+<li>“We’ve developed a number of Swift apps for various clients over the past year and have not needed C style for loops either.” – Eric Chamberlain, eric.chamberlain@arctouch.com</li>
+<li>“Every time I’ve tried to use a C-style for loop, I’ve ended up switching to a while loop because my iteration variable ended up having the wrong type (e.g. having an optional type when the value must be non-optional for the body to execute). The Postmates codebase contains no instances of C-style for loops in Swift.” – Kevin Ballard, kevin@sb.org</li>
+<li>“I found a couple of cases of them in my codebase, but they were trivially transformed into “proper” Swift-style for loops that look better anyway. If it were a vote, I’d vote for eliminating C-style.” – Sean Heber, sean@fifthace.com</li>
 </ul>
 </span>
         
@@ -1790,7 +1752,7 @@ if path.<b>isEmpty</b> { ... }
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">141</span>
+              <span class="site-state-item-count">142</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
