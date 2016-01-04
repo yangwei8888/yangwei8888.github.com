@@ -249,38 +249,38 @@ curl -L https://git">
       
 
       
-        <span itemprop="articleBody"><h1 id="安装_Compose">安装 Compose</h1><p>在安装 Compose之前，你需要先安装好 Docker 。然后你需要使用 <code>curl</code> 指令来安装 Compose</p>
+        <span itemprop="articleBody"><h1 id="u5B89_u88C5_Compose"><a href="#u5B89_u88C5_Compose" class="headerlink" title="安装 Compose"></a>安装 Compose</h1><p>在安装 Compose之前，你需要先安装好 Docker 。然后你需要使用 <code>curl</code> 指令来安装 Compose</p>
 <p>###安装 Docker</p>
 <p>首先，你需要安装大于或者等于1.6版本的 Docker 。</p>
 <ul>
-<li><a href="../installation/mac.md">MAC OSX 安装指南</a></li>
-<li><a href="../installation/ubuntu.md">Ubuntu  安装指南</a></li>
-<li><a href="../installation/">其它系统安装指南</a></li>
+<li><a href="/../installation/mac.md">MAC OSX 安装指南</a></li>
+<li><a href="/../installation/ubuntu.md">Ubuntu  安装指南</a></li>
+<li><a href="/../installation/">其它系统安装指南</a></li>
 </ul>
 <p>###安装 Compose</p>
 <p>运行下边的命令来安装 Compose：</p>
-<pre><code>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/compose/releases</span><span class="regexp">/download/</span><span class="number">1.3</span>.<span class="number">1</span>/docker-compose-<span class="string">`uname -s`</span>-<span class="string">`uname -m`</span> &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>-compose
+<pre><code>curl -L https://github.com/docker/compose/releases/download/1.3.1/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 </code></pre><blockquote>
 <p>注意：如果你在安装的时候出现了  “Permission denied” 的错误信息，这说明你的 <code>/usr/local/bin</code> 目录是不可写的，你需要使用超级用户来安装。运行 <code>sudo -i</code> , 然后运行上边的两个命令，然后 <code>exit</code> 退出。</p>
 </blockquote>
 <p>可选，你也可以在 shell 中使用命令行安装。</p>
 <p>Compose 适用于 OS X 和 64位的Linux 。 如果你使用其他平台，你可以安装一个 Compose 的 Python 包来完成安装。</p>
-<pre><code>$ sudo pip <span class="keyword">install</span> -U docker-compose
+<pre><code>$ sudo pip install -U docker-compose
 </code></pre><p>到这里安装就结束了；Compose已经安装完成。你可以使用 <code>docker-compose --version</code> 来进行测试 。</p>
 <p>###升级</p>
 <p>如果你使用的是 Compose 1.2或者早期版本，当你升级完成后，你需要删除或者迁移你现有的容器。这是因为，1.3版本， Composer 使用 Docker 标签来对容器进行检测，所以它们需要重新创建索引标记。</p>
 <p>如果 Composer 检测到创建的容器没有标签，它将拒绝运行，这样你就不会有两组容器。如果你想要保留已经存在的容器（举例：这里有容器的数据卷上保留这非常重要的数据），你可以使用下边的命令来迁移：</p>
-<pre><code>docker-compose migrate-<span class="keyword">to</span>-labels
+<pre><code>docker-compose migrate-to-labels
 </code></pre><p>或者，如果这些容器是不必要的，你可以删除它们 - Composer 会重新创建一个新的。</p>
-<pre><code>docker rm <span class="operator">-f</span> myapp_web_1 myapp_db_1 ...
+<pre><code>docker rm -f myapp_web_1 myapp_db_1 ...
 </code></pre><p>###Compose 文档</p>
 <ul>
-<li><a href="../compose/">用户指南</a></li>
-<li><a href="../compose/cli.md">使用命令行</a></li>
-<li><a href="../compose/yml.md">Yaml 文件使用</a></li>
-<li><a href="../compose/env.md">Compose 环境变量</a></li>
-<li><a href="../compose/completion.md">命令行安装Compose</a></li>
+<li><a href="/../compose/">用户指南</a></li>
+<li><a href="/../compose/cli.md">使用命令行</a></li>
+<li><a href="/../compose/yml.md">Yaml 文件使用</a></li>
+<li><a href="/../compose/env.md">Compose 环境变量</a></li>
+<li><a href="/../compose/completion.md">命令行安装Compose</a></li>
 </ul>
 </span>
       
@@ -371,7 +371,7 @@ chmod +x /usr/local/bin/docker-compose
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -385,7 +385,7 @@ chmod +x /usr/local/bin/docker-compose
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -434,7 +434,7 @@ chmod +x /usr/local/bin/docker-compose
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装_Compose"><span class="nav-number">1.</span> <span class="nav-text">安装 Compose</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5B89_u88C5_Compose"><span class="nav-number">1.</span> <span class="nav-text">安装 Compose</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -451,7 +451,7 @@ chmod +x /usr/local/bin/docker-compose
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

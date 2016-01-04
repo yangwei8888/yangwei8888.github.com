@@ -237,15 +237,15 @@ IntroductionSwift API Desig">
       
 
       
-        <span itemprop="articleBody"><h1 id="Apply_API_Guidelines_to_the_Standard_Library">Apply API Guidelines to the Standard Library</h1><ul>
+        <span itemprop="articleBody"><h1 id="Apply_API_Guidelines_to_the_Standard_Library"><a href="#Apply_API_Guidelines_to_the_Standard_Library" class="headerlink" title="Apply API Guidelines to the Standard Library"></a>Apply API Guidelines to the Standard Library</h1><ul>
 <li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0006-apply-api-guidelines-to-the-standard-library.md" target="_blank" rel="external">SE-0006</a></li>
 <li>Author(s): <a href="https://github.com/dabrahams" target="_blank" rel="external">Dave Abrahams</a>, <a href="https://github.com/gribozavr" target="_blank" rel="external">Dmitri Gribenko</a>, <a href="https://github.com/moiseev" target="_blank" rel="external">Maxim Moiseev</a></li>
 <li>Status: <strong>Awaiting Review</strong></li>
 <li>Review manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p><a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design Guidelines</a> being developed as<br>part of Swift 3.  It is important that the Standard Library is an exemplar of<br>Swift API Design Guidelines: the APIs from the Standard Library are, probably,<br>the most frequently used Swift APIs in any application domain; the Standard<br>Library also sets precedent for other libraries.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design Guidelines</a> being developed as<br>part of Swift 3.  It is important that the Standard Library is an exemplar of<br>Swift API Design Guidelines: the APIs from the Standard Library are, probably,<br>the most frequently used Swift APIs in any application domain; the Standard<br>Library also sets precedent for other libraries.</p>
 <p>In this project, we are reviewing the entire Standard Library and updating it<br>to follow the guidelines.</p>
-<h2 id="Proposed_solution">Proposed solution</h2><p>The actual work is being performed on the <a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines<br>branch</a> of the <a href="https://github.com/apple/swift" title="Swift repository" target="_blank" rel="external">Swift repository</a>.<br>On high level, the changes can be summarized as follows.</p>
+<h2 id="Proposed_solution"><a href="#Proposed_solution" class="headerlink" title="Proposed solution"></a>Proposed solution</h2><p>The actual work is being performed on the <a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines<br>branch</a> of the <a href="https://github.com/apple/swift" title="Swift repository" target="_blank" rel="external">Swift repository</a>.<br>On high level, the changes can be summarized as follows.</p>
 <ul>
 <li><p>Strip <code>Type</code> suffix from remaining protocol names.  In a few special cases<br>this means adding a <code>Protocol</code> suffix to get out of the way of type<br>names that are primary (though most of these we expect to be<br>obsoleted by Swift 3 language features).</p>
 </li>
@@ -255,8 +255,8 @@ IntroductionSwift API Desig">
 </li>
 </ul>
 <p><strong>More changes will be summarized here as they are implemented.</strong></p>
-<h2 id="API_diffs">API diffs</h2><p>Differences between Swift 2.2 Standard library API and the proposed API are<br>added to this section as they are being implemented on the<br><a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines branch</a>.</p>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>The proposed changes are massively source-breaking for Swift code, and will<br>require a migrator to translate Swift 2 code into Swift 3 code.  The API diffs<br>from this proposal will be the primary source of the information about the<br>required transformations.  In addition, to the extent the language allows, the<br>library will keep old names as unavailable symbols with a <code>renamed</code> annotation,<br>that allows the compiler to produce good error messages and emit Fix-Its.</p>
+<h2 id="API_diffs"><a href="#API_diffs" class="headerlink" title="API diffs"></a>API diffs</h2><p>Differences between Swift 2.2 Standard library API and the proposed API are<br>added to this section as they are being implemented on the<br><a href="https://github.com/apple/swift/tree/swift-3-api-guidelines" title="Swift 3 API Design Guidelines preview" target="_blank" rel="external">swift-3-api-guidelines branch</a>.</p>
+<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>The proposed changes are massively source-breaking for Swift code, and will<br>require a migrator to translate Swift 2 code into Swift 3 code.  The API diffs<br>from this proposal will be the primary source of the information about the<br>required transformations.  In addition, to the extent the language allows, the<br>library will keep old names as unavailable symbols with a <code>renamed</code> annotation,<br>that allows the compiler to produce good error messages and emit Fix-Its.</p>
 </span>
       
     </div>
@@ -274,14 +274,13 @@ IntroductionSwift API Desig">
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/15/swift/proposals/0013-remove-partial-application-super/" rel="prev">0013-remove-partial-application-super</a>
+              <a href="/2015/12/15/swift/proposals/0007-remove-c-style-for-loops/" rel="prev">0007-remove-c-style-for-loops</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/09/docker/kitematic/README/" rel="next">Kitematic
-安装</a>
+              <a href="/2015/12/15/swift/proposals/0005-objective-c-name-translation/" rel="next">0005-objective-c-name-translation</a>
             
           </div>
         </div>
@@ -347,7 +346,7 @@ IntroductionSwift API Desig">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -361,7 +360,7 @@ IntroductionSwift API Desig">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -427,7 +426,7 @@ IntroductionSwift API Desig">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

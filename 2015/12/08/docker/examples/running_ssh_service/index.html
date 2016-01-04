@@ -47,9 +47,7 @@
 # VERSION               0.0.1
 
 FROM     ubuntu:12.04
-MAINTAINER Thatcher R. Peskens &quot;thatcher@dotcloud.com&quot;
-
-# make su">
+MAINTAINER Thatcher R. Peskens &amp;quot;thatcher@dotcloud.com&amp;quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Docker中运行SSH进程服务">
 <meta property="og:url" content="http://yoursite.com/2015/12/08/docker/examples/running_ssh_service/index.html">
@@ -60,9 +58,7 @@ MAINTAINER Thatcher R. Peskens &quot;thatcher@dotcloud.com&quot;
 # VERSION               0.0.1
 
 FROM     ubuntu:12.04
-MAINTAINER Thatcher R. Peskens &quot;thatcher@dotcloud.com&quot;
-
-# make su">
+MAINTAINER Thatcher R. Peskens &amp;quot;thatcher@dotcloud.com&amp;quot;">
 <meta property="og:updated_time" content="2015-12-08T07:08:23.991Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Docker中运行SSH进程服务">
@@ -72,9 +68,7 @@ MAINTAINER Thatcher R. Peskens &quot;thatcher@dotcloud.com&quot;
 # VERSION               0.0.1
 
 FROM     ubuntu:12.04
-MAINTAINER Thatcher R. Peskens &quot;thatcher@dotcloud.com&quot;
-
-# make su">
+MAINTAINER Thatcher R. Peskens &amp;quot;thatcher@dotcloud.com&amp;quot;">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -243,37 +237,37 @@ MAINTAINER Thatcher R. Peskens &quot;thatcher@dotcloud.com&quot;
       
 
       
-        <span itemprop="articleBody"><h1 id="在Docker中运行SSH进程服务">在Docker中运行SSH进程服务</h1><p>以下是用<code>Dockerfile</code>设置sshd服务容器，您可以使用连接并检查其他容器的卷,或者可以快速访问测试容器。</p>
-<pre><code><span class="comment"># sshd</span>
-<span class="comment">#</span>
-<span class="comment"># VERSION               0.0.1</span>
+        <span itemprop="articleBody"><h1 id="u5728Docker_u4E2D_u8FD0_u884CSSH_u8FDB_u7A0B_u670D_u52A1"><a href="#u5728Docker_u4E2D_u8FD0_u884CSSH_u8FDB_u7A0B_u670D_u52A1" class="headerlink" title="在Docker中运行SSH进程服务"></a>在Docker中运行SSH进程服务</h1><p>以下是用<code>Dockerfile</code>设置sshd服务容器，您可以使用连接并检查其他容器的卷,或者可以快速访问测试容器。</p>
+<pre><code># sshd
+#
+# VERSION               0.0.1
 
-<span class="built_in">FROM</span>     ubuntu:<span class="number">12.04</span>
-<span class="built_in">MAINTAINER</span> Thatcher R. Peskens <span class="string">"thatcher@dotcloud.com"</span>
+FROM     ubuntu:12.04
+MAINTAINER Thatcher R. Peskens &quot;thatcher@dotcloud.com&quot;
 
-<span class="comment"># make sure the package repository is up to date</span>
-<span class="built_in">RUN</span> <span class="bash">apt-get update
-</span>
-<span class="built_in">RUN</span> <span class="bash">apt-get install -y openssh-server
-</span><span class="built_in">RUN</span> <span class="bash">mkdir /var/run/sshd
-</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">'root:screencast'</span> |chpasswd
-</span>
-<span class="built_in">EXPOSE</span> <span class="number">22</span>
-CMD    [<span class="string">"/usr/sbin/sshd"</span>, <span class="string">"-D"</span>]
+# make sure the package repository is up to date
+RUN apt-get update
+
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo &apos;root:screencast&apos; |chpasswd
+
+EXPOSE 22
+CMD    [&quot;/usr/sbin/sshd&quot;, &quot;-D&quot;]
 </code></pre><p>使用如下命令构建镜像：</p>
-<pre><code>$ sudo docker build <span class="comment">--rm -t eg_sshd .</span>
+<pre><code>$ sudo docker build --rm -t eg_sshd .
 </code></pre><p>然后运行它，你可以使用<code>docker port</code>来找出容器端口22映射到主机的端口</p>
 <pre><code>$ sudo docker run -d -P --name test_sshd eg_sshd
-$ sudo docker port test_sshd <span class="number">22</span>
-<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49154</span>
+$ sudo docker port test_sshd 22
+0.0.0.0:49154
 </code></pre><p>现在你可以使用ssh登陆Docker进程的主机IP地址，端口是49154(IP地址可以使用ifconfig获取)：</p>
-<pre><code>$ ssh root@<span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span> -p <span class="number">49154</span>
-<span class="preprocessor"># The password is ``screencast``.</span>
+<pre><code>$ ssh root@192.168.1.2 -p 49154
+# The password is ``screencast``.
 $$
 </code></pre><p>最后，清理停止的容器，并且删除容器，然后删除镜像。</p>
-<pre><code><span class="variable">$ </span>sudo docker stop test_sshd
-<span class="variable">$ </span>sudo docker rm test_sshd
-<span class="variable">$ </span>sudo docker rmi eg_sshd
+<pre><code>$ sudo docker stop test_sshd
+$ sudo docker rm test_sshd
+$ sudo docker rmi eg_sshd
 </code></pre></span>
       
     </div>
@@ -291,13 +285,13 @@ $$
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/08/docker/https/" rel="prev">使用 HTTPS 保护 Docker Socket 进程</a>
+              <a href="/2015/12/08/docker/examples/couchdb_data_volumes/" rel="prev">Docker中运行CouchDB服务</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/examples/running_riak_service/" rel="next">在Docker中使用Riak服务</a>
+              <a href="/2015/12/08/docker/https/" rel="next">使用 HTTPS 保护 Docker Socket 进程</a>
             
           </div>
         </div>
@@ -363,7 +357,7 @@ $$
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -377,7 +371,7 @@ $$
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -426,7 +420,7 @@ $$
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在Docker中运行SSH进程服务"><span class="nav-number">1.</span> <span class="nav-text">在Docker中运行SSH进程服务</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5728Docker_u4E2D_u8FD0_u884CSSH_u8FDB_u7A0B_u670D_u52A1"><span class="nav-number">1.</span> <span class="nav-text">在Docker中运行SSH进程服务</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -443,7 +437,7 @@ $$
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

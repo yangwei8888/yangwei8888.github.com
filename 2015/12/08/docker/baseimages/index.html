@@ -228,31 +228,31 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="创建一个基本镜像">创建一个基本镜像</h1><p>==================</p>
-<p>你想创建你自己的<a href="../terms/image.md">基础镜像</a>？很好！</p>
+        <span itemprop="articleBody"><h1 id="u521B_u5EFA_u4E00_u4E2A_u57FA_u672C_u955C_u50CF"><a href="#u521B_u5EFA_u4E00_u4E2A_u57FA_u672C_u955C_u50CF" class="headerlink" title="创建一个基本镜像"></a>创建一个基本镜像</h1><p>==================</p>
+<p>你想创建你自己的<a href="/../terms/image.md">基础镜像</a>？很好！</p>
 <p>具体的过程会严重依赖于你想打包的Linux发行版。我们有下面一些例子供你参考。<br>同时，我们鼓励你通过提交推送请求来贡献你的新镜像。</p>
-<h3 id="使用_tar_来创建一个完整的镜像">使用 tar 来创建一个完整的镜像</h3><p>通常，你要先运行一个可工作的发行版的机器，来打包一个基础镜像。虽然有一些<br>工具不是必需的，比如 Debian 的 Deboostrap，但是你还是可以用它来生成 Ubuntu<br>镜像。</p>
+<h3 id="u4F7F_u7528_tar__u6765_u521B_u5EFA_u4E00_u4E2A_u5B8C_u6574_u7684_u955C_u50CF"><a href="#u4F7F_u7528_tar__u6765_u521B_u5EFA_u4E00_u4E2A_u5B8C_u6574_u7684_u955C_u50CF" class="headerlink" title="使用 tar 来创建一个完整的镜像"></a>使用 tar 来创建一个完整的镜像</h3><p>通常，你要先运行一个可工作的发行版的机器，来打包一个基础镜像。虽然有一些<br>工具不是必需的，比如 Debian 的 Deboostrap，但是你还是可以用它来生成 Ubuntu<br>镜像。</p>
 <p>下面的例子尽可能简单地创建一个 Ubuntu 基础镜像：</p>
 <pre><code>$ sudo debootstrap raring raring &gt; /dev/null
-$ sudo tar -C raring -c . | sudo docker <span class="keyword">import</span> - raring
+$ sudo tar -C raring -c . | sudo docker import - raring
 a29c15f1bf7a
 $ sudo docker run raring cat /etc/lsb-release
-<span class="constant">DISTRIB_ID</span>=Ubuntu
-<span class="constant">DISTRIB_RELEASE</span>=<span class="number">13.04</span>
-<span class="constant">DISTRIB_CODENAME</span>=raring
-<span class="constant">DISTRIB_DESCRIPTION</span>=<span class="string">"Ubuntu 13.04"</span>
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=13.04
+DISTRIB_CODENAME=raring
+DISTRIB_DESCRIPTION=&quot;Ubuntu 13.04&quot;
 </code></pre><p>在 Docker 的 GitHub 上，有更多的创建基础镜像的脚本示例：</p>
 <ul>
 <li><a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-busybox.sh" target="_blank" rel="external">BusyBox</a></li>
 <li>CentOS / Scientific Linux CERN (SLC) <a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-rinse.sh" target="_blank" rel="external">on Debian/Ubuntu</a> or on <a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-yum.sh" target="_blank" rel="external">CentOS/RHEL/SLC/etc</a>.</li>
 <li><a href="https://github.com/dotcloud/docker/blob/master/contrib/mkimage-debootstrap.sh" target="_blank" rel="external">Debian / Ubuntu</a></li>
 </ul>
-<h3 id="使用_scratch_创建简单的基础镜像">使用 scratch 创建简单的基础镜像</h3><p>在 Docker 的注册中，有一个使用空的 tar 文件创建的特殊的版本库，叫 scratch ：</p>
-<pre><code>$ tar cv --files-<span class="keyword">from</span> <span class="regexp">/dev/</span><span class="keyword">null</span> | docker <span class="keyword">import</span> - scratch
+<h3 id="u4F7F_u7528_scratch__u521B_u5EFA_u7B80_u5355_u7684_u57FA_u7840_u955C_u50CF"><a href="#u4F7F_u7528_scratch__u521B_u5EFA_u7B80_u5355_u7684_u57FA_u7840_u955C_u50CF" class="headerlink" title="使用 scratch 创建简单的基础镜像"></a>使用 scratch 创建简单的基础镜像</h3><p>在 Docker 的注册中，有一个使用空的 tar 文件创建的特殊的版本库，叫 scratch ：</p>
+<pre><code>$ tar cv --files-from /dev/null | docker import - scratch
 </code></pre><p>你可以用 <strong><em> docker pull </em></strong> 把它拉取下来。然后你就可以基于它来做新的最小<br>的容器了：</p>
-<pre><code><span class="built_in">FROM</span> scratch
-<span class="built_in">COPY</span> <span class="bash"><span class="literal">true</span>-asm /<span class="literal">true</span>
-</span><span class="built_in">CMD</span> <span class="bash">[<span class="string">"/true"</span>]</span>
+<pre><code>FROM scratch
+COPY true-asm /true
+CMD [&quot;/true&quot;]
 </code></pre><p>上面的 Dockerfile 来自外部的一个最小镜像：<a href="https://github.com/tianon/dockerfiles/tree/master/true" target="_blank" rel="external">tianon/true</a>。</p>
 </span>
       
@@ -343,7 +343,7 @@ $ sudo docker run raring cat /etc/lsb-release
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -357,7 +357,7 @@ $ sudo docker run raring cat /etc/lsb-release
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -406,7 +406,7 @@ $ sudo docker run raring cat /etc/lsb-release
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个基本镜像"><span class="nav-number">1.</span> <span class="nav-text">创建一个基本镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用_tar_来创建一个完整的镜像"><span class="nav-number">1.0.1.</span> <span class="nav-text">使用 tar 来创建一个完整的镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用_scratch_创建简单的基础镜像"><span class="nav-number">1.0.2.</span> <span class="nav-text">使用 scratch 创建简单的基础镜像</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u521B_u5EFA_u4E00_u4E2A_u57FA_u672C_u955C_u50CF"><span class="nav-number">1.</span> <span class="nav-text">创建一个基本镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4F7F_u7528_tar__u6765_u521B_u5EFA_u4E00_u4E2A_u5B8C_u6574_u7684_u955C_u50CF"><span class="nav-number">1.0.1.</span> <span class="nav-text">使用 tar 来创建一个完整的镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4F7F_u7528_scratch__u521B_u5EFA_u7B80_u5355_u7684_u57FA_u7840_u955C_u50CF"><span class="nav-number">1.0.2.</span> <span class="nav-text">使用 scratch 创建简单的基础镜像</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -423,7 +423,7 @@ $ sudo docker run raring cat /etc/lsb-release
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

@@ -261,7 +261,7 @@ Swi">
       
 
       
-        <span itemprop="articleBody"><h1 id="析构过程（Deinitialization）">析构过程（Deinitialization）</h1><hr>
+        <span itemprop="articleBody"><h1 id="u6790_u6784_u8FC7_u7A0B_uFF08Deinitialization_uFF09"><a href="#u6790_u6784_u8FC7_u7A0B_uFF08Deinitialization_uFF09" class="headerlink" title="析构过程（Deinitialization）"></a>析构过程（Deinitialization）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/bruce0505" target="_blank" rel="external">bruce0505</a><br>校对：<a href="https://github.com/fd5788" target="_blank" rel="external">fd5788</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/chenmingbiao" target="_blank" rel="external">chenmingbiao</a></p>
@@ -269,13 +269,13 @@ Swi">
 </blockquote>
 <p>本页包含内容：</p>
 <ul>
-<li><a href="#how_deinitialization_works">析构过程原理</a></li>
-<li><a href="#deinitializers_in_action">析构器实践</a></li>
+<li><a href="/#how_deinitialization_works">析构过程原理</a></li>
+<li><a href="/#deinitializers_in_action">析构器实践</a></li>
 </ul>
 <p><em>析构器</em>只适用于类类型，当一个类的实例被释放之前，析构器会被立即调用。析构器用关键字<code>deinit</code>来标示，类似于构造器要用<code>init</code>来标示。</p>
 <p><a name="how_deinitialization_works"></a></p>
 <p>##析构过程原理</p>
-<p>Swift 会自动释放不再需要的实例以释放资源。如<a href="./16_Automatic_Reference_Counting.html">自动引用计数</a>章节中所讲述，Swift 通过<code>自动引用计数（ARC）</code>处理实例的内存管理。通常当你的实例被释放时不需要手动地去清理。但是，当使用自己的资源时，你可能需要进行一些额外的清理。例如，如果创建了一个自定义的类来打开一个文件，并写入一些数据，你可能需要在类实例被释放之前手动去关闭该文件。</p>
+<p>Swift 会自动释放不再需要的实例以释放资源。如<a href="/./16_Automatic_Reference_Counting.html">自动引用计数</a>章节中所讲述，Swift 通过<code>自动引用计数（ARC）</code>处理实例的内存管理。通常当你的实例被释放时不需要手动地去清理。但是，当使用自己的资源时，你可能需要进行一些额外的清理。例如，如果创建了一个自定义的类来打开一个文件，并写入一些数据，你可能需要在类实例被释放之前手动去关闭该文件。</p>
 <p>在类的定义中，每个类最多只能有一个析构器，而且析构器不带任何参数，如下所示：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">deinit</span> &#123;</span><br><span class="line">    <span class="comment">// 执行析构过程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>析构器是在实例释放发生前被自动调用。你不能主动调用析构器。子类继承了父类的析构器，并且在子类析构器实现的最后，父类的析构器会被自动调用。即使子类没有提供自己的析构器，父类的析构器也同样会被调用。</p>
@@ -387,7 +387,7 @@ Swi">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -401,7 +401,7 @@ Swi">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -450,7 +450,7 @@ Swi">
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#析构过程（Deinitialization）"><span class="nav-number">1.</span> <span class="nav-text">析构过程（Deinitialization）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u6790_u6784_u8FC7_u7A0B_uFF08Deinitialization_uFF09"><span class="nav-number">1.</span> <span class="nav-text">析构过程（Deinitialization）</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -467,7 +467,7 @@ Swi">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

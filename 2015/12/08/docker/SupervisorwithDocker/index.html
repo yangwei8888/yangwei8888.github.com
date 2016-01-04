@@ -222,26 +222,26 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="Using_Supervior_with_Docker">Using Supervior with Docker</h1><p>注意：如果你不喜欢使用sudo，那么你可以看看<a href="http://docs.docker.com/installation/binaries/#dockergroup" target="_blank" rel="external">Giving non-root access</a></p>
+        <span itemprop="articleBody"><h1 id="Using_Supervior_with_Docker"><a href="#Using_Supervior_with_Docker" class="headerlink" title="Using Supervior with Docker"></a>Using Supervior with Docker</h1><p>注意：如果你不喜欢使用sudo，那么你可以看看<a href="http://docs.docker.com/installation/binaries/#dockergroup" target="_blank" rel="external">Giving non-root access</a></p>
 <p>传统上的docker容器中一次只能运行一个进程，例如一次只运行一个Apache守护进程或SSH服务器守护进程一个进程。你经常遇到需要<br>在一个容器中运行多个进程的情形。有许多方法可以实现这一点，从使用简单的bash脚本来运行的<code>CMD</code>指令到安装进程管理工具。 </p>
 <p>在这个例子中，我们将要利用进程管理工具，<a href="http://supervisord.org/" target="_blank" rel="external"><code>Supervior</code></a>，来管理我们容器中的多个进程。使用Supervior使我们能够更好地控制，管理，<br>和重新启动我们想要运行的进程。为了证明这一点，我们接下来要安装并管理的SSH服务进程和一个Apache守护进程。 </p>
-<h2 id="创建Dockerfile">创建Dockerfile</h2><p>让我们先创建一个基本的<code>Dockerfile</code>来创建我们的新镜像。 </p>
+<h2 id="u521B_u5EFADockerfile"><a href="#u521B_u5EFADockerfile" class="headerlink" title="创建Dockerfile"></a>创建Dockerfile</h2><p>让我们先创建一个基本的<code>Dockerfile</code>来创建我们的新镜像。 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:<span class="number">13.04</span></span><br><span class="line">MAINTAINER examples@docker.com</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">"deb http://archive.ubuntu.com/ubuntu precise main universe"</span> &gt; /etc/apt/sources.list</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get upgrade -y</span><br></pre></td></tr></table></figure>
-<h2 id="安装Supervisor">安装Supervisor</h2><p>现在，我们可以安装我们的SSH和Apache，以及Supervisor在我们的容器中。 </p>
+<h2 id="u5B89_u88C5Supervisor"><a href="#u5B89_u88C5Supervisor" class="headerlink" title="安装Supervisor"></a>安装Supervisor</h2><p>现在，我们可以安装我们的SSH和Apache，以及Supervisor在我们的容器中。 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get install -y openssh-server apache2 supervisor</span><br><span class="line">RUN mkdir -p /var/run/sshd</span><br><span class="line">RUN mkdir -p /var/<span class="built_in">log</span>/supervisor</span><br></pre></td></tr></table></figure>
 <p>这里我们组装了一个包含Openssh-server，Apache2和supervisor（它提供了超级守护进程）的封装包。我们也创建了用来运行<br>我们SSH和Supervisor的两个新目录</p>
-<h2 id="添加Supervisor的配置文件">添加Supervisor的配置文件 </h2><p>现在，让我们为Supervisor添加一个配置文件。默认的文件名为<code>supervisord.conf</code>，位于<code>/etc/supervisor/conf.d/</code>。 </p>
+<h2 id="u6DFB_u52A0Supervisor_u7684_u914D_u7F6E_u6587_u4EF6"><a href="#u6DFB_u52A0Supervisor_u7684_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="添加Supervisor的配置文件"></a>添加Supervisor的配置文件 </h2><p>现在，让我们为Supervisor添加一个配置文件。默认的文件名为<code>supervisord.conf</code>，位于<code>/etc/supervisor/conf.d/</code>。 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf</span><br></pre></td></tr></table></figure>
 <p>让我们来看看supervisord.conf文件。 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[supervisord]</span><br><span class="line">nodaemon=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[program:sshd]</span><br><span class="line"><span class="built_in">command</span>=/usr/sbin/sshd -D</span><br><span class="line"></span><br><span class="line">[program:apache2]</span><br><span class="line"><span class="built_in">command</span>=/bin/bash -c <span class="string">"source /etc/apache2/envvars &amp;&amp; exec /usr/sbin/apache2 -DFOREGROUND"</span></span><br></pre></td></tr></table></figure>
 <p>该<code>supervisord.conf</code>配置文件包含了配置Supervisor的指令和Supervisor用来管理进程的指令。第一部分<code>[supervisord]</code>为Supervisor本身的配置。<br>我们使用一个<code>nodaemon</code>指令，来告诉Supervisor以交互方式而非以后台进程方式运行。 </p>
 <p>接下来的两个部分用来管理我们要控制的服务。每个部分控制一个单独的进程。该部分包含一个<code>command</code>指令，指定用什么命令来启动每个过程。 （<em>译者注：要运行什么指令按照相同格式添加即可</em>）</p>
-<h2 id="开放端口以及运行Supervisor">开放端口以及运行Supervisor </h2><p>现在，让我们开放一些需要口，并指定当容器启动时要运行的CMD指令来结束<code>Dockerfile</code>文件。</p>
+<h2 id="u5F00_u653E_u7AEF_u53E3_u4EE5_u53CA_u8FD0_u884CSupervisor"><a href="#u5F00_u653E_u7AEF_u53E3_u4EE5_u53CA_u8FD0_u884CSupervisor" class="headerlink" title="开放端口以及运行Supervisor"></a>开放端口以及运行Supervisor </h2><p>现在，让我们开放一些需要口，并指定当容器启动时要运行的CMD指令来结束<code>Dockerfile</code>文件。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EXPOSE <span class="number">22</span> <span class="number">80</span></span><br><span class="line">CMD [<span class="string">"/usr/bin/supervisord"</span>]</span><br></pre></td></tr></table></figure>
 <p>在这里，当我们的容器启动时，会自动开放了容器的22和80端口，同时运行<code>/usr/bin/supervisord</code>命令。</p>
-<h2 id="创建我们自己的镜像">创建我们自己的镜像</h2><p>现在，我们可以创建我们的新镜像。 </p>
+<h2 id="u521B_u5EFA_u6211_u4EEC_u81EA_u5DF1_u7684_u955C_u50CF"><a href="#u521B_u5EFA_u6211_u4EEC_u81EA_u5DF1_u7684_u955C_u50CF" class="headerlink" title="创建我们自己的镜像"></a>创建我们自己的镜像</h2><p>现在，我们可以创建我们的新镜像。 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker build -t &lt;yourname&gt;/supervisord .</span><br></pre></td></tr></table></figure>
-<h2 id="启动我们的Supervisor容器">启动我们的Supervisor容器</h2><p>一旦我们创建了一个镜像，我们就可以从它启动一个容器。 </p>
+<h2 id="u542F_u52A8_u6211_u4EEC_u7684Supervisor_u5BB9_u5668"><a href="#u542F_u52A8_u6211_u4EEC_u7684Supervisor_u5BB9_u5668" class="headerlink" title="启动我们的Supervisor容器"></a>启动我们的Supervisor容器</h2><p>一旦我们创建了一个镜像，我们就可以从它启动一个容器。 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -p <span class="number">22</span> -p <span class="number">80</span> -t -i &lt;yourname&gt;/supervisord</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> CRIT Supervisor running as root (no user <span class="keyword">in</span> config file)</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">312</span> WARN Included extra file <span class="string">"/etc/supervisor/conf.d/supervisord.conf"</span> during parsing</span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">22</span>,<span class="number">342</span> INFO supervisord started with pid <span class="number">1</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">346</span> INFO spawned: <span class="string">'sshd'</span> with pid <span class="number">6</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">11</span>-<span class="number">25</span> <span class="number">18</span>:<span class="number">53</span>:<span class="number">23</span>,<span class="number">349</span> INFO spawned: <span class="string">'apache2'</span> with pid <span class="number">7</span></span><br><span class="line">. . .</span><br></pre></td></tr></table></figure>
 <p>我们已经使用<code>docker run</code>命令以交互方式启动一个新的容器。该容器已运行Supervisor，并启动了SSH和Apache后台进程。<br>我们已经指定了<code>-p</code>参数开放了端口22和80。通过这种方式我们可以确认我们开放的端口，并且通过这些端口连接到SSH和Apache后台进程。</p>
 </span>
@@ -267,8 +267,7 @@
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/installation/windows/" rel="next">windows
-安装 docker</a>
+              <a href="/2015/12/08/docker/networking/" rel="next">网络配置</a>
             
           </div>
         </div>
@@ -334,7 +333,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -348,7 +347,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -397,7 +396,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Using_Supervior_with_Docker"><span class="nav-number">1.</span> <span class="nav-text">Using Supervior with Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Dockerfile"><span class="nav-number">1.1.</span> <span class="nav-text">创建Dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Supervisor"><span class="nav-number">1.2.</span> <span class="nav-text">安装Supervisor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加Supervisor的配置文件"><span class="nav-number">1.3.</span> <span class="nav-text">添加Supervisor的配置文件 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开放端口以及运行Supervisor"><span class="nav-number">1.4.</span> <span class="nav-text">开放端口以及运行Supervisor </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建我们自己的镜像"><span class="nav-number">1.5.</span> <span class="nav-text">创建我们自己的镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动我们的Supervisor容器"><span class="nav-number">1.6.</span> <span class="nav-text">启动我们的Supervisor容器</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Using_Supervior_with_Docker"><span class="nav-number">1.</span> <span class="nav-text">Using Supervior with Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u521B_u5EFADockerfile"><span class="nav-number">1.1.</span> <span class="nav-text">创建Dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B89_u88C5Supervisor"><span class="nav-number">1.2.</span> <span class="nav-text">安装Supervisor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6DFB_u52A0Supervisor_u7684_u914D_u7F6E_u6587_u4EF6"><span class="nav-number">1.3.</span> <span class="nav-text">添加Supervisor的配置文件 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5F00_u653E_u7AEF_u53E3_u4EE5_u53CA_u8FD0_u884CSupervisor"><span class="nav-number">1.4.</span> <span class="nav-text">开放端口以及运行Supervisor </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u521B_u5EFA_u6211_u4EEC_u81EA_u5DF1_u7684_u955C_u50CF"><span class="nav-number">1.5.</span> <span class="nav-text">创建我们自己的镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u542F_u52A8_u6211_u4EEC_u7684Supervisor_u5BB9_u5668"><span class="nav-number">1.6.</span> <span class="nav-text">启动我们的Supervisor容器</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -414,7 +413,7 @@
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

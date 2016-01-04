@@ -234,27 +234,27 @@ Red Hat Enterprise Linux 6.5 (64-bit) 或更高版本
       
 
       
-        <span itemprop="articleBody"><h1 id="Red_Hat_Enterprise_Linux">Red Hat Enterprise Linux</h1><p>以下是支持 Docker 的 RHEL 版本：</p>
+        <span itemprop="articleBody"><h1 id="Red_Hat_Enterprise_Linux"><a href="#Red_Hat_Enterprise_Linux" class="headerlink" title="Red Hat Enterprise Linux"></a>Red Hat Enterprise Linux</h1><p>以下是支持 Docker 的 RHEL 版本：</p>
 <ul>
-<li><a href="#red-hat-enterprise-linux-7-installation"><em>Red Hat Enterprise Linux 7 (64-bit)</em></a></li>
-<li><a href="#red-hat-enterprise-linux-6.5-installation"><em>Red Hat Enterprise Linux 6.5 (64-bit)</em></a> 或更高版本</li>
+<li><a href="/#red-hat-enterprise-linux-7-installation"><em>Red Hat Enterprise Linux 7 (64-bit)</em></a></li>
+<li><a href="/#red-hat-enterprise-linux-6.5-installation"><em>Red Hat Enterprise Linux 6.5 (64-bit)</em></a> 或更高版本</li>
 </ul>
-<h2 id="内核支持">内核支持</h2><p>如果你的 RHEL 运行的是发行版内核。那就仅支持通过 <em>extras</em> 渠道或者 EPEL 包来安装 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错</p>
-<h2 id="Red_Hat_Enterprise_Linux_7_installation">Red Hat Enterprise Linux 7 installation</h2><p><strong>Red Hat Enterprise Linux 7 （64位）</strong> <a href="https://access.redhat.com/site/products/red-hat-enterprise-linux/docker-and-containers" target="_blank" rel="external">自带Docker</a>. 你可以在<a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.0_Release_Notes/chap-Red_Hat_Enterprise_Linux-7.0_Release_Notes-Linux_Containers_with_Docker_Format.html" target="_blank" rel="external">发行日志</a>中找到概述和指南。</p>
+<h2 id="u5185_u6838_u652F_u6301"><a href="#u5185_u6838_u652F_u6301" class="headerlink" title="内核支持"></a>内核支持</h2><p>如果你的 RHEL 运行的是发行版内核。那就仅支持通过 <em>extras</em> 渠道或者 EPEL 包来安装 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错</p>
+<h2 id="Red_Hat_Enterprise_Linux_7_installation"><a href="#Red_Hat_Enterprise_Linux_7_installation" class="headerlink" title="Red Hat Enterprise Linux 7 installation"></a>Red Hat Enterprise Linux 7 installation</h2><p><strong>Red Hat Enterprise Linux 7 （64位）</strong> <a href="https://access.redhat.com/site/products/red-hat-enterprise-linux/docker-and-containers" target="_blank" rel="external">自带Docker</a>. 你可以在<a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.0_Release_Notes/chap-Red_Hat_Enterprise_Linux-7.0_Release_Notes-Linux_Containers_with_Docker_Format.html" target="_blank" rel="external">发行日志</a>中找到概述和指南。</p>
 <p>Docker 包含在 <strong>extras</strong> 镜像源中，使用下面的方法可以安装 Docker:</p>
 <ol>
 <li><p>启用 <strong>extras</strong> 镜像源:</p>
-<pre><code>$ sudo subscription-manager repos <span class="comment">--enable=rhel-7-server-extras-rpms</span>
+<pre><code>$ sudo subscription-manager repos --enable=rhel-7-server-extras-rpms
 </code></pre></li>
 <li><p>安装 Docker :</p>
-<pre><code>$ sudo yum <span class="keyword">install</span> docker 
+<pre><code>$ sudo yum install docker 
 </code></pre></li>
 </ol>
 <p>如果你是RHEL客户，更多的 RHEL-7 安装、配置和<a href="https://access.redhat.com/site/articles/881893" target="_blank" rel="external">用户指南</a>可以在<a href="https://access.redhat.com/" target="_blank" rel="external">客户中心</a>中找到。</p>
-<p>请继续阅读 <a href="#starting-the-docker-daemon"> 启动 Docker 进程 </a>.</p>
-<h2 id="Red_Hat_Enterprise_Linux_6-5_installation">Red Hat Enterprise Linux 6.5 installation</h2><p>你需要在 <strong>64位</strong> 的 <a href="https://access.redhat.com/site/articles/3078#RHEL6" target="_blank" rel="external">RHEL 6.5</a> 或更高的版本上来安装 Docker，Docker 工作需要特定的内核补丁, 因此 RHEL 的内核版本应为 2.6.32-431 或者更高。</p>
+<p>请继续阅读 <a href="/#starting-the-docker-daemon"> 启动 Docker 进程 </a>.</p>
+<h2 id="Red_Hat_Enterprise_Linux_6-5_installation"><a href="#Red_Hat_Enterprise_Linux_6-5_installation" class="headerlink" title="Red Hat Enterprise Linux 6.5 installation"></a>Red Hat Enterprise Linux 6.5 installation</h2><p>你需要在 <strong>64位</strong> 的 <a href="https://access.redhat.com/site/articles/3078#RHEL6" target="_blank" rel="external">RHEL 6.5</a> 或更高的版本上来安装 Docker，Docker 工作需要特定的内核补丁, 因此 RHEL 的内核版本应为 2.6.32-431 或者更高。</p>
 <p>Docker 已经包含在 RHEL 的 EPEL 源中。该源是 Extra Packages for Enterprise Linux (EPEL) 的一个额外包，社区中正在努力创建和维护相关镜像。</p>
-<h2 id="内核支持-1">内核支持</h2><p>如果你的 RHEL 运行的是发行版内核。那就仅支持通过 <em>extras</em> 渠道或者 EPEL 包来安装 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错</p>
+<h2 id="u5185_u6838_u652F_u6301-1"><a href="#u5185_u6838_u652F_u6301-1" class="headerlink" title="内核支持"></a>内核支持</h2><p>如果你的 RHEL 运行的是发行版内核。那就仅支持通过 <em>extras</em> 渠道或者 EPEL 包来安装 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错</p>
 <blockquote>
 <p><strong>Warning</strong>:<br>Please keep your system up to date using <code>yum update</code> and rebooting<br>your system. Keeping your system updated ensures critical security<br> vulnerabilities and severe bugs (such as those found in kernel 2.6.32)<br>are fixed.</p>
 </blockquote>
@@ -262,28 +262,28 @@ Red Hat Enterprise Linux 6.5 (64-bit) 或更高版本
 <p>在EPEL中已经提供了 <code>docker-io</code> 包</p>
 <p>如果你安装了(不相关)的 Docker 包，它将与 <code>docker-io</code> 冲突。在安装 <code>docker-io</code> 之前，请先卸载 Docker</p>
 <p>下一步，我们将要在我们的主机中安装 Docker,也就是 <code>docker-io</code> 包:</p>
-<pre><code>$ sudo yum -y <span class="keyword">install</span> docker-io
+<pre><code>$ sudo yum -y install docker-io
 </code></pre><p>更新<code>docker-io</code>包:</p>
-<pre><code><span class="variable">$ </span>sudo yum -y update docker-io
+<pre><code>$ sudo yum -y update docker-io
 </code></pre><p>现在 Docker 已经安装好了，我们来启动 docker 进程:</p>
-<pre><code><span class="variable">$ </span>sudo service docker start
+<pre><code>$ sudo service docker start
 </code></pre><p>设置开机启动:</p>
-<pre><code>$ sudo chkconfig docker <span class="function_start"><span class="keyword">on</span></span>
+<pre><code>$ sudo chkconfig docker on
 </code></pre><p>现在，让我们确认 Docker 是否正常工作：</p>
-<pre><code>$ sudo docker run -<span class="tag">i</span> -t fedora /bin/bash
-</code></pre><p>继续 <a href="#启动Docker进程"> 启动 Docker 进程 </a></p>
-<h2 id="启动_Docker_进程">启动 Docker 进程</h2><p>现在 Docker 已经安装好了，让我们来启动 Docker 进程</p>
-<pre><code><span class="variable">$ </span>sudo service docker start
+<pre><code>$ sudo docker run -i -t fedora /bin/bash
+</code></pre><p>继续 <a href="/#启动Docker进程"> 启动 Docker 进程 </a></p>
+<h2 id="u542F_u52A8_Docker__u8FDB_u7A0B"><a href="#u542F_u52A8_Docker__u8FDB_u7A0B" class="headerlink" title="启动 Docker 进程"></a>启动 Docker 进程</h2><p>现在 Docker 已经安装好了，让我们来启动 Docker 进程</p>
+<pre><code>$ sudo service docker start
 </code></pre><p>如果我们想要开机启动 Docker ，我们需要执行如下的命令：</p>
-<pre><code>$ sudo chkconfig docker <span class="function_start"><span class="keyword">on</span></span>
+<pre><code>$ sudo chkconfig docker on
 </code></pre><p>现在测试一下是否正常工作.</p>
-<pre><code>$ sudo docker run -<span class="tag">i</span> -t fedora /bin/bash
+<pre><code>$ sudo docker run -i -t fedora /bin/bash
 </code></pre><blockquote>
 <p>注意: 如果你运行的时候提示一个  <code>Cannot start container</code> 的错误，错误中提到了 SELINUX 或者 权限不足。你需要更新 SELINUX 规则。你可以使用 <code>sudo yum upgrade selinux-policy</code> 然后重启。</p>
 </blockquote>
 <p><strong>下一步</strong></p>
-<p>好！现在你可以去查看<a href="../userguide/README.md">用户指南</a>。</p>
-<h2 id="自定义进程选项">自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
+<p>好！现在你可以去查看<a href="/../userguide/README.md">用户指南</a>。</p>
+<h2 id="u81EA_u5B9A_u4E49_u8FDB_u7A0B_u9009_u9879"><a href="#u81EA_u5B9A_u4E49_u8FDB_u7A0B_u9009_u9879" class="headerlink" title="自定义进程选项"></a>自定义进程选项</h2><p>如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解<a href="/articles/systemd.md">如何定制 Docker 进程</a></p>
 <p>##问题</p>
 <p>遇到问题请到 <a href="https://bugzilla.redhat.com/enter_bug.cgi?product=Fedora%20EPEL&amp;component=docker-io" target="_blank" rel="external">Red Hat Bugzilla for docker-io component</a> 进行反馈。</p>
 </span>
@@ -303,14 +303,14 @@ Red Hat Enterprise Linux 6.5 (64-bit) 或更高版本
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/08/docker/installation/softlayer/" rel="prev">IBM SoftLayer
-安装 docker</a>
+              <a href="/2015/12/08/docker/installation/opensuse/" rel="prev">openSUSE 安装 Docker</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/installation/opensuse/" rel="next">openSUSE 安装 Docker</a>
+              <a href="/2015/12/08/docker/installation/ubuntu/" rel="next">Ubuntu
+安装 docker</a>
             
           </div>
         </div>
@@ -376,7 +376,7 @@ Red Hat Enterprise Linux 6.5 (64-bit) 或更高版本
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -390,7 +390,7 @@ Red Hat Enterprise Linux 6.5 (64-bit) 或更高版本
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -439,7 +439,7 @@ Red Hat Enterprise Linux 6.5 (64-bit) 或更高版本
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Red_Hat_Enterprise_Linux"><span class="nav-number">1.</span> <span class="nav-text">Red Hat Enterprise Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内核支持"><span class="nav-number">1.1.</span> <span class="nav-text">内核支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Red_Hat_Enterprise_Linux_7_installation"><span class="nav-number">1.2.</span> <span class="nav-text">Red Hat Enterprise Linux 7 installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Red_Hat_Enterprise_Linux_6-5_installation"><span class="nav-number">1.3.</span> <span class="nav-text">Red Hat Enterprise Linux 6.5 installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内核支持-1"><span class="nav-number">1.4.</span> <span class="nav-text">内核支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动_Docker_进程"><span class="nav-number">1.5.</span> <span class="nav-text">启动 Docker 进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义进程选项"><span class="nav-number">1.6.</span> <span class="nav-text">自定义进程选项</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Red_Hat_Enterprise_Linux"><span class="nav-number">1.</span> <span class="nav-text">Red Hat Enterprise Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5185_u6838_u652F_u6301"><span class="nav-number">1.1.</span> <span class="nav-text">内核支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Red_Hat_Enterprise_Linux_7_installation"><span class="nav-number">1.2.</span> <span class="nav-text">Red Hat Enterprise Linux 7 installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Red_Hat_Enterprise_Linux_6-5_installation"><span class="nav-number">1.3.</span> <span class="nav-text">Red Hat Enterprise Linux 6.5 installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5185_u6838_u652F_u6301-1"><span class="nav-number">1.4.</span> <span class="nav-text">内核支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u542F_u52A8_Docker__u8FDB_u7A0B"><span class="nav-number">1.5.</span> <span class="nav-text">启动 Docker 进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u81EA_u5B9A_u4E49_u8FDB_u7A0B_u9009_u9879"><span class="nav-number">1.6.</span> <span class="nav-text">自定义进程选项</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -456,7 +456,7 @@ Red Hat Enterprise Linux 6.5 (64-bit) 或更高版本
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

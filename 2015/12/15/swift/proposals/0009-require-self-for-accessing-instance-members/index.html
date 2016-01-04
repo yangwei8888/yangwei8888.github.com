@@ -237,14 +237,14 @@ IntroductionThe current ve">
       
 
       
-        <span itemprop="articleBody"><h1 id="Require_self_for_accessing_instance_members">Require self for accessing instance members</h1><ul>
+        <span itemprop="articleBody"><h1 id="Require_self_for_accessing_instance_members"><a href="#Require_self_for_accessing_instance_members" class="headerlink" title="Require self for accessing instance members"></a>Require self for accessing instance members</h1><ul>
 <li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0009-require-self-for-accessing-instance-members.md" target="_blank" rel="external">SE-0009</a></li>
 <li>Author(s): <a href="https://github.com/hartbit" target="_blank" rel="external">David Hart</a></li>
 <li>Status: <strong>Awaiting review</strong> (scheduled for December 16–20, 2015)</li>
 <li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>The current version of Swift (2.1) requires using <code>self</code> when accessing instance members in closures. The proposal suggests extending this to all member accesses (as is intrinsically the case in Objective-C). It has the benefit of documenting instance properties vs local variables and instance functions vs local functions or closures.</p>
-<h2 id="Motivation">Motivation</h2><p>This proposal makes it obvious which are instance properties vs local variables, as well as which are instance functions vs local functions/closures. This has several advantages:</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The current version of Swift (2.1) requires using <code>self</code> when accessing instance members in closures. The proposal suggests extending this to all member accesses (as is intrinsically the case in Objective-C). It has the benefit of documenting instance properties vs local variables and instance functions vs local functions or closures.</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>This proposal makes it obvious which are instance properties vs local variables, as well as which are instance functions vs local functions/closures. This has several advantages:</p>
 <ul>
 <li>More readable at the point of use. </li>
 <li>More consistent than only requiring <code>self</code> in closure contexts.</li>
@@ -259,9 +259,9 @@ IntroductionThe current ve">
 <li>Clarity is more important than brevity. Although Swift code can be compact, it is a non-goal to enable the smallest possible code with the fewest characters. Brevity in Swift code, where it occurs, is a side-effect of the strong type system and features that naturally reduce boilerplate.</li>
 </ul>
 <p>And I believe that the proposition is directly in line with those objectives.</p>
-<h2 id="Counter-argument">Counter-argument</h2><p>The counter-argument brought up by two members of the community is that the current behaviour “makes the capturing semantics of self stand out more in closures”. While this is true, the author finds its usefulness lacking.</p>
+<h2 id="Counter-argument"><a href="#Counter-argument" class="headerlink" title="Counter-argument"></a>Counter-argument</h2><p>The counter-argument brought up by two members of the community is that the current behaviour “makes the capturing semantics of self stand out more in closures”. While this is true, the author finds its usefulness lacking.</p>
 <p>In the following lines of code, we know without a shadow of a doubt that <code>foobar</code> is a throwing function and that <code>barfoo</code> does not throw.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">try foobar()</span><br><span class="line">barfoo()</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> foobar()</span><br><span class="line">barfoo()</span><br></pre></td></tr></table></figure>
 <p>But with an example of <code>self</code> in a closure:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foobar(&#123;</span><br><span class="line">	<span class="built_in">print</span>(<span class="keyword">self</span>.description)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>The <code>self</code> keyword in the previous lines of code gives a hint but does not bring any certitudes:</p>
@@ -276,15 +276,15 @@ IntroductionThe current ve">
 <li>the <code>description</code> might be referring to a local variable (which we missed the declaration of) shadowing the instance property in an escaping closure.</li>
 </ul>
 <p>In both of these examples, the <code>self</code> keyword does not tell us with any certainty that we should or not be careful about reference cycle issues without checking the signature of the called function, only that self is captured. With the proposition, <code>self</code> gets some meaning back: it indicates which are local and which are instance properties.</p>
-<h2 id="Proposed_Solution">Proposed Solution</h2><p>I suggest that not using <code>self</code> for accessing instance properties and functions is applied in two stages. In Swift 2.x, it could start as a warning and Xcode could provide a Fix-It. Then, it could become a compiler error in Swift 3 and the migrator would help transition code over.</p>
+<h2 id="Proposed_Solution"><a href="#Proposed_Solution" class="headerlink" title="Proposed Solution"></a>Proposed Solution</h2><p>I suggest that not using <code>self</code> for accessing instance properties and functions is applied in two stages. In Swift 2.x, it could start as a warning and Xcode could provide a Fix-It. Then, it could become a compiler error in Swift 3 and the migrator would help transition code over.</p>
 <p>The following code which used to compile would generate an error at the documented lines:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(name)</span>"</span>) <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		foo() <span class="comment">// would not compile</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>The code would have to be modified as so to compile correctly:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> name: <span class="type">String</span> = <span class="string">"David"</span></span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">"Hello <span class="subst">\(<span class="keyword">self</span>.name)</span>"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">self</span>.foo()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A lot of code written since the original change would be impacted by this proposal, but it seems like it can be easily fixed by both the migrator tool and an Xcode Fix-It.</p>
-<h2 id="Alternatives_considered">Alternatives considered</h2><p>The alternative is to keep the current behaviour, but it has the aforementioned disadvantages.</p>
+<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>A lot of code written since the original change would be impacted by this proposal, but it seems like it can be easily fixed by both the migrator tool and an Xcode Fix-It.</p>
+<h2 id="Alternatives_considered"><a href="#Alternatives_considered" class="headerlink" title="Alternatives considered"></a>Alternatives considered</h2><p>The alternative is to keep the current behaviour, but it has the aforementioned disadvantages.</p>
 <p>An alternative would be to demote from a compiler error to a warning.</p>
-<h2 id="Community_Responses">Community Responses</h2><ul>
+<h2 id="Community_Responses"><a href="#Community_Responses" class="headerlink" title="Community Responses"></a>Community Responses</h2><ul>
 <li>“I actually encountered at least two bugs in my app introduced by this implicit “self” behavior. It can be dangerous and hard to track down.” – Rudolf Adamkovic, salutis@me.com</li>
 <li>“Given this, some teams use underscores for their iVars which is very unfortunate. Myself, I use self whenever possible to be explicit. I’d like the language to force us to be clear.” – Dan, robear18@gmail.com</li>
 <li>“I’m not sure how many Swift users this effects, but I’m colorblind and I really struggle with the local vs properties syntax coloring.” – Tyler Cloutier, cloutiertyler@aol.com</li>
@@ -310,7 +310,7 @@ IntroductionThe current ve">
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/15/swift/proposals/0007-remove-c-style-for-loops/" rel="prev">0007-remove-c-style-for-loops</a>
+              <a href="/2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/" rel="prev">0010-add-staticstring-unicodescalarview</a>
             
           </div>
 
@@ -382,7 +382,7 @@ IntroductionThe current ve">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -396,7 +396,7 @@ IntroductionThe current ve">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -462,7 +462,7 @@ IntroductionThe current ve">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

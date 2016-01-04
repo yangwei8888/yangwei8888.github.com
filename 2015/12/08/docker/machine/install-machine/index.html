@@ -246,7 +246,7 @@ OS X 和 Linux在 L">
       
 
       
-        <span itemprop="articleBody"><h1 id="安装_Docker_Machine">安装 Docker Machine</h1><p>Docker Machine 支持 Windows ,OS X ,和 Linux，并且被安装为一个独立的二进制文件。用于各平台架构的二进制文件链接如下：</p>
+        <span itemprop="articleBody"><h1 id="u5B89_u88C5_Docker_Machine"><a href="#u5B89_u88C5_Docker_Machine" class="headerlink" title="安装 Docker Machine"></a>安装 Docker Machine</h1><p>Docker Machine 支持 Windows ,OS X ,和 Linux，并且被安装为一个独立的二进制文件。用于各平台架构的二进制文件链接如下：</p>
 <ul>
 <li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-386.exe" target="_blank" rel="external">Windows - 32bit</a></li>
 <li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe" target="_blank" rel="external">Windows - 64bit</a></li>
@@ -255,25 +255,25 @@ OS X 和 Linux在 L">
 <li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64" target="_blank" rel="external">Linux - x86_64</a></li>
 <li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-386" target="_blank" rel="external">Linux - i386</a></li>
 </ul>
-<h2 id="OS_X_和_Linux">OS X 和 Linux</h2><p>在 Linux 或者 OSX 上安装，你需要下载二进制文件到你的 <code>PATH</code> 路径中( 例如: <code>/usr/local/bin</code>)，并且给与可执行权限。例如，在大多数的 OSX 系统上使用如下命令就可以完成安装了：</p>
-<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/machine/releases</span><span class="regexp">/download/v</span>0.<span class="number">3.0</span>/docker-machine_darwin-amd64 &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>-machine
-<span class="variable">$ </span>chmod +x /usr/local/bin/docker-machine
+<h2 id="OS_X__u548C_Linux"><a href="#OS_X__u548C_Linux" class="headerlink" title="OS X 和 Linux"></a>OS X 和 Linux</h2><p>在 Linux 或者 OSX 上安装，你需要下载二进制文件到你的 <code>PATH</code> 路径中( 例如: <code>/usr/local/bin</code>)，并且给与可执行权限。例如，在大多数的 OSX 系统上使用如下命令就可以完成安装了：</p>
+<pre><code>$ curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64 &gt; /usr/local/bin/docker-machine
+$ chmod +x /usr/local/bin/docker-machine
 </code></pre><p>对于Linux，只是将上边的二进制名称中的 “darwin” 替换成 “linux”。</p>
 <p>现在你可以使用 <code>docker-machine -v</code> 命令来查看版本信息。</p>
 <pre><code>$ docker-machine -v
-machine version <span class="number">0.3</span><span class="number">.0</span>
+machine version 0.3.0
 </code></pre><p>为了在您的机器上避免使用 ssh 来运行 Docker 命令，请确保您已经安装好了 Docker 客户端。</p>
-<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/get.docker.com/builds</span><span class="regexp">/Darwin/x</span>86_64/docker-latest &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>
+<pre><code>$ curl -L https://get.docker.com/builds/Darwin/x86_64/docker-latest &gt; /usr/local/bin/docker
 </code></pre><p>##Windows</p>
 <p>目前，Docker 建议你在 Windows 上通过 <a href="https://msysgit.github.io/" target="_blank" rel="external">msysgit</a> 安装使用 Docker Machine,这将为 Docker Machine 提供一些依赖的程序，如 ssh ，还有 shell 功能。</p>
 <p>当你安装好 msysgit ，启动终端命令提示行，并运行如下命令。这里假设你是在 64 位的 Windows 下安装，如果你使用 32 位系统安装，请将 URL 中的 “x86_64” 替换成 “i386”。</p>
 <p>首先，安装 Docker clent 二进制文件 :</p>
-<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/get.docker.com/builds</span><span class="regexp">/Windows/x</span>86_64/docker-latest.exe &gt; <span class="regexp">/bin/docker</span>
+<pre><code>$ curl -L https://get.docker.com/builds/Windows/x86_64/docker-latest.exe &gt; /bin/docker
 </code></pre><p>下一步，安装 Docker Machine 二进制文件:</p>
-<pre><code><span class="variable">$ </span>curl -<span class="constant">L</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/machine/releases</span><span class="regexp">/download/v</span>0.<span class="number">3.0</span>/docker-machine_windows-amd64.exe &gt; <span class="regexp">/bin/docker</span>-machine
+<pre><code>$ curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe &gt; /bin/docker-machine
 </code></pre><p>现在，检查 <code>docker-machine</code> 是否工作 :</p>
 <pre><code>$ docker-machine -v
-machine version <span class="number">0.3</span><span class="number">.0</span>
+machine version 0.3.0
 </code></pre></span>
       
     </div>
@@ -298,7 +298,7 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/installation/azure/" rel="next">Microsoft Azure</a>
+              <a href="/2015/12/08/docker/examples/running_riak_service/" rel="next">在Docker中使用Riak服务</a>
             
           </div>
         </div>
@@ -364,7 +364,7 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -378,7 +378,7 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -427,7 +427,7 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装_Docker_Machine"><span class="nav-number">1.</span> <span class="nav-text">安装 Docker Machine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OS_X_和_Linux"><span class="nav-number">1.1.</span> <span class="nav-text">OS X 和 Linux</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5B89_u88C5_Docker_Machine"><span class="nav-number">1.</span> <span class="nav-text">安装 Docker Machine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OS_X__u548C_Linux"><span class="nav-number">1.1.</span> <span class="nav-text">OS X 和 Linux</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -444,7 +444,7 @@ machine version <span class="number">0.3</span><span class="number">.0</span>
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

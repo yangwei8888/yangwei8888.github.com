@@ -234,20 +234,20 @@ IntroductionArgument labels are an important part of the interface of a Swift fu
       
 
       
-        <span itemprop="articleBody"><h1 id="Allow_(most)_keywords_as_argument_labels">Allow (most) keywords as argument labels</h1><ul>
+        <span itemprop="articleBody"><h1 id="Allow__28most_29_keywords_as_argument_labels"><a href="#Allow__28most_29_keywords_as_argument_labels" class="headerlink" title="Allow (most) keywords as argument labels"></a>Allow (most) keywords as argument labels</h1><ul>
 <li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0001-keywords-as-argument-labels.md" target="_blank" rel="external">SE-0001</a></li>
 <li>Author: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 <li>Status: <strong>Accepted</strong></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>Argument labels are an important part of the interface of a Swift function, describing what particular arguments to the function do and improving readability. Sometimes, the most natural label for an argument coincides with a language keyword, such as <code>in</code>, <code>repeat</code>, or <code>defer</code>. Such keywords should be allowed as argument labels, allowing better expression of these interfaces.</p>
-<h2 id="Motivation">Motivation</h2><p>In some functions, the best argument label for a particular parameter<br>happens to coincide with a language keyword. For example, consider a<br>module-scope function that finds the index of a particular value in a<br>collection. A natural name for this would be <code>indexOf(_:in:)</code>:</p>
-<pre><code><span class="function"><span class="title">indexOf</span><span class="params">(value, in: collection)</span></span>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Argument labels are an important part of the interface of a Swift function, describing what particular arguments to the function do and improving readability. Sometimes, the most natural label for an argument coincides with a language keyword, such as <code>in</code>, <code>repeat</code>, or <code>defer</code>. Such keywords should be allowed as argument labels, allowing better expression of these interfaces.</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>In some functions, the best argument label for a particular parameter<br>happens to coincide with a language keyword. For example, consider a<br>module-scope function that finds the index of a particular value in a<br>collection. A natural name for this would be <code>indexOf(_:in:)</code>:</p>
+<pre><code>indexOf(value, in: collection)
 </code></pre><p>However, because <code>in</code> is a keyword, one would actually have to use backticks to escape the <code>in</code>, e.g.:</p>
-<pre><code><span class="function"><span class="title">indexOf</span><span class="params">(value, `in`: collection)</span></span>
+<pre><code>indexOf(value, `in`: collection)
 </code></pre><p>When defining new APIs in Swift, authors will tend to pick other<br>non-keyword words (e.g., <code>within</code> for this example), even if they<br>aren’t ideal. However, this issue also comes up when importing<br>Objective-C APIs under the “omit needless words” heuristics, requiring<br>escaping to use those APIs. For example:</p>
-<pre><code>event.<span class="function"><span class="title">touchesMatching</span><span class="params">([.Began, .Moved], `in`: view)</span></span>
-<span class="function"><span class="title">NSXPCInterface</span><span class="params">(`protocol`: SomeProtocolType.Protocol)</span></span>
-</code></pre><h2 id="Proposed_solution">Proposed solution</h2><p>Allow the use of all keywords except <code>inout</code>, <code>var</code>, and <code>let</code> as argument labels. This affects the grammar in three places:</p>
+<pre><code>event.touchesMatching([.Began, .Moved], `in`: view)
+NSXPCInterface(`protocol`: SomeProtocolType.Protocol)
+</code></pre><h2 id="Proposed_solution"><a href="#Proposed_solution" class="headerlink" title="Proposed solution"></a>Proposed solution</h2><p>Allow the use of all keywords except <code>inout</code>, <code>var</code>, and <code>let</code> as argument labels. This affects the grammar in three places:</p>
 <ul>
 <li><p>Call expressions, such as the examples above. Here, we have no grammatic ambiguities, because “<keyword> `:`“ does not appear in any grammar production within a parenthesized expression list. This is, by far, the most important case.</keyword></p>
 </li>
@@ -261,8 +261,8 @@ IntroductionArgument labels are an important part of the interface of a Swift fu
 <li>Function types: these are actually easier than #2, because the parameter name is always followed by a ‘:’:</li>
 </ul>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="type">NSTouchPhase</span>, <span class="keyword">in</span>: <span class="type">NSView</span>?) -&gt; <span class="type">Set</span>&lt;<span class="type">NSTouch</span>&gt;</span><br><span class="line">(<span class="type">String</span>, <span class="keyword">inout</span>: <span class="type">Bool</span>) -&gt; <span class="type">Void</span></span><br></pre></td></tr></table></figure>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>This functionality is strictly additive, and does not break any existing<br>code: it only makes some previously ill-formed code well-formed, and<br>does not change the behavior of any well-formed code.</p>
-<h2 id="Alternatives_considered">Alternatives considered</h2><p>The primarily alternative here is to do nothing: Swift APIs will<br>continue to avoid keywords for argument labels, even when they are the<br>most natural word for the label, and imported APIs will either<br>continue to use backticks or will need to be renamed. This alternative<br>leaves a large number of imported APIs (nearly 200) requiring either<br>some level of renaming of the API or backticks at the call site.</p>
+<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>This functionality is strictly additive, and does not break any existing<br>code: it only makes some previously ill-formed code well-formed, and<br>does not change the behavior of any well-formed code.</p>
+<h2 id="Alternatives_considered"><a href="#Alternatives_considered" class="headerlink" title="Alternatives considered"></a>Alternatives considered</h2><p>The primarily alternative here is to do nothing: Swift APIs will<br>continue to avoid keywords for argument labels, even when they are the<br>most natural word for the label, and imported APIs will either<br>continue to use backticks or will need to be renamed. This alternative<br>leaves a large number of imported APIs (nearly 200) requiring either<br>some level of renaming of the API or backticks at the call site.</p>
 <p>A second alternative is to focus on <code>in</code> itself, which is by far the<br>most common keyword argument in imported APIs. In a brief survey of<br>imported APIs, <code>in</code> accounted for 90% of the conflicts with existing<br>keywords. Moreover, the keyword <code>in</code> is only used in two places in the<br>Swift grammar–for loops and closures–so it could be made<br>context-sensitive. However, this solution is somewhat more complicated<br>(because it requires more context-sensitive keyword parsing) and less<br>general.</p>
 </span>
       
@@ -353,7 +353,7 @@ IntroductionArgument labels are an important part of the interface of a Swift fu
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -367,7 +367,7 @@ IntroductionArgument labels are an important part of the interface of a Swift fu
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -416,7 +416,7 @@ IntroductionArgument labels are an important part of the interface of a Swift fu
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Allow_(most)_keywords_as_argument_labels"><span class="nav-number">1.</span> <span class="nav-text">Allow (most) keywords as argument labels</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.2.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proposed_solution"><span class="nav-number">1.3.</span> <span class="nav-text">Proposed solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Impact_on_existing_code"><span class="nav-number">1.4.</span> <span class="nav-text">Impact on existing code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Alternatives_considered"><span class="nav-number">1.5.</span> <span class="nav-text">Alternatives considered</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Allow__28most_29_keywords_as_argument_labels"><span class="nav-number">1.</span> <span class="nav-text">Allow (most) keywords as argument labels</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.2.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proposed_solution"><span class="nav-number">1.3.</span> <span class="nav-text">Proposed solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Impact_on_existing_code"><span class="nav-number">1.4.</span> <span class="nav-text">Impact on existing code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Alternatives_considered"><span class="nav-number">1.5.</span> <span class="nav-text">Alternatives considered</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -433,7 +433,7 @@ IntroductionArgument labels are an important part of the interface of a Swift fu
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

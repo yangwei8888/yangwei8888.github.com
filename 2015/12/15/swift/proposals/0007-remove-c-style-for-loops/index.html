@@ -237,17 +237,17 @@ Introducti">
       
 
       
-        <span itemprop="articleBody"><h1 id="Remove_C-style_for-loops_with_conditions_and_incrementers">Remove C-style for-loops with conditions and incrementers</h1><ul>
+        <span itemprop="articleBody"><h1 id="Remove_C-style_for-loops_with_conditions_and_incrementers"><a href="#Remove_C-style_for-loops_with_conditions_and_incrementers" class="headerlink" title="Remove C-style for-loops with conditions and incrementers"></a>Remove C-style for-loops with conditions and incrementers</h1><ul>
 <li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0007-remove-c-style-for-loops.md" target="_blank" rel="external">SE-0007</a></li>
 <li>Author(s): <a href="https://github.com/erica" target="_blank" rel="external">Erica Sadun</a></li>
 <li>Status: <strong>Accepted</strong> for Swift 3.0 (<a href="https://bugs.swift.org/browse/SR-226" target="_blank" rel="external">Swift 2.2 bug</a>, <a href="https://bugs.swift.org/browse/SR-227" target="_blank" rel="external">Swift 3.0 bug</a>)</li>
 <li>Review manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>The C-style <code>for-loop</code> appears to be a mechanical carry-over from C rather than a<br>genuinely Swift-specific construct. It is rarely used and not very Swift-like. </p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The C-style <code>for-loop</code> appears to be a mechanical carry-over from C rather than a<br>genuinely Swift-specific construct. It is rarely used and not very Swift-like. </p>
 <p>More Swift-typical construction is already available with <code>for-in</code><br>statements and <code>stride</code>. Removing for loops would simplify the language and starve the<br>most common use-points for <code>--</code> and <code>++</code>, which are already due to be eliminated from the<br>language.</p>
 <p>The value of this construct is limited and I believe its removal should be seriously considered.</p>
-<h2 id="Advantages_of_For_Loops">Advantages of For Loops</h2><p>Swift design supported a shallow learning curve using familiar constants and control<br>structures. The <code>for-loop</code> mimics C and limits the effort needed to master this control flow.</p>
-<h2 id="Disadvantages_of_For_Loops">Disadvantages of For Loops</h2><ol>
+<h2 id="Advantages_of_For_Loops"><a href="#Advantages_of_For_Loops" class="headerlink" title="Advantages of For Loops"></a>Advantages of For Loops</h2><p>Swift design supported a shallow learning curve using familiar constants and control<br>structures. The <code>for-loop</code> mimics C and limits the effort needed to master this control flow.</p>
+<h2 id="Disadvantages_of_For_Loops"><a href="#Disadvantages_of_For_Loops" class="headerlink" title="Disadvantages of For Loops"></a>Disadvantages of For Loops</h2><ol>
 <li>Both <code>for-in</code> and <code>stride</code> provide equivalent behavior using Swift-coherent approaches<br>without being tied to legacy terminology. </li>
 <li>There is a distinct expressive disadvantage in using <code>for-loops</code> compared to <code>for-in</code><br>in succinctness</li>
 <li><code>for-loop</code> implementations do not lend themselves to use with collections and other core Swift types.</li>
@@ -255,9 +255,9 @@ Introducti">
 <li>The semi-colon delimited declaration offers a steep learning curve from users arriving<br>from non C-like languages</li>
 <li>If the <code>for-loop</code> did not exist, I doubt it would be considered for inclusion in Swift 3.</li>
 </ol>
-<h2 id="Proposed_Approach">Proposed Approach</h2><p>I suggest that the for-loop be deprecated in Swift 2.x and removed entirely in Swift 3, with coverage removed from the Swift Programming Language to match the revisions in the current 2.2 update.</p>
-<h2 id="Alternatives_considered">Alternatives considered</h2><p>Not removing <code>for-loop</code> from Swift, losing the opportunity to streamline the language<br>and discard an unneeded control flow item.</p>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>A search of the Apple Swift codebase suggests this feature is rarely used. Community members of the Swift-Evolution mail list confirm that it does not feature in many pro-level apps and can be worked around for those few times when <code>for-loop</code>s do pop up. For example:</p>
+<h2 id="Proposed_Approach"><a href="#Proposed_Approach" class="headerlink" title="Proposed Approach"></a>Proposed Approach</h2><p>I suggest that the for-loop be deprecated in Swift 2.x and removed entirely in Swift 3, with coverage removed from the Swift Programming Language to match the revisions in the current 2.2 update.</p>
+<h2 id="Alternatives_considered"><a href="#Alternatives_considered" class="headerlink" title="Alternatives considered"></a>Alternatives considered</h2><p>Not removing <code>for-loop</code> from Swift, losing the opportunity to streamline the language<br>and discard an unneeded control flow item.</p>
+<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>A search of the Apple Swift codebase suggests this feature is rarely used. Community members of the Swift-Evolution mail list confirm that it does not feature in many pro-level apps and can be worked around for those few times when <code>for-loop</code>s do pop up. For example:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">char *blk_xor(char *dst, const char *src, size_t len)</span><br><span class="line">&#123;</span><br><span class="line"> const char *sp = src;</span><br><span class="line"> <span class="keyword">for</span> (char *dp = dst; sp - src &lt; len; sp++, dp++)</span><br><span class="line">   *dp ^= *sp;</span><br><span class="line"> <span class="keyword">return</span> dst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>versus</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">blk_xor</span><span class="params">(dst: UnsafeMutablePointer&lt;CChar&gt;, src:</span><br><span class="line">UnsafePointer&lt;CChar&gt;, len: Int)</span></span> -&gt; <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">CChar</span>&gt; &#123;</span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;len &#123;</span><br><span class="line">       dst[i] ^= src[i]</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> dst</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -266,7 +266,7 @@ Introducti">
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; i++ &#123;</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>and </p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">50</span>]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span> ; i &lt; array.<span class="built_in">count</span> ;i++)&#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">"array[i] <span class="subst">\(array[i])</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Community_Responses">Community Responses</h2><ul>
+<h2 id="Community_Responses"><a href="#Community_Responses" class="headerlink" title="Community Responses"></a>Community Responses</h2><ul>
 <li>“I am certainly open to considering dropping the C-style for loop.  IMO, it is a rarely used feature of Swift that doesn’t carry its weight.  Many of the reasons to remove them align with the rationale for removing – and ++. “ – Chris Lattner, clattner@apple.com</li>
 <li>“My intuition <em>completely</em> agrees that Swift no longer needs C-style for loops. We have richer, better-structured looping and functional algorithms. That said, one bit of data I’d like to see is how often C-style for loops are actually used in Swift. It’s something a quick crawl through Swift sources on GitHub could establish. If the feature feels anachronistic and is rarely used, it’s a good candidate for removal.” – Douglas Gregnor, dgregor@apple.com</li>
 <li>“Every time I’ve used a C-style for loop in Swift it was because I forgot that .indices existed. If it’s removed, a fixme pointing that direction might be useful.” – David Smith, david_smith@apple.com</li>
@@ -293,13 +293,13 @@ Introducti">
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/15/swift/README/" rel="prev">swift readme</a>
+              <a href="/2015/12/15/swift/proposals/0008-lazy-flatmap-for-optionals/" rel="prev">0008-lazy-flatmap-for-optionals</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/15/swift/proposals/0009-require-self-for-accessing-instance-members/" rel="next">0009-require-self-for-accessing-instance-members</a>
+              <a href="/2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/" rel="next">0006-apply-api-guidelines-to-the-standard-library</a>
             
           </div>
         </div>
@@ -365,7 +365,7 @@ Introducti">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -379,7 +379,7 @@ Introducti">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -445,7 +445,7 @@ Introducti">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

@@ -2,158 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-master/</loc>
-    <lastmod>2015-12-29T07:58:34.665Z</lastmod>
+    <loc>http://yoursite.com/2015/12/31/awesome-dotnet-master/</loc>
+    <lastmod>2015-12-29T09:22:48.601Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-rust-master/</loc>
-    <lastmod>2015-12-29T01:14:09.214Z</lastmod>
+    <loc>http://yoursite.com/2015/12/25/swift-cn/chapter1/03_revision_history/</loc>
+    <lastmod>2015-12-29T09:17:42.373Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-go-master/</loc>
-    <lastmod>2015-12-29T01:13:45.014Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-swift-master/</loc>
-    <lastmod>2015-12-29T01:13:36.719Z</lastmod>
+    <loc>http://yoursite.com/2015/12/25/swift-cn/chapter1/02_a_swift_tour/</loc>
+    <lastmod>2015-12-29T09:17:24.631Z</lastmod>
   </url>
   
   <url>
     <loc>http://yoursite.com/2015/12/31/awesome-ios-master/</loc>
-    <lastmod>2015-12-29T01:09:46.399Z</lastmod>
+    <lastmod>2015-12-29T08:29:40.660Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-dotnet-master/</loc>
-    <lastmod>2015-12-29T01:09:21.948Z</lastmod>
+    <loc>http://yoursite.com/2015/12/31/awesome-swift-master/</loc>
+    <lastmod>2015-12-29T08:29:36.531Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/31/awesome-go-master/</loc>
+    <lastmod>2015-12-29T08:29:32.514Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/31/awesome-rust-master/</loc>
+    <lastmod>2015-12-29T08:29:28.548Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/31/awesome-master/</loc>
+    <lastmod>2015-12-29T08:29:24.651Z</lastmod>
   </url>
   
   <url>
     <loc>http://yoursite.com/2015/12/31/jsdoc/</loc>
     <lastmod>2015-12-28T02:39:17.091Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/dotnet_realtime/</loc>
-    <lastmod>2015-12-21T03:25:05.578Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/unity_start/</loc>
-    <lastmod>2015-12-21T01:56:30.425Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/ios_push_cert/</loc>
-    <lastmod>2015-12-21T01:56:19.089Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/realtime_v2/</loc>
-    <lastmod>2015-12-21T01:51:27.552Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/faq/</loc>
-    <lastmod>2015-12-21T01:51:26.944Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/ios_os_x_guide/</loc>
-    <lastmod>2015-12-21T01:51:26.241Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/data_security/</loc>
-    <lastmod>2015-12-21T01:51:24.401Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/android_statistics/</loc>
-    <lastmod>2015-12-21T01:50:08.538Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/realtime_rest_api/</loc>
-    <lastmod>2015-12-21T01:35:16.150Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/wp_start/</loc>
-    <lastmod>2015-12-21T01:34:10.163Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/python_start/</loc>
-    <lastmod>2015-12-21T01:33:47.088Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/php_start/</loc>
-    <lastmod>2015-12-21T01:33:38.600Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/js_start/</loc>
-    <lastmod>2015-12-21T01:33:23.972Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/ios_statistics/</loc>
-    <lastmod>2015-12-18T10:25:15.451Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/ios_push_guide/</loc>
-    <lastmod>2015-12-18T10:24:54.855Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/ios_os_x_faq/</loc>
-    <lastmod>2015-12-18T10:24:21.548Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/ios_crashreporting_guide/</loc>
-    <lastmod>2015-12-18T10:24:12.068Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/error_code/</loc>
-    <lastmod>2015-12-18T10:23:52.853Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/dotnet_push_guide/</loc>
-    <lastmod>2015-12-18T10:23:17.705Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/dotnet_guide/</loc>
-    <lastmod>2015-12-18T10:23:08.806Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/cql_guide/</loc>
-    <lastmod>2015-12-18T10:22:50.498Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/cloud_code_faq/</loc>
-    <lastmod>2015-12-18T10:22:41.164Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/android_start/</loc>
-    <lastmod>2015-12-18T10:22:30.479Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/30/avos/android_faq/</loc>
-    <lastmod>2015-12-18T10:21:50.943Z</lastmod>
   </url>
   
   <url>
@@ -582,11 +472,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/softlayer/</loc>
-    <lastmod>2015-12-08T07:15:53.416Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2015/12/08/docker/installation/ubuntu/</loc>
     <lastmod>2015-12-08T07:15:45.274Z</lastmod>
   </url>
@@ -602,23 +487,8 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/google/</loc>
-    <lastmod>2015-12-08T07:10:42.799Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2015/12/08/docker/installation/debian/</loc>
     <lastmod>2015-12-08T07:09:45.088Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/azure/</loc>
-    <lastmod>2015-12-08T07:08:59.714Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/08/docker/installation/archlinux/</loc>
-    <lastmod>2015-12-08T07:08:48.043Z</lastmod>
   </url>
   
   <url>

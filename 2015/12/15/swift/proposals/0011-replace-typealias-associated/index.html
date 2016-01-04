@@ -237,20 +237,20 @@ IntroductionThe typealias ke">
       
 
       
-        <span itemprop="articleBody"><h1 id="Replace_typealias_keyword_with_associated_for_associated_type_declarations">Replace <code>typealias</code> keyword with <code>associated</code> for associated type declarations</h1><ul>
+        <span itemprop="articleBody"><h1 id="Replace_typealias_keyword_with_associated_for_associated_type_declarations"><a href="#Replace_typealias_keyword_with_associated_for_associated_type_declarations" class="headerlink" title="Replace typealias keyword with associated for associated type declarations"></a>Replace <code>typealias</code> keyword with <code>associated</code> for associated type declarations</h1><ul>
 <li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0011-replace-typealias-associated.md" target="_blank" rel="external">SE-0011</a></li>
 <li>Author(s): <a href="https://github.com/loiclec" target="_blank" rel="external">Loïc Lecrenier</a></li>
 <li>Status: <strong>Awaiting review</strong></li>
 <li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>The <code>typealias</code> keyword is currently used to declare two kinds of types:</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The <code>typealias</code> keyword is currently used to declare two kinds of types:</p>
 <ol>
 <li>Type Aliases (alternative name for an existing type)</li>
 <li>Associated Types (placeholder name to type used as part of a protocol)</li>
 </ol>
 <p>These two kinds of declarations are different and should use distinct keywords.<br>This would emphasize the difference between them and reduce some of the<br>confusion surrounding the use of associated types.</p>
 <p>The proposed new keyword is <code>associated</code>.</p>
-<h2 id="Motivation">Motivation</h2><p>Re-using <code>typealias</code> for associated type declarations is confusing in many ways.</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>Re-using <code>typealias</code> for associated type declarations is confusing in many ways.</p>
 <ol>
 <li>It is not obvious that <code>typealias</code> in protocols means something else than in<br>other places.</li>
 <li>It hides the existence of associated types to beginners, which allows them<br>to write code they misunderstand.</li>
@@ -263,7 +263,7 @@ IntroductionThe typealias ke">
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>declares <code>Element</code> as a type alias to <code>Container.Generator.Element</code>.</p>
 <p>These subtleties of the language currently require careful consideration to<br>understand.</p>
-<h2 id="Proposed_solution">Proposed solution</h2><p>For declaring associated types, replace the <code>typealias</code> keyword with <code>associated</code>.</p>
+<h2 id="Proposed_solution"><a href="#Proposed_solution" class="headerlink" title="Proposed solution"></a>Proposed solution</h2><p>For declaring associated types, replace the <code>typealias</code> keyword with <code>associated</code>.</p>
 <p>This solves the issues mentioned above:</p>
 <ol>
 <li><code>typealias</code> can now only be used for type aliases declaration.</li>
@@ -274,9 +274,9 @@ IntroductionThe typealias ke">
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    associated <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span> <span class="comment">// error: cannot declare type alias inside protocol, use protocol extension instead</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    associated <span class="type">Container</span> : <span class="type">SequenceType</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Prot</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Element</span> = <span class="type">Container</span>.<span class="type">Generator</span>.<span class="type">Element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Alternative keywords considered: <code>withtype</code>, <code>associatedtype</code>, <code>typeassociation</code>, <code>type</code></p>
-<h2 id="Proposed_Approach">Proposed Approach</h2><p>For declaring associated types, I suggest adding <code>associated</code> and deprecating<br><code>typealias</code> in Swift 2.2, and removing <code>typealias</code> entirely in Swift 3.</p>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>As it simply replaces one keyword for another, the transition to <code>associated</code><br>could be easily automated without any risk of breaking existing code.</p>
-<h2 id="Community_Responses">Community Responses</h2><ul>
+<h2 id="Proposed_Approach"><a href="#Proposed_Approach" class="headerlink" title="Proposed Approach"></a>Proposed Approach</h2><p>For declaring associated types, I suggest adding <code>associated</code> and deprecating<br><code>typealias</code> in Swift 2.2, and removing <code>typealias</code> entirely in Swift 3.</p>
+<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>As it simply replaces one keyword for another, the transition to <code>associated</code><br>could be easily automated without any risk of breaking existing code.</p>
+<h2 id="Community_Responses"><a href="#Community_Responses" class="headerlink" title="Community Responses"></a>Community Responses</h2><ul>
 <li>“I think this is a great idea; re-using typealias for associated types was a mistake.” -John McCall</li>
 <li>“Agreed.” -Chris Lattner</li>
 <li>“+1 to the proposal, emphasizing the distinction is important; and I<br>like “associated” as the keyword for this purpose, too.” -Dmitri Gribenko</li>
@@ -299,13 +299,13 @@ IntroductionThe typealias ke">
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/" rel="prev">0010-add-staticstring-unicodescalarview</a>
+              <a href="/2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/" rel="prev">0012-add-noescape-to-public-library-api</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/" rel="next">0012-add-noescape-to-public-library-api</a>
+              <a href="/2015/12/15/swift/proposals/0010-add-staticstring-unicodescalarview/" rel="next">0010-add-staticstring-unicodescalarview</a>
             
           </div>
         </div>
@@ -371,7 +371,7 @@ IntroductionThe typealias ke">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -385,7 +385,7 @@ IntroductionThe typealias ke">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -451,7 +451,7 @@ IntroductionThe typealias ke">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

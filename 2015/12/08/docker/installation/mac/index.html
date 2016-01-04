@@ -244,7 +244,7 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="Mac_OS_X_安装_Docker">Mac OS X 安装 Docker</h1><blockquote>
+        <span itemprop="articleBody"><h1 id="Mac_OS_X__u5B89_u88C5_Docker"><a href="#Mac_OS_X__u5B89_u88C5_Docker" class="headerlink" title="Mac OS X 安装 Docker"></a>Mac OS X 安装 Docker</h1><blockquote>
 <p>注意：<br>该 Docker 版本为了支持 Docker 机,于是不再支持 Boot2Docker 命令行。使用 Docker Toolbox 和其它 Docker 工具来安装 Docker 机。</p>
 </blockquote>
 <p>您可以利用 Docker Toolbox 来安装 Docker。Docker Toolbox 提供了以下工具：</p>
@@ -332,7 +332,7 @@
 <p>$ docker-machine ls<br>NAME                ACTIVE   DRIVER       STATE     URL                         SWARM<br>default             *        virtualbox   Running   tcp://192.168.99.101:2376  </p>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   如果您之前安装了现在已经舍弃了的 Boot2Docker 这个应用程序的话或者您运行了 Docker 快速入门终端，在列表中还会有一个 <span class="escape">`d</span>ev<span class="escape">` </span>虚拟机。当   您创建 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的时候，<span class="escape">`d</span>ocker-machine<span class="escape">` </span>命令给出了一些指导，以便您您连接虚拟机。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 获取 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的环境变量</span><br></pre></td></tr></table></figure>
 <p>$ docker-machine env default<br>export DOCKER_TLS_VERIFY=”1”<br>export DOCKER_HOST=”tcp://192.168.99.101:2376”<br>export DOCKER_CERT_PATH=”/Users/mary/.docker/machine/machines/default”<br>export DOCKER_MACHINE_NAME=”default”</p>
-<h1 id="Run_this_command_to_configure_your_shell:">Run this command to configure your shell:</h1><h1 id="eval_“$(docker-machine_env_default)”">eval “$(docker-machine env default)”</h1><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">4</span>. 连接到 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机</span><br></pre></td></tr></table></figure>
+<h1 id="Run_this_command_to_configure_your_shell_3A"><a href="#Run_this_command_to_configure_your_shell_3A" class="headerlink" title="Run this command to configure your shell:"></a>Run this command to configure your shell:</h1><h1 id="eval__u201C_24_28docker-machine_env_default_29_u201D"><a href="#eval__u201C_24_28docker-machine_env_default_29_u201D" class="headerlink" title="eval “$(docker-machine env default)”"></a>eval “$(docker-machine env default)”</h1><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">4</span>. 连接到 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机</span><br></pre></td></tr></table></figure>
 <p>$ eval “$(docker-machine env default)”</p>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">5</span>. 运行 <span class="escape">`h</span>ello-world<span class="escape">` </span>container 来验证您的安装是否已经成功。</span><br></pre></td></tr></table></figure>
 <p>docker run hello-world</p>
@@ -430,75 +430,75 @@
 <p>##Mac OS X 上 Docker 的实例<br>通过了解本小节，您可以尝试在虚拟机上进行一些可行的 container 任务。现在，您应该有一台运行着的虚拟机，且通过 shell 脚本可以连接到该虚拟机。为了验证上面所说的，可以执行如下命令来验证:</p>
 <pre><code>$ docker-machine ls
 NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-<span class="keyword">default</span>             *        virtualbox   Running   <span class="string">tcp:</span><span class="comment">//192.168.99.100:2376   </span>
+default             *        virtualbox   Running   tcp://192.168.99.100:2376   
 </code></pre><p>该台处于 <code>ACTIVE</code> 状态的虚拟机，即本例中的 default 虚拟机，就是您的环境所指向的虚拟机。</p>
 <p>###访问 container 的端口</p>
 <ol>
 <li><p>在 DOCKER_HOST 上开启一个NGINX container。</p>
-<pre><code>$ docker <span class="command">run</span> -d -P <span class="comment">--name web nginx</span>
+<pre><code>$ docker run -d -P --name web nginx
 </code></pre><p>一般来说，<code>docker run</code> 命令会开启一个 container，并运行它，最后关闭它。加上 <code>-d</code> 这个参数，container 就可以在您执行了 <code>docker run</code> 这条命令后继续在后台运行了。加上 <code>-P</code> 这个参数就可以将 container 监听的那个端口告知给 Docker Host；这样您就可以在您的 Mac 机上访问 container 了。</p>
 </li>
 <li><p>执行 <code>docker ps</code> 命令，查看运行着的 container</p>
 <pre><code>CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
-<span class="number">5f</span>b65ff765e9        nginx:latest  
+5fb65ff765e9        nginx:latest  
 </code></pre><p>此时，您会发现 <code>nginx</code> 依然在后台运行。</p>
 </li>
 <li><p>查看 container 的端口</p>
 <pre><code>$ docker port web
-<span class="number">443</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49156</span>
-<span class="number">80</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49157</span>
+443/tcp -&gt; 0.0.0.0:49156
+80/tcp -&gt; 0.0.0.0:49157
 </code></pre><p>该命令显示出的内容会告诉你 <code>web</code> container 的 <code>80</code> 端口已经映射到了 Docker Host 上的 <code>49157</code> 端口上。</p>
 </li>
 <li><p>在您的浏览器中输入地址 <code>http://localhost:49157</code>（localhost 就是 0.0.0.0）。</p>
 <p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/bad_host1.png" alt="bad_host1"><br>并没有生效，其原因就是 <code>DOCKER_HOST</code> 的地址并不是你本地的机器的地址（0.0.0.0），而是您的 Docker 虚拟机的地址。</p>
 </li>
 <li><p>获取 Docker 虚拟机（即 <code>default</code>）的地址。</p>
-<pre><code>$ docker-machine ip <span class="keyword">default</span>
-<span class="number">192.168</span><span class="number">.59</span><span class="number">.103</span>
+<pre><code>$ docker-machine ip default
+192.168.59.103
 </code></pre></li>
 <li><p>在您的浏览器中输入地址 <code>http://192.168.59.103:49157</code></p>
 <p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/good_host1.png" alt="good_host1"><br>成功了！</p>
 </li>
 <li><p>如果您想停止并删除正在运行的 <code>nginx</code> container 的话，请执行如下操作：</p>
-<pre><code><span class="variable">$ </span>docker stop web
-<span class="variable">$ </span>docker rm web
+<pre><code>$ docker stop web
+$ docker rm web
 </code></pre></li>
 </ol>
 <p>###为容器挂载一个卷</p>
 <p>当您开启一个 container 的时候，系统会自动将您本机中的 <code>/Users/username</code> 目录共享给 Docker 虚拟机。通过本次共享，您可以将该目录挂载到您的 container 上。下面的内容将会介绍如何做到这些。</p>
 <ol>
 <li><p>跳转到您的用户 <code>$HOME</code> 目录下。</p>
-<pre><code>$ cd <span class="variable">$HOME</span>
+<pre><code>$ cd $HOME
 </code></pre></li>
 <li><p>创建一个新的 <code>site</code> 目录。</p>
-<pre><code><span class="variable">$ </span>mkdir site
+<pre><code>$ mkdir site
 </code></pre></li>
 <li><p>跳转到 <code>site</code> 目录中。</p>
-<pre><code>$ <span class="built_in">cd</span> site
+<pre><code>$ cd site
 </code></pre></li>
 <li><p>创建一个新的 <code>index.html</code> 文件。</p>
-<pre><code>$ <span class="keyword">echo</span> <span class="string">"my new site"</span> &gt; <span class="built_in">index</span>.html
+<pre><code>$ echo &quot;my new site&quot; &gt; index.html
 </code></pre></li>
 <li><p>开启一个新 <code>nginx</code> container 并将 <code>html</code> 目录替换为 <code>site</code> 目录。</p>
-<pre><code>$ docker run -d -P -v <span class="variable">$HOME</span>/site:/usr/share/nginx/html --name mysite nginx
+<pre><code>$ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
 </code></pre></li>
 <li><p>获取到 <code>mysite</code> 这个 container 的端口。</p>
 <pre><code>$ docker port mysite
-<span class="number">80</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49166</span>
-<span class="number">443</span>/tcp -&gt; <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49165</span>
+80/tcp -&gt; 0.0.0.0:49166
+443/tcp -&gt; 0.0.0.0:49165
 </code></pre></li>
 <li><p>在浏览器中输入地址：</p>
 <p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/newsite_view1.png" alt="newsite_view1"></p>
 </li>
 <li><p>立即添加一个文件到 <code>$HOME/siet</code> 目录下。</p>
-<pre><code>$ <span class="built_in">echo</span> <span class="string">"This is cool"</span> &gt; cool.html
+<pre><code>$ echo &quot;This is cool&quot; &gt; cool.html
 </code></pre></li>
 <li><p>在浏览器中输入地址：</p>
 <p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/cool_view1.png" alt="cool_view1"></p>
 </li>
 <li><p>停止然后删除正在运行的 <code>mysite</code> container。</p>
-<pre><code><span class="variable">$ </span>docker stop mysite
-<span class="variable">$ </span>docker rm mysite
+<pre><code>$ docker stop mysite
+$ docker rm mysite
 </code></pre></li>
 </ol>
 <p>##更新 Docker Toolbox</p>
@@ -509,19 +509,19 @@ NAME                ACTIVE   DRIVER       STATE     URL                         
 <li><p>列出所有的虚拟机</p>
 <pre><code>$ docker-machine ls
 NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-dev                 *        virtualbox   Running   <span class="string">tcp:</span><span class="comment">//192.168.99.100:2376   </span>
+dev                 *        virtualbox   Running   tcp://192.168.99.100:2376   
 my-docker-machine            virtualbox   Stopped                               
-<span class="keyword">default</span>                      virtualbox   Stopped  
+default                      virtualbox   Stopped  
 </code></pre></li>
 <li><p>删除（列出的）每一台虚拟机.</p>
-<pre><code>$ docker-machine rm <span class="built_in">dev</span>
-Successfully removed <span class="built_in">dev</span>
+<pre><code>$ docker-machine rm dev
+Successfully removed dev
 </code></pre><p>删除一台虚拟机，意味着从<code>VirtualBox</code>和<code>~/.docker/machine/machines</code>目录中同时删除虚拟机文件。 </p>
 </li>
 <li><p>从“应用程序“文件夹中删除Docker快捷终端（Quickstart Terminal）和Kitematic.</p>
 </li>
 <li><p>从/usr/local/bin文件夹中删除docker, docker-compose和 docker-machine命令文件.</p>
-<pre><code>$ rm <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>docker
+<pre><code>$ rm /usr/local/bin/docker
 </code></pre></li>
 <li><p>从系统中删除 <code>~/.docker</code> 文件夹.</p>
 </li>
@@ -545,13 +545,13 @@ Successfully removed <span class="built_in">dev</span>
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/08/docker/installation/opensuse/" rel="prev">openSUSE 安装 Docker</a>
+              <a href="/2015/12/08/docker/installation/debian/" rel="prev">Debian支持 Docker</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/installation/google/" rel="next">Google Cloud Platform版本的</a>
+              <a href="/2015/12/08/docker/installation/opensuse/" rel="next">openSUSE 安装 Docker</a>
             
           </div>
         </div>
@@ -617,7 +617,7 @@ Successfully removed <span class="built_in">dev</span>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -631,7 +631,7 @@ Successfully removed <span class="built_in">dev</span>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -680,7 +680,7 @@ Successfully removed <span class="built_in">dev</span>
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac_OS_X_安装_Docker"><span class="nav-number">1.</span> <span class="nav-text">Mac OS X 安装 Docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Run_this_command_to_configure_your_shell:"><span class="nav-number">2.</span> <span class="nav-text">Run this command to configure your shell:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#eval_“$(docker-machine_env_default)”"><span class="nav-number">3.</span> <span class="nav-text">eval “$(docker-machine env default)”</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac_OS_X__u5B89_u88C5_Docker"><span class="nav-number">1.</span> <span class="nav-text">Mac OS X 安装 Docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Run_this_command_to_configure_your_shell_3A"><span class="nav-number">2.</span> <span class="nav-text">Run this command to configure your shell:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#eval__u201C_24_28docker-machine_env_default_29_u201D"><span class="nav-number">3.</span> <span class="nav-text">eval “$(docker-machine env default)”</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -697,7 +697,7 @@ Successfully removed <span class="built_in">dev</span>
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

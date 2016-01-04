@@ -237,45 +237,45 @@ E">
       
 
       
-        <span itemprop="articleBody"><h1 id="在Docker中运行Reids服务">在Docker中运行Reids服务</h1><p>非常简单，没有任何修饰，redis是使用一个连接附加到一个web应用程序。</p>
+        <span itemprop="articleBody"><h1 id="u5728Docker_u4E2D_u8FD0_u884CReids_u670D_u52A1"><a href="#u5728Docker_u4E2D_u8FD0_u884CReids_u670D_u52A1" class="headerlink" title="在Docker中运行Reids服务"></a>在Docker中运行Reids服务</h1><p>非常简单，没有任何修饰，redis是使用一个连接附加到一个web应用程序。</p>
 <p>##创建一个redis docker容器</p>
 <p>首先，我们先为redis创建一个Dockerfile</p>
-<pre><code><span class="built_in">FROM</span>        ubuntu:<span class="number">12.10</span>
+<pre><code>FROM        ubuntu:12.10
 RUN         apt-get update
-<span class="built_in">RUN</span>         <span class="bash">apt-get -y install redis-server
-</span><span class="built_in">EXPOSE</span>      <span class="number">6379</span>
-ENTRYPOINT  [<span class="string">"/usr/bin/redis-server"</span>]
+RUN         apt-get -y install redis-server
+EXPOSE      6379
+ENTRYPOINT  [&quot;/usr/bin/redis-server&quot;]
 </code></pre><p>现在你需要通过Dockerfile创建一个镜像，将<your username="">替换成你自己的名字。</your></p>
-<pre><code><span class="label">sudo</span> docker <span class="keyword">build </span>-t &lt;your username&gt;/redis .
+<pre><code>sudo docker build -t &lt;your username&gt;/redis .
 </code></pre><p>##运行服务</p>
 <p>使用我们刚才创建的redis镜像</p>
 <p>使用 -d 运行这个服务分离模式，让容器在后台运行。</p>
 <p>重要的是我们没有开放容器端口，相反，我们将使用一个容器来连接redis容器数据库</p>
-<pre><code>sudo docker <span class="command">run</span> -<span class="property">name</span> redis -d &lt;your username&gt;/redis
+<pre><code>sudo docker run -name redis -d &lt;your username&gt;/redis
 </code></pre><p>##创建你的web应用容器</p>
 <p>现在我们可以创建我们的应用程序容器，我们使用-link参数来创建一个连接redis容器，我们使用别名db,这将会在redis容器和redis实例容器中创建一个安全的通信隧道</p>
-<pre><code>sudo docker run -link <span class="string">redis:</span>db -i -t <span class="string">ubuntu:</span><span class="number">12.10</span> <span class="regexp">/bin/</span>bash
+<pre><code>sudo docker run -link redis:db -i -t ubuntu:12.10 /bin/bash
 </code></pre><p>进入我们刚才创建的容器，我们需要安装redis的redis-cli的二进制包来测试连接</p>
-<pre><code>apt-get <span class="operator"><span class="keyword">update</span>
-apt-<span class="keyword">get</span> -y <span class="keyword">install</span> redis-<span class="keyword">server</span>
-service redis-<span class="keyword">server</span> <span class="keyword">stop</span></span>
+<pre><code>apt-get update
+apt-get -y install redis-server
+service redis-server stop
 </code></pre><p>现在我们可以测试连接，首先我么要先查看下web应用程序容器的环境变量，我们可以用我们的ip和端口来连接redis容器</p>
 <pre><code>env
 . . .
-<span class="constant">DB_NAME</span>=/violet_wolf/db
-<span class="constant">DB_PORT_6379_TCP_PORT</span>=<span class="number">6379</span>
-<span class="constant">DB_PORT</span>=tcp:<span class="comment">//172.17.0.33:6379</span>
-<span class="constant">DB_PORT_6379_TCP</span>=tcp:<span class="comment">//172.17.0.33:6379</span>
-<span class="constant">DB_PORT_6379_TCP_ADDR</span>=<span class="number">172.17</span>.<span class="number">0.33</span>
-<span class="constant">DB_PORT_6379_TCP_PROTO</span>=tcp
+DB_NAME=/violet_wolf/db
+DB_PORT_6379_TCP_PORT=6379
+DB_PORT=tcp://172.17.0.33:6379
+DB_PORT_6379_TCP=tcp://172.17.0.33:6379
+DB_PORT_6379_TCP_ADDR=172.17.0.33
+DB_PORT_6379_TCP_PROTO=tcp
 </code></pre><p>我们可以看到我们有一个DB为前缀的环境变量列表，DB来自指定别名连接我们的现在的容器，让我们使用DB_PORT_6379_TCP_ADDR变量连接到Redis容器。</p>
 <pre><code>redis-cli -h $DB_PORT_6379_TCP_ADDR
-redis <span class="number">172.17</span><span class="number">.0</span><span class="number">.33</span>:<span class="number">6379</span>&gt;
-redis <span class="number">172.17</span><span class="number">.0</span><span class="number">.33</span>:<span class="number">6379</span>&gt; <span class="built_in">set</span> docker awesome
+redis 172.17.0.33:6379&gt;
+redis 172.17.0.33:6379&gt; set docker awesome
 OK
-redis <span class="number">172.17</span><span class="number">.0</span><span class="number">.33</span>:<span class="number">6379</span>&gt; get docker
-<span class="string">"awesome"</span>
-redis <span class="number">172.17</span><span class="number">.0</span><span class="number">.33</span>:<span class="number">6379</span>&gt; <span class="built_in">exit</span>
+redis 172.17.0.33:6379&gt; get docker
+&quot;awesome&quot;
+redis 172.17.0.33:6379&gt; exit
 </code></pre><p>我们可以很容易的使用这个或者其他环境变量在我们的web应用程序容器上连接到redis容器</p>
 </span>
       
@@ -294,13 +294,13 @@ redis <span class="number">172.17</span><span class="number">.0</span><span clas
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/08/docker/installation/debian/" rel="prev">Debian支持 Docker</a>
+              <a href="/2015/12/08/docker/examples/postgresql_service/" rel="prev">在Docker中运行PostgreSQL</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/08/free-programming-books-zh/" rel="next">BOOK目录</a>
+              <a href="/2015/12/08/docker/examples/couchdb_data_volumes/" rel="next">Docker中运行CouchDB服务</a>
             
           </div>
         </div>
@@ -366,7 +366,7 @@ redis <span class="number">172.17</span><span class="number">.0</span><span clas
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -380,7 +380,7 @@ redis <span class="number">172.17</span><span class="number">.0</span><span clas
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -429,7 +429,7 @@ redis <span class="number">172.17</span><span class="number">.0</span><span clas
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在Docker中运行Reids服务"><span class="nav-number">1.</span> <span class="nav-text">在Docker中运行Reids服务</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5728Docker_u4E2D_u8FD0_u884CReids_u670D_u52A1"><span class="nav-number">1.</span> <span class="nav-text">在Docker中运行Reids服务</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -446,7 +446,7 @@ redis <span class="number">172.17</span><span class="number">.0</span><span clas
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

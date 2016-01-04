@@ -222,16 +222,16 @@ This repositor">
       
 
       
-        <span itemprop="articleBody"><h1 id="Swift_Programming_Language_Evolution">Swift Programming Language Evolution</h1><p><strong>Before you initiate a pull request</strong>, please read the process document. Ideas should be thoroughly discussed on the <a href="https://swift.org/community/#swift-evolution" target="_blank" rel="external">swift-evolution mailing list</a> first.</p>
+        <span itemprop="articleBody"><h1 id="Swift_Programming_Language_Evolution"><a href="#Swift_Programming_Language_Evolution" class="headerlink" title="Swift Programming Language Evolution"></a>Swift Programming Language Evolution</h1><p><strong>Before you initiate a pull request</strong>, please read the process document. Ideas should be thoroughly discussed on the <a href="https://swift.org/community/#swift-evolution" target="_blank" rel="external">swift-evolution mailing list</a> first.</p>
 <p>This repository tracks the ongoing evolution of Swift. It contains:</p>
 <ul>
 <li>Goals for upcoming Swift releases (this document)</li>
-<li>The <a href="schedule.md">Swift evolution review schedule</a> tracking proposals to change Swift</li>
-<li>The <a href="process.md">Swift evolution process</a> that governs the evolution of Swift.</li>
+<li>The <a href="/schedule.md">Swift evolution review schedule</a> tracking proposals to change Swift</li>
+<li>The <a href="/process.md">Swift evolution process</a> that governs the evolution of Swift.</li>
 </ul>
 <p>This document describes goals for the Swift language on a per-release<br>basis, usually listing minor releases adding to the currently shipping<br>version and one major release out.  Each release will have many<br>smaller features or changes independent of these larger goals, and not<br>all goals are reached for each release.</p>
 <p>Goals for past versions are included at the bottom of the document for<br>historical purposes, but are not necessarily indicative of the<br>features shipped. The release notes for each shipped version are the<br>definitive list of notable changes in each release.</p>
-<h2 id="Development_major_version:_Swift_3-0">Development major version:  Swift 3.0</h2><p>Expected release date: Fall 2016</p>
+<h2 id="Development_major_version_3A_Swift_3-0"><a href="#Development_major_version_3A_Swift_3-0" class="headerlink" title="Development major version:  Swift 3.0"></a>Development major version:  Swift 3.0</h2><p>Expected release date: Fall 2016</p>
 <p>The primary goal of this release is to stabilize the binary interface<br>of the language and standard library. As part of this process, we will<br>focus and refine the language to provide better overall consistency in<br>feel and implementation. Swift 3.0 will contain <em>source-breaking</em><br>changes from Swift 2.x where necessary to support these goals. More<br>concretely, this release is focused on several key areas:</p>
 <ul>
 <li><strong>Stable ABI</strong>: Stabilize the binary interface (ABI) to guarantee a level of binary compatibility moving forward. This involves finalizing runtime data structures, name mangling, calling conventions, and so on, as well as finalizing some of the details of the language itself that have an impact on its ABI. Stabilizing the ABI also extends to the Standard Library, its data types, and core algorithms. Successful ABI stabilization means that applications and libraries compiled with future versions of Swift can interact at a binary level with applications and libraries compiled with Swift 3.0, even if the source language changes.</li>
@@ -245,9 +245,9 @@ This repositor">
 <li><strong>Type system cleanup and documentation</strong>: Revisit and document the various subtyping and conversion rules in the type system, as well as their implementation in the compiler’s type checker. The intent is to converge on a smaller, simpler type system that is more rigorously defined and more faithfully represented by the type checker.</li>
 <li><strong>Complete generics</strong>: Generics are used pervasively in a number of Swift libraries, especially the standard library. However, there are a number of generics features the standard library requires to fully realize its vision, including recursive protocol constraints, the ability to make a constrained extension conform to a new protocol (i.e., an array of <code>Equatable</code> elements is <code>Equatable</code>), and so on. Swift 3.0 should provide those generics features needed by the standard library, because they affect the standard library’s ABI.</li>
 <li><strong>Focus and refine the language</strong>: Despite being a relatively young language, Swift’s rapid development has meant that it has accumulated some language features and library APIs that don’t fit well with the language as a whole. Swift 3 will remove or improve those features to provide better overall consistency for Swift.</li>
-<li><strong>API design guidelines</strong>: The way in which Swift is used in popular<br>libraries has almost as much of an effect on the character of Swift<br>code as the Swift language itself. The <a href="https://swift.org/documentation/api-design-guidelines.html" target="_blank" rel="external">API design<br>guidelines</a> provide guidance for<br>building great Swift APIs. For Swift 3.0, the Swift standard library<br>and core libraries are being updated to match these guidelines, and<br>Swift’s Objective-C importer will <a href="proposals/0005-objective-c-name-translation.md">automatically map</a> from the <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" target="_blank" rel="external">Cocoa guidelines for<br>Objective-C</a><br>to the Swift API guidelines.</li>
+<li><strong>API design guidelines</strong>: The way in which Swift is used in popular<br>libraries has almost as much of an effect on the character of Swift<br>code as the Swift language itself. The <a href="https://swift.org/documentation/api-design-guidelines.html" target="_blank" rel="external">API design<br>guidelines</a> provide guidance for<br>building great Swift APIs. For Swift 3.0, the Swift standard library<br>and core libraries are being updated to match these guidelines, and<br>Swift’s Objective-C importer will <a href="/proposals/0005-objective-c-name-translation.md">automatically map</a> from the <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" target="_blank" rel="external">Cocoa guidelines for<br>Objective-C</a><br>to the Swift API guidelines.</li>
 </ul>
-<h3 id="Out_of_Scope">Out of Scope</h3><p>A significant part of delivering a major release is in deciding what<br><em>not</em> to do, which means deferring many good ideas. The following is a<br>sampling of potentially good ideas that are not in scope for Swift<br>3.0:</p>
+<h3 id="Out_of_Scope"><a href="#Out_of_Scope" class="headerlink" title="Out of Scope"></a>Out of Scope</h3><p>A significant part of delivering a major release is in deciding what<br><em>not</em> to do, which means deferring many good ideas. The following is a<br>sampling of potentially good ideas that are not in scope for Swift<br>3.0:</p>
 <ul>
 <li><p><strong>Full source compatibility</strong>: Swift 3.0 will not provide full<br>source compatibility. Rather, it can and will introduce<br>source-breaking changes needed to support the main goals of Swift<br>3.0.</p>
 </li>
@@ -261,17 +261,17 @@ This repositor">
 <p>On the other hand, major new libraries (e.g. a new Logging subsystem) are<br>best developed as independent projects on GitHub (or elsewhere) and organized<br>with the Swift Package Manager.  Beyond Swift 3 we may consider standardizing<br>popular packages or expanding the scope of the project.  </p>
 </li>
 </ul>
-<h3 id="Accepted_proposals_for_Swift_3-0">Accepted proposals for Swift 3.0</h3><ul>
-<li><a href="proposals/0005-objective-c-name-translation.md">Better Translation of Objective-C APIs Into Swift</a></li>
-<li><a href="proposals/0002-remove-currying.md">Removing currying <code>func</code> declaration syntax</a></li>
-<li><a href="proposals/0003-remove-var-parameters-patterns.md">Removing <code>var</code> from Function Parameters and Pattern Matching</a></li>
-<li><a href="proposals/0004-remove-pre-post-inc-decrement.md">Remove the <code>++</code> and <code>--</code> operators</a></li>
-<li><a href="proposals/0007-remove-c-style-for-loops.md">Remove C-style for-loops with conditions and incrementers</a></li>
+<h3 id="Accepted_proposals_for_Swift_3-0"><a href="#Accepted_proposals_for_Swift_3-0" class="headerlink" title="Accepted proposals for Swift 3.0"></a>Accepted proposals for Swift 3.0</h3><ul>
+<li><a href="/proposals/0005-objective-c-name-translation.md">Better Translation of Objective-C APIs Into Swift</a></li>
+<li><a href="/proposals/0002-remove-currying.md">Removing currying <code>func</code> declaration syntax</a></li>
+<li><a href="/proposals/0003-remove-var-parameters-patterns.md">Removing <code>var</code> from Function Parameters and Pattern Matching</a></li>
+<li><a href="/proposals/0004-remove-pre-post-inc-decrement.md">Remove the <code>++</code> and <code>--</code> operators</a></li>
+<li><a href="/proposals/0007-remove-c-style-for-loops.md">Remove C-style for-loops with conditions and incrementers</a></li>
 </ul>
-<h2 id="Development_minor_version:_Swift_2-2">Development minor version:  Swift 2.2</h2><p>Expected release date: Spring 2016</p>
+<h2 id="Development_minor_version_3A_Swift_2-2"><a href="#Development_minor_version_3A_Swift_2-2" class="headerlink" title="Development minor version:  Swift 2.2"></a>Development minor version:  Swift 2.2</h2><p>Expected release date: Spring 2016</p>
 <p>This release will focus on fixing bugs, improving<br>quality-of-implementation (QoI) with better warnings and diagnostics,<br>improving compile times, and improving performance.  It may also put<br>some finishing touches on features introduced in Swift 2.0, and<br>include some small additive features that don’t break Swift code or<br>fundamentally change the way Swift is used. As a step toward Swift<br>3.0, it will introduce warnings about upcoming source-incompatible<br>changes in Swift 3.0 so that users can begin migrating their code<br>sooner.</p>
-<h3 id="Accepted_proposals_for_Swift_2-2">Accepted proposals for Swift 2.2</h3><ul>
-<li><a href="proposals/0001-keywords-as-argument-labels.md">Allow (most) keywords as argument labels</a></li>
+<h3 id="Accepted_proposals_for_Swift_2-2"><a href="#Accepted_proposals_for_Swift_2-2" class="headerlink" title="Accepted proposals for Swift 2.2"></a>Accepted proposals for Swift 2.2</h3><ul>
+<li><a href="/proposals/0001-keywords-as-argument-labels.md">Allow (most) keywords as argument labels</a></li>
 </ul>
 </span>
       
@@ -296,7 +296,7 @@ This repositor">
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/15/swift/proposals/0007-remove-c-style-for-loops/" rel="next">0007-remove-c-style-for-loops</a>
+              <a href="/2015/12/15/swift/schedule/" rel="next">swift schedule</a>
             
           </div>
         </div>
@@ -362,7 +362,7 @@ This repositor">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -376,7 +376,7 @@ This repositor">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -425,7 +425,7 @@ This repositor">
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift_Programming_Language_Evolution"><span class="nav-number">1.</span> <span class="nav-text">Swift Programming Language Evolution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Development_major_version:_Swift_3-0"><span class="nav-number">1.1.</span> <span class="nav-text">Development major version:  Swift 3.0</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Out_of_Scope"><span class="nav-number">1.1.1.</span> <span class="nav-text">Out of Scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accepted_proposals_for_Swift_3-0"><span class="nav-number">1.1.2.</span> <span class="nav-text">Accepted proposals for Swift 3.0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Development_minor_version:_Swift_2-2"><span class="nav-number">1.2.</span> <span class="nav-text">Development minor version:  Swift 2.2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Accepted_proposals_for_Swift_2-2"><span class="nav-number">1.2.1.</span> <span class="nav-text">Accepted proposals for Swift 2.2</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift_Programming_Language_Evolution"><span class="nav-number">1.</span> <span class="nav-text">Swift Programming Language Evolution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Development_major_version_3A_Swift_3-0"><span class="nav-number">1.1.</span> <span class="nav-text">Development major version:  Swift 3.0</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Out_of_Scope"><span class="nav-number">1.1.1.</span> <span class="nav-text">Out of Scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accepted_proposals_for_Swift_3-0"><span class="nav-number">1.1.2.</span> <span class="nav-text">Accepted proposals for Swift 3.0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Development_minor_version_3A_Swift_2-2"><span class="nav-number">1.2.</span> <span class="nav-text">Development minor version:  Swift 2.2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Accepted_proposals_for_Swift_2-2"><span class="nav-number">1.2.1.</span> <span class="nav-text">Accepted proposals for Swift 2.2</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -442,7 +442,7 @@ This repositor">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

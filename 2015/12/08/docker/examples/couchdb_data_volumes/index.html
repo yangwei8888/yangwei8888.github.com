@@ -237,25 +237,25 @@ COUCH1=$(sudo docker run -d -p 5984 -v /var/">
       
 
       
-        <span itemprop="articleBody"><h1 id="Docker中运行CouchDB服务">Docker中运行CouchDB服务</h1><blockquote>
-<p>注：如果你不喜欢使用sudo，你可以查看<a href="../installation/binaries.md">这里非root用户运行</a></p>
+        <span itemprop="articleBody"><h1 id="Docker_u4E2D_u8FD0_u884CCouchDB_u670D_u52A1"><a href="#Docker_u4E2D_u8FD0_u884CCouchDB_u670D_u52A1" class="headerlink" title="Docker中运行CouchDB服务"></a>Docker中运行CouchDB服务</h1><blockquote>
+<p>注：如果你不喜欢使用sudo，你可以查看<a href="/../installation/binaries.md">这里非root用户运行</a></p>
 </blockquote>
 <p>这里有一个例子，使用数据卷在两个CouchDb之间共享相同的数据容器，这个可以用于热升级，测试不同版本的CouchDB数据等等。</p>
 <p>##创建第一个数据库</p>
 <p>现在我们创建/var/lib/couchdb作为数据卷</p>
-<pre><code><span class="constant">COUCH1</span>=<span class="variable">$(</span>sudo docker run -d -p <span class="number">5984</span> -v /var/<span class="class"><span class="keyword">lib</span>/<span class="title">couchdb</span> <span class="title">shykes</span>/<span class="title">couchdb</span>:2013-05-03)</span>
+<pre><code>COUCH1=$(sudo docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
 </code></pre><p>##添加一条数据在第一个数据库中</p>
 <p>我们假设你的docker主机默认是本地localhost.如果不是localhost请换到你docker的公共IP</p>
 <pre><code>HOST=localhost
-URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class="variable">$(sudo docker port $COUCH1 5984 | grep -Po '\d+$')</span>/_utils/"</span>
-<span class="built_in">echo</span> <span class="string">"Navigate to <span class="variable">$URL</span> in your browser, and use the couch interface to add data"</span>
+URL=&quot;http://$HOST:$(sudo docker port $COUCH1 5984 | grep -Po &apos;\d+$&apos;)/_utils/&quot;
+echo &quot;Navigate to $URL in your browser, and use the couch interface to add data&quot;
 </code></pre><p>##创建第二个数据库</p>
 <p>这次，我们请求共享访问$COUCH1的卷。</p>
-<pre><code>COUCH2=$(sudo docker run -d -p <span class="number">5984</span> -volumes-from <span class="variable">$COUCH1</span> shykes/couchdb:<span class="number">2013</span>-<span class="number">05</span>-<span class="number">03</span>)
+<pre><code>COUCH2=$(sudo docker run -d -p 5984 -volumes-from $COUCH1 shykes/couchdb:2013-05-03)
 </code></pre><p>##在第二个数据库上来浏览数据</p>
 <pre><code>HOST=localhost
-URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class="variable">$(sudo docker port $COUCH2 5984 | grep -Po '\d+$')</span>/_utils/"</span>
-<span class="built_in">echo</span> <span class="string">"Navigate to <span class="variable">$URL</span> in your browser. You should see the same data as in the first database"</span><span class="string">'!'</span>
+URL=&quot;http://$HOST:$(sudo docker port $COUCH2 5984 | grep -Po &apos;\d+$&apos;)/_utils/&quot;
+echo &quot;Navigate to $URL in your browser. You should see the same data as in the first database&quot;&apos;!&apos;
 </code></pre><p>祝贺你，你已经运行了两个Couchdb容器，并且两个都相互独立，除了他们的数据</p>
 </span>
       
@@ -274,13 +274,13 @@ URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/08/docker/examples/mongodb/" rel="prev">Docker 中运行 MongoDB</a>
+              <a href="/2015/12/08/docker/examples/running_redis_service/" rel="prev">在Docker中运行Reids服务</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/examples/apt-cacher-ng/" rel="next">在Docker中运行Apt-Cacher-ng服务</a>
+              <a href="/2015/12/08/docker/examples/running_ssh_service/" rel="next">在Docker中运行SSH进程服务</a>
             
           </div>
         </div>
@@ -346,7 +346,7 @@ URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -360,7 +360,7 @@ URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -409,7 +409,7 @@ URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker中运行CouchDB服务"><span class="nav-number">1.</span> <span class="nav-text">Docker中运行CouchDB服务</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker_u4E2D_u8FD0_u884CCouchDB_u670D_u52A1"><span class="nav-number">1.</span> <span class="nav-text">Docker中运行CouchDB服务</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -426,7 +426,7 @@ URL=<span class="string">"http://<span class="variable">$HOST</span>:<span class
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

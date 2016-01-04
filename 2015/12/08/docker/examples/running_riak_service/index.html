@@ -246,30 +246,30 @@ $ touch Dockerfile
       
 
       
-        <span itemprop="articleBody"><h1 id="在Docker中使用Riak服务">在Docker中使用Riak服务</h1><p>这个例子的目的是向您展示如何构建一个预装Riak的docker镜象。</p>
+        <span itemprop="articleBody"><h1 id="u5728Docker_u4E2D_u4F7F_u7528Riak_u670D_u52A1"><a href="#u5728Docker_u4E2D_u4F7F_u7528Riak_u670D_u52A1" class="headerlink" title="在Docker中使用Riak服务"></a>在Docker中使用Riak服务</h1><p>这个例子的目的是向您展示如何构建一个预装Riak的docker镜象。</p>
 <p>###创建Dockerfile</p>
 <p>创建一个空文件<code>Dockerfile</code></p>
-<pre><code><span class="variable">$ </span>touch <span class="constant">Dockerfile</span>
+<pre><code>$ touch Dockerfile
 </code></pre><p>接下来，定义你想要来建立你镜像的父镜像。我们将使用Ubuntu（tag：最新版），从Docker Hub中下载：</p>
-<pre><code><span class="comment"># Riak</span>
-<span class="comment">#</span>
-<span class="comment"># VERSION       0.1.0</span>
+<pre><code># Riak
+#
+# VERSION       0.1.0
 
-<span class="comment"># Use the Ubuntu base image provided by dotCloud</span>
-<span class="built_in">FROM</span> ubuntu:latest
-<span class="built_in">MAINTAINER</span> Hector Castro hector@basho.com
+# Use the Ubuntu base image provided by dotCloud
+FROM ubuntu:latest
+MAINTAINER Hector Castro hector@basho.com
 </code></pre><p>接下来,我们更新APT缓存和应用更新:</p>
-<pre><code><span class="comment"># Update the APT cache</span>
-<span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/main$/main universe/'</span> /etc/apt/sources.list
-</span><span class="built_in">RUN</span> <span class="bash">apt-get update
-</span><span class="built_in">RUN</span> <span class="bash">apt-get upgrade -y</span>
+<pre><code># Update the APT cache
+RUN sed -i.bak &apos;s/main$/main universe/&apos; /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get upgrade -y
 </code></pre><p>之后，我们安装和设置一些依赖关系：</p>
 <ul>
 <li><code>CURL</code>来下载 Basho’s APT存储库秘钥。</li>
 <li><code>lsb-release</code>帮助我们查看Ubuntu版本。</li>
 <li><code>openssh-server</code>允许我们登陆远程容器，加入Riak节点组成一个集群。</li>
 <li><p><code>supervisor</code>用于管理<code>OpenSSH</code>和<code>Riak</code>进程。</p>
-<h1 id="Install_and_setup_project_dependencies">Install and setup project dependencies</h1><p>  RUN apt-get install -y curl lsb-release supervisor openssh-server</p>
+<h1 id="Install_and_setup_project_dependencies"><a href="#Install_and_setup_project_dependencies" class="headerlink" title="Install and setup project dependencies"></a>Install and setup project dependencies</h1><p>  RUN apt-get install -y curl lsb-release supervisor openssh-server</p>
 <p>  RUN mkdir -p /var/run/sshd<br>  RUN mkdir -p /var/log/supervisor</p>
 <p>  RUN locale-gen en_US en_US.UTF-8</p>
 <p>  ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf</p>
@@ -277,45 +277,45 @@ $ touch Dockerfile
 </li>
 </ul>
 <p>下一步，添加 Basho’s APT仓库：</p>
-<pre><code><span class="built_in">RUN</span> <span class="bash">curl <span class="operator">-s</span> http://apt.basho.com/gpg/basho.apt.key | apt-key add --
-</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"deb http://apt.basho.com <span class="variable">$(lsb_release -cs)</span> main"</span> &gt; /etc/apt/sources.list.d/basho.list
-</span><span class="built_in">RUN</span> <span class="bash">apt-get update</span>
+<pre><code>RUN curl -s http://apt.basho.com/gpg/basho.apt.key | apt-key add --
+RUN echo &quot;deb http://apt.basho.com $(lsb_release -cs) main&quot; &gt; /etc/apt/sources.list.d/basho.list
+RUN apt-get update
 </code></pre><p>之后，我们安装Riak和改变一些默认值：</p>
-<pre><code><span class="comment"># Install Riak and prepare it to run</span>
-<span class="built_in">RUN</span> <span class="bash">apt-get install -y riak
-</span><span class="built_in">RUN</span> <span class="bash">sed -i.bak <span class="string">'s/127.0.0.1/0.0.0.0/'</span> /etc/riak/app.config
-</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">"ulimit -n 4096"</span> &gt;&gt; /etc/default/riak</span>
+<pre><code># Install Riak and prepare it to run
+RUN apt-get install -y riak
+RUN sed -i.bak &apos;s/127.0.0.1/0.0.0.0/&apos; /etc/riak/app.config
+RUN echo &quot;ulimit -n 4096&quot; &gt;&gt; /etc/default/riak
 </code></pre><p>接下来，我们为缺少的<code>initctl</code>来添加一个软连接：</p>
-<pre><code><span class="comment"># Hack for initctl</span>
-<span class="comment"># See: https://github.com/dotcloud/docker/issues/1024</span>
-<span class="built_in">RUN</span> <span class="bash">dpkg-divert --local --rename --add /sbin/initctl
-</span><span class="built_in">RUN</span> <span class="bash">ln <span class="operator">-s</span> /bin/<span class="literal">true</span> /sbin/initctl</span>
+<pre><code># Hack for initctl
+# See: https://github.com/dotcloud/docker/issues/1024
+RUN dpkg-divert --local --rename --add /sbin/initctl
+RUN ln -s /bin/true /sbin/initctl
 </code></pre><p>然后我们开发Riak协议缓冲区、HTTP接口以及SSH：</p>
-<pre><code><span class="preprocessor"># Expose Riak Protocol Buffers and HTTP interfaces, along with SSH</span>
-EXPOSE <span class="number">8087</span> <span class="number">8098</span> <span class="number">22</span>
+<pre><code># Expose Riak Protocol Buffers and HTTP interfaces, along with SSH
+EXPOSE 8087 8098 22
 </code></pre><p>最后，运行<code>supervisord</code>这里Riak和OpenSSH将启动：</p>
-<pre><code><span class="built_in">CMD</span> <span class="bash">[<span class="string">"/usr/bin/supervisord"</span>]</span>
+<pre><code>CMD [&quot;/usr/bin/supervisord&quot;]
 </code></pre><p>###创建一个supervisord配置文件</p>
 <p>创建一个supervisord.conf空文件，并且保证和Dockerfile是平级目录：</p>
-<pre><code><span class="tag">touch</span> <span class="tag">supervisord</span><span class="class">.conf</span>
+<pre><code>touch supervisord.conf
 </code></pre><p>填充下面定义的程序:</p>
 <pre><code>[supervisord]
 nodaemon=true
 
-[<span class="keyword">program</span>:sshd]
-command=/usr/sbin/sshd -<span class="literal">D</span>
-stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+[program:sshd]
+command=/usr/sbin/sshd -D
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
 autorestart=true
 
-[<span class="keyword">program</span>:riak]
-command=bash -c <span class="string">". /etc/default/riak &amp;&amp; /usr/sbin/riak console"</span>
-pidfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/riak/riak.pid
-stdout_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
-stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span>/supervisor/%(program_name)s.<span class="literal">log</span>
+[program:riak]
+command=bash -c &quot;. /etc/default/riak &amp;&amp; /usr/sbin/riak console&quot;
+pidfile=/var/log/riak/riak.pid
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
 </code></pre><p>###构建Riak的Docker镜像</p>
 <p>现在你应该能够构建一个Riak的docker镜像:</p>
-<pre><code>$ docker <span class="keyword">build </span>-t <span class="string">"&lt;yourname&gt;/riak"</span> .
+<pre><code>$ docker build -t &quot;&lt;yourname&gt;/riak&quot; .
 </code></pre><p>###下一步</p>
 <p>Riak是分布式数据库。很多生产部署包括至少5个节点。查看docker-riak<a href="https://github.com/hectcastro/docker-riak" target="_blank" rel="external">https://github.com/hectcastro/docker-riak</a>项目细节来使用Docker和Pipework部署Riak集群。</p>
 </span>
@@ -335,13 +335,13 @@ stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/08/docker/examples/running_ssh_service/" rel="prev">在Docker中运行SSH进程服务</a>
+              <a href="/2015/12/08/docker/machine/install-machine/" rel="prev">安装 Docker Machine</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/networking/" rel="next">网络配置</a>
+              <a href="/2015/12/08/docker/docker-hub/repos/" rel="next">Docker Hub上的仓库和镜像</a>
             
           </div>
         </div>
@@ -407,7 +407,7 @@ stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -421,7 +421,7 @@ stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -470,7 +470,7 @@ stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在Docker中使用Riak服务"><span class="nav-number">1.</span> <span class="nav-text">在Docker中使用Riak服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install_and_setup_project_dependencies"><span class="nav-number">2.</span> <span class="nav-text">Install and setup project dependencies</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5728Docker_u4E2D_u4F7F_u7528Riak_u670D_u52A1"><span class="nav-number">1.</span> <span class="nav-text">在Docker中使用Riak服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install_and_setup_project_dependencies"><span class="nav-number">2.</span> <span class="nav-text">Install and setup project dependencies</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -487,7 +487,7 @@ stderr_logfile=/<span class="keyword">var</span>/<span class="keyword">log</span
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

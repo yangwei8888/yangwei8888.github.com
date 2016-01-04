@@ -237,69 +237,69 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="在Docker中运行Apt-Cacher-ng服务">在Docker中运行Apt-Cacher-ng服务</h1><blockquote>
-<p>注意:——如果你不喜欢sudo,可以查看<a href="installation/binaries.md">非root用户使用</a>，–如何你使用OS X或者通过TCP使用Docker，你需要使用sudo</p>
+        <span itemprop="articleBody"><h1 id="u5728Docker_u4E2D_u8FD0_u884CApt-Cacher-ng_u670D_u52A1"><a href="#u5728Docker_u4E2D_u8FD0_u884CApt-Cacher-ng_u670D_u52A1" class="headerlink" title="在Docker中运行Apt-Cacher-ng服务"></a>在Docker中运行Apt-Cacher-ng服务</h1><blockquote>
+<p>注意:——如果你不喜欢sudo,可以查看<a href="/installation/binaries.md">非root用户使用</a>，–如何你使用OS X或者通过TCP使用Docker，你需要使用sudo</p>
 </blockquote>
 <p>当你有许多docker服务器，或者不能使用Docker缓存来构建不相干的Docker容器，他可以为你的包缓存代理，这是非常有用的。该容器使第二个下载的任何包几乎瞬间下载。</p>
 <p>使用下边的Dockerfile</p>
-<pre><code><span class="comment">#</span>
-<span class="comment"># Build: docker build -t apt-cacher .</span>
-<span class="comment"># Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher</span>
-<span class="comment">#</span>
-<span class="comment"># and then you can run containers with:</span>
-<span class="comment">#   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash</span>
-<span class="comment">#</span>
-<span class="built_in">FROM</span>        ubuntu
-<span class="built_in">MAINTAINER</span>  SvenDowideit@docker.com
+<pre><code>#
+# Build: docker build -t apt-cacher .
+# Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
+#
+# and then you can run containers with:
+#   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
+#
+FROM        ubuntu
+MAINTAINER  SvenDowideit@docker.com
 
-<span class="built_in">VOLUME</span>      <span class="bash">[<span class="string">"/var/cache/apt-cacher-ng"</span>]
-</span><span class="built_in">RUN</span>     <span class="bash">apt-get update ; apt-get install -yq apt-cacher-ng
-</span>
-<span class="built_in">EXPOSE</span>      <span class="number">3142</span>
-CMD     chmod <span class="number">777</span> /var/cache/apt-cacher-ng ; /etc/init.d/apt-cacher-ng start ; tail -f /var/log/apt-cacher-ng/*
+VOLUME      [&quot;/var/cache/apt-cacher-ng&quot;]
+RUN     apt-get update ; apt-get install -yq apt-cacher-ng
+
+EXPOSE      3142
+CMD     chmod 777 /var/cache/apt-cacher-ng ; /etc/init.d/apt-cacher-ng start ; tail -f /var/log/apt-cacher-ng/*
 </code></pre><p>使用下边的命令构建镜像：</p>
-<pre><code>$ sudo docker <span class="keyword">build </span>-t eg_apt_cacher_ng .
+<pre><code>$ sudo docker build -t eg_apt_cacher_ng .
 </code></pre><p>现在运行它，映射内部端口到主机</p>
-<pre><code>$ sudo docker <span class="command">run</span> -d -p <span class="number">3142</span>:<span class="number">3142</span> <span class="comment">--name test_apt_cacher_ng eg_apt_cacher_ng</span>
+<pre><code>$ sudo docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
 </code></pre><p>查看日志文件，默认使用<code>tailed</code>命令，你可以使用</p>
-<pre><code>$ sudo docker logs <span class="operator">-f</span> <span class="built_in">test</span>_apt_cacher_ng
+<pre><code>$ sudo docker logs -f test_apt_cacher_ng
 </code></pre><p>让你Debian-based容器使用代理,你可以做三件事之一：</p>
 <p> 1.添加一个apt代理设置<code>echo &#39;Acquire::http { Proxy &quot;http://dockerhost:3142&quot;; };&#39; &gt;&gt; /etc/apt/conf.d/01proxy</code></p>
 <p> 2.设置环境变量：<code>http_proxy=http://dockerhost:3142/</code></p>
 <p> 3.修改你的<code>sources.list</code>来开始<code>http://dockerhost:3142/</code></p>
 <p>选项1注入是安全设置到你的apt配置在本地的公共基础版本。</p>
-<pre><code><span class="built_in">FROM</span> ubuntu
-<span class="built_in">RUN</span>  <span class="bash"><span class="built_in">echo</span> <span class="string">'Acquire::http { Proxy "http://dockerhost:3142"; };'</span> &gt;&gt; /etc/apt/apt.conf.d/<span class="number">01</span>proxy
-</span><span class="built_in">RUN</span> <span class="bash">apt-get update ; apt-get install vim git
-</span>
-<span class="comment"># docker build -t my_ubuntu .</span>
+<pre><code>FROM ubuntu
+RUN  echo &apos;Acquire::http { Proxy &quot;http://dockerhost:3142&quot;; };&apos; &gt;&gt; /etc/apt/apt.conf.d/01proxy
+RUN apt-get update ; apt-get install vim git
+
+# docker build -t my_ubuntu .
 </code></pre><p>选项2针对测试时非常好的，但是会破坏其它从http代理的HTTP客户端，如curl 、wget或者其他：</p>
-<pre><code>$ sudo docker <span class="keyword">run</span> --<span class="keyword">rm</span> -t -i -<span class="keyword">e</span> http_proxy=http:<span class="comment">//dockerhost:3142/ debian bash</span>
+<pre><code>$ sudo docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
 </code></pre><p>选项3是最轻便的，但是有时候你可能需要做很多次，你也可以在你的<code>Dockerfile</code>这样做：</p>
-<pre><code>$ sudo docker run <span class="comment">--rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash</span>
+<pre><code>$ sudo docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
 
 $$ /usr/lib/apt-cacher-ng/distkill.pl
-Scanning /var/<span class="operator"><span class="keyword">cache</span>/apt-cacher-ng, please <span class="keyword">wait</span>...
-<span class="keyword">Found</span> distributions:
-bla, taggedcount: <span class="number">0</span>
-     <span class="number">1.</span> precise-<span class="keyword">security</span> (<span class="number">36</span> <span class="keyword">index</span> files)
-     <span class="number">2.</span> wheezy (<span class="number">25</span> <span class="keyword">index</span> files)
-     <span class="number">3.</span> precise-updates (<span class="number">36</span> <span class="keyword">index</span> files)
-     <span class="number">4.</span> precise (<span class="number">36</span> <span class="keyword">index</span> files)
-     <span class="number">5.</span> wheezy-updates (<span class="number">18</span> <span class="keyword">index</span> files)
+Scanning /var/cache/apt-cacher-ng, please wait...
+Found distributions:
+bla, taggedcount: 0
+     1. precise-security (36 index files)
+     2. wheezy (25 index files)
+     3. precise-updates (36 index files)
+     4. precise (36 index files)
+     5. wheezy-updates (18 index files)
 
-<span class="keyword">Found</span> architectures:
-     <span class="number">6.</span> amd64 (<span class="number">36</span> <span class="keyword">index</span> files)
-     <span class="number">7.</span> i386 (<span class="number">24</span> <span class="keyword">index</span> files)
+Found architectures:
+     6. amd64 (36 index files)
+     7. i386 (24 index files)
 
-<span class="keyword">WARNING</span>: The removal <span class="keyword">action</span> may wipe <span class="keyword">out</span> whole directories containing
-         <span class="keyword">index</span> files. <span class="keyword">Select</span> <span class="keyword">d</span> <span class="keyword">to</span> see detailed <span class="keyword">list</span>.
+WARNING: The removal action may wipe out whole directories containing
+         index files. Select d to see detailed list.
 
-(<span class="built_in">Number</span> nn: tag distribution <span class="keyword">or</span> architecture nn;</span> 0: exit; d: <span class="operator"><span class="keyword">show</span> details;</span> r: remove tagged; q: quit): q
+(Number nn: tag distribution or architecture nn; 0: exit; d: show details; r: remove tagged; q: quit): q
 </code></pre><p>最后，停止测试容器，删除容器，删除镜像：</p>
-<pre><code><span class="variable">$ </span>sudo docker stop test_apt_cacher_ng
-<span class="variable">$ </span>sudo docker rm test_apt_cacher_ng
-<span class="variable">$ </span>sudo docker rmi eg_apt_cacher_ng
+<pre><code>$ sudo docker stop test_apt_cacher_ng
+$ sudo docker rm test_apt_cacher_ng
+$ sudo docker rmi eg_apt_cacher_ng
 </code></pre></span>
       
     </div>
@@ -317,13 +317,13 @@ bla, taggedcount: <span class="number">0</span>
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/08/docker/examples/couchdb_data_volumes/" rel="prev">Docker中运行CouchDB服务</a>
+              <a href="/2015/12/08/docker/examples/mongodb/" rel="prev">Docker 中运行 MongoDB</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/docker-hub/repos/" rel="next">Docker Hub上的仓库和镜像</a>
+              <a href="/2015/10/08/free-programming-books-zh/" rel="next">BOOK目录</a>
             
           </div>
         </div>
@@ -389,7 +389,7 @@ bla, taggedcount: <span class="number">0</span>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -403,7 +403,7 @@ bla, taggedcount: <span class="number">0</span>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -452,7 +452,7 @@ bla, taggedcount: <span class="number">0</span>
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在Docker中运行Apt-Cacher-ng服务"><span class="nav-number">1.</span> <span class="nav-text">在Docker中运行Apt-Cacher-ng服务</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5728Docker_u4E2D_u8FD0_u884CApt-Cacher-ng_u670D_u52A1"><span class="nav-number">1.</span> <span class="nav-text">在Docker中运行Apt-Cacher-ng服务</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -469,7 +469,7 @@ bla, taggedcount: <span class="number">0</span>
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

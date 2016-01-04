@@ -249,19 +249,19 @@ Swift 语言相对较小，这是由于 Swift 代码中的几乎所有">
       
 
       
-        <span itemprop="articleBody"><h1 id="关于语言参考（About_the_Language_Reference）">关于语言参考（About the Language Reference）</h1><hr>
+        <span itemprop="articleBody"><h1 id="u5173_u4E8E_u8BED_u8A00_u53C2_u8003_uFF08About_the_Language_Reference_uFF09"><a href="#u5173_u4E8E_u8BED_u8A00_u53C2_u8003_uFF08About_the_Language_Reference_uFF09" class="headerlink" title="关于语言参考（About the Language Reference）"></a>关于语言参考（About the Language Reference）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/dabing1022" target="_blank" rel="external">dabing1022</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></p>
 </blockquote>
 <p>本页内容包括：</p>
 <ul>
-<li><a href="#how_to_read_the_grammar">如何阅读语法</a></li>
+<li><a href="/#how_to_read_the_grammar">如何阅读语法</a></li>
 </ul>
 <p>本书的这一节描述了 Swift 编程语言的形式语法。这里描述的语法是为了帮助您更详细地了解该语言，而不是让您直接实现一个解析器或编译器。</p>
 <p>Swift 语言相对较小，这是由于 Swift 代码中的几乎所有常见类型、函数以及运算符都已经在 Swift 标准库中定义了。虽然这些类型、函数和运算符并不是 Swift 语言自身的一部分，但是它们被广泛应用于本书的讨论和代码范例中。</p>
 <p><a name="how_to_read_the_grammar"></a></p>
-<h2 id="如何阅读语法">如何阅读语法</h2><p>用来描述 Swift 编程语言形式语法的符号遵循下面几个约定：</p>
+<h2 id="u5982_u4F55_u9605_u8BFB_u8BED_u6CD5"><a href="#u5982_u4F55_u9605_u8BFB_u8BED_u6CD5" class="headerlink" title="如何阅读语法"></a>如何阅读语法</h2><p>用来描述 Swift 编程语言形式语法的符号遵循下面几个约定：</p>
 <ul>
 <li>箭头（<code>→</code>）用来标记语法产式，可以理解为“可由……构成”。</li>
 <li>斜体文字用来表示句法类型，并出现在一个语法产式规则两侧。</li>
@@ -272,11 +272,11 @@ Swift 语言相对较小，这是由于 Swift 代码中的几乎所有">
 </ul>
 <p>举个例子，getter-setter 的语法块的定义如下：</p>
 <blockquote>
-<p>getter-setter 方法块语法<br><em>getter-setter 方法块</em> → { <a href="05_Declarations.html#getter-clause"><em>getter 子句</em></a> <a href="05_Declarations.html#setter-clause"><em>setter 子句</em></a><sub>可选</sub> } | { <a href="05_Declarations.html#setter-clause"><em>setter 子句</em></a> <a href="05_Declarations.html#getter-clause"><em>getter 子句</em></a> }</p>
+<p>getter-setter 方法块语法<br><em>getter-setter 方法块</em> → { <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a> <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a><sub>可选</sub> } | { <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a> <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a> }</p>
 </blockquote>
 <p>这个定义表明，一个 getter-setter 方法块可以由一个 getter 子句后跟一个可选的 setter 子句构成，然后用大括号括起来，或者由一个 setter 子句后跟一个 getter 子句构成，然后用大括号括起来。下面的两个语法产式等价于上述的语法产式，并明确指出了如何取舍：</p>
 <blockquote>
-<p>getter-setter 方法块语法<br>getter-setter 方法块 → { <a href="05_Declarations.html#getter-clause"><em>getter 子句</em></a>  <a href="05_Declarations.html#setter-clause"><em>setter 子句</em></a><sub>可选</sub> }<br>getter-setter 方法块 → { <a href="05_Declarations.html#setter-clause"><em>setter 子句</em></a> <a href="05_Declarations.html#getter-clause"><em>getter 子句</em></a> }</p>
+<p>getter-setter 方法块语法<br>getter-setter 方法块 → { <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a>  <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a><sub>可选</sub> }<br>getter-setter 方法块 → { <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a> <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a> }</p>
 </blockquote>
 </span>
       
@@ -295,7 +295,7 @@ Swift 语言相对较小，这是由于 Swift 代码中的几乎所有">
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/25/swift-cn/README/" rel="prev">已同步更新到 Swift 2.1</a>
+              <a href="/2015/12/25/swift-cn/v1.0/" rel="prev">v1.0</a>
             
           </div>
 
@@ -367,7 +367,7 @@ Swift 语言相对较小，这是由于 Swift 代码中的几乎所有">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -381,7 +381,7 @@ Swift 语言相对较小，这是由于 Swift 代码中的几乎所有">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -430,7 +430,7 @@ Swift 语言相对较小，这是由于 Swift 代码中的几乎所有">
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于语言参考（About_the_Language_Reference）"><span class="nav-number">1.</span> <span class="nav-text">关于语言参考（About the Language Reference）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何阅读语法"><span class="nav-number">1.1.</span> <span class="nav-text">如何阅读语法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5173_u4E8E_u8BED_u8A00_u53C2_u8003_uFF08About_the_Language_Reference_uFF09"><span class="nav-number">1.</span> <span class="nav-text">关于语言参考（About the Language Reference）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5982_u4F55_u9605_u8BFB_u8BED_u6CD5"><span class="nav-number">1.1.</span> <span class="nav-text">如何阅读语法</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -447,7 +447,7 @@ Swift 语言相对较小，这是由于 Swift 代码中的几乎所有">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

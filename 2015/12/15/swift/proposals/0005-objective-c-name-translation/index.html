@@ -234,20 +234,20 @@ IntroductionThis proposal describes how we can improve Swift’s “Clang Import
       
 
       
-        <span itemprop="articleBody"><h1 id="Better_Translation_of_Objective-C_APIs_Into_Swift">Better Translation of Objective-C APIs Into Swift</h1><ul>
+        <span itemprop="articleBody"><h1 id="Better_Translation_of_Objective-C_APIs_Into_Swift"><a href="#Better_Translation_of_Objective-C_APIs_Into_Swift" class="headerlink" title="Better Translation of Objective-C APIs Into Swift"></a>Better Translation of Objective-C APIs Into Swift</h1><ul>
 <li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0005-objective-c-name-translation.md" target="_blank" rel="external">SE-0005</a></li>
 <li>Author(s): <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a>, <a href="https://github.com/dabrahams" target="_blank" rel="external">Dave Abrahams</a></li>
 <li>Status: <strong>Accepted</strong></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>This proposal describes how we can improve Swift’s “Clang Importer”, which is responsible for mapping C and Objective-C APIs into Swift, to translate the names of Objective-C functions, types, methods, properties, etc. into names that more closely align with the <a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design Guidelines</a> being developed as part of Swift 3. Our approach focuses on the differences between the Objective-C <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" title="Coding Guidelines for Cocoa" target="_blank" rel="external">Coding Guidelines for Cocoa</a> and the Swift API Design Guidelines, using some simple linguistic analysis to aid the automatic translation from Objective-C names to more “Swifty” names.</p>
-<h2 id="Motivation">Motivation</h2><p>The Objective-C <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" title="Coding Guidelines for Cocoa" target="_blank" rel="external">Coding Guidelines for Cocoa</a><br>provide a framework for creating clear, consistent APIs in<br>Objective-C, where they work extraordinarily well. However, Swift is a<br>different language: in particular, it is strongly typed and provides<br>type inference, generics, and overloading. As a result, Objective-C<br>APIs that feel right in Objective-C can feel wordy when used in<br>Swift. For example:</p>
-<pre><code>let contentString = listItemView<span class="class">.stringValue</span><span class="class">.stringByTrimmingCharactersInSet</span>(
-   NSCharacterSet.<span class="function"><span class="title">whitespaceAndNewlineCharacterSet</span><span class="params">()</span></span>)
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This proposal describes how we can improve Swift’s “Clang Importer”, which is responsible for mapping C and Objective-C APIs into Swift, to translate the names of Objective-C functions, types, methods, properties, etc. into names that more closely align with the <a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design Guidelines</a> being developed as part of Swift 3. Our approach focuses on the differences between the Objective-C <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" title="Coding Guidelines for Cocoa" target="_blank" rel="external">Coding Guidelines for Cocoa</a> and the Swift API Design Guidelines, using some simple linguistic analysis to aid the automatic translation from Objective-C names to more “Swifty” names.</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>The Objective-C <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" title="Coding Guidelines for Cocoa" target="_blank" rel="external">Coding Guidelines for Cocoa</a><br>provide a framework for creating clear, consistent APIs in<br>Objective-C, where they work extraordinarily well. However, Swift is a<br>different language: in particular, it is strongly typed and provides<br>type inference, generics, and overloading. As a result, Objective-C<br>APIs that feel right in Objective-C can feel wordy when used in<br>Swift. For example:</p>
+<pre><code>let contentString = listItemView.stringValue.stringByTrimmingCharactersInSet(
+   NSCharacterSet.whitespaceAndNewlineCharacterSet())
 </code></pre><p>The APIs used here follow the Objective-C guidelines. A more “Swifty”<br>version of the same code might instead look like this:</p>
-<pre><code>let <span class="attribute">content</span> = listItem<span class="class">.stringValue</span><span class="class">.trimming</span>(.whitespaceAndNewlines)
+<pre><code>let content = listItem.stringValue.trimming(.whitespaceAndNewlines)
 </code></pre><p>The latter example more closely adheres to the <a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design<br>Guidelines</a>, in particular, omitting “needless”<br>words that restate the types already enforced by the compiler (view,<br>string, character set, etc.). The goal of this proposal is to make<br>imported Objective-C feel more “Swifty”, providing a more fluid<br>experience for Swift programmers using Objective-C APIs.</p>
 <p>The solution in this proposal applies equally to the Objective-C<br>frameworks (e.g., all of Cocoa and Cocoa Touch) and any Objective-C<br>APIs that are available to Swift in mix-and-match projects. Note that<br>the <a href="https://swift.org/core-libraries/" title="Swift Core Libraries" target="_blank" rel="external">Swift core libraries</a><br>reimplement the APIs of Objective-C frameworks, so any API changes to<br>those frameworks (Foundation, XCTest, etc.) will be reflected in the<br>Swift 3 implementations of the core libraries.</p>
-<h2 id="Proposed_solution">Proposed solution</h2><p>The proposed solution involves identifying the differences between the<br>Objective-C <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" title="Coding Guidelines for Cocoa" target="_blank" rel="external">Coding Guidelines for Cocoa</a> and<br>the <a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design Guidelines</a> to build a<br>set of transformations that map from the former to the latter based on<br>the guidelines themselves and other observed conventions in<br>Objective-C. This is an extension of other heuristics in the Clang<br>importer that translate names, e.g., the mapping of global enum<br>constants into Swift’s cases (which strips common prefixes from the<br>enum constant names) and the mapping from Objective-C factory methods<br>(e.g., <code>+[NSNumber numberWithBool:]</code>) to Swift initializers<br>(<code>NSNumber(bool: true)</code>).</p>
+<h2 id="Proposed_solution"><a href="#Proposed_solution" class="headerlink" title="Proposed solution"></a>Proposed solution</h2><p>The proposed solution involves identifying the differences between the<br>Objective-C <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" title="Coding Guidelines for Cocoa" target="_blank" rel="external">Coding Guidelines for Cocoa</a> and<br>the <a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design Guidelines</a> to build a<br>set of transformations that map from the former to the latter based on<br>the guidelines themselves and other observed conventions in<br>Objective-C. This is an extension of other heuristics in the Clang<br>importer that translate names, e.g., the mapping of global enum<br>constants into Swift’s cases (which strips common prefixes from the<br>enum constant names) and the mapping from Objective-C factory methods<br>(e.g., <code>+[NSNumber numberWithBool:]</code>) to Swift initializers<br>(<code>NSNumber(bool: true)</code>).</p>
 <p>The heuristics described in this proposal will require iteration,<br>tuning, and experimentation across a large body of Objective-C APIs to<br>get right. Moreover, it will not be perfect: some APIs will<br>undoubtedly end up being less clear in Swift following this<br>translation than they had been before. Therefore, the goal is to make<br>the vast majority of imported Objective-C APIs feel more “Swifty”, and<br>allow the authors of Objective-C APIs that end up being less clear to<br>address those problems on a per-API basis via annotation within the<br>Objective-C headers.</p>
 <p>The proposed solution involves several related changes to the Clang importer:</p>
 <ol>
@@ -265,41 +265,41 @@ IntroductionThis proposal describes how we can improve Swift’s “Clang Import
 </li>
 </ol>
 <p>To get a sense of what these transformations do, consider a portion of<br>the imported <code>UIBezierPath</code> API in Swift 2:</p>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">UIBezierPath</span> : <span class="title">NSObject</span>, <span class="title">NSCopying</span>, <span class="title">NSCoding</span> </span>{
-  convenience <span class="keyword">init</span>(ovalInRect: <span class="type">CGRect</span>)
-  <span class="func"><span class="keyword">func</span> <span class="title">moveToPoint</span><span class="params">(<span class="number">_</span>: CGPoint)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">addLineToPoint</span><span class="params">(<span class="number">_</span>: CGPoint)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">addCurveToPoint</span><span class="params">(<span class="number">_</span>: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">addQuadCurveToPoint</span><span class="params">(<span class="number">_</span>: CGPoint, controlPoint: CGPoint)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">appendPath</span><span class="params">(<span class="number">_</span>: UIBezierPath)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">bezierPathByReversingPath</span><span class="params">()</span></span> -&gt; <span class="type">UIBezierPath</span>
-  <span class="func"><span class="keyword">func</span> <span class="title">applyTransform</span><span class="params">(<span class="number">_</span>: CGAffineTransform)</span></span>
-  <span class="keyword">var</span> empty: <span class="type">Bool</span> { <span class="keyword">get</span> }
-  <span class="func"><span class="keyword">func</span> <span class="title">containsPoint</span><span class="params">(<span class="number">_</span>: CGPoint)</span></span> -&gt; <span class="type">Bool</span>
-  <span class="func"><span class="keyword">func</span> <span class="title">fillWithBlendMode</span><span class="params">(<span class="number">_</span>: CGBlendMode, alpha: CGFloat)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">strokeWithBlendMode</span><span class="params">(<span class="number">_</span>: CGBlendMode, alpha: CGFloat)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">copyWithZone</span><span class="params">(<span class="number">_</span>: NSZone)</span></span> -&gt; <span class="type">AnyObject</span>
-  <span class="func"><span class="keyword">func</span> <span class="title">encodeWithCoder</span><span class="params">(<span class="number">_</span>: NSCoder)</span></span>
+<pre><code>class UIBezierPath : NSObject, NSCopying, NSCoding {
+  convenience init(ovalInRect: CGRect)
+  func moveToPoint(_: CGPoint)
+  func addLineToPoint(_: CGPoint)
+  func addCurveToPoint(_: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)
+  func addQuadCurveToPoint(_: CGPoint, controlPoint: CGPoint)
+  func appendPath(_: UIBezierPath)
+  func bezierPathByReversingPath() -&gt; UIBezierPath
+  func applyTransform(_: CGAffineTransform)
+  var empty: Bool { get }
+  func containsPoint(_: CGPoint) -&gt; Bool
+  func fillWithBlendMode(_: CGBlendMode, alpha: CGFloat)
+  func strokeWithBlendMode(_: CGBlendMode, alpha: CGFloat)
+  func copyWithZone(_: NSZone) -&gt; AnyObject
+  func encodeWithCoder(_: NSCoder)
 }
 </code></pre><p>And the same API imported under our current, experimental implementation of this proposal:</p>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">UIBezierPath</span> : <span class="title">Object</span>, <span class="title">Copying</span>, <span class="title">Coding</span> </span>{
-  convenience <span class="keyword">init</span>(ovalIn: <span class="type">CGRect</span>)
-  <span class="func"><span class="keyword">func</span> <span class="title">moveTo</span><span class="params">(<span class="number">_</span>: CGPoint)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">addLineTo</span><span class="params">(<span class="number">_</span>: CGPoint)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">addCurveTo</span><span class="params">(<span class="number">_</span>: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">addQuadCurveTo</span><span class="params">(<span class="number">_</span>: CGPoint, controlPoint: CGPoint)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">append</span><span class="params">(<span class="number">_</span>: UIBezierPath)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">reversing</span><span class="params">()</span></span> -&gt; <span class="type">UIBezierPath</span>
-  <span class="func"><span class="keyword">func</span> <span class="title">apply</span><span class="params">(<span class="number">_</span>: CGAffineTransform)</span></span>
-  <span class="keyword">var</span> isEmpty: <span class="type">Bool</span> { <span class="keyword">get</span> }
-  <span class="func"><span class="keyword">func</span> <span class="title">contains</span><span class="params">(<span class="number">_</span>: CGPoint)</span></span> -&gt; <span class="type">Bool</span>
-  <span class="func"><span class="keyword">func</span> <span class="title">fillWith</span><span class="params">(<span class="number">_</span>: CGBlendMode, alpha: CGFloat)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">strokeWith</span><span class="params">(<span class="number">_</span>: CGBlendMode, alpha: CGFloat)</span></span>
-  <span class="func"><span class="keyword">func</span> <span class="title">copy</span><span class="params">(zone <span class="number">_</span>: Zone = <span class="literal">nil</span>)</span></span> -&gt; <span class="type">AnyObject</span>
-  <span class="func"><span class="keyword">func</span> <span class="title">encodeWith</span><span class="params">(<span class="number">_</span>: Coder)</span></span>
+<pre><code>class UIBezierPath : Object, Copying, Coding {
+  convenience init(ovalIn: CGRect)
+  func moveTo(_: CGPoint)
+  func addLineTo(_: CGPoint)
+  func addCurveTo(_: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)
+  func addQuadCurveTo(_: CGPoint, controlPoint: CGPoint)
+  func append(_: UIBezierPath)
+  func reversing() -&gt; UIBezierPath
+  func apply(_: CGAffineTransform)
+  var isEmpty: Bool { get }
+  func contains(_: CGPoint) -&gt; Bool
+  func fillWith(_: CGBlendMode, alpha: CGFloat)
+  func strokeWith(_: CGBlendMode, alpha: CGFloat)
+  func copy(zone _: Zone = nil) -&gt; AnyObject
+  func encodeWith(_: Coder)
 }
 </code></pre><p>In the latter case, a number of words that restated type information<br>in the original APIs have been pruned. The result is closer to<br>following the Swift API Design Guidelines. For example, this shows<br>that Swift developers can now copy any object conforming to the<br>NSCopying with a simple call to <code>foo.copy()</code> instead of calling<br><code>foo.copyWithZone(nil)</code>.</p>
-<h2 id="Implementation_Experience">Implementation Experience</h2><p>An experimental, partial implementation of this proposal is available<br>in the main Swift tree behind a set of experimental compiler<br>flags. With these flags, one can see the results of applying this<br>proposal to imported Objective-C APIs (e.g., via the script in<br><code>utils/omit-needless-words.py</code>) and to Swift code itself. The flags<br>are:</p>
+<h2 id="Implementation_Experience"><a href="#Implementation_Experience" class="headerlink" title="Implementation Experience"></a>Implementation Experience</h2><p>An experimental, partial implementation of this proposal is available<br>in the main Swift tree behind a set of experimental compiler<br>flags. With these flags, one can see the results of applying this<br>proposal to imported Objective-C APIs (e.g., via the script in<br><code>utils/omit-needless-words.py</code>) and to Swift code itself. The flags<br>are:</p>
 <ul>
 <li><p><code>-enable-omit-needless-words</code>: this flag enables most of the changes<br>to the Clang importer (bullets 1, 2, 4, and 5 in the prior<br>section). It is currently suitable only for printing the Swift<br>interface to Objective-C modules (e.g., via <code>swift-ide-test</code>).</p>
 </li>
@@ -309,10 +309,10 @@ IntroductionThis proposal describes how we can improve Swift’s “Clang Import
 </li>
 </ul>
 <p>While the implementation is far from complete, it is enough to see the<br>effects that the proposal has on Objective-C APIs and code that uses<br>them.</p>
-<h2 id="Detailed_design">Detailed design</h2><p>This section details the experimental implementation of rules 2-5 in prose. The actual implementation is available in the Swift source tree, mostly in the <code>omitNeedlessWords</code> functions of <a href="https://github.com/apple/swift/blob/master/lib/Basic/StringExtras.cpp" target="_blank" rel="external">lib/Basic/StringExtras.cpp</a>.</p>
+<h2 id="Detailed_design"><a href="#Detailed_design" class="headerlink" title="Detailed design"></a>Detailed design</h2><p>This section details the experimental implementation of rules 2-5 in prose. The actual implementation is available in the Swift source tree, mostly in the <code>omitNeedlessWords</code> functions of <a href="https://github.com/apple/swift/blob/master/lib/Basic/StringExtras.cpp" target="_blank" rel="external">lib/Basic/StringExtras.cpp</a>.</p>
 <p>The descriptions in this section are described in terms of the incoming Objective-C API. For example, Objective-C method names are “selectors”, e.g., <code>startWithQueue:completionHandler:</code> is a selector with two selector pieces, <code>startWithQueue</code> and <code>completionHandler</code>. A direct mapping of this name into Swift would produce <code>startWithQueue(_:completionHandler:)</code>.</p>
-<h3 id="Prune_redundant_type_names">Prune redundant type names</h3><p>Objective-C API names often contain names of parameter and/or result<br>types that would be omitted in a Swift API. The following rules are<br>designed to identify and remove these words. [<a href="https://swift.org/documentation/api-design-guidelines.html#omit-needless-words" target="_blank" rel="external">Omit Needless Words</a>]</p>
-<h4 id="Identifying_type_names">Identifying type names</h4><p>The matching process described below searches in a selector piece for<br>a suffix of a string called the <strong>type name</strong>, which is defined as follows:</p>
+<h3 id="Prune_redundant_type_names"><a href="#Prune_redundant_type_names" class="headerlink" title="Prune redundant type names"></a>Prune redundant type names</h3><p>Objective-C API names often contain names of parameter and/or result<br>types that would be omitted in a Swift API. The following rules are<br>designed to identify and remove these words. [<a href="https://swift.org/documentation/api-design-guidelines.html#omit-needless-words" target="_blank" rel="external">Omit Needless Words</a>]</p>
+<h4 id="Identifying_type_names"><a href="#Identifying_type_names" class="headerlink" title="Identifying type names"></a>Identifying type names</h4><p>The matching process described below searches in a selector piece for<br>a suffix of a string called the <strong>type name</strong>, which is defined as follows:</p>
 <ul>
 <li><p>For most Objective-C types, the <em>type name</em> is the name under which<br>Swift imports the type, ignoring nullability. For example,</p>
 <p>|Objective-C type       | <em>Type Name</em>                                |<br>|———————–|——————————————–|<br>|<code>float</code>                |<code>Float</code>                                     |<br>|<code>nullable NSString</code>    |<code>String</code>                                    |<br>|<code>UIDocument</code>           |<code>UIDocument</code>                                |<br>|<code>nullable UIDocument</code>  |<code>UIDocument</code>                                |<br>|<code>NSInteger</code>            |<code>NSInteger</code>                                 |<br>|<code>NSUInteger</code>           |<code>NSUInteger</code>                                |<br>|<code>CGFloat</code>              |<code>CGFloat</code>                                   |</p>
@@ -324,7 +324,7 @@ IntroductionThis proposal describes how we can improve Swift’s “Clang Import
 <li><p>When the Objective-C type is a typedef other than <code>NSInteger</code>,<br><code>NSUInteger</code>, or <code>CGFloat</code> (which follow the first rule above),<br>the <em>type name</em> is that of the underlying type. For example, when<br>the Objective-C type is <code>UILayoutPriority</code>, which is a typedef for<br><code>float</code>, we try to match the string “<code>Float</code>“. [<a href="https://swift.org/documentation/api-design-guidelines.html#weak-type-information" target="_blank" rel="external">Compensate for Weak Type Information</a>]</p>
 </li>
 </ul>
-<h4 id="Matching">Matching</h4><p>In order to prune a redundant type name from a selector piece, we<br>need to match a substring of the selector that identifies the type.  </p>
+<h4 id="Matching"><a href="#Matching" class="headerlink" title="Matching"></a>Matching</h4><p>In order to prune a redundant type name from a selector piece, we<br>need to match a substring of the selector that identifies the type.  </p>
 <p>A couple of basic rules govern all matches:</p>
 <ul>
 <li><p><strong>Matches begin and end at word boundaries</strong> in both type names and<br>selector pieces.  Word boundaries occur at the beginning and end of<br>a string, and before every capital letter.</p>
@@ -400,7 +400,7 @@ func pointFor<b>Coordinate</b>(_: CLLocation<b>Coordinate</b><i>2D</i>) -> NSPoi
 </li>
 </ul>
 <p>In the examples above, the italic text is effectively skipped, so the<br>bold part of the selector piece can be matched and pruned.</p>
-<h4 id="Pruning_Restrictions">Pruning Restrictions</h4><p>The following restrictions govern the pruning steps listed in the<br>next section.  If any step would violate one of these rules, it is<br>skipped.</p>
+<h4 id="Pruning_Restrictions"><a href="#Pruning_Restrictions" class="headerlink" title="Pruning Restrictions"></a>Pruning Restrictions</h4><p>The following restrictions govern the pruning steps listed in the<br>next section.  If any step would violate one of these rules, it is<br>skipped.</p>
 <ul>
 <li><p><strong>Never make a selector piece entirely empty</strong>.</p>
 </li>
@@ -466,7 +466,7 @@ func add(_: UIGestureRecognizer) <b>// should indicate that we're adding to the 
 
 </li>
 </ul>
-<h4 id="Pruning_Steps">Pruning Steps</h4><p>The following pruning steps are performed in the order<br>shown:</p>
+<h4 id="Pruning_Steps"><a href="#Pruning_Steps" class="headerlink" title="Pruning Steps"></a>Pruning Steps</h4><p>The following pruning steps are performed in the order<br>shown:</p>
 <ol>
 <li><p><strong>Prune the result type from the head of type-preserving<br>transforms</strong>.  Specifically, when</p>
 <ul>
@@ -552,10 +552,10 @@ foregroundColor = .<b>darkGray</b>()
 
 </li>
 </ol>
-<h5 id="Why_Does_Order_Matter?">Why Does Order Matter?</h5><p>Some steps below prune matches from the head of the first selector<br>piece, and some prune from the tail.  When <code>pruning restrictions</code>_<br>prevent both the head and tail from being pruned, prioritizing<br>head-pruning steps can keep method families together.  For example,<br>in NSFontDescriptor:</p>
-<pre><code><span class="func"><span class="keyword">func</span> <span class="title">fontDescriptorWithSymbolicTraits</span><span class="params">(<span class="number">_</span>: NSFontSymbolicTraits)</span></span> -&gt; <span class="type">NSFontDescriptor</span>
-<span class="func"><span class="keyword">func</span> <span class="title">fontDescriptorWithSize</span><span class="params">(<span class="number">_</span>: CGFloat)</span></span> -&gt; <span class="type">UIFontDescriptor</span>
-<span class="func"><span class="keyword">func</span> <span class="title">fontDescriptorWithMatrix</span><span class="params">(<span class="number">_</span>: CGAffineTransform)</span></span> -&gt;  <span class="type">UIFontDescriptor</span>
+<h5 id="Why_Does_Order_Matter_3F"><a href="#Why_Does_Order_Matter_3F" class="headerlink" title="Why Does Order Matter?"></a>Why Does Order Matter?</h5><p>Some steps below prune matches from the head of the first selector<br>piece, and some prune from the tail.  When <code>pruning restrictions</code>_<br>prevent both the head and tail from being pruned, prioritizing<br>head-pruning steps can keep method families together.  For example,<br>in NSFontDescriptor:</p>
+<pre><code>func fontDescriptorWithSymbolicTraits(_: NSFontSymbolicTraits) -&gt; NSFontDescriptor
+func fontDescriptorWithSize(_: CGFloat) -&gt; UIFontDescriptor
+func fontDescriptorWithMatrix(_: CGAffineTransform) -&gt;  UIFontDescriptor
 ...
 </code></pre><p>becomes:</p>
 <pre>
@@ -575,7 +575,7 @@ func withMatrix(_: CGAffineTransform) -> UIFontDescriptor
 </pre>
 
 
-<h4 id="Add_Default_Arguments">Add Default Arguments</h4><p>For any method that is not a single-parameter setter, default<br>arguments are added to parameters in the following cases:</p>
+<h4 id="Add_Default_Arguments"><a href="#Add_Default_Arguments" class="headerlink" title="Add Default Arguments"></a>Add Default Arguments</h4><p>For any method that is not a single-parameter setter, default<br>arguments are added to parameters in the following cases:</p>
 <ul>
 <li><p><strong>Nullable trailing closure parameters</strong> are given a default value of <code>nil</code>.</p>
 </li>
@@ -594,10 +594,10 @@ UIView.animateWithDuration(
 </pre>
 
 <p>to become:</p>
-<pre><code>rootViewController.present(alert, <span class="string">animated:</span> <span class="literal">true</span>)
+<pre><code>rootViewController.present(alert, animated: true)
 UIView.animateWithDuration(
-  <span class="number">0.2</span>, <span class="string">delay:</span> <span class="number">0.0</span>, <span class="string">animations:</span> { self.logo.alpha = <span class="number">0.0</span> }) { _ <span class="keyword">in</span> self.logo.hidden = <span class="literal">true</span> }
-</code></pre><h4 id="Add_First_Argument_Labels">Add First Argument Labels</h4><p>When the first parameter of a method is defaulted, <strong>split the first<br>selector piece if it contains a preposition</strong>, turning everything<br>starting with the last preposition into a <em>required</em> label for the<br>first argument. If the generated first argument label starts with the<br>word “with”, drop the “with”.</p>
+  0.2, delay: 0.0, animations: { self.logo.alpha = 0.0 }) { _ in self.logo.hidden = true }
+</code></pre><h4 id="Add_First_Argument_Labels"><a href="#Add_First_Argument_Labels" class="headerlink" title="Add First Argument Labels"></a>Add First Argument Labels</h4><p>When the first parameter of a method is defaulted, <strong>split the first<br>selector piece if it contains a preposition</strong>, turning everything<br>starting with the last preposition into a <em>required</em> label for the<br>first argument. If the generated first argument label starts with the<br>word “with”, drop the “with”.</p>
 <p>This heuristic eliminates words that refer only to the first<br>argument from call sites where the argument’s default value is<br>used. For example, instead of:</p>
 <pre>
 extension NSArray {
@@ -628,7 +628,7 @@ array.enumerateObjects() {               // OK
 }
 </objcbool></pre>
 
-<h4 id="Prepend_“is”_to_Boolean_Properties">Prepend “is” to Boolean Properties</h4><p><strong>Unless the name of a Boolean property contains</strong></p>
+<h4 id="Prepend__u201Cis_u201D_to_Boolean_Properties"><a href="#Prepend__u201Cis_u201D_to_Boolean_Properties" class="headerlink" title="Prepend “is” to Boolean Properties"></a>Prepend “is” to Boolean Properties</h4><p><strong>Unless the name of a Boolean property contains</strong></p>
 <ul>
 <li><p><strong>an auxiliary verb</strong> such as “is”, “has”, “may”, “should”, or<br>“will”</p>
 </li>
@@ -638,10 +638,10 @@ array.enumerateObjects() {               // OK
 <p><strong>prepend “is” to its name</strong>.</p>
 <p>For example:</p>
 <pre><code>extension NSBezierPath {
-  <span class="keyword">var</span> <span class="keyword">empty</span>: <span class="keyword">Bool</span>
+  var empty: Bool
 }
 
-<span class="keyword">if</span> path.<span class="keyword">empty</span> { ... }
+if path.empty { ... }
 </code></pre><p>will become</p>
 <pre>
 extension NSBezierPath {
@@ -651,15 +651,15 @@ extension NSBezierPath {
 if path.<b>isEmpty</b> { ... }
 </pre>
 
-<h3 id="Stripping_the_“NS”_Prefix">Stripping the “NS” Prefix</h3><p>The removal of the “NS” prefix for the Foundation module (or other<br>specifically identified modules) is a mechanical translation for all<br>global symbols defined within that module that can be performed in the<br>Clang importer. Note that this removal can create conflicts with the<br>standard library. For example, <code>NSString</code> and <code>NSArray</code> will become<br><code>String</code> and <code>Array</code>, respectively, and Foundation’s versions will<br>shadow the standard library’s versions. We are investigating several<br>ways to address this problem, including:</p>
+<h3 id="Stripping_the__u201CNS_u201D_Prefix"><a href="#Stripping_the__u201CNS_u201D_Prefix" class="headerlink" title="Stripping the “NS” Prefix"></a>Stripping the “NS” Prefix</h3><p>The removal of the “NS” prefix for the Foundation module (or other<br>specifically identified modules) is a mechanical translation for all<br>global symbols defined within that module that can be performed in the<br>Clang importer. Note that this removal can create conflicts with the<br>standard library. For example, <code>NSString</code> and <code>NSArray</code> will become<br><code>String</code> and <code>Array</code>, respectively, and Foundation’s versions will<br>shadow the standard library’s versions. We are investigating several<br>ways to address this problem, including:</p>
 <ul>
 <li><p>Retain the <code>NS</code> prefix on such classes.</p>
 </li>
 <li><p>Introduce some notion of submodules into Swift, so that these<br>classes would exist in a submodule for reference-semantic types<br>(e.g., one would refer to <code>Foundation.ReferenceTypes.Array</code> or similar).</p>
 </li>
 </ul>
-<h2 id="Impact_on_existing_code">Impact on existing code</h2><p>The proposed changes are massively source-breaking for Swift code that<br>makes use of Objective-C frameworks, and will require a migrator to<br>translate Swift 2 code into Swift 3 code. The <code>-Womit-needless-words</code><br>flag described in the <a href="#implementation-experience">Implementation<br>Experience</a> section can provide the basics<br>for such a migrator. Additionally, the compiler needs to provide good<br>error messages (with Fix-Its) for Swift code that refers to the old<br>(pre-transformed) Objective-C names, which could be achieved with some<br>combination of the Fix-Its described previously and a secondary name<br>lookup mechanism retaining the old names.</p>
-<h2 id="Acknowledgments">Acknowledgments</h2><p>The automatic translation described in this proposal has been<br>developed as part of the effort to produce the <a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design<br>Guidelines</a> with Dmitri Hrybenko, Ted Kremenek,<br>Chris Lattner, Alex Migicovsky, Max Moiseev, Ali Ozer, and Tony Parker.</p>
+<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>The proposed changes are massively source-breaking for Swift code that<br>makes use of Objective-C frameworks, and will require a migrator to<br>translate Swift 2 code into Swift 3 code. The <code>-Womit-needless-words</code><br>flag described in the <a href="/#implementation-experience">Implementation<br>Experience</a> section can provide the basics<br>for such a migrator. Additionally, the compiler needs to provide good<br>error messages (with Fix-Its) for Swift code that refers to the old<br>(pre-transformed) Objective-C names, which could be achieved with some<br>combination of the Fix-Its described previously and a secondary name<br>lookup mechanism retaining the old names.</p>
+<h2 id="Acknowledgments"><a href="#Acknowledgments" class="headerlink" title="Acknowledgments"></a>Acknowledgments</h2><p>The automatic translation described in this proposal has been<br>developed as part of the effort to produce the <a href="https://swift.org/documentation/api-design-guidelines.html" title="API Design Guidelines" target="_blank" rel="external">Swift API Design<br>Guidelines</a> with Dmitri Hrybenko, Ted Kremenek,<br>Chris Lattner, Alex Migicovsky, Max Moiseev, Ali Ozer, and Tony Parker.</p>
 </span>
       
     </div>
@@ -677,7 +677,7 @@ if path.<b>isEmpty</b> { ... }
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/15/swift/schedule/" rel="prev">swift schedule</a>
+              <a href="/2015/12/15/swift/proposals/0006-apply-api-guidelines-to-the-standard-library/" rel="prev">0006-apply-api-guidelines-to-the-standard-library</a>
             
           </div>
 
@@ -749,7 +749,7 @@ if path.<b>isEmpty</b> { ... }
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -763,7 +763,7 @@ if path.<b>isEmpty</b> { ... }
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -812,7 +812,7 @@ if path.<b>isEmpty</b> { ... }
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Better_Translation_of_Objective-C_APIs_Into_Swift"><span class="nav-number">1.</span> <span class="nav-text">Better Translation of Objective-C APIs Into Swift</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.2.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proposed_solution"><span class="nav-number">1.3.</span> <span class="nav-text">Proposed solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation_Experience"><span class="nav-number">1.4.</span> <span class="nav-text">Implementation Experience</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Detailed_design"><span class="nav-number">1.5.</span> <span class="nav-text">Detailed design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prune_redundant_type_names"><span class="nav-number">1.5.1.</span> <span class="nav-text">Prune redundant type names</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Identifying_type_names"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">Identifying type names</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Matching"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">Matching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pruning_Restrictions"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">Pruning Restrictions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pruning_Steps"><span class="nav-number">1.5.1.4.</span> <span class="nav-text">Pruning Steps</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Why_Does_Order_Matter?"><span class="nav-number">1.5.1.4.1.</span> <span class="nav-text">Why Does Order Matter?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add_Default_Arguments"><span class="nav-number">1.5.1.5.</span> <span class="nav-text">Add Default Arguments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add_First_Argument_Labels"><span class="nav-number">1.5.1.6.</span> <span class="nav-text">Add First Argument Labels</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prepend_“is”_to_Boolean_Properties"><span class="nav-number">1.5.1.7.</span> <span class="nav-text">Prepend “is” to Boolean Properties</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stripping_the_“NS”_Prefix"><span class="nav-number">1.5.2.</span> <span class="nav-text">Stripping the “NS” Prefix</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Impact_on_existing_code"><span class="nav-number">1.6.</span> <span class="nav-text">Impact on existing code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Acknowledgments"><span class="nav-number">1.7.</span> <span class="nav-text">Acknowledgments</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Better_Translation_of_Objective-C_APIs_Into_Swift"><span class="nav-number">1.</span> <span class="nav-text">Better Translation of Objective-C APIs Into Swift</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.2.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proposed_solution"><span class="nav-number">1.3.</span> <span class="nav-text">Proposed solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation_Experience"><span class="nav-number">1.4.</span> <span class="nav-text">Implementation Experience</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Detailed_design"><span class="nav-number">1.5.</span> <span class="nav-text">Detailed design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prune_redundant_type_names"><span class="nav-number">1.5.1.</span> <span class="nav-text">Prune redundant type names</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Identifying_type_names"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">Identifying type names</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Matching"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">Matching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pruning_Restrictions"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">Pruning Restrictions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pruning_Steps"><span class="nav-number">1.5.1.4.</span> <span class="nav-text">Pruning Steps</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Why_Does_Order_Matter_3F"><span class="nav-number">1.5.1.4.1.</span> <span class="nav-text">Why Does Order Matter?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add_Default_Arguments"><span class="nav-number">1.5.1.5.</span> <span class="nav-text">Add Default Arguments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add_First_Argument_Labels"><span class="nav-number">1.5.1.6.</span> <span class="nav-text">Add First Argument Labels</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prepend__u201Cis_u201D_to_Boolean_Properties"><span class="nav-number">1.5.1.7.</span> <span class="nav-text">Prepend “is” to Boolean Properties</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stripping_the__u201CNS_u201D_Prefix"><span class="nav-number">1.5.2.</span> <span class="nav-text">Stripping the “NS” Prefix</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Impact_on_existing_code"><span class="nav-number">1.6.</span> <span class="nav-text">Impact on existing code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Acknowledgments"><span class="nav-number">1.7.</span> <span class="nav-text">Acknowledgments</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -829,7 +829,7 @@ if path.<b>isEmpty</b> { ... }
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

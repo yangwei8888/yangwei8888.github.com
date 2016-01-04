@@ -261,7 +261,7 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="特性（Attributes）">特性（Attributes）</h1><hr>
+        <span itemprop="articleBody"><h1 id="u7279_u6027_uFF08Attributes_uFF09"><a href="#u7279_u6027_uFF08Attributes_uFF09" class="headerlink" title="特性（Attributes）"></a>特性（Attributes）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/Hawstein" target="_blank" rel="external">Hawstein</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></p>
@@ -269,8 +269,8 @@
 </blockquote>
 <p>本页内容包括：</p>
 <ul>
-<li><a href="#declaration_attributes">声明特性</a></li>
-<li><a href="#type_attributes">类型特性</a></li>
+<li><a href="/#declaration_attributes">声明特性</a></li>
+<li><a href="/#type_attributes">类型特性</a></li>
 </ul>
 <p>特性提供了关于声明和类型的更多信息。在Swift中有两类特性，用于修饰声明的以及用于修饰类型的。</p>
 <p>通过以下方式指定一个特性：符号<code>@</code>后面跟特性名，如果包含参数，则把参数带上：</p>
@@ -279,9 +279,9 @@
 </blockquote>
 <p>有些声明特性通过接收参数来指定特性的更多信息以及它是如何修饰一个特定的声明的。这些特性的参数写在小括号内，它们的格式由它们所属的特性来定义。</p>
 <p><a name="declaration_attributes"></a></p>
-<h2 id="声明特性">声明特性</h2><p>声明特性只能应用于声明。然而，你也可以将<code>noreturn</code>特性应用于函数或方法类型。</p>
+<h2 id="u58F0_u660E_u7279_u6027"><a href="#u58F0_u660E_u7279_u6027" class="headerlink" title="声明特性"></a>声明特性</h2><p>声明特性只能应用于声明。然而，你也可以将<code>noreturn</code>特性应用于函数或方法类型。</p>
 <p><code>autoclosure</code></p>
-<p>这个特性通过把表达式自动封装成无参数的闭包来延迟表达式的计算。它可以声明返回表达式自身类型的没有参数的方法类型，也可以用于函数参数的声明。含有<code>autoclosure</code>特性的声明同时也具有<code>noescape</code>的特性，除非传递可选参数<code>escaping</code>.关于怎样使用<code>autoclosure</code>特性的例子，参见<a href="./03_Types.html#function_type">函数类型</a>.</p>
+<p>这个特性通过把表达式自动封装成无参数的闭包来延迟表达式的计算。它可以声明返回表达式自身类型的没有参数的方法类型，也可以用于函数参数的声明。含有<code>autoclosure</code>特性的声明同时也具有<code>noescape</code>的特性，除非传递可选参数<code>escaping</code>.关于怎样使用<code>autoclosure</code>特性的例子，参见<a href="/./03_Types.html#function_type">函数类型</a>.</p>
 <p><code>available</code></p>
 <p>将<code>available</code>特性用于声明时，意味着该声明的生命周期会依赖于特定的平台和操作系统版本。</p>
 <p><code>available</code>特性经常与参数列表一同出现，该参数列表至少有两个参数，参数之间由逗号分隔。这些参数由以下这些平台名字中的一个起头：</p>
@@ -310,12 +310,12 @@
 </ul>
 <p>你可以将<code>renamed</code>参数和<code>unavailable</code>参数以及类型别名声明组合使用，以向用户表示：在你的代码中，一个声明已经被重命名。当一个声明的名字在一个框架或者库的不同发布版本间发生变化时，这会相当有用。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// First release</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyProtocol</span> </span>&#123;</span><br><span class="line">    <span class="comment">// protocol definition</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Subsequent release renames MyProtocol</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyRenamedProtocol</span> </span>&#123;</span><br><span class="line">    <span class="comment">// protocol definition</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@available(*, unavailable, renamed=<span class="string">"MyRenamedProtocol"</span>)</span><br><span class="line"><span class="keyword">typealias</span> <span class="type">MyProtocol</span> = <span class="type">MyRenamedProtocol</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Subsequent release renames MyProtocol</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyRenamedProtocol</span> </span>&#123;</span><br><span class="line">    <span class="comment">// protocol definition</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="preprocessor">@available</span>(*, unavailable, renamed=<span class="string">"MyRenamedProtocol"</span>)</span><br><span class="line"><span class="keyword">typealias</span> <span class="type">MyProtocol</span> = <span class="type">MyRenamedProtocol</span></span><br></pre></td></tr></table></figure>
 <p>你可以在一个单独的声明上使用多个<code>available</code>特性，以详细说明该声明在不同平台上的有效性。编译器只有在当前的目标平台和<code>available</code>特性中指定的平台匹配时，才会使用<code>available</code>特性。</p>
 <p>如果<code>available</code>特性除了平台名称参数外，只指定了一个<code>introduced</code>参数，那么可以使用以下简写语法代替：</p>
 <p>@available(<code>platform name</code> <code>version number</code>, *)</p>
 <p><code>available</code>特性的简写语法可以简明地表达出多个平台的可用性。尽管这两种形式在功能上是相同的，但请尽可能地使用简明语法形式。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@available(iOS <span class="number">8.0</span>, <span class="type">OSX</span> <span class="number">10.10</span>, *)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// class definition</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@available</span>(iOS <span class="number">8.0</span>, <span class="type">OSX</span> <span class="number">10.10</span>, *)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// class definition</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>objc</code></p>
 <p>该特性用于修饰任何可以在Objective-C中表示的声明。比如，非嵌套类、协议、非泛型枚举（仅限整型值类型）、类和协议的属性和方法（包括<code>getter</code>和<code>setter</code>）、构造器、析构器以及下标。<code>objc</code>特性告诉编译器这个声明可以在Objective-C代码中使用。</p>
 <p>标有<code>objc</code>特性的类必须继承自Objective-C中定义的类。如果你将<code>objc</code>特性应用于一个类或协议，它也会隐式地应用于那个类的成员或协议。对于标记了<code>objc</code>特性的类，编译器会隐式地为它的子类添加<code>objc</code>特性。标记了<code>objc</code>特性的协议不能继承没有标记<code>objc</code>的协议。</p>
@@ -354,10 +354,10 @@
 <li><p><code>mutable_variant</code>参数用于提供变异方法的名称，如果未变异方法以一个可变的值被调用而且其结果并未被使用时，应该使用此变异方法。格式如下（方法名有字符串构成）：</p><p><code>mutable_variant=method name</code></p><p><br>比如，Swift标准库同时提供了变异方法<code>sortInPlace()</code>和未变异方法<code>sort()</code>集合，它们的元素生成器符合<code>Comparable</code>协议。如果你调用了<code>sort()</code>方法，而没有使用它的结果，其实很有可能，你是打算使用变异方法<code>sortInPlace()</code>。</p>
 </li>
 </ul>
-<h3 id="Interface_Builder使用的声明特性">Interface Builder使用的声明特性</h3><p>Interface Builder特性是Interface Builder用来与Xcode同步的声明特性。Swift提供了以下的Interface Builder特性：<code>IBAction</code>，<code>IBDesignable</code>，<code>IBInspectable</code>，以及<code>IBOutlet</code>。这些特性与Objective-C中对应的特性在概念上是相同的。</p>
+<h3 id="Interface_Builder_u4F7F_u7528_u7684_u58F0_u660E_u7279_u6027"><a href="#Interface_Builder_u4F7F_u7528_u7684_u58F0_u660E_u7279_u6027" class="headerlink" title="Interface Builder使用的声明特性"></a>Interface Builder使用的声明特性</h3><p>Interface Builder特性是Interface Builder用来与Xcode同步的声明特性。Swift提供了以下的Interface Builder特性：<code>IBAction</code>，<code>IBDesignable</code>，<code>IBInspectable</code>，以及<code>IBOutlet</code>。这些特性与Objective-C中对应的特性在概念上是相同的。</p>
 <p><code>IBOutlet</code>和<code>IBInspectable</code>用于修饰一个类的属性声明；<code>IBAction</code>特性用于修饰一个类的方法声明；<code>IBDesignable</code>用于修饰类的声明。</p>
 <p><a name="type_attributes"></a></p>
-<h2 id="类型特性">类型特性</h2><p>类型特性只能用于修饰类型。然而，你也可以用<code>noreturn</code>特性去修饰函数或方法声明。</p>
+<h2 id="u7C7B_u578B_u7279_u6027"><a href="#u7C7B_u578B_u7279_u6027" class="headerlink" title="类型特性"></a>类型特性</h2><p>类型特性只能用于修饰类型。然而，你也可以用<code>noreturn</code>特性去修饰函数或方法声明。</p>
 <p><code>convention</code></p>
 <p>该特性用于函数的类型，它指出函数调用的约定。</p>
 <p><code>convention</code>特性总是与下面的参数之一一起出现。</p>
@@ -373,7 +373,7 @@
 <p><code>noreturn</code></p>
 <p>该特性用于修饰函数或方法的类型，表明该函数或方法不会返回到它的调用者中去。你也可以用它标记函数或方法的声明，表示函数或方法的相应类型，<code>T</code>，是<code>@noreturn T</code>。</p>
 <blockquote>
-<p>特性语法<br><em>特性</em> → <strong>@</strong> <a href="#attribute_name"><em>特性名</em></a> <a href="#attribute_argument_clause"><em>特性参数子句</em></a> (可选)<br><em>特性名</em> → <a href="02_Lexical_Structure.html#identifiers"><em>标识符</em></a><br><em>特性参数子句</em> → <strong>(</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>特性(Attributes)列表</em> → <a href="#attribute"><em>特色</em></a> <a href="#attributes"><em>特性(Attributes)列表</em></a> (可选)<br><em>平衡令牌列表</em> → <a href="#balanced_token"><em>平衡令牌</em></a> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选)<br><em>平衡令牌</em> → <strong>(</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>平衡令牌</em> → <strong>[</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>]</strong><br><em>平衡令牌</em> → <strong>{</strong> <a href="#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>}</strong><br><em>平衡令牌</em> → <strong>任意标识符, 关键字, 字面量或运算符</strong><br><em>平衡令牌</em> → <strong>任意标点除了(, ), [, ], {, 或 }</strong></p>
+<p>特性语法<br><em>特性</em> → <strong>@</strong> <a href="/#attribute_name"><em>特性名</em></a> <a href="/#attribute_argument_clause"><em>特性参数子句</em></a> (可选)<br><em>特性名</em> → <a href="/02_Lexical_Structure.html#identifiers"><em>标识符</em></a><br><em>特性参数子句</em> → <strong>(</strong> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>特性(Attributes)列表</em> → <a href="/#attribute"><em>特色</em></a> <a href="/#attributes"><em>特性(Attributes)列表</em></a> (可选)<br><em>平衡令牌列表</em> → <a href="/#balanced_token"><em>平衡令牌</em></a> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选)<br><em>平衡令牌</em> → <strong>(</strong> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>平衡令牌</em> → <strong>[</strong> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>]</strong><br><em>平衡令牌</em> → <strong>{</strong> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>}</strong><br><em>平衡令牌</em> → <strong>任意标识符, 关键字, 字面量或运算符</strong><br><em>平衡令牌</em> → <strong>任意标点除了(, ), [, ], {, 或 }</strong></p>
 </blockquote>
 </span>
       
@@ -464,7 +464,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -478,7 +478,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -527,7 +527,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#特性（Attributes）"><span class="nav-number">1.</span> <span class="nav-text">特性（Attributes）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#声明特性"><span class="nav-number">1.1.</span> <span class="nav-text">声明特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Interface_Builder使用的声明特性"><span class="nav-number">1.1.1.</span> <span class="nav-text">Interface Builder使用的声明特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型特性"><span class="nav-number">1.2.</span> <span class="nav-text">类型特性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u7279_u6027_uFF08Attributes_uFF09"><span class="nav-number">1.</span> <span class="nav-text">特性（Attributes）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u58F0_u660E_u7279_u6027"><span class="nav-number">1.1.</span> <span class="nav-text">声明特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Interface_Builder_u4F7F_u7528_u7684_u58F0_u660E_u7279_u6027"><span class="nav-number">1.1.1.</span> <span class="nav-text">Interface Builder使用的声明特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7C7B_u578B_u7279_u6027"><span class="nav-number">1.2.</span> <span class="nav-text">类型特性</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -544,7 +544,7 @@
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

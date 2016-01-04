@@ -258,23 +258,23 @@ Where 子句
       
 
       
-        <span itemprop="articleBody"><h1 id="泛型参数（Generic_Parameters_and_Arguments）">泛型参数（Generic Parameters and Arguments）</h1><hr>
+        <span itemprop="articleBody"><h1 id="u6CDB_u578B_u53C2_u6570_uFF08Generic_Parameters_and_Arguments_uFF09"><a href="#u6CDB_u578B_u53C2_u6570_uFF08Generic_Parameters_and_Arguments_uFF09" class="headerlink" title="泛型参数（Generic Parameters and Arguments）"></a>泛型参数（Generic Parameters and Arguments）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/fd5788" target="_blank" rel="external">fd5788</a><br>校对：<a href="https://github.com/yankuangshi" target="_blank" rel="external">yankuangshi</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
 <p>2.0<br>翻译+校对：<a href="https:github.com/wardenNScaiyi" target="_blank" rel="external">wardenNScaiyi</a></p>
 </blockquote>
 <p>本页包含内容：</p>
 <ul>
-<li><a href="#generic_parameter">泛型形参子句</a><ul>
-<li><a href="#where_clauses">Where 子句</a></li>
+<li><a href="/#generic_parameter">泛型形参子句</a><ul>
+<li><a href="/#where_clauses">Where 子句</a></li>
 </ul>
 </li>
-<li><a href="#generic_argument">泛型实参子句</a></li>
+<li><a href="/#generic_argument">泛型实参子句</a></li>
 </ul>
 <p>本节涉及泛型类型、泛型函数以及泛型构造器的参数，包括形参和实参。声明泛型类型、函数或构造器时，须指定相应的类型参数。类型参数相当于一个占位符，当实例化泛型类型、调用泛型函数或泛型构造器时，就用具体的类型实参替代之。</p>
-<p>关于 Swift 语言的泛型概述，请参阅 <a href="../chapter2/23_Generics.md">泛型</a>。</p>
+<p>关于 Swift 语言的泛型概述，请参阅 <a href="/../chapter2/23_Generics.md">泛型</a>。</p>
 <p><a name="generic_parameter"></a></p>
-<h2 id="泛型形参子句">泛型形参子句</h2><p>泛型形参子句指定泛型类型或函数的类型形参，以及这些参数相关的约束和要求。泛型形参子句用尖括号（<code>&lt;&gt;</code>）包住，并且有以下两种形式：</p>
+<h2 id="u6CDB_u578B_u5F62_u53C2_u5B50_u53E5"><a href="#u6CDB_u578B_u5F62_u53C2_u5B50_u53E5" class="headerlink" title="泛型形参子句"></a>泛型形参子句</h2><p>泛型形参子句指定泛型类型或函数的类型形参，以及这些参数相关的约束和要求。泛型形参子句用尖括号（<code>&lt;&gt;</code>）包住，并且有以下两种形式：</p>
 <blockquote>
 <p>&lt;<code>泛型形参列表</code>&gt;<br>&lt;<code>泛型形参列表</code> where <code>类型要求</code>&gt;</p>
 </blockquote>
@@ -288,7 +288,7 @@ Where 子句
 <p>例如，因为 <code>Int</code> 和 <code>Double</code> 均满足<code>Comparable</code>协议，所以该函数可以接受这两种类型。与泛型类型相反，调用泛型函数或构造器时不需要指定泛型实参子句。类型实参由传递给函数或构造器的实参推断而出。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">simpleMax(<span class="number">17</span>, <span class="number">42</span>) <span class="comment">// T 被推断为 Int 类型</span></span><br><span class="line">simpleMax(<span class="number">3.14159</span>, <span class="number">2.71828</span>) <span class="comment">// T 被推断为 Double 类型</span></span><br></pre></td></tr></table></figure>
 <p><a name="where_clauses"></a></p>
-<h3 id="Where_子句">Where 子句</h3><p>要想对类型形参及其关联类型指定额外要求，可以在泛型形参列表之后添加 <code>where</code> 子句。<code>where</code> 子句由关键字 <code>where</code> 及其后的用逗号分隔的一个或多个要求组成。</p>
+<h3 id="Where__u5B50_u53E5"><a href="#Where__u5B50_u53E5" class="headerlink" title="Where 子句"></a>Where 子句</h3><p>要想对类型形参及其关联类型指定额外要求，可以在泛型形参列表之后添加 <code>where</code> 子句。<code>where</code> 子句由关键字 <code>where</code> 及其后的用逗号分隔的一个或多个要求组成。</p>
 <p><code>where</code> 子句中的要求用于指明该类型形参继承自某个类或符合某个协议或协议组合。尽管 <code>where</code> 子句提供了语法糖使其有助于表达类型形参上的简单约束（如 <code>T: Comparable</code> 等同于 <code>T where T: Comparable</code>，等等），但是依然可以用来对类型形参及其关联类型提供更复杂的约束。如，<code>&lt;T where T: C, T: P&gt;</code> 表示泛型类型 <code>T</code> 继承自类 <code>C</code> 且符合协议 <code>P</code>。</p>
 <p>如上所述，可以强制约束类型形参的关联类型符合某个协议。例如 <code>&lt;S: SequenceType where S.Generator.Element: Equatable&gt;</code> 表示 <code>S</code> 符合 <code>SequenceType</code> 协议，而且 <code>S</code> 的关联类型 <code>S.Generator.Element</code> 符合 <code>Eauatable</code> 协议。这种约束确保了序列中的每个元素都是符合 <code>Equatable</code> 协议的。</p>
 <p>也可以用操作符 <code>==</code> 来指定两个类型必须相同。例如，泛型形参子句 <code>&lt;S1: SequenceType, S2: SequenceType where S1.Generator.Element == S2.Generator.Element&gt;</code> 表示 <code>S1</code> 和 <code>S2</code> 必须都符合 <code>SequenceType</code> 协议，而且两个序列中的元素类型必须相同。</p>
@@ -299,18 +299,18 @@ Where 子句
 </blockquote>
 <p><a name="generic-parameter-clause"></a></p>
 <blockquote>
-<p><em>泛型形参子句</em> → <strong>&lt;</strong> <a href="#generic-parameter-list"><em>泛型形参列表</em></a> <a href="#requirement-clause"><em>约束子句</em></a><sub>可选</sub> <strong>&gt;</strong><br><a name="generic-parameter-list"></a><br><em>泛型形参列表</em> → <a href="#generic-parameter"><em>泛形形参</em></a> | <a href="#generic-parameter"><em>泛形形参</em></a> <strong>,</strong> <a href="#generic-parameter-list"><em>泛型形参列表</em></a><br><a name="generic-parameter"></a><br><em>泛形形参</em> → <a href="03_Types.html#type-name"><em>类型名称</em></a><br><em>泛形形参</em> → <a href="03_Types.html#type-name"><em>类型名称</em></a> <strong>:</strong> <a href="03_Types.html#type-identifier"><em>类型标识符</em></a><br><em>泛形形参</em> → <a href="03_Types.html#type-name"><em>类型名称</em></a> <strong>:</strong> <a href="03_Types.html#protocol-composition-type"><em>协议合成类型</em></a>  </p>
+<p><em>泛型形参子句</em> → <strong>&lt;</strong> <a href="/#generic-parameter-list"><em>泛型形参列表</em></a> <a href="/#requirement-clause"><em>约束子句</em></a><sub>可选</sub> <strong>&gt;</strong><br><a name="generic-parameter-list"></a><br><em>泛型形参列表</em> → <a href="/#generic-parameter"><em>泛形形参</em></a> | <a href="/#generic-parameter"><em>泛形形参</em></a> <strong>,</strong> <a href="/#generic-parameter-list"><em>泛型形参列表</em></a><br><a name="generic-parameter"></a><br><em>泛形形参</em> → <a href="/03_Types.html#type-name"><em>类型名称</em></a><br><em>泛形形参</em> → <a href="/03_Types.html#type-name"><em>类型名称</em></a> <strong>:</strong> <a href="/03_Types.html#type-identifier"><em>类型标识符</em></a><br><em>泛形形参</em> → <a href="/03_Types.html#type-name"><em>类型名称</em></a> <strong>:</strong> <a href="/03_Types.html#protocol-composition-type"><em>协议合成类型</em></a>  </p>
 </blockquote>
 <p><a name="requirement-clause"></a></p>
 <blockquote>
-<p><em>约束子句</em> → <strong>where</strong> <a href="#requirement-list"><em>约束列表</em></a><br><a name="requirement-list"></a><br><em>约束列表</em> → <a href="#requirement"><em>约束</em></a> | <a href="#requirement"><em>约束</em></a> <strong>,</strong> <a href="#requirement-list"><em>约束列表</em></a><br><a name="requirement"></a><br><em>约束</em> → <a href="#conformance-requirement"><em>一致性约束</em></a> | <a href="#same-type-requirement"><em>同类型约束</em></a>  </p>
+<p><em>约束子句</em> → <strong>where</strong> <a href="/#requirement-list"><em>约束列表</em></a><br><a name="requirement-list"></a><br><em>约束列表</em> → <a href="/#requirement"><em>约束</em></a> | <a href="/#requirement"><em>约束</em></a> <strong>,</strong> <a href="/#requirement-list"><em>约束列表</em></a><br><a name="requirement"></a><br><em>约束</em> → <a href="/#conformance-requirement"><em>一致性约束</em></a> | <a href="/#same-type-requirement"><em>同类型约束</em></a>  </p>
 </blockquote>
 <p><a name="conformance-requirement"></a></p>
 <blockquote>
-<p><em>一致性约束</em> → <a href="03_Types.html#type-identifier"><em>类型标识符</em></a> <strong>:</strong> <a href="03_Types.html#type-identifier"><em>类型标识符</em></a><br><em>一致性约束</em> → <a href="03_Types.html#type-identifier"><em>类型标识符</em></a> <strong>:</strong> <a href="03_Types.html#protocol-composition-type"><em>协议合成类型</em></a><br><a name="same-type-requirement"></a><br><em>同类型约束</em> → <a href="03_Types.html#type-identifier"><em>类型标识符</em></a> <strong>==</strong> <a href="03_Types.html#type"><em>类型</em></a>  </p>
+<p><em>一致性约束</em> → <a href="/03_Types.html#type-identifier"><em>类型标识符</em></a> <strong>:</strong> <a href="/03_Types.html#type-identifier"><em>类型标识符</em></a><br><em>一致性约束</em> → <a href="/03_Types.html#type-identifier"><em>类型标识符</em></a> <strong>:</strong> <a href="/03_Types.html#protocol-composition-type"><em>协议合成类型</em></a><br><a name="same-type-requirement"></a><br><em>同类型约束</em> → <a href="/03_Types.html#type-identifier"><em>类型标识符</em></a> <strong>==</strong> <a href="/03_Types.html#type"><em>类型</em></a>  </p>
 </blockquote>
 <p><a name="generic_argument"></a></p>
-<h2 id="泛型实参子句">泛型实参子句</h2><p>泛型实参子句指定泛型类型的类型实参。泛型实参子句用尖括号（<code>&lt;&gt;</code>）包住，形式如下：</p>
+<h2 id="u6CDB_u578B_u5B9E_u53C2_u5B50_u53E5"><a href="#u6CDB_u578B_u5B9E_u53C2_u5B50_u53E5" class="headerlink" title="泛型实参子句"></a>泛型实参子句</h2><p>泛型实参子句指定泛型类型的类型实参。泛型实参子句用尖括号（<code>&lt;&gt;</code>）包住，形式如下：</p>
 <blockquote>
 <p>&lt;<code>泛型实参列表</code>&gt;</p>
 </blockquote>
@@ -319,9 +319,9 @@ Where 子句
 <p>泛型 <code>Dictionary</code> 类型的特化版本，<code>Dictionary&lt;String, Int&gt;</code> 就是用具体的 <code>String</code> 和 <code>Int</code> 类型替代泛型类型 <code>Key: Hashable</code> 和 <code>Value</code> 产生的。每一个类型实参必须满足它所替代的泛型形参的所有约束，包括任何 <code>where</code> 子句所指定的额外的关联类型要求。上面的例子中，类型形参 <code>Key</code> 的类型必须符合 <code>Hashable</code> 协议，因此 <code>String</code> 也必须满足 <code>Hashable</code> 协议。</p>
 <p>可以用本身就是泛型类型的特化版本的类型实参替代类型形参（假设已满足合适的约束和关联类型要求）。例如，为了生成一个元素类型是整型数组的数组，可以用数组的特化版本 <code>Array&lt;Int&gt;</code> 替代泛型类型 <code>Array&lt;T&gt;</code> 的类型形参 <code>T</code> 来实现。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arrayOfArrays: <span class="type">Array</span>&lt;<span class="type">Array</span>&lt;<span class="type">Int</span>&gt;&gt; = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</span><br></pre></td></tr></table></figure>
-<p>如 <a href="#generic_parameter">泛型形参子句</a> 所述，不能用泛型实参子句来指定泛型函数或构造器的类型实参。</p>
+<p>如 <a href="/#generic_parameter">泛型形参子句</a> 所述，不能用泛型实参子句来指定泛型函数或构造器的类型实参。</p>
 <blockquote>
-<p>泛型实参子句语法<br><a name="generic-argument-clause"></a><br><em>泛型实参子句</em> → <strong>&lt;</strong> <a href="#generic-argument-list"><em>泛型实参列表</em></a> <strong>&gt;</strong><br><a name="generic-argument-list"></a><br><em>泛型实参列表</em> → <a href="#generic-argument"><em>泛型实参</em></a> | <a href="#generic-argument"><em>泛型实参</em></a> <strong>,</strong> <a href="#generic-argument-list"><em>泛型实参列表</em></a><br><a name="generic-argument"></a><br><em>泛型实参</em> → <a href="03_Types.html#type"><em>类型</em></a>  </p>
+<p>泛型实参子句语法<br><a name="generic-argument-clause"></a><br><em>泛型实参子句</em> → <strong>&lt;</strong> <a href="/#generic-argument-list"><em>泛型实参列表</em></a> <strong>&gt;</strong><br><a name="generic-argument-list"></a><br><em>泛型实参列表</em> → <a href="/#generic-argument"><em>泛型实参</em></a> | <a href="/#generic-argument"><em>泛型实参</em></a> <strong>,</strong> <a href="/#generic-argument-list"><em>泛型实参列表</em></a><br><a name="generic-argument"></a><br><em>泛型实参</em> → <a href="/03_Types.html#type"><em>类型</em></a>  </p>
 </blockquote>
 </span>
       
@@ -412,7 +412,7 @@ Where 子句
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -426,7 +426,7 @@ Where 子句
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -475,7 +475,7 @@ Where 子句
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#泛型参数（Generic_Parameters_and_Arguments）"><span class="nav-number">1.</span> <span class="nav-text">泛型参数（Generic Parameters and Arguments）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型形参子句"><span class="nav-number">1.1.</span> <span class="nav-text">泛型形参子句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Where_子句"><span class="nav-number">1.1.1.</span> <span class="nav-text">Where 子句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型实参子句"><span class="nav-number">1.2.</span> <span class="nav-text">泛型实参子句</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u6CDB_u578B_u53C2_u6570_uFF08Generic_Parameters_and_Arguments_uFF09"><span class="nav-number">1.</span> <span class="nav-text">泛型参数（Generic Parameters and Arguments）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u6CDB_u578B_u5F62_u53C2_u5B50_u53E5"><span class="nav-number">1.1.</span> <span class="nav-text">泛型形参子句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Where__u5B50_u53E5"><span class="nav-number">1.1.1.</span> <span class="nav-text">Where 子句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6CDB_u578B_u5B9E_u53C2_u5B50_u53E5"><span class="nav-number">1.2.</span> <span class="nav-text">泛型实参子句</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -492,7 +492,7 @@ Where 子句
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

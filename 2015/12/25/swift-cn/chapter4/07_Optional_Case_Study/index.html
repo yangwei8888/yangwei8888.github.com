@@ -252,27 +252,27 @@ Swift中更简便的方法
       
 
       
-        <span itemprop="articleBody"><h1 id="可选类型完美解决占位问题">可选类型完美解决占位问题</h1><hr>
+        <span itemprop="articleBody"><h1 id="u53EF_u9009_u7C7B_u578B_u5B8C_u7F8E_u89E3_u51B3_u5360_u4F4D_u95EE_u9898"><a href="#u53EF_u9009_u7C7B_u578B_u5B8C_u7F8E_u89E3_u51B3_u5360_u4F4D_u95EE_u9898" class="headerlink" title="可选类型完美解决占位问题"></a>可选类型完美解决占位问题</h1><hr>
 <blockquote>
 <p>翻译：<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队翻译组-Tyrion</a><br>校对：<a href="http://weibo.com/littlekok/" target="_blank" rel="external">老码团队翻译组-Ayra</a></p>
 </blockquote>
 <p>本页包含内容：</p>
 <ul>
-<li><a href="#add-function">为Dictionary增加objectsForKeys函数</a></li>
-<li><a href="##easy-function">Swift中更简便的方法</a></li>
-<li><a href="#nested-optional">内嵌可选类型</a></li>
-<li><a href="#provide-default">提供一个默认值</a></li>
+<li><a href="/#add-function">为Dictionary增加objectsForKeys函数</a></li>
+<li><a href="/##easy-function">Swift中更简便的方法</a></li>
+<li><a href="/#nested-optional">内嵌可选类型</a></li>
+<li><a href="/#provide-default">提供一个默认值</a></li>
 </ul>
 <p>可选类型是Swift中新引入的，功能很强大。在这篇博文里讨论的，是在Swift里，如何通过可选类型来保证强类型的安全性。作为例子，我们来创建一个Objective-C API的Swift版本，但实际上Swift本身并不需要这样的API。</p>
 <p><a name="#add-function"></a></p>
-<h4 id="为Dictionary增加objectsForKeys函数">为Dictionary增加objectsForKeys函数</h4><p>在Objective-C中，<figure class="highlight"><figcaption><span>这个方法需要一个```NSArray```数组作为键值参数，然后返回一个包含相关值的数组。文档里写到："返回数组中的第N个值，和输入数组中的第N个值相对应"，那如果有某个键值在字典里不存在呢？于是就有了```notFoundMarker```作为返回提示。比如第三个键值没有找到，那么在返回数组中第三个值就是这个```notFoundMarker```，而不是字典中的第三个值，但是这个值只是用来提醒原字典中没有找到对应值，但在返回数组中该元素存在，且用```notFoundMarker```作为占位符，因为这个对象不能直接使用，所以在Foundation框架中有个专门的类处理这个情况：```NSNull```。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#22312;Swift&#20013;&#65292;```Dictionary```&#31867;&#27809;&#26377;&#31867;&#20284;```objectsForKeys```&#30340;&#20989;&#25968;&#65292;&#20026;&#20102;&#35828;&#26126;&#38382;&#39064;&#65292;&#25105;&#20204;&#21160;&#25163;&#21152;&#19968;&#20010;&#65292;&#24182;&#19988;&#20351;&#20854;&#25104;&#20026;&#25805;&#20316;&#23383;&#20856;&#20540;&#30340;&#36890;&#29992;&#26041;&#27861;&#12290;&#25105;&#20204;&#21487;&#20197;&#29992;```extension```&#26469;&#23454;&#29616;&#65306;&#10;&#10;```swift&#10;extension Dictionary&#123;&#10;&#9;func valuesForKeys(keys:[K], notFoundMarker: V )-&#62;[V]&#123;&#10;&#9;&#9;//&#20855;&#20307;&#23454;&#29616;&#20195;&#30721;&#21518;&#38754;&#20250;&#20889;&#21040;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="u4E3ADictionary_u589E_u52A0objectsForKeys_u51FD_u6570"><a href="#u4E3ADictionary_u589E_u52A0objectsForKeys_u51FD_u6570" class="headerlink" title="为Dictionary增加objectsForKeys函数"></a>为Dictionary增加objectsForKeys函数</h4><p>在Objective-C中，<figure class="highlight"><figcaption><span>这个方法需要一个```NSArray```数组作为键值参数，然后返回一个包含相关值的数组。文档里写到："返回数组中的第N个值，和输入数组中的第N个值相对应"，那如果有某个键值在字典里不存在呢？于是就有了```notFoundMarker```作为返回提示。比如第三个键值没有找到，那么在返回数组中第三个值就是这个```notFoundMarker```，而不是字典中的第三个值，但是这个值只是用来提醒原字典中没有找到对应值，但在返回数组中该元素存在，且用```notFoundMarker```作为占位符，因为这个对象不能直接使用，所以在Foundation框架中有个专门的类处理这个情况：```NSNull```。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#22312;Swift&#20013;&#65292;```Dictionary```&#31867;&#27809;&#26377;&#31867;&#20284;```objectsForKeys```&#30340;&#20989;&#25968;&#65292;&#20026;&#20102;&#35828;&#26126;&#38382;&#39064;&#65292;&#25105;&#20204;&#21160;&#25163;&#21152;&#19968;&#20010;&#65292;&#24182;&#19988;&#20351;&#20854;&#25104;&#20026;&#25805;&#20316;&#23383;&#20856;&#20540;&#30340;&#36890;&#29992;&#26041;&#27861;&#12290;&#25105;&#20204;&#21487;&#20197;&#29992;```extension```&#26469;&#23454;&#29616;&#65306;&#10;&#10;```swift&#10;extension Dictionary&#123;&#10;&#9;func valuesForKeys(keys:[K], notFoundMarker: V )-&#62;[V]&#123;&#10;&#9;&#9;//&#20855;&#20307;&#23454;&#29616;&#20195;&#30721;&#21518;&#38754;&#20250;&#20889;&#21040;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>以上就是我们实现的Swift版本，这个和Objective-C版本有很大区别。在Swift中，因为其强类型的原因限制了返回的结果数组只能包含单一类型的元素，所以我们不能放<figure class="highlight"><figcaption><span>我们只用```nil```就可以了。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#10;```swift&#10;extension Dictionary&#123;&#10;    func valuesForKeys(keys: [Key]) -&#62; [Value?] &#123;&#10;        var result = [Value?]()&#10;        result.reserveCapacity(keys.count)&#10;        for key in keys&#123;&#10;            result.append(self[key])&#10;        &#125;&#10;        return result&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 <p><a name="#easy-function"></a></p>
-<h4 id="Swift中更简便的方法">Swift中更简便的方法</h4><p>小伙伴们可能会问，为什么Swift中不需要实现这么一个API呢？其实其有更简单的实现，如下面代码所示：</p>
+<h4 id="Swift_u4E2D_u66F4_u7B80_u4FBF_u7684_u65B9_u6CD5"><a href="#Swift_u4E2D_u66F4_u7B80_u4FBF_u7684_u65B9_u6CD5" class="headerlink" title="Swift中更简便的方法"></a>Swift中更简便的方法</h4><p>小伙伴们可能会问，为什么Swift中不需要实现这么一个API呢？其实其有更简单的实现，如下面代码所示：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Dictionary</span> </span>&#123;</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">valuesForKeys</span><span class="params">(keys: [Key])</span></span> -&gt; [<span class="type">Value</span>?] &#123;</span><br><span class="line">		<span class="keyword">return</span> keys.<span class="built_in">map</span> &#123; <span class="keyword">self</span>[$<span class="number">0</span>] &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上述方式实现的功能和最开始的方法实现的功能相同，虽然核心的功能是封装了<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#25509;&#19979;&#26469;&#65292;&#25105;&#20204;&#23454;&#39564;&#20960;&#20010;&#20363;&#23376;&#65306;&#10;&#10;```swift&#10;var dic: Dictionary = [ &#34;1&#34;: 2, &#34;3&#34;:3, &#34;4&#34;:5 ]&#10;&#10;var t = dic.valuesForKeys([&#34;1&#34;, &#34;4&#34;]) &#10;//&#32467;&#26524;&#20026;&#65306;[Optional(2), Optional(5)]&#10;&#10;var t = dict.valuesForKeys([&#34;3&#34;, &#34;9&#34;])&#10;// &#32467;&#26524;&#20026;&#65306;[Optional(3), nil]&#10;&#10;t = dic.valuesForKeys([])&#10;//&#32467;&#26524;&#20026;&#65306;[]</span><br></pre></td></tr></table></figure></p>
 <p><a name="#nested-optional"></a></p>
-<h4 id="内嵌可选类型">内嵌可选类型</h4><p>现在，如果我们为每一个结果调用<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;```swift&#10;var dic: Dictionary = [ &#34;1&#34;: 2, &#34;3&#34;:3, &#34;4&#34;:5 ]&#10;&#10;var t = dic.valuesForKeys([&#34;1&#34;, &#34;4&#34;]).last //&#32467;&#26524;&#20026;&#65306;Optional(Optional(5))&#10;// Optional(Optional(&#34;Ching&#34;))&#10;&#10;var t = dict.valuesForKeys([&#34;3&#34;, &#34;9&#34;]).last&#10;// &#32467;&#26524;&#20026;&#65306;Optional(nil)&#10;&#10;var t = dict.valuesForKeys([]).last&#10;// &#32467;&#26524;&#20026;&#65306;nil</span><br></pre></td></tr></table></figure></p>
+<h4 id="u5185_u5D4C_u53EF_u9009_u7C7B_u578B"><a href="#u5185_u5D4C_u53EF_u9009_u7C7B_u578B" class="headerlink" title="内嵌可选类型"></a>内嵌可选类型</h4><p>现在，如果我们为每一个结果调用<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;```swift&#10;var dic: Dictionary = [ &#34;1&#34;: 2, &#34;3&#34;:3, &#34;4&#34;:5 ]&#10;&#10;var t = dic.valuesForKeys([&#34;1&#34;, &#34;4&#34;]).last //&#32467;&#26524;&#20026;&#65306;Optional(Optional(5))&#10;// Optional(Optional(&#34;Ching&#34;))&#10;&#10;var t = dict.valuesForKeys([&#34;3&#34;, &#34;9&#34;]).last&#10;// &#32467;&#26524;&#20026;&#65306;Optional(nil)&#10;&#10;var t = dict.valuesForKeys([]).last&#10;// &#32467;&#26524;&#20026;&#65306;nil</span><br></pre></td></tr></table></figure></p>
 <p>小伙伴们立马迷糊了，为什么会出现两层包含的可选类型呢？，特别对第二种情况的<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#25105;&#20204;&#22238;&#36807;&#22836;&#30475;&#30475;```last```&#23646;&#24615;&#30340;&#23450;&#20041;&#65306;&#10;&#10;```swift&#10;var last:T? &#123; get &#125;</span><br></pre></td></tr></table></figure></p>
 <p>很明显<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#22914;&#26524;&#22312;Objective-C&#20013;&#37325;&#26032;&#35843;&#29992;&#19978;&#36848;&#26041;&#27861;&#65292;&#25105;&#20204;&#23558;&#20351;&#29992;```NSNull```&#20316;&#20026;&#21344;&#20301;&#31526;&#65292;Objective-C&#30340;&#35843;&#29992;&#35821;&#27861;&#22914;&#19979;&#25152;&#31034;&#65306;&#10;&#10;```swift&#10;[dict valuesForKeys:@[@&#34;1&#34;, @&#34;4&#34;] notFoundMarker:[NSNull null]].lastObject&#10;// 5&#10;[dict valuesForKeys:@[@&#34;1&#34;, @&#34;3&#34;] notFoundMarker:[NSNull null]].lastObject&#10;// NSNull&#10;[dict valuesForKeys:@[] notFoundMarker:[NSNull null]].lastObject&#10;// nil</span><br></pre></td></tr></table></figure></p>
 <p>不管是Swift版本还是Objective-C版本，返回值为<figure class="highlight"><figcaption><span>但是如果返回是```Optional(nil)```或者Objective-C中的```NSNull```都表示数组中的最后一个元素存在，但是元素的内容是空的。在Objective-C中只能借助```NSNull```作为占位符来达到这个目的，但是Swift却可以语言系统类型的角度的实现。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#60;a name=&#34;#provide-default&#34;&#62;&#60;/a&#62;&#10;#### &#25552;&#20379;&#19968;&#20010;&#40664;&#35748;&#20540;&#10;&#10;&#36827;&#19968;&#27493;&#23553;&#35013;&#65292;&#22914;&#26524;&#25105;&#23383;&#20856;&#20013;&#30340;&#26576;&#20010;&#25110;&#26576;&#20123;&#20803;&#32032;&#19981;&#23384;&#22312;&#65292;&#25105;&#20204;&#24819;&#25552;&#20379;&#19968;&#20010;&#40664;&#35748;&#20540;&#24590;&#20040;&#21150;&#21602;&#65311;&#23454;&#29616;&#26041;&#27861;&#24456;&#31616;&#21333;&#65306;&#10;&#10;```swift&#10;extension Dictionary &#123;&#10;&#9;func valuesForKeys( keys:[Key], notFoundMarker: Value)-&#62;[Value]&#123;&#10;&#9;&#9;return self.valueForKeys(kes).map&#123; $0 ?? notFoundMarker &#125;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
@@ -280,7 +280,7 @@ Swift中更简便的方法
 <p>和Objective-C相比，其需要占位符来达到占位的目的，但是Swift却已经从语言类型系统的层面原生的支持了这种用法，同时提供了丰富的语法功能。这就是Swift可选类型的强大之处。同时注意上述例子中用到了空合运算符<code>??</code>。</p>
 <hr>
 <p>本章节不是老码的原创，是老码认真的阅读了苹果的官方博客，自己的练习总结，如果小伙伴们费了吃奶的劲还是看不懂，请找度娘谷歌。还是看不懂？请到老码<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">官方微博</a>咆哮。  </p>
-<h5 id="本文由翻译自Apple_Swift_Blog_：Optionals_Case_Study:_valuesForKeys">本文由翻译自Apple Swift Blog ：<a href="https://developer.apple.com/swift/blog/?id=12" target="_blank" rel="external">Optionals Case Study: valuesForKeys</a></h5></span>
+<h5 id="u672C_u6587_u7531_u7FFB_u8BD1_u81EAApple_Swift_Blog__uFF1AOptionals_Case_Study_3A_valuesForKeys"><a href="#u672C_u6587_u7531_u7FFB_u8BD1_u81EAApple_Swift_Blog__uFF1AOptionals_Case_Study_3A_valuesForKeys" class="headerlink" title="本文由翻译自Apple Swift Blog ：Optionals Case Study: valuesForKeys"></a>本文由翻译自Apple Swift Blog ：<a href="https://developer.apple.com/swift/blog/?id=12" target="_blank" rel="external">Optionals Case Study: valuesForKeys</a></h5></span>
       
     </div>
 
@@ -369,7 +369,7 @@ Swift中更简便的方法
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -383,7 +383,7 @@ Swift中更简便的方法
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -432,7 +432,7 @@ Swift中更简便的方法
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可选类型完美解决占位问题"><span class="nav-number">1.</span> <span class="nav-text">可选类型完美解决占位问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为Dictionary增加objectsForKeys函数"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">为Dictionary增加objectsForKeys函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Swift中更简便的方法"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">Swift中更简便的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内嵌可选类型"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">内嵌可选类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#本文由翻译自Apple_Swift_Blog_：Optionals_Case_Study:_valuesForKeys"><span class="nav-number">1.0.0.3.1.</span> <span class="nav-text">本文由翻译自Apple Swift Blog ：Optionals Case Study: valuesForKeys</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u53EF_u9009_u7C7B_u578B_u5B8C_u7F8E_u89E3_u51B3_u5360_u4F4D_u95EE_u9898"><span class="nav-number">1.</span> <span class="nav-text">可选类型完美解决占位问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E3ADictionary_u589E_u52A0objectsForKeys_u51FD_u6570"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">为Dictionary增加objectsForKeys函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Swift_u4E2D_u66F4_u7B80_u4FBF_u7684_u65B9_u6CD5"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">Swift中更简便的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u5185_u5D4C_u53EF_u9009_u7C7B_u578B"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">内嵌可选类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#u672C_u6587_u7531_u7FFB_u8BD1_u81EAApple_Swift_Blog__uFF1AOptionals_Case_Study_3A_valuesForKeys"><span class="nav-number">1.0.0.3.1.</span> <span class="nav-text">本文由翻译自Apple Swift Blog ：Optionals Case Study: valuesForKeys</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -449,7 +449,7 @@ Swift中更简便的方法
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

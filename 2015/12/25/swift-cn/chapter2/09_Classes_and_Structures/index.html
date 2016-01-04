@@ -258,18 +258,18 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="类和结构体（Classes_and_Structures）">类和结构体（Classes and Structures）</h1><blockquote>
+        <span itemprop="articleBody"><h1 id="u7C7B_u548C_u7ED3_u6784_u4F53_uFF08Classes_and_Structures_uFF09"><a href="#u7C7B_u548C_u7ED3_u6784_u4F53_uFF08Classes_and_Structures_uFF09" class="headerlink" title="类和结构体（Classes and Structures）"></a>类和结构体（Classes and Structures）</h1><blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/JaySurplus" target="_blank" rel="external">JaySurplus</a><br>校对：<a href="https://github.com/sg552" target="_blank" rel="external">sg552</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/SkyJean" target="_blank" rel="external">SkyJean</a></p>
 <p>2.1<br>校对：<a href="http://codebuild.me" target="_blank" rel="external">shanks</a>，2015-10-29</p>
 </blockquote>
 <p>本页包含内容：</p>
 <ul>
-<li><a href="#comparing_classes_and_structures">类和结构体对比</a></li>
-<li><a href="#structures_and_enumerations_are_value_types">结构体和枚举是值类型</a></li>
-<li><a href="#classes_are_reference_types">类是引用类型</a></li>
-<li><a href="#choosing_between_classes_and_structures">类和结构体的选择</a></li>
-<li><a href="#assignment_and_copy_behavior_for_strings_arrays_and_dictionaries">字符串(String)、数组(Array)、和字典(Dictionary)类型的赋值与复制行为</a></li>
+<li><a href="/#comparing_classes_and_structures">类和结构体对比</a></li>
+<li><a href="/#structures_and_enumerations_are_value_types">结构体和枚举是值类型</a></li>
+<li><a href="/#classes_are_reference_types">类是引用类型</a></li>
+<li><a href="/#choosing_between_classes_and_structures">类和结构体的选择</a></li>
+<li><a href="/#assignment_and_copy_behavior_for_strings_arrays_and_dictionaries">字符串(String)、数组(Array)、和字典(Dictionary)类型的赋值与复制行为</a></li>
 </ul>
 <p><em>类</em>和<em>结构体</em>是人们构建代码所用的一种通用且灵活的构造体。我们可以使用完全相同的语法规则来为类和结构体定义属性（常量、变量）和添加方法，从而扩展类和结构体的功能。</p>
 <p>与其他编程语言所不同的是，Swift 并不要求你为自定义类和结构去创建独立的接口和实现文件。你所要做的是在一个单一文件中定义一个类或者结构体，系统将会自动生成面向其它代码的外部接口。</p>
@@ -287,7 +287,7 @@
 <li>通过扩展以增加默认实现的功能</li>
 <li>实现协议以提供某种标准功能</li>
 </ul>
-<p>更多信息请参见<a href="./10_Properties.html">属性</a>，<a href="./11_Methods.html">方法</a>，<a href="./12_Subscripts.html">下标脚本</a>，<a href="./14_Initialization.html">构造过程</a>，<a href="./21_Extensions.html">扩展</a>，和<a href="./22_Protocols.html">协议</a>。</p>
+<p>更多信息请参见<a href="/./10_Properties.html">属性</a>，<a href="/./11_Methods.html">方法</a>，<a href="/./12_Subscripts.html">下标脚本</a>，<a href="/./14_Initialization.html">构造过程</a>，<a href="/./21_Extensions.html">扩展</a>，和<a href="/./22_Protocols.html">协议</a>。</p>
 <p>与结构体相比，类还有如下的附加功能：</p>
 <ul>
 <li>继承允许一个类继承另一个类的特征</li>
@@ -295,12 +295,12 @@
 <li>解构器允许一个类实例释放任何其所被分配的资源</li>
 <li>引用计数允许对一个类的多次引用</li>
 </ul>
-<p>更多信息请参见<a href="./13_Inheritance.html">继承</a>，<a href="./19_Type_Casting.html">类型转换</a>，<a href="./15_Deinitialization.html">析构过程</a>，和<a href="./16_Automatic_Reference_Counting.html">自动引用计数</a>。</p>
+<p>更多信息请参见<a href="/./13_Inheritance.html">继承</a>，<a href="/./19_Type_Casting.html">类型转换</a>，<a href="/./15_Deinitialization.html">析构过程</a>，和<a href="/./16_Automatic_Reference_Counting.html">自动引用计数</a>。</p>
 <blockquote>
 <p>注意<br>结构体总是通过被复制的方式在代码中传递，不使用引用计数。</p>
 </blockquote>
 <p><a name="definition_syntax"></a></p>
-<h3 id="定义语法">定义语法</h3><p>类和结构体有着类似的定义方式。我们通过关键字<code>class</code>和<code>struct</code>来分别表示类和结构体，并在一对大括号中定义它们的具体内容：</p>
+<h3 id="u5B9A_u4E49_u8BED_u6CD5"><a href="#u5B9A_u4E49_u8BED_u6CD5" class="headerlink" title="定义语法"></a>定义语法</h3><p>类和结构体有着类似的定义方式。我们通过关键字<code>class</code>和<code>struct</code>来分别表示类和结构体，并在一对大括号中定义它们的具体内容：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</span><br><span class="line">	<span class="comment">// class definition goes here</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SomeStructure</span> </span>&#123;</span><br><span class="line">	<span class="comment">// structure definition goes here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意<br>在你每次定义一个新类或者结构体的时候，实际上你是定义了一个新的 Swift 类型。因此请使用<code>UpperCamelCase</code>这种方式来命名（如<code>SomeClass</code>和<code>SomeStructure</code>等），以便符合标准 Swift 类型的大写命名风格（如<code>String</code>，<code>Int</code>和<code>Bool</code>）。相反的，请使用<code>lowerCamelCase</code>这种方式为属性和方法命名（如<code>framerate</code>和<code>incrementCount</code>），以便和类型名区分。</p>
@@ -310,12 +310,12 @@
 <p>在上面的示例中我们定义了一个名为<code>Resolution</code>的结构体，用来描述一个显示器的像素分辨率。这个结构体包含了两个名为<code>width</code>和<code>height</code>的存储属性。存储属性是被捆绑和存储在类或结构体中的常量或变量。当这两个属性被初始化为整数<code>0</code>的时候，它们会被推断为<code>Int</code>类型。</p>
 <p>在上面的示例中我们还定义了一个名为<code>VideoMode</code>的类，用来描述一个视频显示器的特定模式。这个类包含了四个变量存储属性。第一个是<code>分辨率</code>，它被初始化为一个新的<code>Resolution</code>结构体的实例，属性类型被推断为<code>Resolution</code>。新<code>VideoMode</code>实例同时还会初始化其它三个属性，它们分别是，初始值为<code>false</code>的<code>interlaced</code>，初始值为<code>0.0</code>的<code>frameRate</code>，以及值为可选<code>String</code>的<code>name</code>。<code>name</code>属性会被自动赋予一个默认值<code>nil</code>，意为“没有<code>name</code>值”，因为它是一个可选类型。</p>
 <p><a name="class_and_structure_instances"></a></p>
-<h3 id="类和结构体实例">类和结构体实例</h3><p><code>Resolution</code>结构体和<code>VideoMode</code>类的定义仅描述了什么是<code>Resolution</code>和<code>VideoMode</code>。它们并没有描述一个特定的分辨率（resolution）或者视频模式（video mode）。为了描述一个特定的分辨率或者视频模式，我们需要生成一个它们的实例。</p>
+<h3 id="u7C7B_u548C_u7ED3_u6784_u4F53_u5B9E_u4F8B"><a href="#u7C7B_u548C_u7ED3_u6784_u4F53_u5B9E_u4F8B" class="headerlink" title="类和结构体实例"></a>类和结构体实例</h3><p><code>Resolution</code>结构体和<code>VideoMode</code>类的定义仅描述了什么是<code>Resolution</code>和<code>VideoMode</code>。它们并没有描述一个特定的分辨率（resolution）或者视频模式（video mode）。为了描述一个特定的分辨率或者视频模式，我们需要生成一个它们的实例。</p>
 <p>生成结构体和类实例的语法非常相似：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someResolution = <span class="type">Resolution</span>()</span><br><span class="line"><span class="keyword">let</span> someVideoMode = <span class="type">VideoMode</span>()</span><br></pre></td></tr></table></figure>
-<p>结构体和类都使用构造器语法来生成新的实例。构造器语法的最简单形式是在结构体或者类的类型名称后跟随一对空括号，如<code>Resolution()</code>或<code>VideoMode()</code>。通过这种方式所创建的类或者结构体实例，其属性均会被初始化为默认值。<a href="./14_Initialization.html">构造过程</a>章节会对类和结构体的初始化进行更详细的讨论。</p>
+<p>结构体和类都使用构造器语法来生成新的实例。构造器语法的最简单形式是在结构体或者类的类型名称后跟随一对空括号，如<code>Resolution()</code>或<code>VideoMode()</code>。通过这种方式所创建的类或者结构体实例，其属性均会被初始化为默认值。<a href="/./14_Initialization.html">构造过程</a>章节会对类和结构体的初始化进行更详细的讨论。</p>
 <p><a name="accessing_properties"></a></p>
-<h3 id="属性访问">属性访问</h3><p>通过使用<em>点语法</em>（<em>dot syntax</em>），你可以访问实例的属性。其语法规则是，实例名后面紧跟属性名，两者通过点号(<code>.</code>)连接：</p>
+<h3 id="u5C5E_u6027_u8BBF_u95EE"><a href="#u5C5E_u6027_u8BBF_u95EE" class="headerlink" title="属性访问"></a>属性访问</h3><p>通过使用<em>点语法</em>（<em>dot syntax</em>），你可以访问实例的属性。其语法规则是，实例名后面紧跟属性名，两者通过点号(<code>.</code>)连接：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">"The width of someResolution is <span class="subst">\(someResolution.width)</span>"</span>)</span><br><span class="line"><span class="comment">// 输出 "The width of someResolution is 0"</span></span><br></pre></td></tr></table></figure>
 <p>在上面的例子中，<code>someResolution.width</code>引用<code>someResolution</code>的<code>width</code>属性，返回<code>width</code>的初始值<code>0</code>。</p>
 <p>你也可以访问子属性，如<code>VideoMode</code>中<code>Resolution</code>属性的<code>width</code>属性：</p>
@@ -326,11 +326,11 @@
 <p>注意<br>与 Objective-C 语言不同的是，Swift 允许直接设置结构体属性的子属性。上面的最后一个例子，就是直接设置了<code>someVideoMode</code>中<code>resolution</code>属性的<code>width</code>这个子属性，以上操作并不需要重新为整个<code>resolution</code>属性设置新值。</p>
 </blockquote>
 <p><a name="memberwise_initializers_for_structure_types"></a></p>
-<h3 id="结构体类型的成员逐一构造器（Memberwise_Initializers_for_Structure_Types）">结构体类型的成员逐一构造器（Memberwise Initializers for Structure Types）</h3><p>所有结构体都有一个自动生成的<em>成员逐一构造器</em>，用于初始化新结构体实例中成员的属性。新实例中各个属性的初始值可以通过属性的名称传递到成员逐一构造器之中：</p>
+<h3 id="u7ED3_u6784_u4F53_u7C7B_u578B_u7684_u6210_u5458_u9010_u4E00_u6784_u9020_u5668_uFF08Memberwise_Initializers_for_Structure_Types_uFF09"><a href="#u7ED3_u6784_u4F53_u7C7B_u578B_u7684_u6210_u5458_u9010_u4E00_u6784_u9020_u5668_uFF08Memberwise_Initializers_for_Structure_Types_uFF09" class="headerlink" title="结构体类型的成员逐一构造器（Memberwise Initializers for Structure Types）"></a>结构体类型的成员逐一构造器（Memberwise Initializers for Structure Types）</h3><p>所有结构体都有一个自动生成的<em>成员逐一构造器</em>，用于初始化新结构体实例中成员的属性。新实例中各个属性的初始值可以通过属性的名称传递到成员逐一构造器之中：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vga = <span class="type">Resolution</span>(width:<span class="number">640</span>, height: <span class="number">480</span>)</span><br></pre></td></tr></table></figure>
-<p>与结构体不同，类实例没有默认的成员逐一构造器。<a href="./14_Initialization.html">构造过程</a>章节会对构造器进行更详细的讨论。</p>
+<p>与结构体不同，类实例没有默认的成员逐一构造器。<a href="/./14_Initialization.html">构造过程</a>章节会对构造器进行更详细的讨论。</p>
 <p><a name="structures_and_enumerations_are_value_types"></a></p>
-<h2 id="结构体和枚举是值类型">结构体和枚举是值类型</h2><p><em>值类型</em>被赋予给一个变量、常量或者被传递给一个函数的时候，其值会被<em>拷贝</em>。</p>
+<h2 id="u7ED3_u6784_u4F53_u548C_u679A_u4E3E_u662F_u503C_u7C7B_u578B"><a href="#u7ED3_u6784_u4F53_u548C_u679A_u4E3E_u662F_u503C_u7C7B_u578B" class="headerlink" title="结构体和枚举是值类型"></a>结构体和枚举是值类型</h2><p><em>值类型</em>被赋予给一个变量、常量或者被传递给一个函数的时候，其值会被<em>拷贝</em>。</p>
 <p>在之前的章节中，我们已经大量使用了值类型。实际上，在 Swift 中，所有的基本类型：整数（Integer）、浮点数（floating-point）、布尔值（Boolean）、字符串（string)、数组（array）和字典（dictionary），都是值类型，并且在底层都是以结构体的形式所实现。</p>
 <p>在 Swift 中，所有的结构体和枚举类型都是值类型。这意味着它们的实例，以及实例中所包含的任何值类型属性，在代码中传递的时候都会被复制。</p>
 <p>请看下面这个示例，其使用了前一个示例中的<code>Resolution</code>结构体：</p>
@@ -348,7 +348,7 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CompassPoint</span> </span>&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="type">North</span>, <span class="type">South</span>, <span class="type">East</span>, <span class="type">West</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> currentDirection = <span class="type">CompassPoint</span>.<span class="type">West</span></span><br><span class="line"><span class="keyword">let</span> rememberedDirection = currentDirection</span><br><span class="line">currentDirection = .<span class="type">East</span></span><br><span class="line"><span class="keyword">if</span> rememberedDirection == .<span class="type">West</span> &#123;</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">"The remembered direction is still .West"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "The remembered direction is still .West"</span></span><br></pre></td></tr></table></figure>
 <p>上例中<code>rememberedDirection</code>被赋予了<code>currentDirection</code>的值，实际上它被赋予的是值的一个拷贝。赋值过程结束后再修改<code>currentDirection</code>的值并不影响<code>rememberedDirection</code>所储存的原始值的拷贝。</p>
 <p><a name="classes_are_reference_types"></a></p>
-<h2 id="类是引用类型">类是引用类型</h2><p>与值类型不同，引用类型在被赋予到一个变量、常量或者被传递到一个函数时，其值不会被拷贝。因此，引用的是已存在的实例本身而不是其拷贝。</p>
+<h2 id="u7C7B_u662F_u5F15_u7528_u7C7B_u578B"><a href="#u7C7B_u662F_u5F15_u7528_u7C7B_u578B" class="headerlink" title="类是引用类型"></a>类是引用类型</h2><p>与值类型不同，引用类型在被赋予到一个变量、常量或者被传递到一个函数时，其值不会被拷贝。因此，引用的是已存在的实例本身而不是其拷贝。</p>
 <p>请看下面这个示例，其使用了之前定义的<code>VideoMode</code>类：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> tenEighty = <span class="type">VideoMode</span>()</span><br><span class="line">tenEighty.resolution = hd</span><br><span class="line">tenEighty.interlaced = <span class="literal">true</span></span><br><span class="line">tenEighty.name = <span class="string">"1080i"</span></span><br><span class="line">tenEighty.frameRate = <span class="number">25.0</span></span><br></pre></td></tr></table></figure>
 <p>以上示例中，声明了一个名为<code>tenEighty</code>的常量，其引用了一个<code>VideoMode</code>类的新实例。在之前的示例中，这个视频模式（video mode）被赋予了HD分辨率（<code>1920</code>*<code>1080</code>）的一个拷贝（即<code>hd</code>实例）。同时设置为<code>interlaced</code>，命名为<code>“1080i”</code>。最后，其帧率是<code>25.0</code>帧每秒。</p>
@@ -359,7 +359,7 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">"The frameRate property of tenEighty is now <span class="subst">\(tenEighty.frameRate)</span>"</span>)</span><br><span class="line"><span class="comment">// 输出 "The frameRate property of theEighty is now 30.0"</span></span><br></pre></td></tr></table></figure>
 <p>需要注意的是<code>tenEighty</code>和<code>alsoTenEighty</code>被声明为常量而不是变量。然而你依然可以改变<code>tenEighty.frameRate</code>和<code>alsoTenEighty.frameRate</code>，因为<code>tenEighty</code>和<code>alsoTenEighty</code>这两个常量的值并未改变。它们并不“存储”这个<code>VideoMode</code>实例，而仅仅是对<code>VideoMode</code>实例的引用。所以，改变的是被引用的<code>VideoMode</code>的<code>frameRate</code>属性，而不是引用<code>VideoMode</code>的常量的值。</p>
 <p><a name="identity_operators"></a></p>
-<h3 id="恒等运算符">恒等运算符</h3><p>因为类是引用类型，有可能有多个常量和变量在幕后同时引用同一个类实例。（对于结构体和枚举来说，这并不成立。因为它们作为值类型，在被赋予到常量、变量或者传递到函数时，其值总是会被拷贝。）</p>
+<h3 id="u6052_u7B49_u8FD0_u7B97_u7B26"><a href="#u6052_u7B49_u8FD0_u7B97_u7B26" class="headerlink" title="恒等运算符"></a>恒等运算符</h3><p>因为类是引用类型，有可能有多个常量和变量在幕后同时引用同一个类实例。（对于结构体和枚举来说，这并不成立。因为它们作为值类型，在被赋予到常量、变量或者传递到函数时，其值总是会被拷贝。）</p>
 <p>如果能够判定两个常量或者变量是否引用同一个类实例将会很有帮助。为了达到这个目的，Swift 内建了两个恒等运算符：</p>
 <ul>
 <li>等价于（<code>===</code>）</li>
@@ -372,11 +372,11 @@
 <li>“等价于”表示两个类类型（class type）的常量或者变量引用同一个类实例。</li>
 <li>“等于”表示两个实例的值“相等”或“相同”，判定时要遵照设计者定义的评判标准，因此相对于“相等”来说，这是一种更加合适的叫法。</li>
 </ul>
-<p>当你在定义你的自定义类和结构体的时候，你有义务来决定判定两个实例“相等”的标准。在章节<a href="./25_Advanced_Operators.html#equivalence_operators">等价操作符</a>中将会详细介绍实现自定义“等于”和“不等于”运算符的流程。</p>
+<p>当你在定义你的自定义类和结构体的时候，你有义务来决定判定两个实例“相等”的标准。在章节<a href="/./25_Advanced_Operators.html#equivalence_operators">等价操作符</a>中将会详细介绍实现自定义“等于”和“不等于”运算符的流程。</p>
 <p><a name="pointers"></a></p>
-<h3 id="指针">指针</h3><p>如果你有 C，C++ 或者 Objective-C 语言的经验，那么你也许会知道这些语言使用<em>指针</em>来引用内存中的地址。一个引用某个引用类型实例的 Swift 常量或者变量，与 C 语言中的指针类似，但是并不直接指向某个内存地址，也不要求你使用星号（<code>*</code>）来表明你在创建一个引用。Swift 中的这些引用与其它的常量或变量的定义方式相同。</p>
+<h3 id="u6307_u9488"><a href="#u6307_u9488" class="headerlink" title="指针"></a>指针</h3><p>如果你有 C，C++ 或者 Objective-C 语言的经验，那么你也许会知道这些语言使用<em>指针</em>来引用内存中的地址。一个引用某个引用类型实例的 Swift 常量或者变量，与 C 语言中的指针类似，但是并不直接指向某个内存地址，也不要求你使用星号（<code>*</code>）来表明你在创建一个引用。Swift 中的这些引用与其它的常量或变量的定义方式相同。</p>
 <p><a name="choosing_between_classes_and_structures"></a></p>
-<h2 id="类和结构体的选择">类和结构体的选择</h2><p>在你的代码中，你可以使用类和结构体来定义你的自定义数据类型。</p>
+<h2 id="u7C7B_u548C_u7ED3_u6784_u4F53_u7684_u9009_u62E9"><a href="#u7C7B_u548C_u7ED3_u6784_u4F53_u7684_u9009_u62E9" class="headerlink" title="类和结构体的选择"></a>类和结构体的选择</h2><p>在你的代码中，你可以使用类和结构体来定义你的自定义数据类型。</p>
 <p>然而，结构体实例总是通过值传递，类实例总是通过引用传递。这意味两者适用不同的任务。当你在考虑一个工程项目的数据结构和功能的时候，你需要决定每个数据结构是定义成类还是结构体。</p>
 <p>按照通用的准则，当符合一条或多条以下条件时，请考虑构建结构体：</p>
 <ul>
@@ -393,7 +393,7 @@
 </ul>
 <p>在所有其它案例中，定义一个类，生成一个它的实例，并通过引用来管理和传递。实际中，这意味着绝大部分的自定义数据构造都应该是类，而非结构体。</p>
 <p><a name="assignment_and_copy_behavior_for_strings_arrays_and_dictionaries"></a></p>
-<h2 id="字符串(String)、数组(Array)、和字典(Dictionary)类型的赋值与复制行为">字符串(String)、数组(Array)、和字典(Dictionary)类型的赋值与复制行为</h2><p>Swift 中，许多基本类型，诸如<code>String</code>，<code>Array</code>和<code>Dictionary</code>类型均以结构体的形式实现。这意味着被赋值给新的常量或变量，或者被传入函数或方法中时，它们的值会被拷贝。</p>
+<h2 id="u5B57_u7B26_u4E32_28String_29_u3001_u6570_u7EC4_28Array_29_u3001_u548C_u5B57_u5178_28Dictionary_29_u7C7B_u578B_u7684_u8D4B_u503C_u4E0E_u590D_u5236_u884C_u4E3A"><a href="#u5B57_u7B26_u4E32_28String_29_u3001_u6570_u7EC4_28Array_29_u3001_u548C_u5B57_u5178_28Dictionary_29_u7C7B_u578B_u7684_u8D4B_u503C_u4E0E_u590D_u5236_u884C_u4E3A" class="headerlink" title="字符串(String)、数组(Array)、和字典(Dictionary)类型的赋值与复制行为"></a>字符串(String)、数组(Array)、和字典(Dictionary)类型的赋值与复制行为</h2><p>Swift 中，许多基本类型，诸如<code>String</code>，<code>Array</code>和<code>Dictionary</code>类型均以结构体的形式实现。这意味着被赋值给新的常量或变量，或者被传入函数或方法中时，它们的值会被拷贝。</p>
 <p>Objective-C 中<code>NSString</code>，<code>NSArray</code>和<code>NSDictionary</code>类型均以类的形式实现，而并非结构体。它们在被赋值或者被传入函数或方法时，不会发生值拷贝，而是传递现有实例的引用。</p>
 <blockquote>
 <p>注意<br>以上是对字符串、数组、字典的“拷贝”行为的描述。在你的代码中，拷贝行为看起来似乎总会发生。然而，Swift 在幕后只在绝对必要时才执行实际的拷贝。Swift 管理所有的值拷贝以确保性能最优化，所以你没必要去回避赋值来保证性能最优化。</p>
@@ -487,7 +487,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -501,7 +501,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -550,7 +550,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类和结构体（Classes_and_Structures）"><span class="nav-number">1.</span> <span class="nav-text">类和结构体（Classes and Structures）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义语法"><span class="nav-number">1.0.1.</span> <span class="nav-text">定义语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类和结构体实例"><span class="nav-number">1.0.2.</span> <span class="nav-text">类和结构体实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性访问"><span class="nav-number">1.0.3.</span> <span class="nav-text">属性访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体类型的成员逐一构造器（Memberwise_Initializers_for_Structure_Types）"><span class="nav-number">1.0.4.</span> <span class="nav-text">结构体类型的成员逐一构造器（Memberwise Initializers for Structure Types）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体和枚举是值类型"><span class="nav-number">1.1.</span> <span class="nav-text">结构体和枚举是值类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类是引用类型"><span class="nav-number">1.2.</span> <span class="nav-text">类是引用类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#恒等运算符"><span class="nav-number">1.2.1.</span> <span class="nav-text">恒等运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">1.2.2.</span> <span class="nav-text">指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类和结构体的选择"><span class="nav-number">1.3.</span> <span class="nav-text">类和结构体的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串(String)、数组(Array)、和字典(Dictionary)类型的赋值与复制行为"><span class="nav-number">1.4.</span> <span class="nav-text">字符串(String)、数组(Array)、和字典(Dictionary)类型的赋值与复制行为</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u7C7B_u548C_u7ED3_u6784_u4F53_uFF08Classes_and_Structures_uFF09"><span class="nav-number">1.</span> <span class="nav-text">类和结构体（Classes and Structures）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B9A_u4E49_u8BED_u6CD5"><span class="nav-number">1.0.1.</span> <span class="nav-text">定义语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7C7B_u548C_u7ED3_u6784_u4F53_u5B9E_u4F8B"><span class="nav-number">1.0.2.</span> <span class="nav-text">类和结构体实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5C5E_u6027_u8BBF_u95EE"><span class="nav-number">1.0.3.</span> <span class="nav-text">属性访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7ED3_u6784_u4F53_u7C7B_u578B_u7684_u6210_u5458_u9010_u4E00_u6784_u9020_u5668_uFF08Memberwise_Initializers_for_Structure_Types_uFF09"><span class="nav-number">1.0.4.</span> <span class="nav-text">结构体类型的成员逐一构造器（Memberwise Initializers for Structure Types）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7ED3_u6784_u4F53_u548C_u679A_u4E3E_u662F_u503C_u7C7B_u578B"><span class="nav-number">1.1.</span> <span class="nav-text">结构体和枚举是值类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7C7B_u662F_u5F15_u7528_u7C7B_u578B"><span class="nav-number">1.2.</span> <span class="nav-text">类是引用类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6052_u7B49_u8FD0_u7B97_u7B26"><span class="nav-number">1.2.1.</span> <span class="nav-text">恒等运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u6307_u9488"><span class="nav-number">1.2.2.</span> <span class="nav-text">指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7C7B_u548C_u7ED3_u6784_u4F53_u7684_u9009_u62E9"><span class="nav-number">1.3.</span> <span class="nav-text">类和结构体的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B57_u7B26_u4E32_28String_29_u3001_u6570_u7EC4_28Array_29_u3001_u548C_u5B57_u5178_28Dictionary_29_u7C7B_u578B_u7684_u8D4B_u503C_u4E0E_u590D_u5236_u884C_u4E3A"><span class="nav-number">1.4.</span> <span class="nav-text">字符串(String)、数组(Array)、和字典(Dictionary)类型的赋值与复制行为</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -567,7 +567,7 @@
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

@@ -265,16 +265,16 @@ Docker 引擎使用的是Linux内核特性，所以我们需要在 Windows 上�
 </blockquote>
 <p><strong>Boot2docker start</strong> 将会自动启动一个 shell 命令框并配置好环境变量，以便您可以马上使用 Docker ：</p>
 <p>让我们尝试运行 <code>hello-world</code> 例子。 运行：</p>
-<pre><code>$ docker <span class="command">run</span> hello-world
+<pre><code>$ docker run hello-world
 </code></pre><p>这将会下载一个非常小的 <code>hello-world</code> 镜像，并且打印出 <code>Hello from Docker.</code> 信息。</p>
 <p>###使用 Windows 的命令行(cmd.exe) 来管理运行 Docker</p>
 <p>启动一个 Windows 命令行（cmd.exe）.</p>
 <p>运行 Boot2docker 命令，这需要你的 Windows PATH环境变量中包含了 <code>ssh.exe</code>。因此我们需要将安装的 Git 的 bin 目录 （其中包含了 ssh.exe） 配置到我们的 <code>%PATH%</code> 环境变量中，运行如下命令：</p>
-<pre><code><span class="operator"><span class="keyword">set</span> <span class="keyword">PATH</span>=%<span class="keyword">PATH</span>%;</span>"c:\Program Files (x86)\Git\bin"
+<pre><code>set PATH=%PATH%;&quot;c:\Program Files (x86)\Git\bin&quot;
 </code></pre><p>现在，我们可以运行 <code>boot2docker start</code> 命令来启动 Boot2docker 虚拟机。（如果有虚拟主机不存在的错误提示，你需要运行 <code>boot2docker init</code> 命令）。复制上边的指令到 cmd.exe 来设置你的 windows 控制台的环境变量，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
 <p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-cmd.png" alt="docker cmd.exe"></p>
-<h3 id="PowerShell_中使用_Docker">PowerShell 中使用 Docker</h3><p>启动 PowerShell，你需要将 <code>ssh.exe</code> 添加到你的 PATH 中。</p>
-<pre><code><span class="variable">$Env</span>:Path = <span class="string">"${Env:Path};c:\Program Files (x86)\Git\bin"</span>
+<h3 id="PowerShell__u4E2D_u4F7F_u7528_Docker"><a href="#PowerShell__u4E2D_u4F7F_u7528_Docker" class="headerlink" title="PowerShell 中使用 Docker"></a>PowerShell 中使用 Docker</h3><p>启动 PowerShell，你需要将 <code>ssh.exe</code> 添加到你的 PATH 中。</p>
+<pre><code>$Env:Path = &quot;${Env:Path};c:\Program Files (x86)\Git\bin&quot;
 </code></pre><p>之后，运行 <code>boot2docker start</code> 命令行，它会打印出  PowerShell 命令，这些命令是用来设置环境变量来连接运行在虚拟机中 Docker 的。运行这些命令，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
 <p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-powershell.png" alt="Powershell Docker"></p>
 <blockquote>
@@ -283,7 +283,7 @@ Docker 引擎使用的是Linux内核特性，所以我们需要在 Windows 上�
 <p>##进一步的细节</p>
 <p>Boot2Docker 管理工具提供了如下几个命令：</p>
 <pre><code>$ boot2docker
-Usage: boot2docker.exe <span class="annotation">[&lt;options&gt;]</span> {help|init|up|ssh|save|down|poweroff|reset|restart|config|status|info|ip|shellinit|delete|download|upgrade|version} <span class="annotation">[&lt;args&gt;]</span>
+Usage: boot2docker.exe [&lt;options&gt;] {help|init|up|ssh|save|down|poweroff|reset|restart|config|status|info|ip|shellinit|delete|download|upgrade|version} [&lt;args&gt;]
 </code></pre><p>###升级</p>
 <ul>
 <li>下载最新的 <a href="https://github.com/boot2docker/windows-installer/releases/tag/v1.5.0" target="_blank" rel="external">Docker for Windows Installer</a></li>
@@ -296,9 +296,9 @@ Usage: boot2docker.exe <span class="annotation">[&lt;options&gt;]</span> {help|i
 <p>boot2Docker的默认用户是 <code>docker</code> 密码是 <code>tcuser</code>。 </p>
 <p>最新版本的 boot2docker 可以设置网络适配器来给容器提供端口访问。</p>
 <p>如你运行一个暴露内部端口的容器</p>
-<pre><code>docker run --rm -<span class="tag">i</span> -t -<span class="tag">p</span> <span class="number">80</span>:<span class="number">80</span> nginx
+<pre><code>docker run --rm -i -t -p 80:80 nginx
 </code></pre><p>当你需要使用一个IP地址来访问 Nginx 服务器，你可以使用如下命令来查看 ip。</p>
-<pre><code>$ <span class="keyword">boot2docker </span><span class="literal">ip</span>
+<pre><code>$ boot2docker ip
 </code></pre><p>通常情况下，是192.168.59.103,但是它可以通过 virtualbox 的 dhcp 来改变。</p>
 <p>更多细节信息，请查看<a href="http://boot2docker.io/" target="_blank" rel="external">Boot2Docker site</a></p>
 <p>###使用PUTTY登陆来代替CMD命令行</p>
@@ -332,14 +332,14 @@ Usage: boot2docker.exe <span class="annotation">[&lt;options&gt;]</span> {help|i
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/08/docker/SupervisorwithDocker/" rel="prev">Using Supervior with Docker</a>
+              <a href="/2015/12/08/docker/installation/ubuntu/" rel="prev">Ubuntu
+安装 docker</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/installation/ubuntu/" rel="next">Ubuntu
-安装 docker</a>
+              <a href="/2015/12/08/docker/examples/mongodb/" rel="next">Docker 中运行 MongoDB</a>
             
           </div>
         </div>
@@ -405,7 +405,7 @@ Usage: boot2docker.exe <span class="annotation">[&lt;options&gt;]</span> {help|i
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -419,7 +419,7 @@ Usage: boot2docker.exe <span class="annotation">[&lt;options&gt;]</span> {help|i
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -468,7 +468,7 @@ Usage: boot2docker.exe <span class="annotation">[&lt;options&gt;]</span> {help|i
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#PowerShell_中使用_Docker"><span class="nav-number">1.</span> <span class="nav-text">PowerShell 中使用 Docker</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#PowerShell__u4E2D_u4F7F_u7528_Docker"><span class="nav-number">1.</span> <span class="nav-text">PowerShell 中使用 Docker</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -485,7 +485,7 @@ Usage: boot2docker.exe <span class="annotation">[&lt;options&gt;]</span> {help|i
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

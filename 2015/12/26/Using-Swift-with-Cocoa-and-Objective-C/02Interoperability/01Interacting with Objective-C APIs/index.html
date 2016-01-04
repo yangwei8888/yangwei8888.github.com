@@ -284,19 +284,19 @@ Objective-C 选择器（Se">
 <hr>
 <p>本页包含内容：</p>
 <ul>
-<li><a href="#initialization">初始化</a></li>
-<li><a href="#failable_initialization">可失败初始化</a></li>
-<li><a href="#accessing_properties">访问属性</a></li>
-<li><a href="#working_with_methods">方法</a></li>
-<li><a href="#id_compatibility">id 兼容性（id Compatibility）</a></li>
-<li><a href="#Nullability_and_Optionals">空值和可选值</a></li>
-<li><a href="#extensions">扩展（Extensions）</a></li>
-<li><a href="#closures">闭包（Closures）</a></li>
-<li><a href="#object_comparison">比较对象</a></li>
-<li><a href="#swift_type_compatibility">Swift 类型兼容性</a></li>
-<li><a href="#Requiring_Dynamic_Dispatch">动态分发</a></li>
-<li><a href="#Lightweight_Generics">轻量级泛型</a></li>
-<li><a href="#objective_c_selectors">Objective-C 选择器（Selectors）</a></li>
+<li><a href="/#initialization">初始化</a></li>
+<li><a href="/#failable_initialization">可失败初始化</a></li>
+<li><a href="/#accessing_properties">访问属性</a></li>
+<li><a href="/#working_with_methods">方法</a></li>
+<li><a href="/#id_compatibility">id 兼容性（id Compatibility）</a></li>
+<li><a href="/#Nullability_and_Optionals">空值和可选值</a></li>
+<li><a href="/#extensions">扩展（Extensions）</a></li>
+<li><a href="/#closures">闭包（Closures）</a></li>
+<li><a href="/#object_comparison">比较对象</a></li>
+<li><a href="/#swift_type_compatibility">Swift 类型兼容性</a></li>
+<li><a href="/#Requiring_Dynamic_Dispatch">动态分发</a></li>
+<li><a href="/#Lightweight_Generics">轻量级泛型</a></li>
+<li><a href="/#objective_c_selectors">Objective-C 选择器（Selectors）</a></li>
 </ul>
 <p><strong>互用性</strong>是让 Swift 和 Objective-C 相接合的一种特性，使你能够在一种语言编写的文件中使用另一种语言。当你准备开始把 Swift 融入到你的开发流程中时，你应该懂得如何利用互用性来重新定义并提高你写 Cocoa 应用的方案。</p>
 <p>互用性很重要的一点就是允许你在写 Swift 代码时使用 Objective-C 的 API 接口。当你导入一个 Objective-C 框架后，你可以使用原生的 Swift 语法实例化它的 Class 并且与之交互。</p>
@@ -324,7 +324,7 @@ Objective-C 选择器（Se">
 <p>在 Swift 中访问和设置 Objective-C 对象的属性时，使用点语法</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myTextField.textColor = <span class="type">UIColor</span>.darkGrayColor()</span><br><span class="line">myTextField.text = <span class="string">"Hello world"</span></span><br></pre></td></tr></table></figure>
 <p>当 get 或 set 属性时，直接使用属性名称，不需要附加圆括号。注意，<code>darkGrayColor</code>后面附加了一对圆括号，这是因为<code>darkGrayColor</code>是<code>UIColor</code>的一个类方法，不是一个属性。</p>
-<p>在 Objective-C 中，一个有返回值的无参数方法可以被作为一个隐式的访问函数，并且可以与访问器使用同样的方法调用。但在 Swift 中不再能够这样做了，只有在 Objective-C 中 使用<code>@property</code>关键字声明的属性才会被作为属性引入。方法被导入和调用见<a href="#working_with_methods">方法</a>描述。</p>
+<p>在 Objective-C 中，一个有返回值的无参数方法可以被作为一个隐式的访问函数，并且可以与访问器使用同样的方法调用。但在 Swift 中不再能够这样做了，只有在 Objective-C 中 使用<code>@property</code>关键字声明的属性才会被作为属性引入。方法被导入和调用见<a href="/#working_with_methods">方法</a>描述。</p>
 <p><a name="working_with_methods"></a></p>
 <p>##方法</p>
 <p>在 Swift 中调用 Objective-C 方法时，使用点语法。</p>
@@ -356,7 +356,7 @@ Objective-C 选择器（Se">
 <p>当然，如果你能确定这个对象的类型（并且确定不是<code>nil</code>），你可以添加<code>as</code>操作符强制调用。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myDate = lastRefreshDate <span class="keyword">as</span> <span class="type">NSDate</span></span><br><span class="line"><span class="keyword">let</span> timeInterval = myDate.timeIntervalSinceReferenceDate</span><br></pre></td></tr></table></figure>
 <p><a name="Nullability_and_Optionals"></a></p>
-<h2 id="空值和可选值">空值和可选值</h2><p>在 Objective-C 中，对象的引用可以是值为<code>NULL</code>的原始指针（在 Objective-C 中的简称为<code>nil</code>）。而在Swift中，所有的值–包括结构体与对象的引用–都被保证为非空。作为替代，你将这个可以为空的值包装为optional type。当你需要宣告值为空时，你需要使用<code>nil</code>。你可以在<a href="https://github.com/CocoaChina-editors/Welcome-to-Swift/blob/master/The%20Swift%20Programming%20Language/02Language%20Guide/01The%20Basics.md#optionals" target="_blank" rel="external">Optionals</a>中了解更多。</p>
+<h2 id="u7A7A_u503C_u548C_u53EF_u9009_u503C"><a href="#u7A7A_u503C_u548C_u53EF_u9009_u503C" class="headerlink" title="空值和可选值"></a>空值和可选值</h2><p>在 Objective-C 中，对象的引用可以是值为<code>NULL</code>的原始指针（在 Objective-C 中的简称为<code>nil</code>）。而在Swift中，所有的值–包括结构体与对象的引用–都被保证为非空。作为替代，你将这个可以为空的值包装为optional type。当你需要宣告值为空时，你需要使用<code>nil</code>。你可以在<a href="https://github.com/CocoaChina-editors/Welcome-to-Swift/blob/master/The%20Swift%20Programming%20Language/02Language%20Guide/01The%20Basics.md#optionals" target="_blank" rel="external">Optionals</a>中了解更多。</p>
 <p>Objective-C 能够使用空值标记来设定一个参数类型，属性类型或者返回值类型是否可以为 NULL 或者 为 nil 值。单独的类型声明可以使用<code>__nullable</code>和<code>__nonnull</code>标注，空值的范围性的声明可以使用<code>NS_ASSUME_NONNULL_BEGIN</code>和<code>NS_ASSUME_NONNULL_END</code>宏。如果一个类型没有任何的空值标注信息，Swift 就不能分辨出可选值和非可选值类型，并且将作为隐式的解包可选值导入。</p>
 <ul>
 <li>以<code>__nonnull</code>或者范围宏标注声明的空值类型，被作为非空可选值<code>non-optional</code>导入到 Swift。</li>
@@ -372,7 +372,7 @@ Objective-C 选择器（Se">
 <p>##扩展（Extensions）</p>
 <p>Swift 的扩展和 Objective-C 的类别（Category）相似。扩展为原有的类，结构和枚举丰富了功能，包括在 Objective-C 中定义过的。你可以为系统的框架或者你自己的类型增加扩展，只需要导入合适的模块并且保证你在 Objective-C 中使用的类、结构或枚举拥有相同的名字。</p>
 <p>举个例子，你可以扩展<code>UIBezierPath</code>类来为它增加一个等边三角形，这个方法只需提供三角形的边长与起点。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIBezierPath</span> </span>&#123;</span><br><span class="line">    convenience <span class="keyword">init</span>(triangleSideLength: <span class="type">Float</span>, origin: <span class="type">CGPoint</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>()</span><br><span class="line">        <span class="keyword">let</span> squareRoot = <span class="type">Float</span>(sqrt(<span class="number">3</span>))</span><br><span class="line">        <span class="keyword">let</span> altitude = (squareRoot * triangleSideLength) / <span class="number">2</span></span><br><span class="line">        moveToPoint(origin)</span><br><span class="line">        addLineToPoint(<span class="type">CGPoint</span>(triangleSideLength, origin.x))</span><br><span class="line">        addLineToPoint(<span class="type">CGPoint</span>(triangleSideLength / <span class="number">2</span>, altitude))</span><br><span class="line">        closePath()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIBezierPath</span> </span>&#123;</span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(triangleSideLength: <span class="type">Float</span>, origin: <span class="type">CGPoint</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>()</span><br><span class="line">        <span class="keyword">let</span> squareRoot = <span class="type">Float</span>(sqrt(<span class="number">3</span>))</span><br><span class="line">        <span class="keyword">let</span> altitude = (squareRoot * triangleSideLength) / <span class="number">2</span></span><br><span class="line">        moveToPoint(origin)</span><br><span class="line">        addLineToPoint(<span class="type">CGPoint</span>(triangleSideLength, origin.x))</span><br><span class="line">        addLineToPoint(<span class="type">CGPoint</span>(triangleSideLength / <span class="number">2</span>, altitude))</span><br><span class="line">        closePath()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>你也可以使用扩展来增加属性（包括类的属性与静态属性）。然而，这些属性必须是通过计算才能获取的，扩展不会为类，结构体，枚举添加存储属性。下面这个例子为<code>CGRect</code>类增加了一个叫<code>area</code>的属性。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">CGRect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> area: <span class="type">CGFloat</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> width * height</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> rect = <span class="type">CGRect</span>(x: <span class="number">0.0</span>, y: <span class="number">0.0</span>, width: <span class="number">10.0</span>, height: <span class="number">50.0</span>)</span><br><span class="line"><span class="keyword">let</span> area = rect.area</span><br><span class="line"><span class="comment">// area: CGFloat = 500.0</span></span><br></pre></td></tr></table></figure>
 <p>你同样可以使用扩展来为类添加协议而无需增加它的子类。如果这个协议是在 Swift 中被定义的，你可以添加 comformance 到它的结构或枚举中无论它们在 Objective-C 或在 Swift 中被定义。</p>
@@ -392,8 +392,8 @@ Objective-C 选择器（Se">
 <p>NSObject 类仅仅做了身份的比较，所以你需要在你自己的类中重新实现 isEqual: 方法。因为你可以直接传递 Swift 对象给 Objective-C 的 API，你也应该为这些对象实现自定义的 isEqual: 方法，如果你希望比较两个对象的内容是否相同而不是仅仅比较他们是不是由相同的对象派生。</p>
 <p>作为实现比较函数的一部分，确保根据<a href="//https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/DevPedia-CocoaCore/ObjectComparison.html#//apple_ref/doc/uid/TP40008195-CH37">Object comparison</a>实现对象的<code>hash</code>属性。更进一步的说，如果你希望你的类能够作为字典中的键，也需要遵从<code>Hashable</code>协议以及实现<code>hashValues</code>属性。</p>
 <p><a name="swift_type_compatibility"></a></p>
-<h2 id="Swift_类型兼容性">Swift 类型兼容性</h2><p>当你在 Swift 中创建了一个继承自 Objective-C 类的子类时，该类以及该类的成员-属性，方法，下标和构造器，便会在 Objective-C 中自动可用。在某些情况下，你需要更细粒度的控制如何将 Swift API 暴漏给 Objective-C。如果你的 Swift 类没有继承自 Objective-C 的类，又或者你想更改暴漏给 Objective-C 代码的接口符号名称，你便可以使用<code>@objc</code>属性。如果你正在使用如键值观察的 API 来动态替换方法的实现，也可以通过使用<code>dynamic</code>修饰符来获得对 Objective-C 运行时被自动派发的成员的访问。</p>
-<h3 id="在_Objective-C_中暴漏_Swift_接口">在 Objective-C 中暴漏 Swift 接口</h3><p>当你定义一个继承自<code>NSObject</code>类或者其他 Objective-C 类的 Swift 子类时，该类便会自动兼容 Objective-C。Swift 编译器已经为你做好了这部分所需要的工作。</p>
+<h2 id="Swift__u7C7B_u578B_u517C_u5BB9_u6027"><a href="#Swift__u7C7B_u578B_u517C_u5BB9_u6027" class="headerlink" title="Swift 类型兼容性"></a>Swift 类型兼容性</h2><p>当你在 Swift 中创建了一个继承自 Objective-C 类的子类时，该类以及该类的成员-属性，方法，下标和构造器，便会在 Objective-C 中自动可用。在某些情况下，你需要更细粒度的控制如何将 Swift API 暴漏给 Objective-C。如果你的 Swift 类没有继承自 Objective-C 的类，又或者你想更改暴漏给 Objective-C 代码的接口符号名称，你便可以使用<code>@objc</code>属性。如果你正在使用如键值观察的 API 来动态替换方法的实现，也可以通过使用<code>dynamic</code>修饰符来获得对 Objective-C 运行时被自动派发的成员的访问。</p>
+<h3 id="u5728_Objective-C__u4E2D_u66B4_u6F0F_Swift__u63A5_u53E3"><a href="#u5728_Objective-C__u4E2D_u66B4_u6F0F_Swift__u63A5_u53E3" class="headerlink" title="在 Objective-C 中暴漏 Swift 接口"></a>在 Objective-C 中暴漏 Swift 接口</h3><p>当你定义一个继承自<code>NSObject</code>类或者其他 Objective-C 类的 Swift 子类时，该类便会自动兼容 Objective-C。Swift 编译器已经为你做好了这部分所需要的工作。</p>
 <p>所有的步骤都由 Swift 编译器自动完成，如果你从未在 Objective-C 代码中导入 Swift 类，你也不需要担心类型适配问题。另外一种情况，如果你的 Swift 类并不继承于 Objective-C 类而你希望能在 Objective-C 的代码中使用它，你可以使用下面描述的<code>@objc</code>属性。</p>
 <p><code>@objc</code>可以让你的 Swift API 在 Objective-C 中使用。换句话说，你可以通过在任何 Swift 方法、类、属性前添加<code>@objc</code>，来使得他们可以在 Objective-C 代码中使用。如果你的类继承自 Objective-C，编译器会自动帮助你完成这一步。编译器还会在所有的变量、方法、属性前加 @objc，如果这个类自己前面加上了<code>@objc</code>关键字。当你使用<code>@IBOutlet</code>，<code>@IBAction</code>，或者是<code>@NSManaged</code>属性时，<code>@objc</code>也会自动加在前面。这个关键字也可以用在 Objetive-C 中的 target-action 设计模式中，例如，<code>NSTimer</code>或者<code>UIButton</code>。</p>
 <p>当你在 Objective-C 中使用 Swift API，编译器通常会对语句做直接的翻译。例如，Swift API <code>func playSong(name: String)</code>会被解释为<code>- (void)playSong:(NSString *)name</code>。然而，有一个例外：当在 Objective-C 中使用 Swift 的初始化函数，编译器会在方法前添加“initWith”并且将原初始化函数的第一个参数首字母大写。例如，这个 Swift 初始化函数<code>init (songName: String, artist: String</code>将被翻译为<code>- (instancetype)initWithSongName:(NSString *)songName artist:(NSString *)artist</code>。</p>
@@ -401,10 +401,10 @@ Objective-C 选择器（Se">
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swift</span></span><br><span class="line"><span class="preprocessor">@objc</span>(<span class="type">Squirrel</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> Белка </span>&#123;</span><br><span class="line">    <span class="preprocessor">@objc</span>(initWithName:)</span><br><span class="line">    <span class="keyword">init</span> (имя: <span class="type">String</span>) &#123; <span class="comment">/*...*/</span> &#125;</span><br><span class="line">    <span class="preprocessor">@objc</span>(hideNuts:inTree:)</span><br><span class="line">    <span class="func"><span class="keyword">func</span> прячьОрехи<span class="params">(Int, вДереве: Дерево)</span></span> &#123; <span class="comment">/*...*/</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当你在 Swift 类中使用<code>@objc(&lt;#name#&gt;)</code>关键字，这个类可以不需要命名空间即可在 Objective-C 中使用。这个关键字在你迁徙 Objecive-C 代码到 Swift 时同样也非常有用。由于归档过的对象存贮了类的名字，你应该使用<code>@objc(&lt;#name#&gt;)</code>来声明与旧的归档过的类相同的名字，这样旧的类才能被新的 Swift 类解档。</p>
 <p><a name="Requiring_Dynamic_Dispatch"></a></p>
-<h2 id="请求动态分配">请求动态分配</h2><p>@objc 属性将你的 Swift API 暴露给了 Objective-C 运行时，但是它并不能保证一个属性，方法，下标，或构造器的动态调度。通过绕过 Objective-C 运行时，Swift 编译器可能仍然 devirtualize 或内联成员访问来优化代码的性能。当你用动态修改符标记一个成员声明时，对该成员的访问始终是动态调度。由于标有动态修改声明使用 Objective-C 运行时来调度，它们被隐式的用 @objc 属性标记。</p>
+<h2 id="u8BF7_u6C42_u52A8_u6001_u5206_u914D"><a href="#u8BF7_u6C42_u52A8_u6001_u5206_u914D" class="headerlink" title="请求动态分配"></a>请求动态分配</h2><p>@objc 属性将你的 Swift API 暴露给了 Objective-C 运行时，但是它并不能保证一个属性，方法，下标，或构造器的动态调度。通过绕过 Objective-C 运行时，Swift 编译器可能仍然 devirtualize 或内联成员访问来优化代码的性能。当你用动态修改符标记一个成员声明时，对该成员的访问始终是动态调度。由于标有动态修改声明使用 Objective-C 运行时来调度，它们被隐式的用 @objc 属性标记。</p>
 <p>动态分配的需求很少是必要的。但是，当你要在运行时替换一个 API 的实现时你必须使用动态修改。例如，你可以使用 Objective-C 运行时方法<code>method_exchangeImplementations</code>函数来替换 app 正在运行时某个方法的实现。如果 Swift 编译器内联了方法的实现或者 devirtualized 对它的访问，新的实现将不会被使用。</p>
 <p><a name="Lightweight_Generics"></a></p>
-<h2 id="轻量级泛型">轻量级泛型</h2><p>使用轻量级泛型参数的 Objective-C 声明类型，如<code>NSArray</code>，<code>NSSet</code>以及<code>NSDictionary</code>，在被导入到 Swift 时会附带上他们内容保存的类型。</p>
+<h2 id="u8F7B_u91CF_u7EA7_u6CDB_u578B"><a href="#u8F7B_u91CF_u7EA7_u6CDB_u578B" class="headerlink" title="轻量级泛型"></a>轻量级泛型</h2><p>使用轻量级泛型参数的 Objective-C 声明类型，如<code>NSArray</code>，<code>NSSet</code>以及<code>NSDictionary</code>，在被导入到 Swift 时会附带上他们内容保存的类型。</p>
 <p>例如，考虑下面的 Objective-C 属性声明：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property NSArray&#60;NSDate *&#62;* dates;&#10;@property NSSet&#60;NSString *&#62;* words;&#10;@property NSDictionary&#60;KeyType: NSURL *, NSData *&#62;* cachedData;</span><br></pre></td></tr></table></figure>
 <p>下面是 Swift 导入后：</p>
@@ -413,13 +413,13 @@ Objective-C 选择器（Se">
 <p>注意<br>除了 Foundation 中的集合类， Objective-C 的轻量级泛型会被 Swift 忽略掉。任何其他使用轻量级泛型的类型在导入到 Swift 中时会被视为无参数化。</p>
 </blockquote>
 <p><a name="objective_c_selectors"></a></p>
-<h2 id="Objective-C_选择器">Objective-C 选择器</h2><p>Objective-C 选择器是一种指向 Objective-C 方法名的类型。在 Swift 里，Objective-C 的选择器被<code>Selector</code>结构体替代。你可以通过字符串创建一个选择器，比如<code>let mySelector: Selector = &quot;tappedButton:&quot;</code>。因为字符串字面量能够自动被转换为选择器，所以你可以把字符串字面量直接传递给任何能够接受选择器的方法。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> myButton = <span class="type">UIButton</span>(frame: <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">100</span>, height: <span class="number">50</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">init</span>?(nibName nibNameOrNil: <span class="type">String</span>?, bundle nibBundleOrNil: <span class="type">NSBundle</span>?) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(nibName: nibNameOrNil, bundle: nibBundleOrNil)</span><br><span class="line">        myButton.addTarget(<span class="keyword">self</span>, action: <span class="string">"tappedButton:"</span>, forControlEvents: .<span class="type">TouchUpInside</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tappedButton</span><span class="params">(sender: UIButton!)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"tapped button"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    required <span class="keyword">init</span>?(coder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(coder: coder)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Objective-C__u9009_u62E9_u5668"><a href="#Objective-C__u9009_u62E9_u5668" class="headerlink" title="Objective-C 选择器"></a>Objective-C 选择器</h2><p>Objective-C 选择器是一种指向 Objective-C 方法名的类型。在 Swift 里，Objective-C 的选择器被<code>Selector</code>结构体替代。你可以通过字符串创建一个选择器，比如<code>let mySelector: Selector = &quot;tappedButton:&quot;</code>。因为字符串字面量能够自动被转换为选择器，所以你可以把字符串字面量直接传递给任何能够接受选择器的方法。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> myButton = <span class="type">UIButton</span>(frame: <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">100</span>, height: <span class="number">50</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">init</span>?(nibName nibNameOrNil: <span class="type">String</span>?, bundle nibBundleOrNil: <span class="type">NSBundle</span>?) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(nibName: nibNameOrNil, bundle: nibBundleOrNil)</span><br><span class="line">        myButton.addTarget(<span class="keyword">self</span>, action: <span class="string">"tappedButton:"</span>, forControlEvents: .<span class="type">TouchUpInside</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">tappedButton</span><span class="params">(sender: UIButton!)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"tapped button"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(coder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(coder: coder)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意</p>
 <p><code>performSelector:</code>方法和相关的调用选择器的方法没有导入到 Swift 中因为它们本质上是不安全的。</p>
 </blockquote>
-<p>如果你的 Swift 类继承自 Objective-C 的类，你的所有方法都可以用作 Objective-C 的选择器。反之，如果你的 Swift 类不是继承自 Objective-C，你需要在想要使用的选择器前面加上<code>@objc</code>属性前缀，详情请看<a href="#swift_type_compatibility">Swift 类型兼容性</a>。</p>
+<p>如果你的 Swift 类继承自 Objective-C 的类，你的所有方法都可以用作 Objective-C 的选择器。反之，如果你的 Swift 类不是继承自 Objective-C，你需要在想要使用的选择器前面加上<code>@objc</code>属性前缀，详情请看<a href="/#swift_type_compatibility">Swift 类型兼容性</a>。</p>
 </span>
       
     </div>
@@ -509,7 +509,7 @@ Objective-C 选择器（Se">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -523,7 +523,7 @@ Objective-C 选择器（Se">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -572,7 +572,7 @@ Objective-C 选择器（Se">
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#空值和可选值"><span class="nav-number">1.</span> <span class="nav-text">空值和可选值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift_类型兼容性"><span class="nav-number">2.</span> <span class="nav-text">Swift 类型兼容性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在_Objective-C_中暴漏_Swift_接口"><span class="nav-number">2.1.</span> <span class="nav-text">在 Objective-C 中暴漏 Swift 接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求动态分配"><span class="nav-number">3.</span> <span class="nav-text">请求动态分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#轻量级泛型"><span class="nav-number">4.</span> <span class="nav-text">轻量级泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Objective-C_选择器"><span class="nav-number">5.</span> <span class="nav-text">Objective-C 选择器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7A7A_u503C_u548C_u53EF_u9009_u503C"><span class="nav-number">1.</span> <span class="nav-text">空值和可选值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift__u7C7B_u578B_u517C_u5BB9_u6027"><span class="nav-number">2.</span> <span class="nav-text">Swift 类型兼容性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5728_Objective-C__u4E2D_u66B4_u6F0F_Swift__u63A5_u53E3"><span class="nav-number">2.1.</span> <span class="nav-text">在 Objective-C 中暴漏 Swift 接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BF7_u6C42_u52A8_u6001_u5206_u914D"><span class="nav-number">3.</span> <span class="nav-text">请求动态分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8F7B_u91CF_u7EA7_u6CDB_u578B"><span class="nav-number">4.</span> <span class="nav-text">轻量级泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Objective-C__u9009_u62E9_u5668"><span class="nav-number">5.</span> <span class="nav-text">Objective-C 选择器</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -589,7 +589,7 @@ Objective-C 选择器（Se">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

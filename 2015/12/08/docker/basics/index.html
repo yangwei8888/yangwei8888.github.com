@@ -234,35 +234,35 @@ $ docker info
       
 
       
-        <span itemprop="articleBody"><h1 id="使用docker第一步">使用docker第一步</h1><p>###检查你的Docker是否安装</p>
+        <span itemprop="articleBody"><h1 id="u4F7F_u7528docker_u7B2C_u4E00_u6B65"><a href="#u4F7F_u7528docker_u7B2C_u4E00_u6B65" class="headerlink" title="使用docker第一步"></a>使用docker第一步</h1><p>###检查你的Docker是否安装</p>
 <p>本指南假设你已经完成了Docker的安装工作。检查你安装的Docker,运行以下命令：</p>
-<pre><code><span class="comment"># Check that you have a working install</span>
-<span class="variable">$ </span>docker info
+<pre><code># Check that you have a working install
+$ docker info
 </code></pre><p>如果你得到 <code>docker: command not found</code>，你可能没有完整的安装上Docker。</p>
 <p>如果你得到 <code>/var/lib/docker/repositories: permission denied</code> ，那你可能没有权限访问你主机上的Docker。</p>
 <p>为获得访问Docker权限可以直接在命令前加<code>sudo</code>，或者采取以下步骤授予权限：：</p>
-<pre><code><span class="comment"># 如果还没有docker group就添加一个：</span>
-<span class="variable">$ </span>sudo groupadd docker
-<span class="comment"># 将用户加入该group内。然后退出并重新登录即可生效。</span>
-<span class="variable">$ </span>sudo gpasswd -a <span class="variable">${</span><span class="constant">USER</span>} docker
-<span class="comment"># 重启docker</span>
-<span class="variable">$ </span>sudo service docker restart
-</code></pre><p>请参考<a href="../install/">安装指南</a>安装。</p>
+<pre><code># 如果还没有docker group就添加一个：
+$ sudo groupadd docker
+# 将用户加入该group内。然后退出并重新登录即可生效。
+$ sudo gpasswd -a ${USER} docker
+# 重启docker
+$ sudo service docker restart
+</code></pre><p>请参考<a href="/../install/">安装指南</a>安装。</p>
 <p>###下载预构建镜像</p>
-<pre><code><span class="comment"># Download an ubuntu image</span>
-<span class="variable">$ </span>sudo docker pull ubuntu
+<pre><code># Download an ubuntu image
+$ sudo docker pull ubuntu
 </code></pre><p>这将从Docker Hub中查找到 <code>Ubuntu</code> 镜像，并且从Docker Hub中下载镜像到本地缓存中。</p>
 <blockquote>
 <p>提示：当镜像下载成功之后，你将会看到镜像的短id一个12字符的hash, <code>539c0211cd76: Download complete</code>，这些短的镜像IDS是完整ID的前12个字符。你可以使用 <code>docker inspect</code>和 <code>docker images --no-trunc=true</code>来查看完整ID。</p>
 </blockquote>
 <p>如果你使用OS X，你可以使用 <code>sudo</code>。</p>
 <p>###运行交互shell</p>
-<pre><code><span class="comment"># 在ubuntu镜像中使用运行交互shell,</span>
-<span class="comment"># 分配一个控制台,分配输入输出流</span>
-<span class="comment"># To detach the tty without exiting the shell,</span>
-<span class="comment"># use the escape sequence Ctrl-p + Ctrl-q</span>
-<span class="comment"># <span class="doctag">note:</span> This will continue to exist in a stopped state once exited (see "docker ps -a")</span>
-$ sudo docker <span class="command">run</span> -i -t ubuntu /bin/bash
+<pre><code># 在ubuntu镜像中使用运行交互shell,
+# 分配一个控制台,分配输入输出流
+# To detach the tty without exiting the shell,
+# use the escape sequence Ctrl-p + Ctrl-q
+# note: This will continue to exist in a stopped state once exited (see &quot;docker ps -a&quot;)
+$ sudo docker run -i -t ubuntu /bin/bash
 </code></pre><p>###绑定Docker到另外的主机/端口或者Unix socket</p>
 <blockquote>
 <p>提示：修改默认的 docker 进程绑定到一个tcp端口或者 Unix docker群组，这将会增加你的安全风险，允许非 root 用户获得 root 访问的主机权限。请确保你的 <code>docker</code> 权限。如果你绑定一个 <code>TCP</code> 端口任何人可以通过这个端口来访问你的 <code>Docker</code>,所以它不应该放在一个开放的网络中。</p>
@@ -270,91 +270,91 @@ $ sudo docker <span class="command">run</span> -i -t ubuntu /bin/bash
 <p>使用 <code>-H</code> 标记可以使 <code>Docker</code> 来监听指定的IP和端口。默认情况下，它将监听 <code>unix:///var/run/docker.sock</code>只允许本地root用户连接。你可以将它设置为 <code>0.0.0.0:2375</code>或者指定的主机IP来给所有人访问权限。但是这不推荐，因为这样普通用户获得主机上运行进程的root权限。</p>
 <p>同样，Docker 客户端可以使用 <code>-H</code> 来连接指定的主机端口。</p>
 <p><code>-H</code> 使用以下格式来分配主机和端口</p>
-<pre><code>tcp://[<span class="link_label">host</span>][<span class="link_reference">:port</span>]<span class="code">` or `</span>unix://path
+<pre><code>tcp://[host][:port]` or `unix://path
 </code></pre><p>举例：</p>
 <ul>
 <li>tcp://host:2375 -&gt; TCP connection on host:2375</li>
 <li>unix://path/to/socket -&gt; Unix socket located at path/to/socket</li>
 </ul>
 <p><code>-H</code>，当输入为空的时候，将默认为相同的原始值，即没有<code>-H</code>输入。<br><code>-H</code>也接受短形式的TCP绑定。</p>
-<pre><code>host[<span class="symbol">:port</span>]` <span class="keyword">or</span> `<span class="symbol">:port</span>
+<pre><code>host[:port]` or `:port
 </code></pre><p>进程模式运行Docker</p>
-<pre><code>$ sudo &lt;path to&gt;/docker -H <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">5555</span> -d &amp;
+<pre><code>$ sudo &lt;path to&gt;/docker -H 0.0.0.0:5555 -d &amp;
 </code></pre><p>下载<code>Ubuntu</code>镜像：</p>
-<pre><code>sudo docker -H :<span class="number">5555</span> pull ubuntu
+<pre><code>sudo docker -H :5555 pull ubuntu
 </code></pre><p>你可以使用多个<code>-H</code>标记，例如，你想要同时监听TCP和Unix socket。</p>
-<pre><code><span class="comment"># 进程模式下运行docker</span>
-<span class="variable">$ </span>sudo &lt;path to&gt;<span class="regexp">/docker -H tcp:/</span><span class="regexp">/127.0.0.1:2375 -H unix:/</span><span class="regexp">//var</span><span class="regexp">/run/docker</span>.sock -d &amp;
-<span class="comment"># 使用默认的unix socker来下载ubuntu镜像</span>
-<span class="variable">$ </span>sudo docker pull ubuntu
-<span class="comment"># 或者使用TCP端口</span>
-<span class="variable">$ </span>sudo docker -<span class="constant">H</span> <span class="symbol">tcp:</span>/<span class="regexp">/127.0.0.1:2375 pull ubuntu</span>
+<pre><code># 进程模式下运行docker
+$ sudo &lt;path to&gt;/docker -H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -d &amp;
+# 使用默认的unix socker来下载ubuntu镜像
+$ sudo docker pull ubuntu
+# 或者使用TCP端口
+$ sudo docker -H tcp://127.0.0.1:2375 pull ubuntu
 </code></pre><p>####开始一个长时间运行的工作进程</p>
-<pre><code><span class="comment"># 开始一个非常有用的长时间运行的进程</span>
-<span class="variable">$ </span><span class="constant">JOB=</span><span class="variable">$(</span>sudo docker run -d ubuntu /bin/sh -c <span class="string">"while true; do echo Hello world; sleep 1; done"</span>)
+<pre><code># 开始一个非常有用的长时间运行的进程
+$ JOB=$(sudo docker run -d ubuntu /bin/sh -c &quot;while true; do echo Hello world; sleep 1; done&quot;)
 
-<span class="comment"># 到目前为止收集的输出工作</span>
-<span class="variable">$ </span>sudo docker logs <span class="variable">$JOB</span>
+# 到目前为止收集的输出工作
+$ sudo docker logs $JOB
 
-<span class="comment"># 关闭这项进程</span>
-<span class="variable">$ </span>sudo docker kill <span class="variable">$JOB</span>
+# 关闭这项进程
+$ sudo docker kill $JOB
 </code></pre><p>####列出容器</p>
-<pre><code><span class="variable">$ </span>sudo docker ps <span class="comment"># Lists only running containers</span>
-<span class="variable">$ </span>sudo docker ps -a <span class="comment"># Lists all containers</span>
-<span class="variable">$ </span>sudo docker ps -l <span class="comment"># List the last running container</span>
+<pre><code>$ sudo docker ps # Lists only running containers
+$ sudo docker ps -a # Lists all containers
+$ sudo docker ps -l # List the last running container
 </code></pre><p>####控制容器</p>
-<pre><code><span class="comment"># 开始一个新的容器</span>
-<span class="variable">$ </span><span class="constant">JOB=</span><span class="variable">$(</span>sudo docker run -d ubuntu /bin/sh -c <span class="string">"while true; do echo Hello world; sleep 1; done"</span>)
+<pre><code># 开始一个新的容器
+$ JOB=$(sudo docker run -d ubuntu /bin/sh -c &quot;while true; do echo Hello world; sleep 1; done&quot;)
 
-<span class="comment"># 停止容器</span>
-<span class="variable">$ </span>docker stop <span class="variable">$JOB</span>
+# 停止容器
+$ docker stop $JOB
 
-<span class="comment"># 开始容器</span>
-<span class="variable">$ </span>docker start <span class="variable">$JOB</span>
+# 开始容器
+$ docker start $JOB
 
-<span class="comment"># 重启容器</span>
-<span class="variable">$ </span>docker restart <span class="variable">$JOB</span>
+# 重启容器
+$ docker restart $JOB
 
-<span class="comment"># 杀死一个工作</span>
-<span class="variable">$ </span>docker kill <span class="variable">$JOB</span>
+# 杀死一个工作
+$ docker kill $JOB
 
-<span class="comment"># 删除一个容器</span>
-<span class="variable">$ </span>docker stop <span class="variable">$JOB</span> <span class="comment"># Container must be stopped to remove it</span>
-<span class="variable">$ </span>docker rm <span class="variable">$JOB</span>
+# 删除一个容器
+$ docker stop $JOB # Container must be stopped to remove it
+$ docker rm $JOB
 </code></pre><p>####绑定服务到TCP端口</p>
-<pre><code><span class="comment">#让容器绑定4444端口，并通知netcat监听它。</span>
-<span class="variable">$ </span><span class="constant">JOB=</span><span class="variable">$(</span>sudo docker run -d -p <span class="number">4444</span> <span class="symbol">ubuntu:</span><span class="number">12.10</span> /bin/nc -l <span class="number">4444</span>)
+<pre><code>#让容器绑定4444端口，并通知netcat监听它。
+$ JOB=$(sudo docker run -d -p 4444 ubuntu:12.10 /bin/nc -l 4444)
 
-<span class="comment"># 查看容器转发的公共端口</span>
-<span class="variable">$ </span><span class="constant">PORT=</span><span class="variable">$(</span>sudo docker port <span class="variable">$JOB</span> <span class="number">4444</span> | awk -<span class="constant">F:</span> <span class="string">'{ print $2 }'</span>)
+# 查看容器转发的公共端口
+$ PORT=$(sudo docker port $JOB 4444 | awk -F: &apos;{ print $2 }&apos;)
 
-<span class="comment"># 连接这个公共端口</span>
-<span class="variable">$ </span>echo hello world | nc <span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span> <span class="variable">$PORT</span>
+# 连接这个公共端口
+$ echo hello world | nc 127.0.0.1 $PORT
 
-<span class="comment"># 确认网络连接工作</span>
-<span class="variable">$ </span>echo <span class="string">"Daemon received: $(sudo docker logs $JOB)"</span>
+# 确认网络连接工作
+$ echo &quot;Daemon received: $(sudo docker logs $JOB)&quot;
 </code></pre><p>####提交（存储）一个容器的状态</p>
 <p>保存你镜像容器的状态，这也就可以重复利用。</p>
 <p>当你提交你的容器，仅仅是镜像和容器之间的不同，从创建到容器的当前状态来存储（作为差异）。你可以使用 <code>docker images</code>来查看已有镜像。</p>
-<pre><code><span class="comment"># 使用新的名称来提交你的镜像</span>
-<span class="variable">$ </span>sudo docker commit &lt;container_id&gt; &lt;some_name&gt;
+<pre><code># 使用新的名称来提交你的镜像
+$ sudo docker commit &lt;container_id&gt; &lt;some_name&gt;
 
-<span class="comment"># 列出你的容器</span>
-<span class="variable">$ </span>sudo docker images
+# 列出你的容器
+$ sudo docker images
 </code></pre><p>你现在有一个镜像的状态，你可以创建新的实例。</p>
 <p>####删除Docker镜像</p>
 <p>首先要保证有权限对Docker镜像或者容器进行操作，具体做法参见进入前文安装部分。</p>
-<pre><code><span class="comment"># 停止所有容器</span>
-<span class="variable">$ </span>docker stop <span class="variable">$(</span>docker ps -a -q)
+<pre><code># 停止所有容器
+$ docker stop $(docker ps -a -q)
 
-<span class="comment"># 删除指定镜像</span>
-<span class="variable">$ </span>docker rmi <span class="variable">$image</span>
+# 删除指定镜像
+$ docker rmi $image
 
-<span class="comment"># 删除无标示镜像，即id为&lt;None&gt;的镜像</span>
-<span class="variable">$ </span>docker rmi <span class="variable">$(</span>docker images | grep <span class="string">"^&lt;none&gt;"</span> | awk <span class="string">"{print $3}"</span>)
+# 删除无标示镜像，即id为&lt;None&gt;的镜像
+$ docker rmi $(docker images | grep &quot;^&lt;none&gt;&quot; | awk &quot;{print $3}&quot;)
 
-<span class="comment"># 删除所有镜像</span>
-<span class="variable">$ </span>docker rmi <span class="variable">$(</span>docker images -q)
+# 删除所有镜像
+$ docker rmi $(docker images -q)
 </code></pre></span>
       
     </div>
@@ -444,7 +444,7 @@ $ sudo docker <span class="command">run</span> -i -t ubuntu /bin/bash
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -458,7 +458,7 @@ $ sudo docker <span class="command">run</span> -i -t ubuntu /bin/bash
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -507,7 +507,7 @@ $ sudo docker <span class="command">run</span> -i -t ubuntu /bin/bash
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用docker第一步"><span class="nav-number">1.</span> <span class="nav-text">使用docker第一步</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u4F7F_u7528docker_u7B2C_u4E00_u6B65"><span class="nav-number">1.</span> <span class="nav-text">使用docker第一步</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -524,7 +524,7 @@ $ sudo docker <span class="command">run</span> -i -t ubuntu /bin/bash
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

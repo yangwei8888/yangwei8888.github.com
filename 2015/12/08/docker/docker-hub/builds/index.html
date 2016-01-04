@@ -234,7 +234,7 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="Docker_Hub上的自动化构建">Docker Hub上的自动化构建</h1><p>##关于自动化构建</p>
+        <span itemprop="articleBody"><h1 id="Docker_Hub_u4E0A_u7684_u81EA_u52A8_u5316_u6784_u5EFA"><a href="#Docker_Hub_u4E0A_u7684_u81EA_u52A8_u5316_u6784_u5EFA" class="headerlink" title="Docker Hub上的自动化构建"></a>Docker Hub上的自动化构建</h1><p>##关于自动化构建</p>
 <p>自动化构建是一个特殊的功能，它允许您在 Docker Hub 上使用构建集群，根据指定的 <code>Dockerfile</code> 或者 GitHub 、 BitBucket 仓库（或环境）来自动创建镜像。该系统将从仓库复制一份，并根据以仓库为环境的 <code>Dockerfile</code> 的描述构建镜像。由此产生的镜像将被上传到注册表，并且自动生成标记。</p>
 <p>自动化构建有许多优势：</p>
 <ul>
@@ -293,33 +293,33 @@
 <p>也可以使用 Webhooks 来自动化构建，Webhooks 会在仓库推送成功后被调用。</p>
 <p>此webhook调用将生成一个 HTTP POST，JSON样例如下：</p>
 <pre><code>{
-   "<span class="attribute">push_data</span>":<span class="value">{
-      "<span class="attribute">pushed_at</span>":<span class="value"><span class="number">1385141110</span></span>,
-      "<span class="attribute">images</span>":<span class="value">[
-         <span class="string">"imagehash1"</span>,
-         <span class="string">"imagehash2"</span>,
-         <span class="string">"imagehash3"</span>
-      ]</span>,
-      "<span class="attribute">pusher</span>":<span class="value"><span class="string">"username"</span>
-   </span>}</span>,
-   "<span class="attribute">repository</span>":<span class="value">{
-      "<span class="attribute">status</span>":<span class="value"><span class="string">"Active"</span></span>,
-      "<span class="attribute">description</span>":<span class="value"><span class="string">"my docker repo that does cool things"</span></span>,
-      "<span class="attribute">is_automated</span>":<span class="value"><span class="literal">false</span></span>,
-      "<span class="attribute">full_description</span>":<span class="value"><span class="string">"This is my full description"</span></span>,
-      "<span class="attribute">repo_url</span>":<span class="value"><span class="string">"https://registry.hub.docker.com/u/username/reponame/"</span></span>,
-      "<span class="attribute">owner</span>":<span class="value"><span class="string">"username"</span></span>,
-      "<span class="attribute">is_official</span>":<span class="value"><span class="literal">false</span></span>,
-      "<span class="attribute">is_private</span>":<span class="value"><span class="literal">false</span></span>,
-      "<span class="attribute">name</span>":<span class="value"><span class="string">"reponame"</span></span>,
-      "<span class="attribute">namespace</span>":<span class="value"><span class="string">"username"</span></span>,
-      "<span class="attribute">star_count</span>":<span class="value"><span class="number">1</span></span>,
-      "<span class="attribute">comment_count</span>":<span class="value"><span class="number">1</span></span>,
-      "<span class="attribute">date_created</span>":<span class="value"><span class="number">1370174400</span></span>,
-      "<span class="attribute">dockerfile</span>":<span class="value"><span class="string">"my full dockerfile is listed here"</span></span>,
-      "<span class="attribute">repo_name</span>":<span class="value"><span class="string">"username/reponame"</span>
-   </span>}
-</span>}
+   &quot;push_data&quot;:{
+      &quot;pushed_at&quot;:1385141110,
+      &quot;images&quot;:[
+         &quot;imagehash1&quot;,
+         &quot;imagehash2&quot;,
+         &quot;imagehash3&quot;
+      ],
+      &quot;pusher&quot;:&quot;username&quot;
+   },
+   &quot;repository&quot;:{
+      &quot;status&quot;:&quot;Active&quot;,
+      &quot;description&quot;:&quot;my docker repo that does cool things&quot;,
+      &quot;is_automated&quot;:false,
+      &quot;full_description&quot;:&quot;This is my full description&quot;,
+      &quot;repo_url&quot;:&quot;https://registry.hub.docker.com/u/username/reponame/&quot;,
+      &quot;owner&quot;:&quot;username&quot;,
+      &quot;is_official&quot;:false,
+      &quot;is_private&quot;:false,
+      &quot;name&quot;:&quot;reponame&quot;,
+      &quot;namespace&quot;:&quot;username&quot;,
+      &quot;star_count&quot;:1,
+      &quot;comment_count&quot;:1,
+      &quot;date_created&quot;:1370174400,
+      &quot;dockerfile&quot;:&quot;my full dockerfile is listed here&quot;,
+      &quot;repo_name&quot;:&quot;username/reponame&quot;
+   }
+}
 </code></pre><p>Webhooks 可在自动化构建项目的 Settings 菜单中设置。</p>
 <blockquote>
 <p>注意：如果你想测试你的 webhook，我们建议使用像 <a href="http://requestb.in/" target="_blank" rel="external">requestb.in</a> 的工具。 </p>
@@ -419,7 +419,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -433,7 +433,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -482,7 +482,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker_Hub上的自动化构建"><span class="nav-number">1.</span> <span class="nav-text">Docker Hub上的自动化构建</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker_Hub_u4E0A_u7684_u81EA_u52A8_u5316_u6784_u5EFA"><span class="nav-number">1.</span> <span class="nav-text">Docker Hub上的自动化构建</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -499,7 +499,7 @@
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

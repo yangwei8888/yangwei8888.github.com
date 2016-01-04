@@ -246,7 +246,7 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="Docker_中运行_MongoDB">Docker 中运行 MongoDB</h1><p>###描述</p>
+        <span itemprop="articleBody"><h1 id="Docker__u4E2D_u8FD0_u884C_MongoDB"><a href="#Docker__u4E2D_u8FD0_u884C_MongoDB" class="headerlink" title="Docker 中运行 MongoDB"></a>Docker 中运行 MongoDB</h1><p>###描述</p>
 <p>在这个例子里，我们会学到如何构建一个预装 <code>MongoDB</code> 的镜像。我们还将会看到如何推送镜像到 Docker Hub 并分享给其他人。</p>
 <p>使用 Docker 容器来部署 <a href="https://www.mongodb.org/" target="_blank" rel="external">MongoDB</a> 实例将会给你带来许多好处，例如：</p>
 <ul>
@@ -255,90 +255,90 @@
 <li>基于全球访问的共享镜像</li>
 </ul>
 <blockquote>
-<p>注意: 如果你不喜欢sudo,可以查看<a href="installation/binaries.md">非 root 用户使用</a></p>
+<p>注意: 如果你不喜欢sudo,可以查看<a href="/installation/binaries.md">非 root 用户使用</a></p>
 </blockquote>
 <p>###为 MongoDB 创建一个 Dockerfile</p>
 <p>让我们创建一个 <code>Dockerfile</code> 并构建：</p>
-<pre><code><span class="variable">$ </span>nano <span class="constant">Dockerfile</span>
+<pre><code>$ nano Dockerfile
 </code></pre><p>虽然这部分是可选的，但是在 <code>Dockerfile</code> 开头处添加注释，可以更好的去解释其目的：</p>
-<pre><code><span class="preprocessor"># Dockerizing MongoDB: Dockerfile for building MongoDB images</span>
-<span class="preprocessor"># Based on ubuntu:latest, installs MongoDB following the instructions from:</span>
-<span class="preprocessor"># http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/</span>
+<pre><code># Dockerizing MongoDB: Dockerfile for building MongoDB images
+# Based on ubuntu:latest, installs MongoDB following the instructions from:
+# http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 </code></pre><blockquote>
 <p>小贴士：<code>Dockerfile</code>文件是灵活的。然而，他们遵循一定的格式。第一项定义的是镜像的名称，这里是 Dockerized MongoDB 应用的父镜像。</p>
 </blockquote>
 <p>我们将使用 Docker Hub 中最新版本的 Ubuntu 镜像来构建。</p>
-<pre><code><span class="comment"># Format: FROM    repository[:version]</span>
-<span class="built_in">FROM</span>       ubuntu:latest
+<pre><code># Format: FROM    repository[:version]
+FROM       ubuntu:latest
 </code></pre><p>继续，我们将在 <code>Dockerfile</code> 中指定 <code>MAINTAINER</code></p>
-<pre><code><span class="comment"># Format: MAINTAINER Name &lt;email<span class="doctag">@addr</span>.ess&gt;</span>
-<span class="constant">MAINTAINER</span> <span class="constant">M</span>.<span class="constant">Y</span>. <span class="constant">Name</span> &lt;myname<span class="variable">@addr</span>.ess&gt;
+<pre><code># Format: MAINTAINER Name &lt;email@addr.ess&gt;
+MAINTAINER M.Y. Name &lt;myname@addr.ess&gt;
 </code></pre><blockquote>
 <p>注：尽管 Ubuntu 系统已经有 MongoDB 包，但是它们可能过时，因此，在这个例子中，我们将使用 MongoDB 的官方包。</p>
 </blockquote>
 <p>我们将开始导入 MongoDB 公共 GPG 秘钥。我们还将创建一个 MongoDB 库包管理器</p>
-<pre><code><span class="comment"># Installation:</span>
-<span class="comment"># Import MongoDB public GPG key AND create a MongoDB list file</span>
-<span class="built_in">RUN</span> <span class="bash">apt-key adv --keyserver hkp://keyserver.ubuntu.com:<span class="number">80</span> --recv <span class="number">7</span>F0CEB10
-</span><span class="built_in">RUN</span> <span class="bash"><span class="built_in">echo</span> <span class="string">'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'</span> | tee /etc/apt/sources.list.d/<span class="number">10</span>gen.list</span>
+<pre><code># Installation:
+# Import MongoDB public GPG key AND create a MongoDB list file
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+RUN echo &apos;deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen&apos; | tee /etc/apt/sources.list.d/10gen.list
 </code></pre><p>这个初步的准备后，我们将更新我们的包并且安装 MongoDB 。</p>
-<pre><code># <span class="operator"><span class="keyword">Update</span> apt-<span class="keyword">get</span> sources <span class="keyword">AND</span> <span class="keyword">install</span> MongoDB
-RUN apt-<span class="keyword">get</span> <span class="keyword">update</span>
-RUN apt-<span class="keyword">get</span> <span class="keyword">install</span> -y -q mongodb-org</span>
+<pre><code># Update apt-get sources AND install MongoDB
+RUN apt-get update
+RUN apt-get install -y -q mongodb-org
 </code></pre><blockquote>
 <p>小贴士: 您可以通过使用所需的软件包版本列表来指定 MongoDB的特定版本,例如:</p>
 </blockquote>
-<pre><code>RUN apt-get install -y -q mongodb-org=<span class="number">2.6</span><span class="number">.1</span> mongodb-org-server=<span class="number">2.6</span><span class="number">.1</span> mongodb-org-shell=<span class="number">2.6</span><span class="number">.1</span> mongodb-org-mongos=<span class="number">2.6</span><span class="number">.1</span> mongodb-org-tools=<span class="number">2.6</span><span class="number">.1</span>
+<pre><code>RUN apt-get install -y -q mongodb-org=2.6.1 mongodb-org-server=2.6.1 mongodb-org-shell=2.6.1 mongodb-org-mongos=2.6.1 mongodb-org-tools=2.6.1
 </code></pre><p>MongoDB 需要数据目录，让我们在最后一步中执行</p>
-<pre><code># <span class="operator"><span class="keyword">Create</span> the MongoDB <span class="keyword">data</span> <span class="keyword">directory</span>
-RUN mkdir -<span class="keyword">p</span> /<span class="keyword">data</span>/db</span>
+<pre><code># Create the MongoDB data directory
+RUN mkdir -p /data/db
 </code></pre><p>最后我们设置 <code>ENTRYPOINT</code> 指令来告诉 Docker 如何在我们的 MongoDB 镜像容器内运行 <code>mongod</code> 。并且我们将使用 <code>EXPOSE</code> 命令来指定端口：</p>
-<pre><code><span class="comment"># Expose port 27017 from the container to the host</span>
-<span class="built_in">EXPOSE</span> <span class="number">27017</span>
+<pre><code># Expose port 27017 from the container to the host
+EXPOSE 27017
 
-<span class="comment"># Set usr/bin/mongod as the dockerized entry-point application</span>
-<span class="built_in">ENTRYPOINT</span> <span class="bash">usr/bin/mongod</span>
+# Set usr/bin/mongod as the dockerized entry-point application
+ENTRYPOINT usr/bin/mongod
 </code></pre><p>现在保存我们的文件并且构建我们的镜像。</p>
 <blockquote>
-<p>注：完整版的 <code>Dockerfile</code> 可以在这里<a href="Dockerfile">下载</a></p>
+<p>注：完整版的 <code>Dockerfile</code> 可以在这里<a href="/Dockerfile">下载</a></p>
 </blockquote>
 <p>###构建 MongoDB 的 Docker 镜像</p>
 <p>我们可以使用我们的 <code>Dockerfile</code> 来构建我们的 MongoD B镜像。除非实验，使用 <code>docker build</code> 的 <code>--tag</code> 参数来给 docker 镜像指定标签始终是一个很好的做法。</p>
-<pre><code><span class="preprocessor"># Format: sudo docker build --tag/-t <span class="title">&lt;user-name&gt;</span>/<span class="title">&lt;repository&gt;</span> .</span>
-<span class="preprocessor"># Example:</span>
+<pre><code># Format: sudo docker build --tag/-t &lt;user-name&gt;/&lt;repository&gt; .
+# Example:
 $ sudo docker build --tag my/repo .
 </code></pre><p>当我们发出这个命令时，Docker 将会通过 <code>Dockerfile</code> 来构建镜像。最终镜像将被标记成 <code>my/repo</code> 。</p>
 <p>###推送 MongoDB 镜像到 Docker Hub</p>
 <p><code>docker push</code> 命令将会把镜像推送到 Docker Hub 上，你可以在 Docker Hub 上托管和分享推送的镜像。为此，你需要先登录：</p>
-<pre><code><span class="comment"># Log-in</span>
+<pre><code># Log-in
 $ sudo docker login
 Username:
 ..
 
-<span class="comment"># Push the image</span>
-<span class="comment"># Format: sudo docker push &lt;user-name&gt;/&lt;repository&gt;</span>
-$ sudo docker push <span class="keyword">my</span>/repo
-The push refers <span class="keyword">to</span> a repository [<span class="keyword">my</span>/repo] (len: <span class="number">1</span>)
-Sending image <span class="type">list</span>
-Pushing repository <span class="keyword">my</span>/repo (<span class="number">1</span> tags)
+# Push the image
+# Format: sudo docker push &lt;user-name&gt;/&lt;repository&gt;
+$ sudo docker push my/repo
+The push refers to a repository [my/repo] (len: 1)
+Sending image list
+Pushing repository my/repo (1 tags)
 ..
 </code></pre><p>###使用 MongoDB 的镜像</p>
 <p>使用我们创建的MongoDB镜像，我们可以运行一个或多个的 MongoDB 守护进程。</p>
-<pre><code><span class="preprocessor"># Basic way</span>
-<span class="preprocessor"># Usage: sudo docker run --name <span class="title">&lt;name for container&gt;</span> -d <span class="title">&lt;user-name&gt;</span>/<span class="title">&lt;repository&gt;</span></span>
+<pre><code># Basic way
+# Usage: sudo docker run --name &lt;name for container&gt; -d &lt;user-name&gt;/&lt;repository&gt;
 $ sudo docker run --name mongo_instance_001 -d my/repo
 
-<span class="preprocessor"># Dockerized MongoDB, lean and mean!</span>
-<span class="preprocessor"># Usage: sudo docker run --name <span class="title">&lt;name for container&gt;</span> -d <span class="title">&lt;user-name&gt;</span>/<span class="title">&lt;repository&gt;</span> --noprealloc --smallfiles</span>
+# Dockerized MongoDB, lean and mean!
+# Usage: sudo docker run --name &lt;name for container&gt; -d &lt;user-name&gt;/&lt;repository&gt; --noprealloc --smallfiles
 $ sudo docker run --name mongo_instance_001 -d my/repo --noprealloc --smallfiles
 
-<span class="preprocessor"># Checking out the logs of a MongoDB container</span>
-<span class="preprocessor"># Usage: sudo docker logs <span class="title">&lt;name for container&gt;</span></span>
+# Checking out the logs of a MongoDB container
+# Usage: sudo docker logs &lt;name for container&gt;
 $ sudo docker logs mongo_instance_001
 
-<span class="preprocessor"># Playing with MongoDB</span>
-<span class="preprocessor"># Usage: mongo --port <span class="title">&lt;port you get from `docker ps`&gt;</span> </span>
-$ mongo --port <span class="number">12345</span>
+# Playing with MongoDB
+# Usage: mongo --port &lt;port you get from `docker ps`&gt; 
+$ mongo --port 12345
 </code></pre></span>
       
     </div>
@@ -356,13 +356,14 @@ $ mongo --port <span class="number">12345</span>
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/08/docker/examples/nodejs_web_app/" rel="prev">Docker中运行Node.js web应用</a>
+              <a href="/2015/12/08/docker/installation/windows/" rel="prev">windows
+安装 docker</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/08/docker/examples/couchdb_data_volumes/" rel="next">Docker中运行CouchDB服务</a>
+              <a href="/2015/12/08/docker/examples/apt-cacher-ng/" rel="next">在Docker中运行Apt-Cacher-ng服务</a>
             
           </div>
         </div>
@@ -428,7 +429,7 @@ $ mongo --port <span class="number">12345</span>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -442,7 +443,7 @@ $ mongo --port <span class="number">12345</span>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -491,7 +492,7 @@ $ mongo --port <span class="number">12345</span>
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker_中运行_MongoDB"><span class="nav-number">1.</span> <span class="nav-text">Docker 中运行 MongoDB</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker__u4E2D_u8FD0_u884C_MongoDB"><span class="nav-number">1.</span> <span class="nav-text">Docker 中运行 MongoDB</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -508,7 +509,7 @@ $ mongo --port <span class="number">12345</span>
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

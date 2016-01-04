@@ -234,18 +234,18 @@ IntroductionThe increment/decrement operators in Swift were added very early in 
       
 
       
-        <span itemprop="articleBody"><h1 id="Remove_the_++_and_-_operators">Remove the <code>++</code> and <code>--</code> operators</h1><ul>
+        <span itemprop="articleBody"><h1 id="Remove_the_++_and_-_operators"><a href="#Remove_the_++_and_-_operators" class="headerlink" title="Remove the ++ and -- operators"></a>Remove the <code>++</code> and <code>--</code> operators</h1><ul>
 <li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0004-remove-pre-post-inc-decrement.md" target="_blank" rel="external">SE-0004</a></li>
 <li>Author: <a href="https://github.com/lattner" target="_blank" rel="external">Chris Lattner</a></li>
 <li>Status: <strong>Accepted</strong></li>
 </ul>
-<h2 id="Introduction">Introduction</h2><p>The increment/decrement operators in Swift were added very early in the<br>development of Swift, as a carry-over from C.  These were added without much<br>consideration, and haven’t been thought about much since then.  This document<br>provides a fresh look at them, and ultimately recommends we just remove them<br>entirely, since they are confusing and not carrying their weight.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The increment/decrement operators in Swift were added very early in the<br>development of Swift, as a carry-over from C.  These were added without much<br>consideration, and haven’t been thought about much since then.  This document<br>provides a fresh look at them, and ultimately recommends we just remove them<br>entirely, since they are confusing and not carrying their weight.</p>
 <p>As a quick refresher, there are four operators in this family:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = ++x  <span class="comment">// pre-increment  - returns input value after mutation</span></span><br><span class="line"><span class="keyword">let</span> b = x++  <span class="comment">// post-increment - returns copy of input value before mutation</span></span><br><span class="line"><span class="keyword">let</span> <span class="built_in">c</span> = --x  <span class="comment">// pre-decrement  - returns input value after mutation</span></span><br><span class="line"><span class="keyword">let</span> d = x--  <span class="comment">// post-decrement - returns copy of input value before mutation</span></span><br></pre></td></tr></table></figure>
 <p>However, the result value of these operators are frequently ignored.</p>
-<h2 id="Advantages_of_These_Operators">Advantages of These Operators</h2><p>The primary advantage of these operators is their expressive capability.  They<br>are shorthand for (e.g.) <code>x += 1</code> on a numeric type, or <code>x.advance()</code> on an<br>iterator-like value.  When the return value is needed, the Swift <code>+=</code> operator<br>cannot be used in-line, since (unlike C) it returns <code>Void</code>.</p>
+<h2 id="Advantages_of_These_Operators"><a href="#Advantages_of_These_Operators" class="headerlink" title="Advantages of These Operators"></a>Advantages of These Operators</h2><p>The primary advantage of these operators is their expressive capability.  They<br>are shorthand for (e.g.) <code>x += 1</code> on a numeric type, or <code>x.advance()</code> on an<br>iterator-like value.  When the return value is needed, the Swift <code>+=</code> operator<br>cannot be used in-line, since (unlike C) it returns <code>Void</code>.</p>
 <p>The second advantage of Swift supporting this family of operators is continuity<br>with C, and other common languages in the extended C family (C++, Objective-C,<br>Java, C#, Javascript, etc).  People coming to Swift from these other languages<br>may reasonably expect these operators to exist.  That said, there are also<br>popular languages which have kept the majority of C operators but dropped these<br>(e.g. Python).</p>
-<h2 id="Disadvantages_of_These_Operators">Disadvantages of These Operators</h2><ol>
+<h2 id="Disadvantages_of_These_Operators"><a href="#Disadvantages_of_These_Operators" class="headerlink" title="Disadvantages of These Operators"></a>Disadvantages of These Operators</h2><ol>
 <li><p>These operators increase the burden to learn Swift as a first programming<br>language - or any other case where you don’t already know these operators from a<br>different language.</p>
 </li>
 <li><p>Their expressive advantage is minimal - <code>x++</code> is not much shorter<br>than <code>x += 1</code>.</p>
@@ -262,8 +262,8 @@ IntroductionThe increment/decrement operators in Swift were added very early in 
 </li>
 </ol>
 <p>Finally, these fail the metric of “if we didn’t already have these, would we add<br>them to Swift 3?”</p>
-<h2 id="Proposed_Approach">Proposed Approach</h2><p>We should just drop these operators entirely.  In terms of roll-out, we should<br>deprecate them in the Spring Swift 2.x release (with a nice Fixit hint to cover<br>common cases), and remove them completely in Swift 3.</p>
-<h2 id="Alternatives_considered">Alternatives considered</h2><p>Simplest alternative: we could keep them. More interesting to consider, we could<br>change these operators to return Void.  This solves some of the problems above,<br>but introduces a new question: once the result is gone, the difference between<br>the prefix and postfix form also vanishes.  Given that, we would have to pick<br>between these unfortunate choices:</p>
+<h2 id="Proposed_Approach"><a href="#Proposed_Approach" class="headerlink" title="Proposed Approach"></a>Proposed Approach</h2><p>We should just drop these operators entirely.  In terms of roll-out, we should<br>deprecate them in the Spring Swift 2.x release (with a nice Fixit hint to cover<br>common cases), and remove them completely in Swift 3.</p>
+<h2 id="Alternatives_considered"><a href="#Alternatives_considered" class="headerlink" title="Alternatives considered"></a>Alternatives considered</h2><p>Simplest alternative: we could keep them. More interesting to consider, we could<br>change these operators to return Void.  This solves some of the problems above,<br>but introduces a new question: once the result is gone, the difference between<br>the prefix and postfix form also vanishes.  Given that, we would have to pick<br>between these unfortunate choices:</p>
 <p>1) Keep both <code>x++</code> and <code>++x</code> in the language, even though they do the same<br>thing.</p>
 <p>2) Drop one of <code>x++</code> or <code>++x</code>.  C++ programmers generally prefer the prefix<br>forms, but everyone else generally prefers the postfix forms.  Dropping either<br>one would be a significant deviation from C.</p>
 <p>Despite considering these options carefully, they still don’t justify the<br>complexity that the operators add to Swift.</p>
@@ -356,7 +356,7 @@ IntroductionThe increment/decrement operators in Swift were added very early in 
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -370,7 +370,7 @@ IntroductionThe increment/decrement operators in Swift were added very early in 
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -436,7 +436,7 @@ IntroductionThe increment/decrement operators in Swift were added very early in 
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>
