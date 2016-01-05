@@ -170,6 +170,203 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/" itemprop="url">
+                0012-add-noescape-to-public-library-api
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0012-add-noescape-to-public-library-api/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Add_@noescape_to_public_library_API"><a href="#Add_@noescape_to_public_library_API" class="headerlink" title="Add @noescape to public library API"></a>Add <code>@noescape</code> to public library API</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0012-add-noescape-to-public-library-api.md" target="_blank" rel="external">SE-0012</a></li>
+<li>Author(s): <a href="https://github.com/jtbandes" target="_blank" rel="external">Jacob Bandes-Storch</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="@noescape"><a href="#@noescape" class="headerlink" title="@noescape"></a><code>@noescape</code></h3><p>Swift provides <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID546" target="_blank" rel="external">a <code>@noescape</code> declaration attribute</a> which can be applied to closure parameters, indicating that the closure’s execution is guaranteed not to escape the function call.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">withLock</span><span class="params">(@noescape perform closure: <span class="params">()</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">    myLock.lock()</span><br><span class="line">    closure()</span><br><span class="line">    myLock.unlock()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Thus, a closure argument is guaranteed to be executed (if executed at all) <em>before</em> the function returns. This enables the compiler to perform various optimizations, such as omitting unnecessary capturing/retaining/releasing of <code>self</code>.</p>
+<p>For example, just as “<code>self.</code>“ may be omitted in the context of a method, since a <code>@noescape</code> closure is known not to capture <code>self</code>, properties and methods can be accessed without the <code>self.</code> prefix:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> counter = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">incrementCounter</span><span class="params">()</span></span> &#123;</span><br><span class="line">        counter += <span class="number">1</span>  <span class="comment">// "self." elided in an instance method</span></span><br><span class="line">        </span><br><span class="line">        withLock &#123;</span><br><span class="line">            <span class="comment">// Without @noescape, the following line would produce the error</span></span><br><span class="line">            <span class="comment">//   "reference to property 'counter' in closure requires</span></span><br><span class="line">            <span class="comment">//    explicit 'self.' to make capture semantics explicit".</span></span><br><span class="line">            counter += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="In_C_and_Objective-C"><a href="#In_C_and_Objective-C" class="headerlink" title="In C and Objective-C"></a>In C and Objective-C</h3><p>Clang understands the <code>noescape</code> attribute, spelled <code>__attribute__((noescape))</code> or <code>__attribute__((__noescape__))</code>. When function definitions whose block or function-pointer parameters have this attribute are imported to Swift, they are visible with a Swift <code>@noescape</code> attribute.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void performWithLock(__attribute__((noescape)) void (^block)()) &#123;  // exposed as @noescape to Swift</span><br><span class="line">    lock(myLock);</span><br><span class="line">    block();</span><br><span class="line">    unlock(myLock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)performWithLock:(__attribute__((noescape)) void (^)())block &#123;  // exposed as @noescape to Swift&#10;    [myLock lock];&#10;    block();&#10;    [myLock unlock];&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>Many standard methods and functions — particularly in Foundation and libdispatch — have non-escaping closure semantics, but <strong>do not have <code>__attribute__((noescape))</code></strong>. This thwarts the compiler optimizations and syntax shortcuts granted by <code>@noescape</code>, when they should otherwise be applied.</p>
+<p>In pure Swift, there is no workaround, but by writing some custom C/Objective-C wrapper functions, users can work around these limitations:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// MyProject-Bridging-Header.h&#10;&#10;NS_INLINE void MyDispatchSyncWrapper(dispatch_queue_t queue, __attribute__((noescape)) dispatch_block_t block)&#10;&#123;&#10;    dispatch_sync(queue, block);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>However, it’s clear that library functions with non-escaping semantics should be marked with the <code>noescape</code> attribute at the source, so that users don’t have to wrap every function they’d like to use.</p>
+<h2 id="Proposed_solution"><a href="#Proposed_solution" class="headerlink" title="Proposed solution"></a>Proposed solution</h2><ol>
+<li>Audit system C/Objective-C libraries (stdlib, libdispatch, Foundation, …) for functions and methods with closure parameters that are guaranteed not to escape the lifetime of the call.<ul>
+<li><em>See the end of this document for a comprehensive list of candidate functions/methods.</em></li>
+</ul>
+</li>
+<li>Annotate such functions and methods’ block/function-pointer parameters with <code>__attribute__((noescape))</code>.</li>
+<li>For libraries with Swift-specific forks (like <a href="https://github.com/apple/swift-corelibs-libdispatch" target="_blank" rel="external">swift-corelibs-libdispatch</a>), the change should be made in the Apple-internal upstream version as well.</li>
+</ol>
+<h6 id="Example_patch"><a href="#Example_patch" class="headerlink" title="Example patch"></a>Example patch</h6><p>An example patch to libdispatch can be seen at <a href="https://github.com/apple/swift-corelibs-libdispatch/pull/6/files" target="_blank" rel="external">https://github.com/apple/swift-corelibs-libdispatch/pull/6/files</a>.</p>
+<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>Users who previously used functions which are newly <code>@noescape</code> may have unnecessary instances of <code>self.</code> in their code. However, there should be no breaking syntax changes and no functional difference.</p>
+<h2 id="Alternatives_considered"><a href="#Alternatives_considered" class="headerlink" title="Alternatives considered"></a>Alternatives considered</h2><p>The Swift compiler’s support for supplementary “API notes” (<code>.apinotes</code> files) could be extended and used to annotate closure parameters as non-escaping.</p>
+<p>However, I believe it’s better to put annotations in headers for the following reasons:</p>
+<ul>
+<li>The presence of <code>__attribute__((noescape))</code> in library headers clarifies API contracts, and encourages users to use this attribute in their own code where applicable.</li>
+<li>With apinotes, the benefits to Swift would be limited to specific libraries and functions, leaving annotation in the hands of the Swift compiler project. Given a version of a library with annotated headeres, however, no extra compiler configuration is required to take advantage of the annotation.</li>
+<li>As Clang itself improves, the benefits of <code>__attribute__((noescape))</code> can be granted to Objective-C callers as well as Swift (for example, by suppressing <code>-Wimplicit-retain-self</code> &lt;rdar://19914650&gt;).</li>
+</ul>
+<h2 id="Comprehensive_list_of_methods/functions_with_non-escaping_block_parameters"><a href="#Comprehensive_list_of_methods/functions_with_non-escaping_block_parameters" class="headerlink" title="Comprehensive list of methods/functions with non-escaping block parameters"></a>Comprehensive list of methods/functions with non-escaping block parameters</h2><p>Note that Objective-C library methods tend to come in three variants:</p>
+<ul>
+<li>“[elements] passing test”</li>
+<li>“[sorted] using comparator”</li>
+<li>“enumerate using block/function”</li>
+</ul>
+<h3 id="stdlib"><a href="#stdlib" class="headerlink" title="stdlib"></a>stdlib</h3><ul>
+<li><code>bsearch()</code>, <code>bsearch_b()</code></li>
+<li><code>heapsort()</code>, <code>heapsort_b()</code></li>
+<li><code>mergesort()</code>, <code>mergesort_b()</code></li>
+<li><code>psort()</code>, <code>psort_b()</code></li>
+<li><code>qsort()</code>, <code>qsort_b()</code></li>
+</ul>
+<h3 id="libdispatch"><a href="#libdispatch" class="headerlink" title="libdispatch"></a>libdispatch</h3><ul>
+<li><code>dispatch_apply()</code>, <code>dispatch_apply_f()</code></li>
+<li><code>dispatch_barrier_sync()</code>, <code>dispatch_barrier_sync_f()</code></li>
+<li><code>dispatch_block_perform()</code></li>
+<li><code>dispatch_data_apply()</code></li>
+<li><code>dispatch_once()</code>, <code>dispatch_once_f()</code></li>
+<li><code>dispatch_sync()</code>, <code>dispatch_sync_f()</code></li>
+</ul>
+<h3 id="CoreFoundation"><a href="#CoreFoundation" class="headerlink" title="CoreFoundation"></a>CoreFoundation</h3><ul>
+<li><code>CFArrayBSearchValues()</code></li>
+<li><code>CFArraySortValues()</code></li>
+<li><code>CFTreeSortChildren()</code></li>
+</ul>
+<h3 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h3><h6 id="u201CPassing_test_u201D_methods"><a href="#u201CPassing_test_u201D_methods" class="headerlink" title="“Passing test” methods"></a>“Passing test” methods</h6><ul>
+<li><code>-[NSArray indexOfObjectPassingTest:]</code></li>
+<li><code>-[NSArray indexOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSArray indexesOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSArray indexesOfObjectsPassingTest:]</code></li>
+<li><code>-[NSDictionary keysOfEntriesPassingTest:]</code></li>
+<li><code>-[NSDictionary keysOfEntriesWithOptions:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexInRange:options:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexPassingTest:]</code></li>
+<li><code>-[NSIndexSet indexWithOptions:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexesInRange:options:passingTest:]</code></li>
+<li><code>-[NSIndexSet indexesPassingTest:]</code></li>
+<li><code>-[NSIndexSet indexesWithOptions:passingTest:]</code></li>
+<li><code>-[NSOrderedSet indexOfObjectPassingTest:]</code></li>
+<li><code>-[NSOrderedSet indexOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSOrderedSet indexesOfObjectsAtIndexes:passingTest:]</code></li>
+<li><code>-[NSOrderedSet indexesOfObjectsPassingTest:]</code></li>
+<li><code>-[NSSet objectsPassingTest:]</code></li>
+<li><code>-[NSSet objectsWithOptions:passingTest:]</code></li>
+</ul>
+<h6 id="u201CUsing_comparator/function_u201D_methods"><a href="#u201CUsing_comparator/function_u201D_methods" class="headerlink" title="“Using comparator/function” methods"></a>“Using comparator/function” methods</h6><ul>
+<li><code>-[NSArray indexOfObject:inSortedRange:options:usingComparator:]</code></li>
+<li><code>-[NSArray sortedArrayUsingComparator:]</code></li>
+<li><code>-[NSArray sortedArrayUsingFunction:context:]</code></li>
+<li><code>-[NSArray sortedArrayUsingFunction:context:hint:]</code></li>
+<li><code>-[NSArray sortedArrayWithOptions:usingComparator:]</code></li>
+<li><code>-[NSDictionary keysSortedByValueUsingComparator:]</code></li>
+<li><code>-[NSDictionary keysSortedByValueWithOptions:usingComparator:]</code></li>
+<li><code>-[NSMutableArray sortUsingComparator:]</code></li>
+<li><code>-[NSMutableArray sortUsingFunction:context:]</code></li>
+<li><code>-[NSMutableArray sortWithOptions:usingComparator:]</code></li>
+<li><code>-[NSMutableOrderedSet sortRange:options:usingComparator:]</code></li>
+<li><code>-[NSMutableOrderedSet sortWithOptions:usingComparator:]</code></li>
+</ul>
+<h6 id="u201CEnumerate_using_block_u201D_methods"><a href="#u201CEnumerate_using_block_u201D_methods" class="headerlink" title="“Enumerate using block” methods"></a>“Enumerate using block” methods</h6><ul>
+<li><code>-[NSArray enumerateObjectsUsingBlock:]</code></li>
+<li><code>-[NSArray enumerateObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSData enumerateByteRangesUsingBlock:]</code></li>
+<li><code>-[NSDictionary enumerateKeysAndObjectsUsingBlock:]</code></li>
+<li><code>-[NSDictionary enumerateKeysAndObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateIndexesUsingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateIndexesWithOptions:usingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateRangesInRange:options:usingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateRangesUsingBlock:]</code></li>
+<li><code>-[NSIndexSet enumerateRangesWithOptions:usingBlock:]</code></li>
+<li><code>-[NSOrderedSet enumerateObjectsUsingBlock:]</code></li>
+<li><code>-[NSOrderedSet enumerateObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSSet enumerateObjectsUsingBlock:]</code></li>
+<li><code>-[NSSet enumerateObjectsWithOptions:usingBlock:]</code></li>
+<li><code>-[NSString enumerateLinesUsingBlock:]</code></li>
+<li><code>-[NSString enumerateSubstringsInRange:options:usingBlock:]</code></li>
+</ul>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><p>The AVFoundation, SceneKit, SpriteKit, AppKit, and MediaPlayer frameworks have methods that could also use <code>__attribute__((noescape))</code>, but those are considered outside the scope of this proposal.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/15/swift/proposals/0011-replace-typealias-associated/" itemprop="url">
                 0011-replace-typealias-associated
               </a>
@@ -1618,117 +1815,11 @@ if path.<b>isEmpty</b> { ... }
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/15/swift/proposals/0002-remove-currying/" itemprop="url">
-                0002-remove-currying
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
-            2015-12-15
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/15/swift/proposals/0002-remove-currying/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0002-remove-currying/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Removing_currying_func_declaration_syntax"><a href="#Removing_currying_func_declaration_syntax" class="headerlink" title="Removing currying func declaration syntax"></a>Removing currying <code>func</code> declaration syntax</h1><ul>
-<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0002-remove-currying.md" target="_blank" rel="external">SE-0002</a></li>
-<li>Author(s): <a href="https://github.com/jckarter" target="_blank" rel="external">Joe Groff</a></li>
-<li>Status: <strong>Accepted</strong></li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Curried function declaration syntax <code>func foo(x: Int)(y: Int)</code> is of limited<br>usefulness and creates a lot of language and implementation complexity. We<br>should remove it.</p>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>The presence of curried function syntax has knock-on effects, complicating<br>other language features:</p>
-<ul>
-<li>The presence of currying invites confusion over keyword rules and the<br>declaration name of functions. We’ve argued several times over whether<br>curried arguments represent a continuation of the function’s arguments, begin<br>the argument list of a new function, or deserve to follow different rules<br>altogether.</li>
-<li>It has subtle interactions with ‘var’ and ‘inout’ argument<br>annotations. A curried function with ‘inout’ parameters anywhere other than<br>its first clause cannot be partially applied without surprising semantic<br>restrictions, limiting its usefulness. With ‘var’ parameters, there’s the<br>question of at what level the ‘var’ gets bound; many users expect it at the<br>outermost partial application, but we currently bind at the innermost partial<br>application.</li>
-</ul>
-<p>The idioms of the standard library, Cocoa, and most third-party code don’t<br>really make ML-style argument currying of free functions profitable. In<br>Cocoa and the standard library, most things are methods, where we can still get<br>useful partial application via <code>self.method</code> and maybe someday <code>.map { f($0)
-}</code> as well. The curried function design also predates the design of the<br>keyword argument model. We have plans to move away<br>from the arguments-are-a-single-tuple model too (which is already belied by<br>things like <code>@autoclosure</code> and <code>inout</code>), which pushes us even further away from<br>the ML argument model.</p>
-<p>Many users have observed the uselessness of our currying feature, and asked for<br>Scala-style <code>f(_, 1)</code> freeform partial application as an alternative. The fact<br>that even functionally-oriented users don’t see much value in our currying<br>feature makes me feel like we might be better off without it. It definitely fails<br>the “would we add it if we didn’t have it already” test.</p>
-<h2 id="Detailed_design"><a href="#Detailed_design" class="headerlink" title="Detailed design"></a>Detailed design</h2><p>We remove support for multiple argument patterns in <code>func</code> declarations,<br>reducing the grammar for <code>func-signature</code> to allow only one <code>argument</code> clause.<br>For migration purposes, existing code that uses currying declaration syntax<br>can be transformed to explicitly return a closure instead:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Before:</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">curried</span><span class="params">(x: Int)</span></span>(y: <span class="type">String</span>) -&gt; <span class="type">Float</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="type">Float</span>(x) + <span class="type">Float</span>(y)!</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// After:</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">curried</span><span class="params">(x: Int)</span></span> -&gt; (<span class="type">String</span>) -&gt; <span class="type">Float</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;(y: <span class="type">String</span>) -&gt; <span class="type">Float</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> <span class="type">Float</span>(x) + <span class="type">Float</span>(y)!</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>I don’t propose changing the semantics of methods, which formally remain<br>functions of type <code>Self -&gt; Args -&gt; Return</code>.</p>
-<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>This is removing a language feature, so will obviously break existing code<br>that uses the feature. We feel that currying is of sufficiently marginal<br>utility, runs against the grain of emerging language practice, and there’s a<br>reasonable automatic migration, so the impact is acceptable in order to<br>simplify the language.</p>
-<h2 id="Alternatives_considered"><a href="#Alternatives_considered" class="headerlink" title="Alternatives considered"></a>Alternatives considered</h2><p>The alternative would be to preserve currying as-is, which as discussed above,<br>is not ideal. Although I don’t propose taking any immediate action, future<br>alternative designs to provide similar functionality in a more idiomatic way<br>include:</p>
-<ul>
-<li>Scala-like ad-hoc partial application syntax, such that something like<br><code>foo(_, bar: 2)</code> would be shorthand for <code>{ x in foo(x, bar: 2) }</code>. This<br>has the benefit of arguably being more readable with our keyword-argument-<br>oriented API design, and also more flexible than traditional currying,<br>which requires argument order to be preconsidered by the API designer.</li>
-<li>Method and/or operator slicing syntax. We have <code>self.method</code> to partially<br>bind a method to its <code>self</code> parameter, and could potentially add<br><code>.method(argument)</code> to partially bind a method to its non-self arguments,<br>which would be especially useful for higher-order methods like <code>map</code><br>and <code>filter</code>. Haskell-like <code>(2+)</code>/<code>(+2)</code> syntax for partially applying<br>operators might also be nice.</li>
-</ul>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/9/">&raquo;</a>
   </nav>
 
  </div>
@@ -1762,21 +1853,21 @@ if path.<b>isEmpty</b> { ... }
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">116</span>
+              <span class="site-state-item-count">159</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -1,0 +1,686 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="javascript基础 突变事件," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="一、问题背景1.1、发现问题首先有这样一个问题，就是页面title后面莫名其妙hash值
+这是一个带有flash的播放页面，开始，觉得这个问题我十分钟能搞定发到外网，测试同学稍等。十分钟过后我哭了~
+二、问题描述问题重现在IE环境下，如果页面有flash内容embed嵌入，同时页面URL中带有hash，在flash加载后会改变document.title，而且后面js每次和flash交互都会改变d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript基础--突变事件与观察者事件">
+<meta property="og:url" content="http://yoursite.com/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="一、问题背景1.1、发现问题首先有这样一个问题，就是页面title后面莫名其妙hash值
+这是一个带有flash的播放页面，开始，觉得这个问题我十分钟能搞定发到外网，测试同学稍等。十分钟过后我哭了~
+二、问题描述问题重现在IE环境下，如果页面有flash内容embed嵌入，同时页面URL中带有hash，在flash加载后会改变document.title，而且后面js每次和flash交互都会改变d">
+<meta property="og:updated_time" content="2016-01-05T04:23:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript基础--突变事件与观察者事件">
+<meta name="twitter:description" content="一、问题背景1.1、发现问题首先有这样一个问题，就是页面title后面莫名其妙hash值
+这是一个带有flash的播放页面，开始，觉得这个问题我十分钟能搞定发到外网，测试同学稍等。十分钟过后我哭了~
+二、问题描述问题重现在IE环境下，如果页面有flash内容embed嵌入，同时页面URL中带有hash，在flash加载后会改变document.title，而且后面js每次和flash交互都会改变d">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> javascript基础--突变事件与观察者事件 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?953e46480b0a75d01aaf6d872cc77099";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              javascript基础--突变事件与观察者事件
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2014-08-05T00:00:00+08:00" content="2014-08-05">
+            2014-08-05
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-javascript</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h3 id="u4E00_u3001_u95EE_u9898_u80CC_u666F"><a href="#u4E00_u3001_u95EE_u9898_u80CC_u666F" class="headerlink" title="一、问题背景"></a>一、问题背景</h3><h4 id="1-1_u3001_u53D1_u73B0_u95EE_u9898"><a href="#1-1_u3001_u53D1_u73B0_u95EE_u9898" class="headerlink" title="1.1、发现问题"></a>1.1、发现问题</h4><p>首先有这样一个问题，就是页面title后面莫名其妙hash值</p>
+<p>这是一个带有flash的播放页面，开始，觉得这个问题我十分钟能搞定发到外网，测试同学稍等。十分钟过后我哭了~</p>
+<h3 id="u4E8C_u3001_u95EE_u9898_u63CF_u8FF0"><a href="#u4E8C_u3001_u95EE_u9898_u63CF_u8FF0" class="headerlink" title="二、问题描述"></a>二、问题描述</h3><p>问题重现在IE环境下，如果页面有flash内容embed嵌入，同时页面URL中带有hash，在flash加载后会改变document.title，而且后面js每次和flash交互都会改变document.title，就是把hash内容加到title后面(<a href="http://code.google.com/p/swfobject/issues/detail?id=293)。这个被定义为IE的bug，怎么解决？" target="_blank" rel="external">http://code.google.com/p/swfobject/issues/detail?id=293)。这个被定义为IE的bug，怎么解决？</a><br><a href="http://stackoverflow.com/questions/4562423/ie-title-changes-to-afterhash-if-the-page-has-a-url-with-and-has-flash-s" target="_blank" rel="external">http://stackoverflow.com/questions/4562423/ie-title-changes-to-afterhash-if-the-page-has-a-url-with-and-has-flash-s</a><br>然后有了这个解决方案。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> originalTitle = <span class="built_in">document</span>.title.split(<span class="string">"#"</span>)[<span class="number">0</span>];   </span><br><span class="line"><span class="built_in">document</span>.attachEvent &amp;&amp; <span class="built_in">document</span>.attachEvent(<span class="string">'onpropertychange'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(evt.propertyName === <span class="string">'title'</span> &amp;&amp; <span class="built_in">document</span>.title !== originalTitle) &#123;</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">document</span>.title = originalTitle;</span><br><span class="line">        &#125;, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">  </span><br><span class="line"><span class="comment">//使用document.title=newtitle设置标题属性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeTitle</span>(<span class="params">newTitle</span>)</span>&#123;</span><br><span class="line">    originalTitle = newTitle;</span><br><span class="line">    <span class="built_in">document</span>.title = newtitle;</span><br><span class="line">&#125;</span><br><span class="line">changeTitle(originalTitle);</span><br></pre></td></tr></table></figure>
+<p>这里的方案是监听IE中document的propertychang事件，当flash改变document.title时，把title设置回来。当然也有人提出使用在flash操作时据改变，但是flash交互的地方太多了，而且改变时也会有个title闪一下的问题。除此之外，还想没有其它的好办法了。<br>然后，使用了这段推荐方法并没有解决所有的问题，因为有几点被忽略了：<br>(1) atatchEvent不是所有IE浏览器都能用的。这点好解决，兼容下就好了。<br>(2) propertychangge也不是所有IE浏览器能用的。这点还有什么方法可以去兼容实现呢？</p>
+<p>因为IE11跟之前的IE又不一样了。</p>
+<ul>
+<li><p>(1) propertychange已经不被IE11支持了(<a href="http://stackoverflow.com/questions/24795769/propertychange-not-working-in-ie11" target="_blank" rel="external">http://stackoverflow.com/questions/24795769/propertychange-not-working-in-ie11</a></p>
+</li>
+<li><p>(2) attachEvent也被IE11放弃了<br>所以这段代码要改成这样：</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> originalTitle = <span class="built_in">document</span>.title.split(<span class="string">"#"</span>)[<span class="number">0</span>];    </span><br><span class="line"><span class="keyword">var</span> isIE11OrGreater = !!(navigator.userAgent.match(<span class="regexp">/Trident/</span>) &amp;&amp; navigator.userAgent.match(<span class="regexp">/rv:11.0/</span>)); <span class="comment">// IE11</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.attachEvent &amp;&amp; <span class="built_in">document</span>.attachEvent(<span class="string">'onpropertychange'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(evt.propertyName === <span class="string">'title'</span> &amp;&amp; <span class="built_in">document</span>.title !== originalTitle) &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">           <span class="built_in">document</span>.title = originalTitle;</span><br><span class="line">        &#125;, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * IE 9的突变事件模型，使用DOMCharacterDataModified才行，ie11使用dom3事件模型，弃用了突变观察者</span><br><span class="line"> * https://msdn.microsoft.com/library/bg182625(v=vs.85).aspx, 这里有较详细的介绍</span><br><span class="line"> * </span><br><span class="line"> */</span></span><br><span class="line">isIE11OrGreater &amp;&amp; <span class="built_in">document</span>.addEventListener &amp;&amp; <span class="built_in">document</span>.addEventListener(<span class="string">'DOMCharacterDataModified'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.title !== originalTitle) &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">           <span class="built_in">document</span>.title = originalTitle;</span><br><span class="line">        &#125;, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeTitle</span>(<span class="params">newTitle</span>)</span>&#123;</span><br><span class="line">    originalTitle = newTitle;</span><br><span class="line">    <span class="built_in">document</span>.title = newTitle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">changeTitle(originalTitle);</span><br></pre></td></tr></table></figure>
+<p>这样为什么能解决？简单的解释是IE9使用addEventListener代替了原来的attachEvent处理事件，并且支持新的DOMCharacterDataModified突变事件。而ie9以后不再使用propertychange。</p>
+<h3 id="u4E8C_u3001_u7A81_u53D8_u4E8B_u4EF6"><a href="#u4E8C_u3001_u7A81_u53D8_u4E8B_u4EF6" class="headerlink" title="二、突变事件"></a>二、突变事件</h3><h4 id="2-1_u3001_u4EC0_u4E48_u662F_u7A81_u53D8_u4E8B_u4EF6_uFF1F"><a href="#2-1_u3001_u4EC0_u4E48_u662F_u7A81_u53D8_u4E8B_u4EF6_uFF1F" class="headerlink" title="2.1、什么是突变事件？"></a>2.1、什么是突变事件？</h4><p>先看看普通的事件模型。下面这个图都见过，事件的机制、兼容性和实现，就不赘述了。</p>
+<h4 id="2-2_u3001_u90A3_u7A81_u53D8_u4E8B_u4EF6_u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F"><a href="#2-2_u3001_u90A3_u7A81_u53D8_u4E8B_u4EF6_u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F" class="headerlink" title="2.2、那突变事件有什么不同？"></a>2.2、那突变事件有什么不同？</h4><p>突变事件是指在dom元素改变时会触发的事件。例如</p>
+<p>DOMAttrModified 突变事件报告对元素的属性列表的更改。此单一事件包括与插入、删除或更改属性相关的信息。</p>
+<p>DOMNodeInserted、DOMNodeRemoved 和 DOMSubtreeModified </p>
+<p>突变事件监视元素子项的结构更改，例如向元素子项添加了元素或者删除了元素子项。</p>
+<p>注意  对于未反映在 HTML 属性中的属性（例如 input 元素上的 value），可以使用称为“defineProperty”的 ECMAScript 5 (JavaScript) 功能。本文档不介绍如何使用该对象迁移属性更改事件。defineProperty JavaScript API。例如json对象的属性改变等不属于突变事件。</p>
+<h4 id="u7A81_u53D8_u4E8B_u4EF6_u89C2_u5BDF_u8005"><a href="#u7A81_u53D8_u4E8B_u4EF6_u89C2_u5BDF_u8005" class="headerlink" title="突变事件观察者"></a>突变事件观察者</h4><p>什么是突变事件观察者，和普通事件模型的有什么不同？<br>突变观察者不是基于 Web 平台的事件模型。这是一个重用区别，这使它们能够更快地进行分派，而无需在 DOM 元素层次结构中对事件执行冒泡操作。</p>
+<p>而且，突变观察者的目标是在通知你的观察者之前记录多项更改。它们批量提供突变记录，以避免在你的应用中滥发此类事件。相比之下，突变事件是同步发送的，可以中断正常的代码执行来通知你应用发生突变。尽管突变观察者采用延迟的通知模型，但仍可保证你的应用的观察者可以在下一个重画之前收到（并有机会处理）所有突变记录。<br>这两项更改会影响你的应用必须如何调整来支持突变观察者。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mutationObserver = <span class="keyword">new</span> MutationObserver(callback);</span><br><span class="line">mutationObserver.observe(someElement, options);</span><br></pre></td></tr></table></figure>
+<p><a href="https://msdn.microsoft.com/library/dn265032(v=vs.85).aspx[待续" target="_blank" rel="external">https://msdn.microsoft.com/library/dn265032(v=vs.85).aspx[待续</a>]</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript基础-突变事件/" rel="tag">#javascript基础 突变事件</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/08/07/ouvens.github.io/frontend-javascript/2014-08-07-js-observer-and-listener/" rel="prev">javascript基础--监听与观察者模式</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/" rel="next">从webWorker到serviceWorker</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E00_u3001_u95EE_u9898_u80CC_u666F"><span class="nav-number">1.</span> <span class="nav-text">一、问题背景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1_u3001_u53D1_u73B0_u95EE_u9898"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、发现问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E8C_u3001_u95EE_u9898_u63CF_u8FF0"><span class="nav-number">2.</span> <span class="nav-text">二、问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E8C_u3001_u7A81_u53D8_u4E8B_u4EF6"><span class="nav-number">3.</span> <span class="nav-text">二、突变事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1_u3001_u4EC0_u4E48_u662F_u7A81_u53D8_u4E8B_u4EF6_uFF1F"><span class="nav-number">3.1.</span> <span class="nav-text">2.1、什么是突变事件？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2_u3001_u90A3_u7A81_u53D8_u4E8B_u4EF6_u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F"><span class="nav-number">3.2.</span> <span class="nav-text">2.2、那突变事件有什么不同？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u7A81_u53D8_u4E8B_u4EF6_u89C2_u5BDF_u8005"><span class="nav-number">3.3.</span> <span class="nav-text">突变事件观察者</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/';
+      var disqus_title = 'javascript基础--突变事件与观察者事件';
+      var disqus_url = 'http://yoursite.com/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

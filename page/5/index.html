@@ -170,6 +170,162 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter2/19_Type_Casting/" itemprop="url">
+                第二章-19类型转换（Type Casting）
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-25T12:00:08+08:00" content="2015-12-25">
+            2015-12-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/25/swift-cn/chapter2/19_Type_Casting/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter2/19_Type_Casting/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="u7C7B_u578B_u8F6C_u6362_uFF08Type_Casting_uFF09"><a href="#u7C7B_u578B_u8F6C_u6362_uFF08Type_Casting_uFF09" class="headerlink" title="类型转换（Type Casting）"></a>类型转换（Type Casting）</h1><hr>
+<blockquote>
+<p>1.0<br>翻译：<a href="https://github.com/xiehurricane" target="_blank" rel="external">xiehurricane</a><br>校对：<a href="https://github.com/happyming" target="_blank" rel="external">happyming</a></p>
+<p>2.0<br>翻译+校对：<a href="https://github.com/yangsiy" target="_blank" rel="external">yangsiy</a></p>
+<p>2.1<br>校对：<a href="http://codebuild.me" target="_blank" rel="external">shanks</a>，2015-11-01</p>
+</blockquote>
+<p>本页包含内容：</p>
+<ul>
+<li><a href="/#defining_a_class_hierarchy_for_type_casting">定义一个类层次作为例子</a></li>
+<li><a href="/#checking_type">检查类型</a></li>
+<li><a href="/#downcasting">向下转型（Downcasting）</a></li>
+<li><a href="/#type_casting_for_any_and_anyobject"><code>Any</code> 和 <code>AnyObject</code> 的类型转换</a></li>
+</ul>
+<p><em>类型转换</em> 可以判断实例的类型，也可以将实例看做是其父类或者子类的实例。</p>
+<p>类型转换在 Swift 中使用 <code>is</code> 和 <code>as</code> 操作符实现。这两个操作符提供了一种简单达意的方式去检查值的类型或者转换它的类型。</p>
+<p>你也可以用它来检查一个类型是否实现了某个协议，就像在<a href="/./22_Protocols.html#checking_for_protocol_conformance">检验协议的一致性</a>部分讲述的一样。</p>
+<p><a name="defining_a_class_hierarchy_for_type_casting"></a></p>
+<h2 id="u5B9A_u4E49_u4E00_u4E2A_u7C7B_u5C42_u6B21_u4F5C_u4E3A_u4F8B_u5B50"><a href="#u5B9A_u4E49_u4E00_u4E2A_u7C7B_u5C42_u6B21_u4F5C_u4E3A_u4F8B_u5B50" class="headerlink" title="定义一个类层次作为例子"></a>定义一个类层次作为例子</h2><p>你可以将类型转换用在类和子类的层次结构上，检查特定类实例的类型并且转换这个类实例的类型成为这个层次结构中的其他类型。下面的三个代码段定义了一个类层次和一个包含了这些类实例的数组，作为类型转换的例子。</p>
+<p>第一个代码片段定义了一个新的基类 <code>MediaItem</code>。这个类为任何出现在数字媒体库的媒体项提供基础功能。特别的，它声明了一个 <code>String</code> 类型的 <code>name</code> 属性，和一个 <code>init(name:)</code> 初始化器。（假定所有的媒体项都有个名称。）</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MediaItem</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下一个代码段定义了 <code>MediaItem</code> 的两个子类。第一个子类 <code>Movie</code> 封装了与电影相关的额外信息，在父类（或者说基类）的基础上增加了一个 <code>director</code>（导演）属性，和相应的初始化器。第二个子类 <code>Song</code>，在父类的基础上增加了一个 <code>artist</code>（艺术家）属性，和相应的初始化器：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Movie</span>: <span class="title">MediaItem</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> director: <span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>, director: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.director = director</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Song</span>: <span class="title">MediaItem</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> artist: <span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>, artist: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.artist = artist</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后一个代码段创建了一个数组常量 <code>library</code>，包含两个 <code>Movie</code> 实例和三个 <code>Song</code> 实例。<code>library</code> 的类型是在它被初始化时根据它数组中所包含的内容推断来的。Swift 的类型检测器能够推断出 <code>Movie</code> 和 <code>Song</code> 有共同的父类 <code>MediaItem</code>，所以它推断出 <code>[MediaItem]</code> 类作为 <code>library</code> 的类型：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> library = [</span><br><span class="line">    <span class="type">Movie</span>(name: <span class="string">"Casablanca"</span>, director: <span class="string">"Michael Curtiz"</span>),</span><br><span class="line">    <span class="type">Song</span>(name: <span class="string">"Blue Suede Shoes"</span>, artist: <span class="string">"Elvis Presley"</span>),</span><br><span class="line">    <span class="type">Movie</span>(name: <span class="string">"Citizen Kane"</span>, director: <span class="string">"Orson Welles"</span>),</span><br><span class="line">    <span class="type">Song</span>(name: <span class="string">"The One And Only"</span>, artist: <span class="string">"Chesney Hawkes"</span>),</span><br><span class="line">    <span class="type">Song</span>(name: <span class="string">"Never Gonna Give You Up"</span>, artist: <span class="string">"Rick Astley"</span>)</span><br><span class="line">]</span><br><span class="line"><span class="comment">// 数组 library 的类型被推断为 [MediaItem]</span></span><br></pre></td></tr></table></figure>
+<p>在幕后 <code>library</code> 里存储的媒体项依然是 <code>Movie</code> 和 <code>Song</code> 类型的。但是，若你迭代它，依次取出的实例会是 <code>MediaItem</code> 类型的，而不是 <code>Movie</code> 和 <code>Song</code> 类型。为了让它们作为原本的类型工作，你需要检查它们的类型或者向下转换它们到其它类型，就像下面描述的一样。</p>
+<p><a name="checking_type"></a></p>
+<h2 id="u68C0_u67E5_u7C7B_u578B_uFF08Checking_Type_uFF09"><a href="#u68C0_u67E5_u7C7B_u578B_uFF08Checking_Type_uFF09" class="headerlink" title="检查类型（Checking Type）"></a>检查类型（Checking Type）</h2><p>用类型检查操作符（<code>is</code>）来检查一个实例是否属于特定子类型。若实例属于那个子类型，类型检查操作符返回 <code>true</code>，否则返回 <code>false</code>。</p>
+<p>下面的例子定义了两个变量，<code>movieCount</code> 和 <code>songCount</code>，用来计算数组 <code>library</code> 中 <code>Movie</code> 和 <code>Song</code> 类型的实例数量：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> movieCount = <span class="number">0</span></span><br><span class="line"><span class="keyword">var</span> songCount = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> library &#123;</span><br><span class="line">    <span class="keyword">if</span> item <span class="keyword">is</span> <span class="type">Movie</span> &#123;</span><br><span class="line">        ++movieCount</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> item <span class="keyword">is</span> <span class="type">Song</span> &#123;</span><br><span class="line">        ++songCount</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"Media library contains <span class="subst">\(movieCount)</span> movies and <span class="subst">\(songCount)</span> songs"</span>)</span><br><span class="line"><span class="comment">// 打印 “Media library contains 2 movies and 3 songs”</span></span><br></pre></td></tr></table></figure>
+<p>示例迭代了数组 <code>library</code> 中的所有项。每一次，<code>for-in</code> 循环设置<br><code>item</code> 为数组中的下一个 <code>MediaItem</code>。</p>
+<p>若当前 <code>MediaItem</code> 是一个 <code>Movie</code> 类型的实例，<code>item is Movie</code> 返回<br><code>true</code>，否则返回 <code>false</code>。同样的，<code>item is Song</code> 检查 <code>item</code> 是否为 <code>Song</code> 类型的实例。在循环结束后，<code>movieCount</code> 和 <code>songCount</code> 的值就是被找到的属于各自类型的实例的数量。</p>
+<p><a name="downcasting"></a></p>
+<h2 id="u5411_u4E0B_u8F6C_u578B_uFF08Downcasting_uFF09"><a href="#u5411_u4E0B_u8F6C_u578B_uFF08Downcasting_uFF09" class="headerlink" title="向下转型（Downcasting）"></a>向下转型（Downcasting）</h2><p>某类型的一个常量或变量可能在幕后实际上属于一个子类。当确定是这种情况时，你可以尝试向下转到它的子类型，用类型转换操作符（<code>as?</code> 或 <code>as!</code>）。</p>
+<p>因为向下转型可能会失败，类型转型操作符带有两种不同形式。条件形式（conditional form）<code>as?</code> 返回一个你试图向下转成的类型的可选值（optional value）。强制形式 <code>as!</code> 把试图向下转型和强制解包（force-unwraps）转换结果结合为一个操作。</p>
+<p>当你不确定向下转型可以成功时，用类型转换的条件形式（<code>as?</code>）。条件形式的类型转换总是返回一个可选值（optional value），并且若下转是不可能的，可选值将是 <code>nil</code>。这使你能够检查向下转型是否成功。</p>
+<p>只有你可以确定向下转型一定会成功时，才使用强制形式（<code>as!</code>）。当你试图向下转型为一个不正确的类型时，强制形式的类型转换会触发一个运行时错误。</p>
+<p>下面的例子，迭代了 <code>library</code> 里的每一个 <code>MediaItem</code>，并打印出适当的描述。要这样做，<code>item</code> 需要真正作为 <code>Movie</code> 或 <code>Song</code> 的类型来使用，而不仅仅是作为 <code>MediaItem</code>。为了能够在描述中使用 <code>Movie</code> 或 <code>Song</code> 的 <code>director</code> 或 <code>artist</code> 属性，这是必要的。</p>
+<p>在这个示例中，数组中的每一个 <code>item</code> 可能是 <code>Movie</code> 或 <code>Song</code>。事前你不知道每个 <code>item</code> 的真实类型，所以这里使用条件形式的类型转换（<code>as?</code>）去检查循环里的每次下转：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> library &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> movie = item <span class="keyword">as</span>? <span class="type">Movie</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Movie: '<span class="subst">\(movie.name)</span>', dir. <span class="subst">\(movie.director)</span>"</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> song = item <span class="keyword">as</span>? <span class="type">Song</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Song: '<span class="subst">\(song.name)</span>', by <span class="subst">\(song.artist)</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Movie: 'Casablanca', dir. Michael Curtiz</span></span><br><span class="line"><span class="comment">// Song: 'Blue Suede Shoes', by Elvis Presley</span></span><br><span class="line"><span class="comment">// Movie: 'Citizen Kane', dir. Orson Welles</span></span><br><span class="line"><span class="comment">// Song: 'The One And Only', by Chesney Hawkes</span></span><br><span class="line"><span class="comment">// Song: 'Never Gonna Give You Up', by Rick Astley</span></span><br></pre></td></tr></table></figure>
+<p>示例首先试图将 <code>item</code> 下转为 <code>Movie</code>。因为 <code>item</code> 是一个 <code>MediaItem</code><br>类型的实例，它可能是一个 <code>Movie</code>；同样，它也可能是一个 <code>Song</code>，或者仅仅是基类<br><code>MediaItem</code>。因为不确定，<code>as?</code> 形式在试图下转时将返回一个可选值。<code>item as? Movie</code> 的返回值是 <code>Movie?</code> 或者说“可选 <code>Movie</code>”。</p>
+<p>当向下转型为 <code>Movie</code> 应用在两个 <code>Song</code><br>实例时将会失败。为了处理这种情况，上面的例子使用了可选绑定（optional binding）来检查可选 <code>Movie</code> 真的包含一个值（这个是为了判断下转是否成功。）可选绑定是这样写的“<code>if let movie = item as? Movie</code>”，可以这样解读：</p>
+<p>“尝试将 <code>item</code> 转为 <code>Movie</code> 类型。若成功，设置一个新的临时常量 <code>movie</code> 来存储返回的可选 <code>Movie</code> 中的值”</p>
+<p>若向下转型成功，然后 <code>movie</code> 的属性将用于打印一个 <code>Movie</code> 实例的描述，包括它的导演的名字 <code>director</code>。相似的原理被用来检测 <code>Song</code> 实例，当 <code>Song</code> 被找到时则打印它的描述（包含 <code>artist</code> 的名字）。</p>
+<blockquote>
+<p>注意<br>转换没有真的改变实例或它的值。根本的实例保持不变；只是简单地把它作为它被转换成的类型来使用。</p>
+</blockquote>
+<p><a name="type_casting_for_any_and_anyobject"></a></p>
+<h2 id="Any__u548C_AnyObject__u7684_u7C7B_u578B_u8F6C_u6362"><a href="#Any__u548C_AnyObject__u7684_u7C7B_u578B_u8F6C_u6362" class="headerlink" title="Any 和 AnyObject 的类型转换"></a><code>Any</code> 和 <code>AnyObject</code> 的类型转换</h2><p>Swift 为不确定类型提供了两种特殊的类型别名：</p>
+<ul>
+<li><code>AnyObject</code> 可以表示任何类类型的实例。</li>
+<li><code>Any</code> 可以表示任何类型，包括函数类型。</li>
+</ul>
+<blockquote>
+<p>注意<br>只有当你确实需要它们的行为和功能时才使用 <code>Any</code> 和 <code>AnyObject</code>。在你的代码里使用你期望的明确类型总是更好的。</p>
+</blockquote>
+<p><a name="anyobject"></a></p>
+<h3 id="AnyObject__u7C7B_u578B"><a href="#AnyObject__u7C7B_u578B" class="headerlink" title="AnyObject 类型"></a><code>AnyObject</code> 类型</h3><p>当在工作中使用 Cocoa APIs 时，我们经常会接收到一个 <code>[AnyObject]</code> 类型的数组，或者说“一个任意类型对象的数组”。这是因为 Objective-C 没有明确的类型化数组。但是，你常常可以从 API 提供的信息来确定数组中对象的类型。</p>
+<blockquote>
+<p>译者注<br>这段文档似乎没有及时更新，从 Xcode 7 和 Swift 2.0 开始，由于 Objective-C 引入了轻量泛型，集合类型已经可以类型化了，在 Swift 中使用 Cocoa API 也越来越少遇到 <code>AnyObject</code> 类型了。详情请参阅 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID173" target="_blank" rel="external">Lightweight Generics</a> 和 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/WorkingWithCocoaDataTypes.html#//apple_ref/doc/uid/TP40014216-CH6-ID69" target="_blank" rel="external">Collection Classes</a>。</p>
+</blockquote>
+<p>在这些情况下，你可以使用强制形式的类型转换（<code>as</code>）来下转数组中的每一项到比 <code>AnyObject</code> 更明确的类型，不需要可选解包（optional unwrapping）。</p>
+<p>下面的示例定义了一个 <code>[AnyObject]</code> 类型的数组并填入三个 <code>Movie</code> 类型的实例：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someObjects: [<span class="type">AnyObject</span>] = [</span><br><span class="line">    <span class="type">Movie</span>(name: <span class="string">"2001: A Space Odyssey"</span>, director: <span class="string">"Stanley Kubrick"</span>),</span><br><span class="line">    <span class="type">Movie</span>(name: <span class="string">"Moon"</span>, director: <span class="string">"Duncan Jones"</span>),</span><br><span class="line">    <span class="type">Movie</span>(name: <span class="string">"Alien"</span>, director: <span class="string">"Ridley Scott"</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>因为知道这个数组只包含 <code>Movie</code> 实例，你可以直接用（<code>as!</code>）下转并解包到非可选的 <code>Movie</code> 类型：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> object <span class="keyword">in</span> someObjects &#123;</span><br><span class="line">    <span class="keyword">let</span> movie = object <span class="keyword">as</span>! <span class="type">Movie</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Movie: '<span class="subst">\(movie.name)</span>', dir. <span class="subst">\(movie.director)</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Movie: '2001: A Space Odyssey', dir. Stanley Kubrick</span></span><br><span class="line"><span class="comment">// Movie: 'Moon', dir. Duncan Jones</span></span><br><span class="line"><span class="comment">// Movie: 'Alien', dir. Ridley Scott</span></span><br></pre></td></tr></table></figure>
+<p>为了变为一个更简短的形式，下转 <code>someObjects</code> 数组为 <code>[Movie]</code> 类型而不是下转数组中的每一项：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> movie <span class="keyword">in</span> someObjects <span class="keyword">as</span>! [<span class="type">Movie</span>] &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Movie: '<span class="subst">\(movie.name)</span>', dir. <span class="subst">\(movie.director)</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Movie: '2001: A Space Odyssey', dir. Stanley Kubrick</span></span><br><span class="line"><span class="comment">// Movie: 'Moon', dir. Duncan Jones</span></span><br><span class="line"><span class="comment">// Movie: 'Alien', dir. Ridley Scott</span></span><br></pre></td></tr></table></figure>
+<p><a name="any"></a></p>
+<h3 id="Any__u7C7B_u578B"><a href="#Any__u7C7B_u578B" class="headerlink" title="Any 类型"></a><code>Any</code> 类型</h3><p>这里有个示例，使用 <code>Any</code> 类型来和混合的不同类型一起工作，包括函数类型和非类类型。它创建了一个可以存储 <code>Any</code> 类型的数组 <code>things</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> things = [<span class="type">Any</span>]()</span><br><span class="line"></span><br><span class="line">things.append(<span class="number">0</span>)</span><br><span class="line">things.append(<span class="number">0.0</span>)</span><br><span class="line">things.append(<span class="number">42</span>)</span><br><span class="line">things.append(<span class="number">3.14159</span>)</span><br><span class="line">things.append(<span class="string">"hello"</span>)</span><br><span class="line">things.append((<span class="number">3.0</span>, <span class="number">5.0</span>))</span><br><span class="line">things.append(<span class="type">Movie</span>(name: <span class="string">"Ghostbusters"</span>, director: <span class="string">"Ivan Reitman"</span>))</span><br><span class="line">things.append(&#123; (name: <span class="type">String</span>) -&gt; <span class="type">String</span> <span class="keyword">in</span> <span class="string">"Hello, <span class="subst">\(name)</span>"</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p><code>things</code> 数组包含两个 <code>Int</code> 值，两个 <code>Double</code> 值，一个 <code>String</code> 值，一个元组 <code>(Double, Double)</code>，一个<code>Movie</code>实例“Ghostbusters”，以及一个接受 <code>String</code> 值并返回另一个 <code>String</code> 值的闭包表达式。</p>
+<p>你可以在 <code>switch</code> 表达式的 <code>case</code> 中使用 <code>is</code> 和 <code>as</code> 操作符来找出只知道是 <code>Any</code> 或 <code>AnyObject</code> 类型的常量或变量的具体类型。下面的示例迭代 <code>things</code> 数组中的每一项，并用 <code>switch</code> 语句查找每一项的类型。有几个 <code>switch</code> 语句的 <code>case</code> 绑定它们匹配到的值到一个指定类型的常量，从而可以打印这些值：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> thing <span class="keyword">in</span> things &#123;</span><br><span class="line">    <span class="keyword">switch</span> thing &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span> <span class="keyword">as</span> <span class="type">Int</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"zero as an Int"</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span> <span class="keyword">as</span> <span class="type">Double</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"zero as a Double"</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">let</span> someInt <span class="keyword">as</span> <span class="type">Int</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"an integer value of <span class="subst">\(someInt)</span>"</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">let</span> someDouble <span class="keyword">as</span> <span class="type">Double</span> <span class="keyword">where</span> someDouble &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"a positive double value of <span class="subst">\(someDouble)</span>"</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">is</span> <span class="type">Double</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"some other double value that I don't want to print"</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">let</span> someString <span class="keyword">as</span> <span class="type">String</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"a string value of \"<span class="subst">\(someString)</span>\""</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">let</span> (x, y) <span class="keyword">as</span> (<span class="type">Double</span>, <span class="type">Double</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"an (x, y) point at <span class="subst">\(x)</span>, <span class="subst">\(y)</span>"</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">let</span> movie <span class="keyword">as</span> <span class="type">Movie</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"a movie called '<span class="subst">\(movie.name)</span>', dir. <span class="subst">\(movie.director)</span>"</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">let</span> stringConverter <span class="keyword">as</span> <span class="type">String</span> -&gt; <span class="type">String</span>:</span><br><span class="line">        <span class="built_in">print</span>(stringConverter(<span class="string">"Michael"</span>))</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"something else"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// zero as an Int</span></span><br><span class="line"><span class="comment">// zero as a Double</span></span><br><span class="line"><span class="comment">// an integer value of 42</span></span><br><span class="line"><span class="comment">// a positive double value of 3.14159</span></span><br><span class="line"><span class="comment">// a string value of "hello"</span></span><br><span class="line"><span class="comment">// an (x, y) point at 3.0, 5.0</span></span><br><span class="line"><span class="comment">// a movie called 'Ghostbusters', dir. Ivan Reitman</span></span><br><span class="line"><span class="comment">// Hello, Michael</span></span><br></pre></td></tr></table></figure>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/25/swift-cn/chapter2/20_Nested_Types/" itemprop="url">
                 第二章-20嵌套类型（Nested Types）
               </a>
@@ -1702,139 +1858,6 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/25/swift-cn/README/" itemprop="url">
-                已同步更新到 Swift 2.1
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T12:00:00+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/README/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/README/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><blockquote>
-<p>已同步更新到 Swift 2.1</p>
-</blockquote>
-<h1 id="2-0__u65B0_u7684_u5F00_u59CB"><a href="#2-0__u65B0_u7684_u5F00_u59CB" class="headerlink" title="2.0 新的开始"></a>2.0 新的开始</h1><blockquote>
-<p>Swift 兴趣交流群：<code>131595168</code>, <code>146932759</code>, <code>151336833</code>, <code>153549217</code>. <strong>加入一个群即可，请勿重复添加</strong></p>
-<p><a target="_blank" href="http://swiftweekly.cn">订阅 Swift 开发者周报，每周获取最新 Swift 资源</a></p>
-</blockquote>
-<!-- -->
-<blockquote>
-<p>如果您觉得这个项目不错，请<a target="_blank" href="https://github.com/numbbbbb/the-swift-programming-language-in-chinese">点击Star一下</a>，您的支持是我们最大的动力。</p>
-</blockquote>
-<h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>开源项目完成难，维护更难。</p>
-<p>大家看到的是发布时的瞩目和荣耀，却没有看到项目本身质量不高、错误频出。这并不是翻译者和校对者的问题，他们已经付出了足够的努力。真正的问题在我，没有建立起长期的维护团队，因此后期的校对和更新都难以实施。</p>
-<p>1.0发布之后，我们就再也没能和苹果的文档同步。语法错误、编译不通过、语言不通顺，阅读量直线下降，最低时每天只有不到1000人访问。</p>
-<p>6月9日，calvingit发了一个issue“准备翻译2.0版本吗”，我没有回复，应该已经没人关注这个项目了吧，我想。</p>
-<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p>我错了。</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1472352/10558349/74eb84de-74fe-11e5-99d2-155dfacff068.png" alt="1"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558351/79101476-74fe-11e5-82d5-feb815d0b86b.png" alt="2"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558353/7c983272-74fe-11e5-8397-97c5176261ca.png" alt="3"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558354/7cd63ae0-74fe-11e5-9b9d-1d7ec6516319.png" alt="4"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558358/7fe50914-74fe-11e5-9b2b-a7b9129ea638.png" alt="5"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558360/83a8b064-74fe-11e5-9c2f-2e79d3309f62.png" alt="6"></p>
-<p>在我没有任何回复的情况下，不到一天时间，有五位朋友报名。看到这些回复的时候我真的很惊讶，也很感动，无论这个项目存在多少问题，只要有人关注，有人愿意为它付出，那我还有什么理由放弃呢？</p>
-<p>6月28日8点55分，Swift 2.0翻译正式启动。按下发送按钮后，我不停的刷新页面，半个小时过去了，一个回复都没有。“还是不行啊”“如果再过一个小时没人回复我就把issue删掉”，类似的念头不断出现，又不断消失。</p>
-<p>9:35，xtymichael第一个回复，而且一下就认领了三篇！接下来就是不断的回复认领，到中午已经有超过一半章节被认领。</p>
-<p>第二天早晨，37个章节全部认领完毕。</p>
-<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>经过一个多月的努力，我们终于完成了文档的更新。听起来似乎没什么，确实，从1到n总是没有从0到1那么振奋人心。不过真正参与了才知道，修改往往比创造更麻烦，一个需要耐心，一个需要激情，前者往往得不到应有的重视。</p>
-<p>但是我还是想尽最大可能去感谢他们，这个项目能走到今天，靠的不是我，是那个issue，是那些回复，是这几十个兄弟在工作学习的空闲敲下的每一个字符。而我能做的，只是在每篇文章的开头，那个所有人都会忽略的地方，加上他们的ID。</p>
-<p>下次你再打开这篇文档，可以多看看那些列在最上方的ID，哪怕不去follow和star，只是看一眼就好。他们的所有努力和付出，就存在于这短暂的一瞥中。</p>
-<p>Swift 2.0 参与者名单（按照章节顺序）：</p>
-<ul>
-<li><a href="https://github.com/xtymichael" target="_blank" rel="external">xtymichael</a></li>
-<li><a href="https://github.com/AlanMelody" target="_blank" rel="external">AlanMelody</a></li>
-<li><a href="https://github.com/DianQK" target="_blank" rel="external">DianQK</a></li>
-<li><a href="https://github.com/dreamkidd" target="_blank" rel="external">dreamkidd</a></li>
-<li><a href="https://github.com/100mango" target="_blank" rel="external">100mango</a></li>
-<li><a href="https://github.com/futantan" target="_blank" rel="external">futantan</a></li>
-<li><a href="https://github.com/SkyJean" target="_blank" rel="external">SkyJean</a></li>
-<li><a href="https://github.com/yangsiy" target="_blank" rel="external">yangsiy</a></li>
-<li><a href="https://github.com/shanksyang" target="_blank" rel="external">shanksyang</a></li>
-<li><a href="https://github.com/chenmingbiao" target="_blank" rel="external">chenmingbiao</a></li>
-<li><a href="https://github.com/Channe" target="_blank" rel="external">Channe</a></li>
-<li><a href="https://github.com/lyojo" target="_blank" rel="external">lyojo</a></li>
-<li><a href="https://github.com/SergioChan" target="_blank" rel="external">SergioChan</a></li>
-<li><a href="https://github.com/mmoaay" target="_blank" rel="external">mmoaay</a></li>
-<li><a href="https://github.com/buginux" target="_blank" rel="external">buginux</a></li>
-<li><a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></li>
-<li><a href="https://github.com/EudeMorgen" target="_blank" rel="external">EudeMorgen</a></li>
-<li><a href="https://github.com/littledogboy" target="_blank" rel="external">littledogboy</a></li>
-<li><a href="https://github.com/Lenhoon" target="_blank" rel="external">Lenhoon</a></li>
-<li><a href="https://github.com/ray16897188" target="_blank" rel="external">ray16897188</a></li>
-<li><a href="https://github.com/wardenNScaiyi" target="_blank" rel="external">wardenNScaiyi</a></li>
-<li><a href="https://github.com/miaosiqi" target="_blank" rel="external">miaosiqi</a></li>
-</ul>
-<p>最后，感谢<a href="http://wiki.jikexueyuan.com" target="_blank" rel="external">极客学院</a>提供的wiki系统，在国内访问起来速度很快，优化后的样式看起来也更舒服。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
               <a class="post-title-link" href="/2015/12/25/swift-cn/v1.0/" itemprop="url">
                 v1.0
               </a>
@@ -1997,8 +2020,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/" itemprop="url">
-                第三章-01关于语言参考（About the Language Reference）
+              <a class="post-title-link" href="/2015/12/25/swift-cn/README/" itemprop="url">
+                已同步更新到 Swift 2.1
               </a>
             
           
@@ -2008,7 +2031,7 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:20+08:00" content="2015-12-25">
+          <time itemprop="dateCreated" datetime="2015-12-25T12:00:00+08:00" content="2015-12-25">
             2015-12-25
           </time>
         </span>
@@ -2034,8 +2057,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/" itemprop="commentsCount"></span>
+            <a href="/2015/12/25/swift-cn/README/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/README/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -2050,35 +2073,56 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="u5173_u4E8E_u8BED_u8A00_u53C2_u8003_uFF08About_the_Language_Reference_uFF09"><a href="#u5173_u4E8E_u8BED_u8A00_u53C2_u8003_uFF08About_the_Language_Reference_uFF09" class="headerlink" title="关于语言参考（About the Language Reference）"></a>关于语言参考（About the Language Reference）</h1><hr>
-<blockquote>
-<p>1.0<br>翻译：<a href="https://github.com/dabing1022" target="_blank" rel="external">dabing1022</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a></p>
-<p>2.0<br>翻译+校对：<a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></p>
+          <span itemprop="articleBody"><blockquote>
+<p>已同步更新到 Swift 2.1</p>
 </blockquote>
-<p>本页内容包括：</p>
+<h1 id="2-0__u65B0_u7684_u5F00_u59CB"><a href="#2-0__u65B0_u7684_u5F00_u59CB" class="headerlink" title="2.0 新的开始"></a>2.0 新的开始</h1><blockquote>
+<p>Swift 兴趣交流群：<code>131595168</code>, <code>146932759</code>, <code>151336833</code>, <code>153549217</code>. <strong>加入一个群即可，请勿重复添加</strong></p>
+<p><a target="_blank" href="http://swiftweekly.cn">订阅 Swift 开发者周报，每周获取最新 Swift 资源</a></p>
+</blockquote>
+<!-- -->
+<blockquote>
+<p>如果您觉得这个项目不错，请<a target="_blank" href="https://github.com/numbbbbb/the-swift-programming-language-in-chinese">点击Star一下</a>，您的支持是我们最大的动力。</p>
+</blockquote>
+<h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>开源项目完成难，维护更难。</p>
+<p>大家看到的是发布时的瞩目和荣耀，却没有看到项目本身质量不高、错误频出。这并不是翻译者和校对者的问题，他们已经付出了足够的努力。真正的问题在我，没有建立起长期的维护团队，因此后期的校对和更新都难以实施。</p>
+<p>1.0发布之后，我们就再也没能和苹果的文档同步。语法错误、编译不通过、语言不通顺，阅读量直线下降，最低时每天只有不到1000人访问。</p>
+<p>6月9日，calvingit发了一个issue“准备翻译2.0版本吗”，我没有回复，应该已经没人关注这个项目了吧，我想。</p>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p>我错了。</p>
+<p><img src="https://cloud.githubusercontent.com/assets/1472352/10558349/74eb84de-74fe-11e5-99d2-155dfacff068.png" alt="1"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558351/79101476-74fe-11e5-82d5-feb815d0b86b.png" alt="2"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558353/7c983272-74fe-11e5-8397-97c5176261ca.png" alt="3"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558354/7cd63ae0-74fe-11e5-9b9d-1d7ec6516319.png" alt="4"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558358/7fe50914-74fe-11e5-9b2b-a7b9129ea638.png" alt="5"><br><img src="https://cloud.githubusercontent.com/assets/1472352/10558360/83a8b064-74fe-11e5-9c2f-2e79d3309f62.png" alt="6"></p>
+<p>在我没有任何回复的情况下，不到一天时间，有五位朋友报名。看到这些回复的时候我真的很惊讶，也很感动，无论这个项目存在多少问题，只要有人关注，有人愿意为它付出，那我还有什么理由放弃呢？</p>
+<p>6月28日8点55分，Swift 2.0翻译正式启动。按下发送按钮后，我不停的刷新页面，半个小时过去了，一个回复都没有。“还是不行啊”“如果再过一个小时没人回复我就把issue删掉”，类似的念头不断出现，又不断消失。</p>
+<p>9:35，xtymichael第一个回复，而且一下就认领了三篇！接下来就是不断的回复认领，到中午已经有超过一半章节被认领。</p>
+<p>第二天早晨，37个章节全部认领完毕。</p>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>经过一个多月的努力，我们终于完成了文档的更新。听起来似乎没什么，确实，从1到n总是没有从0到1那么振奋人心。不过真正参与了才知道，修改往往比创造更麻烦，一个需要耐心，一个需要激情，前者往往得不到应有的重视。</p>
+<p>但是我还是想尽最大可能去感谢他们，这个项目能走到今天，靠的不是我，是那个issue，是那些回复，是这几十个兄弟在工作学习的空闲敲下的每一个字符。而我能做的，只是在每篇文章的开头，那个所有人都会忽略的地方，加上他们的ID。</p>
+<p>下次你再打开这篇文档，可以多看看那些列在最上方的ID，哪怕不去follow和star，只是看一眼就好。他们的所有努力和付出，就存在于这短暂的一瞥中。</p>
+<p>Swift 2.0 参与者名单（按照章节顺序）：</p>
 <ul>
-<li><a href="/#how_to_read_the_grammar">如何阅读语法</a></li>
+<li><a href="https://github.com/xtymichael" target="_blank" rel="external">xtymichael</a></li>
+<li><a href="https://github.com/AlanMelody" target="_blank" rel="external">AlanMelody</a></li>
+<li><a href="https://github.com/DianQK" target="_blank" rel="external">DianQK</a></li>
+<li><a href="https://github.com/dreamkidd" target="_blank" rel="external">dreamkidd</a></li>
+<li><a href="https://github.com/100mango" target="_blank" rel="external">100mango</a></li>
+<li><a href="https://github.com/futantan" target="_blank" rel="external">futantan</a></li>
+<li><a href="https://github.com/SkyJean" target="_blank" rel="external">SkyJean</a></li>
+<li><a href="https://github.com/yangsiy" target="_blank" rel="external">yangsiy</a></li>
+<li><a href="https://github.com/shanksyang" target="_blank" rel="external">shanksyang</a></li>
+<li><a href="https://github.com/chenmingbiao" target="_blank" rel="external">chenmingbiao</a></li>
+<li><a href="https://github.com/Channe" target="_blank" rel="external">Channe</a></li>
+<li><a href="https://github.com/lyojo" target="_blank" rel="external">lyojo</a></li>
+<li><a href="https://github.com/SergioChan" target="_blank" rel="external">SergioChan</a></li>
+<li><a href="https://github.com/mmoaay" target="_blank" rel="external">mmoaay</a></li>
+<li><a href="https://github.com/buginux" target="_blank" rel="external">buginux</a></li>
+<li><a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></li>
+<li><a href="https://github.com/EudeMorgen" target="_blank" rel="external">EudeMorgen</a></li>
+<li><a href="https://github.com/littledogboy" target="_blank" rel="external">littledogboy</a></li>
+<li><a href="https://github.com/Lenhoon" target="_blank" rel="external">Lenhoon</a></li>
+<li><a href="https://github.com/ray16897188" target="_blank" rel="external">ray16897188</a></li>
+<li><a href="https://github.com/wardenNScaiyi" target="_blank" rel="external">wardenNScaiyi</a></li>
+<li><a href="https://github.com/miaosiqi" target="_blank" rel="external">miaosiqi</a></li>
 </ul>
-<p>本书的这一节描述了 Swift 编程语言的形式语法。这里描述的语法是为了帮助您更详细地了解该语言，而不是让您直接实现一个解析器或编译器。</p>
-<p>Swift 语言相对较小，这是由于 Swift 代码中的几乎所有常见类型、函数以及运算符都已经在 Swift 标准库中定义了。虽然这些类型、函数和运算符并不是 Swift 语言自身的一部分，但是它们被广泛应用于本书的讨论和代码范例中。</p>
-<p><a name="how_to_read_the_grammar"></a></p>
-<h2 id="u5982_u4F55_u9605_u8BFB_u8BED_u6CD5"><a href="#u5982_u4F55_u9605_u8BFB_u8BED_u6CD5" class="headerlink" title="如何阅读语法"></a>如何阅读语法</h2><p>用来描述 Swift 编程语言形式语法的符号遵循下面几个约定：</p>
-<ul>
-<li>箭头（<code>→</code>）用来标记语法产式，可以理解为“可由……构成”。</li>
-<li>斜体文字用来表示句法类型，并出现在一个语法产式规则两侧。</li>
-<li>关键字和标点符号由固定宽度的粗体文本表示，只出现在一个语法产式规则的右侧。</li>
-<li>可供选择的语法产式由竖线（<code>|</code>）分隔。当可选用的语法产式太多时，为了阅读方便，它们将被拆分为多行语法产式规则。</li>
-<li>少数情况下，语法产式规则的右侧会有用于描述的常规字体文字。</li>
-<li>可选的句法类型和字面值用尾标 <code>opt</code> 来标记。</li>
-</ul>
-<p>举个例子，getter-setter 的语法块的定义如下：</p>
-<blockquote>
-<p>getter-setter 方法块语法<br><em>getter-setter 方法块</em> → { <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a> <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a><sub>可选</sub> } | { <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a> <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a> }</p>
-</blockquote>
-<p>这个定义表明，一个 getter-setter 方法块可以由一个 getter 子句后跟一个可选的 setter 子句构成，然后用大括号括起来，或者由一个 setter 子句后跟一个 getter 子句构成，然后用大括号括起来。下面的两个语法产式等价于上述的语法产式，并明确指出了如何取舍：</p>
-<blockquote>
-<p>getter-setter 方法块语法<br>getter-setter 方法块 → { <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a>  <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a><sub>可选</sub> }<br>getter-setter 方法块 → { <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a> <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a> }</p>
-</blockquote>
+<p>最后，感谢<a href="http://wiki.jikexueyuan.com" target="_blank" rel="external">极客学院</a>提供的wiki系统，在国内访问起来速度很快，优化后的样式看起来也更舒服。</p>
 </span>
         
       
@@ -2102,7 +2146,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/6/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/6/">&raquo;</a>
   </nav>
 
  </div>
@@ -2136,21 +2180,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">116</span>
+              <span class="site-state-item-count">159</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

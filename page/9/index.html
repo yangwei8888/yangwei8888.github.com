@@ -170,6 +170,112 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0002-remove-currying/" itemprop="url">
+                0002-remove-currying
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0002-remove-currying/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0002-remove-currying/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Removing_currying_func_declaration_syntax"><a href="#Removing_currying_func_declaration_syntax" class="headerlink" title="Removing currying func declaration syntax"></a>Removing currying <code>func</code> declaration syntax</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0002-remove-currying.md" target="_blank" rel="external">SE-0002</a></li>
+<li>Author(s): <a href="https://github.com/jckarter" target="_blank" rel="external">Joe Groff</a></li>
+<li>Status: <strong>Accepted</strong></li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Curried function declaration syntax <code>func foo(x: Int)(y: Int)</code> is of limited<br>usefulness and creates a lot of language and implementation complexity. We<br>should remove it.</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>The presence of curried function syntax has knock-on effects, complicating<br>other language features:</p>
+<ul>
+<li>The presence of currying invites confusion over keyword rules and the<br>declaration name of functions. We’ve argued several times over whether<br>curried arguments represent a continuation of the function’s arguments, begin<br>the argument list of a new function, or deserve to follow different rules<br>altogether.</li>
+<li>It has subtle interactions with ‘var’ and ‘inout’ argument<br>annotations. A curried function with ‘inout’ parameters anywhere other than<br>its first clause cannot be partially applied without surprising semantic<br>restrictions, limiting its usefulness. With ‘var’ parameters, there’s the<br>question of at what level the ‘var’ gets bound; many users expect it at the<br>outermost partial application, but we currently bind at the innermost partial<br>application.</li>
+</ul>
+<p>The idioms of the standard library, Cocoa, and most third-party code don’t<br>really make ML-style argument currying of free functions profitable. In<br>Cocoa and the standard library, most things are methods, where we can still get<br>useful partial application via <code>self.method</code> and maybe someday <code>.map { f($0)
+}</code> as well. The curried function design also predates the design of the<br>keyword argument model. We have plans to move away<br>from the arguments-are-a-single-tuple model too (which is already belied by<br>things like <code>@autoclosure</code> and <code>inout</code>), which pushes us even further away from<br>the ML argument model.</p>
+<p>Many users have observed the uselessness of our currying feature, and asked for<br>Scala-style <code>f(_, 1)</code> freeform partial application as an alternative. The fact<br>that even functionally-oriented users don’t see much value in our currying<br>feature makes me feel like we might be better off without it. It definitely fails<br>the “would we add it if we didn’t have it already” test.</p>
+<h2 id="Detailed_design"><a href="#Detailed_design" class="headerlink" title="Detailed design"></a>Detailed design</h2><p>We remove support for multiple argument patterns in <code>func</code> declarations,<br>reducing the grammar for <code>func-signature</code> to allow only one <code>argument</code> clause.<br>For migration purposes, existing code that uses currying declaration syntax<br>can be transformed to explicitly return a closure instead:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Before:</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">curried</span><span class="params">(x: Int)</span></span>(y: <span class="type">String</span>) -&gt; <span class="type">Float</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="type">Float</span>(x) + <span class="type">Float</span>(y)!</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// After:</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">curried</span><span class="params">(x: Int)</span></span> -&gt; (<span class="type">String</span>) -&gt; <span class="type">Float</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;(y: <span class="type">String</span>) -&gt; <span class="type">Float</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> <span class="type">Float</span>(x) + <span class="type">Float</span>(y)!</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>I don’t propose changing the semantics of methods, which formally remain<br>functions of type <code>Self -&gt; Args -&gt; Return</code>.</p>
+<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>This is removing a language feature, so will obviously break existing code<br>that uses the feature. We feel that currying is of sufficiently marginal<br>utility, runs against the grain of emerging language practice, and there’s a<br>reasonable automatic migration, so the impact is acceptable in order to<br>simplify the language.</p>
+<h2 id="Alternatives_considered"><a href="#Alternatives_considered" class="headerlink" title="Alternatives considered"></a>Alternatives considered</h2><p>The alternative would be to preserve currying as-is, which as discussed above,<br>is not ideal. Although I don’t propose taking any immediate action, future<br>alternative designs to provide similar functionality in a more idiomatic way<br>include:</p>
+<ul>
+<li>Scala-like ad-hoc partial application syntax, such that something like<br><code>foo(_, bar: 2)</code> would be shorthand for <code>{ x in foo(x, bar: 2) }</code>. This<br>has the benefit of arguably being more readable with our keyword-argument-<br>oriented API design, and also more flexible than traditional currying,<br>which requires argument order to be preconsidered by the API designer.</li>
+<li>Method and/or operator slicing syntax. We have <code>self.method</code> to partially<br>bind a method to its <code>self</code> parameter, and could potentially add<br><code>.method(argument)</code> to partially bind a method to its non-self arguments,<br>which would be especially useful for higher-order methods like <code>map</code><br>and <code>filter</code>. Haskell-like <code>(2+)</code>/<code>(+2)</code> syntax for partially applying<br>operators might also be nice.</li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/15/swift/proposals/0001-keywords-as-argument-labels/" itemprop="url">
                 0001-keywords-as-argument-labels
               </a>
@@ -952,8 +1058,8 @@ machine version 0.3.0
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/examples/running_riak_service/" itemprop="url">
-                在Docker中使用Riak服务
+              <a class="post-title-link" href="/2015/12/08/docker/examples/nodejs_web_app/" itemprop="url">
+                Docker中运行Node.js web应用
               </a>
             
           
@@ -989,8 +1095,8 @@ machine version 0.3.0
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/examples/running_riak_service/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/running_riak_service/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/examples/nodejs_web_app/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/nodejs_web_app/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -1005,320 +1111,277 @@ machine version 0.3.0
 
       
         
-          <span itemprop="articleBody"><h1 id="u5728Docker_u4E2D_u4F7F_u7528Riak_u670D_u52A1"><a href="#u5728Docker_u4E2D_u4F7F_u7528Riak_u670D_u52A1" class="headerlink" title="在Docker中使用Riak服务"></a>在Docker中使用Riak服务</h1><p>这个例子的目的是向您展示如何构建一个预装Riak的docker镜象。</p>
-<p>###创建Dockerfile</p>
-<p>创建一个空文件<code>Dockerfile</code></p>
-<pre><code>$ touch Dockerfile
-</code></pre><p>接下来，定义你想要来建立你镜像的父镜像。我们将使用Ubuntu（tag：最新版），从Docker Hub中下载：</p>
-<pre><code># Riak
-#
-# VERSION       0.1.0
+          <span itemprop="articleBody"><h1 id="Docker_u4E2D_u8FD0_u884CNode-js_web_u5E94_u7528"><a href="#Docker_u4E2D_u8FD0_u884CNode-js_web_u5E94_u7528" class="headerlink" title="Docker中运行Node.js web应用"></a>Docker中运行Node.js web应用</h1><blockquote>
+<p><strong>注意:——如果你不喜欢 sudo </strong>,可以查看<a href="/installation/binaries.md">使用非root用户</a></p>
+</blockquote>
+<p>这个例子的目的是向您展示如何通过使用 <code>Dockerfile</code>来构建自己的docker镜像。我们将在<code>Centos</code>上运行一个简单 <code>node.js</code> web应用并输出’hello word’。您可以在<a href="https://github.com/enokd/docker-node-hello/获得完整的源代码。" target="_blank" rel="external">https://github.com/enokd/docker-node-hello/获得完整的源代码。</a></p>
+<p>##创建Node.js应用</p>
+<p>首先，先创建一个文件存放目录<code>src</code>。然后创建<code>package.json</code>文件来描述你的应用程序和依赖关系：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;docker-centos-hello&quot;,
+  &quot;private&quot;: true,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;description&quot;: &quot;Node.js Hello world app on CentOS using docker&quot;,
+  &quot;author&quot;: &quot;Daniel Gasienica &lt;daniel@gasienica.ch&gt;&quot;,
+  &quot;dependencies&quot;: {
+    &quot;express&quot;: &quot;3.2.4&quot;
+  }
+}
+</code></pre><p>然后，创建一个 <code>index.js</code> 文件使用 <a href="http://expressjs.com/" target="_blank" rel="external">Express.js</a> 框架来创建一个web应用程序:</p>
+<pre><code>var express = require(&apos;express&apos;);
 
-# Use the Ubuntu base image provided by dotCloud
-FROM ubuntu:latest
-MAINTAINER Hector Castro hector@basho.com
-</code></pre><p>接下来,我们更新APT缓存和应用更新:</p>
-<pre><code># Update the APT cache
-RUN sed -i.bak &apos;s/main$/main universe/&apos; /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get upgrade -y
-</code></pre><p>之后，我们安装和设置一些依赖关系：</p>
+// Constants
+var PORT = 8080;
+
+// App
+var app = express();
+app.get(&apos;/&apos;, function (req, res) {
+  res.send(&apos;Hello world\n&apos;);
+});
+
+app.listen(PORT);
+console.log(&apos;Running on http://localhost:&apos; + PORT);
+</code></pre><p>在接下来的步骤中，我们将看到如何使用 docker 的 centos 容器来运行这个应用程序。首先，你需要为你的应用程序构建一个 docker 镜像。</p>
+<p>##创建Dockerfile</p>
+<p>创建一个空文件叫<code>Dockerfile</code>:</p>
+<pre><code>touch Dockerfile
+</code></pre><p>使用你喜欢的编辑器打开Dockerfile</p>
+<p>接下来，定义构建自己镜像的顶级镜像。在这里我们使用 Docker Hub 中 Centos（tag：6）镜像：</p>
+<pre><code>FROM    centos:6
+</code></pre><p>因为我们要构建一个<code>Node.js</code>应用，你需要在你的 <code>Centos</code> 镜像中安装Node.js。Node.js运行应用程序需要使用 npm 安装你 package.json 中定义的依赖关系。安装 Centos 包，你可以查看 Node.js 维基指令：</p>
+<pre><code># Enable EPEL for Node.js
+RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+# Install Node.js and npm
+RUN     yum install -y npm
+</code></pre><p>将你的应用程序源代码添加到你的Docker镜像中，使用<code>ADD</code>指令：</p>
+<pre><code># Bundle app source
+ADD . /src
+</code></pre><p>使用npm安装你的应用程序依赖：</p>
+<pre><code># Install app dependencies
+RUN cd /src; npm install
+</code></pre><p>应用程序绑定到端口8080，您将使用<code>EXPOSE</code>指令对 docker 端口进程映射：</p>
+<pre><code>EXPOSE  8080
+</code></pre><p>最后，定义命令，使用 <code>CMD</code> 定义运行时的node服务和应用 <code>src/index.js</code>的路径（看我们添加源代码到容器的步骤）：</p>
+<pre><code>CMD [&quot;node&quot;, &quot;/src/index.js&quot;]
+</code></pre><p>你的<code>Dockerfile</code>现在看起来像如下这样：</p>
+<pre><code>FROM    centos:centos6
+
+# Enable EPEL for Node.js
+RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+# Install Node.js and npm
+RUN     yum install -y npm
+
+# Bundle app source
+COPY . /src
+# Install app dependencies
+RUN cd /src; npm install
+
+EXPOSE  8080
+CMD [&quot;node&quot;, &quot;/src/index.js&quot;]
+</code></pre><p>##创建你的个人镜像</p>
+<p>到你的 <code>Dockerfile</code> 目录下，运行命令来构建镜像。<code>-t</code> 参数给镜像添加标签，为了让我们在 <code>docker images</code> 命令更容易查找到它：</p>
+<pre><code>$ sudo docker build -t &lt;your username&gt;/centos-node-hello .
+</code></pre><p>你的镜像现在将在列表中：</p>
+<pre><code>$ sudo docker images
+
+# Example
+REPOSITORY                          TAG        ID              CREATED
+centos                              centos6    539c0211cd76    8 weeks ago
+&lt;your username&gt;/centos-node-hello   latest     d64d3505b0d2    2 hours ago
+</code></pre><p>##运行镜像</p>
+<p>使用 <code>-d</code> 参数来运行你的镜像并将容器在后台运行。使用 <code>-p</code> 参数来绑定一个公共端口到私有容器端口上。运行你之前构建的镜像：</p>
+<pre><code>$ sudo docker run -p 49160:8080 -d &lt;your username&gt;/centos-node-hello
+</code></pre><p>打印应用输出：</p>
+<pre><code># Get container ID
+$ sudo docker ps
+
+# Print app output
+$ sudo docker logs &lt;container id&gt;
+
+# Example
+Running on http://localhost:8080
+</code></pre><p>##测试</p>
+<p>要测试应用程序,先得到 docker 应用程序映射的端口:</p>
+<pre><code>$ sudo docker ps
+
+# Example
+ID            IMAGE                                     COMMAND              ...   PORTS
+ecce33b30ebf  &lt;your username&gt;/centos-node-hello:latest  node /src/index.js         49160-&gt;8080
+</code></pre><p>在上面的示例中，docker 映射容器的 <code>49160</code> 端口到 <code>8080</code> 端口。</p>
+<p>现在你可以使用<code>curl</code>来访问你的app（安装curl：sudo apt-get install curl)：</p>
+<pre><code>$ curl -i localhost:49160
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 12
+Date: Sun, 02 Jun 2013 03:53:22 GMT
+Connection: keep-alive
+
+Hello world
+</code></pre><p>如果你使用的是 OS X 的 Boot2docker，实际上端口映射到的是 Docker 虚拟主机，你需要使用如下命令来测试：</p>
+<pre><code>$ curl $(boot2docker ip):49160
+</code></pre><p>我们希望本教程能够帮助您在 Docker 上构建的 <code>Centos</code> 镜像来运行Node.js。你可以获得全部源代码 <a href="https://github.com/gasi/docker-node-hello" target="_blank" rel="external">https://github.com/gasi/docker-node-hello</a>。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/08/docker/installation/windows/" itemprop="url">
+                windows
+安装 docker
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/docker/" itemprop="url" rel="index">
+                  <span itemprop="name">docker</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/08/docker/installation/windows/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/windows/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>#windows</p>
+<blockquote>
+<p>提示：Docker 已经在windows7.1和windows 8上通过测试，当然它也可以在低版本的windows上使用。但是你的处理器必须支持硬件虚拟化。</p>
+</blockquote>
+<p>Docker 引擎使用的是Linux内核特性，所以我们需要在 Windows 上使用一个轻量级的虚拟机 (VM) 来运行 Docker。我们使用 Windows的Docker客户端来控制 Docker 虚拟化引擎的构建、运行和管理 。</p>
+<p>为了简化这个过程，我们设计了一个叫 <a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="external">Boot2Docker</a> 的应用程序，你可以通过它来安装虚拟机和运行 Docker。</p>
+<p>虽然你使用的是 Windows 的 Docker 客户端，但是 docker 引擎容器依然是运行在 Linux 宿主主机上（现在是通过Virtual box）。直到我们开发了 windows 版本的 Docker 引擎，你只需要在你的 Windows 主机上启动一个 Linux 容器。</p>
+<p>##安装</p>
+<ol>
+<li><p>下载最新版本的<a href="https://github.com/boot2docker/windows-installer/releases/latest" target="_blank" rel="external">Docker for Windows Installer</a></p>
+</li>
+<li><p>运行安装文件，它将会安装virtualbox、MSYS-git boot2docker Linux镜像和Boot2Docker的管理工具。</p>
+<p> <img src="http://widuu.u.qiniudn.com/windows_docker.png" alt="docker windows软件安装"></p>
+</li>
+<li><p>从桌面上或者Program Files中找到Boot2Docker for Windows，运行 <code>Boot2Docker Start</code> 脚本。这个脚本会要求你输入 ssh 密钥密码 - 可以简单点（但是起码看起来比较安全），然后只需要按[Enter]按钮即可。</p>
+</li>
+<li><p><code>Boot2Docker Start</code> 将启动一个 Unix shell 来配置和管理运行在虚拟主机中的 Docker，运行 <code>docker version</code> 来查看它是否正常工作。</p>
+</li>
+</ol>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-start.png" alt="windows docker run"></p>
+<p>###运行 Docker</p>
+<blockquote>
+<p>注意：如果你使用的是一个远程的 Docker 进程，像 <code>Boot2docker</code> ，你就不需要像前边的文档实例中那样在输入 Docker 命令之前输入 <code>sudo</code>。</p>
+</blockquote>
+<p><strong>Boot2docker start</strong> 将会自动启动一个 shell 命令框并配置好环境变量，以便您可以马上使用 Docker ：</p>
+<p>让我们尝试运行 <code>hello-world</code> 例子。 运行：</p>
+<pre><code>$ docker run hello-world
+</code></pre><p>这将会下载一个非常小的 <code>hello-world</code> 镜像，并且打印出 <code>Hello from Docker.</code> 信息。</p>
+<p>###使用 Windows 的命令行(cmd.exe) 来管理运行 Docker</p>
+<p>启动一个 Windows 命令行（cmd.exe）.</p>
+<p>运行 Boot2docker 命令，这需要你的 Windows PATH环境变量中包含了 <code>ssh.exe</code>。因此我们需要将安装的 Git 的 bin 目录 （其中包含了 ssh.exe） 配置到我们的 <code>%PATH%</code> 环境变量中，运行如下命令：</p>
+<pre><code>set PATH=%PATH%;&quot;c:\Program Files (x86)\Git\bin&quot;
+</code></pre><p>现在，我们可以运行 <code>boot2docker start</code> 命令来启动 Boot2docker 虚拟机。（如果有虚拟主机不存在的错误提示，你需要运行 <code>boot2docker init</code> 命令）。复制上边的指令到 cmd.exe 来设置你的 windows 控制台的环境变量，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-cmd.png" alt="docker cmd.exe"></p>
+<h3 id="PowerShell__u4E2D_u4F7F_u7528_Docker"><a href="#PowerShell__u4E2D_u4F7F_u7528_Docker" class="headerlink" title="PowerShell 中使用 Docker"></a>PowerShell 中使用 Docker</h3><p>启动 PowerShell，你需要将 <code>ssh.exe</code> 添加到你的 PATH 中。</p>
+<pre><code>$Env:Path = &quot;${Env:Path};c:\Program Files (x86)\Git\bin&quot;
+</code></pre><p>之后，运行 <code>boot2docker start</code> 命令行，它会打印出  PowerShell 命令，这些命令是用来设置环境变量来连接运行在虚拟机中 Docker 的。运行这些命令，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
+<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-powershell.png" alt="Powershell Docker"></p>
+<blockquote>
+<p>提示:你可以使用 <code>boot2docker shellinit | Invoke-Expression</code> 来设置你的环境变量来代替复制粘贴 Powershell 命令。</p>
+</blockquote>
+<p>##进一步的细节</p>
+<p>Boot2Docker 管理工具提供了如下几个命令：</p>
+<pre><code>$ boot2docker
+Usage: boot2docker.exe [&lt;options&gt;] {help|init|up|ssh|save|down|poweroff|reset|restart|config|status|info|ip|shellinit|delete|download|upgrade|version} [&lt;args&gt;]
+</code></pre><p>###升级</p>
 <ul>
-<li><code>CURL</code>来下载 Basho’s APT存储库秘钥。</li>
-<li><code>lsb-release</code>帮助我们查看Ubuntu版本。</li>
-<li><code>openssh-server</code>允许我们登陆远程容器，加入Riak节点组成一个集群。</li>
-<li><p><code>supervisor</code>用于管理<code>OpenSSH</code>和<code>Riak</code>进程。</p>
-<h1 id="Install_and_setup_project_dependencies"><a href="#Install_and_setup_project_dependencies" class="headerlink" title="Install and setup project dependencies"></a>Install and setup project dependencies</h1><p>  RUN apt-get install -y curl lsb-release supervisor openssh-server</p>
-<p>  RUN mkdir -p /var/run/sshd<br>  RUN mkdir -p /var/log/supervisor</p>
-<p>  RUN locale-gen en_US en_US.UTF-8</p>
-<p>  ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf</p>
-<p>  RUN echo ‘root:basho’ | chpasswd</p>
+<li>下载最新的 <a href="https://github.com/boot2docker/windows-installer/releases/tag/v1.5.0" target="_blank" rel="external">Docker for Windows Installer</a></li>
+<li>运行安装程序，这将升级 Boot2Docker 管理工具</li>
+<li><p>打开终端输入如下的命令来升级你现有的虚拟机：</p>
+<p>  $ boot2docker stop<br>  $ boot2docker download<br>  $ boot2docker start</p>
 </li>
 </ul>
-<p>下一步，添加 Basho’s APT仓库：</p>
-<pre><code>RUN curl -s http://apt.basho.com/gpg/basho.apt.key | apt-key add --
-RUN echo &quot;deb http://apt.basho.com $(lsb_release -cs) main&quot; &gt; /etc/apt/sources.list.d/basho.list
-RUN apt-get update
-</code></pre><p>之后，我们安装Riak和改变一些默认值：</p>
-<pre><code># Install Riak and prepare it to run
-RUN apt-get install -y riak
-RUN sed -i.bak &apos;s/127.0.0.1/0.0.0.0/&apos; /etc/riak/app.config
-RUN echo &quot;ulimit -n 4096&quot; &gt;&gt; /etc/default/riak
-</code></pre><p>接下来，我们为缺少的<code>initctl</code>来添加一个软连接：</p>
-<pre><code># Hack for initctl
-# See: https://github.com/dotcloud/docker/issues/1024
-RUN dpkg-divert --local --rename --add /sbin/initctl
-RUN ln -s /bin/true /sbin/initctl
-</code></pre><p>然后我们开发Riak协议缓冲区、HTTP接口以及SSH：</p>
-<pre><code># Expose Riak Protocol Buffers and HTTP interfaces, along with SSH
-EXPOSE 8087 8098 22
-</code></pre><p>最后，运行<code>supervisord</code>这里Riak和OpenSSH将启动：</p>
-<pre><code>CMD [&quot;/usr/bin/supervisord&quot;]
-</code></pre><p>###创建一个supervisord配置文件</p>
-<p>创建一个supervisord.conf空文件，并且保证和Dockerfile是平级目录：</p>
-<pre><code>touch supervisord.conf
-</code></pre><p>填充下面定义的程序:</p>
-<pre><code>[supervisord]
-nodaemon=true
-
-[program:sshd]
-command=/usr/sbin/sshd -D
-stdout_logfile=/var/log/supervisor/%(program_name)s.log
-stderr_logfile=/var/log/supervisor/%(program_name)s.log
-autorestart=true
-
-[program:riak]
-command=bash -c &quot;. /etc/default/riak &amp;&amp; /usr/sbin/riak console&quot;
-pidfile=/var/log/riak/riak.pid
-stdout_logfile=/var/log/supervisor/%(program_name)s.log
-stderr_logfile=/var/log/supervisor/%(program_name)s.log
-</code></pre><p>###构建Riak的Docker镜像</p>
-<p>现在你应该能够构建一个Riak的docker镜像:</p>
-<pre><code>$ docker build -t &quot;&lt;yourname&gt;/riak&quot; .
-</code></pre><p>###下一步</p>
-<p>Riak是分布式数据库。很多生产部署包括至少5个节点。查看docker-riak<a href="https://github.com/hectcastro/docker-riak" target="_blank" rel="external">https://github.com/hectcastro/docker-riak</a>项目细节来使用Docker和Pipework部署Riak集群。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/docker-hub/repos/" itemprop="url">
-                Docker Hub上的仓库和镜像
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/docker-hub/repos/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/docker-hub/repos/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Docker_Hub_u4E0A_u7684_u4ED3_u5E93_u548C_u955C_u50CF"><a href="#Docker_Hub_u4E0A_u7684_u4ED3_u5E93_u548C_u955C_u50CF" class="headerlink" title="Docker Hub上的仓库和镜像"></a>Docker Hub上的仓库和镜像</h1><p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/repos.png" alt="仓库镜像"></p>
-<p>##搜索仓库和镜像</p>
-<p>你可以使用 Docker 来搜索所有公开可用的仓库和镜像。</p>
-<pre><code>$ docker search ubuntu
-</code></pre><p>这将通过 Docker 提供的关键字匹配来显示您可用的仓库列表。</p>
-<p>私有仓库将不会显示到仓库搜索结果上。你可以通过 Docker Hub 的简况页面来查看仓库的状态。</p>
-<p>##仓库</p>
-<p>你的 Docker Hub 仓库有许多特性。</p>
-<p>###stars</p>
-<p>你的仓库可以用星被标记，你也可以用星标记别的仓库。Stars 也是显示你喜欢这个仓库的一种方法，也是一种简单的方法来标记你喜欢的仓库。</p>
-<p>###评论</p>
-<p>你可以与其他 Docker 社区的成员和维护者留下评论。如果你发现有不当的评论，你可以标记他们以供审核。</p>
-<p>###合作者及其作用</p>
-<p>指定的合作者可以通过你提供的权限访问你的私人仓库。一旦指定，他们可以 <code>push</code> 和 <code>pull</code> 你的仓库。但他们将不会被允许执行任何管理任务，如从删除仓库或者改变其状态。</p>
-<blockquote>
-<p>注：一个合作者不能添加其他合作者。只有仓库的所有者才有管理权限。</p>
-</blockquote>
-<p>你也可以与在 Docker Hub 上的组织和团队进行协作，更多信息。</p>
-<p>##官方仓库</p>
-<p>Docker Hub 包含了许多<a href="http://registry.hub.docker.com/official" target="_blank" rel="external">官方仓库</a>。这些都是 Docker 供应商和 Docker 贡献者提供的认证库，他们包含了来自供应商，如 Oracle 和 Red Hat的镜像,您可以使用它们来构建应用程序和服务。</p>
-<p>如果使用官方库，供应商会对镜像进行持续维护、升级和优化，从而为项目提供强大的驱动力。</p>
-<blockquote>
-<p>注：如果你的组织、产品或者团队想要给官方资源库做贡献。可以再<a href="https://github.com/docker/stackbrew" target="_blank" rel="external">这里</a>查看更多信息。</p>
-</blockquote>
-<p>##私有Docker仓库</p>
-<p>私人仓库用来存储你的私有镜像，前提是你需要一个 Docker 账户，或者你已经属于 Docker Hub 上的某个组织或群组。</p>
-<p>要使用 Docker Hub 私有仓库，首先在<a href="https://registry.hub.docker.com/account/repositories/add/" target="_blank" rel="external">这里</a>进行添加。你的 Docker Hub 账户会免费获得一个私人仓库。如果你需要更多的账户，你需要升级你的 <a href="https://registry.hub.docker.com/plans/" target="_blank" rel="external">Docker Hub 计划</a>。</p>
-<p>私有仓库建立好后，你可以使用 Docker 来 <code>push</code> 和 <code>pull</code> 你的镜像。</p>
-<blockquote>
-<p>注：你需要先登录并获得权限来访问你的私人仓库。</p>
-</blockquote>
-<p>私有仓库和公共仓库基本相同，但是以公共身份是无法浏览或者搜索到私有仓库及其内容的，他们也不会以同样的方式被缓存。</p>
-<p>在设置页面你可以指定哪些人有权限访问（如合作者），在这里你可以切换仓库状态（公共到私有，或者反过来）。你需要有一个可用的私有仓库，并开启相关设置才能做这样的转换。如果你无法进行相关操作，请升级你的 <a href="https://registry.hub.docker.com/plans/" target="_blank" rel="external">Docker Hub 计划</a>。</p>
-<p>##Webhooks</p>
-<p>您可以在仓库设置页面来配置你的 webhooks。只有成功 <code>push</code> 以后，<code>webhook</code> 才会生效。webhooks 会调用 HTTP POST 请求一个json，类似如下所示的例子：</p>
-<blockquote>
-<p>你可以使用 http 工具进行测试，例如 <a href="http://requestb.in/" target="_blank" rel="external">requestb.in.</a></p>
-</blockquote>
-<p>webhook json例子:</p>
-<pre><code>{
-   &quot;push_data&quot;:{
-      &quot;pushed_at&quot;:1385141110,
-      &quot;images&quot;:[
-         &quot;imagehash1&quot;,
-         &quot;imagehash2&quot;,
-         &quot;imagehash3&quot;
-      ],
-      &quot;pusher&quot;:&quot;username&quot;
-   },
-   &quot;repository&quot;:{
-      &quot;status&quot;:&quot;Active&quot;,
-      &quot;description&quot;:&quot;my docker repo that does cool things&quot;,
-      &quot;is_automated&quot;:false,
-      &quot;full_description&quot;:&quot;This is my full description&quot;,
-      &quot;repo_url&quot;:&quot;https://registry.hub.docker.com/u/username/reponame/&quot;,
-      &quot;owner&quot;:&quot;username&quot;,
-      &quot;is_official&quot;:false,
-      &quot;is_private&quot;:false,
-      &quot;name&quot;:&quot;reponame&quot;,
-      &quot;namespace&quot;:&quot;username&quot;,
-      &quot;star_count&quot;:1,
-      &quot;comment_count&quot;:1,
-      &quot;date_created&quot;:1370174400,
-      &quot;dockerfile&quot;:&quot;my full dockerfile is listed here&quot;,
-      &quot;repo_name&quot;:&quot;username/reponame&quot;
-   }
-}
-</code></pre><p>Webhooks 允许你将你镜像和仓库的更新信息通知指定用户、服务以及其他应用程序。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/docker-hub/docker-hub/" itemprop="url">
-                Docker Hub
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/docker-hub/docker-hub/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/docker-hub/docker-hub/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Docker_Hub"><a href="#Docker_Hub" class="headerlink" title="Docker Hub"></a>Docker Hub</h1><p>先来看看 Docker Hub 的界面：</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a><img src="http://7xlbtp.com1.z0.glb.clouddn.com/hub.png" alt=""></h1><p>在这个章节，我们来学习 Docker Hub 的相关话题：</p>
-<p><a href="/accounts.md">账户</a></p>
-<p>学习如何创建一个Docker Hub账户来管理你的组织和机构。</p>
-<p><a href="/repos.md">仓库</a></p>
-<p>了解如何分享你 Docker Hub 上的 Docker 镜像，以及如何存储和管理你的私人镜像。</p>
-<p><a href="/builds.md">自动构建</a></p>
-<p>学习如何自动化构建、部署和管理</p>
+<p>###容器端口重定向</p>
+<p>boot2Docker的默认用户是 <code>docker</code> 密码是 <code>tcuser</code>。 </p>
+<p>最新版本的 boot2docker 可以设置网络适配器来给容器提供端口访问。</p>
+<p>如你运行一个暴露内部端口的容器</p>
+<pre><code>docker run --rm -i -t -p 80:80 nginx
+</code></pre><p>当你需要使用一个IP地址来访问 Nginx 服务器，你可以使用如下命令来查看 ip。</p>
+<pre><code>$ boot2docker ip
+</code></pre><p>通常情况下，是192.168.59.103,但是它可以通过 virtualbox 的 dhcp 来改变。</p>
+<p>更多细节信息，请查看<a href="http://boot2docker.io/" target="_blank" rel="external">Boot2Docker site</a></p>
+<p>###使用PUTTY登陆来代替CMD命令行</p>
+<p>Boot2Docker使用 <code>%HOMEPATH%\.ssh</code> 目录来生成你的共有和私有密钥。同样登陆的时候你也需要使用这个目录下的私有密钥。</p>
+<p>这个私有密钥需要转换成 PuTTY 所需要的格式。</p>
+<p>你可以使用 <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" target="_blank" rel="external">puttygen</a>来生成，具体操作如下:</p>
+<ol>
+<li><p>打开 <code>puttygen.exe</code> 找到（”File”-&gt;”Load”）按钮来加载 %HOMEPATH%.ssh\id_boot2docker 私有密钥文件。</p>
+</li>
+<li><p>点击<code>&quot;Save Private Key&quot;</code>按钮。</p>
+</li>
+<li><p>在PUTTY中使用刚才保存的文件来登陆 docker@127.0.0.1:2022 </p>
+</li>
+</ol>
+<p>##参考</p>
+<p>如果你已经运行 Docker 主机或者你不希望使用 <code>Boot2docker</code> 安装，你可以安装 docker.exe 使用非官方的包管理器 Chocolately。了解更多新，请查看 <a href="https://chocolatey.org/packages/docker" target="_blank" rel="external">Docker package on Chocolatey</a>。</p>
 </span>
         
       
@@ -1342,7 +1405,7 @@ stderr_logfile=/var/log/supervisor/%(program_name)s.log
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/10/">&raquo;</a>
   </nav>
 
  </div>
@@ -1376,21 +1439,21 @@ stderr_logfile=/var/log/supervisor/%(program_name)s.log
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">116</span>
+              <span class="site-state-item-count">159</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

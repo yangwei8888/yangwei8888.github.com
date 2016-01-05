@@ -1,0 +1,727 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="ionic," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="ionic是最近一个很流行的Hybird移动开发解决方案，个人兴趣研究了一下，还是不错的https://github.com/driftyco/ionic
+1.环境准备
+安装nodejs
+安装cordova和ionic
+
+1$npm install -g cordova ionic
+或者下载github上项目代码进行构建(不推荐)
+
+安装java JDK  jdk是Java运行开发环境，按andr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ionic Hybrid跨终端应用程序开发方案研究">
+<meta property="og:url" content="http://yoursite.com/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="ionic是最近一个很流行的Hybird移动开发解决方案，个人兴趣研究了一下，还是不错的https://github.com/driftyco/ionic
+1.环境准备
+安装nodejs
+安装cordova和ionic
+
+1$npm install -g cordova ionic
+或者下载github上项目代码进行构建(不推荐)
+
+安装java JDK  jdk是Java运行开发环境，按andr">
+<meta property="og:updated_time" content="2016-01-05T04:23:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ionic Hybrid跨终端应用程序开发方案研究">
+<meta name="twitter:description" content="ionic是最近一个很流行的Hybird移动开发解决方案，个人兴趣研究了一下，还是不错的https://github.com/driftyco/ionic
+1.环境准备
+安装nodejs
+安装cordova和ionic
+
+1$npm install -g cordova ionic
+或者下载github上项目代码进行构建(不推荐)
+
+安装java JDK  jdk是Java运行开发环境，按andr">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> Ionic Hybrid跨终端应用程序开发方案研究 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?953e46480b0a75d01aaf6d872cc77099";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Ionic Hybrid跨终端应用程序开发方案研究
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-06-16T00:00:00+08:00" content="2015-06-16">
+            2015-06-16
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/frontend-client/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-client</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>ionic是最近一个很流行的Hybird移动开发解决方案，个人兴趣研究了一下，还是不错的<br><a href="https://github.com/driftyco/ionic" target="_blank" rel="external">https://github.com/driftyco/ionic</a></p>
+<h3 id="1-_u73AF_u5883_u51C6_u5907"><a href="#1-_u73AF_u5883_u51C6_u5907" class="headerlink" title="1.环境准备"></a>1.环境准备</h3><ul>
+<li>安装nodejs</li>
+<li>安装cordova和ionic</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install -g cordova ionic</span><br></pre></td></tr></table></figure>
+<p>或者下载github上项目代码进行构建(不推荐)</p>
+<ul>
+<li>安装java JDK<br>  jdk是Java运行开发环境，按android开发必须的开发的环境</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">JAVA_HOME</span> <span class="constant">D</span><span class="symbol">:/program</span> file/java/jdk_1.<span class="number">7.34</span>/</span><br><span class="line">path <span class="constant">D</span><span class="symbol">:/program</span> file/java/jdk_1.<span class="number">7.34</span>/bin</span><br><span class="line">classpath   <span class="constant">C</span><span class="symbol">:/apache-ant-</span><span class="number">1.8</span>.<span class="number">1</span>/lib</span><br></pre></td></tr></table></figure>
+<p>测试方法：java -version</p>
+<ul>
+<li>安装Apache ant<br>Apache Ant,是一个将软件编译、测试、部署等步骤联系在一起加以自动化的一个工具，大多用于Java环境中的软件开发。由Apache软件基金会所提供。这里用到的的是用于android签名证书等打包(android开发过程中ide使用gradle配置打包，早期都是用的ant打包，这里使用的方法比较原始)<br><a href="http://ant.apache.org/bindownload.cgi" target="_blank" rel="external">http://ant.apache.org/bindownload.cgi</a> 上下载最新版apache-bin(可选择安装型或压缩包型)，然后添加系统环境变量</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">ANT_HOME</span>    <span class="constant">C</span><span class="symbol">:/</span> apache-ant-<span class="number">1.9</span>.<span class="number">5</span></span><br><span class="line">path        <span class="constant">C</span><span class="symbol">:/</span> apache-ant-<span class="number">1.9</span>.<span class="number">5</span>/bin</span><br><span class="line">classpath   <span class="constant">C</span><span class="symbol">:/apache-ant-</span><span class="number">1.9</span>.<span class="number">5</span>/lib</span><br></pre></td></tr></table></figure>
+<p>测试方法：ant -version</p>
+<ul>
+<li>安装Android sdk<br>下载最新的adk，<a href="http://developer.android.com/sdk/installing/index.html" target="_blank" rel="external">http://developer.android.com/sdk/installing/index.html</a> 下载后解压到某个目录(例如D盘)，然后添加系统环境变量</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">ANDROID_HOME</span>   <span class="constant">D</span><span class="symbol">:/android-sdk-windows</span></span><br><span class="line">path        <span class="constant">D</span><span class="symbol">:/android</span>\android-sdk-windows\tools</span><br><span class="line">classpath  <span class="constant">D</span><span class="symbol">:/android</span>\android-sdk-windows\tools\lib</span><br></pre></td></tr></table></figure>
+<p>测试方法：android<br>必须掌握的两个命令：abd start-server/ adb kill-server，用于启动android debug服务，adb使用与启动模拟器或是通过手机的自动安装调试，并可以看到log信息。这两个命令会经常用到<br>然后 命令行运行一下tns，如果看到以下提示信息，就可以开始第一个开发了。</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NativeScript</span></span><br><span class="line">┌─────────┬─────────────────────────────</span><br><span class="line">───────────────────────────────────┐</span><br><span class="line">│ Usage   │ Synopsis                                                       │</span><br><span class="line">│ General │ $ tns <span class="variable">&lt;Command&gt;</span> [Command Parameters] [--command <span class="variable">&lt;Options&gt;</span>]     │</span><br><span class="line">│ Alias   │ $ nativescript <span class="variable">&lt;Command&gt;</span> [Command Parameters] [--command       │</span><br><span class="line">│         │ <span class="variable">&lt;Options&gt;</span>]                                                     │</span><br><span class="line">└─────────┴─────────────────────────────</span><br><span class="line">───────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+<h3 id="2-_u5F00_u59CB_u5F00_u53D1"><a href="#2-_u5F00_u59CB_u5F00_u53D1" class="headerlink" title="2.开始开发"></a>2.开始开发</h3><ul>
+<li>创建项目</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ ionic start projectName tabs</span><br><span class="line">$ cd projectName</span><br><span class="line">├── bower<span class="class">.json</span>     <span class="comment">// bower dependencies</span></span><br><span class="line">├── config<span class="class">.xml</span>        <span class="comment">// cordova configuration，例如标题和入口页面</span></span><br><span class="line">├── gulpfile<span class="class">.js</span>        <span class="comment">// gulp tasks</span></span><br><span class="line">├── hooks              <span class="comment">// custom cordova hooks to execute on specific commands</span></span><br><span class="line">├── resources         <span class="comment">// custom static files such as icon</span></span><br><span class="line">├── ionic<span class="class">.project</span>    <span class="comment">// ionic configuration</span></span><br><span class="line">├── package<span class="class">.json</span>   <span class="comment">// node dependencies</span></span><br><span class="line">├── platforms      <span class="comment">// iOS/Android specific builds will reside here</span></span><br><span class="line">├── plugins         <span class="comment">// where your cordova/ionic plugins will be installed</span></span><br><span class="line">├── scss               <span class="comment">// scss code, which will output to www/css/</span></span><br><span class="line">└── www            <span class="comment">// application - what we need pay attention。JS code and libs, CSS, images, etc.</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置移动平台</li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ionic platform <span class="keyword">add </span>ios</span><br><span class="line">$ ionic platform <span class="keyword">add </span><span class="keyword">android</span><br><span class="line"></span>$ ionic <span class="keyword">build </span><span class="keyword">android/ios</span><br><span class="line"></span>$ ionic emulator/run <span class="keyword">android/ios </span>(emulator将在模拟器上启动，run将在真实手机上启动)</span><br></pre></td></tr></table></figure>
+<p>如果能够正常启动，就可以任性的开发了。</p>
+<h3 id="3-_u9879_u76EE_u4EE3_u7801_u7ED3_u6784_u5206_u6790"><a href="#3-_u9879_u76EE_u4EE3_u7801_u7ED3_u6784_u5206_u6790" class="headerlink" title="3.项目代码结构分析"></a>3.项目代码结构分析</h3><p>对于前端开发来说，只要关注www/下的项目代码就可以了，打包编译后www将会到android项目的asset目录下面。而客户端的主页面是通过一个入口html来开始运行的，如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ionicframework.demo862117;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.<span class="type">Bundle</span>;</span><br><span class="line"><span class="keyword">import</span> org.apache.cordova.*;</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">CordovaActivity</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    public void onCreate(<span class="type">Bundle</span> savedInstanceState)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        <span class="keyword">super</span>.init();</span><br><span class="line">        <span class="comment">// Set by &lt;content src="index.html" /&gt; in config.xml</span></span><br><span class="line">        loadUrl(launchUrl);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里主页面打包后会生成带上主要的android/ios外壳，界面产生的所有内容由H5实现。</p>
+<h3 id="4-angular_u4E0E_u7EC4_u4EF6_u5316"><a href="#4-angular_u4E0E_u7EC4_u4EF6_u5316" class="headerlink" title="4.angular与组件化"></a>4.angular与组件化</h3><p>ionic使用了angular作为基础开发库，并用组件化的方案来管理自己的一套前端库，主要用到angular，angular-ui，iconfont，svg等前端技术知识，这里不一一展开了。<br><a href="http://www.ionicframework.com/docs/components/" target="_blank" rel="external">http://www.ionicframework.com/docs/components/</a> ，当然这里有了一套完整的前端开发框架很文档。即如果我们用它来开发应用的话，是需要用它的框架来写代码就可以了。</p>
+<h3 id="5-_u603B_u7ED3_u5206_u6790"><a href="#5-_u603B_u7ED3_u5206_u6790" class="headerlink" title="5.总结分析"></a>5.总结分析</h3><h4 id="u4F18_u52BF"><a href="#u4F18_u52BF" class="headerlink" title="优势"></a>优势</h4><ol>
+<li>大量可参考的组件和文档，使得开发入门成本比较低</li>
+<li>兼容angular(当然自己也可以用其他的，只是默认创建项目时引入了angular)</li>
+<li>整理来说，ionic的方案仍然集中在hybrid开发的集成化，对于快速开发内嵌页面来说是很好的选择</li>
+<li>前端人员除了搭环境，不需要了解过多客户端的知识，就可以开发hybrid跨终端的app了</li>
+</ol>
+<h4 id="u53EF_u80FD_u5B58_u5728_u7684_u4E0D_u8DB3_uFF1A"><a href="#u53EF_u80FD_u5B58_u5728_u7684_u4E0D_u8DB3_uFF1A" class="headerlink" title="可能存在的不足："></a>可能存在的不足：</h4><ol>
+<li>直接将页面打包发布会使得迭代不好解决，如果使用离线包机制可以解决这一问题，但是客户端的定制化仍然我们对预- - 处理后的代码进行较大的二次修改</li>
+<li>依然停留在webview开发阶段，不能突破webview解析dom的性能问题</li>
+<li>目前没有自动化调试，需借助外部工具来做</li>
+</ol>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ionic/" rel="tag">#ionic</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/" rel="prev">Nativescript跨终端应用程序开发方案研究</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/" rel="next">polymer组件化与vm特性</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-_u73AF_u5883_u51C6_u5907"><span class="nav-number">1.</span> <span class="nav-text">1.环境准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-_u5F00_u59CB_u5F00_u53D1"><span class="nav-number">2.</span> <span class="nav-text">2.开始开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-_u9879_u76EE_u4EE3_u7801_u7ED3_u6784_u5206_u6790"><span class="nav-number">3.</span> <span class="nav-text">3.项目代码结构分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-angular_u4E0E_u7EC4_u4EF6_u5316"><span class="nav-number">4.</span> <span class="nav-text">4.angular与组件化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-_u603B_u7ED3_u5206_u6790"><span class="nav-number">5.</span> <span class="nav-text">5.总结分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4F18_u52BF"><span class="nav-number">5.1.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u53EF_u80FD_u5B58_u5728_u7684_u4E0D_u8DB3_uFF1A"><span class="nav-number">5.2.</span> <span class="nav-text">可能存在的不足：</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/';
+      var disqus_title = 'Ionic Hybrid跨终端应用程序开发方案研究';
+      var disqus_url = 'http://yoursite.com/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

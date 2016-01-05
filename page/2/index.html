@@ -170,6 +170,190 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/02Writing Swift Classes with Objective-C Behavior/" itemprop="url">
+                02Interoperability-02特性编写Swift类
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-26T22:00:09+08:00" content="2015-12-26">
+            2015-12-26
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Using-Swift-with-Cocoa-and-Objective-C/" itemprop="url" rel="index">
+                  <span itemprop="name">Using-Swift-with-Cocoa-and-Objective-C</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/02Writing Swift Classes with Objective-C Behavior/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/02Writing Swift Classes with Objective-C Behavior/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><blockquote>
+<p>翻译：<a href="https://github.com/halinuya" target="_blank" rel="external">halinuya</a></p>
+<p>校对：<a href="https://github.com/song-buaa" target="_blank" rel="external">song-buaa</a> <a href="https://github.com/MonicaZhou" target="_blank" rel="external">MonicaZhou</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
+</blockquote>
+<h1 id="u4F7F_u7528Objective-C_u7279_u6027_u7F16_u5199Swift_u7C7B"><a href="#u4F7F_u7528Objective-C_u7279_u6027_u7F16_u5199Swift_u7C7B" class="headerlink" title="使用Objective-C特性编写Swift类"></a>使用Objective-C特性编写Swift类</h1><hr>
+<p>本节包括内容：</p>
+<ul>
+<li><a href="/#inheriting_from_objective-c_classes">继承Objective-C的类（Inheriting from Objective-C Classes）</a></li>
+<li><a href="/#adopting_protocols">采用协议（Adopting Protocols）</a></li>
+<li><a href="/#writing_initializers_and_deinitializers">编写构造器和析构器（Writing Initializers and Deinitializers）</a></li>
+<li><a href="/#integrating_with_interface_builder">集成Interface Builder（Integrating with Interface Builder）</a></li>
+<li><a href="/#specifying_property_attributes">指明属性特性（Specifying Property Attributes）</a></li>
+<li><a href="/#implementing_core_data_managed_object_subclasses">实现Core Data Managed Object子类（Implementing Core Data Managed Object Subclasses）</a></li>
+<li><a href="/#using_swift_class_names_with_objective_c_apis">使用带Objective-C API的Swift类名</a></li>
+</ul>
+<p>互用性（互操作性）使开发者可以定义融合了 Objective-C 语言特性的Swift类。编写 Swift 类时，不仅可以继承 Objective-C 语言编写的父类，采用 Objective-C 的协议，还可以利用 Objective-C 的一些其它功能。这意味着，开发者可以基于 Objective-C 中已有的熟悉、可靠的类、方法和框架来创建 Swift 类，并结合 Swift 提供的现代化和更有效的语言特点对其进行优化。</p>
+<p><a name="inheriting_from_objective-c_classes"></a></p>
+<h2 id="u7EE7_u627FObjective-C_u7684_u7C7B"><a href="#u7EE7_u627FObjective-C_u7684_u7C7B" class="headerlink" title="继承Objective-C的类"></a>继承Objective-C的类</h2><p>在 Swift 中，开发者可以定义一个子类，该子类继承自使用 Objective-C 编写的类。创建该子类的方法是，在 Swift 的类名后面加上一个冒号（:），冒号后面跟上 Objective-C 的类名。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySwiftViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 定义类</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>开发者能够从 Objective-C 的父类中继承所有的功能。如果开发者要覆盖父类中的方法，不要忘记使用<code>override</code>关键字。</p>
+<h3 id="NSCoding_u534F_u8BAE"><a href="#NSCoding_u534F_u8BAE" class="headerlink" title="NSCoding协议"></a>NSCoding协议</h3><p><code>NSCoding</code>协议要求符合的类型实现所需的构造器<code>init(coder:)</code>。直接采用<code>NSCoding</code>协议的类必须实现这个方法。采用<code>NSCoding</code>协议的类的子类，这些类有一个或者多个自定义的构造器或者不带初始化值的属性，也必须实现这个方法。Xcode提供了以下占位实现来提醒：</p>
+<pre><code>required init(coder aDecoder: NSCoder) {
+    fatalError(&quot;init(coder:) has not been implemented&quot;)
+}
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">对那些从 Storyboards 里加载的对象，或者用 NSUserDefaults 或 NSKeyedArchiver 类归档到磁盘的对象，你必须提供一个完整的初始化程序的实现。然而，当类型以此种方式无法实例化的时候，你可能并不需要实现构造器。</span><br><span class="line"></span><br><span class="line">&lt;a name=<span class="string">"adopting_protocols"</span>&gt;&lt;/a&gt;</span><br><span class="line"><span class="comment">## 采用协议</span></span><br><span class="line"></span><br><span class="line">在 Swift 中，开发者可以采用 Objective-C 中定义好的协议。和 Swift 协议一样，所有 Objective-C 协议都写在一个用逗号隔开的列表中，跟在所在类的父类名后面（如果它有父类的话）。</span><br><span class="line"></span><br><span class="line">`<span class="javascript"></span>``<span class="javascript">swift</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySwiftViewController</span>: <span class="title">UIViewController</span>, <span class="title">UITableViewDelegate</span>, <span class="title">UITableViewDataSource</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 定义类</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+
+Objective-C 协议与 Swift 协议使用上是一致的。如果开发者想在 Swift 代码中引用 `UITableViewDelegate`协议，可以直接使用`UITableViewDelegate`（跟在 Objective-C 中引用`id&lt;UITableViewDelegate&gt;`是等价的）。
+
+因为在 Swift 中，类和协议的命名空间是统一的，Objective-C 里的 NSObject 协议被重新映射到 Swift 里的 NSObjectProtocol。
+
+&lt;a name=&quot;writing_initializers_and_deinitializers&quot;&gt;&lt;/a&gt;
+## 编写构造器和析构器
+
+Swift 的编译器确保在初始化时，构造器不允许类里有任何未初始化的属性，这样做能够增加代码的安全性和可预测性。另外，与 Objective-C 语言不同，Swift 不提供单独的内存分配方法供开发者调用。当你使用原生的 Swift 初始化方法时（即使是和 Objective-C 类协作），Swift 会将 Objective-C 的初始化方法转换为 Swift 的初始化方法。关于如何实现开发者自定义构造器的更多信息，请查看[构造器](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html#//apple_ref/doc/uid/TP40014097-CH18)。
+
+当开发者希望在类被释放前，执行额外的清理工作时，需要执行一个析构过程来代替`dealloc`方法。在实例被释放前，Swift 会自动调用析构器来执行析构过程。Swift 调用完子类的析构器后，会自动调用父类的析构器。当开发者使用 Objective-C 类或者是继承自 Objective-C 类的 Swift 类时，Swift 也会自动为开发者调用这个类的父类里的`dealloc`方法。关于如何实现开发者自定义析构器的更多信息，请查看[析构器]https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Deinitialization.html#//apple_ref/doc/uid/TP40014097-CH19)。
+
+&lt;a name=&quot;integrating_with_interface_builder&quot;&gt;&lt;/a&gt;
+## 集成Interface Builder
+
+Swift 编译器包含一些属性，使得开发者的 Swift 类集成了 Interface Builder 里的一些特色功能。和 Objective-C 里一样，你能在 Swift 里面使用 outlets，actions 和实时渲染（live rendering）。
+
+### 使用Outlets和Action
+
+使用 Outlets 和 Action 可以连接源代码和 Interface Builder 的 UI 对象。在Swift里面使用 Outlets 和 Action，需要在属性和方法声明前插入`@IBOutlet`或者`@IBAction`关键字。声明一个 Outlet 集合同样是用`@IBOutlet`属性，即为类型指定一个数组。
+
+当开发者在 Swift 里面声明了一个 Outlet 时，Swift 编译器会自动将该类型转换为弱（weak）、隐式（implicitly）、未包装（unwrapped）的 optional（Objective-C 里面对应指针类型）数据类型，并为它分配一个初始化的空值`nil`。实际上，编译器使用`@IBOutlet weak var name: Type! = nil`来代替 `@IBOutlet var name: Type`。编译器将该类型转换成了弱（weak）、隐式（implicitly）、未包装（unwrapped）的 optional 类型，因此开发者就不需要在构造器中为该类型分配一个初始值了。当开发者从故事板（storyboard）或者`xib`文件里面初始化对象 class 后，定义好的 Outlet 和这些对象连接在一起了，所以，这些 Outlet 是隐式的，未包装的。由于创建的 outlets 一般都是弱关系，因此默认 outlets 是弱类型。
+
+例如，下面的 Swift 代码声明了一个拥有 Outlet、Outlet 集合和 Action 的类：
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="preprocessor">@IBOutlet</span> <span class="keyword">var</span> button: <span class="type">UIButton</span></span><br><span class="line"></span><br><span class="line">	<span class="preprocessor">@IBOutlet</span> <span class="keyword">var</span> textFields: <span class="type">UITextField</span>[]</span><br><span class="line"></span><br><span class="line">	<span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">buttonTapped</span><span class="params">(AnyObject)</span></span> &#123;</span><br><span class="line">		<span class="built_in">println</span>(<span class="string">"button tapped!"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+在`buttonTapped`方法中，消息发送者的信息没有被使用，因此可以省略该方法的参数名。
+
+### 实时渲染（live rendering）
+开发者可以在 Interface Builder 中用`@IBDesignable`和`@IBInspectable`来创建生动、可交互的自定义视图（view）。开发者继承`UIView`或者`NSView`来自定义一个视图（view）时，可以在类声明前添加`@IBDesignable`属性。当你在 Interface Builder 里添加了自定义的视图后（在监视器面板的自定义视图类中进行设置），Interface Builder 将在画布上渲染你自定义的视图。
+
+
+&gt;注意：只能针对框架里对象进行实时渲染
+
+你也可以将`@IBInspectable`属性添加到和用户定义的运行时属性兼容的类型属性里。这样，当开发者将自定义的视图添加到 Interface Builder 里后，就可以在监视器面板中编辑这些属性。
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@IBDesignable</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCustomView</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">	<span class="preprocessor">@IBInspectable</span> <span class="keyword">var</span> textColor: <span class="type">UIColor</span></span><br><span class="line">	<span class="preprocessor">@IBInspectable</span> <span class="keyword">var</span> iconHeight: <span class="type">CGFloat</span></span><br><span class="line">	<span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+&lt;a name=&quot;specifying_property_attributes&quot;&gt;&lt;/a&gt;
+## 指明属性特性
+
+在 Objective-C 中，属性通常都有一组特性（Attributes）说明来指明该属性的一些附加信息。在 Swift 中，开发者可以通过不同的方法来指明属性的这些特性。
+
+### 强类型和弱类型
+
+Swift 里属性默认都是强类型的。使用`weak`关键字修饰一个属性，能指明其对象存储时是一个弱引用。该关键字仅能修饰 optional 对象类型。更多的信息，请查阅[特性](https://github.com/CocoaChina-editors/Welcome-to-Swift/blob/master/The%20Swift%20Programming%20Language/02Language%20Guide/09Classes%20and%20Structures.md)。
+
+### 读／写和只读
+
+在 Swift 中，没有`readwrite`和`readonly`特性。当声明一个存储型属性时，使用`let`修饰其为只读；使用`var`修饰其为可读／写。当声明一个计算型属性时，为其提供一个 getter 方法，使其成为只读的；提供 getter 方法和 setter 方法，使其成为可读／写的。更多信息，请查阅[属性](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13)。
+
+### 拷贝
+
+在 Swift 中，Objective-C 的`copy`特性被转换为`@NSCopying`属性。这一类的属性必须遵守 `NSCopying`协议。更多信息，请查阅[特性](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13)。
+
+&lt;a name=&quot;implementing_core_data_managed_object_subclasses&quot;&gt;&lt;/a&gt;
+## 实现Core Data Managed Object子类
+
+Core Data 提供了基本存储和实现`NSManagedObject`子类的一组属性。在与Core Data 模型中管理对象子类相关的特性或者关系的每个属性定义之前，将`@NSmanaged`特性加入。与 Objective-C 里面的 `@dynamic`特性类似，`@NSManaged`特性告知 Swift 编译器，这个属性的存储和实现将在运行时完成。但是，与`@dynamic`不同的是，`@NSManaged`特性仅在 Core Data 支持中可用。
+
+Swift 类被命名空间化---他们局限于被编译的模块中（最典型的是Target）。
+为了使用带 Core Data 模型的`NSManagedObject`类的 Swift 子类，在模型实体监视器的类区域里，用模块名字作为类名的前缀。
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/Art/coredatanamespace_2x.png)
+
+&lt;a name=&quot;using_swift_class_names_with_objective_c_apis&quot;&gt;&lt;/a&gt;
+## 使用带Objective-C API的Swift类名
+
+Swift 类的命名基于他们被编译的模块，即使是使用来自 Objective-C 的代码。和 Objective-C 不同的是，所有的类都是全局命名空间的一部分，必须没有相同的名字，Swift 类可以基于他们存在的模块来消除歧义。比如，被称为 MyFramework 框架中的被叫做DataManager 的 Swift 类的全限定名就是 MyFramework.DataManager。一个 Swift 应用目标就是模块本身，所以，在一个叫 MyGreatApp 的应用里，叫 Observer 的 Swift 类的全限定名是 MyGreatApp.Observer。
+
+为了保存在 Objective-C 代码里使用的 Swift 类，Swift类用他们的全限定名暴漏给 Objective-C 运行时。因此，当你使用那些对 Swift 类的字符串代表起作用的 API，必须包含类的全限定名。比如，当你创建一个基于文档的 Mac 应用，要在应用的 Info.plist 里提供 NSDocument 子类的名字。Swift里，你必须使用文档子类的全名，包括从你的应用或者框架里派生出来的模块名字。
+    下面的例子中，`NSClassFromString`方法用于检索一个来自字符串代表的类的引用。为了检索 Swift 类，需要使用全限定名，包括应用的名字。
+
+```    swift
+let myPersonClass:AnyClass(NSClassFromString(&quot;MyGreatApp.Person&quot;))
+</code></pre></span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/03Working with Cocoa Data Types/" itemprop="url">
                 02Interoperability-03与 Cocoa 数据类型共舞
               </a>
@@ -1856,181 +2040,11 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter1/03_revision_history/" itemprop="url">
-                第一章-03Swift 版本历史记录
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T21:00:00+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter1/03_revision_history/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter1/03_revision_history/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Swift__u7248_u672C_u5386_u53F2_u8BB0_u5F55"><a href="#Swift__u7248_u672C_u5386_u53F2_u8BB0_u5F55" class="headerlink" title="Swift 版本历史记录"></a>Swift 版本历史记录</h1><hr>
-<blockquote>
-<p>翻译：<a href="http://weibo.com/littlekok/" target="_blank" rel="external">成都老码团队翻译组-Arya</a><br>校对：<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">成都老码团队翻译组-Oberyn</a></p>
-</blockquote>
-<p>本页内容包括：</p>
-<ul>
-<li><a href="/#xcode6_4_Beta">XCode6.4 Beta Swift语法文档更新</a></li>
-<li><a href="/#xcode6_3">XCode6.3正式版 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_2">XCode6.2正式版 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_2_Beta3">XCode6.2 Beta3 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_2_Beta2">XCode6.2 Beta2 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_2_Beta1">XCode6.2 Beta1 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_1_1">XCode6.1.1正式版 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_1">XCode6.1 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_1_Beta2">XCode6.1 Beta2 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_1_Beta1">XCode6.1 Beta1 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_beta7">XCode6 Beta7 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_beta6">XCode6 Beta6 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_beta5">XCode6 Beta5 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_beta4">XCode6 Beta4 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_beta3">XCode6 Beta3 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_beta2">XCode6 Beta2 Swift语法文档更新</a></li>
-<li><a href="/#xcode6_beta1">XCode6 Beta1 Swift语法文档更新</a></li>
-<li>XCode6下载: <a href="http://pan.baidu.com/disk/home#from=share_pan_logo&amp;path=%252F%25E8%2580%2581%25E7%25A0%2581%25E4%25BA%2591%25E7%259B%2598-XCode6%252FXCode6-Beta5" target="_blank" rel="external">老码云盘下载</a></li>
-</ul>
-<p>以下部分是针对XCode6每一次Beta版本直至正式版发布，Swift语法部分的更新归类</p>
-<p><a name="xcode6_4_Beta"></a></p>
-<h3 id="XCode6-4_Beta_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-4_Beta_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.4 Beta中Swift语法更新"></a>XCode6.4 Beta中Swift语法更新</h3><p><strong><em>注意：苹果在这个版本发布后没有及时的更新Swift Programming Language文档,以下是<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队</a>通过XCode6.4 Beta Release Note总结的更改说明：</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2015-04-13</td><br>    <td><ul class="list-bullet"><br>        <li><br>            XCode6.4包含了对于构建和调试基于iOS8.4 App的支持<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_3"></a></p>
-<h3 id="XCode6-3_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-3_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.3中Swift语法更新"></a>XCode6.3中Swift语法更新</h3><p><strong><em>注意：苹果此时发布了统一的版本XCode6.3，其中将以前的XCode6.3 Beta系列版本合并, 而XCode6.3共计发布了4次Beta版本，<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队</a>通过Release Note总结的详细更改说明请参看:<a href="https://docs.baihui.com/sheet/published.do?rid=mxpis6d36a8b7bc254c36ae2a808c64c2361e" target="_blank" rel="external">Swift语法更新记录表格</a></em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2015-4-8</td><br>    <td><ul class="list-bullet"><br>            <li><br>                Swift现在自身提供了一个<code>Set</code>集合类型，更多信息请看<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-ID484" target="_blank" rel="external">集合</a><br><br>            </li><br>            <li><br>                <code>@autoclosure</code>现在是一个参数声明的属性，而不是参数类型的属性。这里还有一个新的参数声明属性<code>@noescape</code>。更多信息，请看<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Attributes.html#//apple_ref/doc/uid/TP40014097-CH35-ID348" target="_blank" rel="external">属性声明</a><br>            </li><br>            <li><br>                对于类型属性和方法现在可以使用<code>static</code>关键字作为声明描述符，更多信息，请看<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/doc/uid/TP40014097-CH34-ID483" target="_blank" rel="external">类型变量属性</a><br>            </li><br>            <li><br>                Swift现在包含一个<code>as?</code>和<code>as!</code>的向下可失败类型转换运算符。更多信息，请看<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-ID283" target="_blank" rel="external">协议遵循性检查</a><br>            </li><br>            <li><br>                增加了一个新的指导章节，它是关于<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/StringsAndCharacters.html#//apple_ref/doc/uid/TP40014097-CH7-ID495" target="_blank" rel="external">字符串索引</a>的<br>            </li><br>            <li><br>                从<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AdvancedOperators.html#//apple_ref/doc/uid/TP40014097-CH27-ID37" target="_blank" rel="external">溢出运算符</a>中移除了溢出除运算符和求余溢出运算符<br>            </li><br>            <li><br>                更新了常量和常量属性在声明和构造时的规则，更多信息，请看<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/doc/uid/TP40014097-CH34-ID355" target="_blank" rel="external">常量声明</a><br>            </li><br>            <li><br>                更新了字符串字面量中Unicode标量集的定义，请看<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/StringsAndCharacters.html#//apple_ref/doc/uid/TP40014097-CH7-ID295" target="_blank" rel="external">字符串字面量中的特殊字符</a><br>            </li><br>            <li><br>                更新了<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/BasicOperators.html#//apple_ref/doc/uid/TP40014097-CH6-ID73" target="_blank" rel="external">区间运算符</a>章节来提示当半开区间运算符含有相同的起止索引时，其区间为空。<br>            </li><br>            <li><br>                更新了<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID104" target="_blank" rel="external">闭包引用类型</a>章节来澄清对于变量的捕获规则<br>            </li><br>            <li><br>                更新了<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AdvancedOperators.html#//apple_ref/doc/uid/TP40014097-CH27-ID38" target="_blank" rel="external">值溢出</a>章节来澄清有符号整数和无符号整数的溢出行为<br>            </li><br>            <li><br>                更新了<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/doc/uid/TP40014097-CH34-ID369" target="_blank" rel="external">协议声明</a>章节来澄清协议声明时的作用域和成员<br>            </li><br>            <li><br>                更新了<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html#//apple_ref/doc/uid/TP40014097-CH20-ID58" target="_blank" rel="external">捕获列表</a>章节来澄清对于闭包捕获列表中的弱引用和无主引用的使用语法。<br>            </li><br>            <li><br>                更新了<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/doc/uid/TP40014097-CH30-ID418" target="_blank" rel="external">运算符</a>章节来明确指明一些例子来说明自定义运算符所支持的特性，如数学运算符，各种符号，Unicode符号块等<br>            </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_2"></a></p>
-<h3 id="XCode6-2_u6B63_u5F0F_u7248_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-2_u6B63_u5F0F_u7248_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.2正式版中Swift语法更新"></a>XCode6.2正式版中Swift语法更新</h3><p><strong><em>注意：苹果此时发布了统一的版本XCode6.2，其中将以前的XCode6.2 Beta系列版本合并</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2015-02-09</td><br>    <td><ul class="list-bullet"><br>        <li><br>            在函数作用域中的常量声明时可以不被初始化，它必须在第一次使用前被赋值。更多的信息，请看<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/doc/uid/TP40014097-CH34-ID355" target="_blank" rel="external">常量声明</a><br>        </li><br>        <li><br>            在构造器中，常量属性有且仅能被赋值一次。更多信息，请看<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html#//apple_ref/doc/uid/TP40014097-CH18-ID212" target="_blank" rel="external">在构造过程中给常量属性赋值</a><br>        </li><br>        <li><br>            多个可选绑定现在可以在<code>if</code>语句后面以逗号分隔的赋值列表的方式出现，更多信息，请看<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html#//apple_ref/doc/uid/TP40014097-CH5-ID333" target="_blank" rel="external">可选绑定</a><br>        </li><br>        <li><br>            一个<a link="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Expressions.html#//apple_ref/doc/uid/TP40014097-CH32-ID405">可选链表达式</a>必须出现在后缀表达式中<br>        </li><br>        <li><br>            协议类型转换不再局限于<code>@obj</code>修饰的协议了<br>        </li><br>        <li><br>            在运行时可能会失败的类型转换可以使用<code>as?</code>和<code>as!</code>运算符，而确保不会失败的类型转换现在使用<code>as</code>运算符。更多信息，请看<a link="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Expressions.html#//apple_ref/doc/uid/TP40014097-CH32-ID388">类型转换运算符</a><br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_2_Beta3"></a></p>
-<h3 id="XCode6-2_Beta3_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-2_Beta3_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.2 Beta3中Swift语法更新"></a>XCode6.2 Beta3中Swift语法更新</h3><p><strong><em>注意：苹果在这个版本发布后没有及时的更新Swift Programming Language文档,以下是<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队</a>通过XCode6.2 Beta3 Release Note总结的更改说明：</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-12-19</td><br>    <td><br>        <ul class="list-bullet"><br>            <li><br>                在对Watch App做消息通知模拟调试时，第一个payload.apns文件将会被默认选择<br>            </li><br>            <li><br>                在为Watch App使用asset catalog时，38mm和42mm尺寸的图片就会被使用<br>            </li><br>            <li><br>                在做Watch App开发时,<code>@IBAction</code>属性支持<code>WKInterfaceSwitch</code>和<code>WKInterfaceSlider</code> Swift类型了<br>            </li><br>            <li><br>                现在可以通过Device窗口安装，删除和访问App容器中的数据了。<br>            </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_2_Beta2"></a></p>
-<h3 id="XCode6-2_Beta2_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-2_Beta2_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.2 Beta2中Swift语法更新"></a>XCode6.2 Beta2中Swift语法更新</h3><p><strong><em>注意：苹果在这个版本发布后没有及时的更新Swift Programming Language文档,以下是<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队</a>通过XCode6.2 Beta2 Release Note总结的更改说明：</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-12-10</td><br>    <td><ul class="list-bullet"><br>        <li><br>            现在在Interface Builder中可以针对特定的Device设备自定义Watch应用的Layout布局了<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_2_Beta1"></a></p>
-<h3 id="XCode6-2_Beta1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-2_Beta1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.2 Beta1中Swift语法更新"></a>XCode6.2 Beta1中Swift语法更新</h3><p><strong><em>注意：苹果在这个版本发布后没有及时的更新Swift Programming Language文档,以下是<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队</a>通过XCode6.2 Beta1 Release Note总结的更改说明：</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-11-28</td><br>    <td><ul class="list-bullet"><br>        <li><br>            XCode6.2包含了iOS8.2 SDK，该SDK中包含WatchKit用来开发Apple Watch应用。<br>        </li><br>        <li><br>            在工具集中增加了对WatchKit的支持：<br>            1）UI设计工具增加了Apple Watch应用的界面组件，通知和小部件。<br>            2）增加了调试和性能统计功能<br>            3）增加Apple Watch应用的模拟器帮助调试应用功能<br>        </li><br>        <li><br>            为了使Apple Watch应用能够正常工作，一些具体的参数必须设置：<br>            1）WatchKit中扩展配置文件Info.plist中的<code>NSExtensionAttributes</code>配置项WKAppBundleIdentifier必须和WatchKit App中的通用配置文件中的属性<code>CFBundleIdentifier</code>项目保持一致。2）WatchKit中的<code>CFBundleIdentifier</code>配置项必须和<code>WKCompanionAppBundleIdentifier</code>中的配置项保持一致<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_1_1"></a></p>
-<h3 id="XCode6-1-1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-1-1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.1.1中Swift语法更新"></a>XCode6.1.1中Swift语法更新</h3><p><strong><em>注意：苹果在这个版本发布后没有及时的更新Swift Programming Language文档,以下是<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队</a>通过XCode6.1.1 Release Note总结的更改说明：</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-12-2</td><br>    <td><ul class="list-bullet"><br>        <li><br>            在SourceKit中一些导致Crash的常见问题被修复，比如名字冲突和遗留废弃数据的问题等。<br>        </li><br>        <li><br>            把纯正的Swift类对象实例赋值给AnyObject量不会再Crash了。<br>        </li><br>        <li><br>            在泛型使用场景下，遵循了协议类要求的构造器方法或者类型方法可以直接调用继承类中的方法了。<br>        </li><br>        <li><br>            修正了InterfaceBuild中如果图片名字含有“/”时，会在OSX10.10上Crash或者无法打开的问题<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_1"></a></p>
-<h3 id="XCode6-1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.1中Swift语法更新"></a>XCode6.1中Swift语法更新</h3><p><strong><em>注意：苹果此时发布了统一的版本XCode6.1，其中将以前的XCode6.0.1和XCode6.1 Beta系列版本合并</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-10-16</td><br>    <td><ul class="list-bullet"><br>        <li><br>            增加了一个完整的关于<a href="http://developer.apple.com/library/etc/redirect/xcode/devtools/419f35/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html" target="_blank" rel="external">失败构造器(Failable Initializers)</a>的指南文档<br>        </li><br>        <li><br>            增加了一个关于协议的<a href="http://developer.apple.com/library/etc/redirect/xcode/devtools/419f35/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html" target="_blank" rel="external">失败构造器需求(Failable Initializer Requirements)</a>的描述<br>        </li><br>        <li><br>            <code>Any</code>类型的常量或变量现在可以包含一个函数实例了。同时更新了<a href="http://developer.apple.com/library/etc/redirect/xcode/devtools/419f35/documentation/Swift/Conceptual/Swift_Programming_Language/TypeCasting.html" target="_blank" rel="external"><code>Any</code></a>章节的案例用来演示如何在swith语句中检查和转换一个函数类型。<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_1_Beta2"></a></p>
-<h3 id="XCode6-1_Beta2_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-1_Beta2_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.1 Beta2中Swift语法更新"></a>XCode6.1 Beta2中Swift语法更新</h3><p><strong><em>注意：苹果此时发布了XCode6.0.1版本(也称为XCode6正式版)，此版本用于iOS的开发，同时也发布子版本XCode6.1 Beta2，此版本为OSX开发做准备，以下所述的更改仅对XCode6.1 Beta2有效</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-09-15</td><br>    <td><ul class="list-bullet"><br>        <li><br>            带有原始值的枚举类型增加了一个<code>rawValue</code>属性替代<code>toRaw()</code>方法，同时使用了一个以<code>rawValue</code>为参数的失败构造器来替代<code>fromRaw()</code>方法。更多的信息，请看<a href="http://developer.apple.com/library/etc/redirect/xcode/devtools/419f35/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html" target="_blank" rel="external">原始值(Raw Values)</a>和<a href="http://developer.apple.com/library/etc/redirect/xcode/devtools/419f35/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html" target="_blank" rel="external">带原始值的枚举类型(Enumerations with Cases of a Raw-Value Type)</a>部分<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_1_Beta1"></a></p>
-<h3 id="XCode6-1_Beta1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6-1_Beta1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6.1 Beta1中Swift语法更新"></a>XCode6.1 Beta1中Swift语法更新</h3><p><strong><em>注意：苹果此时发布了XCode6 GM版本，此版本用于iOS的开发，同时也发布子版本XCode6.1 Beta1，此版本为OSX开发做准备，以下所述的更改仅对XCode6.1 Beta1有效</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-09-09</td><br>    <td><ul class="list-bullet"><br>        <li><br>            增加了一个新的关于<a href="http://developer.apple.com/library/etc/redirect/xcode/devtools/419f35/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html" target="_blank" rel="external">失败构造器(Failable Initializers)</a>的参考章节,失败构造器可以触发失败的构造过程<br>        </li><br>        <li><br>            自定义运算符现在可以包含<code>?</code>字符，更新的<a href="http://developer.apple.com/library/etc/redirect/xcode/devtools/419f35/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html" target="_blank" rel="external">运算符(Operators)</a>章节描述了改进后的规则，并且从<a href="http://developer.apple.com/library/etc/redirect/xcode/devtools/419f35/documentation/Swift/Conceptual/Swift_Programming_Language/AdvancedOperators.html" target="_blank" rel="external">自定义运算符(Custom Operators)</a>章节删除了重复的运算符有效字符集合<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_beta7"></a></p>
-<h3 id="XCode6_Beta7_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6_Beta7_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6 Beta7中Swift语法更新"></a>XCode6 Beta7中Swift语法更新</h3><p><strong><em>注意：苹果在这个版本发布后没有及时的更新Swift Programming Language文档,以下是<a href="http://weibo.com/u/5241713117" target="_blank" rel="external">老码团队</a>通过XCode Beta7 Release Note总结的更改说明：</em></strong></p>
-<table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-09-03</td><br>    <td><ul class="list-bullet"><br>        <li><br>            实现了内部库的修改和适配，主要包括如下：<br>            1）大量内部类或者函数遵循Optional类型和协议<br>            2）移除大部分函数返回类型隐式解封可选类型的使用<br><br>        </li><br>        <li><br>            对于泛型的类库函数或接口统一从<code>T!</code>更换为<code>T？</code>或<code>T</code>，这样使得语法更加严谨，明确了可能返回为空和不为空的情况<br>        </li><br>        <li><br>            字符类型不能使用+运算法链接，可以以<code>String(C1)+String(2)</code> 的方式实现字符间链接<br>        </li><br>        <li><br>            重写了<code>Sort</code>函数，解决了栈溢出的问题<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_beta6"></a></p>
-<h3 id="XCode6_Beta6_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6_Beta6_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6 Beta6中Swift语法更新"></a>XCode6 Beta6中Swift语法更新</h3><table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-08-18</td><br>    <td><ul class="list-bullet"><br>        <li><br>            在章节协议中，增加新的小节：<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-XID_397" target="_blank" rel="external">对构造器的规定（Initializer Requirements）</a><br>        </li><br>        <li><br>            在章节协议中，增加新的小节：<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-XID_409" target="_blank" rel="external">类专属协议（class-only protocols）</a><br>        </li><br>        <li><br>            <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html#//apple_ref/doc/uid/TP40014097-CH5-XID_494" target="_blank" rel="external">断言(assertions)</a>现在可以使用字符串内插语法，并删除了文档中有冲突的注释<br>        </li><br>        <li><br>            更新了<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/StringsAndCharacters.html#//apple_ref/doc/uid/TP40014097-CH7-XID_428" target="_blank" rel="external">连接字符串和字符（Concatenating Strings and Characters）</a>小节来说明一个事实，那就是字符串和字符不能再用<code>+</code>号运算符或者复合加法运算符<code>+=</code>相互连接，这两种运算符现在只能用于字符串之间相连。请使用<code>String</code>类型的<code>append</code>方法在一个字符串的尾部增加单个字符<br>        </li><br>        <li><br>            在<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Attributes.html#//apple_ref/doc/uid/TP40014097-CH35-XID_516" target="_blank" rel="external">声明特性（Declaration Attributes）</a>章节增加了关于<code>availability</code>特性的一些信息<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_beta5"></a></p>
-<h3 id="XCode6_Beta5_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6_Beta5_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6 Beta5中Swift语法更新"></a>XCode6 Beta5中Swift语法更新</h3><table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-08-04</td><br>    <td><ul class="list-bullet"><br>        <li><br>            <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html#//apple_ref/doc/uid/TP40014097-CH5-XID_478" target="_blank" rel="external">可选类型（Optionals）</a> 若有值时，不再隐式的转换为 <code>true</code>，同样，若无值时，也不再隐式的转换为 <code>false</code>, 这是为了避免在判别 optional <code>Bool</code> 的值时产生困惑。 替代的方案是，用<code>==</code> 或 <code>!=</code> 运算符显式地去判断Optinal是否是 <code>nil</code>，以确认其是否包含值。<br>        </li><br>        <li><br>            Swift新增了一个 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/BasicOperators.html#//apple_ref/doc/uid/TP40014097-CH6-XID_124" data-id="//apple_ref/doc/uid/TP40014097-CH6-XID_124" target="_blank" rel="external">Nil合并运算符（Nil Coalescing Operator）</a> (<code>a ?? b</code>), 该表达式中，如果Optional <code>a</code>的值存在，则取得它并返回，若Optional <code>a</code>为<code>nil</code>，则返回默认值 <code>b</code><br>        </li><br>        <li><br>            更新和扩展 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/StringsAndCharacters.html#//apple_ref/doc/uid/TP40014097-CH7-XID_434" target="_blank" rel="external">字符串的比较（Comparing Strings）</a> 章节，用以反映和展示’字符串和字符的比较’，以及’前缀（prefix）/后缀(postfix)比较’都开始基于扩展字符集(extended grapheme clusters)规范的等价比较.<br>        </li><br>        <li><br>            现在，你可以通过 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/OptionalChaining.html#//apple_ref/doc/uid/TP40014097-CH21-XID_356" target="_blank" rel="external">可选链（Optional Chaining）</a>来：给属性设值，将其赋给一个下标脚注（subscript）; 或调用一个变异（mutating）方法或运算符。对此，章节——<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/OptionalChaining.html#//apple_ref/doc/uid/TP40014097-CH21-XID_364" target="_blank" rel="external">通过可选链访问属性（Accessing Properties Through Optional Chaining）</a>的内容已经被相应的更新。而章节——<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/OptionalChaining.html#//apple_ref/doc/uid/TP40014097-CH21-XID_361" target="_blank" rel="external">通过可选链调用方法（Calling Methods Through Optional Chaining</a>中，关于检查方法调用是否成功的例子，已被扩展为展示如何检查一个属性是否被设值成功。<br><br>        </li><br>        <li><br>            在章节可选链中，增加一个新的小节 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/OptionalChaining.html#//apple_ref/doc/uid/TP40014097-CH21-XID_364" target="_blank" rel="external">访问可选类型的下标脚注（Accessing Subscripts of Optional Type）</a><br>        </li><br>        <li><br>            更新章节 <a href="../chapter2/04_Collection_Types.md#访问和修改数组" data-id="访问和修改数组">访问和修改数组(Accessing and Modifying an Array)</a> 以标示：从该版本起，不能再通过<code>+=</code> 运算符给一个数组添加一个新的项。. 对应的替代方案是, 使<code>append</code> 方法, 或者通过<code>+=</code>运算符来添加一个<b>只有一个项的数组</b>（single-item Array）.</li><br>        <li><br>            添加了一个提示：在 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/BasicOperators.html#//apple_ref/doc/uid/TP40014097-CH6-XID_126" target="_blank" rel="external">范围运算符（Range Operators）</a>中，比如， <code>a…b</code> 和 <code>a..&lt;b</code> ，起始值<code>a</code>不能大于结束值<code>b</code>.<br>        </li><br>        <li><br>            重写了<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Inheritance.html#//apple_ref/doc/uid/TP40014097-CH17-XID_293" target="_blank" rel="external">继承（Inheritance）</a> 这一章：删除了本章中关于构造器重写的介绍性报道；转而将更多的注意力放到新增的部分——子类的新功能，以及如何通过重写（overrides）修改已有的功能。另外，小节 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Inheritance.html#//apple_ref/doc/uid/TP40014097-CH17-XID_301" target="_blank" rel="external">重写属性的Getters和Setters（Overriding Property Getters and Setters）</a> 中的例子已经被替换为展示如何重写一个 <code>description</code> 属性. (而关于如何在子类的构造器中修改继承属性的默认值的例子，已经被移到 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Inheritance.html#//apple_ref/doc/uid/TP40014097-CH17-XID_293" target="_blank" rel="external">构造过程（Initialization）</a> 这一章.)<br>        </li><br>        <li><br>            更新了 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html#//apple_ref/doc/uid/TP40014097-CH18-XID_331" target="_blank" rel="external">构造器的继承与重写（Initializer Inheritance and Overriding）</a> 小节以标示： 重写一个特定的构造器必须使用 <code>override</code> 修饰符.<br>        </li><br>        <li><br>            更新 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html#//apple_ref/doc/uid/TP40014097-CH18-XID_339" target="_blank" rel="external"> Required构造器（Required Initializers）</a> 小节以标示：<code>required</code> 修饰符现在需要出现在所有子类的required构造器的声明中, 而required构造器的实现，现在可以仅从父类自动继承。<br>        </li><br>        <li><br>            中置（Infix）的 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AdvancedOperators.html#//apple_ref/doc/uid/TP40014097-CH27-XID_80" target="_blank" rel="external">运算符函数（Operator Functions）</a> 不再需要<code>@infix</code> 属性.<br>        </li><br>        <li><br>            <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/RevisionHistory.html#//apple_ref/doc/uid/TP40014097-CH40-XID_1631" target="_blank" rel="external">前置和后置运算符(Prefix and Postfix Operators)</a>的<code>@prefix</code> 和 <code>@postfix</code> 属性，已变更为 <code>prefix</code> 和 <code>postfix</code> 声明修饰符（declaration modifiers）.<br>        </li><br>            <li><br>            增加一条注解：当Prefix和postfix运算符被作用于同一个操作数时，关于<a href="AdvancedOperators.html#//apple_ref/doc/uid/TP40014097-CH27-XID_81" data-id="//apple_ref/doc/uid/TP40014097-CH27-XID_81">前置和后置运算符(Prefix and Postfix Operators)</a>的顺序(postfix运算符会先被执行)<br>        </li><br>        <li><br>            在运算符函数（Operator functions）中， <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AdvancedOperators.html#//apple_ref/doc/uid/TP40014097-CH27-XID_82" data-id="//apple_ref/doc/uid/TP40014097-CH27-XID_82" target="_blank" rel="external">组合赋值运算符（Compound Assignment Operators）</a> 不再使用 <code>@assignment</code> 属性来定义函数.<br>        </li><br>        <li><br>            在这个版本中，在定义<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AdvancedOperators.html#//apple_ref/doc/uid/TP40014097-CH27-XID_85" target="_blank" rel="external">自定义操作符（Custom Operators）</a> 时，<b>修饰符（Modifiers）的出现顺序发生变化</b>。比如， 现在，你该编写 <code>prefix operator</code>， 而不是 <code>operator prefix</code>.<br>        </li><br>        <li><br>            增加信息：关于<code>dynamic</code> 声明修饰符（declaration modifier），于章节 <a href="Declarations.html#//apple_ref/doc/uid/TP40014097-CH34-XID_705" data-id="//apple_ref/doc/uid/TP40014097-CH34-XID_705">声明修饰符（Declaration Modifiers）</a>.<br>        </li><br>        <li><br>            增加信息：<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/doc/uid/TP40014097-CH30-XID_886" target="_blank" rel="external">字面量Literals</a> 的类型推导（type inference）<br>        </li><br>        <li><br>            为章节<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/doc/uid/TP40014097-CH34-XID_597" target="_blank" rel="external">Curried Functions</a>添加了更多的信息.<br>        </li><br>        </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_beta4"></a></p>
-<h4 id="XCode6_Beta4_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6_Beta4_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6 Beta4中Swift语法更新"></a>XCode6 Beta4中Swift语法更新</h4><table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-07-21</td><br>    <td><ul class="list-bullet"><br>        <li><br>            加入新的章节  <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AccessControl.html#//apple_ref/doc/uid/TP40014097-CH41-XID_29" target="_blank" rel="external">权限控制（Access Control）</a>.<br>        </li><br>        <li><br>            更新了章节 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/StringsAndCharacters.html#//apple_ref/doc/uid/TP40014097-CH7-XID_413" target="_blank" rel="external">字符串和字符（Strings and Characters）</a> 用以表明，在Swift中，<code>Character</code> 类型现在代表的是扩展字符集(extended grapheme cluster)中的一个Unicode，为此，新增了小节 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/StringsAndCharacters.html#//apple_ref/doc/uid/TP40014097-CH7-XID_431" target="_blank" rel="external">Extended Grapheme Clusters</a> 。同时，为小节 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/StringsAndCharacters.html#//apple_ref/doc/uid/TP40014097-CH7-XID_428" target="_blank" rel="external">Unicode标量（Unicode Scalars）</a> 和 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/StringsAndCharacters.html#//apple_ref/doc/uid/TP40014097-CH7-XID_434" target="_blank" rel="external">字符串比较（Comparing Strings）</a>增加了更多内容.<br>        </li><br>        <li><br>            更新章节<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/doc/uid/TP40014097-CH30-XID_856" target="_blank" rel="external">字符串字面量（String Literals）</a>：在一个字符串中，Unicode标量（Unicode scalars） 以 <code>\u{n}</code>的形式来表示, <code>n</code> 是一个最大可以有8位的16进制数（hexadecimal digits）<br>        </li><br>        <li><br>            <code>NSString</code> <code>length</code> 属性已被映射到Swift的内建 <code>String</code>类型。（注意，这两属性的类型是<code>utf16Count</code>,而非 <code>utf16count</code>）.<br>        </li><br>        <li><br>            Swift的内建 <code>String</code> 类型不再拥有 <code>uppercaseString</code> 和 <code>lowercaseString</code> 属性.其对应部分在章节 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/StringsAndCharacters.html#//apple_ref/doc/uid/TP40014097-CH7-XID_413" target="_blank" rel="external">字符串和字符（Strings and Characters）</a>已经被删除, 并且各种对应的代码用例也已被更新.<br>        </li><br>        <li><br>            加入新的章节  <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html#//apple_ref/doc/uid/TP40014097-CH18-XID_315" target="_blank" rel="external">没有外部名的构造器参数（Initializer Parameters Without External Names）</a>.<br>        </li><br>        <li><br>            加入新的章节  <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html#//apple_ref/doc/uid/TP40014097-CH18-XID_339" target="_blank" rel="external"> Required构造器（Required Initializers）</a>.<br>        </li><br>        <li><br>            加入新的章节 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html#//apple_ref/doc/uid/TP40014097-CH10-XID_252" target="_blank" rel="external">可选元祖（函数）返回类型 （Optional Tuple Return Types）</a>.<br>        </li><br>        <li><br>            更新章节 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html#//apple_ref/doc/uid/TP40014097-CH5-XID_453" target="_blank" rel="external">类型标注（Type Annotations）</a> ：多个相关变量可以用“类型标注”（type annotaion）在同一行中声明为同一类型。<br>        </li><br>        <li><br>             <code>@optional</code>, <code>@lazy</code>, <code>@final</code>,  <code>@required</code> 等关键字被更新为 <code>optional</code>, <code>lazy</code>, <code>final</code>, <code>required</code> <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/doc/uid/TP40014097-CH34-XID_705" target="_blank" rel="external">参见声明修饰符（Declaration Modifiers）</a>.<br>        </li><br>        <li><br>            更新整本书 —— 引用 <code>..&lt;</code> 作为<a href="BasicOperators.html#//apple_ref/doc/uid/TP40014097-CH6-XID_128" data-id="//apple_ref/doc/uid/TP40014097-CH6-XID_128">区间运算符（Half-Open Range Operator）</a> (取代原先的<code>..</code> ).<br>        </li><br>        <li><br>            更新了小节 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-XID_185" target="_blank" rel="external">读取和修改字典（Accessing and Modifying a Dictionary）</a>：  <code>Dictionary</code> 现在早呢更加了一个 Boolean型的属性： <code>isEmpty</code><br>        </li><br>        <li><br>            解释了哪些字符（集）可被用来定义<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AdvancedOperators.html#//apple_ref/doc/uid/TP40014097-CH27-XID_85" target="_blank" rel="external">自定义操作符 （Custom Operators）</a><br>        </li><br>        <li><br>            <code>nil</code> 和布尔运算中的 <code>true</code> 和 <code>false</code> 现在被定义为字面量<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/doc/uid/TP40014097-CH30-XID_886" target="_blank" rel="external">Literals</a>.<br>        </li><br>    </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_beta3"></a></p>
-<h4 id="XCode6_Beta3_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6_Beta3_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6 Beta3中Swift语法更新"></a>XCode6 Beta3中Swift语法更新</h4><table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-07-7</td><br>    <td><ul class="list-bullet"><br>        <li><br>            Swift 中的数组 （<code>Array</code>） 类型从现在起具备了完整的值语义。具体信息被更新到 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-XID_170" target="_blank" rel="external">集合的可变性（Mutability of Collections）</a> 和 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-XID_172" target="_blank" rel="external">数组（Arrays）</a> 两小节，以反映这个新的变化. 此外，还解释了如何 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_150" target="_blank" rel="external">给Strings, Arrays和Dictionaries进行赋值和拷贝 （Assignment and Copy Behavior for Strings, Arrays, and Dictionaries）</a>.<br>        </li><br>        <li><br>            <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-XID_173" target="_blank" rel="external">数组类型速记语法（Array Type Shorthand Syntax）</a> 从 <code>SomeType[]</code>.更新为<code>[SomeType]</code><br>        </li><br>        <li><br>            加入新的小节：<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-XID_182" target="_blank" rel="external">字典类型的速记语法（Dictionary Type Shorthand Syntax)</a>.： <code>[KeyType: ValueType]</code>.<br>        </li><br>        <li><br>            加入新的小节：<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-XID_189" target="_blank" rel="external">字典键类型的哈希值（Hash Values for Dictionary Key Types)</a>.<br>        </li><br>        <li><br>            例子 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-XID_154" target="_blank" rel="external">闭包表达式 (Closure Expressions)</a> 中使用新的全局函数 <code>sorted</code> 取代原先的全局函数 <code>sort</code> 去展示如何返回一个全新的数组.<br>        </li><br>        <li><br>            更新关于 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html#//apple_ref/doc/uid/TP40014097-CH18-XID_320" target="_blank" rel="external">结构体逐一成员构造器 （Memberwise Initializers for Structure Types）</a> 的描述：即使结构体的成员<b>没有默认值</b>，逐一成员构造器也可以自动获得。<br>        </li><br>        <li><br>            <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/BasicOperators.html#//apple_ref/doc/uid/TP40014097-CH6-XID_128" target="_blank" rel="external">区间运算符（Half-Open Range Operator）</a>由<code>..</code>更新到<code>..&lt;</code><br>        </li><br>        <li><br>            添加一个例子 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html#//apple_ref/doc/uid/TP40014097-CH26-XID_285" target="_blank" rel="external">扩展一个泛型（Extending a Generic Type）</a><br>        </li><br>    </ul><br>    </td><br>  </tr><br></tbody><br></table>
-
-<p><a name="xcode6_beta2"></a></p>
-<h4 id="XCode6_Beta2_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6_Beta2_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6 Beta2中Swift语法更新"></a>XCode6 Beta2中Swift语法更新</h4><table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-07-7</td><br>    <td><ul class="list-bullet"><br>        <li><br>            发布新的文档用以详述Swift - 苹果公司针对iOS和OS X应用的全新开发语言<br>        </li><br>        </ul><br>    </td><br>    </tr><br></tbody><br></table>
-
-<p><a name="xcode6_beta1"></a></p>
-<h4 id="XCode6_Beta1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0"><a href="#XCode6_Beta1_u4E2DSwift_u8BED_u6CD5_u66F4_u65B0" class="headerlink" title="XCode6 Beta1中Swift语法更新"></a>XCode6 Beta1中Swift语法更新</h4><table class="graybox" border="0" cellspacing="0" cellpadding="5"><br><thead><br>    <tr><br>        <th scope="col" width="100">发布日期</th><br>        <th scope="col">语法变更记录</th><br>    </tr><br></thead><br><tbody><br>    <tr><br>    <td scope="row">2014-06-3</td><br>    <td><ul class="list-bullet"><br>        <li><br>            苹果全球开发者大会WWDC2014召开，发布了苹果最新的开发语言Swift，并释放出XCode6 Beta1版本<br>        </li><br>        </ul><br>    </td><br>    </tr><br></tbody><br></table>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
   </nav>
 
  </div>
@@ -2064,21 +2078,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">116</span>
+              <span class="site-state-item-count">159</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

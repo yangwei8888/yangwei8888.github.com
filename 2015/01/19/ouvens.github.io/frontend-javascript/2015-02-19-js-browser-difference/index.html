@@ -1,0 +1,725 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="js兼容性," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="javascript的浏览器差异性特征12var ie6=!-[1,]&amp;amp;&amp;amp;!window.XMLHttpRequest//检查IE6最简洁代码
+兼容性问题是由于多个浏览器同时存在而导致的。这些浏览器在处理一个相同的页面时，表现有时会有差异。这种差异可能很小，甚至不会被注意到；也可能很大，甚至造成在某个浏览器下无法正常浏览。我们把引起这些差异的问题统称为“浏览器兼容性问题”。下面让我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript基础--js不同浏览器的差异性">
+<meta property="og:url" content="http://yoursite.com/2015/01/19/ouvens.github.io/frontend-javascript/2015-02-19-js-browser-difference/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="javascript的浏览器差异性特征12var ie6=!-[1,]&amp;amp;&amp;amp;!window.XMLHttpRequest//检查IE6最简洁代码
+兼容性问题是由于多个浏览器同时存在而导致的。这些浏览器在处理一个相同的页面时，表现有时会有差异。这种差异可能很小，甚至不会被注意到；也可能很大，甚至造成在某个浏览器下无法正常浏览。我们把引起这些差异的问题统称为“浏览器兼容性问题”。下面让我">
+<meta property="og:updated_time" content="2016-01-05T04:23:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript基础--js不同浏览器的差异性">
+<meta name="twitter:description" content="javascript的浏览器差异性特征12var ie6=!-[1,]&amp;amp;&amp;amp;!window.XMLHttpRequest//检查IE6最简洁代码
+兼容性问题是由于多个浏览器同时存在而导致的。这些浏览器在处理一个相同的页面时，表现有时会有差异。这种差异可能很小，甚至不会被注意到；也可能很大，甚至造成在某个浏览器下无法正常浏览。我们把引起这些差异的问题统称为“浏览器兼容性问题”。下面让我">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> javascript基础--js不同浏览器的差异性 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?953e46480b0a75d01aaf6d872cc77099";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              javascript基础--js不同浏览器的差异性
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-01-19T00:00:00+08:00" content="2015-01-19">
+            2015-01-19
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-javascript</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/01/19/ouvens.github.io/frontend-javascript/2015-02-19-js-browser-difference/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/01/19/ouvens.github.io/frontend-javascript/2015-02-19-js-browser-difference/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h3 id="javascript_u7684_u6D4F_u89C8_u5668_u5DEE_u5F02_u6027_u7279_u5F81"><a href="#javascript_u7684_u6D4F_u89C8_u5668_u5DEE_u5F02_u6027_u7279_u5F81" class="headerlink" title="javascript的浏览器差异性特征"></a>javascript的浏览器差异性特征</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ie6=!-[<span class="number">1</span>,]&amp;&amp;!<span class="built_in">window</span>.XMLHttpRequest</span><br><span class="line"><span class="comment">//检查IE6最简洁代码</span></span><br></pre></td></tr></table></figure>
+<p>兼容性问题是由于多个浏览器同时存在而导致的。这些浏览器在处理一个相同的页面时，表现有时会有差异。这种差异可能很小，甚至不会被注意到；也可能很大，甚至造成在某个浏览器下无法正常浏览。我们把引起这些差异的问题统称为“浏览器兼容性问题”。下面让我们一起来看Javascript在解决兼容性问题上的方法。</p>
+<ol>
+<li><p>document.form.item 问题<br>问题：<br>代码中存在 document.formName.item(“itemName”) 这样的语句，不能在FF下运行<br>解决方法：<br>改用 document.formName.elements[“elementName”]</p>
+</li>
+<li><p>集合类对象问<br>问题：<br>代码中许多集合类对象取用时使用()，IE能接受，FF不能<br>解决方法：<br>改用 [] 作为下标运算，例： </p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementsByName(<span class="string">"inputName"</span>)(<span class="number">1</span>)  改为 <span class="built_in">document</span>.getElementsByName(<span class="string">"inputName"</span>)[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>window.event<br>问题：<br>使用 window.event 无法在FF上运行<br>解决方法：<br>FF的 event 只能在事件发生的现场使用，此问题暂无法解决。可以把 event 传到函数里变通解决：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onMouseMove = <span class="string">"functionName(event)"</span> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">functionName</span> (<span class="params">e</span>) </span>&#123;  </span><br><span class="line">e = e || <span class="built_in">window</span>.event;  </span><br><span class="line">......  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>HTML对象的 id 作为对象名的问题<br>问题：<br>在IE中，HTML对象的 ID 可以作为 document 的下属对象变量名直接使用，在FF中不能<br>解决方法：<br>使用对象变量时全部用标准的 getElementById(“idName”)</p>
+</li>
+<li><p>用 idName 字符串取得对象的问题<br>问题：<br>在IE中，利用 eval(“idName”) 可以取得 id 为 idName 的HTML对象，在FF中不能<br>解决方法：<br>用 getElementById(“idName”) 代替 eval(“idName”)</p>
+</li>
+<li><p>变量名与某HTML对象 id 相同的问题<br>问题：<br>在FF中，因为对象 id 不作为HTML对象的名称，所以可以使用与HTML对象 id 相同的变量名，IE中不能<br>解决方法：<br>在声明变量时，一律加上 var ，以避免歧义，这样在IE中亦可正常运行<br>最好不要取与HTML对象 id 相同的变量名，以减少错误</p>
+</li>
+<li><p>event.x 与 event.y 问题<br>问题：<br>在IE中，event 对象有x,y属性，FF中没有<br>解决方法：<br>在FF中，与 event.x 等效的是 event.pageX ，但event.pageX IE中没有<br>故采用 event.clientX 代替 event.x ，在IE中也有这个变量<br>event.clientX 与 event.pageX 有微妙的差别，就是滚动条<br>要完全一样，可以这样：<br>mX = event.x ? event.x : event.pageX;<br>然后用 mX 代替 event.x</p>
+</li>
+<li><p>关于frame<br>问题：<br>在IE中可以用 window.testFrame 取得该frame，FF中不行<br>解决方法：</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.top.document.getElementById(<span class="string">"testFrame"</span>).src = <span class="string">'xx.htm'</span> </span><br><span class="line"><span class="built_in">window</span>.top.frameName.location = <span class="string">'xx.htm'</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>取得元素的属性<br>在FF中，自己定义的属性必须 getAttribute() 取得</p>
+</li>
+<li><p>在FF中没有 parentElement，parement.children 而用 parentNode，parentNode.childNodes<br>问题：<br>childNodes 的下标的含义在IE和FF中不同，FF的 childNodes 中会插入空白文本节点<br>解决方法：<br>可以通过 node.getElementsByTagName() 来回避这个问题<br>问题：<br>当html中节点缺失时，IE和FF对 parentNode 的解释不同，例如：</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">input</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">form</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>FF中 input.parentNode 的值为form，而IE中 input.parentNode 的值为空节点<br>问题：<br>FF中节点自己没有 removeNode 方法<br>解决方法：<br>必须使用如下方法 node.parentNode.removeChild(node)</p>
+<ol>
+<li><p>const 问题<br>问题：<br>在IE中不能使用 const 关键字<br>解决方法：<br>以 var 代替</p>
+</li>
+<li><p>body 对象<br>FF的 body 在 body 标签没有被浏览器完全读入之前就存在，而IE则必须在 body 完全被读入之后才存在<br>这会产生在IE下，文档没有载入完时，在body上appendChild会出现空白页面的问题<br>解决方法：<br>一切在body上插入节点的动作，全部在onload后进行</p>
+</li>
+<li><p>url encoding<br>问题：<br>一般FF无法识别js中的&amp;<br>解决方法：<br>在js中如果书写url就直接写&amp;不要写&amp;</p>
+</li>
+<li><p>nodeName 和 tagName 问题<br>问题：<br>在FF中，所有节点均有 nodeName 值，但 textNode 没有 tagName 值，在IE中，nodeName 的使用有问题<br>解决方法：<br>使用 tagName，但应检测其是否为空</p>
+</li>
+<li><p>元素属性<br>IE下 input.type 属性为只读，但是FF下可以修改</p>
+</li>
+<li><p>document.getElementsByName() 和 document.all[name] 的问题<br>问题：<br>在IE中，getElementsByName()、document.all[name] 均不能用来取得 div 元素<br>是否还有其它不能取的元素还不知道（这个问题还有争议，还在研究中）</p>
+</li>
+<li><p>调用子框架或者其它框架中的元素的问题<br>在IE中，可以用如下方法来取得子元素中的值<br>document.getElementById(“frameName”).(document.)elementName<br>window.frames[“frameName”].elementName<br>在FF中则需要改成如下形式来执行，与IE兼容：<br>window.frames[“frameName”].contentWindow.document.elementName<br>window.frames[“frameName”].document.elementName </p>
+</li>
+<li><p>对象宽高赋值问题<br>问题：<br>FireFox中类似 obj.style.height = imgObj.height 的语句无效<br>解决方法：<br>统一使用 obj.style.height = imgObj.height + “px”;</p>
+</li>
+<li><p>innerText的问题<br>问题：<br>innerText 在IE中能正常工作，但是 innerText 在FireFox中却不行<br>解决方法：<br>在非IE浏览器中使用textContent代替innerText</p>
+</li>
+<li><p>event.srcElement和event.toElement问题<br>问题：<br>IE下，even对象有srcElement属性，但是没有target属性；Firefox下，even对象有target属性，但是没有 srcElement属性<br>解决方法：</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> source = e.target || e.srcElement;  </span><br><span class="line"><span class="keyword">var</span> target = e.relatedTarget || e.toElement;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>禁止选取网页内容<br>问题：<br>FF需要用CSS禁止，IE用JS禁止<br>解决方法：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IE: obj.onselectstart = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">FF: -moz-user-select:none;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>捕获事件<br>问题：<br>FF没有setCapture()、releaseCapture()方法<br>解决方法：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">IE:</span><br><span class="line">    obj.setCapture();   </span><br><span class="line">    obj.releaseCapture(); </span><br><span class="line">FF:</span><br><span class="line">    <span class="built_in">window</span>.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);  </span><br><span class="line">    <span class="built_in">window</span>.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);  </span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">window</span>.captureEvents)&#123;  </span><br><span class="line">        o.setCapture();  </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">        <span class="built_in">window</span>.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">window</span>.captureEvents)&#123;  </span><br><span class="line">        o.releaseCapture();  </span><br><span class="line">    &#125;<span class="keyword">else</span>   &#123;  </span><br><span class="line">        <span class="built_in">window</span>.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>本文主要介绍的是IE和FF两个浏览器中的兼容性问题。随着浏览器种类的增多，出现的兼容性问题肯定也越来越多。浏览器兼容性问题的“解决”需要浏览器开发商、W3C、开发者共同的努力才能实现。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js兼容性/" rel="tag">#js兼容性</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/16/ouvens.github.io/Frontend-weboptimize/2015-03-16-front-end-performance-test/" rel="prev">前端性能测试</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/01/18/ouvens.github.io/product-product/2015-01-18-db-design/" rel="next">产品数据库设计</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#javascript_u7684_u6D4F_u89C8_u5668_u5DEE_u5F02_u6027_u7279_u5F81"><span class="nav-number">1.</span> <span class="nav-text">javascript的浏览器差异性特征</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/01/19/ouvens.github.io/frontend-javascript/2015-02-19-js-browser-difference/';
+      var disqus_title = 'javascript基础--js不同浏览器的差异性';
+      var disqus_url = 'http://yoursite.com/2015/01/19/ouvens.github.io/frontend-javascript/2015-02-19-js-browser-difference/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

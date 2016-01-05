@@ -1,0 +1,742 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="nativescript," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="1.环境准备
+安装nodejs
+安装nativescript
+
+1$npm install -g nativescript
+或者下载github上项目代码进行构建(不推荐)
+
+安装java JDKjdk是Java运行开发环境，按android开发必须的开发的环境
+
+123JAVA_HOME   D:/program file/java/jdk_1.7.34/path         D:/prog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nativescript跨终端应用程序开发方案研究">
+<meta property="og:url" content="http://yoursite.com/2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="1.环境准备
+安装nodejs
+安装nativescript
+
+1$npm install -g nativescript
+或者下载github上项目代码进行构建(不推荐)
+
+安装java JDKjdk是Java运行开发环境，按android开发必须的开发的环境
+
+123JAVA_HOME   D:/program file/java/jdk_1.7.34/path         D:/prog">
+<meta property="og:updated_time" content="2016-01-05T04:23:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nativescript跨终端应用程序开发方案研究">
+<meta name="twitter:description" content="1.环境准备
+安装nodejs
+安装nativescript
+
+1$npm install -g nativescript
+或者下载github上项目代码进行构建(不推荐)
+
+安装java JDKjdk是Java运行开发环境，按android开发必须的开发的环境
+
+123JAVA_HOME   D:/program file/java/jdk_1.7.34/path         D:/prog">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> Nativescript跨终端应用程序开发方案研究 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?953e46480b0a75d01aaf6d872cc77099";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Nativescript跨终端应用程序开发方案研究
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-06-18T00:00:00+08:00" content="2015-06-18">
+            2015-06-18
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/frontend-client/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-client</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h3 id="1-_u73AF_u5883_u51C6_u5907"><a href="#1-_u73AF_u5883_u51C6_u5907" class="headerlink" title="1.环境准备"></a>1.环境准备</h3><ul>
+<li>安装nodejs</li>
+<li>安装nativescript</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install -g nativescript</span><br></pre></td></tr></table></figure>
+<p>或者下载github上项目代码进行构建(不推荐)</p>
+<ul>
+<li>安装java JDK<br>jdk是Java运行开发环境，按android开发必须的开发的环境</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME   D:<span class="regexp">/program file/</span>java/jdk_1<span class="number">.7</span><span class="number">.34</span>/</span><br><span class="line">path         D:<span class="regexp">/program file/</span>java/jdk_1<span class="number">.7</span><span class="number">.34</span>/bin</span><br><span class="line">classpath   D:<span class="regexp">/program file/</span>java/jdk_1<span class="number">.7</span><span class="number">.34</span>/lib</span><br></pre></td></tr></table></figure>
+<p>测试方法：java -version</p>
+<ul>
+<li>安装Apache ant<br>Apache Ant,是一个将软件编译、测试、部署等步骤联系在一起加以自动化的一个工具，大多用于Java环境中的软件开发。由Apache软件基金会所提供。这里用到的的是用于android签名证书等打包(android开发过程中ide使用gradle配置打包，早期都是用的ant打包，这里使用的方法比较原始)<br><a href="http://ant.apache.org/bindownload.cgi" target="_blank" rel="external">http://ant.apache.org/bindownload.cgi</a> 上下载最新版apache-bin(可选择安装型或压缩包型)，然后添加系统环境变量</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ANT_HOME    C:/ apache-ant-1.9.5</span><br><span class="line">path        C:/ apache-ant-1.9.5/bin</span><br><span class="line">classpath   C:/apache-ant-1.9.5/lib</span><br></pre></td></tr></table></figure>
+<p>测试方法：ant -version</p>
+<ul>
+<li>安装Android sdk<br>下载最新的adk，<a href="http://developer.android.com/sdk/installing/index.html" target="_blank" rel="external">http://developer.android.com/sdk/installing/index.html</a> 下载后解压到某个目录(例如D盘)，然后添加系统环境变量</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ANDROID_HOME   D:/android-sdk-windows</span><br><span class="line">path        D:/android\android-sdk-windows\tools</span><br><span class="line">classpath  D:/android\android-sdk-windows\tools\lib</span><br></pre></td></tr></table></figure>
+<p>测试方法：android<br>必须掌握的两个命令：abd start-server/ adb kill-server，用于启动android debug服务，adb使用与启动模拟器或是通过手机的自动安装调试，并可以看到log信息。这两个命令会经常用到<br>然后 命令行运行一下tns，如果看到以下提示信息，就可以开始第一个开发了。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># NativeScript</span><br><span class="line">┌─────────┬─────────────────────────────</span><br><span class="line">───────────────────────────────────┐</span><br><span class="line">│ Usage   │ Synopsis                                                       │</span><br><span class="line">│ General │ $ tns &lt;Command&gt; [Command Parameters] [--command &lt;Options&gt;]     │</span><br><span class="line">│ Alias   │ $ nativescript &lt;Command&gt; [Command Parameters] [--command       │</span><br><span class="line">│         │ &lt;Options&gt;]                                                     │</span><br><span class="line">└─────────┴─────────────────────────────</span><br><span class="line">───────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+<h3 id="2-_u5F00_u59CB_u9879_u76EE"><a href="#2-_u5F00_u59CB_u9879_u76EE" class="headerlink" title="2.开始项目"></a>2.开始项目</h3><ul>
+<li>创建项目</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ tns create demo</span><br><span class="line">$ cd demo</span><br><span class="line">$ tns platform add andrdoi/ios</span><br><span class="line">├── app     <span class="comment">// bower dependencies</span></span><br><span class="line">        ├── App_Resources    <span class="comment">// bower dependencies</span></span><br><span class="line">                        ├── Android  <span class="comment">// android项目的drawble静态图片等文件，项目转换的时候直接拷贝到android项目下</span></span><br><span class="line">                        ├── iOS        <span class="comment">//ios项目用到的图片文件</span></span><br><span class="line">        ├── tns_modules    <span class="comment">//tns node模块，可以用来调用移动设备功能</span></span><br><span class="line">        ├── app.css    <span class="comment">// 内部控件样式</span></span><br><span class="line">        ├── app.js    <span class="comment">// 页面配置入口配置</span></span><br><span class="line">        ├── LICENSE</span><br><span class="line">        ├── main-page.js    <span class="comment">// 页面js文件</span></span><br><span class="line">        ├── main-page.xml    <span class="comment">// 页面布局文件</span></span><br><span class="line">        ├── main-view-model.js    <span class="comment">// vm对象生成文件</span></span><br><span class="line">        ├── package.json    <span class="comment">// bower dependencies</span></span><br><span class="line">├── node_module     <span class="comment">// node插件忽略</span></span><br><span class="line">├── platforms           <span class="comment">// 转换后的移动端平台代码</span></span><br><span class="line">        ├── android           <span class="comment">// 标准的可移植android项目代码</span></span><br><span class="line">        ├── ios                  <span class="comment">//标准的可移植ios项目代码</span></span><br><span class="line">└──package.json           <span class="comment">//项目信息配置文件</span></span><br></pre></td></tr></table></figure>
+<p>从项目的结构可以看出，项目代码使用的mvvm结构，而且它的viewmodel是通过方法操作的。</p>
+<ul>
+<li>配置移动平台</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ tns platform add ios/android</span><br><span class="line">$ tns run android/ios (真机启动) 或者  tns run android/ios --emulator(启动模拟器)</span><br></pre></td></tr></table></figure>
+<p>如果没问题的话就可以看到手机或模拟器上启动了应用程序<br>来自： <a href="http://docs.nativescript.org/hello-world/hello-world-ns-cli.html" target="_blank" rel="external">http://docs.nativescript.org/hello-world/hello-world-ns-cli.html</a></p>
+<h3 id="3-_u9879_u76EE_u5206_u6790_u4E0E_u5B9E_u4F8B"><a href="#3-_u9879_u76EE_u5206_u6790_u4E0E_u5B9E_u4F8B" class="headerlink" title="3.项目分析与实例"></a>3.项目分析与实例</h3><p>分析一下页面主要的代码结构</p>
+<ul>
+<li>app.js，页面的预处理入口，表示启动main-page这个页面</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> application = <span class="built_in">require</span>(<span class="string">"application"</span>);</span><br><span class="line">application.mainModule = <span class="string">"main-page"</span>;</span><br><span class="line">application.cssFile = <span class="string">"./app.css"</span>;</span><br><span class="line">application.start();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>main-page.js 页面的数据绑定处理，将vm和方法绑定，也可认为是把vm和对象关联绑定</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vmModule = <span class="built_in">require</span>(<span class="string">"./main-view-model"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pageLoaded</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> page = args.object;</span><br><span class="line">    page.bindingContext = vmModule.mainViewModel;</span><br><span class="line">&#125;</span><br><span class="line">exports.pageLoaded = pageLoaded;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>main-view-model.js 页面的vm定义模块，申明方法和数据</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> __extends = <span class="keyword">this</span>.__extends || <span class="function"><span class="keyword">function</span> (<span class="params">d, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">in</span> b) <span class="keyword">if</span> (b.hasOwnProperty(p)) d[p] = b[p];</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__</span>(<span class="params"></span>) </span>&#123; <span class="keyword">this</span>.constructor = d; &#125;</span><br><span class="line">    __.prototype = b.prototype;</span><br><span class="line">    d.prototype = <span class="keyword">new</span> __();</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> observable = <span class="built_in">require</span>(<span class="string">"data/observable"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> HelloWorldModel = (<span class="function"><span class="keyword">function</span> (<span class="params">_super</span>) </span>&#123;</span><br><span class="line">    __extends(HelloWorldModel, _super);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">HelloWorldModel</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        _super.call(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">this</span>.counter = <span class="number">42</span>;</span><br><span class="line">        <span class="keyword">this</span>.set(<span class="string">"message"</span>, <span class="keyword">this</span>.counter + <span class="string">" taps left"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    HelloWorldModel.prototype.tapAction = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.counter--;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.counter &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.set(<span class="string">"message"</span>, <span class="string">"Hoorraaay! You unlocked the NativeScript clicker achievement!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.set(<span class="string">"message"</span>, <span class="keyword">this</span>.counter + <span class="string">" taps left"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> HelloWorldModel;</span><br><span class="line">&#125;)(observable.Observable);</span><br><span class="line">exports.HelloWorldModel = HelloWorldModel;</span><br><span class="line">exports.mainViewModel = <span class="keyword">new</span> HelloWorldModel();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>app.css</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.title &#123;</span><br><span class="line">    font-size: 30;</span><br><span class="line">    horizontal-align: center;</span><br><span class="line">    margin:20;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button &#123;</span><br><span class="line">    font-size: 42;</span><br><span class="line">    horizontal-align: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.message &#123;</span><br><span class="line">    font-size: 20;</span><br><span class="line">    color: #284848;</span><br><span class="line">    horizontal-align: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>main-page.xml android上布局的文件，类似vm模板，注意，是xml的，不是html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">Page</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.nativescript.org/tns.xsd"</span> <span class="attribute">loaded</span>=<span class="value">"pageLoaded"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">StackLayout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">Label</span> <span class="attribute">text</span>=<span class="value">"Tap the button"</span> <span class="attribute">cssClass</span>=<span class="value">"title"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">Button</span> <span class="attribute">text</span>=<span class="value">"TAP"</span> <span class="attribute">tap</span>=<span class="value">"&#123;&#123; tapAction &#125;&#125;"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">Label</span> <span class="attribute">text</span>=<span class="value">"&#123;&#123; message &#125;&#125;"</span> <span class="attribute">cssClass</span>=<span class="value">"message"</span> <span class="attribute">textWrap</span>=<span class="value">"true"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">StackLayout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">Page</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-_u603B_u7ED3_u5206_u6790"><a href="#4-_u603B_u7ED3_u5206_u6790" class="headerlink" title="4.总结分析"></a>4.总结分析</h3><ol>
+<li>核心是用JavaScript来写代码，然后预处理成android/ios项目进行打包安装</li>
+<li>开发模式基本遵循前端的mvvm思想来实现，只是实现和表现不一样</li>
+<li>参考文档完善，整理来说是一个不错的native开发方案</li>
+<li>开发使用commonJs的规范，容易理解</li>
+<li>但是不足之处也很明显，很难做现有单页面的改造，迭代不方便，功能上线必须像客户端那样发布审核，某些程度上还是需要web页面的支持</li>
+</ol>
+<p>当然这次只分析了个简单的例子，后面自己搞个复杂的例子来分享下，敬请期待(类似的还有samurai-native和react-native，坐等android支持)~</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nativescript/" rel="tag">#nativescript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/" rel="prev">shadow dom解析</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/" rel="next">Ionic Hybrid跨终端应用程序开发方案研究</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-_u73AF_u5883_u51C6_u5907"><span class="nav-number">1.</span> <span class="nav-text">1.环境准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-_u5F00_u59CB_u9879_u76EE"><span class="nav-number">2.</span> <span class="nav-text">2.开始项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-_u9879_u76EE_u5206_u6790_u4E0E_u5B9E_u4F8B"><span class="nav-number">3.</span> <span class="nav-text">3.项目分析与实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-_u603B_u7ED3_u5206_u6790"><span class="nav-number">4.</span> <span class="nav-text">4.总结分析</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/';
+      var disqus_title = 'Nativescript跨终端应用程序开发方案研究';
+      var disqus_url = 'http://yoursite.com/2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

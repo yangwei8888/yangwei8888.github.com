@@ -1,0 +1,760 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="css 清除浮动," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="一、什么是css float理解float：元素float后，确实可以从文档流中消失，表现在他们外面的DIV的边框不能被他们撑起来。可是，文档中在他们下面的元素又确实不会和他们重叠。先理解下float做了什么。​
+
+
+
+
+是否脱离文档流
+参考物
+描述
+
+
+
+
+position:relative
+否
+元素在文档流中位置
+top,left,right,bottom指定了相对于参考物位置
+
+
+posti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css清除浮动">
+<meta property="og:url" content="http://yoursite.com/2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="一、什么是css float理解float：元素float后，确实可以从文档流中消失，表现在他们外面的DIV的边框不能被他们撑起来。可是，文档中在他们下面的元素又确实不会和他们重叠。先理解下float做了什么。​
+
+
+
+
+是否脱离文档流
+参考物
+描述
+
+
+
+
+position:relative
+否
+元素在文档流中位置
+top,left,right,bottom指定了相对于参考物位置
+
+
+posti">
+<meta property="og:updated_time" content="2016-01-05T04:23:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css清除浮动">
+<meta name="twitter:description" content="一、什么是css float理解float：元素float后，确实可以从文档流中消失，表现在他们外面的DIV的边框不能被他们撑起来。可是，文档中在他们下面的元素又确实不会和他们重叠。先理解下float做了什么。​
+
+
+
+
+是否脱离文档流
+参考物
+描述
+
+
+
+
+position:relative
+否
+元素在文档流中位置
+top,left,right,bottom指定了相对于参考物位置
+
+
+posti">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> css清除浮动 | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?953e46480b0a75d01aaf6d872cc77099";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              css清除浮动
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2014-11-07T00:00:00+08:00" content="2014-11-07">
+            2014-11-07
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/frontend-css/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-css</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h3 id="u4E00_u3001_u4EC0_u4E48_u662Fcss_float"><a href="#u4E00_u3001_u4EC0_u4E48_u662Fcss_float" class="headerlink" title="一、什么是css float"></a>一、什么是css float</h3><p>理解float：元素float后，确实可以从文档流中消失，表现在他们外面的DIV的边框不能被他们撑起来。可是，文档中在他们下面的元素又确实不会和他们重叠。先理解下float做了什么。<br>​</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>是否脱离文档流</th>
+<th>参考物</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>position:relative</td>
+<td>否</td>
+<td>元素在文档流中位置</td>
+<td>top,left,right,bottom指定了相对于参考物位置</td>
+</tr>
+<tr>
+<td>postition:absolute</td>
+<td>是</td>
+<td>最近外层relative元素</td>
+<td>否则为body，top,left,right,bottom指定了相对于参考物位置</td>
+</tr>
+<tr>
+<td>float</td>
+<td>是</td>
+<td>元素在文档流中位置，相对于参考物</td>
+<td>尽可能向left(向左),top(向上)，right向右，both(向两侧)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="u4E8C_u3001_u6E05_u9664_u6D6E_u52A8"><a href="#u4E8C_u3001_u6E05_u9664_u6D6E_u52A8" class="headerlink" title="二、清除浮动"></a>二、清除浮动</h3><h4 id="1_uFF0C_u7236_u7EA7div_u81EA_u5B9A_u4E49height"><a href="#1_uFF0C_u7236_u7EA7div_u81EA_u5B9A_u4E49height" class="headerlink" title="1，父级div自定义height"></a>1，父级div自定义height</h4><p>原理：父级div手动定义height，就解决了父级div无法自动获取到高度的问题。<br>优点：简单，代码少，容易掌握<br>缺点：只适合高度固定的布局，要给出精确的高度，如果高度和父级div不一样时，会产生问题<br>建议：不推荐使用，只建议高度固定的布局时使用</p>
+<h4 id="2_uFF0C_u5C3E_u5904_u52A0_u5165clear_3Aboth_u7684_u7A7A_u6807_u7B7E"><a href="#2_uFF0C_u5C3E_u5904_u52A0_u5165clear_3Aboth_u7684_u7A7A_u6807_u7B7E" class="headerlink" title="2，尾处加入clear:both的空标签"></a>2，尾处加入clear:both的空标签</h4><p>原理：添加一个空div，利用css提高的clear:both清除浮动，让父级div能自动获取到高度<br>优点：简单，代码少，浏览器支持好，不容易出现怪问题<br>缺点：不少初学者不理解原理；如果页面浮动布局多，就要增加很多空div，让人感觉很不爽<br>建议：不推荐使用，但此方法是以前主要使用的一种清除浮动方法</p>
+<h4 id="3_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Ahidden_u89E6_u53D1BFC"><a href="#3_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Ahidden_u89E6_u53D1BFC" class="headerlink" title="3，父元素使用overflow:hidden触发BFC"></a>3，父元素使用overflow:hidden触发BFC</h4><p>原理：必须定义width或zoom:1，同时不能定义height，使用overflow:hidden时，浏览器会自动检查浮动区域的高度<br>优点：简单，代码少，浏览器支持好<br>缺点：不能和position配合使用，因为超出的尺寸的会被隐藏。<br>建议：只推荐没有使用position或对overflow:hidden理解比较深的朋友使用。</p>
+<h4 id="4_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Aauto_u89E6_u53D1BFC"><a href="#4_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Aauto_u89E6_u53D1BFC" class="headerlink" title="4，父元素使用overflow:auto触发BFC"></a>4，父元素使用overflow:auto触发BFC</h4><p>原理：必须定义width或zoom:1，同时不能定义height，使用overflow:auto时，浏览器会自动检查浮动区域的高度<br>优点：简单，代码少，浏览器支持好<br>缺点：内部宽高超过父级div时，会出现滚动条。<br>建议：不推荐使用，如果你需要出现滚动条或者确保你的代码不会出现滚动条就使用吧。</p>
+<h4 id="5_uFF0C_u7236_u7EA7div_u5B9A_u4E49__u4F2A_u7C7B_3Aafter_u548Czoom"><a href="#5_uFF0C_u7236_u7EA7div_u5B9A_u4E49__u4F2A_u7C7B_3Aafter_u548Czoom" class="headerlink" title="5，父级div定义 伪类:after和zoom"></a>5，父级div定义 伪类:after和zoom</h4><p>原理：IE8以上和非IE浏览器才支持:after，原理和方法2有点类似，zoom(IE转有属性)可解决ie6,ie7浮动问题<br>优点：浏览器支持好，不容易出现怪问题（目前：大型网站都有使用，如：腾迅，网易，新浪等等）<br>缺点：代码多，不少初学者不理解原理，要两句代码结合使用，才能让主流浏览器都支持。<br>建议：推荐使用，建议定义公共类，以减少CSS代码。</p>
+<h4 id="6_uFF0C_u8BA9_u7236_u5143_u7D20_u4E5F_u4E00_u8D77_u6D6E_u52A8"><a href="#6_uFF0C_u8BA9_u7236_u5143_u7D20_u4E5F_u4E00_u8D77_u6D6E_u52A8" class="headerlink" title="6，让父元素也一起浮动"></a>6，让父元素也一起浮动</h4><p>原理：所有代码一起浮动，就变成了一个整体<br>优点：没有优点<br>缺点：会产生新的浮动问题。<br>建议：不推荐使用，只作了解。</p>
+<h4 id="7_uFF0C_u7236_u5143_u7D20div_u5B9A_u4E49display_3Atable"><a href="#7_uFF0C_u7236_u5143_u7D20div_u5B9A_u4E49display_3Atable" class="headerlink" title="7，父元素div定义display:table"></a>7，父元素div定义display:table</h4><p>原理：将div属性变成表格<br>优点：没有优点<br>缺点：会产生新的未知问题。<br>建议：不推荐使用，只作了解。</p>
+<h4 id="8_uFF0C_u7ED3_u5C3E_u5904_u52A0br_u6807_u7B7Eclear_3Aboth"><a href="#8_uFF0C_u7ED3_u5C3E_u5904_u52A0br_u6807_u7B7Eclear_3Aboth" class="headerlink" title="8，结尾处加br标签clear:both"></a>8，结尾处加br标签clear:both</h4><p>原理：父级div定义zoom:1来解决IE浮动问题，结尾处加 br标签 clear:both<br>建议：不推荐使用，只作了解。<br>总结：建议使用方法3 overflow:hidden触发BFC或方法5 使用after、zoom两种方式解决问题</p>
+<h3 id="u4E09_u3001_u76F8_u5BF9_u5E94_u5B9E_u4F8B_u5982_u4E0B"><a href="#u4E09_u3001_u76F8_u5BF9_u5E94_u5B9E_u4F8B_u5982_u4E0B" class="headerlink" title="三、相对应实例如下"></a>三、相对应实例如下</h3><p>实例1：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="comment">/*解决代码*/</span><span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;&#125;</span></span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>实例2</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span></span>&#125;</span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="comment">/*清除浮动代码*/</span></span><br><span class="line"><span class="class">.clearfloat</span><span class="rules">&#123;<span class="rule"><span class="attribute">clear</span>:<span class="value">both</span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"clearfloat"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>实例3</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="comment">/*解决代码*/</span><span class="rule"><span class="attribute">overflow</span>:<span class="value">hidden</span></span>;&#125;</span></span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>实例4</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="comment">/*解决代码*/</span><span class="rule"><span class="attribute">overflow</span>:<span class="value">auto</span></span></span>&#125;</span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>实例5</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;&#125;</span></span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="comment">/*清除浮动代码*/</span></span><br><span class="line"><span class="class">.clearfloat</span><span class="pseudo">:after</span><span class="rules">&#123;<span class="rule"><span class="attribute">display</span>:<span class="value">block</span></span>;<span class="rule"><span class="attribute">clear</span>:<span class="value">both</span></span>;<span class="rule"><span class="attribute">content</span>:<span class="value"><span class="string">""</span></span></span>;<span class="rule"><span class="attribute">visibility</span>:<span class="value">hidden</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">0</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.clearfloat</span><span class="rules">&#123;<span class="rule"><span class="attribute">zoom</span>:<span class="value"><span class="number">1</span></span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1 clearfloat"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>实例6、实例7、实例8极不推荐，实例略</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css-清除浮动/" rel="tag">#css 清除浮动</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/11/08/ouvens.github.io/frontend-css/2014-11-08-css-center-layout/" rel="prev">css居中与自适应布局</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/06/ouvens.github.io/frontend-css/2014-10-06-css-ie-bug-and-resolution/" rel="next">css在IE下问题及解决方法</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E00_u3001_u4EC0_u4E48_u662Fcss_float"><span class="nav-number">1.</span> <span class="nav-text">一、什么是css float</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E8C_u3001_u6E05_u9664_u6D6E_u52A8"><span class="nav-number">2.</span> <span class="nav-text">二、清除浮动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1_uFF0C_u7236_u7EA7div_u81EA_u5B9A_u4E49height"><span class="nav-number">2.1.</span> <span class="nav-text">1，父级div自定义height</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2_uFF0C_u5C3E_u5904_u52A0_u5165clear_3Aboth_u7684_u7A7A_u6807_u7B7E"><span class="nav-number">2.2.</span> <span class="nav-text">2，尾处加入clear:both的空标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Ahidden_u89E6_u53D1BFC"><span class="nav-number">2.3.</span> <span class="nav-text">3，父元素使用overflow:hidden触发BFC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Aauto_u89E6_u53D1BFC"><span class="nav-number">2.4.</span> <span class="nav-text">4，父元素使用overflow:auto触发BFC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5_uFF0C_u7236_u7EA7div_u5B9A_u4E49__u4F2A_u7C7B_3Aafter_u548Czoom"><span class="nav-number">2.5.</span> <span class="nav-text">5，父级div定义 伪类:after和zoom</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6_uFF0C_u8BA9_u7236_u5143_u7D20_u4E5F_u4E00_u8D77_u6D6E_u52A8"><span class="nav-number">2.6.</span> <span class="nav-text">6，让父元素也一起浮动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7_uFF0C_u7236_u5143_u7D20div_u5B9A_u4E49display_3Atable"><span class="nav-number">2.7.</span> <span class="nav-text">7，父元素div定义display:table</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8_uFF0C_u7ED3_u5C3E_u5904_u52A0br_u6807_u7B7Eclear_3Aboth"><span class="nav-number">2.8.</span> <span class="nav-text">8，结尾处加br标签clear:both</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E09_u3001_u76F8_u5BF9_u5E94_u5B9E_u4F8B_u5982_u4E0B"><span class="nav-number">3.</span> <span class="nav-text">三、相对应实例如下</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/';
+      var disqus_title = 'css清除浮动';
+      var disqus_url = 'http://yoursite.com/2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

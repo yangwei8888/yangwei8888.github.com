@@ -1,0 +1,733 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="terry yang's blog | java | scala | bi" />
+
+
+
+  <meta name="keywords" content="javascript proto __proto__," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yosita" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="这里重新讲述prototype原型这个概念，今天我们深度的分析下prototype与proto。
+例子123456var Person = function(name)   &amp;#123;       this.name = name ;   &amp;#125;;  var p = new Person(&quot;Ben&quot;);  console.log(p.name);
+代码简单的 你不用说明了，如果现在让大家根">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript基础--深入理解proto与__proto__">
+<meta property="og:url" content="http://yoursite.com/2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/index.html">
+<meta property="og:site_name" content="yosita">
+<meta property="og:description" content="这里重新讲述prototype原型这个概念，今天我们深度的分析下prototype与proto。
+例子123456var Person = function(name)   &amp;#123;       this.name = name ;   &amp;#125;;  var p = new Person(&quot;Ben&quot;);  console.log(p.name);
+代码简单的 你不用说明了，如果现在让大家根">
+<meta property="og:image" content="http://7tszky.com1.z0.glb.clouddn.com/Fr5kpmvSgM5JuW4gJF66-xtsAMB9">
+<meta property="og:updated_time" content="2016-01-05T04:23:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript基础--深入理解proto与__proto__">
+<meta name="twitter:description" content="这里重新讲述prototype原型这个概念，今天我们深度的分析下prototype与proto。
+例子123456var Person = function(name)   &amp;#123;       this.name = name ;   &amp;#125;;  var p = new Person(&quot;Ben&quot;);  console.log(p.name);
+代码简单的 你不用说明了，如果现在让大家根">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> javascript基础--深入理解proto与__proto__ | yosita </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?953e46480b0a75d01aaf6d872cc77099";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">yosita</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              javascript基础--深入理解proto与__proto__
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2014-05-16T00:00:00+08:00" content="2014-05-16">
+            2014-05-16
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-javascript</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>这里重新讲述prototype原型这个概念，今天我们深度的分析下prototype与<strong><strong>proto</strong></strong>。</p>
+<h3 id="u4F8B_u5B50"><a href="#u4F8B_u5B50" class="headerlink" title="例子"></a>例子</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)  </span><br><span class="line"> </span>&#123;  </span><br><span class="line">     <span class="keyword">this</span>.name = name ;  </span><br><span class="line"> &#125;;  </span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">"Ben"</span>);  </span><br><span class="line"><span class="built_in">console</span>.log(p.name);</span><br></pre></td></tr></table></figure>
+<p>代码简单的 你不用说明了，如果现在让大家根据上面的代码画一张包含Function与Object的内存图，大家肯定回想什么叫包含Function与Object，上面的代码和它们有几毛钱的关系。好了，下面我先按要求把图画出来，大家参考下：</p>
+<p><img src="http://7tszky.com1.z0.glb.clouddn.com/Fr5kpmvSgM5JuW4gJF66-xtsAMB9" alt=""></p>
+<p>解析下：</p>
+<p>1、任何一个由构造器产生的对象都有<strong><strong>proto</strong></strong>属性，且此属性指向该构造器的prototype。</p>
+<p>2、所有构造器/函数的<strong><strong>proto</strong></strong>都指向Function的prototype</p>
+<p>拿第2条对比第1条，貌似我们发现了什么，没错函数的构造器就是Function，看下面的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数表达式  </span></span><br><span class="line">    <span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)  </span><br><span class="line">    </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name ;  </span><br><span class="line">    &#125;;  </span><br><span class="line">     <span class="comment">//函数声明  </span></span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)  </span><br><span class="line">     </span>&#123;  </span><br><span class="line">         <span class="keyword">this</span>.name = name ;  </span><br><span class="line">     &#125;  </span><br><span class="line">     <span class="comment">//上面两种方式实际上就相当与new Function  </span></span><br><span class="line">     <span class="keyword">var</span> Person = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"name"</span> , <span class="string">"this.name = name ;"</span> );</span><br></pre></td></tr></table></figure>
+<p>当然了不能说说，下面看代码验证：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(Person.__proto__ === <span class="built_in">Function</span>.prototype);  <span class="comment">//true  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p.__proto__);<span class="comment">//objcect  </span></span><br><span class="line"><span class="built_in">console</span>.log(p.__proto__.__proto__ === <span class="built_in">Object</span>.prototype); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>有人会问，那么Function与Object的prototype,<strong>prop</strong>到底是什么呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">console</span>.log(<span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">//true  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.prototype.__proto__ == <span class="built_in">Object</span>.prototype); <span class="comment">//true  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.__proto__); <span class="comment">//null</span></span><br></pre></td></tr></table></figure>
+<p>有此可见</p>
+<p>1、所有的构造器包括Object和Function都继承了Function.prototype的方法，由第三行可知所有的构造器都是对象，即js中一切皆为对象。</p>
+<p>2、<strong><strong>proto</strong></strong>最终的指向都是Object.prototype，这也就是js中的原型链。</p>
+<p>最后我们看一下Object的文档：</p>
+<p>Properties<br>The following table lists properties of the Object Object.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><strong>proto</strong></strong> Property</td>
+<td>Specifies the prototype for an object.</td>
+</tr>
+<tr>
+<td>constructor Property</td>
+<td>Specifies the function that creates an object.</td>
+</tr>
+<tr>
+<td>prototype Property</td>
+<td>Returns a reference to the prototype for a class of objects.</td>
+</tr>
+</tbody>
+</table>
+<p>发现Object还有个constructor属性。<br>1、constructor属性指向的是创建当前对象的构造函数。</p>
+<p>2、每个函数都有一个默认的属性prototype，而这个prototype的constructor默认指向这个函数</p>
+<p>看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数表达式  </span></span><br><span class="line"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.name = name ;  </span><br><span class="line">&#125;;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">"Ben"</span>);  </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p.constructor === Person);<span class="comment">//true  </span></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype.constructor === Person);  <span class="comment">//true  </span></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype <span class="keyword">instanceof</span>  <span class="built_in">Object</span>);  <span class="comment">//true  </span></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype <span class="keyword">instanceof</span>  Person);  <span class="comment">//false  </span></span><br><span class="line"><span class="comment">//改变Person的prototype  </span></span><br><span class="line">Person.prototype = &#123;name:<span class="string">"123"</span>&#125; ;  </span><br><span class="line"><span class="keyword">var</span> p2 = <span class="keyword">new</span> Person(<span class="string">"Ben"</span>);  </span><br><span class="line"><span class="built_in">console</span>.log(p2.constructor === <span class="built_in">Object</span>);<span class="comment">//true  </span></span><br><span class="line"><span class="built_in">console</span>.log(p2.constructor === Person.prototype.constructor);<span class="comment">//true  </span></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype.constructor === <span class="built_in">Object</span>);<span class="comment">//true  </span></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype.constructor === Person);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<p>当改变Person的prototype时，会发现，Person.prototype.constructor指向了Object，主要是因为:</p>
+<p>Person.prototype = {name:”123”} 相当于Person.prototype=new Object({name:”123”} );此时的构造器变成了Object.</p>
+<h3 id="u518D_u5177_u4F53_u770B_u4E0Bproto_u662F_u4EC0_u4E48"><a href="#u518D_u5177_u4F53_u770B_u4E0Bproto_u662F_u4EC0_u4E48" class="headerlink" title="再具体看下proto是什么"></a>再具体看下<strong><strong>proto</strong></strong>是什么</h3><p><strong><strong>proto</strong></strong> 属性可用于设置对象的原型。<br>该对象或函数继承新原型的所有方法和属性，以及新原型的原型链中的所有方法和属性。 对象可以仅有一个原型（不包括原型链中继承的原型），因此当您调用 <strong><strong>proto</strong></strong> 属性时，将替换以前的原型。</p>
+<p>Object.prototype.<strong><strong>proto_</strong></strong><br>Object.prototype.<strong><strong>proto</strong></strong> is an accessor property with attributes { [[Enumerable]]: false, [[Configurable]]:true }. The [[Get]] and [[Set]] attributes are defined as follows</p>
+<p>B.2.2.1.1<br>get Object.prototype.<strong><strong>proto</strong></strong></p>
+<blockquote>
+<p>The value of the [[Get]] attribute is a built-in function that requires no arguments. It performs the following steps:</p>
+</blockquote>
+<ul>
+<li>Let O be the result of calling ToObject passing the this value as the argument.</li>
+<li>ReturnIfAbrupt(O).</li>
+<li>Return the result of calling the [[GetPrototypeOf]] internal method of O.<br>B.2.2.1.2<br>set Object.prototype.<strong><strong>proto</strong></strong></li>
+</ul>
+<blockquote>
+<p>The value of the [[Set]] attribute is a built-in function that takes an argument proto. It performs the following steps:</p>
+</blockquote>
+<ul>
+<li>Let O be RequireObjectCoercible(this value).</li>
+<li>ReturnIfAbrupt(O).</li>
+<li>If Type(proto) is neither Object nor Null, then return undefined.</li>
+<li>If Type(O) is not Object, then return undefined.</li>
+<li>Let status be the result of calling the [[SetPrototypeOf]] internal method of O with - - argument proto.</li>
+<li>ReturnIfAbrupt(status).</li>
+<li>If status is false, then throw a TypeError exception.</li>
+<li>Return undefined. </li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript-proto-proto/" rel="tag">#javascript proto __proto__</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/" rel="prev">从webWorker到serviceWorker</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/01/01/ouvens.github.io/frontend-resource/2020-01-01-front-end-learning-list/" rel="next">前端学习资源汇总</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">terry</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4F8B_u5B50"><span class="nav-number">1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u518D_u5177_u4F53_u770B_u4E0Bproto_u662F_u4EC0_u4E48"><span class="nav-number">2.</span> <span class="nav-text">再具体看下proto是什么</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">terry</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/';
+      var disqus_title = 'javascript基础--深入理解proto与__proto__';
+      var disqus_url = 'http://yoursite.com/2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
