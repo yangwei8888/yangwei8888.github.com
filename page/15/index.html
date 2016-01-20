@@ -170,6 +170,155 @@
           
           
             
+              <a class="post-title-link" href="/2015/01/19/ouvens.github.io/frontend-javascript/2015-02-19-js-browser-difference/" itemprop="url">
+                javascript基础--js不同浏览器的差异性
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-01-19T00:00:00+08:00" content="2015-01-19">
+            2015-01-19
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-javascript</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/01/19/ouvens.github.io/frontend-javascript/2015-02-19-js-browser-difference/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/01/19/ouvens.github.io/frontend-javascript/2015-02-19-js-browser-difference/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h3 id="javascript_u7684_u6D4F_u89C8_u5668_u5DEE_u5F02_u6027_u7279_u5F81"><a href="#javascript_u7684_u6D4F_u89C8_u5668_u5DEE_u5F02_u6027_u7279_u5F81" class="headerlink" title="javascript的浏览器差异性特征"></a>javascript的浏览器差异性特征</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ie6=!-[<span class="number">1</span>,]&amp;&amp;!<span class="built_in">window</span>.XMLHttpRequest</span><br><span class="line"><span class="comment">//检查IE6最简洁代码</span></span><br></pre></td></tr></table></figure>
+<p>兼容性问题是由于多个浏览器同时存在而导致的。这些浏览器在处理一个相同的页面时，表现有时会有差异。这种差异可能很小，甚至不会被注意到；也可能很大，甚至造成在某个浏览器下无法正常浏览。我们把引起这些差异的问题统称为“浏览器兼容性问题”。下面让我们一起来看Javascript在解决兼容性问题上的方法。</p>
+<ol>
+<li><p>document.form.item 问题<br>问题：<br>代码中存在 document.formName.item(“itemName”) 这样的语句，不能在FF下运行<br>解决方法：<br>改用 document.formName.elements[“elementName”]</p>
+</li>
+<li><p>集合类对象问<br>问题：<br>代码中许多集合类对象取用时使用()，IE能接受，FF不能<br>解决方法：<br>改用 [] 作为下标运算，例： </p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementsByName(<span class="string">"inputName"</span>)(<span class="number">1</span>)  改为 <span class="built_in">document</span>.getElementsByName(<span class="string">"inputName"</span>)[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>window.event<br>问题：<br>使用 window.event 无法在FF上运行<br>解决方法：<br>FF的 event 只能在事件发生的现场使用，此问题暂无法解决。可以把 event 传到函数里变通解决：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onMouseMove = <span class="string">"functionName(event)"</span> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">functionName</span> (<span class="params">e</span>) </span>&#123;  </span><br><span class="line">e = e || <span class="built_in">window</span>.event;  </span><br><span class="line">......  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>HTML对象的 id 作为对象名的问题<br>问题：<br>在IE中，HTML对象的 ID 可以作为 document 的下属对象变量名直接使用，在FF中不能<br>解决方法：<br>使用对象变量时全部用标准的 getElementById(“idName”)</p>
+</li>
+<li><p>用 idName 字符串取得对象的问题<br>问题：<br>在IE中，利用 eval(“idName”) 可以取得 id 为 idName 的HTML对象，在FF中不能<br>解决方法：<br>用 getElementById(“idName”) 代替 eval(“idName”)</p>
+</li>
+<li><p>变量名与某HTML对象 id 相同的问题<br>问题：<br>在FF中，因为对象 id 不作为HTML对象的名称，所以可以使用与HTML对象 id 相同的变量名，IE中不能<br>解决方法：<br>在声明变量时，一律加上 var ，以避免歧义，这样在IE中亦可正常运行<br>最好不要取与HTML对象 id 相同的变量名，以减少错误</p>
+</li>
+<li><p>event.x 与 event.y 问题<br>问题：<br>在IE中，event 对象有x,y属性，FF中没有<br>解决方法：<br>在FF中，与 event.x 等效的是 event.pageX ，但event.pageX IE中没有<br>故采用 event.clientX 代替 event.x ，在IE中也有这个变量<br>event.clientX 与 event.pageX 有微妙的差别，就是滚动条<br>要完全一样，可以这样：<br>mX = event.x ? event.x : event.pageX;<br>然后用 mX 代替 event.x</p>
+</li>
+<li><p>关于frame<br>问题：<br>在IE中可以用 window.testFrame 取得该frame，FF中不行<br>解决方法：</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.top.document.getElementById(<span class="string">"testFrame"</span>).src = <span class="string">'xx.htm'</span> </span><br><span class="line"><span class="built_in">window</span>.top.frameName.location = <span class="string">'xx.htm'</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>取得元素的属性<br>在FF中，自己定义的属性必须 getAttribute() 取得</p>
+</li>
+<li><p>在FF中没有 parentElement，parement.children 而用 parentNode，parentNode.childNodes<br>问题：<br>childNodes 的下标的含义在IE和FF中不同，FF的 childNodes 中会插入空白文本节点<br>解决方法：<br>可以通过 node.getElementsByTagName() 来回避这个问题<br>问题：<br>当html中节点缺失时，IE和FF对 parentNode 的解释不同，例如：</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">input</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">form</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>FF中 input.parentNode 的值为form，而IE中 input.parentNode 的值为空节点<br>问题：<br>FF中节点自己没有 removeNode 方法<br>解决方法：<br>必须使用如下方法 node.parentNode.removeChild(node)</p>
+<ol>
+<li><p>const 问题<br>问题：<br>在IE中不能使用 const 关键字<br>解决方法：<br>以 var 代替</p>
+</li>
+<li><p>body 对象<br>FF的 body 在 body 标签没有被浏览器完全读入之前就存在，而IE则必须在 body 完全被读入之后才存在<br>这会产生在IE下，文档没有载入完时，在body上appendChild会出现空白页面的问题<br>解决方法：<br>一切在body上插入节点的动作，全部在onload后进行</p>
+</li>
+<li><p>url encoding<br>问题：<br>一般FF无法识别js中的&amp;<br>解决方法：<br>在js中如果书写url就直接写&amp;不要写&amp;</p>
+</li>
+<li><p>nodeName 和 tagName 问题<br>问题：<br>在FF中，所有节点均有 nodeName 值，但 textNode 没有 tagName 值，在IE中，nodeName 的使用有问题<br>解决方法：<br>使用 tagName，但应检测其是否为空</p>
+</li>
+<li><p>元素属性<br>IE下 input.type 属性为只读，但是FF下可以修改</p>
+</li>
+<li><p>document.getElementsByName() 和 document.all[name] 的问题<br>问题：<br>在IE中，getElementsByName()、document.all[name] 均不能用来取得 div 元素<br>是否还有其它不能取的元素还不知道（这个问题还有争议，还在研究中）</p>
+</li>
+<li><p>调用子框架或者其它框架中的元素的问题<br>在IE中，可以用如下方法来取得子元素中的值<br>document.getElementById(“frameName”).(document.)elementName<br>window.frames[“frameName”].elementName<br>在FF中则需要改成如下形式来执行，与IE兼容：<br>window.frames[“frameName”].contentWindow.document.elementName<br>window.frames[“frameName”].document.elementName </p>
+</li>
+<li><p>对象宽高赋值问题<br>问题：<br>FireFox中类似 obj.style.height = imgObj.height 的语句无效<br>解决方法：<br>统一使用 obj.style.height = imgObj.height + “px”;</p>
+</li>
+<li><p>innerText的问题<br>问题：<br>innerText 在IE中能正常工作，但是 innerText 在FireFox中却不行<br>解决方法：<br>在非IE浏览器中使用textContent代替innerText</p>
+</li>
+<li><p>event.srcElement和event.toElement问题<br>问题：<br>IE下，even对象有srcElement属性，但是没有target属性；Firefox下，even对象有target属性，但是没有 srcElement属性<br>解决方法：</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> source = e.target || e.srcElement;  </span><br><span class="line"><span class="keyword">var</span> target = e.relatedTarget || e.toElement;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>禁止选取网页内容<br>问题：<br>FF需要用CSS禁止，IE用JS禁止<br>解决方法：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IE: obj.onselectstart = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;</span><br><span class="line">FF: -moz-user-select:none;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>捕获事件<br>问题：<br>FF没有setCapture()、releaseCapture()方法<br>解决方法：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">IE:</span><br><span class="line">    obj.setCapture();   </span><br><span class="line">    obj.releaseCapture(); </span><br><span class="line">FF:</span><br><span class="line">    <span class="built_in">window</span>.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);  </span><br><span class="line">    <span class="built_in">window</span>.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);  </span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">window</span>.captureEvents)&#123;  </span><br><span class="line">        o.setCapture();  </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">        <span class="built_in">window</span>.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">window</span>.captureEvents)&#123;  </span><br><span class="line">        o.releaseCapture();  </span><br><span class="line">    &#125;<span class="keyword">else</span>   &#123;  </span><br><span class="line">        <span class="built_in">window</span>.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>本文主要介绍的是IE和FF两个浏览器中的兼容性问题。随着浏览器种类的增多，出现的兼容性问题肯定也越来越多。浏览器兼容性问题的“解决”需要浏览器开发商、W3C、开发者共同的努力才能实现。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/01/18/ouvens.github.io/product-product/2015-01-18-db-design/" itemprop="url">
                 产品数据库设计
               </a>
@@ -1283,6 +1432,143 @@
           
           
             
+              <a class="post-title-link" href="/2014/11/09/ouvens.github.io/frontend-css/2015-11-09-responsive-css/" itemprop="url">
+                响应式架构设计
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2014-11-09T00:00:00+08:00" content="2014-11-09">
+            2014-11-09
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/frontend-css/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-css</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/11/09/ouvens.github.io/frontend-css/2015-11-09-responsive-css/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/09/ouvens.github.io/frontend-css/2015-11-09-responsive-css/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h2 id="u54CD_u5E94_u5F0F_u9875_u9762_u8BBE_u8BA1_u4E0E_u5B9E_u73B0"><a href="#u54CD_u5E94_u5F0F_u9875_u9762_u8BBE_u8BA1_u4E0E_u5B9E_u73B0" class="headerlink" title="响应式页面设计与实现"></a>响应式页面设计与实现</h2><h4 id="u4E00_u3001_u54CD_u5E94_u5F0F_u6982_u8FF0"><a href="#u4E00_u3001_u54CD_u5E94_u5F0F_u6982_u8FF0" class="headerlink" title="一、响应式概述"></a>一、响应式概述</h4><p>适应不同设备浏览器分辨率或尺寸的样式布局方式。包括响应式布局和响应式媒体两个关键点<br>    之前的做法：通过判断UA跳转不同页面来适应不同设备浏览器屏幕分辨率下的显示效果。</p>
+<p>那么问题来了，UA的问题：</p>
+<ul>
+<li>依赖设备本身浏览器或设备特点，例如尺寸，屏幕分辨率等。</li>
+<li>需要分配多个页面跳转适配浏览器。例如：qzone.com，m.qzone.com。</li>
+</ul>
+<p>响应式布局和响应式媒体解决了这些问题</p>
+<h4 id="u4E8C_u3001_u54CD_u5E94_u5F0F_u5E03_u5C40"><a href="#u4E8C_u3001_u54CD_u5E94_u5F0F_u5E03_u5C40" class="headerlink" title="二、响应式布局"></a>二、响应式布局</h4><p>兼容浏览器分辨率，清晰度，横屏，竖屏的页面元素布局方式。一般使用栅格方式实现。一般情况下是以移动优先，PC端作为一个扩展。</p>
+<p>实现方式：</p>
+<p><strong>1，meta标签定义</strong><br>使用 viewport标签在手机浏览器上控制布局控制不缩放。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width,initial-scale=1, maximum-scale=1"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过快捷方式打开时全屏显示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-mobile-web-app-capable"</span> <span class="attribute">content</span>=<span class="value">"yes"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>  隐藏状态栏</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-mobile-web-app-status-bar-style"</span> <span class="attribute">content</span>=<span class="value">"blank"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>2，使用media query适应对应布局</strong></p>
+<p>此外目前比较主流可用的栅格系统有</p>
+<p>Responsive Grid System<br>Fluid 960 Grid(adaptjs)<br>Simple Grid</p>
+<h4 id="u4E09_u3001_u54CD_u5E94_u5F0F_u5A92_u4F53"><a href="#u4E09_u3001_u54CD_u5E94_u5F0F_u5A92_u4F53" class="headerlink" title="三、响应式媒体"></a>三、响应式媒体</h4><p>响应式网站设计最难的就是图片处理了。布局做了响应式处理，在我们手机访问时，请求的图片还是PC上的大图；文件体积大，消耗流量多，请求延时长。响应式媒体要解决的两个关键点是媒体尺寸自适应和屏幕分辨率自适应。</p>
+<p>基本思路：</p>
+<p>浏览器通过js或css获取用户设备屏幕尺寸，分辨率逻辑处理后输出适应的图片或样式。另外如果用户屏幕是高清屏，还的输出双倍分辨率的图形适应屏幕。</p>
+<p>媒体大小自适应解决方案：</p>
+<p><strong>1，使用css背景图片 (依赖media query)</strong></p>
+<p>将图片设计为背景图片，并在css通过media query来加载所需要的背景图片。这样就会根据访问设备的属性来加载形影的图片。但是无法定义页面图片图片属性。</p>
+<p><strong>2，picture element (依赖浏览器新特性+midea query)</strong></p>
+<p>W3C已经有一个用于响应式图形的草案：新定义标签<picture>，但因为它还只是草案，目前还没有支持的浏览器，期待在不久的未来我们能用上。虽然目前不支持，但我们还是来了解下这个浏览器的新特性，也和我们一贯的研究方向一致。</picture></p>
+<p><picture>是一个图形元素，内容由多个源图组成，并由CSS Media Queries来适配出合理图形，代码规范如下</picture></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">picture</span> <span class="attribute">width</span>=<span class="value">"500"</span> <span class="attribute">height</span>=<span class="value">"500"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">source</span> <span class="attribute">media</span>=<span class="value">"(min-width: 640px)"</span> <span class="attribute">srcset</span>=<span class="value">"large-1.jpg 1x, large-2.jpg 2x"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">source</span> <span class="attribute">media</span>=<span class="value">"(min-width: 320px)"</span> <span class="attribute">srcset</span>=<span class="value">"med-1.jpg 1x, med-2.jpg 2x"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">source</span> <span class="attribute">srcset</span>=<span class="value">"small-1.jpg 1x, small-2.jpg 2x"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"small-1.jpg"</span> <span class="attribute">alt</span>=<span class="value">""</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">p</span>&gt;</span>Accessible text<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- Fallback content--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">noscript</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"external/imgs/small.jpg"</span> <span class="attribute">alt</span>=<span class="value">"Team photo"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">noscript</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">picture</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">source: 一个图片源；</span><br><span class="line">media: 媒体查询，用于适配屏幕尺寸；</span><br><span class="line">srcset: 图片链接，1x适应普通屏，2x适应高清屏；</span><br><span class="line"><span class="tag">&lt;<span class="title">noscript</span>/&gt;</span>: 当浏览器不支持脚本时的一个替代方案；</span><br><span class="line"><span class="tag">&lt;<span class="title">img</span>/&gt;</span>: 初始图片；另外还有一个无障碍文本，类似<span class="tag">&lt;<span class="title">img</span>/&gt;</span>的alt属性。</span><br><span class="line"><span class="tag">&lt;<span class="title">picture</span>&gt;</span>目前还不支持，但它的原理我们是可借鉴的，所以就诞生了一个用于图片响应式处理的类库picturefill</span><br></pre></td></tr></table></figure>
+<p><strong>3，picturefill (依赖js+media query)</strong></p>
+<p><a href="https://github.com/scottjehl/picturefill" target="_blank" rel="external">https://github.com/scottjehl/picturefill</a><br><a href="http://scottjehl.github.io/picturefill/" target="_blank" rel="external">http://scottjehl.github.io/picturefill/</a></p>
+<p>可以认为是picture元素的一个polyfill，(什么是polyfill？晶哥第一次沙龙讲过，就是修复浏览器特性不支持的”腻子”)。<br>未来我们可能使用picture元素来进行图片在页面的适应。而picturefill是w3c提供的最新的针对响应式图片的设计方案，但是需要浏览器支持picture属性，原理就是JS获取Source的源以及CSS Media Queries规则，输出适应图片。</p>
+<p>这个是picturefill实现的部分源码，大致看了一下，原理就是使用javascript来解析picture元素定义的标签，来在页面上强行使用picture类似元素。但是个人觉得性能方面值得去考虑。</p>
+<p><strong>4，adaptive-images</strong></p>
+<p><a href="http://adaptive-images.com/" target="_blank" rel="external">http://adaptive-images.com/</a></p>
+<p>实现原理是浏览器访问服务器图片时带上浏览器的窗口信息，服务器获取后根据窗口信息获取相对应的图片返回。<br>这是一个服务端解决方案，优点：一是不用更改现有的HTML标签结构，因此可快捷地应用于过去的项目；二是对于任何图片，包括JS添加的，都会起作用，即图片宽度不会大于浏览器宽度，三是由于其采用服务端解决方案，兼容性很广。<br>    但是，其缺点也是明显的：首先，其依赖Cookie和JS，浏览器信息需要通过js存放cookie，发送时放在头部发送，这导致一些禁用或不能使用Cookie和JS的浏览器不能使用。然后是其对所有图片都起作用，这不适用于那些需要加载大图片的情形；最后，不适用于CDN，因为图片都是针对特定设备即时生成的，我觉得可以修改后端代码做</p>
+<p><strong>5，responsive-images.js(依赖js)</strong></p>
+<p>   官网：<a href="https://github.com/kvendrik/responsive-images.js" target="_blank" rel="external">https://github.com/kvendrik/responsive-images.js</a><br>   这个与picturefill类似，不过它不依赖media query，而是通过JS检测浏览器的可见视口宽度来决定选择合适的图片，因此其兼容性很广，所有的主流浏览器。同时也不需要额外的标签，而是需要额外的属性，但是它不支持JS添加的图片，至少目前还不支持。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">alt</span>=<span class="value">'kitten!'</span> <span class="attribute">data-src-base</span>=<span class="value">'demo/images/'</span> <span class="attribute">data-src</span>=<span class="value">'&lt;480:smallest.jpg,</span><br><span class="line"> &lt;768:small.jpg,&lt;960:medium.jpg,&gt;960:big.jpg'</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>屏幕分辨率自适应方案：</p>
+<p>主要是解决高清屏(retina屏)的问题，由于高清屏与普通屏幕有所区别：</p>
+<p>由于高清屏的特性，1px是由2×2个像素点来渲染，那么我们样式上的border:1px在Retina屏下会渲染成2px的边框，与设计稿有出入，为了追求1px精准还原，我们就不得不拿出一个完美的解决方案。(此处没去深究)<br>   JS检测是否高清屏：var retina = window.devicePixelRatio &gt; 1;<br>    例如一个边框的</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">media</span> only screen and (-webkit-min-device-pixel-ratio:<span class="number">2</span>),</span><br><span class="line">       only screen and (min-device-pixel-ratio:<span class="number">2</span>) </span>&#123;</span><br><span class="line"><span class="tag">button</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">border</span>:<span class="value">none</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">0</span> <span class="number">16px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background-size</span>:<span class="value"> <span class="number">50%</span> <span class="number">50%</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="u56DB_u3001_u54CD_u5E94_u5F0Fjavascript"><a href="#u56DB_u3001_u54CD_u5E94_u5F0Fjavascript" class="headerlink" title="四、响应式javascript"></a>四、响应式javascript</h4><p>这里主要通过环境判断来异步加载不同的javascript，这样就实现了安装浏览器环境来加载了，例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span>(isMobile)&#123;</span><br><span class="line">    <span class="built_in">require</span>.async([<span class="string">'zepto'</span>, <span class="string">'./mobileMain'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">$, main</span>)</span>&#123;</span><br><span class="line">        main.init();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">require</span>.async([<span class="string">'jquery'</span>, <span class="string">'./main'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">$, main</span>)</span>&#123;</span><br><span class="line">        main.init();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="u4E94_u3001_u54CD_u5E94_u5F0F_u7F51_u7AD9_u67B6_u6784_u8BBE_u8BA1"><a href="#u4E94_u3001_u54CD_u5E94_u5F0F_u7F51_u7AD9_u67B6_u6784_u8BBE_u8BA1" class="headerlink" title="五、响应式网站架构设计"></a>五、响应式网站架构设计</h4><p>(1) 简单网站的响应式结构</p>
+<p>使用media query指定屏幕适应属性实现网页自适应，不同设备下的css写在一个文件内，css按模块管理。模块分开，易于管理和编码实现，也便于维护，是中小型网站实现响应式的不二选择。</p>
+<p>缺点：对于样式复杂的网站没有拆分，不能根据对应屏幕加载对应样式，造成带宽浪费；不利于优化和cdn。</p>
+<p>(2) 分流响应式站点</p>
+<p>javascript根据UA特性来加载不同域下的css，可以尽可能避免使用media query，不同浏览器环境下的样式分离管理，实现了平台样式分离，易于cdn管理。</p>
+<p>缺点：需要维护多套样式表，即使公共部分抽离，一旦修改，影响多个平台环境；需要判断UA；架构实现稍微复杂。</p>
+<p>(3) 后台页面直出</p>
+<p>和adaptive-images实现方法类似，首先是建立在不同环境下样式分离管理的基础上，后台根据静态文件请求所带的cookie信息直出静态页面，拉取相对应的css。</p>
+<p>缺点：需要依赖cookie机制，服务器需要进行处理。(不过这层直出可以使用node中间服务获取，由这层服务请求后台，再返回给前端)</p>
+<p>目前对于架构这块理解还不是很透，只了解粗略的原理，还需要继续深入理解。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2014/11/09/ouvens.github.io/frontend-css/2014-11-09-css-draw/" itemprop="url">
                 css基本形状绘图
               </a>
@@ -1448,143 +1734,6 @@
           
           
             
-              <a class="post-title-link" href="/2014/11/09/ouvens.github.io/frontend-css/2015-11-09-responsive-css/" itemprop="url">
-                响应式架构设计
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-11-09T00:00:00+08:00" content="2014-11-09">
-            2014-11-09
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-css/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-css</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/11/09/ouvens.github.io/frontend-css/2015-11-09-responsive-css/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/09/ouvens.github.io/frontend-css/2015-11-09-responsive-css/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h2 id="u54CD_u5E94_u5F0F_u9875_u9762_u8BBE_u8BA1_u4E0E_u5B9E_u73B0"><a href="#u54CD_u5E94_u5F0F_u9875_u9762_u8BBE_u8BA1_u4E0E_u5B9E_u73B0" class="headerlink" title="响应式页面设计与实现"></a>响应式页面设计与实现</h2><h4 id="u4E00_u3001_u54CD_u5E94_u5F0F_u6982_u8FF0"><a href="#u4E00_u3001_u54CD_u5E94_u5F0F_u6982_u8FF0" class="headerlink" title="一、响应式概述"></a>一、响应式概述</h4><p>适应不同设备浏览器分辨率或尺寸的样式布局方式。包括响应式布局和响应式媒体两个关键点<br>    之前的做法：通过判断UA跳转不同页面来适应不同设备浏览器屏幕分辨率下的显示效果。</p>
-<p>那么问题来了，UA的问题：</p>
-<ul>
-<li>依赖设备本身浏览器或设备特点，例如尺寸，屏幕分辨率等。</li>
-<li>需要分配多个页面跳转适配浏览器。例如：qzone.com，m.qzone.com。</li>
-</ul>
-<p>响应式布局和响应式媒体解决了这些问题</p>
-<h4 id="u4E8C_u3001_u54CD_u5E94_u5F0F_u5E03_u5C40"><a href="#u4E8C_u3001_u54CD_u5E94_u5F0F_u5E03_u5C40" class="headerlink" title="二、响应式布局"></a>二、响应式布局</h4><p>兼容浏览器分辨率，清晰度，横屏，竖屏的页面元素布局方式。一般使用栅格方式实现。一般情况下是以移动优先，PC端作为一个扩展。</p>
-<p>实现方式：</p>
-<p><strong>1，meta标签定义</strong><br>使用 viewport标签在手机浏览器上控制布局控制不缩放。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width,initial-scale=1, maximum-scale=1"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>通过快捷方式打开时全屏显示</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-mobile-web-app-capable"</span> <span class="attribute">content</span>=<span class="value">"yes"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>  隐藏状态栏</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-mobile-web-app-status-bar-style"</span> <span class="attribute">content</span>=<span class="value">"blank"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>2，使用media query适应对应布局</strong></p>
-<p>此外目前比较主流可用的栅格系统有</p>
-<p>Responsive Grid System<br>Fluid 960 Grid(adaptjs)<br>Simple Grid</p>
-<h4 id="u4E09_u3001_u54CD_u5E94_u5F0F_u5A92_u4F53"><a href="#u4E09_u3001_u54CD_u5E94_u5F0F_u5A92_u4F53" class="headerlink" title="三、响应式媒体"></a>三、响应式媒体</h4><p>响应式网站设计最难的就是图片处理了。布局做了响应式处理，在我们手机访问时，请求的图片还是PC上的大图；文件体积大，消耗流量多，请求延时长。响应式媒体要解决的两个关键点是媒体尺寸自适应和屏幕分辨率自适应。</p>
-<p>基本思路：</p>
-<p>浏览器通过js或css获取用户设备屏幕尺寸，分辨率逻辑处理后输出适应的图片或样式。另外如果用户屏幕是高清屏，还的输出双倍分辨率的图形适应屏幕。</p>
-<p>媒体大小自适应解决方案：</p>
-<p><strong>1，使用css背景图片 (依赖media query)</strong></p>
-<p>将图片设计为背景图片，并在css通过media query来加载所需要的背景图片。这样就会根据访问设备的属性来加载形影的图片。但是无法定义页面图片图片属性。</p>
-<p><strong>2，picture element (依赖浏览器新特性+midea query)</strong></p>
-<p>W3C已经有一个用于响应式图形的草案：新定义标签<picture>，但因为它还只是草案，目前还没有支持的浏览器，期待在不久的未来我们能用上。虽然目前不支持，但我们还是来了解下这个浏览器的新特性，也和我们一贯的研究方向一致。</picture></p>
-<p><picture>是一个图形元素，内容由多个源图组成，并由CSS Media Queries来适配出合理图形，代码规范如下</picture></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">picture</span> <span class="attribute">width</span>=<span class="value">"500"</span> <span class="attribute">height</span>=<span class="value">"500"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">source</span> <span class="attribute">media</span>=<span class="value">"(min-width: 640px)"</span> <span class="attribute">srcset</span>=<span class="value">"large-1.jpg 1x, large-2.jpg 2x"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">source</span> <span class="attribute">media</span>=<span class="value">"(min-width: 320px)"</span> <span class="attribute">srcset</span>=<span class="value">"med-1.jpg 1x, med-2.jpg 2x"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">source</span> <span class="attribute">srcset</span>=<span class="value">"small-1.jpg 1x, small-2.jpg 2x"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"small-1.jpg"</span> <span class="attribute">alt</span>=<span class="value">""</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">p</span>&gt;</span>Accessible text<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- Fallback content--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">noscript</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"external/imgs/small.jpg"</span> <span class="attribute">alt</span>=<span class="value">"Team photo"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">noscript</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">picture</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">source: 一个图片源；</span><br><span class="line">media: 媒体查询，用于适配屏幕尺寸；</span><br><span class="line">srcset: 图片链接，1x适应普通屏，2x适应高清屏；</span><br><span class="line"><span class="tag">&lt;<span class="title">noscript</span>/&gt;</span>: 当浏览器不支持脚本时的一个替代方案；</span><br><span class="line"><span class="tag">&lt;<span class="title">img</span>/&gt;</span>: 初始图片；另外还有一个无障碍文本，类似<span class="tag">&lt;<span class="title">img</span>/&gt;</span>的alt属性。</span><br><span class="line"><span class="tag">&lt;<span class="title">picture</span>&gt;</span>目前还不支持，但它的原理我们是可借鉴的，所以就诞生了一个用于图片响应式处理的类库picturefill</span><br></pre></td></tr></table></figure>
-<p><strong>3，picturefill (依赖js+media query)</strong></p>
-<p><a href="https://github.com/scottjehl/picturefill" target="_blank" rel="external">https://github.com/scottjehl/picturefill</a><br><a href="http://scottjehl.github.io/picturefill/" target="_blank" rel="external">http://scottjehl.github.io/picturefill/</a></p>
-<p>可以认为是picture元素的一个polyfill，(什么是polyfill？晶哥第一次沙龙讲过，就是修复浏览器特性不支持的”腻子”)。<br>未来我们可能使用picture元素来进行图片在页面的适应。而picturefill是w3c提供的最新的针对响应式图片的设计方案，但是需要浏览器支持picture属性，原理就是JS获取Source的源以及CSS Media Queries规则，输出适应图片。</p>
-<p>这个是picturefill实现的部分源码，大致看了一下，原理就是使用javascript来解析picture元素定义的标签，来在页面上强行使用picture类似元素。但是个人觉得性能方面值得去考虑。</p>
-<p><strong>4，adaptive-images</strong></p>
-<p><a href="http://adaptive-images.com/" target="_blank" rel="external">http://adaptive-images.com/</a></p>
-<p>实现原理是浏览器访问服务器图片时带上浏览器的窗口信息，服务器获取后根据窗口信息获取相对应的图片返回。<br>这是一个服务端解决方案，优点：一是不用更改现有的HTML标签结构，因此可快捷地应用于过去的项目；二是对于任何图片，包括JS添加的，都会起作用，即图片宽度不会大于浏览器宽度，三是由于其采用服务端解决方案，兼容性很广。<br>    但是，其缺点也是明显的：首先，其依赖Cookie和JS，浏览器信息需要通过js存放cookie，发送时放在头部发送，这导致一些禁用或不能使用Cookie和JS的浏览器不能使用。然后是其对所有图片都起作用，这不适用于那些需要加载大图片的情形；最后，不适用于CDN，因为图片都是针对特定设备即时生成的，我觉得可以修改后端代码做</p>
-<p><strong>5，responsive-images.js(依赖js)</strong></p>
-<p>   官网：<a href="https://github.com/kvendrik/responsive-images.js" target="_blank" rel="external">https://github.com/kvendrik/responsive-images.js</a><br>   这个与picturefill类似，不过它不依赖media query，而是通过JS检测浏览器的可见视口宽度来决定选择合适的图片，因此其兼容性很广，所有的主流浏览器。同时也不需要额外的标签，而是需要额外的属性，但是它不支持JS添加的图片，至少目前还不支持。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">alt</span>=<span class="value">'kitten!'</span> <span class="attribute">data-src-base</span>=<span class="value">'demo/images/'</span> <span class="attribute">data-src</span>=<span class="value">'&lt;480:smallest.jpg,</span><br><span class="line"> &lt;768:small.jpg,&lt;960:medium.jpg,&gt;960:big.jpg'</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>屏幕分辨率自适应方案：</p>
-<p>主要是解决高清屏(retina屏)的问题，由于高清屏与普通屏幕有所区别：</p>
-<p>由于高清屏的特性，1px是由2×2个像素点来渲染，那么我们样式上的border:1px在Retina屏下会渲染成2px的边框，与设计稿有出入，为了追求1px精准还原，我们就不得不拿出一个完美的解决方案。(此处没去深究)<br>   JS检测是否高清屏：var retina = window.devicePixelRatio &gt; 1;<br>    例如一个边框的</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">media</span> only screen and (-webkit-min-device-pixel-ratio:<span class="number">2</span>),</span><br><span class="line">       only screen and (min-device-pixel-ratio:<span class="number">2</span>) </span>&#123;</span><br><span class="line"><span class="tag">button</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">border</span>:<span class="value">none</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">0</span> <span class="number">16px</span></span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">background-size</span>:<span class="value"> <span class="number">50%</span> <span class="number">50%</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<h4 id="u56DB_u3001_u54CD_u5E94_u5F0Fjavascript"><a href="#u56DB_u3001_u54CD_u5E94_u5F0Fjavascript" class="headerlink" title="四、响应式javascript"></a>四、响应式javascript</h4><p>这里主要通过环境判断来异步加载不同的javascript，这样就实现了安装浏览器环境来加载了，例如</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span>(isMobile)&#123;</span><br><span class="line">    <span class="built_in">require</span>.async([<span class="string">'zepto'</span>, <span class="string">'./mobileMain'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">$, main</span>)</span>&#123;</span><br><span class="line">        main.init();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">require</span>.async([<span class="string">'jquery'</span>, <span class="string">'./main'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">$, main</span>)</span>&#123;</span><br><span class="line">        main.init();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="u4E94_u3001_u54CD_u5E94_u5F0F_u7F51_u7AD9_u67B6_u6784_u8BBE_u8BA1"><a href="#u4E94_u3001_u54CD_u5E94_u5F0F_u7F51_u7AD9_u67B6_u6784_u8BBE_u8BA1" class="headerlink" title="五、响应式网站架构设计"></a>五、响应式网站架构设计</h4><p>(1) 简单网站的响应式结构</p>
-<p>使用media query指定屏幕适应属性实现网页自适应，不同设备下的css写在一个文件内，css按模块管理。模块分开，易于管理和编码实现，也便于维护，是中小型网站实现响应式的不二选择。</p>
-<p>缺点：对于样式复杂的网站没有拆分，不能根据对应屏幕加载对应样式，造成带宽浪费；不利于优化和cdn。</p>
-<p>(2) 分流响应式站点</p>
-<p>javascript根据UA特性来加载不同域下的css，可以尽可能避免使用media query，不同浏览器环境下的样式分离管理，实现了平台样式分离，易于cdn管理。</p>
-<p>缺点：需要维护多套样式表，即使公共部分抽离，一旦修改，影响多个平台环境；需要判断UA；架构实现稍微复杂。</p>
-<p>(3) 后台页面直出</p>
-<p>和adaptive-images实现方法类似，首先是建立在不同环境下样式分离管理的基础上，后台根据静态文件请求所带的cookie信息直出静态页面，拉取相对应的css。</p>
-<p>缺点：需要依赖cookie机制，服务器需要进行处理。(不过这层直出可以使用node中间服务获取，由这层服务请求后台，再返回给前端)</p>
-<p>目前对于架构这块理解还不是很透，只了解粗略的原理，还需要继续深入理解。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
               <a class="post-title-link" href="/2014/11/08/ouvens.github.io/frontend-css/2014-11-08-css-center-layout/" itemprop="url">
                 css居中与自适应布局
               </a>
@@ -1673,139 +1822,6 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/" itemprop="url">
-                css清除浮动
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-11-07T00:00:00+08:00" content="2014-11-07">
-            2014-11-07
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-css/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-css</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="u4E00_u3001_u4EC0_u4E48_u662Fcss_float"><a href="#u4E00_u3001_u4EC0_u4E48_u662Fcss_float" class="headerlink" title="一、什么是css float"></a>一、什么是css float</h3><p>理解float：元素float后，确实可以从文档流中消失，表现在他们外面的DIV的边框不能被他们撑起来。可是，文档中在他们下面的元素又确实不会和他们重叠。先理解下float做了什么。<br>​</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>是否脱离文档流</th>
-<th>参考物</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>position:relative</td>
-<td>否</td>
-<td>元素在文档流中位置</td>
-<td>top,left,right,bottom指定了相对于参考物位置</td>
-</tr>
-<tr>
-<td>postition:absolute</td>
-<td>是</td>
-<td>最近外层relative元素</td>
-<td>否则为body，top,left,right,bottom指定了相对于参考物位置</td>
-</tr>
-<tr>
-<td>float</td>
-<td>是</td>
-<td>元素在文档流中位置，相对于参考物</td>
-<td>尽可能向left(向左),top(向上)，right向右，both(向两侧)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="u4E8C_u3001_u6E05_u9664_u6D6E_u52A8"><a href="#u4E8C_u3001_u6E05_u9664_u6D6E_u52A8" class="headerlink" title="二、清除浮动"></a>二、清除浮动</h3><h4 id="1_uFF0C_u7236_u7EA7div_u81EA_u5B9A_u4E49height"><a href="#1_uFF0C_u7236_u7EA7div_u81EA_u5B9A_u4E49height" class="headerlink" title="1，父级div自定义height"></a>1，父级div自定义height</h4><p>原理：父级div手动定义height，就解决了父级div无法自动获取到高度的问题。<br>优点：简单，代码少，容易掌握<br>缺点：只适合高度固定的布局，要给出精确的高度，如果高度和父级div不一样时，会产生问题<br>建议：不推荐使用，只建议高度固定的布局时使用</p>
-<h4 id="2_uFF0C_u5C3E_u5904_u52A0_u5165clear_3Aboth_u7684_u7A7A_u6807_u7B7E"><a href="#2_uFF0C_u5C3E_u5904_u52A0_u5165clear_3Aboth_u7684_u7A7A_u6807_u7B7E" class="headerlink" title="2，尾处加入clear:both的空标签"></a>2，尾处加入clear:both的空标签</h4><p>原理：添加一个空div，利用css提高的clear:both清除浮动，让父级div能自动获取到高度<br>优点：简单，代码少，浏览器支持好，不容易出现怪问题<br>缺点：不少初学者不理解原理；如果页面浮动布局多，就要增加很多空div，让人感觉很不爽<br>建议：不推荐使用，但此方法是以前主要使用的一种清除浮动方法</p>
-<h4 id="3_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Ahidden_u89E6_u53D1BFC"><a href="#3_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Ahidden_u89E6_u53D1BFC" class="headerlink" title="3，父元素使用overflow:hidden触发BFC"></a>3，父元素使用overflow:hidden触发BFC</h4><p>原理：必须定义width或zoom:1，同时不能定义height，使用overflow:hidden时，浏览器会自动检查浮动区域的高度<br>优点：简单，代码少，浏览器支持好<br>缺点：不能和position配合使用，因为超出的尺寸的会被隐藏。<br>建议：只推荐没有使用position或对overflow:hidden理解比较深的朋友使用。</p>
-<h4 id="4_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Aauto_u89E6_u53D1BFC"><a href="#4_uFF0C_u7236_u5143_u7D20_u4F7F_u7528overflow_3Aauto_u89E6_u53D1BFC" class="headerlink" title="4，父元素使用overflow:auto触发BFC"></a>4，父元素使用overflow:auto触发BFC</h4><p>原理：必须定义width或zoom:1，同时不能定义height，使用overflow:auto时，浏览器会自动检查浮动区域的高度<br>优点：简单，代码少，浏览器支持好<br>缺点：内部宽高超过父级div时，会出现滚动条。<br>建议：不推荐使用，如果你需要出现滚动条或者确保你的代码不会出现滚动条就使用吧。</p>
-<h4 id="5_uFF0C_u7236_u7EA7div_u5B9A_u4E49__u4F2A_u7C7B_3Aafter_u548Czoom"><a href="#5_uFF0C_u7236_u7EA7div_u5B9A_u4E49__u4F2A_u7C7B_3Aafter_u548Czoom" class="headerlink" title="5，父级div定义 伪类:after和zoom"></a>5，父级div定义 伪类:after和zoom</h4><p>原理：IE8以上和非IE浏览器才支持:after，原理和方法2有点类似，zoom(IE转有属性)可解决ie6,ie7浮动问题<br>优点：浏览器支持好，不容易出现怪问题（目前：大型网站都有使用，如：腾迅，网易，新浪等等）<br>缺点：代码多，不少初学者不理解原理，要两句代码结合使用，才能让主流浏览器都支持。<br>建议：推荐使用，建议定义公共类，以减少CSS代码。</p>
-<h4 id="6_uFF0C_u8BA9_u7236_u5143_u7D20_u4E5F_u4E00_u8D77_u6D6E_u52A8"><a href="#6_uFF0C_u8BA9_u7236_u5143_u7D20_u4E5F_u4E00_u8D77_u6D6E_u52A8" class="headerlink" title="6，让父元素也一起浮动"></a>6，让父元素也一起浮动</h4><p>原理：所有代码一起浮动，就变成了一个整体<br>优点：没有优点<br>缺点：会产生新的浮动问题。<br>建议：不推荐使用，只作了解。</p>
-<h4 id="7_uFF0C_u7236_u5143_u7D20div_u5B9A_u4E49display_3Atable"><a href="#7_uFF0C_u7236_u5143_u7D20div_u5B9A_u4E49display_3Atable" class="headerlink" title="7，父元素div定义display:table"></a>7，父元素div定义display:table</h4><p>原理：将div属性变成表格<br>优点：没有优点<br>缺点：会产生新的未知问题。<br>建议：不推荐使用，只作了解。</p>
-<h4 id="8_uFF0C_u7ED3_u5C3E_u5904_u52A0br_u6807_u7B7Eclear_3Aboth"><a href="#8_uFF0C_u7ED3_u5C3E_u5904_u52A0br_u6807_u7B7Eclear_3Aboth" class="headerlink" title="8，结尾处加br标签clear:both"></a>8，结尾处加br标签clear:both</h4><p>原理：父级div定义zoom:1来解决IE浮动问题，结尾处加 br标签 clear:both<br>建议：不推荐使用，只作了解。<br>总结：建议使用方法3 overflow:hidden触发BFC或方法5 使用after、zoom两种方式解决问题</p>
-<h3 id="u4E09_u3001_u76F8_u5BF9_u5E94_u5B9E_u4F8B_u5982_u4E0B"><a href="#u4E09_u3001_u76F8_u5BF9_u5E94_u5B9E_u4F8B_u5982_u4E0B" class="headerlink" title="三、相对应实例如下"></a>三、相对应实例如下</h3><p>实例1：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="comment">/*解决代码*/</span><span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;&#125;</span></span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>实例2</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span></span>&#125;</span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="comment">/*清除浮动代码*/</span></span><br><span class="line"><span class="class">.clearfloat</span><span class="rules">&#123;<span class="rule"><span class="attribute">clear</span>:<span class="value">both</span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"clearfloat"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>实例3</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="comment">/*解决代码*/</span><span class="rule"><span class="attribute">overflow</span>:<span class="value">hidden</span></span>;&#125;</span></span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>实例4</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="comment">/*解决代码*/</span><span class="rule"><span class="attribute">overflow</span>:<span class="value">auto</span></span></span>&#125;</span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>实例5</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;&#125;</span></span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="comment">/*清除浮动代码*/</span></span><br><span class="line"><span class="class">.clearfloat</span><span class="pseudo">:after</span><span class="rules">&#123;<span class="rule"><span class="attribute">display</span>:<span class="value">block</span></span>;<span class="rule"><span class="attribute">clear</span>:<span class="value">both</span></span>;<span class="rule"><span class="attribute">content</span>:<span class="value"><span class="string">""</span></span></span>;<span class="rule"><span class="attribute">visibility</span>:<span class="value">hidden</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">0</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.clearfloat</span><span class="rules">&#123;<span class="rule"><span class="attribute">zoom</span>:<span class="value"><span class="number">1</span></span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1 clearfloat"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>实例6、实例7、实例8极不推荐，实例略</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1844,21 +1860,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-count">160</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

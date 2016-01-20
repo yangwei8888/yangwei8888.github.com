@@ -170,6 +170,120 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/08/docker/examples/running_ssh_service/" itemprop="url">
+                在Docker中运行SSH进程服务
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/docker/" itemprop="url" rel="index">
+                  <span itemprop="name">docker</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/08/docker/examples/running_ssh_service/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/running_ssh_service/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="u5728Docker_u4E2D_u8FD0_u884CSSH_u8FDB_u7A0B_u670D_u52A1"><a href="#u5728Docker_u4E2D_u8FD0_u884CSSH_u8FDB_u7A0B_u670D_u52A1" class="headerlink" title="在Docker中运行SSH进程服务"></a>在Docker中运行SSH进程服务</h1><p>以下是用<code>Dockerfile</code>设置sshd服务容器，您可以使用连接并检查其他容器的卷,或者可以快速访问测试容器。</p>
+<pre><code># sshd
+#
+# VERSION               0.0.1
+
+FROM     ubuntu:12.04
+MAINTAINER Thatcher R. Peskens &quot;thatcher@dotcloud.com&quot;
+
+# make sure the package repository is up to date
+RUN apt-get update
+
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo &apos;root:screencast&apos; |chpasswd
+
+EXPOSE 22
+CMD    [&quot;/usr/sbin/sshd&quot;, &quot;-D&quot;]
+</code></pre><p>使用如下命令构建镜像：</p>
+<pre><code>$ sudo docker build --rm -t eg_sshd .
+</code></pre><p>然后运行它，你可以使用<code>docker port</code>来找出容器端口22映射到主机的端口</p>
+<pre><code>$ sudo docker run -d -P --name test_sshd eg_sshd
+$ sudo docker port test_sshd 22
+0.0.0.0:49154
+</code></pre><p>现在你可以使用ssh登陆Docker进程的主机IP地址，端口是49154(IP地址可以使用ifconfig获取)：</p>
+<pre><code>$ ssh root@192.168.1.2 -p 49154
+# The password is ``screencast``.
+$$
+</code></pre><p>最后，清理停止的容器，并且删除容器，然后删除镜像。</p>
+<pre><code>$ sudo docker stop test_sshd
+$ sudo docker rm test_sshd
+$ sudo docker rmi eg_sshd
+</code></pre></span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/08/docker/installation/debian/" itemprop="url">
                 Debian支持 Docker
               </a>
@@ -309,8 +423,8 @@ $ sudo service docker restart
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/installation/mac/" itemprop="url">
-                Mac OS X 安装 Docker
+              <a class="post-title-link" href="/2015/12/08/docker/https/" itemprop="url">
+                使用 HTTPS 保护 Docker Socket 进程
               </a>
             
           
@@ -346,8 +460,8 @@ $ sudo service docker restart
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/mac/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/mac/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/https/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/https/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -362,290 +476,12 @@ $ sudo service docker restart
 
       
         
-          <span itemprop="articleBody"><h1 id="Mac_OS_X__u5B89_u88C5_Docker"><a href="#Mac_OS_X__u5B89_u88C5_Docker" class="headerlink" title="Mac OS X 安装 Docker"></a>Mac OS X 安装 Docker</h1><blockquote>
-<p>注意：<br>该 Docker 版本为了支持 Docker 机,于是不再支持 Boot2Docker 命令行。使用 Docker Toolbox 和其它 Docker 工具来安装 Docker 机。</p>
+          <span itemprop="articleBody"><h1 id="u4F7F_u7528_HTTPS__u4FDD_u62A4_Docker_Socket__u8FDB_u7A0B"><a href="#u4F7F_u7528_HTTPS__u4FDD_u62A4_Docker_Socket__u8FDB_u7A0B" class="headerlink" title="使用 HTTPS 保护 Docker Socket 进程"></a>使用 HTTPS 保护 Docker Socket 进程</h1><p>默认情况下，Docker 使用的是无网络环境的 Unix Socket。它可以使用 HTTP Socket 进行通信。</p>
+<p>如果你需要 Docker 使用安全的方式来进行网络通信，你可以使用 <code>tlsverify</code> 标识来启用 TLS，并使用 <code>tlscacert</code> 标识来指定 CA 证书。</p>
+<blockquote>
+<p>警告：使用 TLS 和管理 CA 证书是一个高级话题。在投入生成环境使用之前，你需要自行熟悉了解 OpenSSL，X509 和 TLS 。</p>
+<p>警告：这些 TLS 指令只能生成在 Linux 上工作的证书，Mac OSX 附带的 OpenSSL 版本与 Docker 所需要使用的证书不兼容。</p>
 </blockquote>
-<p>您可以利用 Docker Toolbox 来安装 Docker。Docker Toolbox 提供了以下工具：</p>
-<ul>
-<li>用于运行 docker-machine 二进制文件的 <code>Docker Machine</code></li>
-<li>用于运行 docker 二进行文件的 <code>Docker Engine</code></li>
-<li>用于运行 docker-compose 二进行文件的 <code>Docker Compose (Mac 特有)</code></li>
-<li>Kitematic，Docker 的图形用户界面</li>
-<li>用于 Docker 命令行环且预先配置好的 shell</li>
-<li>Oracle VM VirtualBox</li>
-</ul>
-<p>由于 Docker 的后台程序使用了 Linux 特有的内核特性，所以您不能直接在 OS X 上运行 Docker。相反，您必须使用 <code>docker-machine</code> 来创建并附加一台虚拟机（VM）。该虚拟机需要安装 Linux 操作系统以便在您 Mac 机上运行 Docker。</p>
-<p>####前提条件</p>
-<p>您 Mac 机的 OS X 版本必须大于等于 10.8 “Snow Leopard” 才可以安装 Docker Toolbox。</p>
-<p>###在安装之前先来了解一些关键概念</p>
-<p>当我们在一台 Linux 主机上安装完 Docker 之后，我们的机器中就包含了本地主机和 Docker 主机。如果从网络层来划分，本地主机就代表你的电脑，而 Docker 主机就是运行 container 的那台机器。</p>
-<p>在 Linux 机器上的一种典型安装 Docker 方法：Docker 客户端，Docker 后台程序和 container 会直接运行在您的机器上。这就意味着您可以使用标准的本地主机寻址（例如 <code>localhost:8000</code> 或者 <code>0.0.0.0:8376</code>）来为 Docker container 分配一个地址。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/linux_docker_host.svg" alt="linux_docker_host"></p>
-<p>在 OS X 上安装的 Docker ，其 Docker 后台程序是运行在一个名为 <code>default</code> 的 Linux 虚拟机上的。<code>default</code> 是 Linux 上的一个轻量级的虚拟机，是专门用于在 Mac OS X 机器上运行 Docker 的。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac_docker_host.svg" alt="mac_docker_host"></p>
-<p>在 OS X 中，Docker 主机地址就是 Linux 虚拟机的地址。当你使用 <code>docker-machine</code> 启动虚拟机的时候，该虚拟机会自动获取到 IP 地址。当您开启一个 container 的时候，container 上的端口会映射到虚拟机的端口上。本页面上的实践操作会一一印证上述内容。</p>
-<p>###安装</p>
-<p>如果您有一个正在运行着的 VirtualBox，那么请您在运行安装器（Docker Toolbox）之前务必关闭它。</p>
-<ol>
-<li><p>进入 <a href="https://www.docker.com/toolbox" target="_blank" rel="external">Docker Toolbox</a> 页面。</p>
-</li>
-<li><p>点击 Docker Toolbox 下载链接，进行下载。</p>
-</li>
-<li><p>双击安装包或者通过右击并在快捷菜单中选择“打开”的方式安装 Docker Toolbox。</p>
-<p>此时会弹出“Install Docker Toolbox”（安装 Docker 工具箱）窗口。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-welcome-page.png" alt="mac-welcome-page"></p>
-</li>
-<li><p>点击“继续”（Continue），安装 toolbox。</p>
-<p>此时，toolbox 会展现给你一些选项，供您自定义标准安装。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-page-two.png" alt="mac-page-two"></p>
-<p>默认情况下，标准的 Docker Toolbox 安装是这样的：</p>
-<ul>
-<li>向 <code>/usr/local/bin</code> 目录中添加 Docker 工具的二进制文件。</li>
-<li>修改权限使得这些二进制文件可供任何用户使用。</li>
-<li>更新现有的 VirtualBox 安装。</li>
-</ul>
-<p><br><br>通过点击“自定义”或“更改安装目录”修改这些默认安装值。</p>
-</li>
-<li><p>点击“安装”，执行标准安装。</p>
-<p>系统提示您输入密码。</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-password-prompt.png" alt="mac-password-prompt"></p>
-</li>
-<li><p>输入密码，继续安装</p>
-<p>安装完成后，Docker Toolbox 会为您提供一些信息，通过这些信息您可以完成一些常见的任务。 </p>
-</li>
-<li><p>点击“关闭”，离开当前窗口。</p>
-</li>
-</ol>
-<p>##运行 Docker Container</p>
-<p>想要运行一个 Docker 容器，你需要做如下内容：</p>
-<ul>
-<li>创建一个新的（或开启一台已存在的）Docker 虚拟机</li>
-<li>从您当前的环境切换到新的虚拟机的环境中</li>
-<li>利用 <code>docker</code> 客户端创建，加载并管理 container</li>
-</ul>
-<p>一旦您创建了一台虚拟机，您就可以随时使用它。如同任意一台 VirtualBox 虚拟机，在每次使用它的时候都会保存其配置。</p>
-<p>这里提供两种使用 Docker Toolbox 的方法：使用 Docker 的快速入门终端或使用您的 shell 环境。</p>
-<p>###使用 Docker 的快速入门终端</p>
-<ol>
-<li>打开“应用程序”文件夹或“启动面板”。</li>
-<li><p>找到 Docker 快速入门终端并双击启动它。</p>
-<p>该应用程序：</p>
-<ul>
-<li>开启一个终端窗口</li>
-<li>如果还没有虚拟机的化，请创建一台名叫 <code>default</code> 的虚拟机；如果已经存在这样一台虚拟机，请你开启它。</li>
-<li>将当前终端环境切换到虚拟机环境中。</li>
-</ul>
-<p>一旦启动完成，Docker 快速入门终端会是如下状态：</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/mac-success.png" alt="mac-success"><br>现在，您可以运行 <code>docker</code> 命令了。</p>
-</li>
-<li><p>通过运行 <code>hello-world</code> container 来核实您的安装是否成功。</p>
-</li>
-</ol>
-   <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ docker run hello-world</span><br><span class="line">Unable <span class="built_in">to</span> find image <span class="string">'hello-world:latest'</span> locally</span><br><span class="line"><span class="number">511136</span>ea3c5a: Pull complete</span><br><span class="line"><span class="number">31</span>cbccb51277: Pull complete</span><br><span class="line">e45a5af57b00: Pull complete</span><br><span class="line">hello-world:latest: The image you are pulling has been verified.</span><br><span class="line">Important: image verification is <span class="operator">a</span> tech preview feature <span class="operator">and</span> should <span class="operator">not</span> be</span><br><span class="line">relied <span class="command"><span class="keyword">on</span> <span class="title">to</span> <span class="title">provide</span> <span class="title">security</span>.</span></span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</span><br><span class="line">Hello <span class="built_in">from</span> Docker.</span><br><span class="line">This message shows that your installation appears <span class="built_in">to</span> be working correctly.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">To generate this message, Docker took <span class="operator">the</span> following steps:</span><br><span class="line"><span class="number">1.</span> The Docker client contacted <span class="operator">the</span> Docker daemon.</span><br><span class="line"><span class="number">2.</span> The Docker daemon pulled <span class="operator">the</span> <span class="string">"hello-world"</span> image <span class="built_in">from</span> <span class="operator">the</span> Docker Hub.</span><br><span class="line">   (Assuming <span class="keyword">it</span> was <span class="operator">not</span> already locally available.)</span><br><span class="line"><span class="number">3.</span> The Docker daemon created <span class="operator">a</span> <span class="built_in">new</span> container <span class="built_in">from</span> that image which runs <span class="operator">the</span></span><br><span class="line">   executable that produces <span class="operator">the</span> output you are currently reading.</span><br><span class="line"><span class="number">4.</span> The Docker daemon streamed that output <span class="built_in">to</span> <span class="operator">the</span> Docker client, which sent <span class="keyword">it</span></span><br><span class="line">   <span class="built_in">to</span> your terminal.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">To <span class="keyword">try</span> something more ambitious, you can run <span class="operator">an</span> Ubuntu container <span class="operator">with</span>:</span><br><span class="line">$ docker run -<span class="keyword">it</span> ubuntu bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">For more examples <span class="operator">and</span> ideas, visit:</span><br><span class="line"><span class="keyword">http</span>://docs.docker.com/userguide/</span><br></pre></td></tr></table></figure>
-<p>一个可以和 Docker 工具进行交互的另一种典型方法就是：从您的 shell 命令行入手。</p>
-<p>###使用shell 命令行<br>该部分假设您正在运行一个 Bash shell。您运行的可能是不同的 shell，例如 C shell，但是不用担心，命令都是一样的。</p>
-<ol>
-<li><p>创建一个新的 Docker 虚拟机。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   $ docker-machine <span class="operator"><span class="keyword">create</span> <span class="comment">--driver virtualbox default      </span></span><br><span class="line"></span><br><span class="line">   Creating VirtualBox VM...</span><br><span class="line">   Creating SSH <span class="keyword">key</span>...</span><br><span class="line">   <span class="keyword">Starting</span> VirtualBox VM...</span><br><span class="line">   <span class="keyword">Starting</span> VM...</span><br><span class="line">   <span class="keyword">To</span> see how <span class="keyword">to</span> <span class="keyword">connect</span> Docker <span class="keyword">to</span> this machine, run: docker-machine env <span class="keyword">default</span></span><br><span class="line">   <span class="string">``</span><span class="string">` </span><br><span class="line">  </span><br><span class="line">   这就在 VirtualBox 中创建了一台新的 `</span><span class="keyword">default</span><span class="string">` 虚拟机。</span><br><span class="line">   </span><br><span class="line">   该命令还会在 `</span>~/.docker/machine/machines/<span class="keyword">default</span><span class="string">` 目录下生成一个 docker machine 的配置文件。您只需执行一次 `</span><span class="keyword">create</span><span class="string">` 命令。然后，您可以使用 `</span>docker-machine<span class="string">` 命令来开启，停止，查询并管理虚拟机。</span><br><span class="line"></span><br><span class="line">2. 列出所有可用的 docker machine。</span></span></span><br></pre></td></tr></table></figure>
-<p>$ docker-machine ls<br>NAME                ACTIVE   DRIVER       STATE     URL                         SWARM<br>default             *        virtualbox   Running   tcp://192.168.99.101:2376  </p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   如果您之前安装了现在已经舍弃了的 Boot2Docker 这个应用程序的话或者您运行了 Docker 快速入门终端，在列表中还会有一个 <span class="escape">`d</span>ev<span class="escape">` </span>虚拟机。当   您创建 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的时候，<span class="escape">`d</span>ocker-machine<span class="escape">` </span>命令给出了一些指导，以便您您连接虚拟机。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 获取 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机的环境变量</span><br></pre></td></tr></table></figure>
-<p>$ docker-machine env default<br>export DOCKER_TLS_VERIFY=”1”<br>export DOCKER_HOST=”tcp://192.168.99.101:2376”<br>export DOCKER_CERT_PATH=”/Users/mary/.docker/machine/machines/default”<br>export DOCKER_MACHINE_NAME=”default”</p>
-<h1 id="Run_this_command_to_configure_your_shell_3A"><a href="#Run_this_command_to_configure_your_shell_3A" class="headerlink" title="Run this command to configure your shell:"></a>Run this command to configure your shell:</h1><h1 id="eval__u201C_24_28docker-machine_env_default_29_u201D"><a href="#eval__u201C_24_28docker-machine_env_default_29_u201D" class="headerlink" title="eval “$(docker-machine env default)”"></a>eval “$(docker-machine env default)”</h1><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">4</span>. 连接到 <span class="escape">`d</span>efault<span class="escape">` </span>虚拟机</span><br></pre></td></tr></table></figure>
-<p>$ eval “$(docker-machine env default)”</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">5</span>. 运行 <span class="escape">`h</span>ello-world<span class="escape">` </span>container 来验证您的安装是否已经成功。</span><br></pre></td></tr></table></figure>
-<p>docker run hello-world</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">##学习 Toolbox 安装</span></span><br><span class="line"></span><br><span class="line">Toolbox 将 Docker Engine 的可执行文件和 Docker 的可执行文件下载到您的系统中。当您使用 Docker 快速入门终端或手动创建一个 `<span class="javascript"><span class="keyword">default</span></span>` 虚拟机的时候，Docker Machine 会更新 `<span class="javascript">~<span class="regexp">/.docker/m</span>achine/machines/<span class="keyword">default</span></span>` 文件。该文件夹中包含了虚拟机的配置文件。</span><br><span class="line"></span><br><span class="line">您可以利用 Docker Machine 在系统中创建多个虚拟机，那么也就会有多个虚拟机的配置文件。如果您想要删除某台虚拟机，请您使用 `<span class="javascript">docker-machine rm &lt;machine-name&gt;</span>` 命令。</span><br><span class="line"></span><br><span class="line"><span class="comment">##从 Boot2Docker 迁移</span></span><br><span class="line">如果您现在用的还是 Boot2Docker 的话，在您的本地系统中还会有一个 `<span class="javascript">boot2docker-vm</span>` 虚拟机。为了允许 Docker Machine 管理该台虚拟机，你可以对它进行迁移。</span><br><span class="line"><span class="number">1.</span> 打开一个终端或 Docker 的命令行界面。</span><br><span class="line"><span class="number">2.</span> 输入以下命令。</span><br></pre></td></tr></table></figure>
-<p>docker-machine create -d virtualbox –virtualbox-import-boot2docker-vm boot2docker-vm docker-vm<br>```</p>
-</li>
-<li>使用 <code>docker-machine</code> 命令与该台要被迁移的虚拟机进行交互。<br><code>docker-machine</code> 的子命令和 <code>boot2docker</code> 的子命令比起来还是有一些不同之处的。下面这个表列出了对比了二者的不同并介绍其功能。   </li>
-</ol>
-<table>
-<thead>
-<tr>
-<th><strong><code>boot2docker</code></strong></th>
-<th><strong><code>docker-machine</code></strong></th>
-<th><strong><code>docker-machine</code></strong> description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>init</td>
-<td>create</td>
-<td>Creates a new docker host.</td>
-</tr>
-<tr>
-<td>up</td>
-<td>start</td>
-<td>Starts a stopped machine.</td>
-</tr>
-<tr>
-<td>ssh</td>
-<td>ssh</td>
-<td>Runs a command or interactive ssh session on the machine.</td>
-</tr>
-<tr>
-<td>save</td>
-<td>-</td>
-<td>Not applicable.</td>
-</tr>
-<tr>
-<td>down</td>
-<td>stop</td>
-<td>Stops a running machine.</td>
-</tr>
-<tr>
-<td>poweroff</td>
-<td>stop</td>
-<td>Stops a running machine.</td>
-</tr>
-<tr>
-<td>reset</td>
-<td>restart</td>
-<td>Restarts a running machine.</td>
-</tr>
-<tr>
-<td>config</td>
-<td>inspect</td>
-<td>Prints machine configuration details.</td>
-</tr>
-<tr>
-<td>status</td>
-<td>ls</td>
-<td>Lists all machines and their status.</td>
-</tr>
-<tr>
-<td>info</td>
-<td>inspect</td>
-<td>Displays a machine’s details.</td>
-</tr>
-<tr>
-<td>ip</td>
-<td>ip</td>
-<td>Displays the machine’s ip address.</td>
-</tr>
-<tr>
-<td>shellinit</td>
-<td>env</td>
-<td>Displays shell commands needed to configure your shell to interact with a machine.</td>
-</tr>
-<tr>
-<td>delete</td>
-<td>rm</td>
-<td>Removes a machine.</td>
-</tr>
-<tr>
-<td>download</td>
-<td>-</td>
-<td>Not applicable.</td>
-</tr>
-<tr>
-<td>upgrade</td>
-<td>upgrade</td>
-<td>Upgrades a machine’s Docker client to the latest stable release.</td>
-</tr>
-</tbody>
-</table>
-<p>##Mac OS X 上 Docker 的实例<br>通过了解本小节，您可以尝试在虚拟机上进行一些可行的 container 任务。现在，您应该有一台运行着的虚拟机，且通过 shell 脚本可以连接到该虚拟机。为了验证上面所说的，可以执行如下命令来验证:</p>
-<pre><code>$ docker-machine ls
-NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-default             *        virtualbox   Running   tcp://192.168.99.100:2376   
-</code></pre><p>该台处于 <code>ACTIVE</code> 状态的虚拟机，即本例中的 default 虚拟机，就是您的环境所指向的虚拟机。</p>
-<p>###访问 container 的端口</p>
-<ol>
-<li><p>在 DOCKER_HOST 上开启一个NGINX container。</p>
-<pre><code>$ docker run -d -P --name web nginx
-</code></pre><p>一般来说，<code>docker run</code> 命令会开启一个 container，并运行它，最后关闭它。加上 <code>-d</code> 这个参数，container 就可以在您执行了 <code>docker run</code> 这条命令后继续在后台运行了。加上 <code>-P</code> 这个参数就可以将 container 监听的那个端口告知给 Docker Host；这样您就可以在您的 Mac 机上访问 container 了。</p>
-</li>
-<li><p>执行 <code>docker ps</code> 命令，查看运行着的 container</p>
-<pre><code>CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
-5fb65ff765e9        nginx:latest  
-</code></pre><p>此时，您会发现 <code>nginx</code> 依然在后台运行。</p>
-</li>
-<li><p>查看 container 的端口</p>
-<pre><code>$ docker port web
-443/tcp -&gt; 0.0.0.0:49156
-80/tcp -&gt; 0.0.0.0:49157
-</code></pre><p>该命令显示出的内容会告诉你 <code>web</code> container 的 <code>80</code> 端口已经映射到了 Docker Host 上的 <code>49157</code> 端口上。</p>
-</li>
-<li><p>在您的浏览器中输入地址 <code>http://localhost:49157</code>（localhost 就是 0.0.0.0）。</p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/bad_host1.png" alt="bad_host1"><br>并没有生效，其原因就是 <code>DOCKER_HOST</code> 的地址并不是你本地的机器的地址（0.0.0.0），而是您的 Docker 虚拟机的地址。</p>
-</li>
-<li><p>获取 Docker 虚拟机（即 <code>default</code>）的地址。</p>
-<pre><code>$ docker-machine ip default
-192.168.59.103
-</code></pre></li>
-<li><p>在您的浏览器中输入地址 <code>http://192.168.59.103:49157</code></p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/good_host1.png" alt="good_host1"><br>成功了！</p>
-</li>
-<li><p>如果您想停止并删除正在运行的 <code>nginx</code> container 的话，请执行如下操作：</p>
-<pre><code>$ docker stop web
-$ docker rm web
-</code></pre></li>
-</ol>
-<p>###为容器挂载一个卷</p>
-<p>当您开启一个 container 的时候，系统会自动将您本机中的 <code>/Users/username</code> 目录共享给 Docker 虚拟机。通过本次共享，您可以将该目录挂载到您的 container 上。下面的内容将会介绍如何做到这些。</p>
-<ol>
-<li><p>跳转到您的用户 <code>$HOME</code> 目录下。</p>
-<pre><code>$ cd $HOME
-</code></pre></li>
-<li><p>创建一个新的 <code>site</code> 目录。</p>
-<pre><code>$ mkdir site
-</code></pre></li>
-<li><p>跳转到 <code>site</code> 目录中。</p>
-<pre><code>$ cd site
-</code></pre></li>
-<li><p>创建一个新的 <code>index.html</code> 文件。</p>
-<pre><code>$ echo &quot;my new site&quot; &gt; index.html
-</code></pre></li>
-<li><p>开启一个新 <code>nginx</code> container 并将 <code>html</code> 目录替换为 <code>site</code> 目录。</p>
-<pre><code>$ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
-</code></pre></li>
-<li><p>获取到 <code>mysite</code> 这个 container 的端口。</p>
-<pre><code>$ docker port mysite
-80/tcp -&gt; 0.0.0.0:49166
-443/tcp -&gt; 0.0.0.0:49165
-</code></pre></li>
-<li><p>在浏览器中输入地址：</p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/newsite_view1.png" alt="newsite_view1"></p>
-</li>
-<li><p>立即添加一个文件到 <code>$HOME/siet</code> 目录下。</p>
-<pre><code>$ echo &quot;This is cool&quot; &gt; cool.html
-</code></pre></li>
-<li><p>在浏览器中输入地址：</p>
-<p> <img src="http://7xlbtp.com1.z0.glb.clouddn.com/cool_view1.png" alt="cool_view1"></p>
-</li>
-<li><p>停止然后删除正在运行的 <code>mysite</code> container。</p>
-<pre><code>$ docker stop mysite
-$ docker rm mysite
-</code></pre></li>
-</ol>
-<p>##更新 Docker Toolbox</p>
-<p>为更新Docker Toolbox, 需要下载并重新运行<a href="https://docker.com/toolbox/" target="_blank" rel="external">Docker Toolbox安装器</a>.</p>
-<p>##卸载 Docker Toolbox</p>
-<p>按照以下步骤卸载Toolbox：</p>
-<ol>
-<li><p>列出所有的虚拟机</p>
-<pre><code>$ docker-machine ls
-NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-dev                 *        virtualbox   Running   tcp://192.168.99.100:2376   
-my-docker-machine            virtualbox   Stopped                               
-default                      virtualbox   Stopped  
-</code></pre></li>
-<li><p>删除（列出的）每一台虚拟机.</p>
-<pre><code>$ docker-machine rm dev
-Successfully removed dev
-</code></pre><p>删除一台虚拟机，意味着从<code>VirtualBox</code>和<code>~/.docker/machine/machines</code>目录中同时删除虚拟机文件。 </p>
-</li>
-<li><p>从“应用程序“文件夹中删除Docker快捷终端（Quickstart Terminal）和Kitematic.</p>
-</li>
-<li><p>从/usr/local/bin文件夹中删除docker, docker-compose和 docker-machine命令文件.</p>
-<pre><code>$ rm /usr/local/bin/docker
-</code></pre></li>
-<li><p>从系统中删除 <code>~/.docker</code> 文件夹.</p>
-</li>
-</ol>
-<p>##学习更多</p>
-<p>使用”docker-machine help”命令可以列出关于Docker Machine的全部命令行参考信息.参照<a href="https://docs.docker.com/machine/" target="_blank" rel="external">Docker Machine文档</a>来获得关于如何使用 SSH 或者 SCP 访问虚拟机的信息。<br>接下来，可以继续了解<a href="https://docs.docker.com/userguide" target="_blank" rel="external">Docker用户手册</a> . 如果对使用Kitematic图形界面工具感兴趣，可以参考阅读 <a href="https://docs.docker.com/kitematic/userguide/" target="_blank" rel="external">Kitermatic用户手册</a>.</p>
 </span>
         
       
@@ -2307,92 +2143,6 @@ Successfully removed dev
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="url">
-                ionic进阶开发中的命令使用
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-24T00:00:00+08:00" content="2015-10-24">
-            2015-10-24
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-client/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-client</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h2 id="ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF"><a href="#ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF" class="headerlink" title="ionic 开发构建之路"></a>ionic 开发构建之路</h2><h3 id="1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE"><a href="#1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE" class="headerlink" title="1，创建一个自定义路径的项目"></a>1，创建一个自定义路径的项目</h3><p>如何基于现有的代码路径创建一个项目</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic start projectPath repositryPath</span><br><span class="line">eg:</span><br><span class="line">ionic start ./demo "E:\github\qvm\dist" #注意带上引号，否则报错了，这里如果需要做的话只需要做到将dist的目录创建就可以了，而且文件使用相对路径</span><br><span class="line"></span><br><span class="line">ionic serve -p 80 #在80端口启动调试服务并自动watch</span><br><span class="line">ionic platform add android/ios</span><br><span class="line">ionic run/emulate android/ios</span><br><span class="line"></span><br><span class="line">ionic io init #添加签名和授权</span><br><span class="line">ionic resources -i a.png #上传app icon图片，默认icon放在resources下面</span><br><span class="line">ionic resources -s a.png #上传app 启动图片图片，默认icon放在resources下面</span><br></pre></td></tr></table></figure>
-<h3 id="2_uFF0C_u547D_u4EE4_u884C_u7FFB_u8BD1_u6307_u5357"><a href="#2_uFF0C_u547D_u4EE4_u884C_u7FFB_u8BD1_u6307_u5357" class="headerlink" title="2，命令行翻译指南"></a>2，命令行翻译指南</h3><hr>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic命令行指令:</span><br><span class="line">start [options] &lt;PATH&gt; [template] .............  在制定的目录中创建一个项目</span><br><span class="line">                                    [options] 命令行任意的标识</span><br><span class="line">                                    &lt;PATH&gt; 创建项目的目录，必填</span><br><span class="line">                                   [template] 起始模板，可以使用github库，本地路径或代码包，默认使用<span class="string">"tabs"</span>模板</span><br><span class="line">      [--appname|-a]  .........................  制定app的名称 (注意名称加引号)</span><br><span class="line">      [--id|-i]  ..............................  app的包名 &lt;widget id&gt; 配置, 例如: com.mycompany.myapp</span><br><span class="line">      [--no-cordova|-w]  ......................  创建一个不带cordova 环境的基础框架，Cordova提供了一组设备相关的API，通过这组API，移动应用能够以JavaScript访问原生的设备功能，如摄像头、麦克风等。如果创建与原生无关的app，则可以使用-w</span><br><span class="line">      [--sass|-s]  ............................  设置使用sass预处理器</span><br><span class="line">      [--list|-l]  ............................  可用的起始模板</span><br><span class="line">      [--io-app-id]  ..........................  指定Ionic.io使用的app ID</span><br><span class="line">      [--template|-t]  ........................  指定项目的初始模板</span><br><span class="line">      [--zip-file|-z]  ........................  指定项目初始模板的zip包下载url地址</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">serve [options] ...............................  启动本地服务器进行开发测试 dev/testing</span><br><span class="line">      [--consolelogs|-c]  .....................  输入app的控制台到ionic的控制台显示</span><br><span class="line">      [--serverlogs|-s]  ......................  输入本地服务器日志到ionic的控制台显示</span><br><span class="line">      [--port|-p]  ............................  指定本地服务器的开发端口 (<span class="number">8100</span>默认)</span><br><span class="line">      [--livereload-port|-r]  .................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">      [--nobrowser|-b]  .......................  不自动打开浏览器</span><br><span class="line">      [--nolivereload|-d]  ....................  不使用livereload</span><br><span class="line">      [--noproxy|-x]  .........................  不使用代理</span><br><span class="line">      [--address]  ............................  使用指定的host地址打开</span><br><span class="line">      [--all|-a]  .............................  所有地址上启动调试 (<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>)</span><br><span class="line">      [--browser|-w]  .........................  指定使用的浏览器 (safari, firefox, chrome)</span><br><span class="line">      [--browseroption|-o]  ...................  指定一个具体路径打开 (<span class="regexp">/#/</span>tab/dash)</span><br><span class="line">      [--lab|-l]  .............................  在多种平台系统和多个屏幕下打开测试</span><br><span class="line">      [--nogulp]  .............................  服务器开启时不运行gulp</span><br><span class="line">      [--platform|-t]  ........................  指定的平台模拟打开 (ios/android)</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">platform [options] &lt;PLATFORM&gt; .................  添加创建app的平台</span><br><span class="line">         [--noresources|-r]  ..................  不使用默认的app logo和启动画面</span><br><span class="line">         [--nosave|-e]  .......................  不保存平台配置到package.json画面</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">run [options] &lt;PLATFORM&gt; ......................  在连接的设备上启动app</span><br><span class="line">    [--livereload|-l]  ........................ 实时刷新设备中文件</span><br><span class="line">    [--port|-p]  ..............................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">    [--livereload-port|-r]  ...................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">    [--consolelogs|-c]  .......................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">    [--serverlogs|-s]  ........................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">    [--debug|--release]  ...................... 生成发布版本</span><br><span class="line">    [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">emulate [options] &lt;PLATFORM&gt; ..................  在连接的模拟器上启动app</span><br><span class="line">        [--livereload|-l]  ....................  实时刷新设备中文件</span><br><span class="line">        [--port|-p]  ..........................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">        [--livereload-port|-r]  ...............  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">        [--consolelogs|-c]  ...................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">        [--serverlogs|-s]  ....................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">        [--debug|--release]  .................. 生成发布版本</span><br><span class="line">        [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">build [options] &lt;PLATFORM&gt; ....................  未指定平台构建一个app</span><br><span class="line">      [--nohooks|-n]  .........................  不使用Cordova的调用</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">plugin add [options] &lt;SPEC&gt; ................... 添加一个Cordova插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是插件ID，本地路径或者git地址</span><br><span class="line">       [--searchpath &lt;directory&gt;]  ............  当使用ID时，优先查找目录，而不是git的url</span><br><span class="line">       [--nosave|-e]  .........................  不保存插件到package.json文件</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">resources .....................................  自动生成app图标和启动画面图片 (beta)</span><br><span class="line">                      将图片放在 ./resources 目录下，命名为splash.png或icon， 文件类型为 .png, .ai, and .psd</span><br><span class="line">                      Icon大小为<span class="number">192</span>x192 px的无圆角图片.</span><br><span class="line">                      splash大小为<span class="number">2208</span>x2208 px, 并把要显示的内容至于中间.</span><br><span class="line">          [--icon|-i]  ........................  生成logo图标</span><br><span class="line">          [--splash|-s]  ......................  生成启动画面图片</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">upload ........................................ 上传app到ionic账户</span><br><span class="line">       [--email|-e]  ..........................  Ionic账户邮箱</span><br><span class="line">       [--password|-p]  .......................  Ionic账户密码</span><br><span class="line">       [--note]  ..............................  上传描述</span><br><span class="line">       [--deploy &lt;channel_tag&gt;]  ..............  部署上传的APP到开发通道</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">share &lt;EMAIL&gt; .................................  分享app到邮箱</span><br><span class="line">                                                 &lt;EMAIL&gt; 要分享的邮箱</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">lib [options] [update] ........................  获取ionic的库版本或升级ionic库</span><br><span class="line">                                                 [update] 升级Ionic框架的www/lib/ionic</span><br><span class="line">    [--version|-v]  ...........................  指定版本，否则使用最新版本</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">setup [sass] .................................. 使用工具配置项目 (beta)</span><br><span class="line">                                                 [sass] 设置项目使用sass预处理</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">io &lt;command&gt; ..................................  集成app到ionic.io平台服务 (alpha)</span><br><span class="line">                                                 &lt;command&gt; init</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">security &lt;command&gt; [options] ..................  保存app平台上的签名证书(alpha)</span><br><span class="line">                                                 &lt;command&gt; profiles list, profiles add <span class="string">"&lt;name&gt;"</span>, credentials android, or credentials ios</span><br><span class="line">         [--profile &lt;tag&gt;]  ...................  (credentials &lt;platform&gt;) 指定profile证书保存的路径</span><br><span class="line">         [--keystore|-s &lt;path&gt;]  ..............  (credentials android) 指定 keystore文件路径</span><br><span class="line">         [--keystore-password|-p &lt;password&gt;]  .  (credentials android) 指定app的 keystore password (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--key-alias|-k &lt;alias&gt;]  ............  (credentials android) 指定app的key alias</span><br><span class="line">         [--key-password|-w &lt;password&gt;]  ......  (credentials android) 指定app的key password  (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--cert|-c &lt;path&gt;]  ..................  (credentials ios) 指定p12 文件的路径</span><br><span class="line">         [--cert-password|-p &lt;password&gt;]  .....  (credentials ios)指定 certificate 密码 (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--provisioning-profile|-r &lt;path&gt;]  ..  (credentials ios) 指定 .mobileprovision 文件路径</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">push ..........................................  上传 APNS 和 GCM 证书到 Ionic Push (alpha)</span><br><span class="line">     [--ios-dev-cert]  ........................  上传开发的 .p12文件到 Ionic Push</span><br><span class="line">     [--ios-prod-cert]  .......................  上传发布的 .p12文件到Ionic Push</span><br><span class="line">     [--production-mode=y,n]  .................  Tell Ionic Push to use production (y) or sandbox (n) APNS servers</span><br><span class="line">     [--google-api-key &lt;your-gcm-api-key&gt;]  ...  设置app 早Ionic Push的 GCM API key</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">package &lt;command&gt; [options] ...................  使用ionic打包构建app</span><br><span class="line">                                                 &lt;command&gt; build android, build</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ios, list, info, or download</span><br><span class="line">        [--release]  ..........................  (构建 &lt;platform&gt;) 标记为发布版</span><br><span class="line">        [--profile|-p &lt;tag&gt;]  .................  (构建 &lt;platform&gt;) 指定证书或安全签名</span><br><span class="line">        [--destination|-d &lt;path&gt;]  ............  (download) 指定打包下载的输出目录</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">   </span><br><span class="line">config &lt;command&gt; [key] [value] ................  设置ionic的运行环境(alpha)</span><br><span class="line">                                                 &lt;command&gt; set, unset, build, or info</span><br><span class="line">                                                 [key] 设置的key</span><br><span class="line">                                                 [value] 设置的值</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">browser &lt;command&gt; [browser] ...................  添加另一个浏览器给一个平台</span><br><span class="line">                                                 &lt;command&gt; <span class="string">"add remove rm info versions upgrade list ls revert"</span></span><br><span class="line">                                                 [browser] 需要操作的浏览器 (Crosswalk)</span><br><span class="line">        [--nosave|-n]  ........................  不保存平台和插件到package.json</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">service add [options] &lt;SPEC&gt; .................. 添加ionic服务包并安装需要的插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是服务名称或git</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">add [name] .................................... 添加可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要添加的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">remove [name] ................................. 移除可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要移除的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">list ..........................................  查看项目可用的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ions ..........................................  查看可使用的图标</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">templates .....................................  查看可用的起始模板</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">info ..........................................  查看用户的运行环境</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">help [command] ................................  查看某个命令的帮助文档</span><br><span class="line">                                                 [command] 要查看帮助文档的命令</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">link [appId] ..................................  设置APP的Ionic App ID</span><br><span class="line">                                                 [appId] 设置的app id</span><br><span class="line">     [--reset|-r]  ............................  重置appid</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">hooks [add|remove|permissions|perm] ...........  管理 Cordova调用</span><br><span class="line">                                                 [add|remove|permissions|perm] 添加，移除，修改默认cordavo调用的权限</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">state &lt;COMMAND&gt; ...............................  保存或恢复当前app的状态到package.json文件中</span><br><span class="line">                                                 &lt;COMMAND&gt; [ save | restore | clear | reset ]</span><br><span class="line">      [save]  .................................  保存平台和插件</span><br><span class="line">      [restore]  .............................. 恢复平台和插件</span><br><span class="line">      [clear]  ................................  清除平台和插件</span><br><span class="line">      [reset]  ................................  重置平台和插件</span><br><span class="line">      [--plugins]  ............................  只对插件操作</span><br><span class="line">      [--platforms]  ..........................  只对平台操作</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">docs &lt;TOPIC&gt; ..................................  打开Ionic文档</span><br><span class="line">                                                 &lt;TOPIC&gt; 要浏览的文档内容，使用ls可以查看所有</span><br></pre></td></tr></table></figure></span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2431,21 +2181,21 @@ Successfully removed dev
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-count">160</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

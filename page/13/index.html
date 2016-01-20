@@ -170,6 +170,92 @@
           
           
             
+              <a class="post-title-link" href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="url">
+                ionic进阶开发中的命令使用
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-24T00:00:00+08:00" content="2015-10-24">
+            2015-10-24
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/frontend-client/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-client</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h2 id="ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF"><a href="#ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF" class="headerlink" title="ionic 开发构建之路"></a>ionic 开发构建之路</h2><h3 id="1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE"><a href="#1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE" class="headerlink" title="1，创建一个自定义路径的项目"></a>1，创建一个自定义路径的项目</h3><p>如何基于现有的代码路径创建一个项目</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic start projectPath repositryPath</span><br><span class="line">eg:</span><br><span class="line">ionic start ./demo "E:\github\qvm\dist" #注意带上引号，否则报错了，这里如果需要做的话只需要做到将dist的目录创建就可以了，而且文件使用相对路径</span><br><span class="line"></span><br><span class="line">ionic serve -p 80 #在80端口启动调试服务并自动watch</span><br><span class="line">ionic platform add android/ios</span><br><span class="line">ionic run/emulate android/ios</span><br><span class="line"></span><br><span class="line">ionic io init #添加签名和授权</span><br><span class="line">ionic resources -i a.png #上传app icon图片，默认icon放在resources下面</span><br><span class="line">ionic resources -s a.png #上传app 启动图片图片，默认icon放在resources下面</span><br></pre></td></tr></table></figure>
+<h3 id="2_uFF0C_u547D_u4EE4_u884C_u7FFB_u8BD1_u6307_u5357"><a href="#2_uFF0C_u547D_u4EE4_u884C_u7FFB_u8BD1_u6307_u5357" class="headerlink" title="2，命令行翻译指南"></a>2，命令行翻译指南</h3><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic命令行指令:</span><br><span class="line">start [options] &lt;PATH&gt; [template] .............  在制定的目录中创建一个项目</span><br><span class="line">                                    [options] 命令行任意的标识</span><br><span class="line">                                    &lt;PATH&gt; 创建项目的目录，必填</span><br><span class="line">                                   [template] 起始模板，可以使用github库，本地路径或代码包，默认使用<span class="string">"tabs"</span>模板</span><br><span class="line">      [--appname|-a]  .........................  制定app的名称 (注意名称加引号)</span><br><span class="line">      [--id|-i]  ..............................  app的包名 &lt;widget id&gt; 配置, 例如: com.mycompany.myapp</span><br><span class="line">      [--no-cordova|-w]  ......................  创建一个不带cordova 环境的基础框架，Cordova提供了一组设备相关的API，通过这组API，移动应用能够以JavaScript访问原生的设备功能，如摄像头、麦克风等。如果创建与原生无关的app，则可以使用-w</span><br><span class="line">      [--sass|-s]  ............................  设置使用sass预处理器</span><br><span class="line">      [--list|-l]  ............................  可用的起始模板</span><br><span class="line">      [--io-app-id]  ..........................  指定Ionic.io使用的app ID</span><br><span class="line">      [--template|-t]  ........................  指定项目的初始模板</span><br><span class="line">      [--zip-file|-z]  ........................  指定项目初始模板的zip包下载url地址</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">serve [options] ...............................  启动本地服务器进行开发测试 dev/testing</span><br><span class="line">      [--consolelogs|-c]  .....................  输入app的控制台到ionic的控制台显示</span><br><span class="line">      [--serverlogs|-s]  ......................  输入本地服务器日志到ionic的控制台显示</span><br><span class="line">      [--port|-p]  ............................  指定本地服务器的开发端口 (<span class="number">8100</span>默认)</span><br><span class="line">      [--livereload-port|-r]  .................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">      [--nobrowser|-b]  .......................  不自动打开浏览器</span><br><span class="line">      [--nolivereload|-d]  ....................  不使用livereload</span><br><span class="line">      [--noproxy|-x]  .........................  不使用代理</span><br><span class="line">      [--address]  ............................  使用指定的host地址打开</span><br><span class="line">      [--all|-a]  .............................  所有地址上启动调试 (<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>)</span><br><span class="line">      [--browser|-w]  .........................  指定使用的浏览器 (safari, firefox, chrome)</span><br><span class="line">      [--browseroption|-o]  ...................  指定一个具体路径打开 (<span class="regexp">/#/</span>tab/dash)</span><br><span class="line">      [--lab|-l]  .............................  在多种平台系统和多个屏幕下打开测试</span><br><span class="line">      [--nogulp]  .............................  服务器开启时不运行gulp</span><br><span class="line">      [--platform|-t]  ........................  指定的平台模拟打开 (ios/android)</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">platform [options] &lt;PLATFORM&gt; .................  添加创建app的平台</span><br><span class="line">         [--noresources|-r]  ..................  不使用默认的app logo和启动画面</span><br><span class="line">         [--nosave|-e]  .......................  不保存平台配置到package.json画面</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">run [options] &lt;PLATFORM&gt; ......................  在连接的设备上启动app</span><br><span class="line">    [--livereload|-l]  ........................ 实时刷新设备中文件</span><br><span class="line">    [--port|-p]  ..............................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">    [--livereload-port|-r]  ...................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">    [--consolelogs|-c]  .......................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">    [--serverlogs|-s]  ........................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">    [--debug|--release]  ...................... 生成发布版本</span><br><span class="line">    [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">emulate [options] &lt;PLATFORM&gt; ..................  在连接的模拟器上启动app</span><br><span class="line">        [--livereload|-l]  ....................  实时刷新设备中文件</span><br><span class="line">        [--port|-p]  ..........................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">        [--livereload-port|-r]  ...............  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">        [--consolelogs|-c]  ...................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">        [--serverlogs|-s]  ....................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">        [--debug|--release]  .................. 生成发布版本</span><br><span class="line">        [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">build [options] &lt;PLATFORM&gt; ....................  未指定平台构建一个app</span><br><span class="line">      [--nohooks|-n]  .........................  不使用Cordova的调用</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">plugin add [options] &lt;SPEC&gt; ................... 添加一个Cordova插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是插件ID，本地路径或者git地址</span><br><span class="line">       [--searchpath &lt;directory&gt;]  ............  当使用ID时，优先查找目录，而不是git的url</span><br><span class="line">       [--nosave|-e]  .........................  不保存插件到package.json文件</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">resources .....................................  自动生成app图标和启动画面图片 (beta)</span><br><span class="line">                      将图片放在 ./resources 目录下，命名为splash.png或icon， 文件类型为 .png, .ai, and .psd</span><br><span class="line">                      Icon大小为<span class="number">192</span>x192 px的无圆角图片.</span><br><span class="line">                      splash大小为<span class="number">2208</span>x2208 px, 并把要显示的内容至于中间.</span><br><span class="line">          [--icon|-i]  ........................  生成logo图标</span><br><span class="line">          [--splash|-s]  ......................  生成启动画面图片</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">upload ........................................ 上传app到ionic账户</span><br><span class="line">       [--email|-e]  ..........................  Ionic账户邮箱</span><br><span class="line">       [--password|-p]  .......................  Ionic账户密码</span><br><span class="line">       [--note]  ..............................  上传描述</span><br><span class="line">       [--deploy &lt;channel_tag&gt;]  ..............  部署上传的APP到开发通道</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">share &lt;EMAIL&gt; .................................  分享app到邮箱</span><br><span class="line">                                                 &lt;EMAIL&gt; 要分享的邮箱</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">lib [options] [update] ........................  获取ionic的库版本或升级ionic库</span><br><span class="line">                                                 [update] 升级Ionic框架的www/lib/ionic</span><br><span class="line">    [--version|-v]  ...........................  指定版本，否则使用最新版本</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">setup [sass] .................................. 使用工具配置项目 (beta)</span><br><span class="line">                                                 [sass] 设置项目使用sass预处理</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">io &lt;command&gt; ..................................  集成app到ionic.io平台服务 (alpha)</span><br><span class="line">                                                 &lt;command&gt; init</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">security &lt;command&gt; [options] ..................  保存app平台上的签名证书(alpha)</span><br><span class="line">                                                 &lt;command&gt; profiles list, profiles add <span class="string">"&lt;name&gt;"</span>, credentials android, or credentials ios</span><br><span class="line">         [--profile &lt;tag&gt;]  ...................  (credentials &lt;platform&gt;) 指定profile证书保存的路径</span><br><span class="line">         [--keystore|-s &lt;path&gt;]  ..............  (credentials android) 指定 keystore文件路径</span><br><span class="line">         [--keystore-password|-p &lt;password&gt;]  .  (credentials android) 指定app的 keystore password (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--key-alias|-k &lt;alias&gt;]  ............  (credentials android) 指定app的key alias</span><br><span class="line">         [--key-password|-w &lt;password&gt;]  ......  (credentials android) 指定app的key password  (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--cert|-c &lt;path&gt;]  ..................  (credentials ios) 指定p12 文件的路径</span><br><span class="line">         [--cert-password|-p &lt;password&gt;]  .....  (credentials ios)指定 certificate 密码 (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--provisioning-profile|-r &lt;path&gt;]  ..  (credentials ios) 指定 .mobileprovision 文件路径</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">push ..........................................  上传 APNS 和 GCM 证书到 Ionic Push (alpha)</span><br><span class="line">     [--ios-dev-cert]  ........................  上传开发的 .p12文件到 Ionic Push</span><br><span class="line">     [--ios-prod-cert]  .......................  上传发布的 .p12文件到Ionic Push</span><br><span class="line">     [--production-mode=y,n]  .................  Tell Ionic Push to use production (y) or sandbox (n) APNS servers</span><br><span class="line">     [--google-api-key &lt;your-gcm-api-key&gt;]  ...  设置app 早Ionic Push的 GCM API key</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">package &lt;command&gt; [options] ...................  使用ionic打包构建app</span><br><span class="line">                                                 &lt;command&gt; build android, build</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ios, list, info, or download</span><br><span class="line">        [--release]  ..........................  (构建 &lt;platform&gt;) 标记为发布版</span><br><span class="line">        [--profile|-p &lt;tag&gt;]  .................  (构建 &lt;platform&gt;) 指定证书或安全签名</span><br><span class="line">        [--destination|-d &lt;path&gt;]  ............  (download) 指定打包下载的输出目录</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">   </span><br><span class="line">config &lt;command&gt; [key] [value] ................  设置ionic的运行环境(alpha)</span><br><span class="line">                                                 &lt;command&gt; set, unset, build, or info</span><br><span class="line">                                                 [key] 设置的key</span><br><span class="line">                                                 [value] 设置的值</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">browser &lt;command&gt; [browser] ...................  添加另一个浏览器给一个平台</span><br><span class="line">                                                 &lt;command&gt; <span class="string">"add remove rm info versions upgrade list ls revert"</span></span><br><span class="line">                                                 [browser] 需要操作的浏览器 (Crosswalk)</span><br><span class="line">        [--nosave|-n]  ........................  不保存平台和插件到package.json</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">service add [options] &lt;SPEC&gt; .................. 添加ionic服务包并安装需要的插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是服务名称或git</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">add [name] .................................... 添加可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要添加的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">remove [name] ................................. 移除可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要移除的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">list ..........................................  查看项目可用的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ions ..........................................  查看可使用的图标</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">templates .....................................  查看可用的起始模板</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">info ..........................................  查看用户的运行环境</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">help [command] ................................  查看某个命令的帮助文档</span><br><span class="line">                                                 [command] 要查看帮助文档的命令</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">link [appId] ..................................  设置APP的Ionic App ID</span><br><span class="line">                                                 [appId] 设置的app id</span><br><span class="line">     [--reset|-r]  ............................  重置appid</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">hooks [add|remove|permissions|perm] ...........  管理 Cordova调用</span><br><span class="line">                                                 [add|remove|permissions|perm] 添加，移除，修改默认cordavo调用的权限</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">state &lt;COMMAND&gt; ...............................  保存或恢复当前app的状态到package.json文件中</span><br><span class="line">                                                 &lt;COMMAND&gt; [ save | restore | clear | reset ]</span><br><span class="line">      [save]  .................................  保存平台和插件</span><br><span class="line">      [restore]  .............................. 恢复平台和插件</span><br><span class="line">      [clear]  ................................  清除平台和插件</span><br><span class="line">      [reset]  ................................  重置平台和插件</span><br><span class="line">      [--plugins]  ............................  只对插件操作</span><br><span class="line">      [--platforms]  ..........................  只对平台操作</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">docs &lt;TOPIC&gt; ..................................  打开Ionic文档</span><br><span class="line">                                                 &lt;TOPIC&gt; 要浏览的文档内容，使用ls可以查看所有</span><br></pre></td></tr></table></figure></span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/10/16/ouvens.github.io/frontend-javascript/2015-10-16-es6-under-babel/" itemprop="url">
                 Babel下的ES6兼容性与规范
               </a>
@@ -1480,6 +1566,93 @@
           
           
             
+              <a class="post-title-link" href="/2015/09/29/stack/" itemprop="url">
+                技术栈
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-09-29T07:56:29+08:00" content="2015-09-29">
+            2015-09-29
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/09/29/stack/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/29/stack/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
+<p><a href="http://yangwei.info/test/WebFrontEndStack-master/ux/WebFrontEndStack.htm" target="_blank" rel="external">2.WebFrontEndStack</a></p>
+<p><a href="http://yangwei.info/test/DatabaseStack-master/ux/DatabaseStack.htm" target="_blank" rel="external">3.DatabaseStack</a></p>
+<p><a href="http://coodict.github.io/javascript-in-one-pic/" target="_blank" rel="external">4.javascript-in-one-pic</a></p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/09/29/xbox/" itemprop="url">
                 js绘图
               </a>
@@ -1655,8 +1828,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/09/29/stack/" itemprop="url">
-                技术栈
+              <a class="post-title-link" href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/" itemprop="url">
+                Mock.js前端开发cgi数据模拟工具
               </a>
             
           
@@ -1666,8 +1839,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-09-29T07:56:29+08:00" content="2015-09-29">
-            2015-09-29
+          <time itemprop="dateCreated" datetime="2015-09-20T00:00:00+08:00" content="2015-09-20">
+            2015-09-20
           </time>
         </span>
 
@@ -1676,8 +1849,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                  <span itemprop="name">frontend-javascript</span>
                 </a>
               </span>
 
@@ -1692,8 +1865,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/09/29/stack/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/29/stack/" itemprop="commentsCount"></span>
+            <a href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -1708,10 +1881,33 @@
 
       
         
-          <span itemprop="articleBody"><p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
-<p><a href="http://yangwei.info/test/WebFrontEndStack-master/ux/WebFrontEndStack.htm" target="_blank" rel="external">2.WebFrontEndStack</a></p>
-<p><a href="http://yangwei.info/test/DatabaseStack-master/ux/DatabaseStack.htm" target="_blank" rel="external">3.DatabaseStack</a></p>
-<p><a href="http://coodict.github.io/javascript-in-one-pic/" target="_blank" rel="external">4.javascript-in-one-pic</a></p>
+          <span itemprop="articleBody"><h3 id="1-__u4EC0_u4E48_u662FMockjs"><a href="#1-__u4EC0_u4E48_u662FMockjs" class="headerlink" title="1. 什么是Mockjs"></a>1. 什么是Mockjs</h3><p><a href="http://mockjs.com/" target="_blank" rel="external">http://mockjs.com/</a></p>
+<p>&emsp;&emsp;Mockjs是个能够拦截页面ajax请求并模拟返回数据的小工具，借助Mockjs，前端开发中在后台测试接口还没有给的时候就可以自己拦截请求模拟数据进行愉快的开发了，所以只要制定好了协议，前后端分离开发的成本可以降到基本为0，也不需要联调工具了</p>
+<h3 id="2_uFF0CMockjs_u4E3B_u8981_u529F_u80FD"><a href="#2_uFF0CMockjs_u4E3B_u8981_u529F_u80FD" class="headerlink" title="2，Mockjs主要功能"></a>2，Mockjs主要功能</h3><ul>
+<li>基于数据模板生成模拟数据</li>
+<li>基于html模板申城模拟数据</li>
+<li>拦截并模拟ajax请求</li>
+</ul>
+<p>&emsp;&emsp;当然mock模拟的数据不只是随便的输出字符串，它包含了各种格式的模拟数据，例如姓名，段落，时间，日期，图片地址，身份证号，电话，邮箱，ip等等，所以以后搞数据自动校验什么的再也不用手动输入测试了。也就是Mock自动了做了很多测试调试中的那部分体力活，我们只需要安静的写代码就好了。<br>&emsp;&emsp;数据模板则是根据一个模板自动根据某个规则产生数据，例如序号产生自增的数组等</p>
+<h6 id="u6570_u636E_u6A21_u677F_u5B9A_u4E49_DTD"><a href="#u6570_u636E_u6A21_u677F_u5B9A_u4E49_DTD" class="headerlink" title="数据模板定义 DTD"></a>数据模板定义 DTD</h6><p>数据模板中的每个属性由 3 部分构成：属性名、生成规则、属性值：</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">'name</span>|rule': <span class="keyword">value</span></span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<p>属性名 和 生成规则 之间用 | 分隔。生成规则是可选的。生成规则 有 7 种格式：</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">'name</span>|min-max': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|count': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|min-max.dmin-dmax': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|min-max.dcount': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|count.dmin-dmax': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|count.dcount': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|+step': <span class="keyword">value</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;生成规则的含义需要依赖属性值才能确定。属性值中可以含有@占位符。属性值还指定了最终值的初始值和类型，其中属性值的生成是根据Mockjs里面的随机几个固定字符串生成的。</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">'list|1-10'</span>: [&#123;</span><br><span class="line">        <span class="string">'id|+1'</span>: <span class="number">1</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成结果为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "<span class="attribute">list</span>":<span class="value">[</span><br><span class="line">        &#123;"<span class="attribute">id</span>":<span class="value"><span class="number">1</span></span>&#125;,</span><br><span class="line">        &#123;"<span class="attribute">id</span>":<span class="value"><span class="number">2</span></span>&#125;,</span><br><span class="line">        &#123;"<span class="attribute">id</span>":<span class="value"><span class="number">3</span></span>&#125;,</span><br><span class="line">        &#123;"<span class="attribute">id</span>":<span class="value"><span class="number">4</span></span>&#125;,&#123;"<span class="attribute">id</span>":<span class="value"><span class="number">5</span></span>&#125;</span><br><span class="line">    ]</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>属性值的类型则可实用@来制定格式</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attribute">name</span>: <span class="string">'@chineseName'</span>,</span><br><span class="line">    <span class="attribute">ip</span>: <span class="string">'@ip'</span>,</span><br><span class="line">    <span class="attribute">email</span>: <span class="string">'@email'</span>,</span><br><span class="line">    <span class="attribute">avatar</span>: <span class="string">'@image'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成结果为：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attribute">name</span>: <span class="string">"朱信生"</span>, </span><br><span class="line">    <span class="attribute">ip</span>: <span class="string">"248.149.5.158"</span>, </span><br><span class="line">    <span class="attribute">email</span>: <span class="string">"u.wilson@lee.edu"</span>, </span><br><span class="line">    <span class="attribute">avatar</span>: <span class="string">"http://dummyimage.com/180x150"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以中文名字生成为例子，看下Mockjs是怎么实现的：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">chineseName: function(<span class="keyword">count</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> surnames = <span class="string">"赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳酆鲍史唐"</span>.<span class="keyword">split</span>(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">var</span> forenames = <span class="string">"贵福生龙元全国胜学祥才发武新利清飞彬富顺信子杰涛昌成康星光天达安岩中茂进林有坚和彪博绍功松善厚庆磊民友裕河哲江超浩亮政谦亨奇固之轮翰朗伯宏言若鸣朋斌梁栋维启克伦翔旭鹏月莺媛艳瑞凡佳嘉琼勤珍贞莉桂娣叶璧璐娅琦晶妍茜秋珊莎锦黛青倩婷姣婉娴瑾颖露瑶怡婵雁蓓"</span>.<span class="keyword">split</span>(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">count</span> !== <span class="string">"number"</span>) &#123;</span><br><span class="line">        <span class="keyword">count</span> = Math.random() &gt; .66 ? 2 : 3;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> surname = this.pick(surnames);</span><br><span class="line">    <span class="keyword">var</span> forename = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">count</span> = <span class="keyword">count</span> - 1;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = 0; i &lt; <span class="keyword">count</span>; i++) &#123;</span><br><span class="line">        forename += this.pick(forenames);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> surname + forename;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好吧，看完也是服了作者了~</p>
+<h3 id="3-_u4F7F_u7528_u5B9E_u4F8B"><a href="#3-_u4F7F_u7528_u5B9E_u4F8B" class="headerlink" title="3.使用实例"></a>3.使用实例</h3><p>用起来也很简单</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"jquery-1.11.3.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"mock.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">Mock.mock(<span class="string">'./data.json'</span>,&#123;</span><br><span class="line">    name: <span class="string">'@chineseName'</span>,</span><br><span class="line">    ip: <span class="string">'@ip'</span>,</span><br><span class="line">    email: <span class="string">'@email'</span>,</span><br><span class="line">    phone: <span class="string">'@phone'</span>,</span><br><span class="line">    avatar: <span class="string">'@image'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'./data.json'</span>,</span><br><span class="line">    type: <span class="string">'get'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        index:<span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    dataType: <span class="string">'json'</span>,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res);</span><br><span class="line">    &#125;,</span><br><span class="line">    error: <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当然，mock也支持require，sea，cmd方式引用，整体上是一个非常轻量实用的工具。</p>
 </span>
         
       
@@ -1845,220 +2041,6 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/" itemprop="url">
-                Mock.js前端开发cgi数据模拟工具
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-20T00:00:00+08:00" content="2015-09-20">
-            2015-09-20
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="1-__u4EC0_u4E48_u662FMockjs"><a href="#1-__u4EC0_u4E48_u662FMockjs" class="headerlink" title="1. 什么是Mockjs"></a>1. 什么是Mockjs</h3><p><a href="http://mockjs.com/" target="_blank" rel="external">http://mockjs.com/</a></p>
-<p>&emsp;&emsp;Mockjs是个能够拦截页面ajax请求并模拟返回数据的小工具，借助Mockjs，前端开发中在后台测试接口还没有给的时候就可以自己拦截请求模拟数据进行愉快的开发了，所以只要制定好了协议，前后端分离开发的成本可以降到基本为0，也不需要联调工具了</p>
-<h3 id="2_uFF0CMockjs_u4E3B_u8981_u529F_u80FD"><a href="#2_uFF0CMockjs_u4E3B_u8981_u529F_u80FD" class="headerlink" title="2，Mockjs主要功能"></a>2，Mockjs主要功能</h3><ul>
-<li>基于数据模板生成模拟数据</li>
-<li>基于html模板申城模拟数据</li>
-<li>拦截并模拟ajax请求</li>
-</ul>
-<p>&emsp;&emsp;当然mock模拟的数据不只是随便的输出字符串，它包含了各种格式的模拟数据，例如姓名，段落，时间，日期，图片地址，身份证号，电话，邮箱，ip等等，所以以后搞数据自动校验什么的再也不用手动输入测试了。也就是Mock自动了做了很多测试调试中的那部分体力活，我们只需要安静的写代码就好了。<br>&emsp;&emsp;数据模板则是根据一个模板自动根据某个规则产生数据，例如序号产生自增的数组等</p>
-<h6 id="u6570_u636E_u6A21_u677F_u5B9A_u4E49_DTD"><a href="#u6570_u636E_u6A21_u677F_u5B9A_u4E49_DTD" class="headerlink" title="数据模板定义 DTD"></a>数据模板定义 DTD</h6><p>数据模板中的每个属性由 3 部分构成：属性名、生成规则、属性值：</p>
-<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">'name</span>|rule': <span class="keyword">value</span></span><br></pre></td></tr></table></figure>
-<p>例如：</p>
-<p>属性名 和 生成规则 之间用 | 分隔。生成规则是可选的。生成规则 有 7 种格式：</p>
-<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">'name</span>|min-max': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|count': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|min-max.dmin-dmax': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|min-max.dcount': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|count.dmin-dmax': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|count.dcount': <span class="keyword">value</span></span><br><span class="line"><span class="symbol">'name</span>|+step': <span class="keyword">value</span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;生成规则的含义需要依赖属性值才能确定。属性值中可以含有@占位符。属性值还指定了最终值的初始值和类型，其中属性值的生成是根据Mockjs里面的随机几个固定字符串生成的。</p>
-<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">'list|1-10'</span>: [&#123;</span><br><span class="line">        <span class="string">'id|+1'</span>: <span class="number">1</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>生成结果为：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "<span class="attribute">list</span>":<span class="value">[</span><br><span class="line">        &#123;"<span class="attribute">id</span>":<span class="value"><span class="number">1</span></span>&#125;,</span><br><span class="line">        &#123;"<span class="attribute">id</span>":<span class="value"><span class="number">2</span></span>&#125;,</span><br><span class="line">        &#123;"<span class="attribute">id</span>":<span class="value"><span class="number">3</span></span>&#125;,</span><br><span class="line">        &#123;"<span class="attribute">id</span>":<span class="value"><span class="number">4</span></span>&#125;,&#123;"<span class="attribute">id</span>":<span class="value"><span class="number">5</span></span>&#125;</span><br><span class="line">    ]</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
-<p>属性值的类型则可实用@来制定格式</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attribute">name</span>: <span class="string">'@chineseName'</span>,</span><br><span class="line">    <span class="attribute">ip</span>: <span class="string">'@ip'</span>,</span><br><span class="line">    <span class="attribute">email</span>: <span class="string">'@email'</span>,</span><br><span class="line">    <span class="attribute">avatar</span>: <span class="string">'@image'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>生成结果为：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attribute">name</span>: <span class="string">"朱信生"</span>, </span><br><span class="line">    <span class="attribute">ip</span>: <span class="string">"248.149.5.158"</span>, </span><br><span class="line">    <span class="attribute">email</span>: <span class="string">"u.wilson@lee.edu"</span>, </span><br><span class="line">    <span class="attribute">avatar</span>: <span class="string">"http://dummyimage.com/180x150"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以中文名字生成为例子，看下Mockjs是怎么实现的：</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">chineseName: function(<span class="keyword">count</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> surnames = <span class="string">"赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳酆鲍史唐"</span>.<span class="keyword">split</span>(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">var</span> forenames = <span class="string">"贵福生龙元全国胜学祥才发武新利清飞彬富顺信子杰涛昌成康星光天达安岩中茂进林有坚和彪博绍功松善厚庆磊民友裕河哲江超浩亮政谦亨奇固之轮翰朗伯宏言若鸣朋斌梁栋维启克伦翔旭鹏月莺媛艳瑞凡佳嘉琼勤珍贞莉桂娣叶璧璐娅琦晶妍茜秋珊莎锦黛青倩婷姣婉娴瑾颖露瑶怡婵雁蓓"</span>.<span class="keyword">split</span>(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">count</span> !== <span class="string">"number"</span>) &#123;</span><br><span class="line">        <span class="keyword">count</span> = Math.random() &gt; .66 ? 2 : 3;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> surname = this.pick(surnames);</span><br><span class="line">    <span class="keyword">var</span> forename = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">count</span> = <span class="keyword">count</span> - 1;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = 0; i &lt; <span class="keyword">count</span>; i++) &#123;</span><br><span class="line">        forename += this.pick(forenames);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> surname + forename;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>好吧，看完也是服了作者了~</p>
-<h3 id="3-_u4F7F_u7528_u5B9E_u4F8B"><a href="#3-_u4F7F_u7528_u5B9E_u4F8B" class="headerlink" title="3.使用实例"></a>3.使用实例</h3><p>用起来也很简单</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"jquery-1.11.3.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"mock.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">Mock.mock(<span class="string">'./data.json'</span>,&#123;</span><br><span class="line">    name: <span class="string">'@chineseName'</span>,</span><br><span class="line">    ip: <span class="string">'@ip'</span>,</span><br><span class="line">    email: <span class="string">'@email'</span>,</span><br><span class="line">    phone: <span class="string">'@phone'</span>,</span><br><span class="line">    avatar: <span class="string">'@image'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'./data.json'</span>,</span><br><span class="line">    type: <span class="string">'get'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        index:<span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    dataType: <span class="string">'json'</span>,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res);</span><br><span class="line">    &#125;,</span><br><span class="line">    error: <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>当然，mock也支持require，sea，cmd方式引用，整体上是一个非常轻量实用的工具。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/08/20/ouvens.github.io/frontend-javascript/2015-08-20-mvvm-qvm-frame/" itemprop="url">
-                移动端mvvm框架qvm实现
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-08-20T00:00:00+08:00" content="2015-08-20">
-            2015-08-20
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/08/20/ouvens.github.io/frontend-javascript/2015-08-20-mvvm-qvm-frame/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/20/ouvens.github.io/frontend-javascript/2015-08-20-mvvm-qvm-frame/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><hr>
-<p><a href="https://github.com/ouvens/qvm" target="_blank" rel="external">gitHub地址</a></p>
-<h3 id="1_uFF0C_u79FB_u52A8_u7AEFminimvvm_u6846_u67B6qvm_u5B9E_u73B0"><a href="#1_uFF0C_u79FB_u52A8_u7AEFminimvvm_u6846_u67B6qvm_u5B9E_u73B0" class="headerlink" title="1，移动端minimvvm框架qvm实现"></a>1，移动端minimvvm框架qvm实现</h3><p>qvm概念，一个适用于移动端的mini mvvm(什么是mvvm？没了解的同学自己去了解)框架。参考了angular和vuejs的设计实现思路，并进行简化封装，目前使用的zepto基本依赖库，使用最少的代码实现了基础功能版。</p>
-<h3 id="2_uFF0C_u4E3A_u4EC0_u4E48_u8981_u505A_u5B83"><a href="#2_uFF0C_u4E3A_u4EC0_u4E48_u8981_u505A_u5B83" class="headerlink" title="2，为什么要做它"></a>2，为什么要做它</h3><p>PC浏览器时代，实现mvvm有着麻烦的兼容性问题。而在移动浏览器时代，浏览器原生的支持可以让我们用最少的代码来实现一个mvvm框架库，来最大程度的减少移动端业务代码的开发工作。预计对于中大型的移动前端应用项目，使用mvvm能减少至少30%的业务量，让项目更容易维护。<br>   (不过目前仍有很多不完善的地方后面需要持续改进)</p>
-<h3 id="3_uFF0C_u53CA_u5176_u7B80_u5355_u7684API_u4ECB_u7ECD"><a href="#3_uFF0C_u53CA_u5176_u7B80_u5355_u7684API_u4ECB_u7ECD" class="headerlink" title="3，及其简单的API介绍"></a>3，及其简单的API介绍</h3><p>directive: 以q-开始的属性为我们定义的元素动作指令</p>
-<h6 id="vm_u6A21_u578B_u7ED3_u6784_u4ECB_u7ECD_uFF1A"><a href="#vm_u6A21_u578B_u7ED3_u6784_u4ECB_u7ECD_uFF1A" class="headerlink" title="vm模型结构介绍："></a>vm模型结构介绍：</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">$id: 823832887973495, //qvm对象的全局id,每个qvm对象对应一个</span><br><span class="line">$elem: #div, //对应的view</span><br><span class="line">$model: &#123;  //viewModel,通过directive关联view和model的操作</span><br><span class="line">    text:&#123;</span><br><span class="line">        ns: ns, //获取对象data或指令的namespace</span><br><span class="line">        accessor: accessor, //同一的外部访问器，vm通过修改它来改变</span><br><span class="line">        key: text, //指令名称</span><br><span class="line">        directive： [directive], //指令集</span><br><span class="line">        setter: function, //对象设置方法</span><br><span class="line">        getter: function, //对象获取值方法</span><br><span class="line">        tpl: #div //模板字符串,部分指令需要使用，如repeat</span><br><span class="line">        //后续可能还要增加</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">data: &#123;      //对应的model，即数据层</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="3-1_q-text__u6539_u53D8_u8282_u70B9innerHTML"><a href="#3-1_q-text__u6539_u53D8_u8282_u70B9innerHTML" class="headerlink" title="3.1 q-text 改变节点innerHTML"></a>3.1 q-text 改变节点innerHTML</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"demo"</span> q-text=<span class="string">'text'</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"js/zepto.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"js/qvm.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript"></span><br><span class="line"><span class="keyword">var</span> vm = qvm.<span class="keyword">get</span>(&#123;</span><br><span class="line">    selector: <span class="string">'#demo'</span>,</span><br><span class="line">    data:&#123;</span><br><span class="line">        text: <span class="string">'&lt;h2&gt;Hello World!&lt;/h2&gt;'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    vm.text.accessor = <span class="string">'&lt;h2&gt;Fuck World!&lt;/h2&gt;'</span>;    <span class="comment">//渲染html，通过改变accessor改变innerHTML。</span></span><br><span class="line">&#125;,<span class="number">4000</span>)</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<h6 id="3-2_q-class__u6539_u53D8_u8282_u70B9class_u5C5E_u6027"><a href="#3-2_q-class__u6539_u53D8_u8282_u70B9class_u5C5E_u6027" class="headerlink" title="3.2 q-class 改变节点class属性"></a>3.2 q-class 改变节点class属性</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">.red&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.green&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div id="demo" q-text='text' q-class="color"&gt;&lt;/div&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/zepto.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/qvm.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var vm = qvm.get(&#123;</span><br><span class="line">    selector: '#demo',</span><br><span class="line">    data:&#123;</span><br><span class="line">        text: '&lt;h2&gt;Hello World!&lt;/h2&gt;',</span><br><span class="line">        color: 'red'</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    vm.text.accessor = '&lt;h2&gt;Fuck World!&lt;/h2&gt;';</span><br><span class="line">    vm.class.accessor = 'green';</span><br><span class="line">&#125;,4000)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h6 id="3-3_q-attr_u6570_u636E_u5C5E_u6027_u8D4B_u503C"><a href="#3-3_q-attr_u6570_u636E_u5C5E_u6027_u8D4B_u503C" class="headerlink" title="3.3 q-attr数据属性赋值"></a>3.3 q-attr数据属性赋值</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;<span class="xml"><span class="tag">&lt;<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">id</span>=<span class="value">"demo"</span> <span class="attribute">q-attr-src</span>=<span class="value">"img"</span> <span class="attribute">width</span>=<span class="value">"50"</span> <span class="attribute">height</span>=<span class="value">"30"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"js/zepto.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"js/qvm.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript"></span><br><span class="line"><span class="keyword">var</span> vm = qvm.<span class="keyword">get</span>(&#123;</span><br><span class="line">    selector: <span class="string">'#demo'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        img: <span class="string">'http://9.url.cn/edu/banner/img/505d9c39_760_300.jpg'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    vm.attr_src.accessor = <span class="string">'http://9.url.cn/edu/banner/img/880facff_760_300.jpg'</span>;</span><br><span class="line">&#125;,<span class="number">4000</span>);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>vm.class.accessor = ‘green’; 改变元素的class类，从red改为green。<br>这里注意一下使用attr- 和data-指令使用attr_src和data_src来读取访问器，后面需要统一接口。</p>
-<h6 id="3-4_q-data_u6570_u636E_u5C5E_u6027_u8D4B_u503C"><a href="#3-4_q-data_u6570_u636E_u5C5E_u6027_u8D4B_u503C" class="headerlink" title="3.4 q-data数据属性赋值"></a>3.4 q-data数据属性赋值</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"demo"</span> q-data-title=<span class="string">"text"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">img</span> <span class="attribute">q-attr-src</span>=<span class="value">"img"</span> <span class="attribute">width</span>=<span class="value">"50"</span> <span class="attribute">height</span>=<span class="value">"30"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"js/zepto.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"js/qvm.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript"></span><br><span class="line"><span class="keyword">var</span> vm = qvm.<span class="keyword">get</span>(&#123;</span><br><span class="line">    selector: <span class="string">'#demo'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        text: <span class="string">'PS 大神教程'</span>,</span><br><span class="line">        img: <span class="string">'http://9.url.cn/edu/banner/img/505d9c39_760_300.jpg'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    vm.data_title.accessor = <span class="string">'艺术人生'</span>;</span><br><span class="line">&#125;,<span class="number">4000</span>);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>此方法用于改变data属性。</p>
-<h6 id="3-5_q-repeat__u5D4C_u5957_u4F7F_u7528"><a href="#3-5_q-repeat__u5D4C_u5957_u4F7F_u7528" class="headerlink" title="3.5 q-repeat 嵌套使用"></a>3.5 q-repeat 嵌套使用</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">    &lt;style&gt;</span><br><span class="line">    .red&#123;</span><br><span class="line">        color: red;</span><br><span class="line">    &#125;</span><br><span class="line">    .green&#123;</span><br><span class="line">        color: green;</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;div id="demo" q-class="color" q-repeat="list"&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        &lt;img q-attr-src="img" width="50" height="30"&gt;&lt;span q-text="title" q-class="color"&gt;&lt;/span&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="js/zepto.js"&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="js/qvm.js"&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">    var list =[&#123;</span><br><span class="line">                img: 'http://9.url.cn/edu/banner/img/10b0af94_760_300.jpg',</span><br><span class="line">                title: '音乐改变世界'</span><br><span class="line">            &#125;,&#123;</span><br><span class="line">                img: 'http://9.url.cn/edu/banner/img/880facff_760_300.jpg',</span><br><span class="line">                title: 'PS 大神教程'</span><br><span class="line">            &#125;,&#123;</span><br><span class="line">                img: 'http://9.url.cn/edu/banner/img/505d9c39_760_300.jpg',</span><br><span class="line">                title: '艺术人生'</span><br><span class="line">            &#125;];</span><br><span class="line">    var vm = qvm.get(&#123;</span><br><span class="line">        selector: '#demo',</span><br><span class="line">        data:&#123;</span><br><span class="line">            text: '&lt;h2&gt;Hello World!&lt;/h2&gt;',</span><br><span class="line">            color: 'red',</span><br><span class="line">            list: list</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">        delete list[2];</span><br><span class="line">        list[0].title='music change the world';</span><br><span class="line">        list[1].title='PS master learning';</span><br><span class="line">        vm.class.accessor = 'green';</span><br><span class="line">        vm.repeat.accessor = list;</span><br><span class="line">    &#125;,4000);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">delete list[2];</span><br><span class="line">list[0].title='music change the world';</span><br><span class="line">list[1].title='PS master learning';</span><br><span class="line">改变repeat渲染数组的内容，只对数组进行修改和删除长度。</span><br></pre></td></tr></table></figure>
-<h6 id="3-6_q-_u5BF9_u8C61_u5185_u90E8_u6E32_u67D3"><a href="#3-6_q-_u5BF9_u8C61_u5185_u90E8_u6E32_u67D3" class="headerlink" title="3.6 q-对象内部渲染"></a>3.6 q-对象内部渲染</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">.red&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.green&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div id="demo" q-repeat="list"&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;span q-class="color" q-text="title"&gt;&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;</span><br><span class="line">            &lt;img q-attr-src="img.src" width="50" height="30"&gt;</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/zepto.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/qvm.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var data = &#123;</span><br><span class="line">    title: '&lt;h2&gt;Hello World!&lt;/h2&gt;',</span><br><span class="line">    color: 'red',</span><br><span class="line">    img: &#123;</span><br><span class="line">        src: 'http://9.url.cn/edu/banner/img/880facff_760_300.jpg'</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var vm = qvm.get(&#123;</span><br><span class="line">    selector: '#demo',</span><br><span class="line">    data: &#123;</span><br><span class="line">        list: data</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    data.color = 'green';</span><br><span class="line">    data.title = '&lt;h2&gt;Fuck World!&lt;/h2&gt;';</span><br><span class="line">    data.img.src = 'http://9.url.cn/edu/banner/img/10b0af94_760_300.jpg';</span><br><span class="line">    vm.repeat.accessor = data;</span><br><span class="line">&#125;,4000);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>qvm支持嵌套渲染，但是viewModel以定义的最外层数据为准。</p>
-<h6 id="3-7_q-on_u7B80_u5355_u4E8B_u4EF6_u7ED1_u5B9A"><a href="#3-7_q-on_u7B80_u5355_u4E8B_u4EF6_u7ED1_u5B9A" class="headerlink" title="3.7 q-on简单事件绑定"></a>3.7 q-on简单事件绑定</h6><p>定义的动作和事件名，目前子节点上的on代理在根元素上，避免了重复绑定，如果根节点和根节点同时含有on方法，则按照冒泡的原则进行事件处理。实现时使用了根节点循环向下传递的方式。</p>
-<h6 id="u793A_u4F8B"><a href="#u793A_u4F8B" class="headerlink" title="示例"></a>示例</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">.red&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.green&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div id="demo" q-repeat="list" q-on="click|action"&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;span q-class="color" q-text="title"&gt;&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;</span><br><span class="line">            &lt;img q-attr-src="img.src" width="50" height="30"&gt;</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/zepto.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/qvm.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var data = &#123;</span><br><span class="line">    title: '&lt;h2&gt;点我!&lt;/h2&gt;',</span><br><span class="line">    color: 'red',</span><br><span class="line">    img: &#123;</span><br><span class="line">        src: 'http://9.url.cn/edu/banner/img/880facff_760_300.jpg'</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var vm = qvm.get(&#123;</span><br><span class="line">    selector: '#demo',</span><br><span class="line">    data: &#123;</span><br><span class="line">        list: data</span><br><span class="line">    &#125;,</span><br><span class="line">    action: function()&#123;</span><br><span class="line">        alert('点击事件!');</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>目前实现了节点事件代理到最外层的qmv对象元素上。不对内部元素做绑定。</p>
-<h6 id="3-8_q-*_u81EA_u5B9A_u4E49directive"><a href="#3-8_q-*_u81EA_u5B9A_u4E49directive" class="headerlink" title="3.8 q-*自定义directive"></a>3.8 q-*自定义directive</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">.red&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.green&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div id="demo" q-repeat="list" q-on="click|action" q-self='selfProcess'&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;span q-class="color" q-text="title"&gt;&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;</span><br><span class="line">            &lt;img q-attr-src="img.src" width="50" height="30"&gt;</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/zepto.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/qvm.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var data = &#123;</span><br><span class="line">    title: '&lt;h2&gt;点我!&lt;/h2&gt;',</span><br><span class="line">    color: 'red',</span><br><span class="line">    img: &#123;</span><br><span class="line">        src: 'http://9.url.cn/edu/banner/img/880facff_760_300.jpg'</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var vm = qvm.get(&#123;</span><br><span class="line">    selector: '#demo',</span><br><span class="line">    data: &#123;</span><br><span class="line">        list: data</span><br><span class="line">    &#125;,</span><br><span class="line">    action: function()&#123;</span><br><span class="line">        alert('点击事件!');</span><br><span class="line">    &#125;,</span><br><span class="line">    selfProcess: function(key, vm)&#123;</span><br><span class="line">        console.log(key, vm);</span><br><span class="line">        alert('我是一个自定义处理指令!嘿嘿嘿~')</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>子定义的指令需要遵守一定的规则，例如下面q-self对应的指令为selfProcess的函数，则节点扫描时会自动执行self指令的selfProcess函数。</p>
-<p>TODO：<br>更好的dirtycheck实现，类似virtual dom的方式~</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2097,21 +2079,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-count">160</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

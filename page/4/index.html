@@ -170,6 +170,200 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter2/08_Enumerations/" itemprop="url">
+                第二章-08枚举（Enumerations）
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-25T12:00:19+08:00" content="2015-12-25">
+            2015-12-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                  <span itemprop="name">swift-cn</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/25/swift-cn/chapter2/08_Enumerations/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter2/08_Enumerations/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="u679A_u4E3E_uFF08Enumerations_uFF09"><a href="#u679A_u4E3E_uFF08Enumerations_uFF09" class="headerlink" title="枚举（Enumerations）"></a>枚举（Enumerations）</h1><hr>
+<blockquote>
+<p>1.0<br>翻译：<a href="https://github.com/yankuangshi" target="_blank" rel="external">yankuangshi</a><br>校对：<a href="https://github.com/shinyzhu" target="_blank" rel="external">shinyzhu</a></p>
+<p>2.0<br>翻译+校对：<a href="https://github.com/futantan" target="_blank" rel="external">futantan</a></p>
+<p>2.1<br>翻译：<a href="https://github.com/Channe" target="_blank" rel="external">Channe</a><br>校对：<a href="http://codebuild.me" target="_blank" rel="external">shanks</a></p>
+</blockquote>
+<p>本页内容包含：</p>
+<ul>
+<li><a href="/#enumeration_syntax">枚举语法（Enumeration Syntax）</a></li>
+<li><a href="/#matching_enumeration_values_with_a_switch_statement">使用 Switch 语句匹配枚举值（Matching Enumeration Values with a Switch Statement）</a></li>
+<li><a href="/#associated_values">关联值（Associated Values）</a></li>
+<li><a href="/#raw_values">原始值（Raw Values）</a></li>
+<li><a href="/#recursive_enumerations">递归枚举（Recursive Enumerations）</a></li>
+</ul>
+<p><em>枚举</em>为一组相关的值定义了一个共同的类型，使你可以在你的代码中以类型安全的方式来使用这些值。</p>
+<p>如果你熟悉 C 语言，你会知道在 C 语言中，枚举会为一组整型值分配相关联的名称。Swift 中的枚举更加灵活，不必给每一个枚举成员提供一个值。如果给枚举成员提供一个值（称为“原始”值），则该值的类型可以是字符串，字符，或是一个整型值或浮点数。</p>
+<p>此外，枚举成员可以指定任意类型的关联值存储到枚举成员中，就像其他语言中的联合体（unions）和变体（variants）。每一个枚举成员都可以有适当类型的关联值。</p>
+<p>在 Swift 中，枚举类型是一等（first-class）类型。它们采用了很多在传统上只被类（class）所支持的特性，例如计算型属性（computed properties），用于提供枚举值的附加信息，实例方法（instance methods），用于提供和枚举值相关联的功能。枚举也可以定义构造函数（initializers）来提供一个初始值；可以在原始实现的基础上扩展它们的功能；还可以遵守协议（protocols）来提供标准的功能。</p>
+<p>欲了解更多相关信息，请参见<a href="/./10_Properties.html">属性（Properties）</a>，<a href="/./11_Methods.html">方法（Methods）</a>，<a href="/./14_Initialization.html">构造过程（Initialization）</a>，<a href="/./21_Extensions.html">扩展（Extensions）</a>和<a href="/./22_Protocols.html">协议（Protocols）</a>。</p>
+<p><a name="enumeration_syntax"></a></p>
+<h2 id="u679A_u4E3E_u8BED_u6CD5"><a href="#u679A_u4E3E_u8BED_u6CD5" class="headerlink" title="枚举语法"></a>枚举语法</h2><p>使用<code>enum</code>关键词来创建枚举并且把它们的整个定义放在一对大括号内：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">SomeEnumeration</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 枚举定义放在这里</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是用枚举表示指南针四个方向的例子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CompassPoint</span> </span>&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="type">North</span></span><br><span class="line">	<span class="keyword">case</span> <span class="type">South</span></span><br><span class="line">	<span class="keyword">case</span> <span class="type">East</span></span><br><span class="line">	<span class="keyword">case</span> <span class="type">West</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>枚举中定义的值（如 <code>North</code>，<code>South</code>，<code>East</code>和<code>West</code>）是这个枚举的<em>成员值</em>（或<em>成员</em>）。你使用<code>case</code>关键字来定义一个新的枚举成员值。</p>
+<blockquote>
+<p>注意<br>与 C 和 Objective-C 不同，Swift 的枚举成员在被创建时不会被赋予一个默认的整型值。在上面的<code>CompassPoint</code>例子中，<code>North</code>，<code>South</code>，<code>East</code>和<code>West</code>不会被隐式地赋值为<code>0</code>，<code>1</code>，<code>2</code>和<code>3</code>。相反，这些枚举成员本身就是完备的值，这些值的类型是已经明确定义好的<code>CompassPoint</code>类型。</p>
+</blockquote>
+<p>多个成员值可以出现在同一行上，用逗号隔开：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Planet</span> </span>&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="type">Mercury</span>, <span class="type">Venus</span>, <span class="type">Earth</span>, <span class="type">Mars</span>, <span class="type">Jupiter</span>, <span class="type">Saturn</span>, <span class="type">Uranus</span>, <span class="type">Neptune</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个枚举定义了一个全新的类型。像 Swift 中其他类型一样，它们的名字（例如<code>CompassPoint</code>和<code>Planet</code>）应该以一个大写字母开头。给枚举类型起一个单数名字而不是复数名字，以便于读起来更加容易理解：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> directionToHead = <span class="type">CompassPoint</span>.<span class="type">West</span></span><br></pre></td></tr></table></figure>
+<p><code>directionToHead</code>的类型可以在它被<code>CompassPoint</code>的某个值初始化时推断出来。一旦<code>directionToHead</code>被声明为<code>CompassPoint</code>类型，你可以使用更简短的点语法将其设置为另一个<code>CompassPoint</code>的值：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">directionToHead = .<span class="type">East</span></span><br></pre></td></tr></table></figure>
+<p>当<code>directionToHead</code>的类型已知时，再次为其赋值可以省略枚举类型名。在使用具有显式类型的枚举值时，这种写法让代码具有更好的可读性。</p>
+<p><a name="matching_enumeration_values_with_a_switch_statement"></a></p>
+<h2 id="u4F7F_u7528_Switch__u8BED_u53E5_u5339_u914D_u679A_u4E3E_u503C"><a href="#u4F7F_u7528_Switch__u8BED_u53E5_u5339_u914D_u679A_u4E3E_u503C" class="headerlink" title="使用 Switch 语句匹配枚举值"></a>使用 Switch 语句匹配枚举值</h2><p>你可以使用<code>switch</code>语句匹配单个枚举值：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">directionToHead = .<span class="type">South</span></span><br><span class="line"><span class="keyword">switch</span> directionToHead &#123;</span><br><span class="line">	<span class="keyword">case</span> .<span class="type">North</span>:</span><br><span class="line">	    <span class="built_in">print</span>(<span class="string">"Lots of planets have a north"</span>)</span><br><span class="line">	<span class="keyword">case</span> .<span class="type">South</span>:</span><br><span class="line">	    <span class="built_in">print</span>(<span class="string">"Watch out for penguins"</span>)</span><br><span class="line">	<span class="keyword">case</span> .<span class="type">East</span>:</span><br><span class="line">	    <span class="built_in">print</span>(<span class="string">"Where the sun rises"</span>)</span><br><span class="line">	<span class="keyword">case</span> .<span class="type">West</span>:</span><br><span class="line">	    <span class="built_in">print</span>(<span class="string">"Where the skies are blue"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "Watch out for penguins”</span></span><br></pre></td></tr></table></figure>
+<p>你可以这样理解这段代码：</p>
+<p>“判断<code>directionToHead</code>的值。当它等于<code>.North</code>，打印<code>“Lots of planets have a north”</code>。当它等于<code>.South</code>，打印<code>“Watch out for penguins”</code>。”</p>
+<p>……以此类推。</p>
+<p>正如在<a href="/./05_Control_Flow.html">控制流（Control Flow）</a>中介绍的那样，在判断一个枚举类型的值时，<code>switch</code>语句必须穷举所有情况。如果忽略了<code>.West</code>这种情况，上面那段代码将无法通过编译，因为它没有考虑到<code>CompassPoint</code>的全部成员。强制穷举确保了枚举成员不会被意外遗漏。</p>
+<p>当不需要匹配每个枚举成员的时候，你可以提供一个<code>default</code>分支来涵盖所有未明确处理的枚举成员：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> somePlanet = <span class="type">Planet</span>.<span class="type">Earth</span></span><br><span class="line"><span class="keyword">switch</span> somePlanet &#123;</span><br><span class="line"><span class="keyword">case</span> .<span class="type">Earth</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Mostly harmless"</span>)</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Not a safe place for humans"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "Mostly harmless”</span></span><br></pre></td></tr></table></figure>
+<p><a name="associated_values"></a></p>
+<h2 id="u5173_u8054_u503C_uFF08Associated_Values_uFF09"><a href="#u5173_u8054_u503C_uFF08Associated_Values_uFF09" class="headerlink" title="关联值（Associated Values）"></a>关联值（Associated Values）</h2><p>上一小节的例子演示了如何定义和分类枚举的成员。你可以为<code>Planet.Earth</code>设置一个常量或者变量，并在赋值之后查看这个值。然而，有时候能够把其他类型的<em>关联值</em>和成员值一起存储起来会很有用。这能让你连同成员值一起存储额外的自定义信息，并且你每次在代码中使用该枚举成员时，还可以修改这个关联值。</p>
+<p>你可以定义 Swift 枚举来存储任意类型的关联值，如果需要的话，每个枚举成员的关联值类型可以各不相同。枚举的这种特性跟其他语言中的可识别联合（discriminated unions），标签联合（tagged unions），或者变体（variants）相似。</p>
+<p>例如，假设一个库存跟踪系统需要利用两种不同类型的条形码来跟踪商品。有些商品上标有使用<code>0</code>到<code>9</code>的数字的 UPC-A 格式的一维条形码。每一个条形码都有一个代表“数字系统”的数字，该数字后接五位代表“厂商代码”的数字，接下来是五位代表“产品代码”的数字。最后一个数字是“检查”位，用来验证代码是否被正确扫描：</p>
+<p><img width="252" height="120" alt="" src="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/barcode_UPC_2x.png"></p>
+<p>其他商品上标有 QR 码格式的二维码，它可以使用任何 ISO 8859-1 字符，并且可以编码一个最多拥有 2,953 个字符的字符串：</p>
+<p><img width="169" height="169" alt="" src="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/barcode_QR_2x.png"></p>
+<p>这便于库存跟踪系统用包含四个整型值的元组存储 UPC-A 码，以及用任意长度的字符串储存 QR 码。</p>
+<p>在 Swift 中，使用如下方式定义表示两种商品条形码的枚举：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Barcode</span> </span>&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="type">UPCA</span>(<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Int</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="type">QRCode</span>(<span class="type">String</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码可以这么理解：</p>
+<p>“定义一个名为<code>Barcode</code>的枚举类型，它的一个成员值是具有<code>(Int，Int，Int，Int)</code>类型关联值的<code>UPCA</code>，另一个成员值是具有<code>String</code>类型关联值的<code>QRCode</code>。”</p>
+<p>这个定义不提供任何<code>Int</code>或<code>String</code>类型的关联值，它只是定义了，当<code>Barcode</code>常量和变量等于<code>Barcode.UPCA</code>或<code>Barcode.QRCode</code>时，可以存储的关联值的类型。</p>
+<p>然后可以使用任意一种条形码类型创建新的条形码，例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> productBarcode = <span class="type">Barcode</span>.<span class="type">UPCA</span>(<span class="number">8</span>, <span class="number">85909</span>, <span class="number">51226</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>上面的例子创建了一个名为<code>productBarcode</code>的变量，并将<code>Barcode.UPCA</code>赋值给它，关联的元组值为<code>(8, 85909, 51226, 3)</code>。</p>
+<p>同一个商品可以被分配一个不同类型的条形码，例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">productBarcode = .<span class="type">QRCode</span>(<span class="string">"ABCDEFGHIJKLMNOP"</span>)</span><br></pre></td></tr></table></figure>
+<p>这时，原始的<code>Barcode.UPCA</code>和其整数关联值被新的<code>Barcode.QRCode</code>和其字符串关联值所替代。<code>Barcode</code>类型的常量和变量可以存储一个<code>.UPCA</code>或者一个<code>.QRCode</code>（连同它们的关联值），但是在同一时间只能存储这两个值中的一个。</p>
+<p>像先前那样，可以使用一个 switch 语句来检查不同的条形码类型。然而，这一次，关联值可以被提取出来作为 switch 语句的一部分。你可以在<code>switch</code>的 case 分支代码中提取每个关联值作为一个常量（用<code>let</code>前缀）或者作为一个变量（用<code>var</code>前缀）来使用：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> productBarcode &#123;</span><br><span class="line"><span class="keyword">case</span> .<span class="type">UPCA</span>(<span class="keyword">let</span> numberSystem, <span class="keyword">let</span> manufacturer, <span class="keyword">let</span> product, <span class="keyword">let</span> check):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"UPC-A: <span class="subst">\(numberSystem)</span>, <span class="subst">\(manufacturer)</span>, <span class="subst">\(product)</span>, <span class="subst">\(check)</span>."</span>)</span><br><span class="line"><span class="keyword">case</span> .<span class="type">QRCode</span>(<span class="keyword">let</span> productCode):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"QR code: <span class="subst">\(productCode)</span>."</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "QR code: ABCDEFGHIJKLMNOP."</span></span><br></pre></td></tr></table></figure>
+<p>如果一个枚举成员的所有关联值都被提取为常量，或者都被提取为变量，为了简洁，你可以只在成员名称前标注一个<code>let</code>或者<code>var</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> productBarcode &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">let</span> .<span class="type">UPCA</span>(numberSystem, manufacturer, product, check):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"UPC-A: <span class="subst">\(numberSystem)</span>, <span class="subst">\(manufacturer)</span>, <span class="subst">\(product)</span>, <span class="subst">\(check)</span>."</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">let</span> .<span class="type">QRCode</span>(productCode):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"QR code: <span class="subst">\(productCode)</span>."</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "QR code: ABCDEFGHIJKLMNOP."</span></span><br></pre></td></tr></table></figure>
+<p><a name="raw_values"></a></p>
+<h2 id="u539F_u59CB_u503C_uFF08Raw_Values_uFF09"><a href="#u539F_u59CB_u503C_uFF08Raw_Values_uFF09" class="headerlink" title="原始值（Raw Values）"></a>原始值（Raw Values）</h2><p>在<a href="/#associated_values">关联值</a>小节的条形码例子中，演示了如何声明存储不同类型关联值的枚举成员。作为关联值的替代选择，枚举成员可以被默认值（称为<em>原始值</em>）预填充，这些原始值的类型必须相同。</p>
+<p>这是一个使用 ASCII 码作为原始值的枚举：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">ASCIIControlCharacter</span>: <span class="title">Character</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Tab</span> = <span class="string">"\t"</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">LineFeed</span> = <span class="string">"\n"</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">CarriageReturn</span> = <span class="string">"\r"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>枚举类型<code>ASCIIControlCharacter</code>的原始值类型被定义为<code>Character</code>，并设置了一些比较常见的 ASCII 控制字符。<code>Character</code>的描述详见<a href="/./03_Strings_and_Characters.html">字符串和字符</a>部分。</p>
+<p>原始值可以是字符串，字符，或者任意整型值或浮点型值。每个原始值在枚举声明中必须是唯一的。</p>
+<blockquote>
+<p>注意<br>原始值和关联值是不同的。原始值是在定义枚举时被预先填充的值，像上述三个 ASCII 码。对于一个特定的枚举成员，它的原始值始终不变。关联值是创建一个基于枚举成员的常量或变量时才设置的值，枚举成员的关联值可以变化。</p>
+</blockquote>
+<p><a name="implicitly_assigned_raw_values"></a></p>
+<h3 id="u539F_u59CB_u503C_u7684_u9690_u5F0F_u8D4B_u503C_uFF08Implicitly_Assigned_Raw_Values_uFF09"><a href="#u539F_u59CB_u503C_u7684_u9690_u5F0F_u8D4B_u503C_uFF08Implicitly_Assigned_Raw_Values_uFF09" class="headerlink" title="原始值的隐式赋值（Implicitly Assigned Raw Values）"></a>原始值的隐式赋值（Implicitly Assigned Raw Values）</h3><p>在使用原始值为整数或者字符串类型的枚举时，不需要显式地为每一个枚举成员设置原始值，Swift 将会自动为你赋值。</p>
+<p>例如，当使用整数作为原始值时，隐式赋值的值依次递增<code>1</code>。如果第一个枚举成员没有设置原始值，其原始值将为<code>0</code>。</p>
+<p>下面的枚举是对之前<code>Planet</code>这个枚举的一个细化，利用整型的原始值来表示每个行星在太阳系中的顺序：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Planet</span>: <span class="title">Int</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Mercury</span> = <span class="number">1</span>, <span class="type">Venus</span>, <span class="type">Earth</span>, <span class="type">Mars</span>, <span class="type">Jupiter</span>, <span class="type">Saturn</span>, <span class="type">Uranus</span>, <span class="type">Neptune</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，<code>Plant.Mercury</code>的显式原始值为<code>1</code>，<code>Planet.Venus</code>的隐式原始值为<code>2</code>，依次类推。</p>
+<p>当使用字符串作为枚举类型的原始值时，每个枚举成员的隐式原始值为该枚举成员的名称。</p>
+<p>下面的例子是<code>CompassPoint</code>枚举的细化，使用字符串类型的原始值来表示各个方向的名称：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CompassPoint</span>: <span class="title">String</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">North</span>, <span class="type">South</span>, <span class="type">East</span>, <span class="type">West</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面例子中，<code>CompassPoint.South</code>拥有隐式原始值<code>South</code>，依次类推。</p>
+<p>使用枚举成员的<code>rawValue</code>属性可以访问该枚举成员的原始值：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> earthsOrder = <span class="type">Planet</span>.<span class="type">Earth</span>.rawValue</span><br><span class="line"><span class="comment">// earthsOrder 值为 3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sunsetDirection = <span class="type">CompassPoint</span>.<span class="type">West</span>.rawValue</span><br><span class="line"><span class="comment">// sunsetDirection 值为 "West"</span></span><br></pre></td></tr></table></figure>
+<p><a name="initializing_from_a_raw_value"></a></p>
+<h3 id="u4F7F_u7528_u539F_u59CB_u503C_u521D_u59CB_u5316_u679A_u4E3E_u5B9E_u4F8B_uFF08Initializing_from_a_Raw_Value_uFF09"><a href="#u4F7F_u7528_u539F_u59CB_u503C_u521D_u59CB_u5316_u679A_u4E3E_u5B9E_u4F8B_uFF08Initializing_from_a_Raw_Value_uFF09" class="headerlink" title="使用原始值初始化枚举实例（Initializing from a Raw Value）"></a>使用原始值初始化枚举实例（Initializing from a Raw Value）</h3><p>如果在定义枚举类型的时候使用了原始值，那么将会自动获得一个初始化方法，这个方法接收一个叫做<code>rawValue</code>的参数，参数类型即为原始值类型，返回值则是枚举成员或<code>nil</code>。你可以使用这个初始化方法来创建一个新的枚举实例。</p>
+<p>这个例子利用原始值<code>7</code>创建了枚举成员<code>Uranus</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> possiblePlanet = <span class="type">Planet</span>(rawValue: <span class="number">7</span>)</span><br><span class="line"><span class="comment">// possiblePlanet 类型为 Planet? 值为 Planet.Uranus</span></span><br></pre></td></tr></table></figure>
+<p>然而，并非所有<code>Int</code>值都可以找到一个匹配的行星。因此，原始值构造器总是返回一个<em>可选</em>的枚举成员。在上面的例子中，<code>possiblePlanet</code>是<code>Planet?</code>类型，或者说“可选的<code>Planet</code>”。</p>
+<blockquote>
+<p>注意<br>原始值构造器是一个可失败构造器，因为并不是每一个原始值都有与之对应的枚举成员。更多信息请参见<a href="/../chapter3/05_Declarations.html#failable_initializers">可失败构造器</a></p>
+</blockquote>
+<p>如果你试图寻找一个位置为<code>9</code>的行星，通过原始值构造器返回的可选<code>Planet</code>值将是<code>nil</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> positionToFind = <span class="number">9</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> somePlanet = <span class="type">Planet</span>(rawValue: positionToFind) &#123;</span><br><span class="line">    <span class="keyword">switch</span> somePlanet &#123;</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Earth</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Mostly harmless"</span>)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Not a safe place for humans"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"There isn't a planet at position <span class="subst">\(positionToFind)</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "There isn't a planet at position 9</span></span><br></pre></td></tr></table></figure>
+<p>这个例子使用了可选绑定（optional binding），试图通过原始值<code>9</code>来访问一个行星。<code>if let somePlanet = Planet(rawValue: 9)</code>语句创建了一个可选<code>Planet</code>，如果可选<code>Planet</code>的值存在，就会赋值给<code>somePlanet</code>。在这个例子中，无法检索到位置为<code>9</code>的行星，所以<code>else</code>分支被执行。</p>
+<p><a name="recursive_enumerations"></a></p>
+<h2 id="u9012_u5F52_u679A_u4E3E_uFF08Recursive_Enumerations_uFF09"><a href="#u9012_u5F52_u679A_u4E3E_uFF08Recursive_Enumerations_uFF09" class="headerlink" title="递归枚举（Recursive Enumerations）"></a>递归枚举（Recursive Enumerations）</h2><p>当各种可能的情况可以被穷举时，非常适合使用枚举进行数据建模，例如可以用枚举来表示用于简单整数运算的操作符。这些操作符让你可以将简单的算术表达式，例如整数<code>5</code>，结合为更为复杂的表达式，例如<code>5 + 4</code>。</p>
+<p>算术表达式的一个重要特性是，表达式可以嵌套使用。例如，表达式<code>(5 + 4) * 2</code>，乘号右边是一个数字，左边则是另一个表达式。因为数据是嵌套的，因而用来存储数据的枚举类型也需要支持这种嵌套——这意味着枚举类型需要支持递归。</p>
+<p><em>递归枚举（recursive enumeration）</em>是一种枚举类型，它有一个或多个枚举成员使用该枚举类型的实例作为关联值。使用递归枚举时，编译器会插入一个间接层。你可以在枚举成员前加上<code>indirect</code>来表示该成员可递归。</p>
+<p>例如，下面的例子中，枚举类型存储了简单的算术表达式：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">ArithmeticExpression</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Number</span>(<span class="type">Int</span>)</span><br><span class="line">    <span class="keyword">indirect</span> <span class="keyword">case</span> <span class="type">Addition</span>(<span class="type">ArithmeticExpression</span>, <span class="type">ArithmeticExpression</span>)</span><br><span class="line">    <span class="keyword">indirect</span> <span class="keyword">case</span> <span class="type">Multiplication</span>(<span class="type">ArithmeticExpression</span>, <span class="type">ArithmeticExpression</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你也可以在枚举类型开头加上<code>indirect</code>关键字来表明它的所有成员都是可递归的：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">indirect</span> <span class="class"><span class="keyword">enum</span> <span class="title">ArithmeticExpression</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Number</span>(<span class="type">Int</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Addition</span>(<span class="type">ArithmeticExpression</span>, <span class="type">ArithmeticExpression</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Multiplication</span>(<span class="type">ArithmeticExpression</span>, <span class="type">ArithmeticExpression</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面定义的枚举类型可以存储三种算术表达式：纯数字、两个表达式相加、两个表达式相乘。枚举成员<code>Addition</code>和<code>Multiplication</code>的关联值也是算术表达式——这些关联值使得嵌套表达式成为可能。</p>
+<p>要操作具有递归性质的数据结构，使用递归函数是一种直截了当的方式。例如，下面是一个对算术表达式求值的函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">evaluate</span><span class="params">(expression: ArithmeticExpression)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> expression &#123;</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Number</span>(<span class="keyword">let</span> value):</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Addition</span>(<span class="keyword">let</span> <span class="keyword">left</span>, <span class="keyword">let</span> <span class="keyword">right</span>):</span><br><span class="line">        <span class="keyword">return</span> evaluate(<span class="keyword">left</span>) + evaluate(<span class="keyword">right</span>)</span><br><span class="line">    <span class="keyword">case</span> .<span class="type">Multiplication</span>(<span class="keyword">let</span> <span class="keyword">left</span>, <span class="keyword">let</span> <span class="keyword">right</span>):</span><br><span class="line">        <span class="keyword">return</span> evaluate(<span class="keyword">left</span>) * evaluate(<span class="keyword">right</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 计算 (5 + 4) * 2</span></span><br><span class="line"><span class="keyword">let</span> five = <span class="type">ArithmeticExpression</span>.<span class="type">Number</span>(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">let</span> four = <span class="type">ArithmeticExpression</span>.<span class="type">Number</span>(<span class="number">4</span>)</span><br><span class="line"><span class="keyword">let</span> sum = <span class="type">ArithmeticExpression</span>.<span class="type">Addition</span>(five, four)</span><br><span class="line"><span class="keyword">let</span> product = <span class="type">ArithmeticExpression</span>.<span class="type">Multiplication</span>(sum, <span class="type">ArithmeticExpression</span>.<span class="type">Number</span>(<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(evaluate(product))</span><br><span class="line"><span class="comment">// 输出 "18"</span></span><br></pre></td></tr></table></figure>
+<p>该函数如果遇到纯数字，就直接返回该数字的值。如果遇到的是加法或乘法运算，则分别计算左边表达式和右边表达式的值，然后相加或相乘。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/25/swift-cn/chapter2/09_Classes_and_Structures/" itemprop="url">
                 第二章-09类和结构体（Classes and Structures）
               </a>
@@ -2131,159 +2325,6 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter2/18_Error_Handling/" itemprop="url">
-                第二章-18错误处理（Error Handling）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T12:00:09+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter2/18_Error_Handling/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter2/18_Error_Handling/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="u9519_u8BEF_u5904_u7406_uFF08Error_Handling_uFF09"><a href="#u9519_u8BEF_u5904_u7406_uFF08Error_Handling_uFF09" class="headerlink" title="错误处理（Error Handling）"></a>错误处理（Error Handling）</h1><hr>
-<blockquote>
-<p>2.1<br>翻译+校对：<a href="https://github.com/lyojo" target="_blank" rel="external">lyojo</a> <a href="https://github.com/ray16897188" target="_blank" rel="external">ray16897188</a> 2015-10-23<br>校对：<a href="http://codebuild.me" target="_blank" rel="external">shanks</a> 2015-10-24</p>
-</blockquote>
-<p>本页包含内容：</p>
-<ul>
-<li><a href="/#representing_and_throwing_errors">表示并抛出错误</a></li>
-<li><a href="/#handling_errors">处理错误</a></li>
-<li><a href="/#specifying_cleanup_actions">指定清理操作</a></li>
-</ul>
-<p><em>错误处理（Error handling）</em>是响应错误以及从错误中恢复的过程。Swift 提供了在运行时对可恢复错误的抛出、捕获、传递和操作的一流支持。</p>
-<p>某些操作无法保证总是执行完所有代码或总是生成有用的结果。可选类型可用来表示值缺失，但是当某个操作失败时，最好能得知失败的原因，从而可以作出相应的应对。</p>
-<p>举个例子，假如有个从磁盘上的某个文件读取数据并进行处理的任务，该任务会有多种可能失败的情况，包括指定路径下文件并不存在，文件不具有可读权限，或者文件编码格式不兼容。区分这些不同的失败情况可以让程序解决并处理某些错误，然后把它解决不了的错误报告给用户。</p>
-<blockquote>
-<p>注意<br>Swift 中的错误处理涉及到错误处理模式，这会用到 Cocoa 和 Objective-C 中的<code>NSError</code>。关于这个类的更多信息请参见 <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/index.html#//apple_ref/doc/uid/TP40014216" target="_blank" rel="external">Using Swift with Cocoa and Objective-C (Swift 2.1)</a> 中的<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#//apple_ref/doc/uid/TP40014216-CH7-ID10" target="_blank" rel="external">错误处理</a>。</p>
-</blockquote>
-<p><a name="representing_and_throwing_errors"></a></p>
-<p>##表示并抛出错误</p>
-<p>在 Swift 中，错误用符合<code>ErrorType</code>协议的类型的值来表示。这个空协议表明该类型可以用于错误处理。</p>
-<p>Swift 的枚举类型尤为适合构建一组相关的错误状态，枚举的关联值还可以提供错误状态的额外信息。例如，你可以这样表示在一个游戏中操作自动贩卖机时可能会出现的错误状态：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">VendingMachineError</span>: <span class="title">ErrorType</span> </span>&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="type">InvalidSelection</span>				     <span class="comment">//选择无效</span></span><br><span class="line">	<span class="keyword">case</span> <span class="type">InsufficientFunds</span>(coinsNeeded: <span class="type">Int</span>) <span class="comment">//金额不足</span></span><br><span class="line">	<span class="keyword">case</span> <span class="type">OutOfStock</span>			                 <span class="comment">//缺货</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>抛出一个错误可以让你表明有意外情况发生，导致正常的执行流程无法继续执行。抛出错误使用<code>throws</code>关键字。例如，下面的代码抛出一个错误，提示贩卖机还需要<code>5</code>个硬币：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span> <span class="type">VendingMachineError</span>.<span class="type">InsufficientFunds</span>(coinsNeeded: <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<p><a name="handling_errors"></a></p>
-<p>##处理错误</p>
-<p>某个错误被抛出时，附近的某部分代码必须负责处理这个错误，例如纠正这个问题、尝试另外一种方式、或是向用户报告错误。</p>
-<p>Swift 中有<code>4</code>种处理错误的方式。你可以把函数抛出的错误传递给调用此函数的代码、用<code>do-catch</code>语句处理错误、将错误作为可选类型处理、或者断言此错误根本不会发生。每种方式在下面的小节中都有描述。</p>
-<p>当一个函数抛出一个错误时，你的程序流程会发生改变，所以重要的是你能迅速识别代码中会抛出错误的地方。为了标识出这些地方，在调用一个能抛出错误的函数、方法或者构造器之前，加上<code>try</code>关键字，或者<code>try?</code>或<code>try!</code>这种变体。这些关键字在下面的小节中有具体讲解。</p>
-<blockquote>
-<p>注意<br>Swift 中的错误处理和其他语言中用<code>try</code>，<code>catch</code>和<code>throw</code>进行异常处理很像。和其他语言中（包括 Objective-C ）的异常处理不同的是，Swift 中的错误处理并不涉及解除调用栈，这是一个计算代价高昂的过程。就此而言，<code>throw</code>语句的性能特性是可以和<code>return</code>语句相媲美的。</p>
-</blockquote>
-<p>###用 throwing 函数传递错误</p>
-<p>为了表示一个函数、方法或构造器可以抛出错误，在函数声明的参数列表之后加上<code>throws</code>关键字。一个标有<code>throws</code>关键字的函数被称作<em>throwing 函数</em>。如果这个函数指明了返回值类型，<code>throws</code>关键词需要写在箭头（<code>-&gt;</code>）的前面。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">canThrowErrors</span><span class="params">()</span></span> <span class="keyword">throws</span> -&gt; <span class="type">String</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">cannotThrowErrors</span><span class="params">()</span></span> -&gt; <span class="type">String</span></span><br></pre></td></tr></table></figure>
-<p>一个 throwing 函数可以在其内部抛出错误，并将错误传递到函数被调用时的作用域。</p>
-<blockquote>
-<p>注意<br>只有 throwing 函数可以传递错误。任何在某个非 throwing 函数内部抛出的错误只能在函数内部处理。</p>
-</blockquote>
-<p>下面的例子中，<code>VendingMechine</code>类有一个<code>vend(itemNamed:)</code>方法，如果请求的物品不存在、缺货或者花费超过了投入金额，该方法就会抛出一个相应的<code>VendingMachineError</code>：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> price: <span class="type">Int</span></span><br><span class="line">	<span class="keyword">var</span> <span class="built_in">count</span>: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VendingMachine</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> inventory = [</span><br><span class="line">        <span class="string">"Candy Bar"</span>: <span class="type">Item</span>(price: <span class="number">12</span>, <span class="built_in">count</span>: <span class="number">7</span>),</span><br><span class="line">        <span class="string">"Chips"</span>: <span class="type">Item</span>(price: <span class="number">10</span>, <span class="built_in">count</span>: <span class="number">4</span>),</span><br><span class="line">        <span class="string">"Pretzels"</span>: <span class="type">Item</span>(price: <span class="number">7</span>, <span class="built_in">count</span>: <span class="number">11</span>)</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">var</span> coinsDeposited = <span class="number">0</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">dispenseSnack</span><span class="params">(snack: String)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Dispensing <span class="subst">\(snack)</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">vend</span><span class="params">(itemNamed name: String)</span></span> <span class="keyword">throws</span> &#123;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">var</span> item = inventory[name] <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="type">VendingMachineError</span>.<span class="type">InvalidSelection</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">guard</span> item.<span class="built_in">count</span> &gt; <span class="number">0</span> <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="type">VendingMachineError</span>.<span class="type">OutOfStock</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">guard</span> item.price &lt;= coinsDeposited <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="type">VendingMachineError</span>.<span class="type">InsufficientFunds</span>(coinsNeeded: item.price - coinsDeposited)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        coinsDeposited -= item.price</span><br><span class="line">        --item.<span class="built_in">count</span></span><br><span class="line">        inventory[name] = item</span><br><span class="line">        dispenseSnack(name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在<code>vend(itemNamed:)</code>方法的实现中使用了<code>guard</code>语句来提前退出方法，确保在购买某个物品所需的条件中，有任一条件不满足时，能提前退出方法并抛出相应的错误。由于<code>throw</code>语句会立即退出方法，所以物品只有在所有条件都满足时才会被售出。</p>
-<p>因为<code>vend(itemNamed:)</code>方法会传递出它抛出的任何错误，在你的代码中调用此方法的地方，必须要么直接处理这些错误——使用<code>do-catch</code>语句，<code>try?</code>或<code>try!</code>；要么继续将这些错误传递下去。例如下面例子中，<code>buyFavoriteSnack(_:vendingMachine:)</code>同样是一个 throwing 函数，任何由<code>vend(itemNamed:)</code>方法抛出的错误会一直被传递到<code>buyFavoriteSnack(_:vendingMachine:)</code>函数被调用的地方。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> favoriteSnacks = [</span><br><span class="line">	<span class="string">"Alice"</span>: <span class="string">"Chips"</span>,</span><br><span class="line">	<span class="string">"Bob"</span>: <span class="string">"Licorice"</span>,</span><br><span class="line">	<span class="string">"Eve"</span>: <span class="string">"Pretzels"</span>,</span><br><span class="line">]</span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">buyFavoriteSnack</span><span class="params">(person: String, vendingMachine: VendingMachine)</span></span> <span class="keyword">throws</span> &#123;</span><br><span class="line">	<span class="keyword">let</span> snackName = favoriteSnacks[person] ?? <span class="string">"Candy Bar"</span></span><br><span class="line">	<span class="keyword">try</span> vendingMachine.vend(itemNamed: snackName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上例中，<code>buyFavoriteSnack(_:vendingMachine:)</code>函数会查找某人最喜欢的零食，并通过调用<code>vend(itemNamed:)</code>方法来尝试为他们购买。因为<code>vend(itemNamed:)</code>方法能抛出错误，所以在调用的它时候在它前面加了<code>try</code>关键字。</p>
-<p>###用 Do-Catch 处理错误</p>
-<p>可以使用一个<code>do-catch</code>语句运行一段闭包代码来处理错误。如果在<code>do</code>子句中的代码抛出了一个错误，这个错误会与<code>catch</code>子句做匹配，从而决定哪条子句能处理它。</p>
-<p>下面是<code>do-catch</code>语句的一般形式：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> expression</span><br><span class="line">    statements</span><br><span class="line">&#125; <span class="keyword">catch</span> pattern <span class="number">1</span> &#123;</span><br><span class="line">    statements</span><br><span class="line">&#125; <span class="keyword">catch</span> pattern <span class="number">2</span> <span class="keyword">where</span> condition &#123;</span><br><span class="line">    statements</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在<code>catch</code>后面写一个匹配模式来表明这个子句能处理什么样的错误。如果一条<code>catch</code>子句没有指定匹配模式，那么这条子句可以匹配任何错误，并且把错误绑定到一个名字为<code>error</code>的局部常量。关于模式匹配的更多信息请参考 <a href="/../chapter3/07_Patterns.html">模式</a>。</p>
-<p><code>catch</code>子句不必将<code>do</code>子句中的代码所抛出的每一个可能的错误都作处理。如果所有<code>catch</code>子句都未处理错误，错误就会传递到周围的作用域。然而，错误还是必须要被某个周围的作用域处理的——要么是一个外围的<code>do-catch</code>错误处理语句，要么是一个 throwing 函数的内部。举例来说，下面的代码处理了<code>VendingMachineError</code>枚举类型的全部枚举值，但是所有其它的错误就必须由它周围的作用域处理：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vendingMachine = <span class="type">VendingMachine</span>()</span><br><span class="line">vendingMachine.coinsDeposited = <span class="number">8</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> buyFavoriteSnack(<span class="string">"Alice"</span>, vendingMachine: vendingMachine)</span><br><span class="line">&#125; <span class="keyword">catch</span> <span class="type">VendingMachineError</span>.<span class="type">InvalidSelection</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Invalid Selection."</span>)</span><br><span class="line">&#125; <span class="keyword">catch</span> <span class="type">VendingMachineError</span>.<span class="type">OutOfStock</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Out of Stock."</span>)</span><br><span class="line">&#125; <span class="keyword">catch</span> <span class="type">VendingMachineError</span>.<span class="type">InsufficientFunds</span>(<span class="keyword">let</span> coinsNeeded) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Insufficient funds. Please insert an additional <span class="subst">\(coinsNeeded)</span> coins."</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 打印 “Insufficient funds. Please insert an additional 2 coins.”</span></span><br></pre></td></tr></table></figure>
-<p>上面的例子中，<code>buyFavoriteSnack(_:vendingMachine:)</code>函数在一个<code>try</code>表达式中调用，因为它能抛出错误。如果错误被抛出，相应的执行会马上转移到<code>catch</code>子句中，并判断这个错误是否要被继续传递下去。如果没有错误抛出，<code>do</code>子句中余下的语句就会被执行。</p>
-<p>###将错误转换成可选值</p>
-<p>可以使用<code>try?</code>通过将错误转换成一个可选值来处理错误。如果在评估<code>try?</code>表达式时一个错误被抛出，那么表达式的值就是<code>nil</code>。例如下面代码中的<code>x</code>和<code>y</code>具有相同的值：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">someThrowingFunction</span><span class="params">()</span></span> <span class="keyword">throws</span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">let</span> x = <span class="keyword">try</span>? someThrowingFunction()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">let</span> y: <span class="type">Int</span>?</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    y = <span class="keyword">try</span> someThrowingFunction()</span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">    y = <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果<code>someThrowingFunction()</code>抛出一个错误，<code>x</code>和<code>y</code>的值是<code>nil</code>。否则<code>x</code>和<code>y</code>的值就是该函数的返回值。注意，无论<code>someThrowingFunction()</code>的返回值类型是什么类型，<code>x</code>和<code>y</code>都是这个类型的可选类型。例子中此函数返回一个整型，所以<code>x</code>和<code>y</code>是可选整型。</p>
-<p>如果你想对所有的错误都采用同样的方式来处理，用<code>try?</code>就可以让你写出简洁的错误处理代码。例如，下面的代码用几种方式来获取数据，如果所有方式都失败了则返回<code>nil</code>：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">fetchData</span><span class="params">()</span></span> -&gt; <span class="type">Data</span>? &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> data = <span class="keyword">try</span>? fetchDataFromDisk() &#123; <span class="keyword">return</span> data &#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> data = <span class="keyword">try</span>? fetchDataFromServer() &#123; <span class="keyword">return</span> data &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="u7981_u7528_u9519_u8BEF_u4F20_u9012"><a href="#u7981_u7528_u9519_u8BEF_u4F20_u9012" class="headerlink" title="禁用错误传递"></a>禁用错误传递</h3><p>有时你知道某个 throwing 函数实际上在运行时是不会抛出错误的，在这种情况下，你可以在表达式前面写<code>try!</code>来禁用错误传递，这会把调用包装在一个断言不会有错误抛出的运行时断言中。如果实际上抛出了错误，你会得到一个运行时错误。</p>
-<p>例如，下面的代码使用了<code>loadImage(_:)</code>函数，该函数从给定的路径加载图片资源，如果图片无法载入则抛出一个错误。在这种情况下，因为图片是和应用绑定的，运行时不会有错误抛出，所以适合禁用错误传递：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> photo = <span class="keyword">try</span>! loadImage(<span class="string">"./Resources/John Appleseed.jpg"</span>)</span><br></pre></td></tr></table></figure>
-<p><a name="specifying_cleanup_actions"></a></p>
-<p>##指定清理操作</p>
-<p>可以使用<code>defer</code>语句在即将离开当前代码块时执行一系列语句。该语句让你能执行一些必要的清理工作，不管是以何种方式离开当前代码块的——无论是由于抛出错误而离开，还是由于诸如<code>return</code>或者<code>break</code>的语句。例如，你可以用<code>defer</code>语句来确保文件描述符得以关闭，以及手动分配的内存得以释放。</p>
-<p><code>defer</code>语句将代码的执行延迟到当前的作用域退出之前。该语句由<code>defer</code>关键字和要被延迟执行的语句组成。延迟执行的语句不能包含任何控制转移语句，例如<code>break</code>或是<code>return</code>语句，或是抛出一个错误。延迟执行的操作会按照它们被指定时的顺序的相反顺序执行——也就是说，第一条<code>defer</code>语句中的代码会在第二条<code>defer</code>语句中的代码被执行之后才执行，以此类推。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">processFile</span><span class="params">(filename: String)</span></span> <span class="keyword">throws</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> exists(filename) &#123;</span><br><span class="line">        <span class="keyword">let</span> file = open(filename)</span><br><span class="line">        <span class="keyword">defer</span> &#123;</span><br><span class="line">            close(file)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">let</span> line = <span class="keyword">try</span> file.readline() &#123;</span><br><span class="line">            <span class="comment">// 处理文件。</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// close(file) 会在这里被调用，即作用域的最后。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的代码使用一条<code>defer</code>语句来确保<code>open(_:)</code>函数有一个相应的对<code>close(_:)</code>函数的调用。</p>
-<blockquote>
-<p>注意<br>即使没有涉及到错误处理，你也可以使用<code>defer</code>语句。</p>
-</blockquote>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2322,21 +2363,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-count">160</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

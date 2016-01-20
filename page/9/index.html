@@ -843,6 +843,107 @@ NSXPCInterface(`protocol`: SomeProtocolType.Protocol)
           
           
             
+              <a class="post-title-link" href="/2015/12/15/swift/proposals/0013-remove-partial-application-super/" itemprop="url">
+                0013-remove-partial-application-super
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-15T12:30:00+08:00" content="2015-12-15">
+            2015-12-15
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/12/15/swift/proposals/0013-remove-partial-application-super/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/swift/proposals/0013-remove-partial-application-super/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h1 id="Remove_Partial_Application_of_Non-Final_Super_Methods__28Swift_2-2_29"><a href="#Remove_Partial_Application_of_Non-Final_Super_Methods__28Swift_2-2_29" class="headerlink" title="Remove Partial Application of Non-Final Super Methods (Swift 2.2)"></a>Remove Partial Application of Non-Final Super Methods (Swift 2.2)</h1><ul>
+<li>Proposal: <a href="https://github.com/apple/swift-evolution/blob/master/proposals/0013-remove-partial-application-super.md" target="_blank" rel="external">SE-0013</a></li>
+<li>Author(s): <a href="https://github.com/bitjammer" target="_blank" rel="external">David Farler</a></li>
+<li>Status: <strong>Awaiting review</strong></li>
+<li>Review Manager: <a href="https://github.com/DougGregor" target="_blank" rel="external">Doug Gregor</a></li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Prior to Swift 2.2, calls to superclass methods like <code>super.foo()</code> in<br>Native Swift classes were dispatched statically by recording a reference<br>to the function and calling it directly by its mangled name. In Swift<br>2.2, class methods invoked via <code>super</code> will use dynamic dispatch. That<br>is, the method will be looked up in the superclass’s vtable at runtime.<br>However, if the method is marked with <code>final</code>, it will use the old<br>static dispatch, since no class will be able to override it.</p>
+<p>The mechanisms that support currying require thunks to be emitted so<br>that the function can be called at various uncurrying levels. Currying<br>will be removed in Swift 3.0 so, rather than invest more engineering in<br>those mechanisms, I propose that we disallow partial application of<br>non-final methods through <code>super</code>, except where the <code>self</code> parameter is<br>implicitly captured.</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>The motivation of this change is partially motivated by implementation<br>concerns. The machinery for curry thunk mechanism has a lot of<br>assumptions about what the ultimate function call will be: an apply of a<br>static <code>function_ref</code> or a dynamic dispatch through a <code>class_method</code>,<br>which originate in something like <code>doFoo(self.foo)</code> (note <code>self</code> instead<br>of <code>super</code>). Rather than risk regressions stemming from significant<br>replumbing, it would a good tradeoff to pull in this limited portion of<br>the currying removals in Swift 3.0.</p>
+<h2 id="Detailed_design"><a href="#Detailed_design" class="headerlink" title="Detailed design"></a>Detailed design</h2><p>In terms of design and implementation, this is a trivial change. In<br>semantic analysis, perform the following check on call expressions: if<br>the call expression is based in super, the referenced function isn’t<br>final, and the application does not fulfill all of the parameters, emit<br>an error diagnostic.</p>
+<h3 id="Example_Code"><a href="#Example_Code" class="headerlink" title="Example Code"></a>Example Code</h3><h4 id="Illegal_3A_Partial_application_of_non-final_method"><a href="#Illegal_3A_Partial_application_of_non-final_method" class="headerlink" title="Illegal: Partial application of non-final method"></a>Illegal: Partial application of non-final method</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">(f: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">  f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span>() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> : <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span>() &#123;</span><br><span class="line">    doFoo(<span class="keyword">super</span>.foo()) <span class="comment">// Illegal - doesn't apply the second time.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="OK_3A_Partial_application_of_final_method"><a href="#OK_3A_Partial_application_of_final_method" class="headerlink" title="OK: Partial application of final method"></a>OK: Partial application of final method</h4><p>This is safe because the new dynamic super dispatch mechanisms don’t<br>kick in for final methods - these fall back to the original static<br>function reference because no class can ever override the original<br>implementation.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">(f: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">  f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span>() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> : <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    doFoo(<span class="keyword">super</span>.foo()) <span class="comment">// OK - method is final.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The implementation for this change is available on <a href="https://github.com/apple/swift/tree/remove-partial-super" target="_blank" rel="external">apple/swift/remove-partial-super</a>.</p>
+<h4 id="OK_3A_Partial_application_with_implicit_self"><a href="#OK_3A_Partial_application_with_implicit_self" class="headerlink" title="OK: Partial application with implicit self"></a>OK: Partial application with implicit self</h4><p>Partial application of the implicit self parameter is still allowed with<br>this change. When you pass <code>super.foo</code> around, you have in fact<br>partially applied the method - you’ve captured the <code>self</code> argument<br>present in all Swift method calls. This is safe because no explicit<br>thunks need to be generated at SILGen - the <code>partial_apply</code> instruction<br>will create a closure without additional SIL code.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">(f: <span class="params">()</span></span></span> -&gt; ()) &#123;</span><br><span class="line">  f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> : <span class="title">Base</span> </span>&#123;</span><br><span class="line">  <span class="func"><span class="keyword">func</span> <span class="title">bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    doFoo(<span class="keyword">super</span>.foo) <span class="comment">// OK - only partially applies self</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Impact_on_existing_code"><a href="#Impact_on_existing_code" class="headerlink" title="Impact on existing code"></a>Impact on existing code</h2><p>Given that we’ve decided to remove currying outright, this would be a<br>small percentage of that usage. Generally, calls on <code>super</code> are for<br>delegation, where all arguments are often present.</p>
+<h2 id="Alternatives_considered"><a href="#Alternatives_considered" class="headerlink" title="Alternatives considered"></a>Alternatives considered</h2><p>The only alternative is to make super method dispatch a citizen in the<br>thunk emission process, which requires deep changes to SILGen, symbol<br>mangling, and IRGen. Although this more comprehensive change would allow<br>us to adopt dynamic super dispatch with no source changes for those<br>writing in Swift, I believe the proposal is a reasonable tradeoff.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/09/docker/kitematic/README/" itemprop="url">
                 Kitematic
 安装
@@ -1058,8 +1159,8 @@ machine version 0.3.0
           
           
             
-              <a class="post-title-link" href="/2015/12/08/docker/examples/nodejs_web_app/" itemprop="url">
-                Docker中运行Node.js web应用
+              <a class="post-title-link" href="/2015/12/08/docker/examples/mongodb/" itemprop="url">
+                Docker 中运行 MongoDB
               </a>
             
           
@@ -1095,8 +1196,8 @@ machine version 0.3.0
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/examples/nodejs_web_app/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/nodejs_web_app/" itemprop="commentsCount"></span>
+            <a href="/2015/12/08/docker/examples/mongodb/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/examples/mongodb/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -1111,278 +1212,100 @@ machine version 0.3.0
 
       
         
-          <span itemprop="articleBody"><h1 id="Docker_u4E2D_u8FD0_u884CNode-js_web_u5E94_u7528"><a href="#Docker_u4E2D_u8FD0_u884CNode-js_web_u5E94_u7528" class="headerlink" title="Docker中运行Node.js web应用"></a>Docker中运行Node.js web应用</h1><blockquote>
-<p><strong>注意:——如果你不喜欢 sudo </strong>,可以查看<a href="/installation/binaries.md">使用非root用户</a></p>
-</blockquote>
-<p>这个例子的目的是向您展示如何通过使用 <code>Dockerfile</code>来构建自己的docker镜像。我们将在<code>Centos</code>上运行一个简单 <code>node.js</code> web应用并输出’hello word’。您可以在<a href="https://github.com/enokd/docker-node-hello/获得完整的源代码。" target="_blank" rel="external">https://github.com/enokd/docker-node-hello/获得完整的源代码。</a></p>
-<p>##创建Node.js应用</p>
-<p>首先，先创建一个文件存放目录<code>src</code>。然后创建<code>package.json</code>文件来描述你的应用程序和依赖关系：</p>
-<pre><code>{
-  &quot;name&quot;: &quot;docker-centos-hello&quot;,
-  &quot;private&quot;: true,
-  &quot;version&quot;: &quot;0.0.1&quot;,
-  &quot;description&quot;: &quot;Node.js Hello world app on CentOS using docker&quot;,
-  &quot;author&quot;: &quot;Daniel Gasienica &lt;daniel@gasienica.ch&gt;&quot;,
-  &quot;dependencies&quot;: {
-    &quot;express&quot;: &quot;3.2.4&quot;
-  }
-}
-</code></pre><p>然后，创建一个 <code>index.js</code> 文件使用 <a href="http://expressjs.com/" target="_blank" rel="external">Express.js</a> 框架来创建一个web应用程序:</p>
-<pre><code>var express = require(&apos;express&apos;);
-
-// Constants
-var PORT = 8080;
-
-// App
-var app = express();
-app.get(&apos;/&apos;, function (req, res) {
-  res.send(&apos;Hello world\n&apos;);
-});
-
-app.listen(PORT);
-console.log(&apos;Running on http://localhost:&apos; + PORT);
-</code></pre><p>在接下来的步骤中，我们将看到如何使用 docker 的 centos 容器来运行这个应用程序。首先，你需要为你的应用程序构建一个 docker 镜像。</p>
-<p>##创建Dockerfile</p>
-<p>创建一个空文件叫<code>Dockerfile</code>:</p>
-<pre><code>touch Dockerfile
-</code></pre><p>使用你喜欢的编辑器打开Dockerfile</p>
-<p>接下来，定义构建自己镜像的顶级镜像。在这里我们使用 Docker Hub 中 Centos（tag：6）镜像：</p>
-<pre><code>FROM    centos:6
-</code></pre><p>因为我们要构建一个<code>Node.js</code>应用，你需要在你的 <code>Centos</code> 镜像中安装Node.js。Node.js运行应用程序需要使用 npm 安装你 package.json 中定义的依赖关系。安装 Centos 包，你可以查看 Node.js 维基指令：</p>
-<pre><code># Enable EPEL for Node.js
-RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-# Install Node.js and npm
-RUN     yum install -y npm
-</code></pre><p>将你的应用程序源代码添加到你的Docker镜像中，使用<code>ADD</code>指令：</p>
-<pre><code># Bundle app source
-ADD . /src
-</code></pre><p>使用npm安装你的应用程序依赖：</p>
-<pre><code># Install app dependencies
-RUN cd /src; npm install
-</code></pre><p>应用程序绑定到端口8080，您将使用<code>EXPOSE</code>指令对 docker 端口进程映射：</p>
-<pre><code>EXPOSE  8080
-</code></pre><p>最后，定义命令，使用 <code>CMD</code> 定义运行时的node服务和应用 <code>src/index.js</code>的路径（看我们添加源代码到容器的步骤）：</p>
-<pre><code>CMD [&quot;node&quot;, &quot;/src/index.js&quot;]
-</code></pre><p>你的<code>Dockerfile</code>现在看起来像如下这样：</p>
-<pre><code>FROM    centos:centos6
-
-# Enable EPEL for Node.js
-RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-# Install Node.js and npm
-RUN     yum install -y npm
-
-# Bundle app source
-COPY . /src
-# Install app dependencies
-RUN cd /src; npm install
-
-EXPOSE  8080
-CMD [&quot;node&quot;, &quot;/src/index.js&quot;]
-</code></pre><p>##创建你的个人镜像</p>
-<p>到你的 <code>Dockerfile</code> 目录下，运行命令来构建镜像。<code>-t</code> 参数给镜像添加标签，为了让我们在 <code>docker images</code> 命令更容易查找到它：</p>
-<pre><code>$ sudo docker build -t &lt;your username&gt;/centos-node-hello .
-</code></pre><p>你的镜像现在将在列表中：</p>
-<pre><code>$ sudo docker images
-
-# Example
-REPOSITORY                          TAG        ID              CREATED
-centos                              centos6    539c0211cd76    8 weeks ago
-&lt;your username&gt;/centos-node-hello   latest     d64d3505b0d2    2 hours ago
-</code></pre><p>##运行镜像</p>
-<p>使用 <code>-d</code> 参数来运行你的镜像并将容器在后台运行。使用 <code>-p</code> 参数来绑定一个公共端口到私有容器端口上。运行你之前构建的镜像：</p>
-<pre><code>$ sudo docker run -p 49160:8080 -d &lt;your username&gt;/centos-node-hello
-</code></pre><p>打印应用输出：</p>
-<pre><code># Get container ID
-$ sudo docker ps
-
-# Print app output
-$ sudo docker logs &lt;container id&gt;
-
-# Example
-Running on http://localhost:8080
-</code></pre><p>##测试</p>
-<p>要测试应用程序,先得到 docker 应用程序映射的端口:</p>
-<pre><code>$ sudo docker ps
-
-# Example
-ID            IMAGE                                     COMMAND              ...   PORTS
-ecce33b30ebf  &lt;your username&gt;/centos-node-hello:latest  node /src/index.js         49160-&gt;8080
-</code></pre><p>在上面的示例中，docker 映射容器的 <code>49160</code> 端口到 <code>8080</code> 端口。</p>
-<p>现在你可以使用<code>curl</code>来访问你的app（安装curl：sudo apt-get install curl)：</p>
-<pre><code>$ curl -i localhost:49160
-
-HTTP/1.1 200 OK
-X-Powered-By: Express
-Content-Type: text/html; charset=utf-8
-Content-Length: 12
-Date: Sun, 02 Jun 2013 03:53:22 GMT
-Connection: keep-alive
-
-Hello world
-</code></pre><p>如果你使用的是 OS X 的 Boot2docker，实际上端口映射到的是 Docker 虚拟主机，你需要使用如下命令来测试：</p>
-<pre><code>$ curl $(boot2docker ip):49160
-</code></pre><p>我们希望本教程能够帮助您在 Docker 上构建的 <code>Centos</code> 镜像来运行Node.js。你可以获得全部源代码 <a href="https://github.com/gasi/docker-node-hello" target="_blank" rel="external">https://github.com/gasi/docker-node-hello</a>。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/08/docker/installation/windows/" itemprop="url">
-                windows
-安装 docker
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-08T07:56:29+08:00" content="2015-12-08">
-            2015-12-08
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/docker/" itemprop="url" rel="index">
-                  <span itemprop="name">docker</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/08/docker/installation/windows/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/08/docker/installation/windows/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>#windows</p>
-<blockquote>
-<p>提示：Docker 已经在windows7.1和windows 8上通过测试，当然它也可以在低版本的windows上使用。但是你的处理器必须支持硬件虚拟化。</p>
-</blockquote>
-<p>Docker 引擎使用的是Linux内核特性，所以我们需要在 Windows 上使用一个轻量级的虚拟机 (VM) 来运行 Docker。我们使用 Windows的Docker客户端来控制 Docker 虚拟化引擎的构建、运行和管理 。</p>
-<p>为了简化这个过程，我们设计了一个叫 <a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="external">Boot2Docker</a> 的应用程序，你可以通过它来安装虚拟机和运行 Docker。</p>
-<p>虽然你使用的是 Windows 的 Docker 客户端，但是 docker 引擎容器依然是运行在 Linux 宿主主机上（现在是通过Virtual box）。直到我们开发了 windows 版本的 Docker 引擎，你只需要在你的 Windows 主机上启动一个 Linux 容器。</p>
-<p>##安装</p>
-<ol>
-<li><p>下载最新版本的<a href="https://github.com/boot2docker/windows-installer/releases/latest" target="_blank" rel="external">Docker for Windows Installer</a></p>
-</li>
-<li><p>运行安装文件，它将会安装virtualbox、MSYS-git boot2docker Linux镜像和Boot2Docker的管理工具。</p>
-<p> <img src="http://widuu.u.qiniudn.com/windows_docker.png" alt="docker windows软件安装"></p>
-</li>
-<li><p>从桌面上或者Program Files中找到Boot2Docker for Windows，运行 <code>Boot2Docker Start</code> 脚本。这个脚本会要求你输入 ssh 密钥密码 - 可以简单点（但是起码看起来比较安全），然后只需要按[Enter]按钮即可。</p>
-</li>
-<li><p><code>Boot2Docker Start</code> 将启动一个 Unix shell 来配置和管理运行在虚拟主机中的 Docker，运行 <code>docker version</code> 来查看它是否正常工作。</p>
-</li>
-</ol>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-start.png" alt="windows docker run"></p>
-<p>###运行 Docker</p>
-<blockquote>
-<p>注意：如果你使用的是一个远程的 Docker 进程，像 <code>Boot2docker</code> ，你就不需要像前边的文档实例中那样在输入 Docker 命令之前输入 <code>sudo</code>。</p>
-</blockquote>
-<p><strong>Boot2docker start</strong> 将会自动启动一个 shell 命令框并配置好环境变量，以便您可以马上使用 Docker ：</p>
-<p>让我们尝试运行 <code>hello-world</code> 例子。 运行：</p>
-<pre><code>$ docker run hello-world
-</code></pre><p>这将会下载一个非常小的 <code>hello-world</code> 镜像，并且打印出 <code>Hello from Docker.</code> 信息。</p>
-<p>###使用 Windows 的命令行(cmd.exe) 来管理运行 Docker</p>
-<p>启动一个 Windows 命令行（cmd.exe）.</p>
-<p>运行 Boot2docker 命令，这需要你的 Windows PATH环境变量中包含了 <code>ssh.exe</code>。因此我们需要将安装的 Git 的 bin 目录 （其中包含了 ssh.exe） 配置到我们的 <code>%PATH%</code> 环境变量中，运行如下命令：</p>
-<pre><code>set PATH=%PATH%;&quot;c:\Program Files (x86)\Git\bin&quot;
-</code></pre><p>现在，我们可以运行 <code>boot2docker start</code> 命令来启动 Boot2docker 虚拟机。（如果有虚拟主机不存在的错误提示，你需要运行 <code>boot2docker init</code> 命令）。复制上边的指令到 cmd.exe 来设置你的 windows 控制台的环境变量，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-cmd.png" alt="docker cmd.exe"></p>
-<h3 id="PowerShell__u4E2D_u4F7F_u7528_Docker"><a href="#PowerShell__u4E2D_u4F7F_u7528_Docker" class="headerlink" title="PowerShell 中使用 Docker"></a>PowerShell 中使用 Docker</h3><p>启动 PowerShell，你需要将 <code>ssh.exe</code> 添加到你的 PATH 中。</p>
-<pre><code>$Env:Path = &quot;${Env:Path};c:\Program Files (x86)\Git\bin&quot;
-</code></pre><p>之后，运行 <code>boot2docker start</code> 命令行，它会打印出  PowerShell 命令，这些命令是用来设置环境变量来连接运行在虚拟机中 Docker 的。运行这些命令，然后你就可以运行 docker 命令了，譬如 <code>docker ps</code> :</p>
-<p><img src="http://7xlbtp.com1.z0.glb.clouddn.com/windows-boot2docker-powershell.png" alt="Powershell Docker"></p>
-<blockquote>
-<p>提示:你可以使用 <code>boot2docker shellinit | Invoke-Expression</code> 来设置你的环境变量来代替复制粘贴 Powershell 命令。</p>
-</blockquote>
-<p>##进一步的细节</p>
-<p>Boot2Docker 管理工具提供了如下几个命令：</p>
-<pre><code>$ boot2docker
-Usage: boot2docker.exe [&lt;options&gt;] {help|init|up|ssh|save|down|poweroff|reset|restart|config|status|info|ip|shellinit|delete|download|upgrade|version} [&lt;args&gt;]
-</code></pre><p>###升级</p>
+          <span itemprop="articleBody"><h1 id="Docker__u4E2D_u8FD0_u884C_MongoDB"><a href="#Docker__u4E2D_u8FD0_u884C_MongoDB" class="headerlink" title="Docker 中运行 MongoDB"></a>Docker 中运行 MongoDB</h1><p>###描述</p>
+<p>在这个例子里，我们会学到如何构建一个预装 <code>MongoDB</code> 的镜像。我们还将会看到如何推送镜像到 Docker Hub 并分享给其他人。</p>
+<p>使用 Docker 容器来部署 <a href="https://www.mongodb.org/" target="_blank" rel="external">MongoDB</a> 实例将会给你带来许多好处，例如：</p>
 <ul>
-<li>下载最新的 <a href="https://github.com/boot2docker/windows-installer/releases/tag/v1.5.0" target="_blank" rel="external">Docker for Windows Installer</a></li>
-<li>运行安装程序，这将升级 Boot2Docker 管理工具</li>
-<li><p>打开终端输入如下的命令来升级你现有的虚拟机：</p>
-<p>  $ boot2docker stop<br>  $ boot2docker download<br>  $ boot2docker start</p>
-</li>
+<li>易于维护、高可配置的 MongoDB 实例</li>
+<li>准备好运行和毫秒级内开始工作</li>
+<li>基于全球访问的共享镜像</li>
 </ul>
-<p>###容器端口重定向</p>
-<p>boot2Docker的默认用户是 <code>docker</code> 密码是 <code>tcuser</code>。 </p>
-<p>最新版本的 boot2docker 可以设置网络适配器来给容器提供端口访问。</p>
-<p>如你运行一个暴露内部端口的容器</p>
-<pre><code>docker run --rm -i -t -p 80:80 nginx
-</code></pre><p>当你需要使用一个IP地址来访问 Nginx 服务器，你可以使用如下命令来查看 ip。</p>
-<pre><code>$ boot2docker ip
-</code></pre><p>通常情况下，是192.168.59.103,但是它可以通过 virtualbox 的 dhcp 来改变。</p>
-<p>更多细节信息，请查看<a href="http://boot2docker.io/" target="_blank" rel="external">Boot2Docker site</a></p>
-<p>###使用PUTTY登陆来代替CMD命令行</p>
-<p>Boot2Docker使用 <code>%HOMEPATH%\.ssh</code> 目录来生成你的共有和私有密钥。同样登陆的时候你也需要使用这个目录下的私有密钥。</p>
-<p>这个私有密钥需要转换成 PuTTY 所需要的格式。</p>
-<p>你可以使用 <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" target="_blank" rel="external">puttygen</a>来生成，具体操作如下:</p>
-<ol>
-<li><p>打开 <code>puttygen.exe</code> 找到（”File”-&gt;”Load”）按钮来加载 %HOMEPATH%.ssh\id_boot2docker 私有密钥文件。</p>
-</li>
-<li><p>点击<code>&quot;Save Private Key&quot;</code>按钮。</p>
-</li>
-<li><p>在PUTTY中使用刚才保存的文件来登陆 docker@127.0.0.1:2022 </p>
-</li>
-</ol>
-<p>##参考</p>
-<p>如果你已经运行 Docker 主机或者你不希望使用 <code>Boot2docker</code> 安装，你可以安装 docker.exe 使用非官方的包管理器 Chocolately。了解更多新，请查看 <a href="https://chocolatey.org/packages/docker" target="_blank" rel="external">Docker package on Chocolatey</a>。</p>
-</span>
+<blockquote>
+<p>注意: 如果你不喜欢sudo,可以查看<a href="/installation/binaries.md">非 root 用户使用</a></p>
+</blockquote>
+<p>###为 MongoDB 创建一个 Dockerfile</p>
+<p>让我们创建一个 <code>Dockerfile</code> 并构建：</p>
+<pre><code>$ nano Dockerfile
+</code></pre><p>虽然这部分是可选的，但是在 <code>Dockerfile</code> 开头处添加注释，可以更好的去解释其目的：</p>
+<pre><code># Dockerizing MongoDB: Dockerfile for building MongoDB images
+# Based on ubuntu:latest, installs MongoDB following the instructions from:
+# http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+</code></pre><blockquote>
+<p>小贴士：<code>Dockerfile</code>文件是灵活的。然而，他们遵循一定的格式。第一项定义的是镜像的名称，这里是 Dockerized MongoDB 应用的父镜像。</p>
+</blockquote>
+<p>我们将使用 Docker Hub 中最新版本的 Ubuntu 镜像来构建。</p>
+<pre><code># Format: FROM    repository[:version]
+FROM       ubuntu:latest
+</code></pre><p>继续，我们将在 <code>Dockerfile</code> 中指定 <code>MAINTAINER</code></p>
+<pre><code># Format: MAINTAINER Name &lt;email@addr.ess&gt;
+MAINTAINER M.Y. Name &lt;myname@addr.ess&gt;
+</code></pre><blockquote>
+<p>注：尽管 Ubuntu 系统已经有 MongoDB 包，但是它们可能过时，因此，在这个例子中，我们将使用 MongoDB 的官方包。</p>
+</blockquote>
+<p>我们将开始导入 MongoDB 公共 GPG 秘钥。我们还将创建一个 MongoDB 库包管理器</p>
+<pre><code># Installation:
+# Import MongoDB public GPG key AND create a MongoDB list file
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+RUN echo &apos;deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen&apos; | tee /etc/apt/sources.list.d/10gen.list
+</code></pre><p>这个初步的准备后，我们将更新我们的包并且安装 MongoDB 。</p>
+<pre><code># Update apt-get sources AND install MongoDB
+RUN apt-get update
+RUN apt-get install -y -q mongodb-org
+</code></pre><blockquote>
+<p>小贴士: 您可以通过使用所需的软件包版本列表来指定 MongoDB的特定版本,例如:</p>
+</blockquote>
+<pre><code>RUN apt-get install -y -q mongodb-org=2.6.1 mongodb-org-server=2.6.1 mongodb-org-shell=2.6.1 mongodb-org-mongos=2.6.1 mongodb-org-tools=2.6.1
+</code></pre><p>MongoDB 需要数据目录，让我们在最后一步中执行</p>
+<pre><code># Create the MongoDB data directory
+RUN mkdir -p /data/db
+</code></pre><p>最后我们设置 <code>ENTRYPOINT</code> 指令来告诉 Docker 如何在我们的 MongoDB 镜像容器内运行 <code>mongod</code> 。并且我们将使用 <code>EXPOSE</code> 命令来指定端口：</p>
+<pre><code># Expose port 27017 from the container to the host
+EXPOSE 27017
+
+# Set usr/bin/mongod as the dockerized entry-point application
+ENTRYPOINT usr/bin/mongod
+</code></pre><p>现在保存我们的文件并且构建我们的镜像。</p>
+<blockquote>
+<p>注：完整版的 <code>Dockerfile</code> 可以在这里<a href="/Dockerfile">下载</a></p>
+</blockquote>
+<p>###构建 MongoDB 的 Docker 镜像</p>
+<p>我们可以使用我们的 <code>Dockerfile</code> 来构建我们的 MongoD B镜像。除非实验，使用 <code>docker build</code> 的 <code>--tag</code> 参数来给 docker 镜像指定标签始终是一个很好的做法。</p>
+<pre><code># Format: sudo docker build --tag/-t &lt;user-name&gt;/&lt;repository&gt; .
+# Example:
+$ sudo docker build --tag my/repo .
+</code></pre><p>当我们发出这个命令时，Docker 将会通过 <code>Dockerfile</code> 来构建镜像。最终镜像将被标记成 <code>my/repo</code> 。</p>
+<p>###推送 MongoDB 镜像到 Docker Hub</p>
+<p><code>docker push</code> 命令将会把镜像推送到 Docker Hub 上，你可以在 Docker Hub 上托管和分享推送的镜像。为此，你需要先登录：</p>
+<pre><code># Log-in
+$ sudo docker login
+Username:
+..
+
+# Push the image
+# Format: sudo docker push &lt;user-name&gt;/&lt;repository&gt;
+$ sudo docker push my/repo
+The push refers to a repository [my/repo] (len: 1)
+Sending image list
+Pushing repository my/repo (1 tags)
+..
+</code></pre><p>###使用 MongoDB 的镜像</p>
+<p>使用我们创建的MongoDB镜像，我们可以运行一个或多个的 MongoDB 守护进程。</p>
+<pre><code># Basic way
+# Usage: sudo docker run --name &lt;name for container&gt; -d &lt;user-name&gt;/&lt;repository&gt;
+$ sudo docker run --name mongo_instance_001 -d my/repo
+
+# Dockerized MongoDB, lean and mean!
+# Usage: sudo docker run --name &lt;name for container&gt; -d &lt;user-name&gt;/&lt;repository&gt; --noprealloc --smallfiles
+$ sudo docker run --name mongo_instance_001 -d my/repo --noprealloc --smallfiles
+
+# Checking out the logs of a MongoDB container
+# Usage: sudo docker logs &lt;name for container&gt;
+$ sudo docker logs mongo_instance_001
+
+# Playing with MongoDB
+# Usage: mongo --port &lt;port you get from `docker ps`&gt; 
+$ mongo --port 12345
+</code></pre></span>
         
       
     </div>
@@ -1439,21 +1362,21 @@ Usage: boot2docker.exe [&lt;options&gt;] {help|init|up|ssh|save|down|poweroff|re
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">159</span>
+              <span class="site-state-item-count">160</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">分类</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

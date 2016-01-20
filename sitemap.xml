@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/</loc>
-    <lastmod>2016-01-05T04:23:33.000Z</lastmod>
+    <loc>http://yoursite.com/2016/01/20/android-open-project-master/</loc>
+    <lastmod>2016-01-20T08:41:36.254Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/10/12/ouvens.github.io/frontend-javascript/2015-10-12-es6-code-style/</loc>
+    <loc>http://yoursite.com/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/</loc>
     <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
   
@@ -33,6 +33,11 @@
   
   <url>
     <loc>http://yoursite.com/2013/12/24/ouvens.github.io/frontend-resource/2013-12-24-tool-sublime-plugins-install/</loc>
+    <lastmod>2016-01-05T04:23:33.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/10/12/ouvens.github.io/frontend-javascript/2015-10-12-es6-code-style/</loc>
     <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
   
@@ -127,12 +132,12 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/</loc>
+    <loc>http://yoursite.com/2015/12/06/ouvens.github.io/frontend-javascript/2015-12-06-es6-in-nodejs/</loc>
     <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/06/ouvens.github.io/frontend-javascript/2015-12-06-es6-in-nodejs/</loc>
+    <loc>http://yoursite.com/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/</loc>
     <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
   
