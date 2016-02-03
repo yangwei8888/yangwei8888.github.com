@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
 
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="tech," />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="JavaScript 资源大全中文版我想很多程序员应该记得 GitHub 上有一个 Awesome - XXX 系列的资源整理。awesome-javascript 是 sorrycc 发起维护的 JS 资源列表，内容包括：包管理器、加载器、测试框架、运行器、QA、MVC框架和库、模板引擎、数据可视化、时间轴、编辑器等等
@@ -59,10 +77,18 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
 Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的介绍，如果有">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -71,16 +97,9 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -94,20 +113,30 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -126,7 +155,9 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -134,7 +165,9 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -142,12 +175,15 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -161,71 +197,96 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              JavaScript 资源大全中文版
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
-            2015-12-31
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                JavaScript 资源大全中文版
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/31/jsdoc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/jsdoc/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
-
-        
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/31/jsdoc/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/jsdoc/" itemprop="commentsCount"></span>
-            </a>
-          </span>
+
           
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h1 id="JavaScript__u8D44_u6E90_u5927_u5168_u4E2D_u6587_u7248"><a href="#JavaScript__u8D44_u6E90_u5927_u5168_u4E2D_u6587_u7248" class="headerlink" title="JavaScript 资源大全中文版"></a>JavaScript 资源大全中文版</h1><p>我想很多程序员应该记得 GitHub 上有一个 Awesome - XXX 系列的资源整理。<a href="https://github.com/sorrycc/awesome-javascript" target="_blank" rel="external">awesome-javascript</a> 是 sorrycc 发起维护的 JS 资源列表，内容包括：包管理器、加载器、测试框架、运行器、QA、MVC框架和库、模板引擎、数据可视化、时间轴、编辑器等等</p>
+        <h1 id="JavaScript__u8D44_u6E90_u5927_u5168_u4E2D_u6587_u7248"><a href="#JavaScript__u8D44_u6E90_u5927_u5168_u4E2D_u6587_u7248" class="headerlink" title="JavaScript 资源大全中文版"></a>JavaScript 资源大全中文版</h1><p>我想很多程序员应该记得 GitHub 上有一个 Awesome - XXX 系列的资源整理。<a href="https://github.com/sorrycc/awesome-javascript" target="_blank" rel="external">awesome-javascript</a> 是 sorrycc 发起维护的 JS 资源列表，内容包括：包管理器、加载器、测试框架、运行器、QA、MVC框架和库、模板引擎、数据可视化、时间轴、编辑器等等</p>
 <p>Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的介绍，如果有更详细的中文介绍，对相应开发者的帮助会更大。这也是我们发起这个开源项目的初衷。</p>
 <hr>
 <h3 id="u6211_u4EEC_u8981_u505A_u4EC0_u4E48_uFF1F"><a href="#u6211_u4EEC_u8981_u505A_u4EC0_u4E48_uFF1F" class="headerlink" title="我们要做什么？"></a>我们要做什么？</h3><ul>
@@ -1042,7 +1103,7 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
 <li>UI设计达人：分享 UI 设计精选文章、案例、行业趋势、课程和书籍。<br><img src="http://ww4.sinaimg.cn/mw690/bfdcef89gw1evuvyehtx4j2076076q3e.jpg" width="150" height="150"></li>
 <li>网页设计精选：分享网页设计精选文章、案例、行业趋势、课程和书籍。<br><img src="http://ww2.sinaimg.cn/mw690/bfdcef89gw1evuvyhsikmj2076076dgb.jpg" width="150" height="150"></li>
 </ul>
-</span>
+
       
     </div>
 
@@ -1057,15 +1118,19 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/31/awesome-swift-master/" rel="prev">Awesome Swift</a>
+              <a href="/2015/12/28/ouvens.github.io/frontend-javascript/2015-12-28-nine-browser-cache-methods/" rel="next" title="九种浏览器端缓存机制知多少">
+                <i class="fa fa-chevron-left"></i> 九种浏览器端缓存机制知多少
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/28/ouvens.github.io/frontend-javascript/2015-12-28-nine-browser-cache-methods/" rel="next">九种浏览器端缓存机制知多少</a>
+              <a href="/2015/12/31/awesome-swift-master/" rel="prev" title="Awesome Swift">
+                Awesome Swift <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -1083,22 +1148,27 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
-              <div id="disqus_thread">
-                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-              </div>
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1112,6 +1182,8 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
@@ -1122,12 +1194,14 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -1135,27 +1209,31 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -1165,15 +1243,27 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -1189,15 +1279,21 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
           <div class="post-toc">
+            
+              
             
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript__u8D44_u6E90_u5927_u5168_u4E2D_u6587_u7248"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 资源大全中文版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6211_u4EEC_u8981_u505A_u4EC0_u4E48_uFF1F"><span class="nav-number">1.0.1.</span> <span class="nav-text">我们要做什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5982_u4F55_u53C2_u4E0E_u672C_u9879_u76EE_uFF1F"><span class="nav-number">1.0.2.</span> <span class="nav-text">如何参与本项目？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u672C_u9879_u76EE_u7684_u53C2_u4E0E_u8005"><span class="nav-number">1.0.3.</span> <span class="nav-text">本项目的参与者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u76EE_u5F55"><span class="nav-number">1.0.4.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#package-managers"><span class="nav-number">1.1.</span> <span class="nav-text">包管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loaders"><span class="nav-number">1.2.</span> <span class="nav-text">加载器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bundlers"><span class="nav-number">1.3.</span> <span class="nav-text">打包工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#testing-frameworks"><span class="nav-number">1.4.</span> <span class="nav-text">测试框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6846_u67B6"><span class="nav-number">1.4.1.</span> <span class="nav-text">框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u65AD_u8A00"><span class="nav-number">1.4.2.</span> <span class="nav-text">断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8986_u76D6_u7387"><span class="nav-number">1.4.3.</span> <span class="nav-text">覆盖率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD0_u884C_u5668"><span class="nav-number">1.4.4.</span> <span class="nav-text">运行器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qa-tools"><span class="nav-number">1.5.</span> <span class="nav-text">QA 工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mvc-frameworks-and-libraries"><span class="nav-number">1.6.</span> <span class="nav-text">MVC 框架和库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-powered-cms-frameworks"><span class="nav-number">1.7.</span> <span class="nav-text">基于 Node 的 CMS 框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#templating-engines"><span class="nav-number">1.8.</span> <span class="nav-text">模板引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data visualization"><span class="nav-number">1.9.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#timeline"><span class="nav-number">1.9.1.</span> <span class="nav-text">时间轴</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#editors"><span class="nav-number">1.10.</span> <span class="nav-text">编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#files"><span class="nav-number">1.10.1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#functional-programming"><span class="nav-number">1.10.2.</span> <span class="nav-text">函数式编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reactive-programming"><span class="nav-number">1.10.3.</span> <span class="nav-text">响应式编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">1.10.4.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#date"><span class="nav-number">1.10.5.</span> <span class="nav-text">日期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string"><span class="nav-number">1.10.6.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#number"><span class="nav-number">1.10.7.</span> <span class="nav-text">数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#storage"><span class="nav-number">1.10.8.</span> <span class="nav-text">存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#color"><span class="nav-number">1.10.9.</span> <span class="nav-text">颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#i18n-and-l10n"><span class="nav-number">1.10.10.</span> <span class="nav-text">国际化和本地化（I18n And L10n）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class"><span class="nav-number">1.10.11.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#control-flow"><span class="nav-number">1.10.12.</span> <span class="nav-text">控制流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#routing"><span class="nav-number">1.10.13.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#security"><span class="nav-number">1.10.14.</span> <span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log"><span class="nav-number">1.10.15.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#regexp"><span class="nav-number">1.10.16.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#media"><span class="nav-number">1.10.17.</span> <span class="nav-text">媒体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#voice-command"><span class="nav-number">1.10.18.</span> <span class="nav-text">语音命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#api"><span class="nav-number">1.10.19.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vision-detection"><span class="nav-number">1.10.20.</span> <span class="nav-text">视觉检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#browser-detection"><span class="nav-number">1.10.21.</span> <span class="nav-text">浏览器检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI"><span class="nav-number">1.11.</span> <span class="nav-text">UI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#code-highlighting"><span class="nav-number">1.11.1.</span> <span class="nav-text">代码高亮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loading-status"><span class="nav-number">1.11.2.</span> <span class="nav-text">加载状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#validation"><span class="nav-number">1.11.3.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keyboard-wrappers"><span class="nav-number">1.11.4.</span> <span class="nav-text">键盘封装器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tours-and-guides"><span class="nav-number">1.11.5.</span> <span class="nav-text">浏览和引导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#notifications"><span class="nav-number">1.11.6.</span> <span class="nav-text">通知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sliders"><span class="nav-number">1.11.7.</span> <span class="nav-text">幻灯片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range-sliders"><span class="nav-number">1.11.8.</span> <span class="nav-text">滑块控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#form-widgets"><span class="nav-number">1.11.9.</span> <span class="nav-text">表单组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8F93_u5165"><span class="nav-number">1.11.10.</span> <span class="nav-text">输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u65E5_u5386"><span class="nav-number">1.11.11.</span> <span class="nav-text">日历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u9009_u62E9"><span class="nav-number">1.11.12.</span> <span class="nav-text">选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u6587_u4EF6_u4E0A_u4F20"><span class="nav-number">1.11.13.</span> <span class="nav-text">文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5176_u5B83"><span class="nav-number">1.11.14.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tips"><span class="nav-number">1.11.15.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modals-and-popups"><span class="nav-number">1.11.16.</span> <span class="nav-text">模态框和弹出框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scroll"><span class="nav-number">1.11.17.</span> <span class="nav-text">滚动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#menu"><span class="nav-number">1.11.18.</span> <span class="nav-text">菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#table-grid"><span class="nav-number">1.11.19.</span> <span class="nav-text">表格/栅格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frameworks-1"><span class="nav-number">1.11.20.</span> <span class="nav-text">框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gesture"><span class="nav-number">1.11.21.</span> <span class="nav-text">手势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maps"><span class="nav-number">1.11.22.</span> <span class="nav-text">地图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#video-audio"><span class="nav-number">1.11.23.</span> <span class="nav-text">视频/音频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#animations"><span class="nav-number">1.11.24.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-processing"><span class="nav-number">1.11.25.</span> <span class="nav-text">图片处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6"><span class="nav-number">1.11.26.</span> <span class="nav-text">ECMAScript 6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sdk"><span class="nav-number">1.11.27.</span> <span class="nav-text">软件开发工具包(SDK)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#misc"><span class="nav-number">1.11.28.</span> <span class="nav-text">大杂烩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#worth-reading"><span class="nav-number">1.12.</span> <span class="nav-text">精品阅读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#resources"><span class="nav-number">2.</span> <span class="nav-text">资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#influential-books"><span class="nav-number">2.0.1.</span> <span class="nav-text">有影响力的书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#websites"><span class="nav-number">2.0.2.</span> <span class="nav-text">知名网站</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">中文站点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">英文站点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#weibo-weixin"><span class="nav-number">2.0.3.</span> <span class="nav-text">微博、微信公众号</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
         </section>
       
 
@@ -1205,15 +1301,18 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -1225,73 +1324,53 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-  
-    
-    
-
-  
-
-    <script type="text/javascript">
-      var disqus_shortname = 'yangwei888';
-      var disqus_identifier = '2015/12/31/jsdoc/';
-      var disqus_title = 'JavaScript 资源大全中文版';
-      var disqus_url = 'http://yoursite.com/2015/12/31/jsdoc/';
-
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
-
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
-  
-
-
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -1371,7 +1450,7 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
 
     function tocOverflowIndicator (indicator, action) {
       var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
+      var opacity = action === 'show' ? 1 : 0;
       $indicator.velocity ?
         $indicator.velocity('stop').velocity({
           opacity: opacity
@@ -1425,7 +1504,7 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -1438,42 +1517,62 @@ Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
       }
-    }
+    };
   });
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/31/jsdoc/';
+      var disqus_title = 'JavaScript 资源大全中文版';
+      var disqus_url = 'http://yoursite.com/2015/12/31/jsdoc/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-
-  
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
+
+
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+  
+  
+
+
 </body>
 </html>

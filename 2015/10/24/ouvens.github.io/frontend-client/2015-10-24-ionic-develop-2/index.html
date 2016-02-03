@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
 
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="ionic 进阶开发," />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="ionic 开发构建之路1，创建一个自定义路径的项目如何基于现有的代码路径创建一个项目
@@ -56,10 +74,18 @@
 123456789101112ionic start projectPath repositryPatheg:ionic start ./demo &quot;E:\github\qvm\dist&quot; #注意带上引号，否则报错了，这里如果需要做的话只需要做到将dist的目录创建就可以了，而且文件使用相对路径ionic se">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -68,16 +94,9 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -91,20 +110,30 @@
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -123,7 +152,9 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -131,7 +162,9 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -139,12 +172,15 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -158,74 +194,99 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              ionic进阶开发中的命令使用
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-24T00:00:00+08:00" content="2015-10-24">
-            2015-10-24
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-client/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-client</span>
+            
+              
+                ionic进阶开发中的命令使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-24T00:00:00+08:00" content="2015-10-24">
+              2015-10-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-client/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-client</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
-
-        
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="commentsCount"></span>
-            </a>
-          </span>
+
           
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h2 id="ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF"><a href="#ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF" class="headerlink" title="ionic 开发构建之路"></a>ionic 开发构建之路</h2><h3 id="1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE"><a href="#1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE" class="headerlink" title="1，创建一个自定义路径的项目"></a>1，创建一个自定义路径的项目</h3><p>如何基于现有的代码路径创建一个项目</p>
+        <h2 id="ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF"><a href="#ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF" class="headerlink" title="ionic 开发构建之路"></a>ionic 开发构建之路</h2><h3 id="1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE"><a href="#1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE" class="headerlink" title="1，创建一个自定义路径的项目"></a>1，创建一个自定义路径的项目</h3><p>如何基于现有的代码路径创建一个项目</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic start projectPath repositryPath</span><br><span class="line">eg:</span><br><span class="line">ionic start ./demo "E:\github\qvm\dist" #注意带上引号，否则报错了，这里如果需要做的话只需要做到将dist的目录创建就可以了，而且文件使用相对路径</span><br><span class="line"></span><br><span class="line">ionic serve -p 80 #在80端口启动调试服务并自动watch</span><br><span class="line">ionic platform add android/ios</span><br><span class="line">ionic run/emulate android/ios</span><br><span class="line"></span><br><span class="line">ionic io init #添加签名和授权</span><br><span class="line">ionic resources -i a.png #上传app icon图片，默认icon放在resources下面</span><br><span class="line">ionic resources -s a.png #上传app 启动图片图片，默认icon放在resources下面</span><br></pre></td></tr></table></figure>
 <h3 id="2_uFF0C_u547D_u4EE4_u884C_u7FFB_u8BD1_u6307_u5357"><a href="#2_uFF0C_u547D_u4EE4_u884C_u7FFB_u8BD1_u6307_u5357" class="headerlink" title="2，命令行翻译指南"></a>2，命令行翻译指南</h3><hr>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic命令行指令:</span><br><span class="line">start [options] &lt;PATH&gt; [template] .............  在制定的目录中创建一个项目</span><br><span class="line">                                    [options] 命令行任意的标识</span><br><span class="line">                                    &lt;PATH&gt; 创建项目的目录，必填</span><br><span class="line">                                   [template] 起始模板，可以使用github库，本地路径或代码包，默认使用<span class="string">"tabs"</span>模板</span><br><span class="line">      [--appname|-a]  .........................  制定app的名称 (注意名称加引号)</span><br><span class="line">      [--id|-i]  ..............................  app的包名 &lt;widget id&gt; 配置, 例如: com.mycompany.myapp</span><br><span class="line">      [--no-cordova|-w]  ......................  创建一个不带cordova 环境的基础框架，Cordova提供了一组设备相关的API，通过这组API，移动应用能够以JavaScript访问原生的设备功能，如摄像头、麦克风等。如果创建与原生无关的app，则可以使用-w</span><br><span class="line">      [--sass|-s]  ............................  设置使用sass预处理器</span><br><span class="line">      [--list|-l]  ............................  可用的起始模板</span><br><span class="line">      [--io-app-id]  ..........................  指定Ionic.io使用的app ID</span><br><span class="line">      [--template|-t]  ........................  指定项目的初始模板</span><br><span class="line">      [--zip-file|-z]  ........................  指定项目初始模板的zip包下载url地址</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">serve [options] ...............................  启动本地服务器进行开发测试 dev/testing</span><br><span class="line">      [--consolelogs|-c]  .....................  输入app的控制台到ionic的控制台显示</span><br><span class="line">      [--serverlogs|-s]  ......................  输入本地服务器日志到ionic的控制台显示</span><br><span class="line">      [--port|-p]  ............................  指定本地服务器的开发端口 (<span class="number">8100</span>默认)</span><br><span class="line">      [--livereload-port|-r]  .................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">      [--nobrowser|-b]  .......................  不自动打开浏览器</span><br><span class="line">      [--nolivereload|-d]  ....................  不使用livereload</span><br><span class="line">      [--noproxy|-x]  .........................  不使用代理</span><br><span class="line">      [--address]  ............................  使用指定的host地址打开</span><br><span class="line">      [--all|-a]  .............................  所有地址上启动调试 (<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>)</span><br><span class="line">      [--browser|-w]  .........................  指定使用的浏览器 (safari, firefox, chrome)</span><br><span class="line">      [--browseroption|-o]  ...................  指定一个具体路径打开 (<span class="regexp">/#/</span>tab/dash)</span><br><span class="line">      [--lab|-l]  .............................  在多种平台系统和多个屏幕下打开测试</span><br><span class="line">      [--nogulp]  .............................  服务器开启时不运行gulp</span><br><span class="line">      [--platform|-t]  ........................  指定的平台模拟打开 (ios/android)</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">platform [options] &lt;PLATFORM&gt; .................  添加创建app的平台</span><br><span class="line">         [--noresources|-r]  ..................  不使用默认的app logo和启动画面</span><br><span class="line">         [--nosave|-e]  .......................  不保存平台配置到package.json画面</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">run [options] &lt;PLATFORM&gt; ......................  在连接的设备上启动app</span><br><span class="line">    [--livereload|-l]  ........................ 实时刷新设备中文件</span><br><span class="line">    [--port|-p]  ..............................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">    [--livereload-port|-r]  ...................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">    [--consolelogs|-c]  .......................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">    [--serverlogs|-s]  ........................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">    [--debug|--release]  ...................... 生成发布版本</span><br><span class="line">    [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">emulate [options] &lt;PLATFORM&gt; ..................  在连接的模拟器上启动app</span><br><span class="line">        [--livereload|-l]  ....................  实时刷新设备中文件</span><br><span class="line">        [--port|-p]  ..........................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">        [--livereload-port|-r]  ...............  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">        [--consolelogs|-c]  ...................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">        [--serverlogs|-s]  ....................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">        [--debug|--release]  .................. 生成发布版本</span><br><span class="line">        [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">build [options] &lt;PLATFORM&gt; ....................  未指定平台构建一个app</span><br><span class="line">      [--nohooks|-n]  .........................  不使用Cordova的调用</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">plugin add [options] &lt;SPEC&gt; ................... 添加一个Cordova插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是插件ID，本地路径或者git地址</span><br><span class="line">       [--searchpath &lt;directory&gt;]  ............  当使用ID时，优先查找目录，而不是git的url</span><br><span class="line">       [--nosave|-e]  .........................  不保存插件到package.json文件</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">resources .....................................  自动生成app图标和启动画面图片 (beta)</span><br><span class="line">                      将图片放在 ./resources 目录下，命名为splash.png或icon， 文件类型为 .png, .ai, and .psd</span><br><span class="line">                      Icon大小为<span class="number">192</span>x192 px的无圆角图片.</span><br><span class="line">                      splash大小为<span class="number">2208</span>x2208 px, 并把要显示的内容至于中间.</span><br><span class="line">          [--icon|-i]  ........................  生成logo图标</span><br><span class="line">          [--splash|-s]  ......................  生成启动画面图片</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">upload ........................................ 上传app到ionic账户</span><br><span class="line">       [--email|-e]  ..........................  Ionic账户邮箱</span><br><span class="line">       [--password|-p]  .......................  Ionic账户密码</span><br><span class="line">       [--note]  ..............................  上传描述</span><br><span class="line">       [--deploy &lt;channel_tag&gt;]  ..............  部署上传的APP到开发通道</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">share &lt;EMAIL&gt; .................................  分享app到邮箱</span><br><span class="line">                                                 &lt;EMAIL&gt; 要分享的邮箱</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">lib [options] [update] ........................  获取ionic的库版本或升级ionic库</span><br><span class="line">                                                 [update] 升级Ionic框架的www/lib/ionic</span><br><span class="line">    [--version|-v]  ...........................  指定版本，否则使用最新版本</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">setup [sass] .................................. 使用工具配置项目 (beta)</span><br><span class="line">                                                 [sass] 设置项目使用sass预处理</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">io &lt;command&gt; ..................................  集成app到ionic.io平台服务 (alpha)</span><br><span class="line">                                                 &lt;command&gt; init</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">security &lt;command&gt; [options] ..................  保存app平台上的签名证书(alpha)</span><br><span class="line">                                                 &lt;command&gt; profiles list, profiles add <span class="string">"&lt;name&gt;"</span>, credentials android, or credentials ios</span><br><span class="line">         [--profile &lt;tag&gt;]  ...................  (credentials &lt;platform&gt;) 指定profile证书保存的路径</span><br><span class="line">         [--keystore|-s &lt;path&gt;]  ..............  (credentials android) 指定 keystore文件路径</span><br><span class="line">         [--keystore-password|-p &lt;password&gt;]  .  (credentials android) 指定app的 keystore password (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--key-alias|-k &lt;alias&gt;]  ............  (credentials android) 指定app的key alias</span><br><span class="line">         [--key-password|-w &lt;password&gt;]  ......  (credentials android) 指定app的key password  (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--cert|-c &lt;path&gt;]  ..................  (credentials ios) 指定p12 文件的路径</span><br><span class="line">         [--cert-password|-p &lt;password&gt;]  .....  (credentials ios)指定 certificate 密码 (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--provisioning-profile|-r &lt;path&gt;]  ..  (credentials ios) 指定 .mobileprovision 文件路径</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">push ..........................................  上传 APNS 和 GCM 证书到 Ionic Push (alpha)</span><br><span class="line">     [--ios-dev-cert]  ........................  上传开发的 .p12文件到 Ionic Push</span><br><span class="line">     [--ios-prod-cert]  .......................  上传发布的 .p12文件到Ionic Push</span><br><span class="line">     [--production-mode=y,n]  .................  Tell Ionic Push to use production (y) or sandbox (n) APNS servers</span><br><span class="line">     [--google-api-key &lt;your-gcm-api-key&gt;]  ...  设置app 早Ionic Push的 GCM API key</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">package &lt;command&gt; [options] ...................  使用ionic打包构建app</span><br><span class="line">                                                 &lt;command&gt; build android, build</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ios, list, info, or download</span><br><span class="line">        [--release]  ..........................  (构建 &lt;platform&gt;) 标记为发布版</span><br><span class="line">        [--profile|-p &lt;tag&gt;]  .................  (构建 &lt;platform&gt;) 指定证书或安全签名</span><br><span class="line">        [--destination|-d &lt;path&gt;]  ............  (download) 指定打包下载的输出目录</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">   </span><br><span class="line">config &lt;command&gt; [key] [value] ................  设置ionic的运行环境(alpha)</span><br><span class="line">                                                 &lt;command&gt; set, unset, build, or info</span><br><span class="line">                                                 [key] 设置的key</span><br><span class="line">                                                 [value] 设置的值</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">browser &lt;command&gt; [browser] ...................  添加另一个浏览器给一个平台</span><br><span class="line">                                                 &lt;command&gt; <span class="string">"add remove rm info versions upgrade list ls revert"</span></span><br><span class="line">                                                 [browser] 需要操作的浏览器 (Crosswalk)</span><br><span class="line">        [--nosave|-n]  ........................  不保存平台和插件到package.json</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">service add [options] &lt;SPEC&gt; .................. 添加ionic服务包并安装需要的插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是服务名称或git</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">add [name] .................................... 添加可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要添加的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">remove [name] ................................. 移除可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要移除的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">list ..........................................  查看项目可用的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ions ..........................................  查看可使用的图标</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">templates .....................................  查看可用的起始模板</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">info ..........................................  查看用户的运行环境</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">help [command] ................................  查看某个命令的帮助文档</span><br><span class="line">                                                 [command] 要查看帮助文档的命令</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">link [appId] ..................................  设置APP的Ionic App ID</span><br><span class="line">                                                 [appId] 设置的app id</span><br><span class="line">     [--reset|-r]  ............................  重置appid</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">hooks [add|remove|permissions|perm] ...........  管理 Cordova调用</span><br><span class="line">                                                 [add|remove|permissions|perm] 添加，移除，修改默认cordavo调用的权限</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">state &lt;COMMAND&gt; ...............................  保存或恢复当前app的状态到package.json文件中</span><br><span class="line">                                                 &lt;COMMAND&gt; [ save | restore | clear | reset ]</span><br><span class="line">      [save]  .................................  保存平台和插件</span><br><span class="line">      [restore]  .............................. 恢复平台和插件</span><br><span class="line">      [clear]  ................................  清除平台和插件</span><br><span class="line">      [reset]  ................................  重置平台和插件</span><br><span class="line">      [--plugins]  ............................  只对插件操作</span><br><span class="line">      [--platforms]  ..........................  只对平台操作</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">docs &lt;TOPIC&gt; ..................................  打开Ionic文档</span><br><span class="line">                                                 &lt;TOPIC&gt; 要浏览的文档内容，使用ls可以查看所有</span><br></pre></td></tr></table></figure></span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic命令行指令:</span><br><span class="line">start [options] &lt;PATH&gt; [template] .............  在制定的目录中创建一个项目</span><br><span class="line">                                    [options] 命令行任意的标识</span><br><span class="line">                                    &lt;PATH&gt; 创建项目的目录，必填</span><br><span class="line">                                   [template] 起始模板，可以使用github库，本地路径或代码包，默认使用<span class="string">"tabs"</span>模板</span><br><span class="line">      [--appname|-a]  .........................  制定app的名称 (注意名称加引号)</span><br><span class="line">      [--id|-i]  ..............................  app的包名 &lt;widget id&gt; 配置, 例如: com.mycompany.myapp</span><br><span class="line">      [--no-cordova|-w]  ......................  创建一个不带cordova 环境的基础框架，Cordova提供了一组设备相关的API，通过这组API，移动应用能够以JavaScript访问原生的设备功能，如摄像头、麦克风等。如果创建与原生无关的app，则可以使用-w</span><br><span class="line">      [--sass|-s]  ............................  设置使用sass预处理器</span><br><span class="line">      [--list|-l]  ............................  可用的起始模板</span><br><span class="line">      [--io-app-id]  ..........................  指定Ionic.io使用的app ID</span><br><span class="line">      [--template|-t]  ........................  指定项目的初始模板</span><br><span class="line">      [--zip-file|-z]  ........................  指定项目初始模板的zip包下载url地址</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">serve [options] ...............................  启动本地服务器进行开发测试 dev/testing</span><br><span class="line">      [--consolelogs|-c]  .....................  输入app的控制台到ionic的控制台显示</span><br><span class="line">      [--serverlogs|-s]  ......................  输入本地服务器日志到ionic的控制台显示</span><br><span class="line">      [--port|-p]  ............................  指定本地服务器的开发端口 (<span class="number">8100</span>默认)</span><br><span class="line">      [--livereload-port|-r]  .................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">      [--nobrowser|-b]  .......................  不自动打开浏览器</span><br><span class="line">      [--nolivereload|-d]  ....................  不使用livereload</span><br><span class="line">      [--noproxy|-x]  .........................  不使用代理</span><br><span class="line">      [--address]  ............................  使用指定的host地址打开</span><br><span class="line">      [--all|-a]  .............................  所有地址上启动调试 (<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>)</span><br><span class="line">      [--browser|-w]  .........................  指定使用的浏览器 (safari, firefox, chrome)</span><br><span class="line">      [--browseroption|-o]  ...................  指定一个具体路径打开 (<span class="regexp">/#/</span>tab/dash)</span><br><span class="line">      [--lab|-l]  .............................  在多种平台系统和多个屏幕下打开测试</span><br><span class="line">      [--nogulp]  .............................  服务器开启时不运行gulp</span><br><span class="line">      [--platform|-t]  ........................  指定的平台模拟打开 (ios/android)</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">platform [options] &lt;PLATFORM&gt; .................  添加创建app的平台</span><br><span class="line">         [--noresources|-r]  ..................  不使用默认的app logo和启动画面</span><br><span class="line">         [--nosave|-e]  .......................  不保存平台配置到package.json画面</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">run [options] &lt;PLATFORM&gt; ......................  在连接的设备上启动app</span><br><span class="line">    [--livereload|-l]  ........................ 实时刷新设备中文件</span><br><span class="line">    [--port|-p]  ..............................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">    [--livereload-port|-r]  ...................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">    [--consolelogs|-c]  .......................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">    [--serverlogs|-s]  ........................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">    [--debug|--release]  ...................... 生成发布版本</span><br><span class="line">    [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">emulate [options] &lt;PLATFORM&gt; ..................  在连接的模拟器上启动app</span><br><span class="line">        [--livereload|-l]  ....................  实时刷新设备中文件</span><br><span class="line">        [--port|-p]  ..........................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">        [--livereload-port|-r]  ...............  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">        [--consolelogs|-c]  ...................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">        [--serverlogs|-s]  ....................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">        [--debug|--release]  .................. 生成发布版本</span><br><span class="line">        [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">build [options] &lt;PLATFORM&gt; ....................  未指定平台构建一个app</span><br><span class="line">      [--nohooks|-n]  .........................  不使用Cordova的调用</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">plugin add [options] &lt;SPEC&gt; ................... 添加一个Cordova插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是插件ID，本地路径或者git地址</span><br><span class="line">       [--searchpath &lt;directory&gt;]  ............  当使用ID时，优先查找目录，而不是git的url</span><br><span class="line">       [--nosave|-e]  .........................  不保存插件到package.json文件</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">resources .....................................  自动生成app图标和启动画面图片 (beta)</span><br><span class="line">                      将图片放在 ./resources 目录下，命名为splash.png或icon， 文件类型为 .png, .ai, and .psd</span><br><span class="line">                      Icon大小为<span class="number">192</span>x192 px的无圆角图片.</span><br><span class="line">                      splash大小为<span class="number">2208</span>x2208 px, 并把要显示的内容至于中间.</span><br><span class="line">          [--icon|-i]  ........................  生成logo图标</span><br><span class="line">          [--splash|-s]  ......................  生成启动画面图片</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">upload ........................................ 上传app到ionic账户</span><br><span class="line">       [--email|-e]  ..........................  Ionic账户邮箱</span><br><span class="line">       [--password|-p]  .......................  Ionic账户密码</span><br><span class="line">       [--note]  ..............................  上传描述</span><br><span class="line">       [--deploy &lt;channel_tag&gt;]  ..............  部署上传的APP到开发通道</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">share &lt;EMAIL&gt; .................................  分享app到邮箱</span><br><span class="line">                                                 &lt;EMAIL&gt; 要分享的邮箱</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">lib [options] [update] ........................  获取ionic的库版本或升级ionic库</span><br><span class="line">                                                 [update] 升级Ionic框架的www/lib/ionic</span><br><span class="line">    [--version|-v]  ...........................  指定版本，否则使用最新版本</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">setup [sass] .................................. 使用工具配置项目 (beta)</span><br><span class="line">                                                 [sass] 设置项目使用sass预处理</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">io &lt;command&gt; ..................................  集成app到ionic.io平台服务 (alpha)</span><br><span class="line">                                                 &lt;command&gt; init</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">security &lt;command&gt; [options] ..................  保存app平台上的签名证书(alpha)</span><br><span class="line">                                                 &lt;command&gt; profiles list, profiles add <span class="string">"&lt;name&gt;"</span>, credentials android, or credentials ios</span><br><span class="line">         [--profile &lt;tag&gt;]  ...................  (credentials &lt;platform&gt;) 指定profile证书保存的路径</span><br><span class="line">         [--keystore|-s &lt;path&gt;]  ..............  (credentials android) 指定 keystore文件路径</span><br><span class="line">         [--keystore-password|-p &lt;password&gt;]  .  (credentials android) 指定app的 keystore password (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--key-alias|-k &lt;alias&gt;]  ............  (credentials android) 指定app的key alias</span><br><span class="line">         [--key-password|-w &lt;password&gt;]  ......  (credentials android) 指定app的key password  (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--cert|-c &lt;path&gt;]  ..................  (credentials ios) 指定p12 文件的路径</span><br><span class="line">         [--cert-password|-p &lt;password&gt;]  .....  (credentials ios)指定 certificate 密码 (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--provisioning-profile|-r &lt;path&gt;]  ..  (credentials ios) 指定 .mobileprovision 文件路径</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">push ..........................................  上传 APNS 和 GCM 证书到 Ionic Push (alpha)</span><br><span class="line">     [--ios-dev-cert]  ........................  上传开发的 .p12文件到 Ionic Push</span><br><span class="line">     [--ios-prod-cert]  .......................  上传发布的 .p12文件到Ionic Push</span><br><span class="line">     [--production-mode=y,n]  .................  Tell Ionic Push to use production (y) or sandbox (n) APNS servers</span><br><span class="line">     [--google-api-key &lt;your-gcm-api-key&gt;]  ...  设置app 早Ionic Push的 GCM API key</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">package &lt;command&gt; [options] ...................  使用ionic打包构建app</span><br><span class="line">                                                 &lt;command&gt; build android, build</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ios, list, info, or download</span><br><span class="line">        [--release]  ..........................  (构建 &lt;platform&gt;) 标记为发布版</span><br><span class="line">        [--profile|-p &lt;tag&gt;]  .................  (构建 &lt;platform&gt;) 指定证书或安全签名</span><br><span class="line">        [--destination|-d &lt;path&gt;]  ............  (download) 指定打包下载的输出目录</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">   </span><br><span class="line">config &lt;command&gt; [key] [value] ................  设置ionic的运行环境(alpha)</span><br><span class="line">                                                 &lt;command&gt; set, unset, build, or info</span><br><span class="line">                                                 [key] 设置的key</span><br><span class="line">                                                 [value] 设置的值</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">browser &lt;command&gt; [browser] ...................  添加另一个浏览器给一个平台</span><br><span class="line">                                                 &lt;command&gt; <span class="string">"add remove rm info versions upgrade list ls revert"</span></span><br><span class="line">                                                 [browser] 需要操作的浏览器 (Crosswalk)</span><br><span class="line">        [--nosave|-n]  ........................  不保存平台和插件到package.json</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">service add [options] &lt;SPEC&gt; .................. 添加ionic服务包并安装需要的插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是服务名称或git</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">add [name] .................................... 添加可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要添加的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">remove [name] ................................. 移除可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要移除的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">list ..........................................  查看项目可用的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ions ..........................................  查看可使用的图标</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">templates .....................................  查看可用的起始模板</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">info ..........................................  查看用户的运行环境</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">help [command] ................................  查看某个命令的帮助文档</span><br><span class="line">                                                 [command] 要查看帮助文档的命令</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">link [appId] ..................................  设置APP的Ionic App ID</span><br><span class="line">                                                 [appId] 设置的app id</span><br><span class="line">     [--reset|-r]  ............................  重置appid</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">hooks [add|remove|permissions|perm] ...........  管理 Cordova调用</span><br><span class="line">                                                 [add|remove|permissions|perm] 添加，移除，修改默认cordavo调用的权限</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">state &lt;COMMAND&gt; ...............................  保存或恢复当前app的状态到package.json文件中</span><br><span class="line">                                                 &lt;COMMAND&gt; [ save | restore | clear | reset ]</span><br><span class="line">      [save]  .................................  保存平台和插件</span><br><span class="line">      [restore]  .............................. 恢复平台和插件</span><br><span class="line">      [clear]  ................................  清除平台和插件</span><br><span class="line">      [reset]  ................................  重置平台和插件</span><br><span class="line">      [--plugins]  ............................  只对插件操作</span><br><span class="line">      [--platforms]  ..........................  只对平台操作</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">docs &lt;TOPIC&gt; ..................................  打开Ionic文档</span><br><span class="line">                                                 &lt;TOPIC&gt; 要浏览的文档内容，使用ls可以查看所有</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -240,15 +301,19 @@
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/06/ouvens.github.io/frontend-css/2014-11-06-css-learning-list/" rel="prev">css学习资源汇总</a>
+              <a href="/2015/10/16/ouvens.github.io/frontend-javascript/2015-10-16-es6-under-babel/" rel="next" title="Babel下的ES6兼容性与规范">
+                <i class="fa fa-chevron-left"></i> Babel下的ES6兼容性与规范
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/10/16/ouvens.github.io/frontend-javascript/2015-10-16-es6-under-babel/" rel="next">Babel下的ES6兼容性与规范</a>
+              <a href="/2015/11/06/ouvens.github.io/frontend-css/2014-11-06-css-learning-list/" rel="prev" title="css学习资源汇总">
+                css学习资源汇总 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -266,22 +331,27 @@
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
-              <div id="disqus_thread">
-                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-              </div>
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -295,6 +365,8 @@
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
@@ -305,12 +377,14 @@
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -318,27 +392,31 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -348,15 +426,27 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -372,15 +462,21 @@
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
           <div class="post-toc">
+            
+              
             
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF"><span class="nav-number">1.</span> <span class="nav-text">ionic 开发构建之路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE"><span class="nav-number">1.1.</span> <span class="nav-text">1，创建一个自定义路径的项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2_uFF0C_u547D_u4EE4_u884C_u7FFB_u8BD1_u6307_u5357"><span class="nav-number">1.2.</span> <span class="nav-text">2，命令行翻译指南</span></a></li></ol></li></ol></div>
             
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
         </section>
       
 
@@ -388,15 +484,18 @@
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -408,73 +507,53 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-  
-    
-    
-
-  
-
-    <script type="text/javascript">
-      var disqus_shortname = 'yangwei888';
-      var disqus_identifier = '2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/';
-      var disqus_title = 'ionic进阶开发中的命令使用';
-      var disqus_url = 'http://yoursite.com/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/';
-
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
-
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
-  
-
-
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -554,7 +633,7 @@
 
     function tocOverflowIndicator (indicator, action) {
       var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
+      var opacity = action === 'show' ? 1 : 0;
       $indicator.velocity ?
         $indicator.velocity('stop').velocity({
           opacity: opacity
@@ -608,7 +687,7 @@
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -621,42 +700,62 @@
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
       }
-    }
+    };
   });
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/';
+      var disqus_title = 'ionic进阶开发中的命令使用';
+      var disqus_url = 'http://yoursite.com/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-
-  
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
+
+
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+  
+  
+
+
 </body>
 </html>

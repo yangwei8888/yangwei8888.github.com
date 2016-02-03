@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
-
-
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="terry yang&apos;s blog | java | scala | bi">
@@ -52,10 +70,18 @@
 <meta name="twitter:description" content="terry yang&apos;s blog | java | scala | bi">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -64,16 +90,9 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -87,22 +106,32 @@
 
 
 
-  <div class="container one-column 
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -121,7 +150,9 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -129,7 +160,9 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -137,12 +170,15 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -156,74 +192,116 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
+
+    
+
+    
+    
+      
+      
+        
+        
+        
+      
+
+      
+    
+
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2016/01/20/android-open-project-master/" itemprop="url">
-                Android 开源项目分类汇总
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2016-01-20T07:56:29+08:00" content="2016-01-20">
-            2016-01-20
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Android/" itemprop="url" rel="index">
-                  <span itemprop="name">Android</span>
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/20/android-open-project-master/" itemprop="url">
+                  Android 开源项目分类汇总
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-20T07:56:29+08:00" content="2016-01-20">
+              2016-01-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/20/android-open-project-master/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/20/android-open-project-master/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/01/20/android-open-project-master/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/01/20/android-open-project-master/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Android__u5F00_u6E90_u9879_u76EE_u5206_u7C7B_u6C47_u603B"><a href="#Android__u5F00_u6E90_u9879_u76EE_u5206_u7C7B_u6C47_u603B" class="headerlink" title="Android 开源项目分类汇总"></a>Android 开源项目分类汇总</h1><blockquote>
+            <h1 id="Android__u5F00_u6E90_u9879_u76EE_u5206_u7C7B_u6C47_u603B"><a href="#Android__u5F00_u6E90_u9879_u76EE_u5206_u7C7B_u6C47_u603B" class="headerlink" title="Android 开源项目分类汇总"></a>Android 开源项目分类汇总</h1><blockquote>
 <p>我们的微信公众号：codekk。二维码如下：<br> 专注于 Android 开源分享、源码解析、框架设计、Android 内推。<br> <img src="https://raw.githubusercontent.com/aosp-exchange-group/about/master/weixin-qrcode.jpg" alt="img"><br> 我们的网站：<a href="http://a.codekk.com" target="_blank" rel="external">www.codekk.com</a>  </p>
 </blockquote>
 <p>####<a href="http://a.codekk.com" target="_blank">Android 开源项目源码解析(Volley、UIL、Dagger、EventBus、插件化库等分析)</a>  </p>
@@ -1327,7 +1405,8 @@ distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-</code></pre></span>
+</code></pre>
+          
         
       
     </div>
@@ -1348,69 +1427,94 @@ limitations under the License.
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/31/awesome-ios-master/" itemprop="url">
-                Awesome IOS!
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
-            2015-12-31
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/awesome-ios-master/" itemprop="url">
+                  Awesome IOS!
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/31/awesome-ios-master/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-ios-master/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/31/awesome-ios-master/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-ios-master/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p><a href="https://github.com/sindresorhus/awesome" target="_blank" rel="external"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></a></p>
+            <p><a href="https://github.com/sindresorhus/awesome" target="_blank" rel="external"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></a></p>
 <p>A curated list of awesome iOS frameworks, libraries, tutorials, plugins Xcode, components and much more.<br>The list is divided into categories such as Frameworks, Components, Testing and others,  open source projects, free and paid services. There is no pre-established order of items in each category, the order is for contribution. If you want to contribute, please read the <a href="https://github.com/vsouza/awesome-ios/blob/master/CONTRIBUTING.md" target="_blank" rel="external">guide</a>.</p>
 <p>Projects in Swift language will be marked with :large_orange_diamond: and :watch: for Apple Watch projects. Feel free to add your project.</p>
 <h3 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h3><ul>
@@ -2383,7 +2487,8 @@ limitations under the License.
 <h1 id="Contributing"><a href="#Contributing" class="headerlink" title="Contributing"></a>Contributing</h1><p><a href="https://github.com/vsouza/awesome-ios/blob/master/CONTRIBUTING.md" target="_blank" rel="external">See the guide</a></p>
 <h1 id="License"><a href="#License" class="headerlink" title="License"></a>License</h1><p><a rel="external" href="http://creativecommons.org/publicdomain/mark/1.0/" target="_blank"><br><img src="https://licensebuttons.net/p/mark/1.0/88x31.png" style="border-style: none;" alt="Public Domain Mark"><br></a></p>
 <p>To the extent possible under law, <a href="https://github.com/vsouza" target="_blank" rel="external">Vinicius Souza</a> has waived all copyright and related or neighboring rights to this work.</p>
-</span>
+
+          
         
       
     </div>
@@ -2404,69 +2509,94 @@ limitations under the License.
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/31/awesome-go-master/" itemprop="url">
-                Awesome Go
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
-            2015-12-31
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/awesome-go-master/" itemprop="url">
+                  Awesome Go
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/31/awesome-go-master/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-go-master/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/31/awesome-go-master/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-go-master/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Awesome_Go"><a href="#Awesome_Go" class="headerlink" title="Awesome Go"></a>Awesome Go <a href="https://travis-ci.org/avelino/awesome-go" target="_blank" rel="external"><img src="https://travis-ci.org/avelino/awesome-go.svg?branch=master" alt="Build Status"></a> <a href="https://github.com/sindresorhus/awesome" target="_blank" rel="external"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></a></h1><p>A curated list of awesome Go frameworks, libraries and software. Inspired by <a href="https://github.com/vinta/awesome-python" target="_blank" rel="external">awesome-python</a>.</p>
+            <h1 id="Awesome_Go"><a href="#Awesome_Go" class="headerlink" title="Awesome Go"></a>Awesome Go <a href="https://travis-ci.org/avelino/awesome-go" target="_blank" rel="external"><img src="https://travis-ci.org/avelino/awesome-go.svg?branch=master" alt="Build Status"></a> <a href="https://github.com/sindresorhus/awesome" target="_blank" rel="external"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></a></h1><p>A curated list of awesome Go frameworks, libraries and software. Inspired by <a href="https://github.com/vinta/awesome-python" target="_blank" rel="external">awesome-python</a>.</p>
 <h3 id="Contributing"><a href="#Contributing" class="headerlink" title="Contributing"></a>Contributing</h3><p>Please take a quick gander at the <a href="https://github.com/avelino/awesome-go/blob/master/CONTRIBUTING.md" target="_blank" rel="external">contribution guidelines</a> first. Thanks to all <a href="https://github.com/avelino/awesome-go/graphs/contributors" target="_blank" rel="external">contributors</a>; you rock!</p>
 <p><a href="https://gophers.slack.com/?redir=%2Fmessages%2Fawesome%2F" target="_blank" rel="external">Join us on Slack</a> to chat with other awesome-go maintainers! (<a href="https://bit.ly/go-slack-signup" target="_blank" rel="external">Request an invite</a>, then join the #awesome channel.)</p>
 <h4 id="If_you_see_a_package_or_project_here_that_is_no_longer_maintained_or_is_not_a_good_fit_2C_please_submit_a_pull_request_to_improve_this_file-_Thank_you_21"><a href="#If_you_see_a_package_or_project_here_that_is_no_longer_maintained_or_is_not_a_good_fit_2C_please_submit_a_pull_request_to_improve_this_file-_Thank_you_21" class="headerlink" title="If you see a package or project here that is no longer maintained or is not a good fit, please submit a pull request to improve this file. Thank you!"></a><em>If you see a package or project here that is no longer maintained or is not a good fit, please submit a pull request to improve this file. Thank you!</em></h4><h3 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h3><ul>
@@ -3511,7 +3641,8 @@ limitations under the License.
 <h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><ul>
 <li><a href="https://github.com/go-ole/go-ole" target="_blank" rel="external">go-ole</a> - Win32 OLE implementation for golang</li>
 </ul>
-</span>
+
+          
         
       
     </div>
@@ -3532,69 +3663,94 @@ limitations under the License.
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/31/awesome-dotnet-master/" itemprop="url">
-                Awesome .NET!
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
-            2015-12-31
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/awesome-dotnet-master/" itemprop="url">
+                  Awesome .NET!
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/31/awesome-dotnet-master/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-dotnet-master/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/31/awesome-dotnet-master/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-dotnet-master/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Awesome_-NET_21"><a href="#Awesome_-NET_21" class="headerlink" title="Awesome .NET!"></a>Awesome .NET!</h1><p><a href="https://github.com/sindresorhus/awesome" target="_blank" rel="external"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></a> <a href="https://gitter.im/quozd/awesome-dotnet?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge" target="_blank" rel="external"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/quozd/awesome-dotnet"></a></p>
+            <h1 id="Awesome_-NET_21"><a href="#Awesome_-NET_21" class="headerlink" title="Awesome .NET!"></a>Awesome .NET!</h1><p><a href="https://github.com/sindresorhus/awesome" target="_blank" rel="external"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></a> <a href="https://gitter.im/quozd/awesome-dotnet?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge" target="_blank" rel="external"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/quozd/awesome-dotnet"></a></p>
 <p>A collection of awesome .NET libraries, tools, frameworks, and software.</p>
 <p>Inspired by <a href="https://github.com/markets/awesome-ruby" target="_blank" rel="external">awesome-ruby</a>, <a href="https://github.com/ziadoz/awesome-php" target="_blank" rel="external">awesome-php</a>, <a href="https://github.com/vinta/awesome-python" target="_blank" rel="external">awesome-python</a>, <a href="https://github.com/dypsilon/frontend-dev-bookmarks" target="_blank" rel="external">frontend-dev-bookmarks</a> and <a href="https://github.com/dreikanter/ruby-bookmarks" target="_blank" rel="external">ruby-bookmarks</a>.</p>
 <p>Contributions are always welcome! Please take a look at the <a href="https://github.com/quozd/awesome-dotnet/blob/master/CONTRIBUTING.md" target="_blank" rel="external">contribution guidelines and quality standard</a> pages first. We accept proprietary and commercial software too.</p>
@@ -4195,7 +4351,8 @@ limitations under the License.
 <h1 id="Other_Awesome_Lists"><a href="#Other_Awesome_Lists" class="headerlink" title="Other Awesome Lists"></a>Other Awesome Lists</h1><p>Other amazingly awesome lists can be found in the <a href="https://github.com/bayandin/awesome-awesomeness" target="_blank" rel="external">awesome-awesomeness</a> list.</p>
 <h1 id="License"><a href="#License" class="headerlink" title="License"></a>License</h1><p><a href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="external"><img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" alt="CC0"></a></p>
 <p>To the extent possible under law, <a href="http://quozd.com" target="_blank" rel="external">Vitali Fokin</a> has waived all copyright and related or neighboring rights to this work.</p>
-</span>
+
+          
         
       
     </div>
@@ -4216,69 +4373,94 @@ limitations under the License.
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/31/awesome-master/" itemprop="url">
-                awesome-master list
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
-            2015-12-31
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/awesome-master/" itemprop="url">
+                  awesome-master list
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/31/awesome-master/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-master/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/31/awesome-master/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-master/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 align="center"><br>    <br><br>    <img width="400" src="https://rawgit.com/sindresorhus/awesome/master/media/logo.svg" alt="awesome"><br>    <br><br>    <br><br>    <br><br></h1>
+            <h1 align="center"><br>    <br><br>    <img width="400" src="https://rawgit.com/sindresorhus/awesome/master/media/logo.svg" alt="awesome"><br>    <br><br>    <br><br>    <br><br></h1>
 
 <blockquote>
 <p>A curated list of awesome lists</p>
@@ -4595,7 +4777,8 @@ limitations under the License.
 </ul>
 <h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p><a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="external"><img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" alt="CC0"></a></p>
 <p>To the extent possible under law, <a href="http://sindresorhus.com" target="_blank" rel="external">Sindre Sorhus</a> has waived all copyright and related or neighboring rights to this work.</p>
-</span>
+
+          
         
       
     </div>
@@ -4616,69 +4799,94 @@ limitations under the License.
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/31/awesome-rust-master/" itemprop="url">
-                Awesome Rust
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
-            2015-12-31
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/awesome-rust-master/" itemprop="url">
+                  Awesome Rust
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/31/awesome-rust-master/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-rust-master/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/31/awesome-rust-master/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-rust-master/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Awesome_Rust"><a href="#Awesome_Rust" class="headerlink" title="Awesome Rust"></a>Awesome Rust</h1><p>A curated list of awesome Rust code and resources, inspired by the other <a href="https://github.com/bayandin/awesome-awesomeness" target="_blank" rel="external">awesome lists</a>.</p>
+            <h1 id="Awesome_Rust"><a href="#Awesome_Rust" class="headerlink" title="Awesome Rust"></a>Awesome Rust</h1><p>A curated list of awesome Rust code and resources, inspired by the other <a href="https://github.com/bayandin/awesome-awesomeness" target="_blank" rel="external">awesome lists</a>.</p>
 <p>The goal is to have only projects that are mostly stable and useful to users.</p>
 <ul>
 <li><a href="/#awesome-rust">Awesome Rust</a><ul>
@@ -5261,7 +5469,8 @@ limitations under the License.
 <li><a href="https://github.com/carols10cents/rustlings" target="_blank" rel="external">Rustlings</a> — small exercises to get you used to reading and writing Rust code</li>
 </ul>
 <h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p><a href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="external"><img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" alt="CC0"></a></p>
-</span>
+
+          
         
       
     </div>
@@ -5282,69 +5491,94 @@ limitations under the License.
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/31/awesome-swift-master/" itemprop="url">
-                Awesome Swift
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
-            2015-12-31
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/awesome-swift-master/" itemprop="url">
+                  Awesome Swift
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/31/awesome-swift-master/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-swift-master/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/31/awesome-swift-master/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/awesome-swift-master/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Awesome_Swift"><a href="#Awesome_Swift" class="headerlink" title="Awesome Swift"></a>Awesome Swift <a href="https://github.com/sindresorhus/awesome" target="_blank" rel="external"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></a></h1><p>A curated list of awesome Swift frameworks, libraries, and software for iOS and OSX.</p>
+            <h1 id="Awesome_Swift"><a href="#Awesome_Swift" class="headerlink" title="Awesome Swift"></a>Awesome Swift <a href="https://github.com/sindresorhus/awesome" target="_blank" rel="external"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></a></h1><p>A curated list of awesome Swift frameworks, libraries, and software for iOS and OSX.</p>
 <h3 id="Contributing"><a href="#Contributing" class="headerlink" title="Contributing"></a>Contributing</h3><p>Please take a quick look at the <a href="/CONTRIBUTING.md">contribution guidelines</a> first. If you see a package or project here that is no longer maintained or is not a good fit, please submit a pull request to improve this file. Thank you to all <a href="https://github.com/matteocrippa/awesome-swift/graphs/contributors" target="_blank" rel="external">contributors</a>; you rock!</p>
 <h3 id="Awesome_Swift_Contents"><a href="#Awesome_Swift_Contents" class="headerlink" title="Awesome Swift Contents"></a>Awesome Swift Contents</h3><ul>
 <li><a href="/#demo-apps">Demo Apps</a><ul>
@@ -6140,7 +6374,8 @@ limitations under the License.
 <li><a href="https://github.com/realm/jazzy/" target="_blank" rel="external">jazzy</a> - Soulful docs for Swift &amp; Objective-C.</li>
 <li><a href="https://github.com/SwiftDocOrg/swiftdoc-parser" target="_blank" rel="external">swiftdoc-parser</a> - SwiftDoc.org header parsing and HTML generating utilities.</li>
 </ul>
-</span>
+
+          
         
       
     </div>
@@ -6161,69 +6396,94 @@ limitations under the License.
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/31/jsdoc/" itemprop="url">
-                JavaScript 资源大全中文版
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
-            2015-12-31
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/jsdoc/" itemprop="url">
+                  JavaScript 资源大全中文版
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-31T07:56:29+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/31/jsdoc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/jsdoc/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/31/jsdoc/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/31/jsdoc/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="JavaScript__u8D44_u6E90_u5927_u5168_u4E2D_u6587_u7248"><a href="#JavaScript__u8D44_u6E90_u5927_u5168_u4E2D_u6587_u7248" class="headerlink" title="JavaScript 资源大全中文版"></a>JavaScript 资源大全中文版</h1><p>我想很多程序员应该记得 GitHub 上有一个 Awesome - XXX 系列的资源整理。<a href="https://github.com/sorrycc/awesome-javascript" target="_blank" rel="external">awesome-javascript</a> 是 sorrycc 发起维护的 JS 资源列表，内容包括：包管理器、加载器、测试框架、运行器、QA、MVC框架和库、模板引擎、数据可视化、时间轴、编辑器等等</p>
+            <h1 id="JavaScript__u8D44_u6E90_u5927_u5168_u4E2D_u6587_u7248"><a href="#JavaScript__u8D44_u6E90_u5927_u5168_u4E2D_u6587_u7248" class="headerlink" title="JavaScript 资源大全中文版"></a>JavaScript 资源大全中文版</h1><p>我想很多程序员应该记得 GitHub 上有一个 Awesome - XXX 系列的资源整理。<a href="https://github.com/sorrycc/awesome-javascript" target="_blank" rel="external">awesome-javascript</a> 是 sorrycc 发起维护的 JS 资源列表，内容包括：包管理器、加载器、测试框架、运行器、QA、MVC框架和库、模板引擎、数据可视化、时间轴、编辑器等等</p>
 <p>Awesome 系列虽然挺全，但基本只对收录的资源做了极为简要的介绍，如果有更详细的中文介绍，对相应开发者的帮助会更大。这也是我们发起这个开源项目的初衷。</p>
 <hr>
 <h3 id="u6211_u4EEC_u8981_u505A_u4EC0_u4E48_uFF1F"><a href="#u6211_u4EEC_u8981_u505A_u4EC0_u4E48_uFF1F" class="headerlink" title="我们要做什么？"></a>我们要做什么？</h3><ul>
@@ -7040,7 +7300,8 @@ limitations under the License.
 <li>UI设计达人：分享 UI 设计精选文章、案例、行业趋势、课程和书籍。<br><img src="http://ww4.sinaimg.cn/mw690/bfdcef89gw1evuvyehtx4j2076076q3e.jpg" width="150" height="150"></li>
 <li>网页设计精选：分享网页设计精选文章、案例、行业趋势、课程和书籍。<br><img src="http://ww2.sinaimg.cn/mw690/bfdcef89gw1evuvyhsikmj2076076dgb.jpg" width="150" height="150"></li>
 </ul>
-</span>
+
+          
         
       
     </div>
@@ -7061,69 +7322,94 @@ limitations under the License.
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/28/ouvens.github.io/frontend-javascript/2015-12-28-nine-browser-cache-methods/" itemprop="url">
-                九种浏览器端缓存机制知多少
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-28T00:00:00+08:00" content="2015-12-28">
-            2015-12-28
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/28/ouvens.github.io/frontend-javascript/2015-12-28-nine-browser-cache-methods/" itemprop="url">
+                  九种浏览器端缓存机制知多少
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-28T00:00:00+08:00" content="2015-12-28">
+              2015-12-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/28/ouvens.github.io/frontend-javascript/2015-12-28-nine-browser-cache-methods/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/28/ouvens.github.io/frontend-javascript/2015-12-28-nine-browser-cache-methods/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/28/ouvens.github.io/frontend-javascript/2015-12-28-nine-browser-cache-methods/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/28/ouvens.github.io/frontend-javascript/2015-12-28-nine-browser-cache-methods/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>&emsp;&emsp;浏览器缓存（Browser Caching）是浏览器端保存数据用于快速读取或避免重复资源请求的优化机制，有效的缓存使用可以避免重复的网络请求和浏览器快速地读取本地数据，整体上加速网页展示给用户。浏览器端缓存的机制种类较多，总体归纳为九种，这里详细分析下这九种缓存机制的原理和使用场景。打开浏览器的调试模式-&gt;resources左侧就有浏览器的8种缓存机制。</p>
+            <p>&emsp;&emsp;浏览器缓存（Browser Caching）是浏览器端保存数据用于快速读取或避免重复资源请求的优化机制，有效的缓存使用可以避免重复的网络请求和浏览器快速地读取本地数据，整体上加速网页展示给用户。浏览器端缓存的机制种类较多，总体归纳为九种，这里详细分析下这九种缓存机制的原理和使用场景。打开浏览器的调试模式-&gt;resources左侧就有浏览器的8种缓存机制。</p>
 <p>&emsp;&emsp;<img src="http://7tszky.com1.z0.glb.clouddn.com/Fh5DJkgam82rD_89kXdaxA3cWBC7" alt=""></p>
 <h3 id="u4E00_u3001http_u7F13_u5B58"><a href="#u4E00_u3001http_u7F13_u5B58" class="headerlink" title="一、http缓存"></a>一、http缓存</h3><p>&emsp;&emsp;http缓存是基于HTTP协议的浏览器文件级缓存机制。即针对文件的重复请求情况下，浏览器可以根据协议头判断从服务器端请求文件还是从本地读取文件，chrome控制台下的Frames即展示的是浏览器的http文件级缓存。以下是浏览器缓存的整个机制流程。主要是针对重复的http请求，在有缓存的情况下判断过程主要分3步：</p>
 <ul>
@@ -7268,7 +7554,8 @@ limitations under the License.
 </li>
 </ul>
 <p>&emsp;&emsp;浏览器涉及的缓存方式主要包含这些，具体结合自己的业务场景进行选择使用</p>
-</span>
+
+          
         
       
     </div>
@@ -7289,69 +7576,94 @@ limitations under the License.
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/" itemprop="url">
-                01Getting Started-基本设置
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-26T23:00:00+08:00" content="2015-12-26">
-            2015-12-26
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Using-Swift-with-Cocoa-and-Objective-C/" itemprop="url" rel="index">
-                  <span itemprop="name">Using-Swift-with-Cocoa-and-Objective-C</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/" itemprop="url">
+                  01Getting Started-基本设置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-26T23:00:00+08:00" content="2015-12-26">
+              2015-12-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Using-Swift-with-Cocoa-and-Objective-C/" itemprop="url" rel="index">
+                    <span itemprop="name">Using-Swift-with-Cocoa-and-Objective-C</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/01Getting Started/Basic Setup/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><blockquote>
+            <blockquote>
 <p>翻译：<a href="https://github.com/Creolophus" target="_blank" rel="external">Creolophus</a></p>
 <p>校正：<a href="https://github.com/Evilcome" target="_blank" rel="external">Evilcome</a> <a href="https://github.com/dabing1022" target="_blank" rel="external">ChildhoodAndy</a></p>
 </blockquote>
@@ -7402,7 +7714,8 @@ limitations under the License.
 <p>注意</p>
 <p>你不能直接把 C++ 代码导入 Swift。解决办法是为 C++ 代码创建一个 Objective-C 或者 C 的封装。</p>
 </blockquote>
-</span>
+
+          
         
       
     </div>
@@ -7421,21 +7734,25 @@ limitations under the License.
 
 
     
+
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
- </div>
 
+
+          </div>
+          
+
+
+          
+
+        </div>
         
-
-        
-      </div>
-
-      
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -7450,12 +7767,16 @@ limitations under the License.
 
       
 
-      <section class="site-overview">
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -7463,27 +7784,31 @@ limitations under the License.
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -7493,15 +7818,27 @@ limitations under the License.
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -7522,15 +7859,18 @@ limitations under the License.
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -7542,24 +7882,62 @@ limitations under the License.
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
 
   
   
+
   
-    
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
 
   
 
@@ -7583,53 +7961,13 @@ limitations under the License.
   
 
 
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
-
-  
 
   
   
 
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+
 </body>
 </html>

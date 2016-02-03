@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
-
-
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="terry yang&apos;s blog | java | scala | bi">
@@ -52,10 +70,18 @@
 <meta name="twitter:description" content="terry yang&apos;s blog | java | scala | bi">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -64,16 +90,9 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -87,22 +106,32 @@
 
 
 
-  <div class="container one-column 
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -121,7 +150,9 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -129,7 +160,9 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -137,12 +170,15 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -156,77 +192,116 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
+
+    
+
+    
+    
+      
+      
+
+      
+    
+
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="url">
-                ionic进阶开发中的命令使用
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-24T00:00:00+08:00" content="2015-10-24">
-            2015-10-24
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-client/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-client</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="url">
+                  ionic进阶开发中的命令使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-24T00:00:00+08:00" content="2015-10-24">
+              2015-10-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-client/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-client</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/24/ouvens.github.io/frontend-client/2015-10-24-ionic-develop-2/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h2 id="ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF"><a href="#ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF" class="headerlink" title="ionic 开发构建之路"></a>ionic 开发构建之路</h2><h3 id="1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE"><a href="#1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE" class="headerlink" title="1，创建一个自定义路径的项目"></a>1，创建一个自定义路径的项目</h3><p>如何基于现有的代码路径创建一个项目</p>
+            <h2 id="ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF"><a href="#ionic__u5F00_u53D1_u6784_u5EFA_u4E4B_u8DEF" class="headerlink" title="ionic 开发构建之路"></a>ionic 开发构建之路</h2><h3 id="1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE"><a href="#1_uFF0C_u521B_u5EFA_u4E00_u4E2A_u81EA_u5B9A_u4E49_u8DEF_u5F84_u7684_u9879_u76EE" class="headerlink" title="1，创建一个自定义路径的项目"></a>1，创建一个自定义路径的项目</h3><p>如何基于现有的代码路径创建一个项目</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic start projectPath repositryPath</span><br><span class="line">eg:</span><br><span class="line">ionic start ./demo "E:\github\qvm\dist" #注意带上引号，否则报错了，这里如果需要做的话只需要做到将dist的目录创建就可以了，而且文件使用相对路径</span><br><span class="line"></span><br><span class="line">ionic serve -p 80 #在80端口启动调试服务并自动watch</span><br><span class="line">ionic platform add android/ios</span><br><span class="line">ionic run/emulate android/ios</span><br><span class="line"></span><br><span class="line">ionic io init #添加签名和授权</span><br><span class="line">ionic resources -i a.png #上传app icon图片，默认icon放在resources下面</span><br><span class="line">ionic resources -s a.png #上传app 启动图片图片，默认icon放在resources下面</span><br></pre></td></tr></table></figure>
 <h3 id="2_uFF0C_u547D_u4EE4_u884C_u7FFB_u8BD1_u6307_u5357"><a href="#2_uFF0C_u547D_u4EE4_u884C_u7FFB_u8BD1_u6307_u5357" class="headerlink" title="2，命令行翻译指南"></a>2，命令行翻译指南</h3><hr>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic命令行指令:</span><br><span class="line">start [options] &lt;PATH&gt; [template] .............  在制定的目录中创建一个项目</span><br><span class="line">                                    [options] 命令行任意的标识</span><br><span class="line">                                    &lt;PATH&gt; 创建项目的目录，必填</span><br><span class="line">                                   [template] 起始模板，可以使用github库，本地路径或代码包，默认使用<span class="string">"tabs"</span>模板</span><br><span class="line">      [--appname|-a]  .........................  制定app的名称 (注意名称加引号)</span><br><span class="line">      [--id|-i]  ..............................  app的包名 &lt;widget id&gt; 配置, 例如: com.mycompany.myapp</span><br><span class="line">      [--no-cordova|-w]  ......................  创建一个不带cordova 环境的基础框架，Cordova提供了一组设备相关的API，通过这组API，移动应用能够以JavaScript访问原生的设备功能，如摄像头、麦克风等。如果创建与原生无关的app，则可以使用-w</span><br><span class="line">      [--sass|-s]  ............................  设置使用sass预处理器</span><br><span class="line">      [--list|-l]  ............................  可用的起始模板</span><br><span class="line">      [--io-app-id]  ..........................  指定Ionic.io使用的app ID</span><br><span class="line">      [--template|-t]  ........................  指定项目的初始模板</span><br><span class="line">      [--zip-file|-z]  ........................  指定项目初始模板的zip包下载url地址</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">serve [options] ...............................  启动本地服务器进行开发测试 dev/testing</span><br><span class="line">      [--consolelogs|-c]  .....................  输入app的控制台到ionic的控制台显示</span><br><span class="line">      [--serverlogs|-s]  ......................  输入本地服务器日志到ionic的控制台显示</span><br><span class="line">      [--port|-p]  ............................  指定本地服务器的开发端口 (<span class="number">8100</span>默认)</span><br><span class="line">      [--livereload-port|-r]  .................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">      [--nobrowser|-b]  .......................  不自动打开浏览器</span><br><span class="line">      [--nolivereload|-d]  ....................  不使用livereload</span><br><span class="line">      [--noproxy|-x]  .........................  不使用代理</span><br><span class="line">      [--address]  ............................  使用指定的host地址打开</span><br><span class="line">      [--all|-a]  .............................  所有地址上启动调试 (<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>)</span><br><span class="line">      [--browser|-w]  .........................  指定使用的浏览器 (safari, firefox, chrome)</span><br><span class="line">      [--browseroption|-o]  ...................  指定一个具体路径打开 (<span class="regexp">/#/</span>tab/dash)</span><br><span class="line">      [--lab|-l]  .............................  在多种平台系统和多个屏幕下打开测试</span><br><span class="line">      [--nogulp]  .............................  服务器开启时不运行gulp</span><br><span class="line">      [--platform|-t]  ........................  指定的平台模拟打开 (ios/android)</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">platform [options] &lt;PLATFORM&gt; .................  添加创建app的平台</span><br><span class="line">         [--noresources|-r]  ..................  不使用默认的app logo和启动画面</span><br><span class="line">         [--nosave|-e]  .......................  不保存平台配置到package.json画面</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">run [options] &lt;PLATFORM&gt; ......................  在连接的设备上启动app</span><br><span class="line">    [--livereload|-l]  ........................ 实时刷新设备中文件</span><br><span class="line">    [--port|-p]  ..............................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">    [--livereload-port|-r]  ...................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">    [--consolelogs|-c]  .......................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">    [--serverlogs|-s]  ........................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">    [--debug|--release]  ...................... 生成发布版本</span><br><span class="line">    [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">emulate [options] &lt;PLATFORM&gt; ..................  在连接的模拟器上启动app</span><br><span class="line">        [--livereload|-l]  ....................  实时刷新设备中文件</span><br><span class="line">        [--port|-p]  ..........................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">        [--livereload-port|-r]  ...............  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">        [--consolelogs|-c]  ...................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">        [--serverlogs|-s]  ....................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">        [--debug|--release]  .................. 生成发布版本</span><br><span class="line">        [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">build [options] &lt;PLATFORM&gt; ....................  未指定平台构建一个app</span><br><span class="line">      [--nohooks|-n]  .........................  不使用Cordova的调用</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">plugin add [options] &lt;SPEC&gt; ................... 添加一个Cordova插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是插件ID，本地路径或者git地址</span><br><span class="line">       [--searchpath &lt;directory&gt;]  ............  当使用ID时，优先查找目录，而不是git的url</span><br><span class="line">       [--nosave|-e]  .........................  不保存插件到package.json文件</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">resources .....................................  自动生成app图标和启动画面图片 (beta)</span><br><span class="line">                      将图片放在 ./resources 目录下，命名为splash.png或icon， 文件类型为 .png, .ai, and .psd</span><br><span class="line">                      Icon大小为<span class="number">192</span>x192 px的无圆角图片.</span><br><span class="line">                      splash大小为<span class="number">2208</span>x2208 px, 并把要显示的内容至于中间.</span><br><span class="line">          [--icon|-i]  ........................  生成logo图标</span><br><span class="line">          [--splash|-s]  ......................  生成启动画面图片</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">upload ........................................ 上传app到ionic账户</span><br><span class="line">       [--email|-e]  ..........................  Ionic账户邮箱</span><br><span class="line">       [--password|-p]  .......................  Ionic账户密码</span><br><span class="line">       [--note]  ..............................  上传描述</span><br><span class="line">       [--deploy &lt;channel_tag&gt;]  ..............  部署上传的APP到开发通道</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">share &lt;EMAIL&gt; .................................  分享app到邮箱</span><br><span class="line">                                                 &lt;EMAIL&gt; 要分享的邮箱</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">lib [options] [update] ........................  获取ionic的库版本或升级ionic库</span><br><span class="line">                                                 [update] 升级Ionic框架的www/lib/ionic</span><br><span class="line">    [--version|-v]  ...........................  指定版本，否则使用最新版本</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">setup [sass] .................................. 使用工具配置项目 (beta)</span><br><span class="line">                                                 [sass] 设置项目使用sass预处理</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">io &lt;command&gt; ..................................  集成app到ionic.io平台服务 (alpha)</span><br><span class="line">                                                 &lt;command&gt; init</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">security &lt;command&gt; [options] ..................  保存app平台上的签名证书(alpha)</span><br><span class="line">                                                 &lt;command&gt; profiles list, profiles add <span class="string">"&lt;name&gt;"</span>, credentials android, or credentials ios</span><br><span class="line">         [--profile &lt;tag&gt;]  ...................  (credentials &lt;platform&gt;) 指定profile证书保存的路径</span><br><span class="line">         [--keystore|-s &lt;path&gt;]  ..............  (credentials android) 指定 keystore文件路径</span><br><span class="line">         [--keystore-password|-p &lt;password&gt;]  .  (credentials android) 指定app的 keystore password (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--key-alias|-k &lt;alias&gt;]  ............  (credentials android) 指定app的key alias</span><br><span class="line">         [--key-password|-w &lt;password&gt;]  ......  (credentials android) 指定app的key password  (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--cert|-c &lt;path&gt;]  ..................  (credentials ios) 指定p12 文件的路径</span><br><span class="line">         [--cert-password|-p &lt;password&gt;]  .....  (credentials ios)指定 certificate 密码 (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--provisioning-profile|-r &lt;path&gt;]  ..  (credentials ios) 指定 .mobileprovision 文件路径</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">push ..........................................  上传 APNS 和 GCM 证书到 Ionic Push (alpha)</span><br><span class="line">     [--ios-dev-cert]  ........................  上传开发的 .p12文件到 Ionic Push</span><br><span class="line">     [--ios-prod-cert]  .......................  上传发布的 .p12文件到Ionic Push</span><br><span class="line">     [--production-mode=y,n]  .................  Tell Ionic Push to use production (y) or sandbox (n) APNS servers</span><br><span class="line">     [--google-api-key &lt;your-gcm-api-key&gt;]  ...  设置app 早Ionic Push的 GCM API key</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">package &lt;command&gt; [options] ...................  使用ionic打包构建app</span><br><span class="line">                                                 &lt;command&gt; build android, build</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ios, list, info, or download</span><br><span class="line">        [--release]  ..........................  (构建 &lt;platform&gt;) 标记为发布版</span><br><span class="line">        [--profile|-p &lt;tag&gt;]  .................  (构建 &lt;platform&gt;) 指定证书或安全签名</span><br><span class="line">        [--destination|-d &lt;path&gt;]  ............  (download) 指定打包下载的输出目录</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">   </span><br><span class="line">config &lt;command&gt; [key] [value] ................  设置ionic的运行环境(alpha)</span><br><span class="line">                                                 &lt;command&gt; set, unset, build, or info</span><br><span class="line">                                                 [key] 设置的key</span><br><span class="line">                                                 [value] 设置的值</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">browser &lt;command&gt; [browser] ...................  添加另一个浏览器给一个平台</span><br><span class="line">                                                 &lt;command&gt; <span class="string">"add remove rm info versions upgrade list ls revert"</span></span><br><span class="line">                                                 [browser] 需要操作的浏览器 (Crosswalk)</span><br><span class="line">        [--nosave|-n]  ........................  不保存平台和插件到package.json</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">service add [options] &lt;SPEC&gt; .................. 添加ionic服务包并安装需要的插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是服务名称或git</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">add [name] .................................... 添加可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要添加的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">remove [name] ................................. 移除可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要移除的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">list ..........................................  查看项目可用的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ions ..........................................  查看可使用的图标</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">templates .....................................  查看可用的起始模板</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">info ..........................................  查看用户的运行环境</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">help [command] ................................  查看某个命令的帮助文档</span><br><span class="line">                                                 [command] 要查看帮助文档的命令</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">link [appId] ..................................  设置APP的Ionic App ID</span><br><span class="line">                                                 [appId] 设置的app id</span><br><span class="line">     [--reset|-r]  ............................  重置appid</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">hooks [add|remove|permissions|perm] ...........  管理 Cordova调用</span><br><span class="line">                                                 [add|remove|permissions|perm] 添加，移除，修改默认cordavo调用的权限</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">state &lt;COMMAND&gt; ...............................  保存或恢复当前app的状态到package.json文件中</span><br><span class="line">                                                 &lt;COMMAND&gt; [ save | restore | clear | reset ]</span><br><span class="line">      [save]  .................................  保存平台和插件</span><br><span class="line">      [restore]  .............................. 恢复平台和插件</span><br><span class="line">      [clear]  ................................  清除平台和插件</span><br><span class="line">      [reset]  ................................  重置平台和插件</span><br><span class="line">      [--plugins]  ............................  只对插件操作</span><br><span class="line">      [--platforms]  ..........................  只对平台操作</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">docs &lt;TOPIC&gt; ..................................  打开Ionic文档</span><br><span class="line">                                                 &lt;TOPIC&gt; 要浏览的文档内容，使用ls可以查看所有</span><br></pre></td></tr></table></figure></span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic命令行指令:</span><br><span class="line">start [options] &lt;PATH&gt; [template] .............  在制定的目录中创建一个项目</span><br><span class="line">                                    [options] 命令行任意的标识</span><br><span class="line">                                    &lt;PATH&gt; 创建项目的目录，必填</span><br><span class="line">                                   [template] 起始模板，可以使用github库，本地路径或代码包，默认使用<span class="string">"tabs"</span>模板</span><br><span class="line">      [--appname|-a]  .........................  制定app的名称 (注意名称加引号)</span><br><span class="line">      [--id|-i]  ..............................  app的包名 &lt;widget id&gt; 配置, 例如: com.mycompany.myapp</span><br><span class="line">      [--no-cordova|-w]  ......................  创建一个不带cordova 环境的基础框架，Cordova提供了一组设备相关的API，通过这组API，移动应用能够以JavaScript访问原生的设备功能，如摄像头、麦克风等。如果创建与原生无关的app，则可以使用-w</span><br><span class="line">      [--sass|-s]  ............................  设置使用sass预处理器</span><br><span class="line">      [--list|-l]  ............................  可用的起始模板</span><br><span class="line">      [--io-app-id]  ..........................  指定Ionic.io使用的app ID</span><br><span class="line">      [--template|-t]  ........................  指定项目的初始模板</span><br><span class="line">      [--zip-file|-z]  ........................  指定项目初始模板的zip包下载url地址</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">serve [options] ...............................  启动本地服务器进行开发测试 dev/testing</span><br><span class="line">      [--consolelogs|-c]  .....................  输入app的控制台到ionic的控制台显示</span><br><span class="line">      [--serverlogs|-s]  ......................  输入本地服务器日志到ionic的控制台显示</span><br><span class="line">      [--port|-p]  ............................  指定本地服务器的开发端口 (<span class="number">8100</span>默认)</span><br><span class="line">      [--livereload-port|-r]  .................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">      [--nobrowser|-b]  .......................  不自动打开浏览器</span><br><span class="line">      [--nolivereload|-d]  ....................  不使用livereload</span><br><span class="line">      [--noproxy|-x]  .........................  不使用代理</span><br><span class="line">      [--address]  ............................  使用指定的host地址打开</span><br><span class="line">      [--all|-a]  .............................  所有地址上启动调试 (<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>)</span><br><span class="line">      [--browser|-w]  .........................  指定使用的浏览器 (safari, firefox, chrome)</span><br><span class="line">      [--browseroption|-o]  ...................  指定一个具体路径打开 (<span class="regexp">/#/</span>tab/dash)</span><br><span class="line">      [--lab|-l]  .............................  在多种平台系统和多个屏幕下打开测试</span><br><span class="line">      [--nogulp]  .............................  服务器开启时不运行gulp</span><br><span class="line">      [--platform|-t]  ........................  指定的平台模拟打开 (ios/android)</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">platform [options] &lt;PLATFORM&gt; .................  添加创建app的平台</span><br><span class="line">         [--noresources|-r]  ..................  不使用默认的app logo和启动画面</span><br><span class="line">         [--nosave|-e]  .......................  不保存平台配置到package.json画面</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">run [options] &lt;PLATFORM&gt; ......................  在连接的设备上启动app</span><br><span class="line">    [--livereload|-l]  ........................ 实时刷新设备中文件</span><br><span class="line">    [--port|-p]  ..............................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">    [--livereload-port|-r]  ...................  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">    [--consolelogs|-c]  .......................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">    [--serverlogs|-s]  ........................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">    [--debug|--release]  ...................... 生成发布版本</span><br><span class="line">    [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">emulate [options] &lt;PLATFORM&gt; ..................  在连接的模拟器上启动app</span><br><span class="line">        [--livereload|-l]  ....................  实时刷新设备中文件</span><br><span class="line">        [--port|-p]  ..........................  运行设备的端口号 (<span class="number">8100</span>默认，需要启动livereload.)</span><br><span class="line">        [--livereload-port|-r]  ...............  自动刷新端口(<span class="number">35729</span>默认)</span><br><span class="line">        [--consolelogs|-c]  ...................   输入app的控制台到ionic的控制台显示(需要启动livereload)</span><br><span class="line">        [--serverlogs|-s]  ....................  输入本地服务器日志到ionic的控制台显示 (需要启动livereload)</span><br><span class="line">        [--debug|--release]  .................. 生成发布版本</span><br><span class="line">        [--device|--emulator|--target=FOO]</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">build [options] &lt;PLATFORM&gt; ....................  未指定平台构建一个app</span><br><span class="line">      [--nohooks|-n]  .........................  不使用Cordova的调用</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">plugin add [options] &lt;SPEC&gt; ................... 添加一个Cordova插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是插件ID，本地路径或者git地址</span><br><span class="line">       [--searchpath &lt;directory&gt;]  ............  当使用ID时，优先查找目录，而不是git的url</span><br><span class="line">       [--nosave|-e]  .........................  不保存插件到package.json文件</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">resources .....................................  自动生成app图标和启动画面图片 (beta)</span><br><span class="line">                      将图片放在 ./resources 目录下，命名为splash.png或icon， 文件类型为 .png, .ai, and .psd</span><br><span class="line">                      Icon大小为<span class="number">192</span>x192 px的无圆角图片.</span><br><span class="line">                      splash大小为<span class="number">2208</span>x2208 px, 并把要显示的内容至于中间.</span><br><span class="line">          [--icon|-i]  ........................  生成logo图标</span><br><span class="line">          [--splash|-s]  ......................  生成启动画面图片</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">upload ........................................ 上传app到ionic账户</span><br><span class="line">       [--email|-e]  ..........................  Ionic账户邮箱</span><br><span class="line">       [--password|-p]  .......................  Ionic账户密码</span><br><span class="line">       [--note]  ..............................  上传描述</span><br><span class="line">       [--deploy &lt;channel_tag&gt;]  ..............  部署上传的APP到开发通道</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">share &lt;EMAIL&gt; .................................  分享app到邮箱</span><br><span class="line">                                                 &lt;EMAIL&gt; 要分享的邮箱</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">lib [options] [update] ........................  获取ionic的库版本或升级ionic库</span><br><span class="line">                                                 [update] 升级Ionic框架的www/lib/ionic</span><br><span class="line">    [--version|-v]  ...........................  指定版本，否则使用最新版本</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">setup [sass] .................................. 使用工具配置项目 (beta)</span><br><span class="line">                                                 [sass] 设置项目使用sass预处理</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">io &lt;command&gt; ..................................  集成app到ionic.io平台服务 (alpha)</span><br><span class="line">                                                 &lt;command&gt; init</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">security &lt;command&gt; [options] ..................  保存app平台上的签名证书(alpha)</span><br><span class="line">                                                 &lt;command&gt; profiles list, profiles add <span class="string">"&lt;name&gt;"</span>, credentials android, or credentials ios</span><br><span class="line">         [--profile &lt;tag&gt;]  ...................  (credentials &lt;platform&gt;) 指定profile证书保存的路径</span><br><span class="line">         [--keystore|-s &lt;path&gt;]  ..............  (credentials android) 指定 keystore文件路径</span><br><span class="line">         [--keystore-password|-p &lt;password&gt;]  .  (credentials android) 指定app的 keystore password (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--key-alias|-k &lt;alias&gt;]  ............  (credentials android) 指定app的key alias</span><br><span class="line">         [--key-password|-w &lt;password&gt;]  ......  (credentials android) 指定app的key password  (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--cert|-c &lt;path&gt;]  ..................  (credentials ios) 指定p12 文件的路径</span><br><span class="line">         [--cert-password|-p &lt;password&gt;]  .....  (credentials ios)指定 certificate 密码 (exclude <span class="keyword">for</span> prompt)</span><br><span class="line">         [--provisioning-profile|-r &lt;path&gt;]  ..  (credentials ios) 指定 .mobileprovision 文件路径</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">push ..........................................  上传 APNS 和 GCM 证书到 Ionic Push (alpha)</span><br><span class="line">     [--ios-dev-cert]  ........................  上传开发的 .p12文件到 Ionic Push</span><br><span class="line">     [--ios-prod-cert]  .......................  上传发布的 .p12文件到Ionic Push</span><br><span class="line">     [--production-mode=y,n]  .................  Tell Ionic Push to use production (y) or sandbox (n) APNS servers</span><br><span class="line">     [--google-api-key &lt;your-gcm-api-key&gt;]  ...  设置app 早Ionic Push的 GCM API key</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">package &lt;command&gt; [options] ...................  使用ionic打包构建app</span><br><span class="line">                                                 &lt;command&gt; build android, build</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ios, list, info, or download</span><br><span class="line">        [--release]  ..........................  (构建 &lt;platform&gt;) 标记为发布版</span><br><span class="line">        [--profile|-p &lt;tag&gt;]  .................  (构建 &lt;platform&gt;) 指定证书或安全签名</span><br><span class="line">        [--destination|-d &lt;path&gt;]  ............  (download) 指定打包下载的输出目录</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">   </span><br><span class="line">config &lt;command&gt; [key] [value] ................  设置ionic的运行环境(alpha)</span><br><span class="line">                                                 &lt;command&gt; set, unset, build, or info</span><br><span class="line">                                                 [key] 设置的key</span><br><span class="line">                                                 [value] 设置的值</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">browser &lt;command&gt; [browser] ...................  添加另一个浏览器给一个平台</span><br><span class="line">                                                 &lt;command&gt; <span class="string">"add remove rm info versions upgrade list ls revert"</span></span><br><span class="line">                                                 [browser] 需要操作的浏览器 (Crosswalk)</span><br><span class="line">        [--nosave|-n]  ........................  不保存平台和插件到package.json</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">service add [options] &lt;SPEC&gt; .................. 添加ionic服务包并安装需要的插件</span><br><span class="line">                                                 &lt;SPEC&gt; 可以是服务名称或git</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">add [name] .................................... 添加可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要添加的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">remove [name] ................................. 移除可用的图标，组件和(附加组件)addons</span><br><span class="line">                                                 [name] 需要移除的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">list ..........................................  查看项目可用的图标，组件和(附加组件)addons</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">ions ..........................................  查看可使用的图标</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">templates .....................................  查看可用的起始模板</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">info ..........................................  查看用户的运行环境</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">help [command] ................................  查看某个命令的帮助文档</span><br><span class="line">                                                 [command] 要查看帮助文档的命令</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">link [appId] ..................................  设置APP的Ionic App ID</span><br><span class="line">                                                 [appId] 设置的app id</span><br><span class="line">     [--reset|-r]  ............................  重置appid</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">hooks [add|remove|permissions|perm] ...........  管理 Cordova调用</span><br><span class="line">                                                 [add|remove|permissions|perm] 添加，移除，修改默认cordavo调用的权限</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">state &lt;COMMAND&gt; ...............................  保存或恢复当前app的状态到package.json文件中</span><br><span class="line">                                                 &lt;COMMAND&gt; [ save | restore | clear | reset ]</span><br><span class="line">      [save]  .................................  保存平台和插件</span><br><span class="line">      [restore]  .............................. 恢复平台和插件</span><br><span class="line">      [clear]  ................................  清除平台和插件</span><br><span class="line">      [reset]  ................................  重置平台和插件</span><br><span class="line">      [--plugins]  ............................  只对插件操作</span><br><span class="line">      [--platforms]  ..........................  只对平台操作</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">docs &lt;TOPIC&gt; ..................................  打开Ionic文档</span><br><span class="line">                                                 &lt;TOPIC&gt; 要浏览的文档内容，使用ls可以查看所有</span><br></pre></td></tr></table></figure>
+          
         
       
     </div>
@@ -247,69 +322,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/16/ouvens.github.io/frontend-javascript/2015-10-16-es6-under-babel/" itemprop="url">
-                Babel下的ES6兼容性与规范
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-16T00:00:00+08:00" content="2015-10-16">
-            2015-10-16
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/16/ouvens.github.io/frontend-javascript/2015-10-16-es6-under-babel/" itemprop="url">
+                  Babel下的ES6兼容性与规范
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-16T00:00:00+08:00" content="2015-10-16">
+              2015-10-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/16/ouvens.github.io/frontend-javascript/2015-10-16-es6-under-babel/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/16/ouvens.github.io/frontend-javascript/2015-10-16-es6-under-babel/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/10/16/ouvens.github.io/frontend-javascript/2015-10-16-es6-under-babel/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/16/ouvens.github.io/frontend-javascript/2015-10-16-es6-under-babel/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>ES6标准发布后，前端人员也开发渐渐了解到了es6，但是由于兼容性的问题，仍然没有得到广泛的推广，不过业界也用了一些折中性的方案来解决兼容性和开发体系问题，但大家仍很疑惑，使用ES6会有哪些兼容性问题。</p>
+            <p>ES6标准发布后，前端人员也开发渐渐了解到了es6，但是由于兼容性的问题，仍然没有得到广泛的推广，不过业界也用了一些折中性的方案来解决兼容性和开发体系问题，但大家仍很疑惑，使用ES6会有哪些兼容性问题。</p>
 <h3 id="u4E00_u3001_u517C_u5BB9_u6027_u95EE_u9898_u73B0_u72B6"><a href="#u4E00_u3001_u517C_u5BB9_u6027_u95EE_u9898_u73B0_u72B6" class="headerlink" title="一、兼容性问题现状"></a>一、兼容性问题现状</h3><p>&emsp;&emsp;针对ES6的新特性兼容性问题，目前解决的方案是使用语法解析转换工具将es6语法转化为大部分浏览器识别的es5语法，通用的转化方案有babel，traceur，jsx，typescript，es6-shim。当然es6在服务器端也存在兼容性问题，这里由于只考虑到浏览器端的开发，暂不讨论。下面有一些常用的解决方案和兼容es6的兼容性比较~</p>
 <blockquote>
 <p><a href="/es6的兼容解决方案很多，这里只讨论最常用的几种">https://github.com/babel/babel/issues/596</a></p>
@@ -463,7 +563,8 @@
 <h2 id="u4E09_u3001_u5C0F_u7ED3"><a href="#u4E09_u3001_u5C0F_u7ED3" class="headerlink" title="三、小结"></a>三、小结</h2><p>&emsp;&emsp;所以使用ES6这一方案来进行实际开发是否有一定的必要性仍需要进行考虑，因为es6的高等特性在es5中没有对应的特性去代替，即使能够代替也是使用一些复杂的自定义函数去做，而部分可转换实现的特性仍然较少，而且写起来确实很简洁，这也是es6的一大优势。</p>
 <p>&emsp;&emsp;另外为了让Babel能在实际的开发中使用，我们也自己总结了一份关于ES6部分的规范：</p>
 <p>&emsp;&emsp;<a href="https://github.com/ouvens/ecmaScript-2015-babel-rules" target="_blank" rel="external">https://github.com/ouvens/ecmaScript-2015-babel-rules</a></p>
-</span>
+
+          
         
       
     </div>
@@ -484,69 +585,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/12/ouvens.github.io/frontend-javascript/2015-10-12-es6-code-style/" itemprop="url">
-                es6 编码规范
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-12T00:00:00+08:00" content="2015-10-12">
-            2015-10-12
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/12/ouvens.github.io/frontend-javascript/2015-10-12-es6-code-style/" itemprop="url">
+                  es6 编码规范
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-12T00:00:00+08:00" content="2015-10-12">
+              2015-10-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/12/ouvens.github.io/frontend-javascript/2015-10-12-es6-code-style/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/12/ouvens.github.io/frontend-javascript/2015-10-12-es6-code-style/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/10/12/ouvens.github.io/frontend-javascript/2015-10-12-es6-code-style/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/12/ouvens.github.io/frontend-javascript/2015-10-12-es6-code-style/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="JavaScript__u89C4_u8303_uFF08ES6_u65B0_u589E_uFF09"><a href="#JavaScript__u89C4_u8303_uFF08ES6_u65B0_u589E_uFF09" class="headerlink" title="JavaScript 规范（ES6新增）"></a>JavaScript 规范（ES6新增）</h1><ul>
+            <h1 id="JavaScript__u89C4_u8303_uFF08ES6_u65B0_u589E_uFF09"><a href="#JavaScript__u89C4_u8303_uFF08ES6_u65B0_u589E_uFF09" class="headerlink" title="JavaScript 规范（ES6新增）"></a>JavaScript 规范（ES6新增）</h1><ul>
 <li>一、类型规范</li>
 <li>二、字符串</li>
 <li>三、数组类型</li>
@@ -760,7 +886,8 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> luke = &#123;</span><br><span class="line">  jedi: <span class="literal">true</span>,</span><br><span class="line">  age: <span class="number">28</span></span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProp</span>(<span class="params">prop</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> luke[prop];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> isJedi = getProp(<span class="string">'jedi'</span>);</span><br></pre></td></tr></table></figure>
 <p>参考：<br><a href="http://bubkoo.com/2015/04/05/javascript-style-guide/?utm_source=tuicool" target="_blank" rel="external">http://bubkoo.com/2015/04/05/javascript-style-guide/?utm_source=tuicool</a></p>
 <p><a href="https://github.com/gf-rd/es6-coding-style#%E5%A3%B0%E6%98%8E" target="_blank" rel="external">https://github.com/gf-rd/es6-coding-style#%E5%A3%B0%E6%98%8E</a></p>
-</span>
+
+          
         
       
     </div>
@@ -781,69 +908,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/08/free-programming-books-zh/" itemprop="url">
-                BOOK目录
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-08T07:56:29+08:00" content="2015-10-08">
-            2015-10-08
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/helloworld/" itemprop="url" rel="index">
-                  <span itemprop="name">helloworld</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/08/free-programming-books-zh/" itemprop="url">
+                  BOOK目录
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-08T07:56:29+08:00" content="2015-10-08">
+              2015-10-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/helloworld/" itemprop="url" rel="index">
+                    <span itemprop="name">helloworld</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/08/free-programming-books-zh/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/08/free-programming-books-zh/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/10/08/free-programming-books-zh/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/08/free-programming-books-zh/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h2 id="u76EE_u5F55"><a href="#u76EE_u5F55" class="headerlink" title="目录"></a>目录</h2><ul>
+            <h2 id="u76EE_u5F55"><a href="#u76EE_u5F55" class="headerlink" title="目录"></a>目录</h2><ul>
 <li><a href="/#语言无关">语言无关</a><ul>
 <li><a href="/#在线教育">在线教育</a></li>
 <li><a href="/#软件开发方法">软件开发方法</a></li>
@@ -1400,7 +1552,8 @@
 <li><a href="http://wiki.visual-prolog.com/index.php?title=A_Beginners_Guide_to_Visual_Prolog_in_Chinese" target="_blank" rel="external">Visual Prolog 7初学指南</a></li>
 <li><a href="http://wiki.visual-prolog.com/index.php?title=Visual_Prolog_for_Tyros_in_Chinese" target="_blank" rel="external">Visual Prolog 7边练边学</a></li>
 </ul>
-</span>
+
+          
         
       
     </div>
@@ -1421,69 +1574,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/08/helloworld/" itemprop="url">
-                你好！GitBlog
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-08T07:56:29+08:00" content="2015-10-08">
-            2015-10-08
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/helloworld/" itemprop="url" rel="index">
-                  <span itemprop="name">helloworld</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/08/helloworld/" itemprop="url">
+                  你好！GitBlog
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-08T07:56:29+08:00" content="2015-10-08">
+              2015-10-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/helloworld/" itemprop="url" rel="index">
+                    <span itemprop="name">helloworld</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/08/helloworld/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/08/helloworld/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/10/08/helloworld/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/08/helloworld/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p><a href="http://segmentfault.com/a/1190000002620961" target="_blank" rel="external">1.在ubuntu上部署Kubernetes管理docker集群示例</a></p>
+            <p><a href="http://segmentfault.com/a/1190000002620961" target="_blank" rel="external">1.在ubuntu上部署Kubernetes管理docker集群示例</a></p>
 <p><a href="http://blog.csdn.net/thomas0yang/article/details/8562910/" target="_blank" rel="external">7.Hadoop mapreduce原理学习</a></p>
 <p><a href="https://leancloud.cn/docs/leanengine_guide-node.html#" target="_blank" rel="external">26.LeanEngine 指南</a></p>
 <p><a href="http://dockone.io/article/489" target="_blank" rel="external">28.回顾容器标准之争：Docker赢了，而CoreOS未必就输了</a></p>
@@ -1536,7 +1714,8 @@
 <p><a href="http://sofar.blog.51cto.com/353572/1369266/" target="_blank" rel="external">86.采用RedisLive监控Redis服务</a></p>
 <p><a href="http://www.cnblogs.com/sharpxiajun/p/3531665.html" target="_blank" rel="external">87.系统架构：Web应用架构的新趋势—前端和后端分离的一点想法</a></p>
 <p><a href="http://www.cnblogs.com/mcgrady/archive/2015/08/12/4725038.html" target="_blank" rel="external">88..NET开发知识体系</a></p>
-</span>
+
+          
         
       
     </div>
@@ -1557,73 +1736,99 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/29/stack/" itemprop="url">
-                技术栈
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-29T07:56:29+08:00" content="2015-09-29">
-            2015-09-29
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/29/stack/" itemprop="url">
+                  技术栈
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-29T07:56:29+08:00" content="2015-09-29">
+              2015-09-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/29/stack/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/29/stack/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/09/29/stack/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/29/stack/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
+            <p><a href="http://yangwei.info/test/DotNetStack-master/ux/DotNetStack.htm" target="_blank" rel="external">1.DotNetStack</a></p>
 <p><a href="http://yangwei.info/test/WebFrontEndStack-master/ux/WebFrontEndStack.htm" target="_blank" rel="external">2.WebFrontEndStack</a></p>
 <p><a href="http://yangwei.info/test/DatabaseStack-master/ux/DatabaseStack.htm" target="_blank" rel="external">3.DatabaseStack</a></p>
 <p><a href="http://coodict.github.io/javascript-in-one-pic/" target="_blank" rel="external">4.javascript-in-one-pic</a></p>
-</span>
+
+          
         
       
     </div>
@@ -1644,69 +1849,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/29/xbox/" itemprop="url">
-                js绘图
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-29T07:56:29+08:00" content="2015-09-29">
-            2015-09-29
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/29/xbox/" itemprop="url">
+                  js绘图
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-29T07:56:29+08:00" content="2015-09-29">
+              2015-09-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/29/xbox/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/29/xbox/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/09/29/xbox/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/29/xbox/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p><a href="http://yangwei.info/archives/xbox.html" target="_blank" rel="external">1.XBox-one</a><br><a href="http://yangwei.info/archives/heptagram.html" target="_blank" rel="external">2.heptagram</a><br><img src="/archives/heptagram.jpg" alt=""><br>The Acute Heptagram of Impact – Seth Godin<br>How come Seth Godin is so full of simple but clever and practical ideas?</p>
+            <p><a href="http://yangwei.info/archives/xbox.html" target="_blank" rel="external">1.XBox-one</a><br><a href="http://yangwei.info/archives/heptagram.html" target="_blank" rel="external">2.heptagram</a><br><img src="/archives/heptagram.jpg" alt=""><br>The Acute Heptagram of Impact – Seth Godin<br>How come Seth Godin is so full of simple but clever and practical ideas?</p>
 <p>Here’s another .. The Heptagram of Impact</p>
 <p>“Not as catchy a title as Maslow’s Hierarchy of Needs, but I hope you’ll walk through this with me:</p>
 <p>I can outline a strategy for you, but if you don’t have the tactics in place or you’re not skilled enough to execute, it won’t matter if the strategy is a good one.</p>
@@ -1714,7 +1944,8 @@
 <p>None of this matters if you and your team don’t persist, and your persistence will largely be driven by the desire you have to succeed, which of course is relentlessly undermined by the fear we all wrestle with every day.</p>
 <p>These seven elements: Strategy, Tactics, Execution, Reputation, Persistence, Desire and Fear, make up the seven points of the acute heptagram of impact. If your project isn’t working, it’s almost certainly because one or more of these elements aren’t right. And in my experience, it’s all of them. We generally pick the easiest and safest one to work on (probably tactics) without taking a deep breath and understanding where the real problem is.</p>
 <p>Feel free to share the AHI, but please don’t have it tattooed on your hip or anything.”</p>
-</span>
+
+          
         
       
     </div>
@@ -1735,70 +1966,96 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/29/dabai/" itemprop="url">
-                CSS实现大白动画
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-29T07:56:29+08:00" content="2015-09-29">
-            2015-09-29
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blog/" itemprop="url" rel="index">
-                  <span itemprop="name">blog</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/29/dabai/" itemprop="url">
+                  CSS实现大白动画
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-29T07:56:29+08:00" content="2015-09-29">
+              2015-09-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/29/dabai/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/29/dabai/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/09/29/dabai/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/29/dabai/" itemprop="commentsCount"></span>
-            </a>
-          </span>
+            <p><img src="http://yangwei.info/test/dabai.jpg" alt="dabai" title="dabai"><br><img src="http://github.global.ssl.fastly.net/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Mark" title="GitHub Mark"><br><a href="http://yangwei8888.github.io/test/dabai.html" target="_blank" rel="external">1.css3 大白</a></p>
+
           
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p><img src="http://yangwei.info/test/dabai.jpg" alt="dabai" title="dabai"><br><img src="http://github.global.ssl.fastly.net/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Mark" title="GitHub Mark"><br><a href="http://yangwei8888.github.io/test/dabai.html" target="_blank" rel="external">1.css3 大白</a></p>
-</span>
         
       
     </div>
@@ -1819,69 +2076,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/" itemprop="url">
-                Mock.js前端开发cgi数据模拟工具
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-20T00:00:00+08:00" content="2015-09-20">
-            2015-09-20
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/" itemprop="url">
+                  Mock.js前端开发cgi数据模拟工具
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-20T00:00:00+08:00" content="2015-09-20">
+              2015-09-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-mockjs/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="1-__u4EC0_u4E48_u662FMockjs"><a href="#1-__u4EC0_u4E48_u662FMockjs" class="headerlink" title="1. 什么是Mockjs"></a>1. 什么是Mockjs</h3><p><a href="http://mockjs.com/" target="_blank" rel="external">http://mockjs.com/</a></p>
+            <h3 id="1-__u4EC0_u4E48_u662FMockjs"><a href="#1-__u4EC0_u4E48_u662FMockjs" class="headerlink" title="1. 什么是Mockjs"></a>1. 什么是Mockjs</h3><p><a href="http://mockjs.com/" target="_blank" rel="external">http://mockjs.com/</a></p>
 <p>&emsp;&emsp;Mockjs是个能够拦截页面ajax请求并模拟返回数据的小工具，借助Mockjs，前端开发中在后台测试接口还没有给的时候就可以自己拦截请求模拟数据进行愉快的开发了，所以只要制定好了协议，前后端分离开发的成本可以降到基本为0，也不需要联调工具了</p>
 <h3 id="2_uFF0CMockjs_u4E3B_u8981_u529F_u80FD"><a href="#2_uFF0CMockjs_u4E3B_u8981_u529F_u80FD" class="headerlink" title="2，Mockjs主要功能"></a>2，Mockjs主要功能</h3><ul>
 <li>基于数据模板生成模拟数据</li>
@@ -1908,7 +2190,8 @@
 <h3 id="3-_u4F7F_u7528_u5B9E_u4F8B"><a href="#3-_u4F7F_u7528_u5B9E_u4F8B" class="headerlink" title="3.使用实例"></a>3.使用实例</h3><p>用起来也很简单</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"jquery-1.11.3.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"mock.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">Mock.mock(<span class="string">'./data.json'</span>,&#123;</span><br><span class="line">    name: <span class="string">'@chineseName'</span>,</span><br><span class="line">    ip: <span class="string">'@ip'</span>,</span><br><span class="line">    email: <span class="string">'@email'</span>,</span><br><span class="line">    phone: <span class="string">'@phone'</span>,</span><br><span class="line">    avatar: <span class="string">'@image'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'./data.json'</span>,</span><br><span class="line">    type: <span class="string">'get'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        index:<span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    dataType: <span class="string">'json'</span>,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res);</span><br><span class="line">    &#125;,</span><br><span class="line">    error: <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>当然，mock也支持require，sea，cmd方式引用，整体上是一个非常轻量实用的工具。</p>
-</span>
+
+          
         
       
     </div>
@@ -1929,69 +2212,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-isomorphic-reactjs/" itemprop="url">
-                isomorphic reactjs
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-20T00:00:00+08:00" content="2015-09-20">
-            2015-09-20
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-isomorphic-reactjs/" itemprop="url">
+                  isomorphic reactjs
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-20T00:00:00+08:00" content="2015-09-20">
+              2015-09-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-isomorphic-reactjs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-isomorphic-reactjs/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-isomorphic-reactjs/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/20/ouvens.github.io/frontend-javascript/2015-09-20-isomorphic-reactjs/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h4 id="isomorphic_javascript"><a href="#isomorphic_javascript" class="headerlink" title="isomorphic javascript"></a>isomorphic javascript</h4><p>web应用从最早静态页面、到php后台框架输出、到mv*为主的SPA、到基于node中层的直出，目前有人提出web的下次改变可能将是基于isomorphic javascript的前后台同构应用。 </p>
+            <h4 id="isomorphic_javascript"><a href="#isomorphic_javascript" class="headerlink" title="isomorphic javascript"></a>isomorphic javascript</h4><p>web应用从最早静态页面、到php后台框架输出、到mv*为主的SPA、到基于node中层的直出，目前有人提出web的下次改变可能将是基于isomorphic javascript的前后台同构应用。 </p>
 <h4 id="u4E00_u3001_u76EE_u524D_u4E3B_u6D41web_app_u7684_u7279_u70B9"><a href="#u4E00_u3001_u76EE_u524D_u4E3B_u6D41web_app_u7684_u7279_u70B9" class="headerlink" title="一、目前主流web app的特点"></a>一、目前主流web app的特点</h4><p>目前主要的应用都是基于mv*基础上(backbone、ember、angular等)或工程师自己的mvc思想上的应用。</p>
 <p>通常做法是，页面所有的数据交互在客户端(一般指浏览器或移动webview)完成，后台只负责输出数据或一个初始的空白页面，而页面的数据则通过加载后的js进行加载渲染，一般用户和开发者的体验都会比较好，but存在很多问题:</p>
 <ul>
@@ -2022,7 +2330,8 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>react output demo<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">link</span> <span class="attribute">href</span>=<span class="value">'/styles.css'</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">h1</span> <span class="attribute">id</span>=<span class="value">"main-title"</span>&gt;</span>react output demo-成绩表<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"react-main-mount"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">%-</span> <span class="attribute">reactOutput</span> %&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- comment out main.js to see server side only rendering --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>具体看个例子</p>
 <p><a href="https://github.com/ouvens/Isomorphic-reactjs/" target="_blank" rel="external">https://github.com/ouvens/Isomorphic-reactjs/</a></p>
-</span>
+
+          
         
       
     </div>
@@ -2041,21 +2350,25 @@
 
 
     
+
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/14/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
- </div>
 
+
+          </div>
+          
+
+
+          
+
+        </div>
         
-
-        
-      </div>
-
-      
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -2070,12 +2383,16 @@
 
       
 
-      <section class="site-overview">
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -2083,27 +2400,31 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -2113,15 +2434,27 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -2142,15 +2475,18 @@
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -2162,24 +2498,62 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
 
   
   
+
   
-    
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
 
   
 
@@ -2203,53 +2577,13 @@
   
 
 
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
-
-  
 
   
   
 
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+
 </body>
 </html>

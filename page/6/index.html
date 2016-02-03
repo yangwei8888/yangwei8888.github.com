@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
-
-
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="terry yang&apos;s blog | java | scala | bi">
@@ -52,10 +70,18 @@
 <meta name="twitter:description" content="terry yang&apos;s blog | java | scala | bi">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -64,16 +90,9 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -87,22 +106,32 @@
 
 
 
-  <div class="container one-column 
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -121,7 +150,9 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -129,7 +160,9 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -137,12 +170,15 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -156,74 +192,112 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
+
+    
+
+    
+    
+      
+      
+
+      
+    
+
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/README/" itemprop="url">
-                已同步更新到 Swift 2.1
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T12:00:00+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/README/" itemprop="url">
+                  已同步更新到 Swift 2.1
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T12:00:00+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/README/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/README/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/README/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/README/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><blockquote>
+            <blockquote>
 <p>已同步更新到 Swift 2.1</p>
 </blockquote>
 <h1 id="2-0__u65B0_u7684_u5F00_u59CB"><a href="#2-0__u65B0_u7684_u5F00_u59CB" class="headerlink" title="2.0 新的开始"></a>2.0 新的开始</h1><blockquote>
@@ -273,7 +347,8 @@
 <li><a href="https://github.com/miaosiqi" target="_blank" rel="external">miaosiqi</a></li>
 </ul>
 <p>最后，感谢<a href="http://wiki.jikexueyuan.com" target="_blank" rel="external">极客学院</a>提供的wiki系统，在国内访问起来速度很快，优化后的样式看起来也更舒服。</p>
-</span>
+
+          
         
       
     </div>
@@ -294,69 +369,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/" itemprop="url">
-                第三章-01关于语言参考（About the Language Reference）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:20+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/" itemprop="url">
+                  第三章-01关于语言参考（About the Language Reference）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:00:20+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/01_About_the_Language_Reference/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="u5173_u4E8E_u8BED_u8A00_u53C2_u8003_uFF08About_the_Language_Reference_uFF09"><a href="#u5173_u4E8E_u8BED_u8A00_u53C2_u8003_uFF08About_the_Language_Reference_uFF09" class="headerlink" title="关于语言参考（About the Language Reference）"></a>关于语言参考（About the Language Reference）</h1><hr>
+            <h1 id="u5173_u4E8E_u8BED_u8A00_u53C2_u8003_uFF08About_the_Language_Reference_uFF09"><a href="#u5173_u4E8E_u8BED_u8A00_u53C2_u8003_uFF08About_the_Language_Reference_uFF09" class="headerlink" title="关于语言参考（About the Language Reference）"></a>关于语言参考（About the Language Reference）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/dabing1022" target="_blank" rel="external">dabing1022</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></p>
@@ -385,7 +485,8 @@
 <blockquote>
 <p>getter-setter 方法块语法<br>getter-setter 方法块 → { <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a>  <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a><sub>可选</sub> }<br>getter-setter 方法块 → { <a href="/05_Declarations.html#setter-clause"><em>setter 子句</em></a> <a href="/05_Declarations.html#getter-clause"><em>getter 子句</em></a> }</p>
 </blockquote>
-</span>
+
+          
         
       
     </div>
@@ -406,69 +507,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/02_Lexical_Structure/" itemprop="url">
-                第三章-02词法结构（Lexical Structure）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:19+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/02_Lexical_Structure/" itemprop="url">
+                  第三章-02词法结构（Lexical Structure）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:00:19+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter3/02_Lexical_Structure/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/02_Lexical_Structure/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/02_Lexical_Structure/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/02_Lexical_Structure/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="u8BCD_u6CD5_u7ED3_u6784_uFF08Lexical_Structure_uFF09"><a href="#u8BCD_u6CD5_u7ED3_u6784_uFF08Lexical_Structure_uFF09" class="headerlink" title="词法结构（Lexical Structure）"></a>词法结构（Lexical Structure）</h1><hr>
+            <h1 id="u8BCD_u6CD5_u7ED3_u6784_uFF08Lexical_Structure_uFF09"><a href="#u8BCD_u6CD5_u7ED3_u6784_uFF08Lexical_Structure_uFF09" class="headerlink" title="词法结构（Lexical Structure）"></a>词法结构（Lexical Structure）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/superkam" target="_blank" rel="external">superkam</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/buginux" target="_blank" rel="external">buginux</a></p>
@@ -678,7 +804,8 @@
 <blockquote>
 <p><em>二元运算符</em> → <a href="/#operator"><em>运算符</em></a><br><a id="prefix-operator"></a><br><em>前缀运算符</em> → <a href="/#operator"><em>运算符</em></a><br><a id="postfix-operator"></a><br><em>后缀运算符</em> → <a href="/#operator"><em>运算符</em></a>  </p>
 </blockquote>
-</span>
+
+          
         
       
     </div>
@@ -699,69 +826,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/03_Types/" itemprop="url">
-                第三章-03类型（Types）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:18+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/03_Types/" itemprop="url">
+                  第三章-03类型（Types）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:00:18+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter3/03_Types/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/03_Types/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/03_Types/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/03_Types/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="u7C7B_u578B_uFF08Types_uFF09"><a href="#u7C7B_u578B_uFF08Types_uFF09" class="headerlink" title="类型（Types）"></a>类型（Types）</h1><hr>
+            <h1 id="u7C7B_u578B_uFF08Types_uFF09"><a href="#u7C7B_u578B_uFF08Types_uFF09" class="headerlink" title="类型（Types）"></a>类型（Types）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/lyuka" target="_blank" rel="external">lyuka</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/EudeMorgen" target="_blank" rel="external">EudeMorgen</a></p>
@@ -919,7 +1071,8 @@
 <p>在 Swift 中，类型信息也可以反方向流动——从根节点传向叶子节点。在下面的例子中，常量 <code>eFloat</code> 上的显式类型注解（<code>: Float</code>）将导致数字字面量 <code>2.71828</code> 的类型是 <code>Float</code> 而非 <code>Double</code>。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> e = <span class="number">2.71828</span> <span class="comment">// e 的类型会被推断为 Double</span></span><br><span class="line"><span class="keyword">let</span> eFloat: <span class="type">Float</span> = <span class="number">2.71828</span> <span class="comment">// eFloat 的类型为 Float</span></span><br></pre></td></tr></table></figure>
 <p>Swift 中的类型推断在单独的表达式或语句上进行。这意味着所有用于类型推断的信息必须可以从表达式或其某个子表达式的类型检查中获取到。</p>
-</span>
+
+          
         
       
     </div>
@@ -940,69 +1093,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/04_Expressions/" itemprop="url">
-                第三章-04表达式（Expressions）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:17+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/04_Expressions/" itemprop="url">
+                  第三章-04表达式（Expressions）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:00:17+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter3/04_Expressions/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/04_Expressions/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/04_Expressions/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/04_Expressions/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="u8868_u8FBE_u5F0F_uFF08Expressions_uFF09"><a href="#u8868_u8FBE_u5F0F_uFF08Expressions_uFF09" class="headerlink" title="表达式（Expressions）"></a>表达式（Expressions）</h1><hr>
+            <h1 id="u8868_u8FBE_u5F0F_uFF08Expressions_uFF09"><a href="#u8868_u8FBE_u5F0F_uFF08Expressions_uFF09" class="headerlink" title="表达式（Expressions）"></a>表达式（Expressions）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/sg552" target="_blank" rel="external">sg552</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/EudeMorgen" target="_blank" rel="external">EudeMorgen</a></p>
@@ -1392,7 +1570,8 @@
 <blockquote>
 <p>可选链表达式语法<br><a name="optional-chaining-expression"></a><br><em>可选链表达式</em> → <a href="/#postfix-expression"><em>后缀表达式</em></a> <strong>?</strong>  </p>
 </blockquote>
-</span>
+
+          
         
       
     </div>
@@ -1413,69 +1592,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/05_Declarations/" itemprop="url">
-                第三章-05声明（Declarations）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:16+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/05_Declarations/" itemprop="url">
+                  第三章-05声明（Declarations）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:00:16+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter3/05_Declarations/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/05_Declarations/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/05_Declarations/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/05_Declarations/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p><a name="declarations"></a></p>
+            <p><a name="declarations"></a></p>
 <h1 id="u58F0_u660E_uFF08Declarations_uFF09"><a href="#u58F0_u660E_uFF08Declarations_uFF09" class="headerlink" title="声明（Declarations）"></a>声明（Declarations）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/marsprince" target="_blank" rel="external">marsprince</a> <a href="https://github.com/marsprince" target="_blank" rel="external">Lenhoon</a><a href="http://www.weibo.com/lenhoon" target="_blank" rel="external">(微博)</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
@@ -2036,7 +2240,8 @@ associativity `associativity`
 <p>访问级别修饰符 → <strong>public­</strong> | <strong>public­(­set­)­</strong></p>
 <p>访问级别修饰符 → <a href="/#">访问级别修饰符(access-level-modeifier)</a> <a href="/#">访问级别修饰符列表(access-level-modeifiers)</a> <em>可选</em><br>­</p>
 </blockquote>
-</span>
+
+          
         
       
     </div>
@@ -2057,69 +2262,94 @@ associativity `associativity`
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/06_Attributes/" itemprop="url">
-                第三章-06特性（Attributes）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:15+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/06_Attributes/" itemprop="url">
+                  第三章-06特性（Attributes）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:00:15+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter3/06_Attributes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/06_Attributes/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/06_Attributes/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/06_Attributes/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="u7279_u6027_uFF08Attributes_uFF09"><a href="#u7279_u6027_uFF08Attributes_uFF09" class="headerlink" title="特性（Attributes）"></a>特性（Attributes）</h1><hr>
+            <h1 id="u7279_u6027_uFF08Attributes_uFF09"><a href="#u7279_u6027_uFF08Attributes_uFF09" class="headerlink" title="特性（Attributes）"></a>特性（Attributes）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/Hawstein" target="_blank" rel="external">Hawstein</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/KYawn" target="_blank" rel="external">KYawn</a></p>
@@ -2233,7 +2463,8 @@ associativity `associativity`
 <blockquote>
 <p>特性语法<br><em>特性</em> → <strong>@</strong> <a href="/#attribute_name"><em>特性名</em></a> <a href="/#attribute_argument_clause"><em>特性参数子句</em></a> (可选)<br><em>特性名</em> → <a href="/02_Lexical_Structure.html#identifiers"><em>标识符</em></a><br><em>特性参数子句</em> → <strong>(</strong> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>特性(Attributes)列表</em> → <a href="/#attribute"><em>特色</em></a> <a href="/#attributes"><em>特性(Attributes)列表</em></a> (可选)<br><em>平衡令牌列表</em> → <a href="/#balanced_token"><em>平衡令牌</em></a> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选)<br><em>平衡令牌</em> → <strong>(</strong> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>)</strong><br><em>平衡令牌</em> → <strong>[</strong> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>]</strong><br><em>平衡令牌</em> → <strong>{</strong> <a href="/#balanced_tokens"><em>平衡令牌列表</em></a> (可选) <strong>}</strong><br><em>平衡令牌</em> → <strong>任意标识符, 关键字, 字面量或运算符</strong><br><em>平衡令牌</em> → <strong>任意标点除了(, ), [, ], {, 或 }</strong></p>
 </blockquote>
-</span>
+
+          
         
       
     </div>
@@ -2254,69 +2485,94 @@ associativity `associativity`
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/07_Patterns/" itemprop="url">
-                第三章-07模式（Patterns）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:14+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/07_Patterns/" itemprop="url">
+                  第三章-07模式（Patterns）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:00:14+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter3/07_Patterns/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/07_Patterns/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/07_Patterns/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/07_Patterns/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="u6A21_u5F0F_uFF08Patterns_uFF09"><a href="#u6A21_u5F0F_uFF08Patterns_uFF09" class="headerlink" title="模式（Patterns）"></a>模式（Patterns）</h1><hr>
+            <h1 id="u6A21_u5F0F_uFF08Patterns_uFF09"><a href="#u6A21_u5F0F_uFF08Patterns_uFF09" class="headerlink" title="模式（Patterns）"></a>模式（Patterns）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/honghaoz" target="_blank" rel="external">honghaoz</a><br>校对：<a href="https://github.com/numbbbbb" target="_blank" rel="external">numbbbbb</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/ray16897188" target="_blank" rel="external">ray16897188</a>,</p>
@@ -2407,7 +2663,8 @@ associativity `associativity`
 <blockquote>
 <p>表达式模式语法<br><em>表达式模式</em> → <a href="/../chapter3/04_Expressions.html#expression"><em>表达式</em></a>  </p>
 </blockquote>
-</span>
+
+          
         
       
     </div>
@@ -2428,69 +2685,94 @@ associativity `associativity`
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/08_Generic_Parameters_and_Arguments/" itemprop="url">
-                第三章-08泛型参数（Generic Parameters and Arguments）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:13+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/08_Generic_Parameters_and_Arguments/" itemprop="url">
+                  第三章-08泛型参数（Generic Parameters and Arguments）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:00:13+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter3/08_Generic_Parameters_and_Arguments/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/08_Generic_Parameters_and_Arguments/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/08_Generic_Parameters_and_Arguments/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/08_Generic_Parameters_and_Arguments/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="u6CDB_u578B_u53C2_u6570_uFF08Generic_Parameters_and_Arguments_uFF09"><a href="#u6CDB_u578B_u53C2_u6570_uFF08Generic_Parameters_and_Arguments_uFF09" class="headerlink" title="泛型参数（Generic Parameters and Arguments）"></a>泛型参数（Generic Parameters and Arguments）</h1><hr>
+            <h1 id="u6CDB_u578B_u53C2_u6570_uFF08Generic_Parameters_and_Arguments_uFF09"><a href="#u6CDB_u578B_u53C2_u6570_uFF08Generic_Parameters_and_Arguments_uFF09" class="headerlink" title="泛型参数（Generic Parameters and Arguments）"></a>泛型参数（Generic Parameters and Arguments）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/fd5788" target="_blank" rel="external">fd5788</a><br>校对：<a href="https://github.com/yankuangshi" target="_blank" rel="external">yankuangshi</a>, <a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a></p>
 <p>2.0<br>翻译+校对：<a href="https:github.com/wardenNScaiyi" target="_blank" rel="external">wardenNScaiyi</a></p>
@@ -2555,7 +2837,8 @@ associativity `associativity`
 <blockquote>
 <p>泛型实参子句语法<br><a name="generic-argument-clause"></a><br><em>泛型实参子句</em> → <strong>&lt;</strong> <a href="/#generic-argument-list"><em>泛型实参列表</em></a> <strong>&gt;</strong><br><a name="generic-argument-list"></a><br><em>泛型实参列表</em> → <a href="/#generic-argument"><em>泛型实参</em></a> | <a href="/#generic-argument"><em>泛型实参</em></a> <strong>,</strong> <a href="/#generic-argument-list"><em>泛型实参列表</em></a><br><a name="generic-argument"></a><br><em>泛型实参</em> → <a href="/03_Types.html#type"><em>类型</em></a>  </p>
 </blockquote>
-</span>
+
+          
         
       
     </div>
@@ -2576,69 +2859,94 @@ associativity `associativity`
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/09_Summary_of_the_Grammar/" itemprop="url">
-                第三章-09语法总结（Summary of the Grammar）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T11:00:12+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/25/swift-cn/chapter3/09_Summary_of_the_Grammar/" itemprop="url">
+                  第三章-09语法总结（Summary of the Grammar）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:00:12+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter3/09_Summary_of_the_Grammar/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/09_Summary_of_the_Grammar/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter3/09_Summary_of_the_Grammar/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter3/09_Summary_of_the_Grammar/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="u8BED_u6CD5_u603B_u7ED3_uFF08Summary_of_the_Grammar_uFF09"><a href="#u8BED_u6CD5_u603B_u7ED3_uFF08Summary_of_the_Grammar_uFF09" class="headerlink" title="语法总结（Summary of the Grammar）"></a>语法总结（Summary of the Grammar）</h1><hr>
+            <h1 id="u8BED_u6CD5_u603B_u7ED3_uFF08Summary_of_the_Grammar_uFF09"><a href="#u8BED_u6CD5_u603B_u7ED3_uFF08Summary_of_the_Grammar_uFF09" class="headerlink" title="语法总结（Summary of the Grammar）"></a>语法总结（Summary of the Grammar）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/stanzhai" target="_blank" rel="external">stanzhai</a><br>校对：<a href="https://github.com/xielingwang" target="_blank" rel="external">xielingwang</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/miaosiqi" target="_blank" rel="external">miaosiqi</a></p>
@@ -3126,7 +3434,8 @@ associativity `associativity`
 <p><em>类型继承集</em> → <a href="/../chapter3/03_Types.html#type_identifier"><em>类型标识符</em></a> | <a href="/../chapter3/03_Types.html#type_identifier"><em>类型标识符</em></a> <strong>,</strong> <a href="/../chapter3/03_Types.html#type_inheritance_list"><em>类型继承集</em></a></p>
 <p><em>类条件</em> → <strong>class</strong> </p>
 </blockquote>
-</span>
+
+          
         
       
     </div>
@@ -3145,21 +3454,25 @@ associativity `associativity`
 
 
     
+
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/7/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
- </div>
 
+
+          </div>
+          
+
+
+          
+
+        </div>
         
-
-        
-      </div>
-
-      
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -3174,12 +3487,16 @@ associativity `associativity`
 
       
 
-      <section class="site-overview">
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -3187,27 +3504,31 @@ associativity `associativity`
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -3217,15 +3538,27 @@ associativity `associativity`
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -3246,15 +3579,18 @@ associativity `associativity`
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -3266,24 +3602,62 @@ associativity `associativity`
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
 
   
   
+
   
-    
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
 
   
 
@@ -3307,53 +3681,13 @@ associativity `associativity`
   
 
 
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
-
-  
 
   
   
 
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+
 </body>
 </html>

@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
 
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="serviceWorker webWorker," />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="从webWorker到serviceWorkerhttp://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction下面将从webWorker、serviceWorker和为什么使用serviceWorker三个方面进行讨论
@@ -56,10 +74,18 @@
 一、Web worker要了解serviceworker，先的认识下webworker，也可以了解一下二者的">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -68,16 +94,9 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -91,20 +110,30 @@
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -123,7 +152,9 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -131,7 +162,9 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -139,12 +172,15 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -158,71 +194,96 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              从webWorker到serviceWorker
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-06-05T00:00:00+08:00" content="2014-06-05">
-            2014-06-05
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                从webWorker到serviceWorker
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-06-05T00:00:00+08:00" content="2014-06-05">
+              2014-06-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
-
-        
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/" itemprop="commentsCount"></span>
-            </a>
-          </span>
+
           
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h2 id="u4ECEwebWorker_u5230serviceWorker"><a href="#u4ECEwebWorker_u5230serviceWorker" class="headerlink" title="从webWorker到serviceWorker"></a>从webWorker到serviceWorker</h2><p><a href="http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction" target="_blank" rel="external">http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction</a><br>下面将从webWorker、serviceWorker和为什么使用serviceWorker三个方面进行讨论</p>
+        <h2 id="u4ECEwebWorker_u5230serviceWorker"><a href="#u4ECEwebWorker_u5230serviceWorker" class="headerlink" title="从webWorker到serviceWorker"></a>从webWorker到serviceWorker</h2><p><a href="http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction" target="_blank" rel="external">http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction</a><br>下面将从webWorker、serviceWorker和为什么使用serviceWorker三个方面进行讨论</p>
 <h3 id="u4E00_u3001Web_worker"><a href="#u4E00_u3001Web_worker" class="headerlink" title="一、Web worker"></a>一、Web worker</h3><p>要了解serviceworker，先的认识下webworker，也可以了解一下二者的共同点，并予以区分。</p>
 <p>Web Workers 是 现代浏览器 提供的一个javascript多线程解决方案，我们可以将一些大计算量的代码交由web Worker运行。JavaScript语言执行采用的是单线程模型，也就是说，所有任务排成一个队列，一次只能做一件事。但是有了webworker后就不一样了。</p>
 <h4 id="281_29__u517C_u5BB9_u6027"><a href="#281_29__u517C_u5BB9_u6027" class="headerlink" title="(1) 兼容性"></a>(1) 兼容性</h4><p>支持的浏览器包括IE10、Firefox (从3.6版本开始)、Safari (从4.0版本开始)、Chrome 和 Opera 11+，但是手机浏览器还不支持。</p>
@@ -286,7 +347,7 @@
 <p>(3) 两者目前浏览器兼容性很不好，尤其是serviceworker，草案在更新，特性没有完整，chrome的各分支版本支持都不一样，但仍然还是可以根据这些特性进行一些有趣的开发。</p>
 <p>(4)serviceworker可以带给我们很多</p>
 <p>参考文档<br><a href="https://jakearchibald.github.io/isserviceworkerready/" target="_blank" rel="external">https://jakearchibald.github.io/isserviceworkerready/</a> (api支持性现状介绍)<br><a href="http://www.serviceworker.org/#" target="_blank" rel="external">http://www.serviceworker.org/#</a> (git主页)<br><a href="http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction" target="_blank" rel="external">http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction</a> (w3c介绍)<br><a href="http://jakearchibald.com/2014/service-worker-first-draft/" target="_blank" rel="external">http://jakearchibald.com/2014/service-worker-first-draft/</a> (serviceWorker草案)<br><a href="https://github.com/jakearchibald/isserviceworkerready" target="_blank" rel="external">https://github.com/jakearchibald/isserviceworkerready</a> (样例代码)<br><a href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/" target="_blank" rel="external">https://slightlyoff.github.io/ServiceWorker/spec/service_worker/</a> (10月份更新的草案)</p>
-</span>
+
       
     </div>
 
@@ -301,15 +362,19 @@
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/" rel="prev">javascript基础--突变事件与观察者事件</a>
+              <a href="/2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/" rel="next" title="javascript基础--深入理解proto与__proto__">
+                <i class="fa fa-chevron-left"></i> javascript基础--深入理解proto与__proto__
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/" rel="next">javascript基础--深入理解proto与__proto__</a>
+              <a href="/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/" rel="prev" title="javascript基础--突变事件与观察者事件">
+                javascript基础--突变事件与观察者事件 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -327,22 +392,27 @@
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
-              <div id="disqus_thread">
-                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-              </div>
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -356,6 +426,8 @@
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
@@ -366,12 +438,14 @@
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -379,27 +453,31 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -409,15 +487,27 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -433,15 +523,21 @@
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
           <div class="post-toc">
+            
+              
             
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u4ECEwebWorker_u5230serviceWorker"><span class="nav-number">1.</span> <span class="nav-text">从webWorker到serviceWorker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E00_u3001Web_worker"><span class="nav-number">1.1.</span> <span class="nav-text">一、Web worker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#281_29__u517C_u5BB9_u6027"><span class="nav-number">1.1.1.</span> <span class="nav-text">(1) 兼容性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#282_29__u57FA_u7840API"><span class="nav-number">1.1.2.</span> <span class="nav-text">(2) 基础API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u3001ServiceWorker"><span class="nav-number">2.</span> <span class="nav-text">二、ServiceWorker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#281_29__u517C_u5BB9_u6027-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">(1) 兼容性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#282_29_serviceWorker_u4ECB_u7ECD"><span class="nav-number">2.0.2.</span> <span class="nav-text">(2) serviceWorker介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#283_29__u716E_u4E2A_u6817_u5B50"><span class="nav-number">2.0.3.</span> <span class="nav-text">(3) 煮个栗子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#284_29_u6CE8_u610F_u4E8B_u9879_uFF1A"><span class="nav-number">2.0.4.</span> <span class="nav-text">(4)注意事项：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#285_29_u6269_u5C55_uFF1A"><span class="nav-number">2.0.5.</span> <span class="nav-text">(5)扩展：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#286_29chrome_canary_u79BB_u7EBF_u5C0F_u6050_u9F99_u7684_u6E38_u620F"><span class="nav-number">2.0.6.</span> <span class="nav-text">(6)chrome canary离线小恐龙的游戏</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E09_u3001_u4E3A_u4EC0_u4E48_u8981_u4F7F_u7528serviceworker"><span class="nav-number">3.</span> <span class="nav-text">三、为什么要使用serviceworker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1__u672A_u6765_u6211_u4EEC_u60F3_u8981_u505A_u7684"><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1 未来我们想要做的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2__u76EE_u524Dweb_u5E94_u7528_u7F13_u5B58_u89E3_u51B3_u65B9_u6848_u4E0E_u4E0D_u8DB3"><span class="nav-number">3.0.2.</span> <span class="nav-text">3.2 目前web应用缓存解决方案与不足</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3__u57FA_u4E8E_u8FD9_u4E9B_uFF0C_u6240_u4EE5_u6211_u4EEC_u9009_u62E9_u4E86serviceWorker"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.3 基于这些，所以我们选择了serviceWorker</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u56DB_u3001_u603B_u7ED3"><span class="nav-number">4.</span> <span class="nav-text">四、总结</span></a></li></ol></div>
             
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
         </section>
       
 
@@ -449,15 +545,18 @@
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -469,73 +568,53 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-  
-    
-    
-
-  
-
-    <script type="text/javascript">
-      var disqus_shortname = 'yangwei888';
-      var disqus_identifier = '2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/';
-      var disqus_title = '从webWorker到serviceWorker';
-      var disqus_url = 'http://yoursite.com/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/';
-
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
-
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
-  
-
-
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -615,7 +694,7 @@
 
     function tocOverflowIndicator (indicator, action) {
       var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
+      var opacity = action === 'show' ? 1 : 0;
       $indicator.velocity ?
         $indicator.velocity('stop').velocity({
           opacity: opacity
@@ -669,7 +748,7 @@
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -682,42 +761,62 @@
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
       }
-    }
+    };
   });
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/';
+      var disqus_title = '从webWorker到serviceWorker';
+      var disqus_url = 'http://yoursite.com/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-
-  
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
+
+
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+  
+  
+
+
 </body>
 </html>

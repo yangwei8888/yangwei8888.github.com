@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
 
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="swift-cn," />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="闭包（Closures）
@@ -86,10 +104,18 @@
 闭包是引用类型（Closures Are Refer">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -98,16 +124,9 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -121,20 +140,30 @@
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -153,7 +182,9 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -161,7 +192,9 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -169,12 +202,15 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -188,71 +224,96 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              第二章-07闭包（Closures）
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-25T12:00:20+08:00" content="2015-12-25">
-            2015-12-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/swift-cn/" itemprop="url" rel="index">
-                  <span itemprop="name">swift-cn</span>
+            
+              
+                第二章-07闭包（Closures）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T12:00:20+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/swift-cn/" itemprop="url" rel="index">
+                    <span itemprop="name">swift-cn</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/swift-cn/chapter2/07_Closures/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter2/07_Closures/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
-
-        
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/12/25/swift-cn/chapter2/07_Closures/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/25/swift-cn/chapter2/07_Closures/" itemprop="commentsCount"></span>
-            </a>
-          </span>
+
           
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h1 id="u95ED_u5305_uFF08Closures_uFF09"><a href="#u95ED_u5305_uFF08Closures_uFF09" class="headerlink" title="闭包（Closures）"></a>闭包（Closures）</h1><hr>
+        <h1 id="u95ED_u5305_uFF08Closures_uFF09"><a href="#u95ED_u5305_uFF08Closures_uFF09" class="headerlink" title="闭包（Closures）"></a>闭包（Closures）</h1><hr>
 <blockquote>
 <p>1.0<br>翻译：<a href="https://github.com/wh1100717" target="_blank" rel="external">wh1100717</a><br>校对：<a href="https://github.com/lyuka" target="_blank" rel="external">lyuka</a></p>
 <p>2.0<br>翻译+校对：<a href="https://github.com/100mango" target="_blank" rel="external">100mango</a></p>
@@ -407,7 +468,7 @@
 <p><code>@autoclosure</code>特性暗含了<code>@noescape</code>特性，这个特性在<a href="/#nonescaping_closures">非逃逸闭包</a>一节中有描述。如果你想让这个闭包可以“逃逸”，则应该使用<code>@autoclosure(escaping)</code>特性.</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// customersInLine is ["Barry", "Daniella"]</span></span><br><span class="line"><span class="keyword">var</span> customerProviders: [() -&gt; <span class="type">String</span>] = []</span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">collectCustomerProviders</span><span class="params">(@autoclosure<span class="params">(escaping)</span></span></span> customerProvider: () -&gt; <span class="type">String</span>) &#123;</span><br><span class="line">    customerProviders.append(customerProvider)</span><br><span class="line">&#125;</span><br><span class="line">collectCustomerProviders(customersInLine.removeAtIndex(<span class="number">0</span>))</span><br><span class="line">collectCustomerProviders(customersInLine.removeAtIndex(<span class="number">0</span>))</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(<span class="string">"Collected <span class="subst">\(customerProviders.<span class="built_in">count</span>)</span> closures."</span>)</span><br><span class="line"><span class="comment">// prints "Collected 2 closures."</span></span><br><span class="line"><span class="keyword">for</span> customerProvider <span class="keyword">in</span> customerProviders &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Now serving <span class="subst">\(customerProvider()</span>)!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// prints "Now serving Barry!"</span></span><br><span class="line"><span class="comment">// prints "Now serving Daniella!"</span></span><br></pre></td></tr></table></figure>
 <p>在上面的代码中，<code>collectCustomerProviders(_:)</code>函数并没有调用传入的<code>customerProvider</code>闭包，而是将闭包追加到了<code>customerProviders</code>数组中。这个数组定义在函数作用域范围外，这意味着数组内的闭包将会在函数返回之后被调用。因此，<code>customerProvider</code>参数必须允许“逃逸”出函数作用域。</p>
-</span>
+
       
     </div>
 
@@ -422,15 +483,19 @@
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/25/swift-cn/chapter2/06_Functions/" rel="prev">第二章-06函数（Functions）</a>
+              <a href="/2015/12/25/swift-cn/chapter2/08_Enumerations/" rel="next" title="第二章-08枚举（Enumerations）">
+                <i class="fa fa-chevron-left"></i> 第二章-08枚举（Enumerations）
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/25/swift-cn/chapter2/08_Enumerations/" rel="next">第二章-08枚举（Enumerations）</a>
+              <a href="/2015/12/25/swift-cn/chapter2/06_Functions/" rel="prev" title="第二章-06函数（Functions）">
+                第二章-06函数（Functions） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -448,22 +513,27 @@
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
-              <div id="disqus_thread">
-                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-              </div>
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -477,6 +547,8 @@
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
@@ -487,12 +559,14 @@
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -500,27 +574,31 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -530,15 +608,27 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -554,15 +644,21 @@
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
           <div class="post-toc">
+            
+              
             
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u95ED_u5305_uFF08Closures_uFF09"><span class="nav-number">1.</span> <span class="nav-text">闭包（Closures）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u95ED_u5305_u8868_u8FBE_u5F0F_uFF08Closure_Expressions_uFF09"><span class="nav-number">1.1.</span> <span class="nav-text">闭包表达式（Closure Expressions）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sort__u65B9_u6CD5_uFF08The_Sort_Method_uFF09"><span class="nav-number">1.1.1.</span> <span class="nav-text">sort 方法（The Sort Method）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u95ED_u5305_u8868_u8FBE_u5F0F_u8BED_u6CD5_uFF08Closure_Expression_Syntax_uFF09"><span class="nav-number">1.1.2.</span> <span class="nav-text">闭包表达式语法（Closure Expression Syntax）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u6839_u636E_u4E0A_u4E0B_u6587_u63A8_u65AD_u7C7B_u578B_uFF08Inferring_Type_From_Context_uFF09"><span class="nav-number">1.1.3.</span> <span class="nav-text">根据上下文推断类型（Inferring Type From Context）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5355_u8868_u8FBE_u5F0F_u95ED_u5305_u9690_u5F0F_u8FD4_u56DE_uFF08Implicit_Return_From_Single-Expression_Clossures_uFF09"><span class="nav-number">1.1.4.</span> <span class="nav-text">单表达式闭包隐式返回（Implicit Return From Single-Expression Clossures）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u53C2_u6570_u540D_u79F0_u7F29_u5199_uFF08Shorthand_Argument_Names_uFF09"><span class="nav-number">1.1.5.</span> <span class="nav-text">参数名称缩写（Shorthand Argument Names）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8FD0_u7B97_u7B26_u51FD_u6570_uFF08Operator_Functions_uFF09"><span class="nav-number">1.1.6.</span> <span class="nav-text">运算符函数（Operator Functions）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5C3E_u968F_u95ED_u5305_uFF08Trailing_Closures_uFF09"><span class="nav-number">1.2.</span> <span class="nav-text">尾随闭包（Trailing Closures）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6355_u83B7_u503C_uFF08Capturing_Values_uFF09"><span class="nav-number">1.3.</span> <span class="nav-text">捕获值（Capturing Values）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u95ED_u5305_u662F_u5F15_u7528_u7C7B_u578B_uFF08Closures_Are_Reference_Types_uFF09"><span class="nav-number">1.4.</span> <span class="nav-text">闭包是引用类型（Closures Are Reference Types）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u975E_u9003_u9038_u95ED_u5305_28Nonescaping_Closures_29"><span class="nav-number">1.5.</span> <span class="nav-text">非逃逸闭包(Nonescaping Closures)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u81EA_u52A8_u95ED_u5305_uFF08Autoclosures_uFF09"><span class="nav-number">1.6.</span> <span class="nav-text">自动闭包（Autoclosures）</span></a></li></ol></li></ol></div>
             
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
         </section>
       
 
@@ -570,15 +666,18 @@
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -590,73 +689,53 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-  
-    
-    
-
-  
-
-    <script type="text/javascript">
-      var disqus_shortname = 'yangwei888';
-      var disqus_identifier = '2015/12/25/swift-cn/chapter2/07_Closures/';
-      var disqus_title = '第二章-07闭包（Closures）';
-      var disqus_url = 'http://yoursite.com/2015/12/25/swift-cn/chapter2/07_Closures/';
-
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
-
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
-  
-
-
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -736,7 +815,7 @@
 
     function tocOverflowIndicator (indicator, action) {
       var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
+      var opacity = action === 'show' ? 1 : 0;
       $indicator.velocity ?
         $indicator.velocity('stop').velocity({
           opacity: opacity
@@ -790,7 +869,7 @@
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -803,42 +882,62 @@
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
       }
-    }
+    };
   });
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/12/25/swift-cn/chapter2/07_Closures/';
+      var disqus_title = '第二章-07闭包（Closures）';
+      var disqus_url = 'http://yoursite.com/2015/12/25/swift-cn/chapter2/07_Closures/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-
-  
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
+
+
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+  
+  
+
+
 </body>
 </html>

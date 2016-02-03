@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
 
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="polymer vm特性," />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="一、PolymerPolymer是Google在2013年的Google I/O大会上提出了一个新的UI框架。Polymer的实现使用了WebComponent标准，并且Polymer可保证针对包含各种平台的Web Component规范本地实现的浏览器、库和组件的使用效果完全相同。
@@ -62,10 +80,18 @@
 基础层(platform.js)：是基本构建块">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -74,16 +100,9 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -97,20 +116,30 @@
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -129,7 +158,9 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -137,7 +168,9 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -145,12 +178,15 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -164,71 +200,96 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              polymer组件化与vm特性
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-05-24T00:00:00+08:00" content="2015-05-24">
-            2015-05-24
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                polymer组件化与vm特性
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-24T00:00:00+08:00" content="2015-05-24">
+              2015-05-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
-
-        
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/" itemprop="commentsCount"></span>
-            </a>
-          </span>
+
           
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h4 id="u4E00_u3001Polymer"><a href="#u4E00_u3001Polymer" class="headerlink" title="一、Polymer"></a>一、Polymer</h4><p>Polymer是Google在2013年的Google I/O大会上提出了一个新的UI框架。Polymer的实现使用了WebComponent标准，并且Polymer可保证针对包含各种平台的Web Component规范本地实现的浏览器、库和组件的使用效果完全相同。</p>
+        <h4 id="u4E00_u3001Polymer"><a href="#u4E00_u3001Polymer" class="headerlink" title="一、Polymer"></a>一、Polymer</h4><p>Polymer是Google在2013年的Google I/O大会上提出了一个新的UI框架。Polymer的实现使用了WebComponent标准，并且Polymer可保证针对包含各种平台的Web Component规范本地实现的浏览器、库和组件的使用效果完全相同。</p>
 <h4 id="1-1_Polymer_u6846_u67B6_uFF1A"><a href="#1-1_Polymer_u6846_u67B6_uFF1A" class="headerlink" title="1.1 Polymer框架："></a>1.1 Polymer框架：</h4><p>Polymer框架可以分为三个层次：</p>
 <ul>
 <li>基础层(platform.js)：是基本构建块。大多数情况下，基础层都是本地浏览器的API。</li>
@@ -265,7 +326,7 @@
 <h4 id="2-_react_u751F_u6001"><a href="#2-_react_u751F_u6001" class="headerlink" title="2. react生态"></a>2. react生态</h4><p>react的组件化生态思想和webComponent也及其相似，当然react做了更多的事情，除了web Component，react想做的其实可以称为platform component。</p>
 <h4 id="3-_angular_2-0__u548C_EmberJS_u7B49_u73B0_u6709_u6210_u719F_u65B9_u6848_u7684_u6539_u8FDB"><a href="#3-_angular_2-0__u548C_EmberJS_u7B49_u73B0_u6709_u6210_u719F_u65B9_u6848_u7684_u6539_u8FDB" class="headerlink" title="3. angular 2.0 和 EmberJS等现有成熟方案的改进"></a>3. angular 2.0 和 EmberJS等现有成熟方案的改进</h4><p>angular2.0已明确提出将支持Node绑定、模板集成、元素自定义和支持网络组件的无缝集成；ember的发展情况依然，今后也不排除jQuery等框架的进化重生，以全新的面目出现。</p>
 <h4 id="4-__u5F00_u53D1_u8005_u7684_u5176_u5B83_u5C0F_u4F17_u89E3_u51B3_u65B9_u6848"><a href="#4-__u5F00_u53D1_u8005_u7684_u5176_u5B83_u5C0F_u4F17_u89E3_u51B3_u65B9_u6848" class="headerlink" title="4. 开发者的其它小众解决方案"></a>4. 开发者的其它小众解决方案</h4><p>在企业中，针对企业特殊性的业务，企业前端开发者也可以根据webComponent的思想自己实现更加灵活可用的组件拼装解决方案。相比之下，这个方向的探索研究甚至会更加受欢迎，因为只有开发者才关注关注自己的组件怎么管理。例如目前qiqi项目所用的方案就比较符合这个方向。</p>
-</span>
+
       
     </div>
 
@@ -280,15 +341,19 @@
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/" rel="prev">Ionic Hybrid跨终端应用程序开发方案研究</a>
+              <a href="/2015/04/01/ouvens.github.io/frontend-build/2015-04-01-webpack-tool/" rel="next" title="webpack--更优秀的打包管理工具">
+                <i class="fa fa-chevron-left"></i> webpack--更优秀的打包管理工具
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/04/01/ouvens.github.io/frontend-build/2015-04-01-webpack-tool/" rel="next">webpack--更优秀的打包管理工具</a>
+              <a href="/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/" rel="prev" title="Ionic Hybrid跨终端应用程序开发方案研究">
+                Ionic Hybrid跨终端应用程序开发方案研究 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -306,22 +371,27 @@
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
-              <div id="disqus_thread">
-                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-              </div>
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -335,6 +405,8 @@
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
@@ -345,12 +417,14 @@
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -358,27 +432,31 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -388,15 +466,27 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -412,15 +502,21 @@
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
           <div class="post-toc">
+            
+              
             
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E00_u3001Polymer"><span class="nav-number">1.</span> <span class="nav-text">一、Polymer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1_Polymer_u6846_u67B6_uFF1A"><span class="nav-number">2.</span> <span class="nav-text">1.1 Polymer框架：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2__u57FA_u7840_u5C42"><span class="nav-number">3.</span> <span class="nav-text">1.2 基础层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3__u6838_u5FC3_u5C42_u548C_u5143_u7D20_u5C42_uFF0C_u5373_u7EC4_u4EF6UI_u548C_u7EC4_u4EF6_u903B_u8F91"><span class="nav-number">4.</span> <span class="nav-text">1.3 核心层和元素层，即组件UI和组件逻辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E8C_u3001Polymer_u7684_u4E00_u4E2A_u4F8B_u5B50"><span class="nav-number"></span> <span class="nav-text">二、Polymer的一个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-__u5148_u770B_u4E0B_u9762polymer_u7684_u4E00_u4E2A_u4F8B_u5B50_u4EE3_u7801"><span class="nav-number">0.1.</span> <span class="nav-text">1. 先看下面polymer的一个例子代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-_Polymer__u4F7F_u7528_HTML_imports_u6280_u672F_u6765_u52A0_u8F7D_u7EC4_u4EF6_u3002"><span class="nav-number">0.2.</span> <span class="nav-text">2. Polymer 使用 HTML imports技术来加载组件。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-__u8981_u589E_u52A0_u4E00_u4E2A_u5DE5_u5177_u6761_28toolbar_29_2C__u53EF_u4EE5_u5728_body__u6807_u7B7E_u5185_u6DFB_u52A0_u4E0B_u9762_u7684_u4EE3_u7801_3A"><span class="nav-number">0.3.</span> <span class="nav-text">3. 要增加一个工具条(toolbar), 可以在 body 标签内添加下面的代码:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E09_u3001Polymer_u7684vm_u7279_u6027"><span class="nav-number"></span> <span class="nav-text">三、Polymer的vm特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1_u3001_u6570_u636E_u7684_u53CC_u5411_u7ED1_u5B9A"><span class="nav-number">1.</span> <span class="nav-text">3.1、数据的双向绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2_template_u60F0_u6027_u5143_u7D20"><span class="nav-number">2.</span> <span class="nav-text">3.2 template惰性元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3__u6570_u636E_u7ED1_u5B9A_u4E0E_u4E8B_u4EF6_u5904_u7406"><span class="nav-number">3.</span> <span class="nav-text">3.3 数据绑定与事件处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u56DB_u3001_u524D_u7AEF_u7EC4_u4EF6_u5316_u7684_u53D1_u5C55_u65B9_u5411"><span class="nav-number"></span> <span class="nav-text">四、前端组件化的发展方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-_react_u751F_u6001"><span class="nav-number">1.</span> <span class="nav-text">2. react生态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_angular_2-0__u548C_EmberJS_u7B49_u73B0_u6709_u6210_u719F_u65B9_u6848_u7684_u6539_u8FDB"><span class="nav-number">2.</span> <span class="nav-text">3. angular 2.0 和 EmberJS等现有成熟方案的改进</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-__u5F00_u53D1_u8005_u7684_u5176_u5B83_u5C0F_u4F17_u89E3_u51B3_u65B9_u6848"><span class="nav-number">3.</span> <span class="nav-text">4. 开发者的其它小众解决方案</span></a></li></ol></div>
             
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
         </section>
       
 
@@ -428,15 +524,18 @@
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -448,73 +547,53 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-  
-    
-    
-
-  
-
-    <script type="text/javascript">
-      var disqus_shortname = 'yangwei888';
-      var disqus_identifier = '2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/';
-      var disqus_title = 'polymer组件化与vm特性';
-      var disqus_url = 'http://yoursite.com/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/';
-
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
-
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
-  
-
-
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -594,7 +673,7 @@
 
     function tocOverflowIndicator (indicator, action) {
       var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
+      var opacity = action === 'show' ? 1 : 0;
       $indicator.velocity ?
         $indicator.velocity('stop').velocity({
           opacity: opacity
@@ -648,7 +727,7 @@
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -661,42 +740,62 @@
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
       }
-    }
+    };
   });
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/';
+      var disqus_title = 'polymer组件化与vm特性';
+      var disqus_url = 'http://yoursite.com/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-
-  
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
+
+
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+  
+  
+
+
 </body>
 </html>

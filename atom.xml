@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[yosita]]></title>
-  <subtitle><![CDATA[ѧ��]]></subtitle>
+  <subtitle><![CDATA[yosita]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
   <updated>2016-01-20T08:41:36.254Z</updated>

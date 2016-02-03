@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
 
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="前端 html与css 编码规范," />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="1. 规范概述规范的制定是我们长期以来对工作的积累与沉淀的产物，帮助我们更快、更好、更高效的完成繁重、复杂、多样化的任务，我们制作规范的主要目的在于：
@@ -104,10 +122,18 @@ Cook
 2013.1">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -116,16 +142,9 @@ Cook
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -139,20 +158,30 @@ Cook
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -171,7 +200,9 @@ Cook
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -179,7 +210,9 @@ Cook
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -187,12 +220,15 @@ Cook
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -206,71 +242,96 @@ Cook
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              html与css编码规范
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-11-15T00:00:00+08:00" content="2015-11-15">
-            2015-11-15
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-resource/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-resource</span>
+            
+              
+                html与css编码规范
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-15T00:00:00+08:00" content="2015-11-15">
+              2015-11-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-resource/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-resource</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
-
-        
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/" itemprop="commentsCount"></span>
-            </a>
-          </span>
+
           
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h3 id="1-__u89C4_u8303_u6982_u8FF0"><a href="#1-__u89C4_u8303_u6982_u8FF0" class="headerlink" title="1. 规范概述"></a>1. 规范概述</h3><p>规范的制定是我们长期以来对工作的积累与沉淀的产物，帮助我们更快、更好、更高效的完成繁重、复杂、多样化的任务，我们制作规范的主要目的在于：</p>
+        <h3 id="1-__u89C4_u8303_u6982_u8FF0"><a href="#1-__u89C4_u8303_u6982_u8FF0" class="headerlink" title="1. 规范概述"></a>1. 规范概述</h3><p>规范的制定是我们长期以来对工作的积累与沉淀的产物，帮助我们更快、更好、更高效的完成繁重、复杂、多样化的任务，我们制作规范的主要目的在于：</p>
 <ul>
 <li>降低每个组员介入项目的门槛成本；</li>
 <li>提高工作效率及协同开发的便捷性；</li>
@@ -591,7 +652,7 @@ Cook
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.m-detail</span><span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid <span class="hexcolor">#000</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-bottom-color</span>:<span class="value"><span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <h3 id="7-__u7ED3_u8BED"><a href="#7-__u7ED3_u8BED" class="headerlink" title="7. 结语"></a>7. 结语</h3><p>坚持一致性的原则。<br>一个团队的代码风格如果统一了，首先可以培养良好的协同和编码习惯，其次可以减少无谓的思考，再次可以提升代码质量和可维护性。<br>统一的代码风格，团队内部阅读或编辑代码，将会变得非常轻松，因为组员都用一致思维环境。</p>
 <p>待修改完善</p>
-</span>
+
       
     </div>
 
@@ -606,15 +667,19 @@ Cook
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/17/ouvens.github.io/Frontend-weboptimize/2015-11-17-front-end-image-optmize/" rel="prev">web前端图片极限优化策略</a>
+              <a href="/2015/11/06/ouvens.github.io/frontend-css/2014-11-06-css-learning-list/" rel="next" title="css学习资源汇总">
+                <i class="fa fa-chevron-left"></i> css学习资源汇总
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/06/ouvens.github.io/frontend-css/2014-11-06-css-learning-list/" rel="next">css学习资源汇总</a>
+              <a href="/2015/11/17/ouvens.github.io/Frontend-weboptimize/2015-11-17-front-end-image-optmize/" rel="prev" title="web前端图片极限优化策略">
+                web前端图片极限优化策略 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -632,22 +697,27 @@ Cook
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
-              <div id="disqus_thread">
-                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-              </div>
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -661,6 +731,8 @@ Cook
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             文章目录
@@ -671,12 +743,14 @@ Cook
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -684,27 +758,31 @@ Cook
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -714,15 +792,27 @@ Cook
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -738,15 +828,21 @@ Cook
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
           <div class="post-toc">
+            
+              
             
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-__u89C4_u8303_u6982_u8FF0"><span class="nav-number">1.</span> <span class="nav-text">1. 规范概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-__u57FA_u672C_u4FE1_u606F"><span class="nav-number">2.</span> <span class="nav-text">2. 基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-__u6587_u6863_u76EE_u5F55_u7ED3_u6784"><span class="nav-number">3.</span> <span class="nav-text">3. 文档目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-__u901A_u7528_u7EA6_u5B9A"><span class="nav-number">4.</span> <span class="nav-text">4. 通用约定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1__u5206_u79BB"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 分离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2__u7F29_u8FDB"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 缩进</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3__u7F16_u7801"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4__u5C0F_u5199"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 小写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-5__u6CE8_u91CA"><span class="nav-number">4.5.</span> <span class="nav-text">4.5 注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-6__u5F85_u529E_u4E8B_u9879"><span class="nav-number">4.6.</span> <span class="nav-text">4.6 待办事项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-7__u884C_u5C3E_u7A7A_u683C"><span class="nav-number">4.7.</span> <span class="nav-text">4.7 行尾空格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-8__u4EE3_u7801_u6709_u6548_u6027"><span class="nav-number">4.8.</span> <span class="nav-text">4.8 代码有效性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-_HTML_u89C4_u8303"><span class="nav-number">5.</span> <span class="nav-text">5. HTML规范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1__u6587_u6863_u7C7B_u578B"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 文档类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2__u7701_u7565type_u5C5E_u6027"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 省略type属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3__u7528_u53CC_u5F15_u53F7_u5305_u88F9_u5C5E_u6027_u503C"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 用双引号包裹属性值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4__u5C5E_u6027_u503C_u7701_u7565"><span class="nav-number">5.4.</span> <span class="nav-text">5.4 属性值省略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5__u5D4C_u5957"><span class="nav-number">5.5.</span> <span class="nav-text">5.5 嵌套</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-6__u6807_u7B7E_u95ED_u5408"><span class="nav-number">5.6.</span> <span class="nav-text">5.6 标签闭合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-7__u4F7F_u7528img_u7684alt_u5C5E_u6027"><span class="nav-number">5.7.</span> <span class="nav-text">5.7 使用img的alt属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-8__u4F7F_u7528label_u7684for_u5C5E_u6027"><span class="nav-number">5.8.</span> <span class="nav-text">5.8 使用label的for属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-9__u6309_u6A21_u5757_u6DFB_u52A0_u6CE8_u91CA"><span class="nav-number">5.9.</span> <span class="nav-text">5.9 按模块添加注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-10__u683C_u5F0F"><span class="nav-number">5.10.</span> <span class="nav-text">5.10 格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-11__u8BED_u4E49_u5316_u6807_u7B7E"><span class="nav-number">5.11.</span> <span class="nav-text">5.11 语义化标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-12__u6587_u6863_u6A21_u677F"><span class="nav-number">5.12.</span> <span class="nav-text">5.12 文档模板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-13__u6A21_u5757_u6A21_u677F"><span class="nav-number">5.13.</span> <span class="nav-text">5.13 模块模板</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-_CSS_u89C4_u8303"><span class="nav-number">6.</span> <span class="nav-text">6. CSS规范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1_CSS_u6587_u4EF6_u89C4_u8303"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 CSS文件规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2__u6837_u5F0F_u7684_u547D_u540D_u7EA6_u5B9A"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 样式的命名约定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3__u4E66_u5199_u98CE_u683C_u4E0E_u6392_u7248_u89C4_u8303"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 书写风格与排版规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4__u6837_u5F0F_u89C4_u5219_u4E66_u5199_u987A_u5E8F"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 样式规则书写顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5__u6CE8_u91CA_u89C4_u8303"><span class="nav-number">6.5.</span> <span class="nav-text">6.5 注释规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-6_hack_u89C4_u8303"><span class="nav-number">6.6.</span> <span class="nav-text">6.6 hack规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-7__u907F_u514D_u7C7B_u578B_u9009_u62E9_u5668"><span class="nav-number">6.7.</span> <span class="nav-text">6.7 避免类型选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-8__u5C5E_u6027_u7F29_u5199_u4E0E_u5206_u62C6"><span class="nav-number">6.8.</span> <span class="nav-text">6.8 属性缩写与分拆</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-__u7ED3_u8BED"><span class="nav-number">7.</span> <span class="nav-text">7. 结语</span></a></li></ol></div>
             
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
         </section>
       
 
@@ -754,15 +850,18 @@ Cook
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -774,73 +873,53 @@ Cook
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-  
-    
-    
-
-  
-
-    <script type="text/javascript">
-      var disqus_shortname = 'yangwei888';
-      var disqus_identifier = '2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/';
-      var disqus_title = 'html与css编码规范';
-      var disqus_url = 'http://yoursite.com/2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/';
-
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
-
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
-  
-
-
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -920,7 +999,7 @@ Cook
 
     function tocOverflowIndicator (indicator, action) {
       var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
+      var opacity = action === 'show' ? 1 : 0;
       $indicator.velocity ?
         $indicator.velocity('stop').velocity({
           opacity: opacity
@@ -974,7 +1053,7 @@ Cook
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -987,42 +1066,62 @@ Cook
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
       }
-    }
+    };
   });
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'yangwei888';
+      var disqus_identifier = '2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/';
+      var disqus_title = 'html与css编码规范';
+      var disqus_url = 'http://yoursite.com/2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-
-  
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
+
+
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+  
+  
+
+
 </body>
 </html>

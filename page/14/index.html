@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
-
-
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="terry yang&apos;s blog | java | scala | bi">
@@ -52,10 +70,18 @@
 <meta name="twitter:description" content="terry yang&apos;s blog | java | scala | bi">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -64,16 +90,9 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -87,22 +106,32 @@
 
 
 
-  <div class="container one-column 
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -121,7 +150,9 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -129,7 +160,9 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -137,12 +170,15 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -156,74 +192,112 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
+
+    
+
+    
+    
+      
+      
+
+      
+    
+
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/08/20/ouvens.github.io/frontend-javascript/2015-08-20-mvvm-qvm-frame/" itemprop="url">
-                移动端mvvm框架qvm实现
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-08-20T00:00:00+08:00" content="2015-08-20">
-            2015-08-20
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/20/ouvens.github.io/frontend-javascript/2015-08-20-mvvm-qvm-frame/" itemprop="url">
+                  移动端mvvm框架qvm实现
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-20T00:00:00+08:00" content="2015-08-20">
+              2015-08-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/20/ouvens.github.io/frontend-javascript/2015-08-20-mvvm-qvm-frame/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/20/ouvens.github.io/frontend-javascript/2015-08-20-mvvm-qvm-frame/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/08/20/ouvens.github.io/frontend-javascript/2015-08-20-mvvm-qvm-frame/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/20/ouvens.github.io/frontend-javascript/2015-08-20-mvvm-qvm-frame/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><hr>
+            <hr>
 <p><a href="https://github.com/ouvens/qvm" target="_blank" rel="external">gitHub地址</a></p>
 <h3 id="1_uFF0C_u79FB_u52A8_u7AEFminimvvm_u6846_u67B6qvm_u5B9E_u73B0"><a href="#1_uFF0C_u79FB_u52A8_u7AEFminimvvm_u6846_u67B6qvm_u5B9E_u73B0" class="headerlink" title="1，移动端minimvvm框架qvm实现"></a>1，移动端minimvvm框架qvm实现</h3><p>qvm概念，一个适用于移动端的mini mvvm(什么是mvvm？没了解的同学自己去了解)框架。参考了angular和vuejs的设计实现思路，并进行简化封装，目前使用的zepto基本依赖库，使用最少的代码实现了基础功能版。</p>
 <h3 id="2_uFF0C_u4E3A_u4EC0_u4E48_u8981_u505A_u5B83"><a href="#2_uFF0C_u4E3A_u4EC0_u4E48_u8981_u505A_u5B83" class="headerlink" title="2，为什么要做它"></a>2，为什么要做它</h3><p>PC浏览器时代，实现mvvm有着麻烦的兼容性问题。而在移动浏览器时代，浏览器原生的支持可以让我们用最少的代码来实现一个mvvm框架库，来最大程度的减少移动端业务代码的开发工作。预计对于中大型的移动前端应用项目，使用mvvm能减少至少30%的业务量，让项目更容易维护。<br>   (不过目前仍有很多不完善的地方后面需要持续改进)</p>
@@ -244,7 +318,8 @@
 <h6 id="3-8_q-*_u81EA_u5B9A_u4E49directive"><a href="#3-8_q-*_u81EA_u5B9A_u4E49directive" class="headerlink" title="3.8 q-*自定义directive"></a>3.8 q-*自定义directive</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">.red&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">.green&#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div id="demo" q-repeat="list" q-on="click|action" q-self='selfProcess'&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;span q-class="color" q-text="title"&gt;&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;</span><br><span class="line">            &lt;img q-attr-src="img.src" width="50" height="30"&gt;</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/zepto.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type="text/javascript" src="js/qvm.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var data = &#123;</span><br><span class="line">    title: '&lt;h2&gt;点我!&lt;/h2&gt;',</span><br><span class="line">    color: 'red',</span><br><span class="line">    img: &#123;</span><br><span class="line">        src: 'http://9.url.cn/edu/banner/img/880facff_760_300.jpg'</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var vm = qvm.get(&#123;</span><br><span class="line">    selector: '#demo',</span><br><span class="line">    data: &#123;</span><br><span class="line">        list: data</span><br><span class="line">    &#125;,</span><br><span class="line">    action: function()&#123;</span><br><span class="line">        alert('点击事件!');</span><br><span class="line">    &#125;,</span><br><span class="line">    selfProcess: function(key, vm)&#123;</span><br><span class="line">        console.log(key, vm);</span><br><span class="line">        alert('我是一个自定义处理指令!嘿嘿嘿~')</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <p>子定义的指令需要遵守一定的规则，例如下面q-self对应的指令为selfProcess的函数，则节点扫描时会自动执行self指令的selfProcess函数。</p>
 <p>TODO：<br>更好的dirtycheck实现，类似virtual dom的方式~</p>
-</span>
+
+          
         
       
     </div>
@@ -265,69 +340,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/08/16/ouvens.github.io/frontend-build/2015-08-16-gulp-dev-build-demo/" itemprop="url">
-                gulp搭建简单构建环境
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-08-16T00:00:00+08:00" content="2015-08-16">
-            2015-08-16
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-build/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-build</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/16/ouvens.github.io/frontend-build/2015-08-16-gulp-dev-build-demo/" itemprop="url">
+                  gulp搭建简单构建环境
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-16T00:00:00+08:00" content="2015-08-16">
+              2015-08-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-build/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-build</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/16/ouvens.github.io/frontend-build/2015-08-16-gulp-dev-build-demo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/16/ouvens.github.io/frontend-build/2015-08-16-gulp-dev-build-demo/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/08/16/ouvens.github.io/frontend-build/2015-08-16-gulp-dev-build-demo/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/16/ouvens.github.io/frontend-build/2015-08-16-gulp-dev-build-demo/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>Gulp 是一款基于任务的设计模式的自动化工具，通过插件的配合解决全套前端解决方案，如静态页面压缩、图片压缩、JS合并、SASS同步编译并压缩CSS、服务器控制客户端同步刷新。</p>
+            <p>Gulp 是一款基于任务的设计模式的自动化工具，通过插件的配合解决全套前端解决方案，如静态页面压缩、图片压缩、JS合并、SASS同步编译并压缩CSS、服务器控制客户端同步刷新。</p>
 <p>所有功能前提需要安装nodejs和ruby。</p>
 <h4 id="Gulp_u5B89_u88C5"><a href="#Gulp_u5B89_u88C5" class="headerlink" title="Gulp安装"></a>Gulp安装</h4><p>全局安装Gulpjs</p>
 <p>  npm install -g gulp  #全局安装</p>
@@ -363,7 +463,8 @@
 <p>1、安装Chrome LiveReload<br>2、通过npm安装http-server ，快速建立http服务</p>
 <p>  npm install http-server -g</p>
 <p>3、通过cd找到发布环境目录dist<br>4、运行http-server，默认端口是8080<br>5、访问路径localhost:8080<br>6、再打开一个cmd，通过cd找到项目路径执行gulp，清空发布环境并初始化<br>7、执行监控 gulp<br>8、点击chrome上的LiveReload插件，空心变成实心即关联上，你可以修改css、js、html即时会显示到页面中。</p>
-</span>
+
+          
         
       
     </div>
@@ -384,69 +485,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/08/15/ouvens.github.io/frontend-build/2015-08-15-fis3-study-rearch/" itemprop="url">
-                fis3试用与构建配置研究
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-08-15T00:00:00+08:00" content="2015-08-15">
-            2015-08-15
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-build/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-build</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/15/ouvens.github.io/frontend-build/2015-08-15-fis3-study-rearch/" itemprop="url">
+                  fis3试用与构建配置研究
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-15T00:00:00+08:00" content="2015-08-15">
+              2015-08-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-build/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-build</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/15/ouvens.github.io/frontend-build/2015-08-15-fis3-study-rearch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/15/ouvens.github.io/frontend-build/2015-08-15-fis3-study-rearch/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/08/15/ouvens.github.io/frontend-build/2015-08-15-fis3-study-rearch/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/15/ouvens.github.io/frontend-build/2015-08-15-fis3-study-rearch/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="u4E00_u3001_u5B89_u88C5"><a href="#u4E00_u3001_u5B89_u88C5" class="headerlink" title="一、安装"></a>一、安装</h3><ul>
+            <h3 id="u4E00_u3001_u5B89_u88C5"><a href="#u4E00_u3001_u5B89_u88C5" class="headerlink" title="一、安装"></a>一、安装</h3><ul>
 <li>安装初始化</li>
 </ul>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="tag">i</span> -g fis3</span><br><span class="line">fis3 -v</span><br><span class="line">fis3 init</span><br></pre></td></tr></table></figure>
@@ -533,7 +659,8 @@
 <h3 id="u4E03_u3001_u5FC5_u987B_u638C_u63E1_u7684"><a href="#u4E03_u3001_u5FC5_u987B_u638C_u63E1_u7684" class="headerlink" title="七、必须掌握的"></a>七、必须掌握的</h3><p>命令行 fis3 <command> : </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fis3 release [-d path]     <span class="comment">//发布目录</span></span><br><span class="line">fis3 install 插件名        <span class="comment">//安装一个插件</span></span><br><span class="line">fis3 init     <span class="comment">//初始化一个项目</span></span><br><span class="line">fis3 server [start | stop | restart | open | info ]      <span class="comment">//内置服务器操作</span></span><br><span class="line">fis3 inspect     <span class="comment">//比较实用的命令，用来查看文件 match 结果</span></span><br></pre></td></tr></table></figure>
 <p>大概fis3文档的内容全部覆盖了，只有插件编写没有去深究。感觉整体能应对我们平时遇到的99%的问题。后面也靠fis团队更新插件了，至于缺少方便的插件的开发环境这点，个人觉得不到万不得已不要自己去造轮子，fis2很多插件缺少可以理解，后面还是尽量不要自己去造插件了。</p>
-</span>
+
+          
         
       
     </div>
@@ -554,69 +681,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/08/06/ouvens.github.io/frontend-css/2014-08-06-css-get-rid-of-gap/" itemprop="url">
-                css清除元素间距
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-08-06T00:00:00+08:00" content="2015-08-06">
-            2015-08-06
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-css/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-css</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/06/ouvens.github.io/frontend-css/2014-08-06-css-get-rid-of-gap/" itemprop="url">
+                  css清除元素间距
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-06T00:00:00+08:00" content="2015-08-06">
+              2015-08-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-css/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-css</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/06/ouvens.github.io/frontend-css/2014-08-06-css-get-rid-of-gap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/06/ouvens.github.io/frontend-css/2014-08-06-css-get-rid-of-gap/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/08/06/ouvens.github.io/frontend-css/2014-08-06-css-get-rid-of-gap/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/06/ouvens.github.io/frontend-css/2014-08-06-css-get-rid-of-gap/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="u73B0_u8C61_u63CF_u8FF0"><a href="#u73B0_u8C61_u63CF_u8FF0" class="headerlink" title="现象描述"></a>现象描述</h3><p>真正意义上的inline-block水平呈现的元素间，换行显示或空格分隔的情况下会有间距，很简单的个例子：</p>
+            <h3 id="u73B0_u8C61_u63CF_u8FF0"><a href="#u73B0_u8C61_u63CF_u8FF0" class="headerlink" title="现象描述"></a>现象描述</h3><p>真正意义上的inline-block水平呈现的元素间，换行显示或空格分隔的情况下会有间距，很简单的个例子：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> /&gt;</span> <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"submit"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <p>我们使用CSS更改非inline-block水平元素为inline-block水平，也会有该问题：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.space a &#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    padding: .5em 1em;</span><br><span class="line">    background-color: #cad5eb;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"space"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"##"</span>&gt;</span>惆怅<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"##"</span>&gt;</span>淡定<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"##"</span>&gt;</span>热血<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -655,7 +807,8 @@
 <h3 id="u65B9_u6CD5_u516B_u3001_u4F7F_u7528float_3Aleft"><a href="#u65B9_u6CD5_u516B_u3001_u4F7F_u7528float_3Aleft" class="headerlink" title="方法八、使用float:left"></a>方法八、使用float:left</h3><p>类似下面代码：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.space</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <h3 id="u7ED3_u8BED"><a href="#u7ED3_u8BED" class="headerlink" title="结语"></a>结语</h3><p>其他去除间距的方法肯定还有，欢迎大家通过评论方式进行补充。上文部分方法可能有测试不周全之处，因此，部分细节上可能会有纰漏，欢迎指正。<br>参考文章：Fighting the Space Between Inline Block Elements</p>
-</span>
+
+          
         
       
     </div>
@@ -676,69 +829,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/" itemprop="url">
-                shadow dom解析
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-07-24T00:00:00+08:00" content="2015-07-24">
-            2015-07-24
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/" itemprop="url">
+                  shadow dom解析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-24T00:00:00+08:00" content="2015-07-24">
+              2015-07-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="1-shadowdom_u89E3_u6790"><a href="#1-shadowdom_u89E3_u6790" class="headerlink" title="1.shadowdom解析"></a>1.shadowdom解析</h1><h5 id="1-1__u4EC0_u4E48_u662Fshadow_dom"><a href="#1-1__u4EC0_u4E48_u662Fshadow_dom" class="headerlink" title="1.1 什么是shadow  dom"></a>1.1 什么是shadow  dom</h5><p>先看个例子:</p>
+            <h1 id="1-shadowdom_u89E3_u6790"><a href="#1-shadowdom_u89E3_u6790" class="headerlink" title="1.shadowdom解析"></a>1.shadowdom解析</h1><h5 id="1-1__u4EC0_u4E48_u662Fshadow_dom"><a href="#1-1__u4EC0_u4E48_u662Fshadow_dom" class="headerlink" title="1.1 什么是shadow  dom"></a>1.1 什么是shadow  dom</h5><p>先看个例子:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">video</span> <span class="attribute">controls</span> <span class="attribute">autoplay</span> <span class="attribute">name</span>=<span class="value">"media"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">source</span> <span class="attribute">id</span>=<span class="value">"mp4"</span> <span class="attribute">src</span>=<span class="value">"http://media.w3.org/2010/05/sintel/trailer.mp4"</span> <span class="attribute">type</span>=<span class="value">"video/mp4"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;这样一个标签可以在浏览器产生几个界面你相对较复杂的播放器，怎么做到的?<br>&emsp;&emsp;为了理解问题，可以选择chrome设置里面的show userAgent shawdow，就可以看到shadow dom里的内容。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">video</span> <span class="attribute">src</span>=<span class="value">"a.mp4"</span> <span class="attribute">width</span>=<span class="value">"480"</span> <span class="attribute">height</span>=<span class="value">"360"</span>&gt;</span></span><br><span class="line">    #shadow root</span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-overlay-enclosure"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">style</span>=<span class="value">"display: none;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-enclosure"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">div</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-panel"</span> <span class="attribute">style</span>=<span class="value">"display: none;"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-play-button"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"range"</span> <span class="attribute">step</span>=<span class="value">"any"</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-timeline"</span> <span class="attribute">max</span>=<span class="value">"0"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">div</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-current-time-display"</span> <span class="attribute">style</span>=<span class="value">"display: none;"</span>&gt;</span>0:00<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">div</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-time-remaining-display"</span>&gt;</span>0:00<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-mute-button"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"range"</span> <span class="attribute">step</span>=<span class="value">"any"</span> <span class="attribute">max</span>=<span class="value">"1"</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-volume-slider"</span> <span class="attribute">style</span>=<span class="value">"display: none;"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-toggle-closed-captions-button"</span> <span class="attribute">style</span>=<span class="value">"display: none;"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">style</span>=<span class="value">"display: none;"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">pseudo</span>=<span class="value">"-webkit-media-controls-fullscreen-button"</span> <span class="attribute">style</span>=<span class="value">"display: none;"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -754,7 +932,8 @@
 <p>参考：</p>
 <p><a href="http://soledadpenades.com/2014/01/02/shadow-dom-in-firefox/" target="_blank" rel="external">http://soledadpenades.com/2014/01/02/shadow-dom-in-firefox/</a></p>
 <p><a href="http://www.w3.org/TR/shadow-dom/" target="_blank" rel="external">http://www.w3.org/TR/shadow-dom/</a></p>
-</span>
+
+          
         
       
     </div>
@@ -775,69 +954,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/" itemprop="url">
-                Nativescript跨终端应用程序开发方案研究
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-06-18T00:00:00+08:00" content="2015-06-18">
-            2015-06-18
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-client/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-client</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/" itemprop="url">
+                  Nativescript跨终端应用程序开发方案研究
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-06-18T00:00:00+08:00" content="2015-06-18">
+              2015-06-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-client/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-client</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/06/18/ouvens.github.io/frontend-client/2015-06-18-nativescript-app-dev/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="1-_u73AF_u5883_u51C6_u5907"><a href="#1-_u73AF_u5883_u51C6_u5907" class="headerlink" title="1.环境准备"></a>1.环境准备</h3><ul>
+            <h3 id="1-_u73AF_u5883_u51C6_u5907"><a href="#1-_u73AF_u5883_u51C6_u5907" class="headerlink" title="1.环境准备"></a>1.环境准备</h3><ul>
 <li>安装nodejs</li>
 <li>安装nativescript</li>
 </ul>
@@ -896,7 +1100,8 @@
 <li>但是不足之处也很明显，很难做现有单页面的改造，迭代不方便，功能上线必须像客户端那样发布审核，某些程度上还是需要web页面的支持</li>
 </ol>
 <p>当然这次只分析了个简单的例子，后面自己搞个复杂的例子来分享下，敬请期待(类似的还有samurai-native和react-native，坐等android支持)~</p>
-</span>
+
+          
         
       
     </div>
@@ -917,69 +1122,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/" itemprop="url">
-                Ionic Hybrid跨终端应用程序开发方案研究
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-06-16T00:00:00+08:00" content="2015-06-16">
-            2015-06-16
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-client/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-client</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/" itemprop="url">
+                  Ionic Hybrid跨终端应用程序开发方案研究
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-06-16T00:00:00+08:00" content="2015-06-16">
+              2015-06-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-client/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-client</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/06/16/ouvens.github.io/frontend-client/2015-06-16-ionic-app-dev/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>ionic是最近一个很流行的Hybird移动开发解决方案，个人兴趣研究了一下，还是不错的<br><a href="https://github.com/driftyco/ionic" target="_blank" rel="external">https://github.com/driftyco/ionic</a></p>
+            <p>ionic是最近一个很流行的Hybird移动开发解决方案，个人兴趣研究了一下，还是不错的<br><a href="https://github.com/driftyco/ionic" target="_blank" rel="external">https://github.com/driftyco/ionic</a></p>
 <h3 id="1-_u73AF_u5883_u51C6_u5907"><a href="#1-_u73AF_u5883_u51C6_u5907" class="headerlink" title="1.环境准备"></a>1.环境准备</h3><ul>
 <li>安装nodejs</li>
 <li>安装cordova和ionic</li>
@@ -1026,7 +1256,8 @@
 <li>依然停留在webview开发阶段，不能突破webview解析dom的性能问题</li>
 <li>目前没有自动化调试，需借助外部工具来做</li>
 </ol>
-</span>
+
+          
         
       
     </div>
@@ -1047,69 +1278,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/" itemprop="url">
-                polymer组件化与vm特性
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-05-24T00:00:00+08:00" content="2015-05-24">
-            2015-05-24
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/" itemprop="url">
+                  polymer组件化与vm特性
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-24T00:00:00+08:00" content="2015-05-24">
+              2015-05-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h4 id="u4E00_u3001Polymer"><a href="#u4E00_u3001Polymer" class="headerlink" title="一、Polymer"></a>一、Polymer</h4><p>Polymer是Google在2013年的Google I/O大会上提出了一个新的UI框架。Polymer的实现使用了WebComponent标准，并且Polymer可保证针对包含各种平台的Web Component规范本地实现的浏览器、库和组件的使用效果完全相同。</p>
+            <h4 id="u4E00_u3001Polymer"><a href="#u4E00_u3001Polymer" class="headerlink" title="一、Polymer"></a>一、Polymer</h4><p>Polymer是Google在2013年的Google I/O大会上提出了一个新的UI框架。Polymer的实现使用了WebComponent标准，并且Polymer可保证针对包含各种平台的Web Component规范本地实现的浏览器、库和组件的使用效果完全相同。</p>
 <h4 id="1-1_Polymer_u6846_u67B6_uFF1A"><a href="#1-1_Polymer_u6846_u67B6_uFF1A" class="headerlink" title="1.1 Polymer框架："></a>1.1 Polymer框架：</h4><p>Polymer框架可以分为三个层次：</p>
 <ul>
 <li>基础层(platform.js)：是基本构建块。大多数情况下，基础层都是本地浏览器的API。</li>
@@ -1146,7 +1402,8 @@
 <h4 id="2-_react_u751F_u6001"><a href="#2-_react_u751F_u6001" class="headerlink" title="2. react生态"></a>2. react生态</h4><p>react的组件化生态思想和webComponent也及其相似，当然react做了更多的事情，除了web Component，react想做的其实可以称为platform component。</p>
 <h4 id="3-_angular_2-0__u548C_EmberJS_u7B49_u73B0_u6709_u6210_u719F_u65B9_u6848_u7684_u6539_u8FDB"><a href="#3-_angular_2-0__u548C_EmberJS_u7B49_u73B0_u6709_u6210_u719F_u65B9_u6848_u7684_u6539_u8FDB" class="headerlink" title="3. angular 2.0 和 EmberJS等现有成熟方案的改进"></a>3. angular 2.0 和 EmberJS等现有成熟方案的改进</h4><p>angular2.0已明确提出将支持Node绑定、模板集成、元素自定义和支持网络组件的无缝集成；ember的发展情况依然，今后也不排除jQuery等框架的进化重生，以全新的面目出现。</p>
 <h4 id="4-__u5F00_u53D1_u8005_u7684_u5176_u5B83_u5C0F_u4F17_u89E3_u51B3_u65B9_u6848"><a href="#4-__u5F00_u53D1_u8005_u7684_u5176_u5B83_u5C0F_u4F17_u89E3_u51B3_u65B9_u6848" class="headerlink" title="4. 开发者的其它小众解决方案"></a>4. 开发者的其它小众解决方案</h4><p>在企业中，针对企业特殊性的业务，企业前端开发者也可以根据webComponent的思想自己实现更加灵活可用的组件拼装解决方案。相比之下，这个方向的探索研究甚至会更加受欢迎，因为只有开发者才关注关注自己的组件怎么管理。例如目前qiqi项目所用的方案就比较符合这个方向。</p>
-</span>
+
+          
         
       
     </div>
@@ -1167,69 +1424,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/01/ouvens.github.io/frontend-build/2015-04-01-webpack-tool/" itemprop="url">
-                webpack--更优秀的打包管理工具
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-01T00:00:00+08:00" content="2015-04-01">
-            2015-04-01
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-build/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-build</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/04/01/ouvens.github.io/frontend-build/2015-04-01-webpack-tool/" itemprop="url">
+                  webpack--更优秀的打包管理工具
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-01T00:00:00+08:00" content="2015-04-01">
+              2015-04-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-build/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-build</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/01/ouvens.github.io/frontend-build/2015-04-01-webpack-tool/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/04/01/ouvens.github.io/frontend-build/2015-04-01-webpack-tool/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/04/01/ouvens.github.io/frontend-build/2015-04-01-webpack-tool/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/04/01/ouvens.github.io/frontend-build/2015-04-01-webpack-tool/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h2 id="webpack_u662F_u4EC0_u4E48"><a href="#webpack_u662F_u4EC0_u4E48" class="headerlink" title="webpack是什么"></a>webpack是什么</h2><p>德国开发者Tobias Koppers开发的模块加载器，可用于处理依赖分析和进行打包。</p>
+            <h2 id="webpack_u662F_u4EC0_u4E48"><a href="#webpack_u662F_u4EC0_u4E48" class="headerlink" title="webpack是什么"></a>webpack是什么</h2><p>德国开发者Tobias Koppers开发的模块加载器，可用于处理依赖分析和进行打包。</p>
 <h2 id="commonJS_u4E0EAMD_u652F_u6301"><a href="#commonJS_u4E0EAMD_u652F_u6301" class="headerlink" title="commonJS与AMD支持"></a>commonJS与AMD支持</h2><p>Webpack 对 CommonJS 的 AMD 的语法做了兼容，不过实际上, 引用模块的规则是依据 CommonJS 来的，即如果使用AMD语法，还是根据commonJS语法进行模块查找的。<br>当然我们之前可也以这么写来兼容AMD和commonJS，但是用了webpack语法上就可以任意去写了：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">window, factory</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (typeod exports === <span class="string">'object'</span>) &#123;</span><br><span class="line">        <span class="built_in">module</span>.exports = factory();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) &#123;</span><br><span class="line">        define([],factory);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">window</span>.eventUtil = factory();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//module ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h2 id="u5982_u4F55_u547D_u4EE4_u8C03_u7528webpack"><a href="#u5982_u4F55_u547D_u4EE4_u8C03_u7528webpack" class="headerlink" title="如何命令调用webpack"></a>如何命令调用webpack</h2><p>切换到含有webpack.config.js的目录，执行以下命令：<br>webpack        开发调试环境构建<br>webpack -p    产品发布环境构建，包含压缩，minify最小化<br>webpack        –watch 开发调试环境并开启文件watch(fast!)<br>webpack -d    包含source map打包</p>
@@ -1259,7 +1541,8 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example</span></span><br><span class="line">output: &#123;</span><br><span class="line">    path: <span class="string">"/home/proj/public/assets"</span>,</span><br><span class="line">    publicPath: <span class="string">"/assets/"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Example CDN</span></span><br><span class="line">output: &#123;</span><br><span class="line">    path: <span class="string">"/home/proj/cdn/assets/[hash]"</span>,</span><br><span class="line">    publicPath: <span class="string">"http://cdn.example.com/assets/[hash]/"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>对比下fis<br>相对于fis更加轻量级，webpack更加灵活</p>
 <p>最后给几个官方文档的地址：<br><a href="http://webpack.github.io/">http://webpack.github.io/</a><br><a href="https://github.com/webpack">https://github.com/webpack</a><br><a href="http://webpack.github.io/docs/">http://webpack.github.io/docs/</a><br><a href="https://github.com/petehunt/webpack-howto">https://github.com/petehunt/webpack-howto</a></p>
-</style></p></span>
+</style></p>
+          
         
       
     </div>
@@ -1280,69 +1563,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/03/16/ouvens.github.io/Frontend-weboptimize/2015-03-16-front-end-performance-test/" itemprop="url">
-                前端性能测试
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-03-16T00:00:00+08:00" content="2015-03-16">
-            2015-03-16
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-weboptimize/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-weboptimize</span>
+            
+              
+                
+                <a class="post-title-link" href="/2015/03/16/ouvens.github.io/Frontend-weboptimize/2015-03-16-front-end-performance-test/" itemprop="url">
+                  前端性能测试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-16T00:00:00+08:00" content="2015-03-16">
+              2015-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-weboptimize/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-weboptimize</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/16/ouvens.github.io/Frontend-weboptimize/2015-03-16-front-end-performance-test/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/03/16/ouvens.github.io/Frontend-weboptimize/2015-03-16-front-end-performance-test/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/16/ouvens.github.io/Frontend-weboptimize/2015-03-16-front-end-performance-test/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/03/16/ouvens.github.io/Frontend-weboptimize/2015-03-16-front-end-performance-test/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="u4E00_u3001performance_timing_API"><a href="#u4E00_u3001performance_timing_API" class="headerlink" title="一、performance timing API"></a>一、performance timing API</h3><p>performance timing API支持ie9以上浏览器，页面请求的整个过程和performance API记录的点</p>
+            <h3 id="u4E00_u3001performance_timing_API"><a href="#u4E00_u3001performance_timing_API" class="headerlink" title="一、performance timing API"></a>一、performance timing API</h3><p>performance timing API支持ie9以上浏览器，页面请求的整个过程和performance API记录的点</p>
 <p><img src="http://7tszky.com1.z0.glb.clouddn.com/FqJwnMWrQQ50yyfCN7VyLHBBtuS7" alt=""></p>
 <p><a href="http://javascript.ruanyifeng.com/bom/performance.html" target="_blank" rel="external">http://javascript.ruanyifeng.com/bom/performance.html</a></p>
 <p>根据这个过程 performance.timing会记录页面请求的各个点的timestamp，经过简单输出，就可以得到页面请求每个过程所消耗的时间了。<br>也可以使用现有的实现，原理和以上代码相同：</p>
@@ -1357,7 +1665,8 @@
 <p>最后分析数组之间的间隔就可以分析出执行时间。</p>
 <h3 id="u56DB_u3001timeline_u5206_u6790"><a href="#u56DB_u3001timeline_u5206_u6790" class="headerlink" title="四、timeline分析"></a>四、timeline分析</h3><p>浏览器的timeline可以粗粒度的分析浏览器的文件的请求耗时和加载顺序，这里不进行讲述。</p>
 <h3 id="u4E94_uFF0Cresource_timing"><a href="#u4E94_uFF0Cresource_timing" class="headerlink" title="五，resource timing"></a>五，resource timing</h3><p>通过资源价值情况来分析前端页面的性能</p>
-</span>
+
+          
         
       
     </div>
@@ -1376,21 +1685,25 @@
 
 
     
+
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/15/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
- </div>
 
+
+          </div>
+          
+
+
+          
+
+        </div>
         
-
-        
-      </div>
-
-      
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1405,12 +1718,16 @@
 
       
 
-      <section class="site-overview">
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -1418,27 +1735,31 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -1448,15 +1769,27 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -1477,15 +1810,18 @@
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -1497,24 +1833,62 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
 
   
   
+
   
-    
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
 
   
 
@@ -1538,53 +1912,13 @@
   
 
 
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
-
-  
 
   
   
 
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+
 </body>
 </html>

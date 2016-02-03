@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion ">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,19 +23,27 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
-
-
-    <meta name="description" content="terry yang's blog | java | scala | bi" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
 
 
 
@@ -38,7 +51,12 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
 
 
 <meta name="description" content="terry yang&apos;s blog | java | scala | bi">
@@ -52,10 +70,18 @@
 <meta name="twitter:description" content="terry yang&apos;s blog | java | scala | bi">
 
 
+
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: '',
-    sidebar: 'post'
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -64,16 +90,9 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
+
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -87,22 +106,32 @@
 
 
 
-  <div class="container one-column 
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">yosita</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">yosita</p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -121,7 +150,9 @@
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
             首页
           </a>
         </li>
@@ -129,7 +160,9 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
             归档
           </a>
         </li>
@@ -137,12 +170,15 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
             标签
           </a>
         </li>
       
 
+      
       
       
     </ul>
@@ -156,74 +192,112 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
+
+    
+
+    
+    
+      
+      
+
+      
+    
+
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/" itemprop="url">
-                css清除浮动
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-11-07T00:00:00+08:00" content="2014-11-07">
-            2014-11-07
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-css/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-css</span>
+            
+              
+                
+                <a class="post-title-link" href="/2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/" itemprop="url">
+                  css清除浮动
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-11-07T00:00:00+08:00" content="2014-11-07">
+              2014-11-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-css/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-css</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/07/ouvens.github.io/frontend-css/2014-11-07-css-get-rid-of-float/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="u4E00_u3001_u4EC0_u4E48_u662Fcss_float"><a href="#u4E00_u3001_u4EC0_u4E48_u662Fcss_float" class="headerlink" title="一、什么是css float"></a>一、什么是css float</h3><p>理解float：元素float后，确实可以从文档流中消失，表现在他们外面的DIV的边框不能被他们撑起来。可是，文档中在他们下面的元素又确实不会和他们重叠。先理解下float做了什么。<br>​</p>
+            <h3 id="u4E00_u3001_u4EC0_u4E48_u662Fcss_float"><a href="#u4E00_u3001_u4EC0_u4E48_u662Fcss_float" class="headerlink" title="一、什么是css float"></a>一、什么是css float</h3><p>理解float：元素float后，确实可以从文档流中消失，表现在他们外面的DIV的边框不能被他们撑起来。可是，文档中在他们下面的元素又确实不会和他们重叠。先理解下float做了什么。<br>​</p>
 <table>
 <thead>
 <tr>
@@ -273,7 +347,8 @@
 <p>实例5</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"> </span><br><span class="line"><span class="class">.div1</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#000080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;&#125;</span></span><br><span class="line"><span class="class">.div2</span><span class="rules">&#123;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1px</span> solid red</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100px</span></span></span>;<span class="rule"><span class="attribute">margin-top</span>:<span class="value"><span class="number">10px</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.left</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">20%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.right</span><span class="rules">&#123;<span class="rule"><span class="attribute">float</span>:<span class="value">right</span></span>;<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">30%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">80px</span></span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#DDD</span></span></span></span>&#125;</span><br><span class="line"><span class="comment">/*清除浮动代码*/</span></span><br><span class="line"><span class="class">.clearfloat</span><span class="pseudo">:after</span><span class="rules">&#123;<span class="rule"><span class="attribute">display</span>:<span class="value">block</span></span>;<span class="rule"><span class="attribute">clear</span>:<span class="value">both</span></span>;<span class="rule"><span class="attribute">content</span>:<span class="value"><span class="string">""</span></span></span>;<span class="rule"><span class="attribute">visibility</span>:<span class="value">hidden</span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">0</span></span></span></span>&#125;</span><br><span class="line"><span class="class">.clearfloat</span><span class="rules">&#123;<span class="rule"><span class="attribute">zoom</span>:<span class="value"><span class="number">1</span></span></span></span>&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div1 clearfloat"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"left"</span>&gt;</span>Left<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"right"</span>&gt;</span>Right<span class="tag">&lt;/<span class="title">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"div2"</span>&gt;</span>div2<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>实例6、实例7、实例8极不推荐，实例略</p>
-</span>
+
+          
         
       
     </div>
@@ -294,69 +369,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/11/06/ouvens.github.io/frontend-css/2014-10-06-css-ie-bug-and-resolution/" itemprop="url">
-                css在IE下问题及解决方法
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-11-06T00:00:00+08:00" content="2014-11-06">
-            2014-11-06
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-css/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-css</span>
+            
+              
+                
+                <a class="post-title-link" href="/2014/11/06/ouvens.github.io/frontend-css/2014-10-06-css-ie-bug-and-resolution/" itemprop="url">
+                  css在IE下问题及解决方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-11-06T00:00:00+08:00" content="2014-11-06">
+              2014-11-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-css/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-css</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/11/06/ouvens.github.io/frontend-css/2014-10-06-css-ie-bug-and-resolution/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/06/ouvens.github.io/frontend-css/2014-10-06-css-ie-bug-and-resolution/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/11/06/ouvens.github.io/frontend-css/2014-10-06-css-ie-bug-and-resolution/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/06/ouvens.github.io/frontend-css/2014-10-06-css-ie-bug-and-resolution/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="1_u3001IE6_u6D6E_u52A8_u53CC_u8FB9_u8DDDbug_u548C_u6D6E_u52A8_u65F63_u4E2A_u50CF_u7D20_u7684bug"><a href="#1_u3001IE6_u6D6E_u52A8_u53CC_u8FB9_u8DDDbug_u548C_u6D6E_u52A8_u65F63_u4E2A_u50CF_u7D20_u7684bug" class="headerlink" title="1、IE6浮动双边距bug和浮动时3个像素的bug"></a>1、IE6浮动双边距bug和浮动时3个像素的bug</h3><p>当元素浮动并且同时有外边距时，在IE6下会产生双倍距离。</p>
+            <h3 id="1_u3001IE6_u6D6E_u52A8_u53CC_u8FB9_u8DDDbug_u548C_u6D6E_u52A8_u65F63_u4E2A_u50CF_u7D20_u7684bug"><a href="#1_u3001IE6_u6D6E_u52A8_u53CC_u8FB9_u8DDDbug_u548C_u6D6E_u52A8_u65F63_u4E2A_u50CF_u7D20_u7684bug" class="headerlink" title="1、IE6浮动双边距bug和浮动时3个像素的bug"></a>1、IE6浮动双边距bug和浮动时3个像素的bug</h3><p>当元素浮动并且同时有外边距时，在IE6下会产生双倍距离。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.content</span><span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">float</span>:<span class="value">left</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">margin-left</span>:<span class="value"><span class="number">10px</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>其他浏览器下左边距是10px，IE6下左边距是20px</p>
 <p>解决方法：</p>
@@ -386,7 +486,8 @@
 <p>8、IE6及FF内部div使用margin-top，成为外部div的margin-top<br>前面几个都是介绍IE6下的bug，这次介绍FF下的bug。</p>
 <p> 解决方法：display:inline-block;或者overflow:hidden; （BFC）</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html;charset=utf-8"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>firefox内部div使用margin-top，成为外部div的margin-top<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css"></span><br><span class="line">    <span class="class">.clear</span> <span class="rules">&#123;</span><br><span class="line">        <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;</span><br><span class="line">    &#125;</span></span><br><span class="line">    <span class="class">.a</span> <span class="rules">&#123;</span><br><span class="line">        <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1px</span> solid red</span></span>;</span><br><span class="line">    &#125;</span></span><br><span class="line">    <span class="class">.b1</span> <span class="rules">&#123;</span><br><span class="line">        <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">200px</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">130px</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">background</span>:<span class="value"> yellow</span></span>;</span><br><span class="line">    &#125;</span></span><br><span class="line">    <span class="class">.b2</span> <span class="rules">&#123;</span><br><span class="line">        <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">200px</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">130px</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">background</span>:<span class="value"> yellow</span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;</span><br><span class="line">    &#125;</span></span><br><span class="line">   <span class="class">.c</span> <span class="rules">&#123;</span><br><span class="line">        <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">150px</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">background</span>:<span class="value"> green</span></span>;</span><br><span class="line">        <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> <span class="number">30px</span></span></span>;</span><br><span class="line">    &#125;</span></span><br><span class="line">   </span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"a"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"b1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c"</span>&gt;</span>firefox内部div使用margin-top，成为外部div的margin-top<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">br</span>/&gt;</span><span class="tag">&lt;<span class="title">br</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"a"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"b2"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"c"</span>&gt;</span>这下子正常了<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</span>
+
+          
         
       
     </div>
@@ -407,69 +508,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/08/25/ouvens.github.io/frontend-javascript/2014-08-25-js-settimeout-setinterval/" itemprop="url">
-                javascript基础--setTimeout与setInterval区别
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-08-25T00:00:00+08:00" content="2014-08-25">
-            2014-08-25
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/25/ouvens.github.io/frontend-javascript/2014-08-25-js-settimeout-setinterval/" itemprop="url">
+                  javascript基础--setTimeout与setInterval区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-25T00:00:00+08:00" content="2014-08-25">
+              2014-08-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/08/25/ouvens.github.io/frontend-javascript/2014-08-25-js-settimeout-setinterval/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/08/25/ouvens.github.io/frontend-javascript/2014-08-25-js-settimeout-setinterval/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/08/25/ouvens.github.io/frontend-javascript/2014-08-25-js-settimeout-setinterval/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/08/25/ouvens.github.io/frontend-javascript/2014-08-25-js-settimeout-setinterval/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="u4E00_u3001javascript_u4E2Dsettimeout_u548Csetinterval_u7684_u533A_u522B_u662F"><a href="#u4E00_u3001javascript_u4E2Dsettimeout_u548Csetinterval_u7684_u533A_u522B_u662F" class="headerlink" title="一、javascript中settimeout和setinterval的区别是"></a>一、javascript中settimeout和setinterval的区别是</h3><p>settimeout只运行一次，也就是说设定的时间到后就触发运行指定代码，运行完后即结束。如果运行的代码中再次运行同样的settimeout命令，则可循环运行。</p>
+            <h3 id="u4E00_u3001javascript_u4E2Dsettimeout_u548Csetinterval_u7684_u533A_u522B_u662F"><a href="#u4E00_u3001javascript_u4E2Dsettimeout_u548Csetinterval_u7684_u533A_u522B_u662F" class="headerlink" title="一、javascript中settimeout和setinterval的区别是"></a>一、javascript中settimeout和setinterval的区别是</h3><p>settimeout只运行一次，也就是说设定的时间到后就触发运行指定代码，运行完后即结束。如果运行的代码中再次运行同样的settimeout命令，则可循环运行。</p>
 <p>setinterval是循环运行的，即每到设定时间间隔就触发指定代码。这是真正的定时器。setinterval使用简单，而settimeout则比较灵活，可以随时退出循环，而且可以设置为按不固定的时间间隔来运行，比如第一次1秒，第二次2秒，第三次3秒……</p>
 <h4 id="1_2Csettimeout_u8BE6_u89E3"><a href="#1_2Csettimeout_u8BE6_u89E3" class="headerlink" title="1,settimeout详解"></a>1,settimeout详解</h4><p>var t = settimeout(“javascript 语句”, 时间参数)<br>注：时间参数单位为毫秒</p>
 <p>示例：var t=settimeout(“alert(’3 seconds!’)”, 3000)</p>
@@ -497,7 +623,8 @@
 <p>为了这种情况你可以用一种更好的代码形式</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//processing </span></span><br><span class="line">    setTimeout(<span class="built_in">arguments</span>.callee, interval); </span><br><span class="line">&#125;, interval);</span><br></pre></td></tr></table></figure>
 <p>这个估计稍微想一下, 就明白其中的好处了, 这样就不会产生时间点被跳过的问题内容就到这里, 希望能有所帮助, 可能我表达的不是很清楚如果觉得自己英语基础不错可以直接看</p>
-</span>
+
+          
         
       
     </div>
@@ -518,69 +645,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/08/07/ouvens.github.io/frontend-javascript/2014-08-07-js-observer-and-listener/" itemprop="url">
-                javascript基础--监听与观察者模式
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-08-07T00:00:00+08:00" content="2014-08-07">
-            2014-08-07
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/07/ouvens.github.io/frontend-javascript/2014-08-07-js-observer-and-listener/" itemprop="url">
+                  javascript基础--监听与观察者模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-07T00:00:00+08:00" content="2014-08-07">
+              2014-08-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/08/07/ouvens.github.io/frontend-javascript/2014-08-07-js-observer-and-listener/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/08/07/ouvens.github.io/frontend-javascript/2014-08-07-js-observer-and-listener/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/08/07/ouvens.github.io/frontend-javascript/2014-08-07-js-observer-and-listener/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/08/07/ouvens.github.io/frontend-javascript/2014-08-07-js-observer-and-listener/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="u76D1_u542C_u4E0E_u89C2_u5BDF_u8005_u6A21_u5F0F"><a href="#u76D1_u542C_u4E0E_u89C2_u5BDF_u8005_u6A21_u5F0F" class="headerlink" title="监听与观察者模式"></a>监听与观察者模式</h3><p>这里主要看下监听者模式和观察者模式的两个例子</p>
+            <h3 id="u76D1_u542C_u4E0E_u89C2_u5BDF_u8005_u6A21_u5F0F"><a href="#u76D1_u542C_u4E0E_u89C2_u5BDF_u8005_u6A21_u5F0F" class="headerlink" title="监听与观察者模式"></a>监听与观察者模式</h3><p>这里主要看下监听者模式和观察者模式的两个例子</p>
 <h3 id="1_u3001_u8BF7_u770B_u76D1_u542C_u6A21_u5F0F_u7684_u4EE3_u7801_u793A_u4F8B"><a href="#1_u3001_u8BF7_u770B_u76D1_u542C_u6A21_u5F0F_u7684_u4EE3_u7801_u793A_u4F8B" class="headerlink" title="1、请看监听模式的代码示例"></a>1、请看监听模式的代码示例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 事件对象</span></span><br><span class="line"><span class="keyword">var</span> Event = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.obj = obj;</span><br><span class="line">    <span class="keyword">this</span>.getSource = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.obj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听对象</span></span><br><span class="line"><span class="keyword">var</span> F2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.hander = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> f1 = event.getSource();</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"f2 do something!"</span>);</span><br><span class="line">        f1.callback();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 被监听对象</span></span><br><span class="line"><span class="keyword">var</span> F1 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.abc = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"f1 do something one!"</span>);</span><br><span class="line">        <span class="comment">// 创建事件对象</span></span><br><span class="line">        <span class="keyword">var</span> e = <span class="keyword">new</span> Event(<span class="keyword">this</span>);</span><br><span class="line">        <span class="comment">// 发布事件</span></span><br><span class="line">        <span class="keyword">this</span>.f2.hander(e);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"f1 do something two!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">this</span>.on = <span class="function"><span class="keyword">function</span>(<span class="params">f2</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.f2 = f2;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">this</span>.callback = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"f1 callback invoke!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> f1 = <span class="keyword">new</span> F1();</span><br><span class="line">    <span class="keyword">var</span> f2 = <span class="keyword">new</span> F2();</span><br><span class="line">    <span class="comment">// 加入监听</span></span><br><span class="line">    f1.on(f2);</span><br><span class="line">    f1.abc();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行主函数</span></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
 <p>监听模式示例运行结果：<br>引用</p>
 <p>f1 do something one!<br>f2 do something!<br>f1 callback invoke!<br>f1 do something two! </p>
@@ -590,7 +742,8 @@
 <h3 id="u603B_u7ED3_3A"><a href="#u603B_u7ED3_3A" class="headerlink" title="总结:"></a>总结:</h3><p>1、在观察者模式示例中，被观察的对象有两个观察者，因此两个观察者的逻辑被各自调用了；在监听模式示例中，被监听的对象只有一个监听者，因此只有一个监听者逻辑被调用了。监听模式示例中的监听者也可以有多个，但通知的时候需要逐一通知，比较麻烦，而观察者就方便多了，所以，当一个对象只有一个需要通知的对象时，使用监听者模式比较简单，而当需要通知的对象比较多时，采用观察者模式比较简单明了，这些要结合相应的业务场景，譬如，邮件列表的订阅就适合用观察者模式。</p>
 <p>2、这两种模式都使用了回调的机制，唯一区别不同的是，监听模式使用一个Event对象来保留回调的钩子（事件源处传入的对象，一般是被监听者本身），而观察者模式没有抽象Event事件对象，使用参数的方式将钩子传到观察者，并附带传入了一些其他的信息。因此，观察者模式和监听者模式都是使用回调机制，其设计思想异曲同工。</p>
 <p>3、这两种模式都是采用了对象之间组合的方式进行职责解耦，这是软件设计的指导性思想，无论我们是否很精确的实现这两种设计模式，只要在设计中把握尽量采用组合方式，我们的软件结构就会相对比较清晰，耦合度就相对比较低了，这是这两种设计模式给我们的启示！</p>
-</span>
+
+          
         
       
     </div>
@@ -611,69 +764,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/" itemprop="url">
-                javascript基础--突变事件与观察者事件
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-08-05T00:00:00+08:00" content="2014-08-05">
-            2014-08-05
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/" itemprop="url">
+                  javascript基础--突变事件与观察者事件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-05T00:00:00+08:00" content="2014-08-05">
+              2014-08-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/08/05/ouvens.github.io/frontend-javascript/2014-08-05-js-event-and-observer/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="u4E00_u3001_u95EE_u9898_u80CC_u666F"><a href="#u4E00_u3001_u95EE_u9898_u80CC_u666F" class="headerlink" title="一、问题背景"></a>一、问题背景</h3><h4 id="1-1_u3001_u53D1_u73B0_u95EE_u9898"><a href="#1-1_u3001_u53D1_u73B0_u95EE_u9898" class="headerlink" title="1.1、发现问题"></a>1.1、发现问题</h4><p>首先有这样一个问题，就是页面title后面莫名其妙hash值</p>
+            <h3 id="u4E00_u3001_u95EE_u9898_u80CC_u666F"><a href="#u4E00_u3001_u95EE_u9898_u80CC_u666F" class="headerlink" title="一、问题背景"></a>一、问题背景</h3><h4 id="1-1_u3001_u53D1_u73B0_u95EE_u9898"><a href="#1-1_u3001_u53D1_u73B0_u95EE_u9898" class="headerlink" title="1.1、发现问题"></a>1.1、发现问题</h4><p>首先有这样一个问题，就是页面title后面莫名其妙hash值</p>
 <p>这是一个带有flash的播放页面，开始，觉得这个问题我十分钟能搞定发到外网，测试同学稍等。十分钟过后我哭了~</p>
 <h3 id="u4E8C_u3001_u95EE_u9898_u63CF_u8FF0"><a href="#u4E8C_u3001_u95EE_u9898_u63CF_u8FF0" class="headerlink" title="二、问题描述"></a>二、问题描述</h3><p>问题重现在IE环境下，如果页面有flash内容embed嵌入，同时页面URL中带有hash，在flash加载后会改变document.title，而且后面js每次和flash交互都会改变document.title，就是把hash内容加到title后面(<a href="http://code.google.com/p/swfobject/issues/detail?id=293)。这个被定义为IE的bug，怎么解决？" target="_blank" rel="external">http://code.google.com/p/swfobject/issues/detail?id=293)。这个被定义为IE的bug，怎么解决？</a><br><a href="http://stackoverflow.com/questions/4562423/ie-title-changes-to-afterhash-if-the-page-has-a-url-with-and-has-flash-s" target="_blank" rel="external">http://stackoverflow.com/questions/4562423/ie-title-changes-to-afterhash-if-the-page-has-a-url-with-and-has-flash-s</a><br>然后有了这个解决方案。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> originalTitle = <span class="built_in">document</span>.title.split(<span class="string">"#"</span>)[<span class="number">0</span>];   </span><br><span class="line"><span class="built_in">document</span>.attachEvent &amp;&amp; <span class="built_in">document</span>.attachEvent(<span class="string">'onpropertychange'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(evt.propertyName === <span class="string">'title'</span> &amp;&amp; <span class="built_in">document</span>.title !== originalTitle) &#123;</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">document</span>.title = originalTitle;</span><br><span class="line">        &#125;, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">  </span><br><span class="line"><span class="comment">//使用document.title=newtitle设置标题属性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeTitle</span>(<span class="params">newTitle</span>)</span>&#123;</span><br><span class="line">    originalTitle = newTitle;</span><br><span class="line">    <span class="built_in">document</span>.title = newtitle;</span><br><span class="line">&#125;</span><br><span class="line">changeTitle(originalTitle);</span><br></pre></td></tr></table></figure>
@@ -697,7 +875,8 @@
 <p>而且，突变观察者的目标是在通知你的观察者之前记录多项更改。它们批量提供突变记录，以避免在你的应用中滥发此类事件。相比之下，突变事件是同步发送的，可以中断正常的代码执行来通知你应用发生突变。尽管突变观察者采用延迟的通知模型，但仍可保证你的应用的观察者可以在下一个重画之前收到（并有机会处理）所有突变记录。<br>这两项更改会影响你的应用必须如何调整来支持突变观察者。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mutationObserver = <span class="keyword">new</span> MutationObserver(callback);</span><br><span class="line">mutationObserver.observe(someElement, options);</span><br></pre></td></tr></table></figure>
 <p><a href="https://msdn.microsoft.com/library/dn265032(v=vs.85).aspx[待续" target="_blank" rel="external">https://msdn.microsoft.com/library/dn265032(v=vs.85).aspx[待续</a>]</p>
-</span>
+
+          
         
       
     </div>
@@ -718,69 +897,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/" itemprop="url">
-                从webWorker到serviceWorker
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-06-05T00:00:00+08:00" content="2014-06-05">
-            2014-06-05
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/" itemprop="url">
+                  从webWorker到serviceWorker
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-06-05T00:00:00+08:00" content="2014-06-05">
+              2014-06-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/06/05/ouvens.github.io/frontend-javascript/2014-06-05-webworker-serviceworker/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h2 id="u4ECEwebWorker_u5230serviceWorker"><a href="#u4ECEwebWorker_u5230serviceWorker" class="headerlink" title="从webWorker到serviceWorker"></a>从webWorker到serviceWorker</h2><p><a href="http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction" target="_blank" rel="external">http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction</a><br>下面将从webWorker、serviceWorker和为什么使用serviceWorker三个方面进行讨论</p>
+            <h2 id="u4ECEwebWorker_u5230serviceWorker"><a href="#u4ECEwebWorker_u5230serviceWorker" class="headerlink" title="从webWorker到serviceWorker"></a>从webWorker到serviceWorker</h2><p><a href="http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction" target="_blank" rel="external">http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction</a><br>下面将从webWorker、serviceWorker和为什么使用serviceWorker三个方面进行讨论</p>
 <h3 id="u4E00_u3001Web_worker"><a href="#u4E00_u3001Web_worker" class="headerlink" title="一、Web worker"></a>一、Web worker</h3><p>要了解serviceworker，先的认识下webworker，也可以了解一下二者的共同点，并予以区分。</p>
 <p>Web Workers 是 现代浏览器 提供的一个javascript多线程解决方案，我们可以将一些大计算量的代码交由web Worker运行。JavaScript语言执行采用的是单线程模型，也就是说，所有任务排成一个队列，一次只能做一件事。但是有了webworker后就不一样了。</p>
 <h4 id="281_29__u517C_u5BB9_u6027"><a href="#281_29__u517C_u5BB9_u6027" class="headerlink" title="(1) 兼容性"></a>(1) 兼容性</h4><p>支持的浏览器包括IE10、Firefox (从3.6版本开始)、Safari (从4.0版本开始)、Chrome 和 Opera 11+，但是手机浏览器还不支持。</p>
@@ -844,7 +1048,8 @@
 <p>(3) 两者目前浏览器兼容性很不好，尤其是serviceworker，草案在更新，特性没有完整，chrome的各分支版本支持都不一样，但仍然还是可以根据这些特性进行一些有趣的开发。</p>
 <p>(4)serviceworker可以带给我们很多</p>
 <p>参考文档<br><a href="https://jakearchibald.github.io/isserviceworkerready/" target="_blank" rel="external">https://jakearchibald.github.io/isserviceworkerready/</a> (api支持性现状介绍)<br><a href="http://www.serviceworker.org/#" target="_blank" rel="external">http://www.serviceworker.org/#</a> (git主页)<br><a href="http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction" target="_blank" rel="external">http://www.w3.org/TR/2014/WD-service-workers-20140508/#introduction</a> (w3c介绍)<br><a href="http://jakearchibald.com/2014/service-worker-first-draft/" target="_blank" rel="external">http://jakearchibald.com/2014/service-worker-first-draft/</a> (serviceWorker草案)<br><a href="https://github.com/jakearchibald/isserviceworkerready" target="_blank" rel="external">https://github.com/jakearchibald/isserviceworkerready</a> (样例代码)<br><a href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/" target="_blank" rel="external">https://slightlyoff.github.io/ServiceWorker/spec/service_worker/</a> (10月份更新的草案)</p>
-</span>
+
+          
         
       
     </div>
@@ -865,69 +1070,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/" itemprop="url">
-                javascript基础--深入理解proto与__proto__
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-05-16T00:00:00+08:00" content="2014-05-16">
-            2014-05-16
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-javascript</span>
+            
+              
+                
+                <a class="post-title-link" href="/2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/" itemprop="url">
+                  javascript基础--深入理解proto与__proto__
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-05-16T00:00:00+08:00" content="2014-05-16">
+              2014-05-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/05/16/ouvens.github.io/frontend-javascript/2015-01-16-js-proto-deep/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>这里重新讲述prototype原型这个概念，今天我们深度的分析下prototype与<strong><strong>proto</strong></strong>。</p>
+            <p>这里重新讲述prototype原型这个概念，今天我们深度的分析下prototype与<strong><strong>proto</strong></strong>。</p>
 <h3 id="u4F8B_u5B50"><a href="#u4F8B_u5B50" class="headerlink" title="例子"></a>例子</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)  </span><br><span class="line"> </span>&#123;  </span><br><span class="line">     <span class="keyword">this</span>.name = name ;  </span><br><span class="line"> &#125;;  </span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">"Ben"</span>);  </span><br><span class="line"><span class="built_in">console</span>.log(p.name);</span><br></pre></td></tr></table></figure>
 <p>代码简单的 你不用说明了，如果现在让大家根据上面的代码画一张包含Function与Object的内存图，大家肯定回想什么叫包含Function与Object，上面的代码和它们有几毛钱的关系。好了，下面我先按要求把图画出来，大家参考下：</p>
 <p><img src="http://7tszky.com1.z0.glb.clouddn.com/Fr5kpmvSgM5JuW4gJF66-xtsAMB9" alt=""></p>
@@ -997,7 +1227,8 @@
 <li>If status is false, then throw a TypeError exception.</li>
 <li>Return undefined. </li>
 </ul>
-</span>
+
+          
         
       
     </div>
@@ -1018,69 +1249,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2014/01/01/ouvens.github.io/frontend-resource/2020-01-01-front-end-learning-list/" itemprop="url">
-                前端学习资源汇总
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2014-01-01T00:00:00+08:00" content="2014-01-01">
-            2014-01-01
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-resource/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-resource</span>
+            
+              
+                
+                <a class="post-title-link" href="/2014/01/01/ouvens.github.io/frontend-resource/2020-01-01-front-end-learning-list/" itemprop="url">
+                  前端学习资源汇总
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-01-01T00:00:00+08:00" content="2014-01-01">
+              2014-01-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-resource/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-resource</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/01/01/ouvens.github.io/frontend-resource/2020-01-01-front-end-learning-list/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/01/01/ouvens.github.io/frontend-resource/2020-01-01-front-end-learning-list/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/01/01/ouvens.github.io/frontend-resource/2020-01-01-front-end-learning-list/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/01/01/ouvens.github.io/frontend-resource/2020-01-01-front-end-learning-list/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h2 id="u524D_u7AEF_u5B66_u4E60_u8D44_u6E90_u6C47_u603B"><a href="#u524D_u7AEF_u5B66_u4E60_u8D44_u6E90_u6C47_u603B" class="headerlink" title="前端学习资源汇总"></a>前端学习资源汇总</h2><ul>
+            <h2 id="u524D_u7AEF_u5B66_u4E60_u8D44_u6E90_u6C47_u603B"><a href="#u524D_u7AEF_u5B66_u4E60_u8D44_u6E90_u6C47_u603B" class="headerlink" title="前端学习资源汇总"></a>前端学习资源汇总</h2><ul>
 <li><p>JavaScript语言</p>
 </li>
 <li><p>JavaScript框架</p>
@@ -1108,7 +1364,8 @@
 </li>
 </ul>
 <h4 id="html_meta_u4FE1_u606F"><a href="#html_meta_u4FE1_u606F" class="headerlink" title="html meta信息"></a>html meta信息</h4><p>[<a href="http://segmentfault.com/a/1190000002407912" target="_blank" rel="external">http://segmentfault.com/a/1190000002407912</a>]</p>
-</span>
+
+          
         
       
     </div>
@@ -1129,69 +1386,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2013/12/27/ouvens.github.io/frontend-resource/2013-12-27-js-front-end-knowlege-systerm/" itemprop="url">
-                前端基础--知识体系
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2013-12-27T00:00:00+08:00" content="2013-12-27">
-            2013-12-27
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-resource/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-resource</span>
+            
+              
+                
+                <a class="post-title-link" href="/2013/12/27/ouvens.github.io/frontend-resource/2013-12-27-js-front-end-knowlege-systerm/" itemprop="url">
+                  前端基础--知识体系
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2013-12-27T00:00:00+08:00" content="2013-12-27">
+              2013-12-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-resource/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-resource</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/12/27/ouvens.github.io/frontend-resource/2013-12-27-js-front-end-knowlege-systerm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/12/27/ouvens.github.io/frontend-resource/2013-12-27-js-front-end-knowlege-systerm/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2013/12/27/ouvens.github.io/frontend-resource/2013-12-27-js-front-end-knowlege-systerm/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/12/27/ouvens.github.io/frontend-resource/2013-12-27-js-front-end-knowlege-systerm/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>先给个大家认同的知识体系图</p>
+            <p>先给个大家认同的知识体系图</p>
 <p><img src="http://7tszky.com1.z0.glb.clouddn.com/Fq6epgaEgtUgFdn66A-ufJynwfY6" alt=""></p>
 <h2 id="u4E00_u3001HTML"><a href="#u4E00_u3001HTML" class="headerlink" title="一、HTML"></a>一、HTML</h2><ol>
 <li>标签的分类</li>
@@ -1276,7 +1558,8 @@
 <p>CSS性能优化<br>LESS and SASS<br>JavaScript单元测试<br>JavaScript设计模式<br>NodeJS<br>ES5<br>Web移动开发<br>浏览器插件开发<br>前端安全<br>跨域处理<br>SEO<br>A/B test<br>可用性/可访问性<br>前端流程/部署<br>浏览器原理</p>
 <p>第四阶段<br>一代宗师。</p>
 <p>不停的学习新的技术<br>交互设计能力，管理能力</p>
-</span>
+
+          
         
       
     </div>
@@ -1297,69 +1580,94 @@
     
       
 
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2013/12/24/ouvens.github.io/frontend-resource/2013-12-24-tool-sublime-plugins-install/" itemprop="url">
-                sublime插件安装说明
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2013-12-24T00:00:00+08:00" content="2013-12-24">
-            2013-12-24
-          </time>
-        </span>
+    
+      <header class="post-header">
 
         
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/frontend-resource/" itemprop="url" rel="index">
-                  <span itemprop="name">frontend-resource</span>
+            
+              
+                
+                <a class="post-title-link" href="/2013/12/24/ouvens.github.io/frontend-resource/2013-12-24-tool-sublime-plugins-install/" itemprop="url">
+                  sublime插件安装说明
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2013-12-24T00:00:00+08:00" content="2013-12-24">
+              2013-12-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/frontend-resource/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend-resource</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/12/24/ouvens.github.io/frontend-resource/2013-12-24-tool-sublime-plugins-install/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/12/24/ouvens.github.io/frontend-resource/2013-12-24-tool-sublime-plugins-install/" itemprop="commentsCount"></span>
                 </a>
               </span>
-
-              
-              
-
             
-          </span>
-        
+          
 
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2013/12/24/ouvens.github.io/frontend-resource/2013-12-24-tool-sublime-plugins-install/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/12/24/ouvens.github.io/frontend-resource/2013-12-24-tool-sublime-plugins-install/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="u7CFB_u7EDF_26amp_3B_u73AF_u5883_u8981_u6C42"><a href="#u7CFB_u7EDF_26amp_3B_u73AF_u5883_u8981_u6C42" class="headerlink" title="系统&amp;环境要求"></a>系统&amp;环境要求</h3><ul>
+            <h3 id="u7CFB_u7EDF_26amp_3B_u73AF_u5883_u8981_u6C42"><a href="#u7CFB_u7EDF_26amp_3B_u73AF_u5883_u8981_u6C42" class="headerlink" title="系统&amp;环境要求"></a>系统&amp;环境要求</h3><ul>
 <li>sublime3</li>
 <li>win7 &amp; OSX10</li>
 <li>node</li>
@@ -1394,7 +1702,8 @@
 </ul>
 <p>注意：全局变量需要手动加到配置文件的globals属性里，例：<br>{“globals”: {“ImageHandle”: true}}<br>CSSLint 配置文件<br>SCSS-Lint 配置文件</p>
 <p>来源： <a href="http://imweb.github.io/CodeGuide/#check-sublime3" target="_blank" rel="external">http://imweb.github.io/CodeGuide/#check-sublime3</a></p>
-</span>
+
+          
         
       
     </div>
@@ -1413,21 +1722,25 @@
 
 
     
+
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span>
   </nav>
 
- </div>
 
+
+          </div>
+          
+
+
+          
+
+        </div>
         
-
-        
-      </div>
-
-      
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1442,12 +1755,16 @@
 
       
 
-      <section class="site-overview">
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460" alt="terry" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/14305708?v=3&s=460"
+               alt="terry" />
           <p class="site-author-name" itemprop="name">terry</p>
+          <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">terry yang's blog | java | scala | bi</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -1455,27 +1772,31 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
               
-          </div>
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
         
           <div class="feed-link motion-element">
             <a href="/atom.xml" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -1485,15 +1806,27 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/yangwei8888" target="_blank">github</a>
+                <a href="https://github.com/yangwei8888" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/microsoftgoogles" target="_blank">weibo</a>
+                <a href="http://weibo.com/microsoftgoogles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">zhihu</a>
+                <a href="https://www.zhihu.com/people/run-zhi-38" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
               </span>
             
           
@@ -1514,15 +1847,18 @@
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="icon-next-heart fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">terry</span>
 </div>
@@ -1534,24 +1870,62 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Muse
   </a>
 </div>
 
 
- </div>
+
+      </div>
     </footer>
 
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
 
   
   
+
   
-    
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
 
   
 
@@ -1575,53 +1949,13 @@
   
 
 
-  
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
-
-  
 
   
   
 
   
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  
+
+
 </body>
 </html>
