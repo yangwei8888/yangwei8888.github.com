@@ -16,7 +16,7 @@ html, body, .container, .scroller, #pjax {
 }
 
 .mp-scroll {
-    height: auto;
+     height: 500px;/* auto */
     overflow: auto;
 }
 .scroller,
