@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/02/25/Awesome-Computer-Vision/</loc>
+    <lastmod>2016-02-25T07:24:17.995Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/02/25/Machine-and-Deep-Learning-with-Python/</loc>
     <lastmod>2016-02-25T07:18:11.627Z</lastmod>
   </url>
@@ -49,6 +54,11 @@
   <url>
     <loc>http://yoursite.com/2016/01/20/android-open-project-master/</loc>
     <lastmod>2016-01-20T08:41:36.254Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/</loc>
+    <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
   
   <url>
@@ -182,7 +192,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/</loc>
+    <loc>http://yoursite.com/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/</loc>
     <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
   
@@ -237,6 +247,11 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2013/12/27/ouvens.github.io/frontend-resource/2013-12-27-js-front-end-knowlege-systerm/</loc>
+    <lastmod>2016-01-05T04:23:33.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/</loc>
     <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
@@ -253,16 +268,6 @@
   
   <url>
     <loc>http://yoursite.com/2015/11/26/ouvens.github.io/product-product/2015-11-26-product-dev-process/</loc>
-    <lastmod>2016-01-05T04:23:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/05/24/ouvens.github.io/frontend-javascript/2015-05-24-polymer-vm/</loc>
-    <lastmod>2016-01-05T04:23:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2013/12/27/ouvens.github.io/frontend-resource/2013-12-27-js-front-end-knowlege-systerm/</loc>
     <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
   
