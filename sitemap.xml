@@ -2,6 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2015/12/19/awesome-power-mode-master/</loc>
+    <lastmod>2016-02-25T07:29:05.822Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/31/awesome-master/</loc>
+    <lastmod>2016-02-25T07:28:51.871Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/31/awesome-rust-master/</loc>
+    <lastmod>2016-02-25T07:28:46.057Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/31/awesome-go-master/</loc>
+    <lastmod>2016-02-25T07:28:38.746Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/31/awesome-swift-master/</loc>
+    <lastmod>2016-02-25T07:28:33.517Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/31/awesome-ios-master/</loc>
+    <lastmod>2016-02-25T07:28:27.760Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2015/12/31/awesome-dotnet-master/</loc>
+    <lastmod>2016-02-25T07:28:18.914Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/04/awesome-wechat-dev-posts-2015/</loc>
+    <lastmod>2016-02-25T07:28:04.720Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/02/25/Awesome-Computer-Vision/</loc>
     <lastmod>2016-02-25T07:24:17.995Z</lastmod>
   </url>
@@ -14,11 +54,6 @@
   <url>
     <loc>http://yoursite.com/2016/02/25/awesome-deep-learning/</loc>
     <lastmod>2016-02-25T07:11:15.191Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/02/04/awesome-wechat-dev-posts-2015/</loc>
-    <lastmod>2016-02-04T08:52:21.009Z</lastmod>
   </url>
   
   <url>
@@ -272,11 +307,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-dotnet-master/</loc>
-    <lastmod>2015-12-29T09:22:48.601Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2015/12/25/swift-cn/chapter1/03_revision_history/</loc>
     <lastmod>2015-12-29T09:17:42.373Z</lastmod>
   </url>
@@ -284,31 +314,6 @@
   <url>
     <loc>http://yoursite.com/2015/12/25/swift-cn/chapter1/02_a_swift_tour/</loc>
     <lastmod>2015-12-29T09:17:24.631Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-ios-master/</loc>
-    <lastmod>2015-12-29T08:29:40.660Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-swift-master/</loc>
-    <lastmod>2015-12-29T08:29:36.531Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-go-master/</loc>
-    <lastmod>2015-12-29T08:29:32.514Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-rust-master/</loc>
-    <lastmod>2015-12-29T08:29:28.548Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/31/awesome-master/</loc>
-    <lastmod>2015-12-29T08:29:24.651Z</lastmod>
   </url>
   
   <url>
@@ -359,11 +364,6 @@
   <url>
     <loc>http://yoursite.com/2015/12/26/Using-Swift-with-Cocoa-and-Objective-C/02Interoperability/01Interacting%20with%20Objective-C%20APIs/</loc>
     <lastmod>2015-12-17T11:11:15.941Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2015/12/19/awesome-power-mode-master/</loc>
-    <lastmod>2015-12-17T09:32:30.980Z</lastmod>
   </url>
   
   <url>
@@ -712,12 +712,12 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/repos/</loc>
+    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/docker-hub/</loc>
     <lastmod>2015-12-09T02:32:28.107Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/docker-hub/</loc>
+    <loc>http://yoursite.com/2015/12/08/docker/docker-hub/repos/</loc>
     <lastmod>2015-12-09T02:32:28.107Z</lastmod>
   </url>
   
