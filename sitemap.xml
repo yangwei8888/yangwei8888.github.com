@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/02/25/awesome-deep-learning/</loc>
+    <lastmod>2016-02-25T07:11:15.191Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/02/04/awesome-wechat-dev-posts-2015/</loc>
     <lastmod>2016-02-04T08:52:21.009Z</lastmod>
   </url>
@@ -42,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/</loc>
+    <loc>http://yoursite.com/2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/</loc>
     <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
   
@@ -252,7 +257,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2015/07/24/ouvens.github.io/frontend-javascript/2015-07-24-shadow-dom/</loc>
+    <loc>http://yoursite.com/2015/11/15/ouvens.github.io/frontend-resource/2015-11-15-html-css-code-style/</loc>
     <lastmod>2016-01-05T04:23:33.000Z</lastmod>
   </url>
   
